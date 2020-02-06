@@ -1,0 +1,16 @@
+{
+
+    com.badlogic.gdx.scenes.ui.TextButton$TextButtonButtonStyle: {
+        default: { down: default-round-down, up : default-round, font: default-font},
+
+    },
+    com.badlogic.gdx.scenes.scene2d.ui.Windows$WindowsStyle: {
+        default: {
+                titleFont: default-font
+
+        }
+    }
+
+
+
+}
