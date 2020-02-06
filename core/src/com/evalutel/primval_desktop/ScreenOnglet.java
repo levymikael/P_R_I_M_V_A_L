@@ -83,7 +83,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
 
         int posX = 6 * screenWidth / 7;
-        int posY = 5 * screenHeight / 7;
+        int posY =  screenHeight /2;
         uneMain = new UneMain( posX, posY, 200);
         uneMain.setVisible(false);
 

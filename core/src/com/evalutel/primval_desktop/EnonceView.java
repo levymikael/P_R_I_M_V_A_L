@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 
+import java.util.TimerTask;
+
 
 public class EnonceView extends Actor
 {
@@ -193,4 +195,20 @@ public class EnonceView extends Actor
 
     }
 
+
+    protected static class TaskEtape extends TimerTask
+    {
+        protected long durationMillis;
+
+        protected TaskEtape(long dT)
+        {
+            durationMillis = dT;
+        }
+
+        @Override
+        public void run()
+        {
+
+        }
+    }
 }

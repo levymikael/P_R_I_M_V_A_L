@@ -1,6 +1,7 @@
 package com.evalutel.primval_desktop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -10,6 +11,7 @@ public class ScreenEx1_1 extends ScreenOnglet
     private ArrayList<UneBille> billesList;
     private ArrayList<UnOiseau> oiseauxList;
     private ArrayList<UnePlancheNew> allPlanches;
+
 
     private UnePlancheNew planche1, planche2, planche3, touchedPlanche;
     private EnonceViewEx1_1 enonceViewEx1_1;
@@ -26,12 +28,15 @@ public class ScreenEx1_1 extends ScreenOnglet
     int cptOiseau, cptBille = 0;
     int cpt = -1;
 
+    String str0, str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11;
+
+
 
     public ScreenEx1_1()
     {
         super();
 
-        int largeurBille = 100;
+        int largeurBille = 200;
         int largeurPlanche = largeurBille * 4;
 
         bgScreenEx1_1 = new ScreeenBackgroundImage();
@@ -69,7 +74,13 @@ public class ScreenEx1_1 extends ScreenOnglet
         billesList = autoFillPlanche();
 
         //  timer.schedule(new EtapeAddOiseau(2000), 1);
-        timer.schedule(new EtapeDragBille(2000), 1);
+//        timer.schedule(new EtapeDragBille(2000), 1);
+
+
+
+
+
+
     }
 
 //    private class EtapeAddOiseau extends TaskEtape
@@ -123,8 +134,11 @@ public class ScreenEx1_1 extends ScreenOnglet
             {
                 uneMain.setVisible(true);
                 UneBille bille = billesList.get(cptBille);
-                float posX = bille.currentPositionX;
-                float posY = bille.currentPositionY - (uneMain.getHeight() * 2);
+//                float posX = bille.currentPositionX;
+//                float posY = bille.currentPositionY - (uneMain.getHeight() * 2);
+                float posX = reserveBilles.currentPositionX;
+
+                float posY = reserveBilles.currentPositionY;
 
                 TaskEtape nextEtape = new EtapeDragBille(500);
                 uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
@@ -132,6 +146,27 @@ public class ScreenEx1_1 extends ScreenOnglet
             }
         }
     }
+
+    private class MoveMainToValidus extends TaskEtape
+    {
+        private MoveMainToValidus(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+
+            int posX = validus.currentPositionX;
+            int posY = validus.currentPositionY;
+
+            TaskEtape nextEtape = new EtapeDragBille(500);
+            uneMain.moveTo(durationMillis,  posX,  posY, nextEtape, 1000);
+            timer.schedule(new MoveMain(0), 1);
+        }
+    }
+
 
     private class EtapeDragBille extends TaskEtape
     {
@@ -170,20 +205,28 @@ public class ScreenEx1_1 extends ScreenOnglet
         @Override
         public void run()
         {
-            UneBille bille = billesList.get(cptBille);
-            float posX = reserveBilles.currentPositionX + bille.getWidth();
-            float posY = reserveBilles.currentPositionY - (3 * bille.getWidth());
 
-            TaskEtape nextEtape = new MoveMain(1000);
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
 
             if (cptBille < billesList.size())
             {
+                UneBille bille = billesList.get(cptBille);
+                float posX = reserveBilles.currentPositionX + bille.getWidth();
+                float posY = reserveBilles.currentPositionY - (3 * bille.getWidth());
+
+                TaskEtape nextEtape = new MoveMain(1000);
+
+                planche1.addBilleAndOrganize(bille);
+                cptBille++;
                 uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
             } else
             {
+                UneBille bille = billesList.get(cptBille);
+                float posX = reserveBilles.currentPositionX + bille.getWidth();
+                float posY = reserveBilles.currentPositionY - (3 * bille.getWidth());
+
+                TaskEtape nextEtape = new MoveMain(1000);
+
+                planche1.addBilleAndOrganize(bille);
                 uneMain.moveTo(durationMillis, (int) posX, (int) posY, null, 1000);
             }
         }

@@ -16,7 +16,6 @@ import com.badlogic.gdx.Game;
 
 public class LaunchGame extends Game implements ApplicationListener
 {
-	// Configuration rectangle/texture
 	SpriteBatch batch;
 	Texture img;
 	TextureRegion[] animationFrames;

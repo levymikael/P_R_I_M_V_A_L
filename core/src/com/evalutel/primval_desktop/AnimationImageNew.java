@@ -20,6 +20,8 @@ public class AnimationImageNew implements MyDrawInterface
     TextureRegion[] animationFrames;
     Animation animation;
     public Timer timer = new Timer();
+    public Timer timer4 = new Timer();
+
 
     public float elapsedTime, animationVitesse, animationHeight, animationWidth;
 
@@ -31,7 +33,7 @@ public class AnimationImageNew implements MyDrawInterface
     protected boolean isVisible = true;
 
 
-    public AnimationImageNew(ArrayList<String> imagesPaths, int startPositionX, int startPositionY, float animationHeight, float animationWidth)
+    public AnimationImageNew(ArrayList<String> imagesPaths, int startPositionX, int startPositionY, float animationWidth , float animationHeight)
     {
         this.animationHeight = animationHeight;
         this.animationWidth = animationWidth;
