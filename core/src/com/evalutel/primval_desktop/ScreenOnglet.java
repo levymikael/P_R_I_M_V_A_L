@@ -16,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Pools;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.evalutel.ui_tools.MyImageButton;
 import com.evalutel.ui_tools.PauseSingleton;
 
@@ -34,7 +36,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     private SpriteBatch batch;
     private CalculetteViewTest calculetteViewTest;
     private UnePlancheNew planche1, planche2, planche3, touchedPlanche;
-    private Stage stage;
+    protected Stage stage;
     int screenWidth;
     int screenHeight;
     TextButton.TextButtonStyle textButtonStyle;
@@ -55,8 +57,10 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     public ScreenOnglet()
     {
-
         stage = new Stage();
+
+        //Garde aspect ratio
+//        stage = new Stage(new FitViewport(640, 480));
 
         screenHeight = Gdx.graphics.getHeight();
         screenWidth = Gdx.graphics.getWidth();
@@ -132,6 +136,9 @@ public class ScreenOnglet implements Screen, InputProcessor
         Gdx.gl.glClearColor(1, 1, 1, 1); // center
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        stage.act(delta);
+
+
         batch.begin();
 
         for (int i = 0; i < allDrawables.size(); i++)
@@ -154,6 +161,9 @@ public class ScreenOnglet implements Screen, InputProcessor
     @Override
     public void resize(int width, int height)
     {
+
+        // See below for what true means.
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -177,6 +187,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     @Override
     public void dispose()
     {
+        stage.dispose();
 
     }
 

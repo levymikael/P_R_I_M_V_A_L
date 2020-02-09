@@ -43,21 +43,6 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
     }
 
 
-//
-//    public enum State
-//    {
-//        PAUSE,
-//        RUN
-//    }
-//
-//    public static State getNextState(State e)
-//    {
-//        int index = e.ordinal();
-//        int nextIndex = index + 1;
-//        State[] state = State.values();
-//        nextIndex %= state.length;
-//        return state[nextIndex];
-//    }
 
     public void addListener()
     {

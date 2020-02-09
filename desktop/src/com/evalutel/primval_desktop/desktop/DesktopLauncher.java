@@ -18,9 +18,12 @@ public class DesktopLauncher {
 		config.useHDPI = true;
 
 
-		//config.fullscreen = true;
+
+//		config.fullscreen = true;
 
 		new LwjglApplication(new LaunchGame(), config);
+
+
 
 
 

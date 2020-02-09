@@ -41,6 +41,8 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
 
     TextField textFieldEnonce, textFieldInstructions;
 
+    BitmapFont bitmapFont;
+
     Sprite spriteEnonceMilieu, sprite2, spriteInstructions, spriteEnonceText;
 
     String str0, str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11;
@@ -59,7 +61,7 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 40;
 
-        BitmapFont bitmapFont = generator.generateFont(parameter);
+        bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
         textureEnonceMilieu = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_milieu_new.png"));
@@ -83,9 +85,7 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
 
 // Creation cellule tableau pour numero d'exerice:
         table2 = new Table();
-
         table2.setBackground(new SpriteDrawable(new Sprite(new Texture("Images/EnonceUIElements/titre_top.png"))));
-
 
 // Positionnement numero exercice:
         table2.add(label2).align(Align.center).width(100);
@@ -123,15 +123,23 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
         list = new ArrayList<>();
         list.addAll(Arrays.asList(strs));
 
-        timer4.schedule(new instructionsScrolling(1000), 1000);
 
-        Label.LabelStyle labelStyle3 = new Label.LabelStyle();
-        labelStyle3.font = bitmapFont;
-        labelStyle3.fontColor = Color.BLACK;
-        label3 = new Label(strAux, labelStyle3);
-        label3.setWrap(true);
+
+//        Label.LabelStyle labelStyle3 = new Label.LabelStyle();
+//        labelStyle3.font = bitmapFont;
+//        labelStyle3.fontColor = Color.BLACK;
+
+        instructionsScrolling strAux = new instructionsScrolling(1000);
+
+
+//        label3.setWrap(true);
 
         table4 = new Table();
+
+
+        timer4.schedule(new instructionsScrolling(1000), 1000);
+
+//        System.out.println(label3);
 
         Color colorWhite = new Color();
         colorWhite.add(255, 255, 255, 0);
@@ -240,10 +248,28 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
             {
                 strAux = list.get(indexText);
                 indexText++;
-                System.out.println(strAux);
-                timer.schedule(new instructionsScrolling(10000), 3000);
+//                System.out.println(strAux);
 
+                Label.LabelStyle labelStyle3 = new Label.LabelStyle();
+                labelStyle3.font = bitmapFont;
+                labelStyle3.fontColor = Color.BLACK;
+                label3 = new Label(strAux, labelStyle3);
+                label3.setWrap(true);
+
+
+                timer.schedule(new instructionsScrolling(10000), 3000);
             }
+        }
+
+        public String labelText (){
+
+            String labelText = strAux;
+
+
+            System.out.println(label3);
+
+
+            return labelText;
         }
     }
 
@@ -252,6 +278,7 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
     public void myDraw(Batch batch)
     {
         table.draw(batch, 1);
+
     }
 
 

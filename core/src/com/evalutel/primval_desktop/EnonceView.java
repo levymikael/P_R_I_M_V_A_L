@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -22,35 +20,30 @@ import com.badlogic.gdx.utils.Align;
 import java.util.TimerTask;
 
 
-public class EnonceView extends Actor
+public class EnonceView implements MyDrawInterface
 {
 
-    Stage stage;
-    Table table, table2, table3;
-    Label label2, label;
-    float heightTop;
-    float topYTablePosition, screenHeight, tableHeight, widthBackgroundImage, heightBackGroundImage, widthImageEnonce;
-    public float widthScreen, topSectionposY, heightImageEnonce;
+    private Table table, tableTitre;
+    private Table tableMilieu;
+    private float heightTop;
+    public float widthScreen, topSectionposY;
+    float topYTablePosition, heightBackGroundImage;
+
     private float firstY, currentY, widthEnonce;
 
-    Texture textureEnonceMilieu, texture2, textureConsigne, textureTextEnonce, titreTop;
-    public TextureRegion textureRegionTitreTop;
+    Texture texture2, textureTextEnonce, titreTop;
 
     TextField textFieldEnonce;
 
-    Sprite spriteEnonceMilieu, sprite2, spriteConsigne, spriteEnonceText;
-
-
-    public String addText(String text)
-    {
-        return text;
-    }
+    Sprite  sprite2, spriteEnonceText;
+    BitmapFont bitmapFont;
+    private boolean isVisible = true;
+    private Texture textureMilieuEnonce;
 
 
     public EnonceView(Stage stage, int positionX, int positionY, float width, String numExercice, String consigneExercice)
     {
-
-        this.stage = stage;
+        textureMilieuEnonce = new Texture("Images/EnonceUIElements/enonce_milieu_new.png");
         widthEnonce = width;
         heightTop = widthEnonce * 100 / 1626;
 
@@ -59,94 +52,99 @@ public class EnonceView extends Actor
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 40;
-        //parameter.padLeft = 20;
-        //parameter.padRight = 20;
-        BitmapFont bitmapFont = generator.generateFont(parameter);
+
+        bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
-        textureEnonceMilieu = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_milieu_new.png"));
-        spriteEnonceMilieu = new Sprite(textureEnonceMilieu);
-        textFieldStyleTest.background = new SpriteDrawable(spriteEnonceMilieu);
-
-        table = new Table();
-
-
-// Numero exerice/consigne:
+        // Numero exerice/consigne:
         Label.LabelStyle labelStyle2 = new Label.LabelStyle();
         labelStyle2.font = bitmapFont;
-        labelStyle2.fontColor = Color.BLUE;
-        label2 = new Label(numExercice, labelStyle2);
+        labelStyle2.fontColor = Color.WHITE;
+        Label label2 = new Label(numExercice, labelStyle2);
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.BLACK;
-        label = new Label(consigneExercice, labelStyle);
+        labelStyle.fontColor = Color.WHITE;
+        Label label = new Label(consigneExercice, labelStyle);
         label.setWrap(true);
 
-        // Creation cellule tableau pour numero d'exerice:
-        table2 = new Table();
-        textureConsigne = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_milieu_new.png"));
-        spriteConsigne = new Sprite(textureConsigne);
-        table2.setBackground(new SpriteDrawable(spriteConsigne));
+// Creation cellule tableau pour numero d'exerice:
+        tableTitre = new Table();
+        tableTitre.setBackground(new SpriteDrawable(new Sprite(new Texture("Images/EnonceUIElements/titre_top.png"))));
 
 // Positionnement numero exercice:
-        table2.add(label2).align(Align.top).width(100);
-        table2.add(label).width(widthEnonce - 300);
-        table2.row();
-        table.add(table2).width(widthEnonce);
-        table.row();
-//        table.setColor(Color.BLUE);
+        tableTitre.add().width(50);
+        tableTitre.add(label2).align(Align.center).width(100);
+        tableTitre.add(label).width(widthEnonce-150).height(100);
 
-        texture2 = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_bas_bleu.png"));
-        sprite2 = new Sprite(texture2);
+
+
+
+        table = new Table();
+        stage.addActor(table);
+        stage.addActor(tableTitre);
+
+
+
+        tableMilieu = new Table();
+        table.add(tableMilieu);
+        table.row();
+
+
 
         textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_text.png"));
         spriteEnonceText = new Sprite(textureTextEnonce);
         TextField.TextFieldStyle textFieldStyleEnonce = new TextField.TextFieldStyle();
-        //textFieldStyleEnonce.fontColor = fontColor2;
         textFieldStyleEnonce.font = bitmapFont;
         textFieldStyleEnonce.background = new SpriteDrawable(spriteEnonceText);
         textFieldEnonce = new TextField("", textFieldStyleEnonce);
 
 
+
 // Insertion texte.png dans tableau avec une imageBG.png:
-        table3 = new Table();
-
+        Table tableBandeauBas = new Table();
         heightBackGroundImage = widthEnonce * 59 / 808;
+        texture2 = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_bas_bleu.png"));
+        sprite2 = new Sprite(texture2);
+        tableBandeauBas.setBackground(new SpriteDrawable(sprite2));
+        //tableBandeauBas.row();
+        float heightImageEnonce = heightBackGroundImage * 2 / 3;
 
-        table3.setBackground(new SpriteDrawable(sprite2));
+        float widthImageEnonce = heightImageEnonce * 218 / 41;
+        tableBandeauBas.add(textFieldEnonce).width(widthImageEnonce).height(heightImageEnonce);
 
-        heightImageEnonce = heightBackGroundImage * 2 / 3;
+        table.add(tableBandeauBas).width(widthEnonce).height(heightBackGroundImage);
 
-        widthImageEnonce = heightImageEnonce * 218 / 41;
-        table3.add(textFieldEnonce).width(widthImageEnonce).height(heightImageEnonce);
-        table.add(table3).width(widthBackgroundImage).height(heightBackGroundImage);
+
         table.row();
 
+
 // Positionnement du tableau sur ecran:
-        screenHeight = Gdx.graphics.getHeight();
+
+        //TODO je n'arrive pas a inserer les variables screenWidth and screenHeight dans la classe parent.
+        final int screenHeight = Gdx.graphics.getHeight();
         widthScreen = Gdx.graphics.getWidth();
+        tableTitre.pack();
+        tableTitre.setPosition(widthScreen/2 - widthEnonce/2, screenHeight - tableTitre.getHeight());
+
+
 
         table.pack();
-        tableHeight = table.getHeight();
+        final float tableHeight = table.getHeight();
 
-        topYTablePosition = screenHeight - tableHeight;
+        topYTablePosition = screenHeight - tableHeight - tableTitre.getHeight();
 
         titreTop = new Texture("Images/EnonceUIElements/titre_top.png");
-        textureRegionTitreTop = new TextureRegion(titreTop);
 
         topSectionposY = Gdx.graphics.getHeight() - heightTop;
 
-        table.setPosition(widthScreen / 2 - width / 2, topYTablePosition - heightTop);
+        table.setPosition(widthScreen / 2 - widthEnonce / 2, topYTablePosition /*- heightTop*/);
 
         table.setTouchable(Touchable.enabled);
 
-        setWidth(200);
-        setHeight(table.getHeight());
+        //table.setWidth(20);
 
-        this.stage.addActor(table);
-
-        //Manipulation bandeau enonce (drag)
+//Manipulation bandeau enonce (drag)
 
         table.addListener(new DragListener()
         {
@@ -168,23 +166,25 @@ public class EnonceView extends Actor
                 float moveY = y - firstY;
                 float nextY = currentY + moveY;
 
-
-                if (nextY < topYTablePosition - heightTop) // si deplacement plus bas que bandeau --> bandeau reste immobile
+                if (nextY < topYTablePosition) // si deplacement plus bas que bandeau --> bandeau reste immobile
                 {
-                    table.setY(topYTablePosition - heightTop);
-                } else if (nextY > (topYTablePosition + tableHeight - heightTop - heightBackGroundImage)) // si souris depasse bandeau alors on cache texte consigne
+                    table.setY(topYTablePosition);
+                }
+                else if (nextY > (screenHeight - heightBackGroundImage-tableTitre.getHeight())) // si souris depasse bandeau alors on cache texte consigne
                 {
-                    table.setY(topYTablePosition + tableHeight - heightTop - heightBackGroundImage);
-                } else
+                    table.setY(screenHeight - heightBackGroundImage-tableTitre.getHeight());
+                }
+                else
                 {
                     currentY = currentY + moveY;
                     table.setY(currentY);
                 }
-
             }
         });
 
     }
+
+    /*
 
     @Override
     public void draw(Batch batch, float parentAlpha)
@@ -193,8 +193,38 @@ public class EnonceView extends Actor
 
         batch.draw(textureRegionTitreTop, widthScreen / 2 - (widthEnonce / 2), topSectionposY, widthEnonce, heightTop);
 
-    }
+    }*/
 
+    public void addTextEnonce(String string)
+    {
+
+
+        Table table4 = new Table();
+
+        Label.LabelStyle labelStyle3 = new Label.LabelStyle();
+        labelStyle3.font = bitmapFont;
+        labelStyle3.fontColor = Color.BLACK;
+        Label label3 = new Label(string, labelStyle3);
+        Color colorWhite = new Color();
+        colorWhite.add(255, 255, 255, 0);
+
+        table4.add().width(20).height(100);
+        table4.add(label3).width(widthEnonce-40).height(100);
+        table4.add().width(20).height(100);
+
+        table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
+        table4.row();
+
+        tableMilieu.add(table4);
+        tableMilieu.row();
+
+        table.pack();
+
+
+        topYTablePosition = Gdx.graphics.getHeight() - table.getHeight() - tableTitre.getHeight();
+
+        table.setPosition(widthScreen / 2 - widthEnonce / 2, topYTablePosition /*- heightTop*/);
+    }
 
     protected static class TaskEtape extends TimerTask
     {
@@ -210,5 +240,25 @@ public class EnonceView extends Actor
         {
 
         }
+    }
+
+    @Override
+    public boolean isVisible()
+    {
+        return isVisible;
+    }
+
+    @Override
+    public void setVisible(boolean visible)
+    {
+        isVisible = visible;
+    }
+
+    @Override
+    public void myDraw(Batch batch)
+    {
+        //table.draw(batch, 1);
+        //tableTitre.draw(batch, 1);
+
     }
 }
