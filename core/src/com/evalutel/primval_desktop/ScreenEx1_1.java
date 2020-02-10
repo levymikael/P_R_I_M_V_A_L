@@ -105,9 +105,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         billesList = autoFillPlanche();
 
 
-
-
-         exec = Executors.newSingleThreadScheduledExecutor();
+        exec = Executors.newSingleThreadScheduledExecutor();
 
 
         timer.schedule(new PresentationMetrologue(2000), 1000);
@@ -285,10 +283,10 @@ public class ScreenEx1_1 extends ScreenOnglet
                 int posYOiseau = 7 * screenHeight / 10;
 
 
-                    enonceView.addTextEnonce("Je depose encore une bille");
+                enonceView.addTextEnonce("Je depose encore une bille");
 
-                    oiseau.animateImage(durationMillis, true, posXOiseau, posYOiseau, nextEtape, 1000);
-                    uneMain.moveTo(durationMillis, posX, posY - (int) reserveBilles.getHeight(), nextEtape, 1000);
+                oiseau.animateImage(durationMillis, true, posXOiseau, posYOiseau, nextEtape, 1000);
+                uneMain.moveTo(durationMillis, posX, posY - (int) reserveBilles.getHeight(), nextEtape, 1000);
 //                }
             }
         }
@@ -356,10 +354,68 @@ public class ScreenEx1_1 extends ScreenOnglet
         @Override
         public void run()
         {
-            int posX = validus.currentPositionX;
-            int posY = validus.currentPositionY;
+            uneMain.setVisible(true);
 
-            uneMain.moveTo(durationMillis, posX, posY, null, 1000);
+            float posX = validus.currentPositionX + validus.getWidth() / 2;
+            float posY = validus.currentPositionY /*- uneMain.getHeight()*/;
+
+            TaskEtape nextEtape = new MoveMainBackToPlanche(1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
+            enonceView.addTextEnonce("Validus: Non, non tu t’es trompée ");
+            cptBille++;
+
+        }
+    }
+
+    private class MoveMainBackToPlanche extends TaskEtape
+    {
+        private MoveMainBackToPlanche(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            int posX = planche1.currentPositionX;
+            float posYf = planche1.currentPositionY;
+            int posY = (int) posYf;
+
+            TaskEtape nextEtape = new MoveBilleOutOfPlanche(500);
+            uneMain.moveTo(durationMillis, posX, posY /*- (int) reserveBilles.getHeight()*/, nextEtape, 1000);
+
+            enonceView.addTextEnonce("Metronome : Pour corriger mon erreur, je retire une bille de la planche puis je demande a Mademoiselle Validus.");
+
+        }
+    }
+
+
+    private class MoveBilleOutOfPlanche extends TaskEtape
+    {
+        private MoveBilleOutOfPlanche(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            int posX = planche1.currentPositionX;
+            float posYf = planche1.currentPositionY;
+            int posY = (int) posYf;
+
+
+
+            TaskEtape nextEtape = new EtapeDragBille(500);
+            uneMain.moveTo(durationMillis, posX, posY /*- (int) reserveBilles.getHeight()*/, nextEtape, 1000);
+
+            enonceView.addTextEnonce("Metronome : Pour corriger mon erreur, je retire une bille de la planche puis je demande a Mademoiselle Validus.");
+
         }
     }
 
@@ -414,14 +470,20 @@ public class ScreenEx1_1 extends ScreenOnglet
                     TaskEtape nextEtape = new EtapeAddBille(1000);
                     bille.animateImage(durationMillis, true, posX, posY, nextEtape, 0);
 
-                    enonceView.addTextEnonce("Mince,  je crois que je me suis trompe, je clique sur Mademoiselle Validus pour savoir si c’est juste.");
+                    enonceView.addTextEnonce("Mince, je crois que je me suis trompe, je clique sur Mademoiselle Validus pour savoir si c’est juste.");
 
-                    TaskEtape nextEtape2 = new MoveMainToValidus(1000);
+                    uneMain.cliqueTo(durationMillis, posX, (int) posYMain, null, 0);
 
+                    timer.schedule(new MoveMainToValidus(2000), 1000);
 
-                    exec.scheduleAtFixedRate(nextEtape2, 0, 1000, TimeUnit.MILLISECONDS);
+//                    exec.scheduleAtFixedRate(nextEtape2, 0, 1000, TimeUnit.MILLISECONDS);
+                }
+                else if (cptBille == 4)
+                {
+                    float posXValidus = validus.currentPositionX + validus.getWidth() / 2;
+                    float posYValidus = validus.currentPositionY /*- uneMain.getHeight()*/;
+                    uneMain.cliqueTo(durationMillis, (int) posXValidus, (int) posYValidus, null, 2000);
 
-//                    uneMain.cliqueTo(durationMillis, posX, (int) posYMain, nextEtape2, 0);
                 }
 
             }
