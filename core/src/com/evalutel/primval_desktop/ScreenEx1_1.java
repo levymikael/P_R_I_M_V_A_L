@@ -119,11 +119,9 @@ public class ScreenEx1_1 extends ScreenOnglet
             String str0 = "Bonjour,\n" +
                     "Je suis le professeur Metrologue, on va faire un jeu amusant qui s’appelle Badix.\n" +
                     "Tu veux jouer ?";
-
             enonceView.addTextEnonce(str0);
 
             timer.schedule(new VoiciLaRegleDuJeu(2000), 2000);
-
         }
     }
 
@@ -137,27 +135,20 @@ public class ScreenEx1_1 extends ScreenOnglet
         @Override
         public void run()
         {
-            String str = "";
-            if (cptOiseau == 0)
-            {
-                str = "Voici la règle du jeu:";
-
-            }
-            else if (cptOiseau == 1)
-            {
-                str = "Je vois maintenant 2 oiseaux \n";
-
-            }
-
+            String str = "Voici la règle du jeu:";
             enonceView.addTextEnonce(str);
 
             UnOiseau oiseau = oiseauxList.get(cptOiseau);
             int posY = 7 * screenHeight / 10;
             int posX = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
 
-            TaskEtape nextEtape = new EtapeAddOiseau(1000);
+//            TaskEtape nextEtape = new EtapeAddOiseau(1000);
 
-            oiseau.animateImage(durationMillis, true, posX, posY, nextEtape, 1000);
+            oiseau.animateImage(durationMillis, true, posX, posY, null, 1000);
+            timer.schedule(new JeVoisUnOIseau(2000), 1000);
+            cptOiseau++;
+
+
         }
     }
 
@@ -171,18 +162,18 @@ public class ScreenEx1_1 extends ScreenOnglet
         @Override
         public void run()
         {
-            if (cptOiseau < oiseauxList.size())
-            {
+//            if (cptOiseau < oiseauxList.size())
+//            {
 
-                UnOiseau oiseau = oiseauxList.get(cptOiseau);
-                int posY;
-                int posX;
+//                UnOiseau oiseau = oiseauxList.get(cptOiseau);
+//                int posY;
+//                int posX;
 
 //                if (cptOiseau < 5)
-//                {
-                posY = 7 * screenHeight / 10;
-                posX = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
-//                }
+////                {
+//                posY = 7 * screenHeight / 10;
+//                posX = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
+////                }
 //                else
 //                {
 //                    cpt++;
@@ -192,11 +183,13 @@ public class ScreenEx1_1 extends ScreenOnglet
 
 //                TaskEtape nextEtape = new EtapeAddOiseau(1000);
 
-
+            if (cptOiseau == 0)
+            {
                 timer.schedule(new JeVoisUnOIseau(2000), 1000);
-//                oiseau.animateImage(durationMillis, true, posX, posY, nextEtape, 500);
-                cptOiseau++;
             }
+//                oiseau.animateImage(durationMillis, true, posX, posY, nextEtape, 500);
+            cptOiseau++;
+//            }
 //            else
 //            {
 //                timer.schedule(new MoveMainToReserve(2000), 1);
@@ -216,25 +209,26 @@ public class ScreenEx1_1 extends ScreenOnglet
         public void run()
         {
             String str = " Je vois un oiseau";
-
             enonceView.addTextEnonce(str);
+
+            timer.schedule(new MoveMainToReserve1(2000), 1);
+
 //
 //            UnOiseau oiseau = oiseauxList.get(cptOiseau);
 //            int posY = 7 * screenHeight / 10;
 //            int posX = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
 //
 //            TaskEtape nextEtape = new EtapeAddOiseau(1000);
-//
+
 //            oiseau.animateImage(durationMillis, true, posX, posY, nextEtape, 2000);
 
-            timer.schedule(new MoveMainToReserve(2000), 1);
         }
     }
 
 
-    private class MoveMainToReserve extends TaskEtape
+    private class MoveMainToReserve1 extends TaskEtape
     {
-        private MoveMainToReserve(long durMillis)
+        private MoveMainToReserve1(long durMillis)
         {
             super(durMillis);
         }
@@ -254,15 +248,23 @@ public class ScreenEx1_1 extends ScreenOnglet
                 TaskEtape nextEtape = new EtapeDragBille(500);
                 uneMain.moveTo(durationMillis, posX, posY - (int) reserveBilles.getHeight(), nextEtape, 1000);
 
+                UnOiseau oiseau = oiseauxList.get(cptOiseau);
+                int posXOiseau = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
+                int posYOiseau = 7 * screenHeight / 10;
 
+
+                TaskEtape nextEtape2 = new EtapeAddOiseau(1000);
+
+                oiseau.animateImage(durationMillis, true, posXOiseau, posYOiseau, nextEtape2, 1000);
 
             }
+
         }
     }
 
-    private class MoveMainToValidus extends TaskEtape
+    private class MoveMainToReserve2 extends TaskEtape
     {
-        private MoveMainToValidus(long durMillis)
+        private MoveMainToReserve2(long durMillis)
         {
             super(durMillis);
         }
@@ -270,14 +272,94 @@ public class ScreenEx1_1 extends ScreenOnglet
         @Override
         public void run()
         {
-            int posX = validus.currentPositionX;
-            int posY = validus.currentPositionY;
+            if (cptBille < billesList.size())
+            {
+            uneMain.setVisible(true);
+            //UneBille bille = billesList.get(cptBille);
+
+            int posX = reserveBilles.currentPositionX;
+            float posYf = reserveBilles.currentPositionY;
+            int posY = (int) posYf;
 
             TaskEtape nextEtape = new EtapeDragBille(500);
-            uneMain.moveTo(durationMillis, posX, posY, nextEtape, 1000);
-            timer.schedule(new MoveMainToReserve(0), 1);
+
+            UnOiseau oiseau = oiseauxList.get(2);
+            int posXOiseau = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
+            int posYOiseau = 7 * screenHeight / 10;
+
+            if (cptOiseau > 2)
+            {
+                enonceView.addTextEnonce("Je depose encore une bille");
+
+//                    TaskEtape nextEtape2 = new EtapeAddBille(1000);
+                oiseau.animateImage(durationMillis, true, posXOiseau, posYOiseau, nextEtape, 1000);
+
+                uneMain.moveTo(durationMillis, posX, posY - (int) reserveBilles.getHeight(), nextEtape, 1000);
+//                    uneMain.moveTo(durationMillis, posX, posY - (int) reserveBilles.getHeight(), nextEtape, 3000);
+                }
+            }
         }
     }
+
+    private class MoveMainToReserve3 extends TaskEtape
+    {
+        private MoveMainToReserve3(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            if (cptBille < billesList.size())
+            {
+                uneMain.setVisible(true);
+                //UneBille bille = billesList.get(cptBille);
+
+                int posX = reserveBilles.currentPositionX;
+                float posYf = reserveBilles.currentPositionY;
+                int posY = (int) posYf;
+
+                TaskEtape nextEtape = new EtapeDragBille(500);
+//
+//                UnOiseau oiseau = oiseauxList.get(cptOiseau);
+//                int posXOiseau = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
+//                int posYOiseau = 7 * screenHeight / 10;
+
+//                if (cptOiseau == 2)
+//                {
+                    TaskEtape nextEtape2 = new EtapeAddBille(1000);
+//                    oiseau.animateImage(durationMillis, true, posXOiseau, posYOiseau, nextEtape2, 1000);
+
+                    uneMain.moveTo(durationMillis, posX, posY - (int) reserveBilles.getHeight(), nextEtape, 1000);
+//                    uneMain.moveTo(durationMillis, posX, posY - (int) reserveBilles.getHeight(), nextEtape, 3000);
+
+//                }
+
+            }
+
+        }
+    }
+
+
+//    private class MoveMainToValidus extends TaskEtape
+//    {
+//        private MoveMainToValidus(long durMillis)
+//        {
+//            super(durMillis);
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//            int posX = validus.currentPositionX;
+//            int posY = validus.currentPositionY;
+//
+//            TaskEtape nextEtape = new EtapeDragBille(500);
+//            uneMain.moveTo(durationMillis, posX, posY, nextEtape, 1000);
+//            timer.schedule(new MoveMainToReserve(0), 1);
+//        }
+//    }
 
 
     private class EtapeDragBille extends TaskEtape
@@ -300,13 +382,31 @@ public class ScreenEx1_1 extends ScreenOnglet
 
                 float posYMain = planche1.getHeight() - uneMain.getHeight();
 
-                enonceView.addTextEnonce("Je saisis une bille du sac et je la depose sur le plateau ");
-                TaskEtape nextEtape = new EtapeAddBille(1000);
+                if (cptBille == 0)
+                {
+                    enonceView.addTextEnonce("Je saisis une bille du sac et je la depose sur le plateau ");
+                    TaskEtape nextEtape = new EtapeAddBille(1000);
 
-                bille.animateImage(durationMillis, true, posX, posY, nextEtape, 0);
-                etapeOiseau = true;
-                uneMain.cliqueTo(durationMillis, posX, (int) posYMain, null, 0);
+                    bille.animateImage(durationMillis, true, posX, posY, nextEtape, 0);
+                    uneMain.cliqueTo(durationMillis, posX, (int) posYMain, null, 0);
+                }
+                else if (cptBille == 1)
+                {
+                    TaskEtape nextEtape2 = new EtapeAddBille(1000);
+                    enonceView.addTextEnonce("Je vois maintenant 2 oiseaux ");
 
+                    cptOiseau++;
+                    bille.animateImage(durationMillis, true, posX, posY, nextEtape2, 0);
+                    uneMain.cliqueTo(durationMillis, posX, (int) posYMain, null, 0);
+                }
+                else if (cptBille == 2)
+                {
+                    TaskEtape nextEtape = new EtapeAddBille(1000);
+                    enonceView.addTextEnonce("Tiens ! Encore un oiseau");
+                    
+                    bille.animateImage(durationMillis, true, posX, posY, nextEtape, 0);
+                    uneMain.cliqueTo(durationMillis, posX, (int) posYMain, null, 0);
+                }
             }
         }
     }
@@ -327,8 +427,20 @@ public class ScreenEx1_1 extends ScreenOnglet
                 int posX = screenWidth / 2;
                 int posY = (int) planche1.getHeight() / 2;
 
-                TaskEtape nextEtape = new MoveMainToReserve(1000);
+                TaskEtape nextEtape = null;
 
+                if (cptBille < 1)
+                {
+                    nextEtape = new MoveMainToReserve1(1000);
+                }
+                else if (cptBille < 2)
+                {
+                    nextEtape = new MoveMainToReserve2(1000);
+                }
+                else if (cptBille < 3)
+                {
+                    nextEtape = new MoveMainToReserve3(1000);
+                }
                 planche1.addBilleAndOrganize(bille);
                 cptBille++;
                 uneMain.moveTo(50, posX, posY, nextEtape, 1000);
@@ -356,7 +468,7 @@ public class ScreenEx1_1 extends ScreenOnglet
 
         billesList = new ArrayList<>();
 
-        for (int i = 0; i < oiseauxList.size(); i++)
+        for (int i = 0; i < oiseauxList.size() + 1; i++)
         {
             UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, reserveBilles.largeurBille, reserveBilles.largeurBille);
             billesList.add(billeAdded);
@@ -380,22 +492,15 @@ public class ScreenEx1_1 extends ScreenOnglet
         int firstPositionOiseauX = screenWidth + 200;
         int firstPositionOiseauY = screenHeight + 200;
 
-        int secondPositionOiseauX = 200;
-        int secondPositionOiseauY = 700;
-        for (int i = 0; i < 4; i++)
+//        int secondPositionOiseauX = 200;
+//        int secondPositionOiseauY = 700;
+        for (int i = 0; i < 3; i++)
         {
-            if (etapeOiseau)
-            {
-                int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-                UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, 200, 200);
-                //unOiseau.animateImage(4000, false, (300 / (1 + i)), (300 / (1 + i)));
-                allDrawables.add(unOiseau);
-                oiseauxList.add(unOiseau);
-                etapeOiseau = false;
-            }
+            int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, 200, 200);
+            allDrawables.add(unOiseau);
+            oiseauxList.add(unOiseau);
         }
-
-//        }
 
         return oiseauxList;
     }
