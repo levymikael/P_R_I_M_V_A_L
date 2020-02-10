@@ -23,6 +23,9 @@ import com.evalutel.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 public class ScreenOnglet implements Screen, InputProcessor
@@ -90,6 +93,8 @@ public class ScreenOnglet implements Screen, InputProcessor
         int posY =  screenHeight /2;
         uneMain = new UneMain( posX, posY, 200);
         uneMain.setVisible(false);
+
+
 
         /*
         calculetteViewTest = new CalculetteViewTest(stage, 200, 200, 700, 600);
@@ -308,6 +313,8 @@ public class ScreenOnglet implements Screen, InputProcessor
         objectTouched = null;
         return false;
     }
+
+
 
     protected class TaskEtape extends TimerTask
     {
