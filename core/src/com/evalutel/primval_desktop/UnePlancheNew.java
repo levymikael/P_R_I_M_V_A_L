@@ -10,7 +10,8 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
     public boolean shouldReturnToReserve = false;
     private ArrayList<MyPoint> positionsBilles = new ArrayList<>();
     private ArrayList<UneBille> allBilles = new ArrayList<>();
-    private ArrayList<UneMain> allMains = new ArrayList<>();
+
+    int spaceBille ;
 
 
     public UnePlancheNew(int startPositionX, int startPositionY, int plancheWidth, int billeWidth)
@@ -19,19 +20,18 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
 
         int startX = (int) animationWidth / 12;
 
-        int spaceBille = (int) animationWidth / 24;
+         spaceBille = (int) animationWidth / 24;
 
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                int posX = startX + j * (spaceBille + billeWidth);
-                int posY = startX + i * (spaceBille + billeWidth);
+                int posX = (startX + j * (spaceBille + billeWidth)) ;
+                int posY = (startX + i * (spaceBille + billeWidth)) ;
 
                 positionsBilles.add(new MyPoint(currentPositionX + posX, currentPositionY + posY));
             }
         }
-
     }
 
     /**
@@ -56,6 +56,16 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
         boolean isInPlanche = (uneMain.currentPositionX > this.currentPositionX) && (uneMain.currentPositionX < (this.currentPositionX + this.animationWidth)) && (uneMain.currentPositionY > this.currentPositionY) && (uneMain.currentPositionY < (this.currentPositionY + this.animationHeight));
 
         return isInPlanche;
+    }
+
+    public MyPoint getPositionBille(int index)
+    {
+        return positionsBilles.get(index);
+    }
+
+    public UneBille getBille(int index)
+    {
+        return allBilles.get(index);
     }
 
     /**

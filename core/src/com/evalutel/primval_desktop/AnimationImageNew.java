@@ -4,9 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.evalutel.ui_tools.MyPoint;
 import com.evalutel.ui_tools.PauseSingleton;
 
@@ -19,8 +17,7 @@ public class AnimationImageNew implements MyDrawInterface
 {
     TextureRegion[] animationFrames;
     Animation animation;
-    public Timer timer = new Timer();
-    public Timer timer4 = new Timer();
+    private Timer timer = new Timer();
 
 
     public float elapsedTime, animationVitesse, animationHeight, animationWidth;
@@ -80,6 +77,12 @@ public class AnimationImageNew implements MyDrawInterface
     {
         currentPositionX = x;
         currentPositionY = y;
+    }
+
+    public void setPositionCenter(int x, int y)
+    {
+        currentPositionX = x-(int)(animationWidth/2.0f);
+        currentPositionY = y-(int)(animationHeight/2.0f);
     }
 
 

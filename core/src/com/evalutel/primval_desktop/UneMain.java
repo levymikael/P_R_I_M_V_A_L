@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Pools;
+import com.evalutel.ui_tools.MyPoint;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,17 +24,36 @@ public class UneMain extends AnimationImageNew implements MyTouchInterface, MyDr
 
     public void moveTo(long animationDureemillis, int deplacementEnX, int deplacementEnY, ScreenOnglet.TaskEtape taskEtape, long delayNext)
     {
-        animationWidth = screenWidth/8;
-        animationHeight = screenWidth/8;
-        animateImage(animationDureemillis, false, deplacementEnX, deplacementEnY, taskEtape, delayNext);
+        imageUp();
+
+        int deplacemenNewY = (int)(deplacementEnY - animationHeight*0.9f);
+        int deplacemenNewX = (int)(deplacementEnX - animationWidth*0.1f);
+
+        animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext);
     }
 
     public void cliqueTo(long animationDureemillis, int deplacementEnX, int deplacementEnY, ScreenOnglet.TaskEtape taskEtape, long delayNext)
     {
-        animationWidth = screenWidth/11;
-        animationHeight = screenWidth/11;
-        animateImage(animationDureemillis, false, deplacementEnX, deplacementEnY, taskEtape, delayNext);
+        imageDown();
+
+        int deplacemenNewY = (int)(deplacementEnY - animationHeight*0.9f);
+        int deplacemenNewX = (int)(deplacementEnX - animationWidth*0.1f);
+
+        animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext);
     }
+
+    public void imageDown()
+    {
+        animationWidth = screenWidth/9;
+        animationHeight = screenWidth/9;
+    }
+
+    public void imageUp()
+    {
+        animationWidth = screenWidth/8;
+        animationHeight = screenWidth/8;
+    }
+
 
 
     @Override

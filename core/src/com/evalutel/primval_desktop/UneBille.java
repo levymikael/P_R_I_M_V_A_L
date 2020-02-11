@@ -3,7 +3,6 @@ package com.evalutel.primval_desktop;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.evalutel.ui_tools.MyPoint;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -92,8 +91,6 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
                 break;
             }
         }
-
-
         if (!isAddedToPlanche)
         {
             if (this.plancheNew != null)
@@ -102,17 +99,17 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
                 {
                     this.plancheNew = null;
                     this.setPosition(100000, 100000);
-                } else
+                }
+                else
                 {
                     this.plancheNew.addBilleAndOrganize(this);
                 }
-            } else
+            }
+            else
             {
                 this.setPosition(100000, 100000);
             }
         }
-
-
     }
 
 }

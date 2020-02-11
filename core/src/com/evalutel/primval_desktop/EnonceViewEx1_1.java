@@ -137,7 +137,6 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
         table4 = new Table();
 
 
-        timer4.schedule(new instructionsScrolling(1000), 1000);
 
 //        System.out.println(label3);
 
@@ -257,7 +256,6 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
                 label3.setWrap(true);
 
 
-                timer.schedule(new instructionsScrolling(10000), 3000);
             }
         }
 
