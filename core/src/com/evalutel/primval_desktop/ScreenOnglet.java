@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.evalutel.ui_tools.MyImageButton;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 
 public class ScreenOnglet implements Screen, InputProcessor
@@ -62,11 +60,16 @@ public class ScreenOnglet implements Screen, InputProcessor
     {
         stage = new Stage();
 
-        //Garde aspect ratio
-//        stage = new Stage(new FitViewport(640, 480));
-
         screenHeight = Gdx.graphics.getHeight();
         screenWidth = Gdx.graphics.getWidth();
+
+        //Garde aspect ratio
+
+//        stage = new Stage(new FitViewport(screenWidth, screenHeight));
+//
+//        float widthTest = stage.getWidth();
+//        float heightTest = stage.getHeight();
+
         objectTouchedList = new ArrayList<>();
         allDrawables = new ArrayList<>();
 

@@ -20,8 +20,6 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
     {
         super(getDrawable(imagePathUp, width, height), getDrawable(imagePathDown, width, height));
 
-
-
         stage.addActor(this);
 
     }

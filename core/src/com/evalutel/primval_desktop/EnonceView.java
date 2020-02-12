@@ -22,7 +22,6 @@ import java.util.TimerTask;
 
 public class EnonceView implements MyDrawInterface
 {
-
     private Table table, tableTitre;
     private Table tableMilieu;
     private float heightTop;
@@ -49,7 +48,8 @@ public class EnonceView implements MyDrawInterface
 
 // Configuration police de l'enonce
         TextField.TextFieldStyle textFieldStyleTest = new TextField.TextFieldStyle();
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+//
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 40;
 
@@ -77,20 +77,13 @@ public class EnonceView implements MyDrawInterface
         tableTitre.add(label2).align(Align.center).width(100);
         tableTitre.add(label).width(widthEnonce-150).height(100);
 
-
-
-
         table = new Table();
         stage.addActor(table);
         stage.addActor(tableTitre);
 
-
-
         tableMilieu = new Table();
         table.add(tableMilieu);
         table.row();
-
-
 
         textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_text.png"));
         spriteEnonceText = new Sprite(textureTextEnonce);
@@ -98,8 +91,6 @@ public class EnonceView implements MyDrawInterface
         textFieldStyleEnonce.font = bitmapFont;
         textFieldStyleEnonce.background = new SpriteDrawable(spriteEnonceText);
         textFieldEnonce = new TextField("", textFieldStyleEnonce);
-
-
 
 // Insertion texte.png dans tableau avec une imageBG.png:
         Table tableBandeauBas = new Table();
@@ -114,8 +105,6 @@ public class EnonceView implements MyDrawInterface
         tableBandeauBas.add(textFieldEnonce).width(widthImageEnonce).height(heightImageEnonce);
 
         table.add(tableBandeauBas).width(widthEnonce).height(heightBackGroundImage);
-
-
         table.row();
 
 
@@ -126,8 +115,6 @@ public class EnonceView implements MyDrawInterface
         widthScreen = Gdx.graphics.getWidth();
         tableTitre.pack();
         tableTitre.setPosition(widthScreen/2 - widthEnonce/2, screenHeight - tableTitre.getHeight());
-
-
 
         table.pack();
         final float tableHeight = table.getHeight();
@@ -181,7 +168,6 @@ public class EnonceView implements MyDrawInterface
                 }
             }
         });
-
     }
 
     /*
@@ -198,7 +184,6 @@ public class EnonceView implements MyDrawInterface
     public void addTextEnonce(String string)
     {
 
-
         Table table4 = new Table();
 
         Label.LabelStyle labelStyle3 = new Label.LabelStyle();
@@ -208,9 +193,9 @@ public class EnonceView implements MyDrawInterface
         Color colorWhite = new Color();
         colorWhite.add(255, 255, 255, 0);
 
-        table4.add().width(20).height(100);
-        table4.add(label3).width(widthEnonce-40).height(100);
-        table4.add().width(20).height(100);
+        table4.add().width(20).height(50);
+        table4.add(label3).width(widthEnonce-40).height(50);
+        table4.add().width(20).height(50);
 
         table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
         table4.row();
@@ -257,8 +242,6 @@ public class EnonceView implements MyDrawInterface
     @Override
     public void myDraw(Batch batch)
     {
-        //table.draw(batch, 1);
-        //tableTitre.draw(batch, 1);
 
     }
 }

@@ -5,15 +5,15 @@ import com.evalutel.ui_tools.MyPoint;
 public interface MyTouchInterface
 {
 
-    public boolean isTouched(int x, int y);
+    boolean isTouched(int x, int y);
 
-    public void setPosition(int x, int y);
+    void setPosition(int x, int y);
 
-    public MyPoint getPosition();
+    MyPoint getPosition();
 
-    public float getWidth();
+    float getWidth();
 
-    public float getHeight();
+    float getHeight();
 
     boolean isActive();
 
