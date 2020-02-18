@@ -93,10 +93,9 @@ public class ScreenOnglet implements Screen, InputProcessor
 
 
         int posX = 6 * screenWidth / 7;
-        int posY =  screenHeight /2;
-        uneMain = new UneMain( posX, posY, 200);
+        int posY = screenHeight / 2;
+        uneMain = new UneMain(posX, posY, 200);
         uneMain.setVisible(false);
-
 
 
         /*
@@ -145,7 +144,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(delta);
-
 
         batch.begin();
 
@@ -245,7 +243,8 @@ public class ScreenOnglet implements Screen, InputProcessor
             objectTouched = billeAdded;
 //            firstPositionX = mousePointerX;
 //            firstPositionY = mousePointerY;
-        } else /*si bille part de la planche*/
+        }
+        else /*si bille part de la planche*/
         {
             for (int i = 0; i < objectTouchedList.size(); i++)
             {
@@ -316,7 +315,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         objectTouched = null;
         return false;
     }
-
 
 
     protected class TaskEtape extends TimerTask

@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.Ex;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -16,6 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.evalutel.primval_desktop.AnimationImageNew;
+import com.evalutel.primval_desktop.BackgroundColor;
+import com.evalutel.primval_desktop.EnonceView;
+import com.evalutel.primval_desktop.MyDrawInterface;
+import com.evalutel.primval_desktop.MyTouchInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -129,7 +134,7 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
 //        labelStyle3.font = bitmapFont;
 //        labelStyle3.fontColor = Color.BLACK;
 
-        instructionsScrolling strAux = new instructionsScrolling(1000);
+//        instructionsScrolling strAux = new instructionsScrolling(1000);
 
 
 //        label3.setWrap(true);
@@ -233,7 +238,8 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
 
     }
 
-    private class instructionsScrolling extends EnonceView.TaskEtape
+
+   /* private class instructionsScrolling extends EnonceView.TaskEtape
     {
         private instructionsScrolling(long durMillis)
         {
@@ -270,8 +276,7 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
             return labelText;
         }
     }
-
-
+*/
     @Override
     public void myDraw(Batch batch)
     {

@@ -15,10 +15,31 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
 
     Stage stage;
 
+    public int currentPositionX, currentPositionY;
+
+    public float  width, height;
+
+
 
     public MyImageButton(Stage stage, String imagePathUp, String imagePathDown, float width, float height)
     {
         super(getDrawable(imagePathUp, width, height), getDrawable(imagePathDown, width, height));
+
+
+        this.width = width;
+        this.height = height;
+
+        stage.addActor(this);
+
+    }
+
+    public MyImageButton(Stage stage, String imagePathUp, float width, float height)
+    {
+        super(getDrawable(imagePathUp, width, height));
+
+
+        this.width = width;
+        this.height = height;
 
         stage.addActor(this);
 
@@ -34,12 +55,36 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
     }
 
 
+//    public void setPosition(int x, int y)
+//    {
+//        currentPositionX = x;
+//        currentPositionY = y;
+//    }
+
+
+
+
+    public MyPoint getPosition()
+    {
+        return new MyPoint(currentPositionX, currentPositionY);
+    }
+
+
+    public float getWidth()
+    {
+        return width;
+    }
+
+
+    public float getHeight()
+    {
+        return height;
+    }
+
     @Override
     public void myDraw(Batch batch)
     {
-        stage.draw();
     }
-
 
 
     public void addListener()
