@@ -11,7 +11,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
     private ArrayList<MyPoint> positionsBilles = new ArrayList<>();
     private ArrayList<UneBille> allBilles = new ArrayList<>();
 
-    int spaceBille ;
+    int spaceBille;
 
 
     public UnePlancheNew(int startPositionX, int startPositionY, int plancheWidth, int billeWidth)
@@ -20,14 +20,14 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
 
         int startX = (int) animationWidth / 12;
 
-         spaceBille = (int) animationWidth / 24;
+        spaceBille = (int) animationWidth / 24;
 
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                int posX = (startX + j * (spaceBille + billeWidth)) ;
-                int posY = (startX + i * (spaceBille + billeWidth)) ;
+                int posX = (startX + j * (spaceBille + billeWidth));
+                int posY = (startX + i * (spaceBille + billeWidth));
 
                 positionsBilles.add(new MyPoint(currentPositionX + posX, currentPositionY + posY));
             }
@@ -85,6 +85,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
 
         reorganiseBilles();
 
+
         return retour;
     }
 
@@ -104,6 +105,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
             uneBille.plancheNew = this;
         }
 
+
         return retour;
     }
 
@@ -117,7 +119,6 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
         {
             UneBille bille = arrayBillesAux.get(i);
             addBille(bille);
-
         }
     }
 
@@ -129,6 +130,11 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
     public void removeMain(UneMain uneMain)
     {
         allBilles.remove(uneMain);
+    }
+
+    public int getNumberBilles()
+    {
+        return allBilles.size();
     }
 
 

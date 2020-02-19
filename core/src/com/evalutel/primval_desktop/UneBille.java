@@ -91,7 +91,8 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
                 break;
             }
         }
-        if (!isAddedToPlanche)
+
+        if ( ! isAddedToPlanche)
         {
             if (this.plancheNew != null)
             {

@@ -455,10 +455,7 @@ public class ScreenEx1_1 extends ScreenOnglet
 
         public ArrayList getNumberOiseauxArList()
         {
-//        Random rand = new Random();
-//        int oiseauMaxQuantity = 10;
-//        rand_int = rand.nextInt(oiseauMaxQuantity) + 1;
-
+//
             oiseauxList = new ArrayList<>();
 
             int firstPositionOiseauX = screenWidth + 200;
@@ -575,7 +572,7 @@ public class ScreenEx1_1 extends ScreenOnglet
 
             if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
             {
-                System.out.println("clickedOnContainer");
+                System.out.println("clickedOnReserve");
                 UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille, reserveBilles.largeurBille);
                 objectTouchedList.add(billeAdded);
                 allDrawables.add(billeAdded);

@@ -34,7 +34,7 @@ public class EnonceView implements MyDrawInterface
 
     TextField textFieldEnonce;
 
-    Sprite  sprite2, spriteEnonceText;
+    Sprite sprite2, spriteEnonceText;
     BitmapFont bitmapFont;
     private boolean isVisible = true;
     private Texture textureMilieuEnonce;
@@ -75,7 +75,7 @@ public class EnonceView implements MyDrawInterface
 // Positionnement numero exercice:
         tableTitre.add().width(50);
         tableTitre.add(label2).align(Align.center).width(100);
-        tableTitre.add(label).width(widthEnonce-150).height(100);
+        tableTitre.add(label).width(widthEnonce - 150).height(100);
 
         table = new Table();
         stage.addActor(table);
@@ -110,11 +110,10 @@ public class EnonceView implements MyDrawInterface
 
 // Positionnement du tableau sur ecran:
 
-        //TODO je n'arrive pas a inserer les variables screenWidth and screenHeight dans la classe parent.
         final int screenHeight = Gdx.graphics.getHeight();
         widthScreen = Gdx.graphics.getWidth();
         tableTitre.pack();
-        tableTitre.setPosition(widthScreen/2 - widthEnonce/2, screenHeight - tableTitre.getHeight());
+        tableTitre.setPosition(widthScreen / 2 - widthEnonce / 2, screenHeight - tableTitre.getHeight());
 
         table.pack();
         final float tableHeight = table.getHeight();
@@ -157,9 +156,9 @@ public class EnonceView implements MyDrawInterface
                 {
                     table.setY(topYTablePosition);
                 }
-                else if (nextY > (screenHeight - heightBackGroundImage-tableTitre.getHeight())) // si souris depasse bandeau alors on cache texte consigne
+                else if (nextY > (screenHeight - heightBackGroundImage - tableTitre.getHeight())) // si souris depasse bandeau alors on cache texte consigne
                 {
-                    table.setY(screenHeight - heightBackGroundImage-tableTitre.getHeight());
+                    table.setY(screenHeight - heightBackGroundImage - tableTitre.getHeight());
                 }
                 else
                 {
@@ -194,7 +193,7 @@ public class EnonceView implements MyDrawInterface
         colorWhite.add(255, 255, 255, 0);
 
         table4.add().width(20).height(50);
-        table4.add(label3).width(widthEnonce-40).height(50);
+        table4.add(label3).width(widthEnonce - 40).height(50);
         table4.add().width(20).height(50);
 
         table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
