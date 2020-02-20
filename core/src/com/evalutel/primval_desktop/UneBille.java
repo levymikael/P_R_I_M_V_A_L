@@ -18,11 +18,12 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     ArrayList<Object> billeCanBeDropedOn;
     private Object unePlancheNew;
     private Object unContainer;
+    public ReserveBilles reserveBilles;
 
 
-    public UneBille(int startPositionX, int startPositionY, float animationHeight, float animationWidth)
+    public UneBille(int startPositionX, int startPositionY, float animationHeight)
     {
-        super(getImageRandom(), startPositionX, startPositionY, animationHeight, animationWidth);
+        super(getImageRandom(), startPositionX, startPositionY, animationHeight, animationHeight);
 
     }
 
@@ -100,6 +101,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
                 {
                     this.plancheNew = null;
                     this.setPosition(100000, 100000);
+                    reserveBilles.addBilleToReserve(this);
                 }
                 else
                 {
@@ -108,6 +110,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
             }
             else
             {
+                reserveBilles.addBilleToReserve(this);
                 this.setPosition(100000, 100000);
             }
         }

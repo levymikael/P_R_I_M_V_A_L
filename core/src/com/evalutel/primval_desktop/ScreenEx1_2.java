@@ -15,8 +15,6 @@ public class ScreenEx1_2 extends ScreenOnglet
     private ArrayList<UnOiseau> oiseauxList;
     private ArrayList<UnePlancheNew> allPlanches;
 
-    private ArrayList<Integer> numberOiseauxList;
-
     MyImageButton myButtonValidus;
 
     private UnePlancheNew planche1;
@@ -32,12 +30,12 @@ public class ScreenEx1_2 extends ScreenOnglet
     int diamantCount;
 
     boolean state = false;
-    private int rand_int, randNumOiseau;
+    private int randNumOiseau;
     private int cptOiseau, cptBille = 0;
     int posX, posY;
     int firstPositionOiseauX, firstPositionOiseauY;
     int failedAttempts;
-
+    UneBille billeMovedOut;
 
     EnonceView enonceView;
 
@@ -63,13 +61,21 @@ public class ScreenEx1_2 extends ScreenOnglet
         planche1.shouldReturnToReserve = true;
         allDrawables.add(planche1);
 
+        for (int i = 0; i < 9; i++)
+        {
+            UneBille bille = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille);
+
+            reserveBilles.addBilleToReserve(bille);
+            allDrawables.add(bille);
+            objectTouchedList.add(bille);
+            bille.setVisible(false);
+
+        }
+
         allPlanches = new ArrayList<>();
         allPlanches.add(planche1);
 
-
         billesList = new ArrayList<>();
-
-
 
         float enonceWidth = (screenWidth / 4) * 3;
 
@@ -86,14 +92,6 @@ public class ScreenEx1_2 extends ScreenOnglet
         allDrawables.add(myButtonValidus);
 
 
-        myButtonValidus.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                CheckValidus();
-            }
-        });
 
         metronome = new Metronome(0, 2 * screenHeight / 5, 300, 300);
         allDrawables.add(metronome);
@@ -104,9 +102,10 @@ public class ScreenEx1_2 extends ScreenOnglet
         allDrawables.add(ecrinDiamantView);
 
 
+        timer.schedule(new PresentationExercice(2000), 100);
+
         getNumberOiseauxArList();
 
-        timer.schedule(new PresentationExercice(2000), 100);
 
     }
 
@@ -123,6 +122,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             enonceView.addTextEnonce("Place autant de billes que d'oiseaux que tu vois et demande a Mademoiselle Validus si c'est juste pour avoir un diamant.");
             timer.schedule(new EtapeInstruction(2000), 1000);
+
         }
     }
 
@@ -136,7 +136,6 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-
             int[] numOiseauArray = MyMath.genereTabAleatoire(9);
 
             MyMath.melangeTab(numOiseauArray);
@@ -157,9 +156,28 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
+
+
             Displayoiseaux nextEtape = new Displayoiseaux(0);
             if (cptOiseau < randNumOiseau)
             {
+
+                //TODO: n'a pas l'air de fonctionner - turn touchables object inactives
+
+                myButtonValidus.addListener(new ClickListener()
+                {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y)
+                    {
+                        CheckValidus();
+                    }
+                });
+
+                reserveBilles.setActive(false);
+                planche1.SetAllBillesInactive();
+                ClickListener myButtonValidusListener = myButtonValidus.getClickListener();
+                myButtonValidus.removeListener(myButtonValidusListener);
+
                 UnOiseau oiseau = oiseauxList.get(cptOiseau);
 
                 if (cptOiseau > 5)
@@ -188,85 +206,23 @@ public class ScreenEx1_2 extends ScreenOnglet
             {
 
             }
+
+            //TODO: n'a pas l'air de fonctionner - turn touchables object active
+
+            reserveBilles.setActive(true);
+            planche1.SetAllBillesActive();
+
+            myButtonValidus.addListener(new ClickListener()
+            {
+                @Override
+                public void clicked(InputEvent event, float x, float y)
+                {
+                    CheckValidus();
+                }
+            });
         }
     }
 
-
-//    private class EtapeAddOiseau extends TaskEtape
-//    {
-//        private EtapeAddOiseau(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            if (cptOiseau < oiseauxList.size())
-//            {
-//                UnOiseau oiseau = oiseauxList.get(cptOiseau);
-//
-//                if (cptOiseau > 5)
-//                {
-//                    posY = 5 * screenHeight / 11;
-//                    posX = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * (cptOiseau - 6);
-//                }
-//                else
-//                {
-//                    posY = 7 * screenHeight / 10;
-//                    posX = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
-//                }
-//                oiseau.animateImage(1000, true, posX, posY, null, 500);
-//                cptOiseau++;
-//            }
-//        }
-//    }
-
-
-//    private class EtapeDragBille extends TaskEtape
-//    {
-//        private EtapeDragBille(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            UneBille bille = billesList.get(cptBille);
-//            bille.setVisible(true);
-//            int posX = screenWidth / 2;
-//            int posY = (int) planche1.getHeight() / 2;
-//
-////            TaskEtape nextEtape = new EtapeAddBille(1000);
-//            TaskEtape nextEtape2 = new EtapeAddOiseau(1000);
-//
-//            if (cptBille == 0)
-//            {
-//
-//                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
-//
-//                uneMain.cliqueTo(durationMillis, posX, posY, nextEtape2, 0);
-//            }
-//            else if (cptBille == 1)
-//            {
-//
-//                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
-//                uneMain.cliqueTo(durationMillis, posX, posY, nextEtape2, 0);
-//            }
-//            else if (cptBille == 2)
-//            {
-//
-//                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
-//                uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
-//            }
-//            else if (cptBille == 3)
-//            {
-//                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
-//                uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
-//            }
-//        }
-//    }
 
     public void CheckValidus()
     {
@@ -274,12 +230,9 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             enonceView.addTextEnonce("C'est bien continue " + questionCourante);
 
-            //Remise diamant
-
             timer.schedule(new EtapeNextQuestion(1000), 500);
 
             failedAttempts = 0;
-
             diamantCount++;
             ecrinDiamantView.addTextEcrin(diamantCount + "/9");
 
@@ -295,12 +248,226 @@ public class ScreenEx1_2 extends ScreenOnglet
                 failedAttempts = 0;
                 enonceView.addTextEnonce("voici la correction");
 
-                getCorrection();
-
+                timer.schedule(new EtapeRectification1(1000), 500);
 
             }
         }
     }
+
+    private class EtapeRectification1 extends TaskEtape
+    {
+        private EtapeRectification1(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+
+            if (planche1.getNumberBilles() < randNumOiseau)
+            {
+                uneMain.setVisible(true);
+
+                timer.schedule(new MoveMainToReserve1(1000), 500);
+            }
+            else if (planche1.getNumberBilles() > randNumOiseau)
+            {
+
+                uneMain.setVisible(true);
+
+                UneBille bille = planche1.getLastBille();
+                planche1.removeBilleToReserve(bille);
+
+                timer.schedule(new MoveMainBackToPlanche(1000), 500);
+            }
+            else
+            {
+                timer.schedule(new EtapeNextQuestion(1000), 500);
+                uneMain.setVisible(false);
+
+            }
+        }
+    }
+
+
+    private class MoveMainToReserve1 extends TaskEtape
+    {
+        private MoveMainToReserve1(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            if (cptBille < billesList.size())
+            {
+                uneMain.setVisible(true);
+
+                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
+                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+                int posY = (int) posYf;
+
+                TaskEtape nextEtape = new DisplayBilleReserve(500);
+                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
+            }
+        }
+    }
+
+    private class DisplayBilleReserve extends TaskEtape
+    {
+        private DisplayBilleReserve(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            float posXmain = reserveBilles.currentPositionX /*+ reserveBilles.getWidth() / 2*/;
+            float posYf = reserveBilles.currentPositionY /*+ reserveBilles.getHeight() / 2*/;
+            int posX = (int) posXmain;
+            int posY = (int) posYf;
+
+//            UneBille bille = reserveBilles.getBilleAndRemove();
+//            bille.setPositionCenter(posX, posY);
+//            bille.setVisible(true);
+
+            TaskEtape nextEtape = new EtapeDragBille(1000);
+            timer.schedule(nextEtape, 500);
+            uneMain.imageDown();
+        }
+    }
+
+    private class EtapeDragBille extends TaskEtape
+    {
+        private EtapeDragBille(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            UneBille bille = reserveBilles.getBilleAndRemove();
+            bille.setVisible(true);
+            bille.setPosition(reserveBilles.currentPositionX, reserveBilles.currentPositionY);
+            int posX = screenWidth / 2;
+            int posY = (int) planche1.getHeight() / 2;
+
+            TaskEtape nextEtape = new EtapeAddBille(1000);
+
+            bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
+            uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
+
+        }
+
+    }
+
+    private class EtapeAddBille extends TaskEtape
+    {
+        private EtapeAddBille(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            UneBille bille = reserveBilles.getBilleAndRemove();
+            int posX = screenWidth / 2;
+            int posY = (int) planche1.getHeight() / 2;
+
+            planche1.addBilleAndOrganize(bille);
+            cptBille++;
+
+            uneMain.moveTo(50, posX, posY, null, 1000);
+            uneMain.setVisible(false);
+
+            timer.schedule(new EtapeRectification1(1000), 500);
+
+//            TaskEtape nextEtape = new MoveMainToReserve1(1000);
+//            uneMain.moveTo(50, posX, posY, nextEtape, 1000);
+
+        }
+    }
+
+    private class MoveMainBackToPlanche extends TaskEtape
+    {
+        private MoveMainBackToPlanche(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            UneBille bille = planche1.getLastBille();
+
+            uneMain.setVisible(true);
+
+            float posX = bille.getPosition().x + (int) (bille.animationWidth / 2);
+            float posY = bille.getPosition().y + (int) (bille.animationWidth / 2);
+
+            TaskEtape nextEtape = new MoveBilleOutOfPlanche(500);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
+            uneMain.imageDown();
+
+        }
+    }
+
+
+    private class MoveBilleOutOfPlanche extends TaskEtape
+    {
+        private MoveBilleOutOfPlanche(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            UneBille bille = planche1.getLastBille();
+
+            billeMovedOut = planche1.getLastBille();
+
+            int posX = 600;
+            int posY = 400;
+
+            uneMain.cliqueTo(durationMillis, posX, posY, null, 500);
+
+            uneMain.moveTo(durationMillis, posX, posY, null, 1000);
+
+            TaskEtape nextEtape = new LastOne(500);
+
+            bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
+        }
+    }
+
+
+    private class LastOne extends TaskEtape
+    {
+        private LastOne(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            int posX = 600;
+            int posY = 400;
+
+            TaskEtape nextEtape = new EtapeRectification1(1000);
+            uneMain.moveTo(50, posX, posY, nextEtape, 1000);
+
+            billeMovedOut.setVisible(false);
+            uneMain.setVisible(false);
+        }
+    }
+
 
     private class EtapeNextQuestion extends TaskEtape
     {
@@ -315,72 +482,16 @@ public class ScreenEx1_2 extends ScreenOnglet
             questionCourante++;
             if (questionCourante == 9)
             {
-// fin exercice
+                // fin exercice
             }
             else
             {
                 timer.schedule(new EtapeInstruction(1000), 500);
             }
         }
-    }
-
-
-    public void CorrectionRemoveBille(int diff2Correct)
-    {
-
-        System.out.println(billesList);
-        System.out.println(diff2Correct);
-
-        for (int i = 0; i < diff2Correct; i++)
-        {
-
-            UneBille bille2Remove = billesList.get(billesList.size() - i-1);
-
-            bille2Remove.setPosition(screenWidth + 1000, screenHeight + 1000);
-            planche1.removeBille(bille2Remove);
-
-        }
-
-        timer.schedule(new EtapeNextQuestion(1000), 500);
-    }
-
-    public void autoFillPlanche(int diff2Correct)
-    {
-        int firstPositionBilleX = (planche1.getPosition().x + planche1.getPosition().x / 2);
-        int firstPositionBilleY = (planche1.getPosition().y + planche1.getPosition().y / 2);
-
-
-        for (int i = 0; i < diff2Correct; i++)
-        {
-            UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, reserveBilles.largeurBille, reserveBilles.largeurBille);
-
-            allDrawables.add(billeAdded);
-            billeAdded.setVisible(true);
-            planche1.addBilleAndOrganize(billeAdded);
-        }
-        timer.schedule(new EtapeNextQuestion(1000), 500);
-    }
-
-
-    public void getCorrection()
-
-    {
-        if (planche1.getNumberBilles() < randNumOiseau)
-        {
-
-            int diff2Correct = randNumOiseau - planche1.getNumberBilles();
-
-            autoFillPlanche(diff2Correct);
-
-        }
-        else if (planche1.getNumberBilles() > randNumOiseau)
-        {
-            int diff2Correct = planche1.getNumberBilles() - randNumOiseau;
-
-            CorrectionRemoveBille(diff2Correct);
-        }
 
     }
+
 
     public ArrayList getNumberOiseauxArList()
     {
@@ -390,104 +501,14 @@ public class ScreenEx1_2 extends ScreenOnglet
         for (int i = 0; i < 9; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, 200, 200);
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, 200, 300);
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
         }
 
-        numberOiseauxList = new ArrayList<>();
-
         return oiseauxList;
     }
 
-
-//    @Override
-//    public boolean touchDown(int screenX, int screenY, int pointer, int button)
-//    {
-//        int reversedScreenY = screenHeight - screenY;
-//        mousePointerX = screenX;
-//        mousePointerY = reversedScreenY;
-//
-//        if (reserveBilles.contains(screenX, reversedScreenY)) /*si bille part de la reserve*/
-//        {
-//            System.out.println("clickedOnContainer");
-//            UneMain uneMainAdded = new UneMain("Images/EnonceUIElements/doigt_new.png",reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille, reserveBilles.largeurBille);
-//            objectTouchedList.add(uneMainAdded);
-//            allDrawables.add(uneMainAdded);
-//            objectTouched = uneMainAdded;
-////            firstPositionX = mousePointerX;
-////            firstPositionY = mousePointerY;
-//        } else /*si bille part de la planche*/
-//        {
-//            for (int i = 0; i < objectTouchedList.size(); i++)
-//            {
-//                MyTouchInterface objetAux = objectTouchedList.get(i);
-//
-//                if (objetAux.isTouched(screenX, reversedScreenY))
-//                {
-//                    objectTouched = objetAux;
-//                    firstPositionX = objectTouched.getPositionBille().x;
-//                    firstPositionY = objectTouched.getPositionBille().y;
-//
-//                    if (objectTouched instanceof UneMain)
-//                    {
-//                        UneMain uneMainAux = (UneMain) objectTouched;
-//                        uneMainAux.touchDown();
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean touchDragged(int screenX, int screenY, int pointer)
-//    {
-//        if (objectTouched != null)
-//        {
-//            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (screenHeight - screenY - objectTouched.getHeight() / 2));
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean touchUp(int screenX, int screenY, int pointer, int button)
-//    {
-//        if (objectTouched != null)
-//        {
-//            if (objectTouched instanceof UneMain)
-//            {
-//                UneMain mainAux = (UneMain) objectTouched;
-//                mainAux.touchUp(planche1, screenX, screenHeight - screenY);
-////
-////                else /*si bille pas deposee dans planche*/
-////                    {
-////                    objectTouched.setPosition(firstPositionX, firstPositionY);
-////                    if (billeAux.plancheNew != null) {
-////                        if (billeAux.plancheNew.shouldReturnToReserve)
-////                        {
-////                            billeAux.setPosition(100000, 100000);
-////                            allDrawables.remove(billeAux);
-////                            billeAux.plancheNew = null;
-////                        }
-////                        else {
-////                            planche1.addBilleAndOrganize(billeAux);
-////                            planche2.addBilleAndOrganize(billeAux);
-////                            planche3.addBilleAndOrganize(billeAux);
-////                        }
-////                    } else {
-////                        allDrawables.remove(billeAux);
-////                        billeAux.setPosition(100000, 100000);
-////                    }
-////                }
-//            }
-//
-//        }
-//        objectTouched = null;
-//        return false;
-//    }
-//
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
@@ -496,12 +517,11 @@ public class ScreenEx1_2 extends ScreenOnglet
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
+
         if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
         {
-            System.out.println("clickedOnReserve");
-            UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille, reserveBilles.largeurBille);
-            objectTouchedList.add(billeAdded);
-            allDrawables.add(billeAdded);
+            UneBille billeAdded = reserveBilles.getBilleAndRemove();
+            billeAdded.setVisible(true);
             objectTouched = billeAdded;
         }
         else /*si bille part de la planche*/
@@ -513,8 +533,8 @@ public class ScreenEx1_2 extends ScreenOnglet
                 if (objetAux.isTouched(screenX, reversedScreenY))
                 {
                     objectTouched = objetAux;
-                    firstPositionX = objectTouched.getPosition().x;
-                    firstPositionY = objectTouched.getPosition().y;
+                    firstPositionX = mousePointerX;
+                    firstPositionY = mousePointerY;
 
                     if (objectTouched instanceof UneBille)
                     {
@@ -541,8 +561,6 @@ public class ScreenEx1_2 extends ScreenOnglet
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button)
     {
-
-
         if (objectTouched != null)
         {
             if (objectTouched instanceof UneBille)
@@ -572,7 +590,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                         else
                         {
                             planche1.addBilleAndOrganize(billeAux);
-
                         }
                     }
                     else
@@ -582,7 +599,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                     }
                 }*/
             }
-
         }
         objectTouched = null;
         return false;

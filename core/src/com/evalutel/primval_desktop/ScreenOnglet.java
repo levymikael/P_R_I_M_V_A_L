@@ -5,25 +5,17 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.evalutel.ui_tools.MyImageButton;
 import com.evalutel.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
 import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 
 public class ScreenOnglet implements Screen, InputProcessor
@@ -45,6 +37,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     Button.ButtonStyle buttonStyle;
     MyImageButton startPausebutton;
     boolean isVisible = true;
+    final boolean oiseauxInMove = false;
 
 
     protected ArrayList<MyDrawInterface> allDrawables;
@@ -98,6 +91,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         uneMain.setVisible(false);
 
 
+
         /*
         calculetteViewTest = new CalculetteViewTest(stage, 200, 200, 700, 600);
 
@@ -147,11 +141,15 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         batch.begin();
 
+
+
         for (int i = 0; i < allDrawables.size(); i++)
         {
             MyDrawInterface newItem = allDrawables.get(i);
             if (newItem.isVisible())
             {
+
+
                 newItem.myDraw(batch);
             }
         }
@@ -159,6 +157,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         {
             uneMain.myDraw(batch);
         }
+
 
         batch.end();
         stage.draw();
@@ -237,7 +236,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
         {
             System.out.println("clickedOnReserve");
-            UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille, reserveBilles.largeurBille);
+            UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille);
             objectTouchedList.add(billeAdded);
             allDrawables.add(billeAdded);
             objectTouched = billeAdded;

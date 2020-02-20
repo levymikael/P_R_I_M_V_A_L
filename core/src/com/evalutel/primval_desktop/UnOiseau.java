@@ -6,11 +6,10 @@ public class UnOiseau extends AnimationImageNew /*implements MyDrawInterface */
 {
 
 
-    public UnOiseau(int startPositionX, int startPositionY, float animationHeight, float animationWidth)
+    public UnOiseau(int startPositionX, int startPositionY, float animationWidth,float animationHeight )
     {
-        super(getAnimationOiseau(), startPositionX, startPositionY, animationHeight, animationWidth);
+        super(getAnimationOiseau(), startPositionX, startPositionY, animationWidth, animationHeight );
 
-//        setColor(Color.GREEN);
 //
 //        setTouchable(Touchable.enabled);
 //

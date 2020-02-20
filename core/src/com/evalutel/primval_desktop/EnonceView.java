@@ -16,7 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.SnapshotArray;
 
+import java.util.ArrayList;
 import java.util.TimerTask;
 
 
@@ -128,7 +130,6 @@ public class EnonceView implements MyDrawInterface
 
         table.setTouchable(Touchable.enabled);
 
-        //table.setWidth(20);
 
 //Manipulation bandeau enonce (drag)
 
@@ -167,6 +168,9 @@ public class EnonceView implements MyDrawInterface
                 }
             }
         });
+
+
+
     }
 
     /*
@@ -182,6 +186,10 @@ public class EnonceView implements MyDrawInterface
 
     public void addTextEnonce(String string)
     {
+
+
+
+
 
         Table table4 = new Table();
 
@@ -202,29 +210,76 @@ public class EnonceView implements MyDrawInterface
         tableMilieu.add(table4);
         tableMilieu.row();
 
-        table.pack();
+        if (tableMilieu.getChildren().size > 4)
+        {
+            tableMilieu.clearChildren();
+        }
 
+        table.pack();
 
         topYTablePosition = Gdx.graphics.getHeight() - table.getHeight() - tableTitre.getHeight();
 
         table.setPosition(widthScreen / 2 - widthEnonce / 2, topYTablePosition /*- heightTop*/);
+
+
+
     }
 
-    protected static class TaskEtape extends TimerTask
-    {
-        protected long durationMillis;
+//    public void RemoveCommentaireValidus(String string)
+//    {
+//
+//        SnapshotArray labelArrayList = table.getChildren();
+//
+//        System.out.println(table4.getChildren());
+//        System.out.println(instanceof table4.getChildren());
+//
+//        for (int i = 0; i < labelArrayList.size; i++)
+//        {
+//
+//        }
+//
+//        Table table4 = new Table();
+//
+//        Label.LabelStyle labelStyle3 = new Label.LabelStyle();
+//        labelStyle3.font = bitmapFont;
+//        labelStyle3.fontColor = Color.BLACK;
+//        Label label3 = new Label(string, labelStyle3);
+//        Color colorWhite = new Color();
+//        colorWhite.add(255, 255, 255, 0);
+//
+//        table4.add().width(20).height(50);
+//        table4.add(label3).width(widthEnonce - 40).height(50);
+//        table4.add().width(20).height(50);
+//
+//        table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
+//        table4.row();
+//
+//        tableMilieu.add(table4);
+//        tableMilieu.row();
+//
+//        table.pack();
+//
+//
+//        topYTablePosition = Gdx.graphics.getHeight() - table.getHeight() - tableTitre.getHeight();
+//
+//        table.setPosition(widthScreen / 2 - widthEnonce / 2, topYTablePosition /*- heightTop*/);
+//    }
 
-        protected TaskEtape(long dT)
-        {
-            durationMillis = dT;
-        }
-
-        @Override
-        public void run()
-        {
-
-        }
-    }
+//    protected static class TaskEtape extends TimerTask
+//    {
+//        protected long durationMillis;
+//
+//        protected TaskEtape(long dT)
+//        {
+//            durationMillis = dT;
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//
+//        }
+//    }
 
     @Override
     public boolean isVisible()

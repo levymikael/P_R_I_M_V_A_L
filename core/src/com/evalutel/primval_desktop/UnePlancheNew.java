@@ -68,6 +68,37 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
         return allBilles.get(index);
     }
 
+    public UneBille getLastBille()
+    {
+        if(allBilles.size() > 0)
+        {
+            return allBilles.get(allBilles.size()-1);
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public void SetAllBillesInactive()
+    {
+        for (int i = 0 ; i < allBilles.size(); i ++)
+        {
+            UneBille bille = allBilles.get(i);
+            bille.setActive(false);
+        }
+    }
+
+    public void SetAllBillesActive()
+    {
+        for (int i = 0 ; i < allBilles.size(); i ++)
+        {
+            UneBille bille = allBilles.get(i);
+            bille.setActive(true);
+        }
+    }
+
     /**
      * @param currentPositionX point x coordinate
      * @param currentPositionY point y coordinate
@@ -103,6 +134,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
             uneBille.setPosition(ptAux.x, ptAux.y);
             allBilles.add(uneBille);
             uneBille.plancheNew = this;
+            uneBille.setVisible(true);
         }
 
 
@@ -125,6 +157,12 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
     public void removeBille(UneBille uneBille)
     {
         allBilles.remove(uneBille);
+    }
+
+    public void removeBilleToReserve(UneBille uneBille)
+    {
+        allBilles.remove(uneBille);
+        uneBille.reserveBilles.addBilleToReserve(uneBille);
     }
 
     public void removeMain(UneMain uneMain)

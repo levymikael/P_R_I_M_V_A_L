@@ -1,10 +1,6 @@
 package com.evalutel.primval_desktop;
 
-import com.evalutel.ui_tools.MyPoint;
-
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 
 public class ScreenEx1_1 extends ScreenOnglet
@@ -13,7 +9,6 @@ public class ScreenEx1_1 extends ScreenOnglet
     private ArrayList<UneBille> billesList;
     private ArrayList<UnOiseau> oiseauxList;
     private ArrayList<UnePlancheNew> allPlanches;
-
 
     private UnePlancheNew planche1;
     ScreeenBackgroundImage bgScreenEx1_1;
@@ -170,28 +165,28 @@ public class ScreenEx1_1 extends ScreenOnglet
 
 
     private class MoveMainToReserve1 extends TaskEtape
+{
+    private MoveMainToReserve1(long durMillis)
     {
-        private MoveMainToReserve1(long durMillis)
+        super(durMillis);
+    }
+
+    @Override
+    public void run()
+    {
+        if (cptBille < billesList.size())
         {
-            super(durMillis);
-        }
+            uneMain.setVisible(true);
 
-        @Override
-        public void run()
-        {
-            if (cptBille < billesList.size())
-            {
-                uneMain.setVisible(true);
+            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
+            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+            int posY = (int) posYf;
 
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-                int posY = (int) posYf;
-
-                TaskEtape nextEtape = new DisplayBilleReserve(500);
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
-            }
+            TaskEtape nextEtape = new DisplayBilleReserve(500);
+            uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
         }
     }
+}
 
     private class DisplayBilleReserve extends TaskEtape
     {
@@ -442,7 +437,7 @@ public class ScreenEx1_1 extends ScreenOnglet
 
             for (int i = 0; i < oiseauxList.size() + 1; i++)
             {
-                UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, reserveBilles.largeurBille, reserveBilles.largeurBille);
+                UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, reserveBilles.largeurBille);
                 billesList.add(billeAdded);
 
                 allDrawables.add(billeAdded);
@@ -573,7 +568,7 @@ public class ScreenEx1_1 extends ScreenOnglet
             if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
             {
                 System.out.println("clickedOnReserve");
-                UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille, reserveBilles.largeurBille);
+                UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille);
                 objectTouchedList.add(billeAdded);
                 allDrawables.add(billeAdded);
                 objectTouched = billeAdded;
