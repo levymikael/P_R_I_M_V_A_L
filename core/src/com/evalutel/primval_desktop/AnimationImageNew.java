@@ -5,8 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.evalutel.ui_tools.MyPoint;
-import com.evalutel.ui_tools.PauseSingleton;
+import com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet;
+import com.evalutel.primval_desktop.ui_tools.MyPoint;
+import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -30,7 +31,7 @@ public class AnimationImageNew implements MyDrawInterface
     protected boolean isVisible = true;
 
 
-    public AnimationImageNew(ArrayList<String> imagesPaths, int startPositionX, int startPositionY, float animationWidth , float animationHeight)
+    public AnimationImageNew(ArrayList<String> imagesPaths, int startPositionX, int startPositionY, float animationWidth, float animationHeight)
     {
         this.animationHeight = animationHeight;
         this.animationWidth = animationWidth;
@@ -81,8 +82,8 @@ public class AnimationImageNew implements MyDrawInterface
 
     public void setPositionCenter(int x, int y)
     {
-        currentPositionX = x-(int)(animationWidth/2.0f);
-        currentPositionY = y-(int)(animationHeight/2.0f);
+        currentPositionX = x - (int) (animationWidth / 2.0f);
+        currentPositionY = y - (int) (animationHeight / 2.0f);
     }
 
 
@@ -114,7 +115,6 @@ public class AnimationImageNew implements MyDrawInterface
         long deltaTime = 20;
         long nbIterations = animationDureemillis / deltaTime;
 
-//
 //        double deltaXd = (double) (deplacementEnX - currentPositionX) / (double)nbIterations;
 //        double deltaYd = (double) (deplacementEnY - currentPositionY) / (double)nbIterations;
 
@@ -166,7 +166,8 @@ public class AnimationImageNew implements MyDrawInterface
                 if (distanceCarre > distanceStop * 2)
                 {
                     timer.schedule(new TaskMoveAnimation(currentPositionFloatX, currentPositionFloatY, deltaX, deltaY, deltaTime, nextEtape, delayNext), deltaTime);
-                } else
+                }
+                else
                 {
                     currentPositionX = deplacementEnX;
                     currentPositionY = deplacementEnY;
@@ -175,7 +176,8 @@ public class AnimationImageNew implements MyDrawInterface
                         timer.schedule(nextEtape, delayNext);
                     }
                 }
-            } else
+            }
+            else
             {
                 timer.schedule(new TaskMoveAnimation(currentPositionFloatX, currentPositionFloatY, deltaX, deltaY, deltaTime, nextEtape, delayNext), deltaTime);
             }

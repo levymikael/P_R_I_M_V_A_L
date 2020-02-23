@@ -1,4 +1,14 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.onglets.chapitre1;
+
+import com.evalutel.primval_desktop.EnonceView;
+import com.evalutel.primval_desktop.Metronome;
+import com.evalutel.primval_desktop.MyButtonValidus;
+import com.evalutel.primval_desktop.MyTouchInterface;
+import com.evalutel.primval_desktop.ReserveBilles;
+import com.evalutel.primval_desktop.ScreeenBackgroundImage;
+import com.evalutel.primval_desktop.UnOiseau;
+import com.evalutel.primval_desktop.UneBille;
+import com.evalutel.primval_desktop.UnePlancheNew;
 
 import java.util.ArrayList;
 
@@ -16,7 +26,7 @@ public class ScreenEx1_1 extends ScreenOnglet
     boolean isVisible = true;
     boolean isActive = false;
 
-    Validus validus;
+    MyButtonValidus myButtonValidus;
     Metronome metronome;
 
     boolean state = false;
@@ -63,8 +73,8 @@ public class ScreenEx1_1 extends ScreenOnglet
         enonceView = new EnonceView(stage, 50, 2000, enonceWidth, numExercice, consigneExercice);
         allDrawables.add(enonceView);
 
-        validus = new Validus(0, screenHeight / 7, 300, 300);
-        allDrawables.add(validus);
+        myButtonValidus = new MyButtonValidus(stage,300, 300);
+        allDrawables.add(myButtonValidus);
 
         metronome = new Metronome(0, 2 * screenHeight / 5, 300, 300);
         allDrawables.add(metronome);
@@ -306,8 +316,8 @@ public class ScreenEx1_1 extends ScreenOnglet
             {
                 uneMain.setVisible(true);
 
-                float posX = validus.currentPositionX + validus.getWidth() / 2;
-                float posY = validus.currentPositionY + validus.getHeight() / 2;
+                float posX = myButtonValidus.currentPositionX + myButtonValidus.getWidth() / 2;
+                float posY = myButtonValidus.currentPositionY + myButtonValidus.getHeight() / 2;
 
                 TaskEtape nextEtape = new ClickToValidus(500);
 
@@ -332,8 +342,8 @@ public class ScreenEx1_1 extends ScreenOnglet
             {
                 uneMain.setVisible(true);
 
-                float posX = validus.currentPositionX + validus.getWidth() / 2;
-                float posY = validus.currentPositionY + validus.getHeight() / 2;
+                float posX = myButtonValidus.currentPositionX + myButtonValidus.getWidth() / 2;
+                float posY = myButtonValidus.currentPositionY + myButtonValidus.getHeight() / 2;
 
                 if (billesList.size() == 4)
                 {

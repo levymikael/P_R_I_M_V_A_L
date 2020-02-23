@@ -14,8 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.evalutel.ui_tools.MyImageButton;
-import com.evalutel.ui_tools.MyTextButton;
+import com.evalutel.primval_desktop.ui_tools.MyImageButton;
+import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 import java.util.ArrayList;
 

@@ -47,22 +47,19 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
     }
 
 
-//    public ArrayList setReserveBilles(int howManyBilles)
-//    {
-//
-//    }
-
-
     @Override
     public boolean isTouched(int x, int y)
     {
         return false;
     }
 
+    @Override
     public boolean isActive()
     {
-        return isActive;
+        return true;
     }
+
+
 
     public void setActive(boolean active)
     {

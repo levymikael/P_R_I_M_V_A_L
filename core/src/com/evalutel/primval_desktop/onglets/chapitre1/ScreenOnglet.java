@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -11,8 +11,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.evalutel.ui_tools.MyImageButton;
-import com.evalutel.ui_tools.PauseSingleton;
+import com.evalutel.primval_desktop.CalculetteViewTest;
+import com.evalutel.primval_desktop.MyButtonValidus;
+import com.evalutel.primval_desktop.MyDrawInterface;
+import com.evalutel.primval_desktop.MyTouchInterface;
+import com.evalutel.primval_desktop.ReserveBilles;
+import com.evalutel.primval_desktop.UneBille;
+import com.evalutel.primval_desktop.UneMain;
+import com.evalutel.primval_desktop.UnePlancheNew;
+import com.evalutel.primval_desktop.ui_tools.MyImageButton;
+import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
 import java.util.TimerTask;
@@ -21,7 +29,7 @@ import java.util.TimerTask;
 public class ScreenOnglet implements Screen, InputProcessor
 {
     protected int questionCourante = 0;
-    ReserveBilles reserveBilles;
+    protected ReserveBilles reserveBilles;
     int firstPositionX, firstPositionY;
     MyTouchInterface objectTouched;
     private int appWidth = 2048;
@@ -39,10 +47,12 @@ public class ScreenOnglet implements Screen, InputProcessor
     boolean isVisible = true;
     final boolean oiseauxInMove = false;
 
+    MyButtonValidus myButtonValidus;
 
     protected ArrayList<MyDrawInterface> allDrawables;
     protected ArrayList<MyTouchInterface> objectTouchedList;
     private ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
+
 
     int mousePointerX, mousePointerY;
     UneMain uneMain;
@@ -69,11 +79,12 @@ public class ScreenOnglet implements Screen, InputProcessor
         batch = new SpriteBatch();
 
         startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", "Images/StartPause/button_lecture.png", 200, 200);
-
         startPausebutton.setPosition(0, 4 * screenHeight / 5);
-
         stage.addActor(startPausebutton);
 
+        myButtonValidus = new MyButtonValidus(stage, 300, 300);
+        myButtonValidus.setPosition(0, screenHeight / 7);
+        allDrawables.add(myButtonValidus);
 
         startPausebutton.addListener(new ClickListener()
         {
@@ -89,7 +100,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         int posY = screenHeight / 2;
         uneMain = new UneMain(posX, posY, 200);
         uneMain.setVisible(false);
-
 
 
         /*
@@ -141,15 +151,11 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         batch.begin();
 
-
-
         for (int i = 0; i < allDrawables.size(); i++)
         {
             MyDrawInterface newItem = allDrawables.get(i);
             if (newItem.isVisible())
             {
-
-
                 newItem.myDraw(batch);
             }
         }
@@ -158,7 +164,6 @@ public class ScreenOnglet implements Screen, InputProcessor
             uneMain.myDraw(batch);
         }
 
-
         batch.end();
         stage.draw();
     }
@@ -166,8 +171,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     @Override
     public void resize(int width, int height)
     {
-
-        // See below for what true means.
         stage.getViewport().update(width, height, true);
     }
 
@@ -193,7 +196,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     public void dispose()
     {
         stage.dispose();
-
     }
 
     @Override
@@ -316,7 +318,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     }
 
 
-    protected class TaskEtape extends TimerTask
+    public class TaskEtape extends TimerTask
     {
         protected long durationMillis;
 

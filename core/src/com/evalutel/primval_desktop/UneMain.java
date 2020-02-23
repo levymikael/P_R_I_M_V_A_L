@@ -1,15 +1,7 @@
 package com.evalutel.primval_desktop;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Pools;
-import com.evalutel.ui_tools.MyPoint;
-
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
+import com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet;
 
 
 public class UneMain extends AnimationImageNew implements MyTouchInterface, MyDrawInterface

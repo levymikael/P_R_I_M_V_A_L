@@ -1,6 +1,6 @@
 package com.evalutel.primval_desktop;
 
-import com.evalutel.ui_tools.MyPoint;
+import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 public interface MyTouchInterface
 {

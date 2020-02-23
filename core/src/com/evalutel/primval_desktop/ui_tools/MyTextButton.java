@@ -1,4 +1,4 @@
-package com.evalutel.ui_tools;
+package com.evalutel.primval_desktop.ui_tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

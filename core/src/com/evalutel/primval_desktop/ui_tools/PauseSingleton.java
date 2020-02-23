@@ -1,4 +1,4 @@
-package com.evalutel.ui_tools;
+package com.evalutel.primval_desktop.ui_tools;
 
 public class PauseSingleton
 {

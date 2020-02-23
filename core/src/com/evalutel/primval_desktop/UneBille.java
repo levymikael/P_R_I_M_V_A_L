@@ -11,11 +11,9 @@ import java.util.Timer;
 
 public class UneBille extends AnimationImageNew implements MyTouchInterface, MyDrawInterface
 {
-    TextureRegion[] animationFrames;
     Animation animation;
     private Timer timer = new Timer();
     public UnePlancheNew plancheNew = null;
-    ArrayList<Object> billeCanBeDropedOn;
     private Object unePlancheNew;
     private Object unContainer;
     public ReserveBilles reserveBilles;
@@ -79,7 +77,6 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
 
     public void touchUp(ArrayList<UnePlancheNew> planches, int firstPositionX, int firstPositionY)
     {
-
         boolean isAddedToPlanche = false;
 
         for (int i = 0; i < planches.size(); i++)
@@ -93,7 +90,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
             }
         }
 
-        if ( ! isAddedToPlanche)
+        if (!isAddedToPlanche)
         {
             if (this.plancheNew != null)
             {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-import com.evalutel.ui_tools.MyPoint;
+import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 public class MyMath
 {

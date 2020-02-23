@@ -1,4 +1,4 @@
-package com.evalutel.ui_tools;
+package com.evalutel.primval_desktop.ui_tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,8 +17,7 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
 
     public int currentPositionX, currentPositionY;
 
-    public float  width, height;
-
+    public float width, height;
 
 
     public MyImageButton(Stage stage, String imagePathUp, String imagePathDown, float width, float height)
@@ -53,15 +52,6 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
         sprite.setSize(width, height);
         return new SpriteDrawable(sprite);
     }
-
-
-//    public void setPosition(int x, int y)
-//    {
-//        currentPositionX = x;
-//        currentPositionY = y;
-//    }
-
-
 
 
     public MyPoint getPosition()
