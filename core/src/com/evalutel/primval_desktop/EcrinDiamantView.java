@@ -95,7 +95,7 @@ public class EcrinDiamantView implements MyDrawInterface
 
         widthScreen = Gdx.graphics.getWidth();
         tableTitre.pack();
-        tableTitre.setPosition(100, 50);
+        tableTitre.setPosition(10, 50);
 
         table.pack();
 

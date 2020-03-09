@@ -11,15 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
 
-public class MyButtonValidus extends MyImageButton implements MyDrawInterface, MyTouchInterface
+public class MyButtonRetour extends MyImageButton implements MyDrawInterface, MyTouchInterface
 {
     public com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet.TaskEtape etapeCorrection;
     private boolean isActif;
 
 
-    public MyButtonValidus(Stage stage, float width, float height)
+    public MyButtonRetour(Stage stage, float width, float height)
     {
-        super(stage, "Images/vo00000.png", width, height);
+        super(stage, "Images/fleche_retour.png", width, height);
         setTouchable(Touchable.enabled);
 
 
@@ -28,14 +28,7 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface, M
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                if(isActif)
-                {
-                    if(etapeCorrection != null)
-                    {
-                        etapeCorrection.run();
-                    }
-
-                }
+                //revenir a ecran precedent
             }
         });
     }
@@ -54,7 +47,7 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface, M
     @Override
     public void myDraw(Batch batch)
     {
-        TextureRegion textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("Images/vo00000.png")));
+        TextureRegion textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("Images/fleche_retour.png")));
 
         batch.draw(textureRegion2, currentPositionX, currentPositionY, width, height);
 
@@ -69,7 +62,7 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface, M
     @Override
     public void setPosition(int x, int y)
     {
-        super.setPosition(x,y);
+        super.setPosition(x, y);
     }
 
 

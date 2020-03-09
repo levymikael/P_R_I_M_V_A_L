@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
@@ -24,7 +23,7 @@ public class ActiviteView implements MyDrawInterface
     private Table table, tableTitre, tableBandeauBas;
     private Table tableMilieu;
     private float heightTop;
-    public float widthScreen, topSectionposY, newHeight;
+    public float widthScreen, topSectionposY;
     float topYTablePosition, heightBackGroundImage;
 
     private float firstY, currentY, widthEnonce;
@@ -33,21 +32,25 @@ public class ActiviteView implements MyDrawInterface
 
     TextField textFieldEnonce;
 
+    int cptInstructions;
+
     Sprite sprite2, spriteEnonceText;
     BitmapFont bitmapFont;
     private boolean isVisible = true;
     private Texture textureMilieuEnonce;
+    Texture textureFleche;
 
 
-    public ActiviteView(Stage stage, int positionX, int positionY, float width, String numExercice, String consigneExercice, String exDansChapitre)
+    public ActiviteView(Stage stage, float width, String numExercice, String consigneExercice, String exDansChapitre)
     {
+        textureFleche = new Texture(Gdx.files.internal("Images/EnonceUIElements/icons8-arrow-100.png"));
         textureMilieuEnonce = new Texture("Images/EnonceUIElements/enonce_milieu_new.png");
         widthEnonce = width;
         heightTop = widthEnonce * 100 / 1626;
 
 // Configuration police de l'enonce
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 40;
 
@@ -70,7 +73,8 @@ public class ActiviteView implements MyDrawInterface
         labelStyle3.font = bitmapFont;
         labelStyle3.fontColor = Color.YELLOW;
         Label label3 = new Label(exDansChapitre, labelStyle3);
-        label.setWrap(true);
+        label3.setWidth(50);
+        label3.setWrap(true);
 
 
 // Creation cellule tableau pour numero d'exerice:
@@ -80,8 +84,8 @@ public class ActiviteView implements MyDrawInterface
 // Positionnement numero exercice:
         tableTitre.add().width(50);
         tableTitre.add(label2).align(Align.center).width(80);
-        tableTitre.add(label).width(widthEnonce - 180).height(100);
-        tableTitre.add(label3).align(Align.center).width(50);
+        tableTitre.add(label).width(widthEnonce - 210).height(100);
+        tableTitre.add(label3).align(Align.center).width(80);
 
         table = new Table();
         stage.addActor(table);
@@ -127,10 +131,11 @@ public class ActiviteView implements MyDrawInterface
 
         topYTablePosition = screenHeight - tableHeight - tableTitre.getHeight();
 
-        titreTop = new Texture("Images/EnonceUIElements/titre_top.png");
+//        titreTop = new Texture("Images/EnonceUIElements/titre_top.png");
 
         topSectionposY = Gdx.graphics.getHeight() - heightTop;
 
+        currentY = topYTablePosition;
         table.setPosition(widthScreen / 2 - widthEnonce / 2, topYTablePosition /*- heightTop*/);
 
         table.setTouchable(Touchable.enabled);
@@ -160,10 +165,12 @@ public class ActiviteView implements MyDrawInterface
 
                 if (nextY < topYTablePosition) // si deplacement plus bas que bandeau --> bandeau reste immobile
                 {
+                    currentY = topYTablePosition;
                     table.setY(topYTablePosition);
                 }
                 else if (nextY > (screenHeight - heightBackGroundImage - tableTitre.getHeight())) // si souris depasse bandeau alors on cache texte consigne
                 {
+                    currentY = screenHeight - heightBackGroundImage - tableTitre.getHeight();
                     table.setY(screenHeight - heightBackGroundImage - tableTitre.getHeight());
                 }
                 else
@@ -171,15 +178,9 @@ public class ActiviteView implements MyDrawInterface
                     currentY = currentY + moveY;
                     table.setY(currentY);
 
-                    newHeight = screenHeight - currentY;
-
-
                 }
             }
         });
-
-
-
     }
 
     public void addTextActivite(String string)
@@ -190,36 +191,71 @@ public class ActiviteView implements MyDrawInterface
         labelStyle3.font = bitmapFont;
         labelStyle3.fontColor = Color.BLACK;
         Label label3 = new Label(string, labelStyle3);
+        label3.setWrap(true);
+
         Color colorWhite = new Color();
         colorWhite.add(255, 255, 255, 0);
 
-        table4.add().width(20).height(50);
-        table4.add(label3).width(widthEnonce - 40).height(50);
-        table4.add().width(20).height(50);
+
+        Label.LabelStyle labelStyle4 = new Label.LabelStyle();
+        labelStyle4.font = bitmapFont;
+        labelStyle4.fontColor = Color.BLACK;
+        Label label4 = new Label("", labelStyle3);
+
+        if (cptInstructions == 0)
+
+        {
+            Sprite sprite = new Sprite(textureFleche);
+            sprite.setSize(30,40);
+            SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(sprite);
+
+
+            Table table5 = new Table();
+            table5.setBackground(flecheSpriteDrawable);
+
+//            table5.setHeight(50);
+
+            table4.add().width(20);
+            table4.add(table5).width(50);
+            table4.add(label3).width(widthEnonce - 90);
+            table4.add().width(20);
+        }
+        else
+        {
+
+            table4.add().width(20);
+            table4.add(label4).width(50);
+            table4.add(label3).width(widthEnonce - 90);
+            table4.add().width(20);
+        }
 
         table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
         table4.row();
 
-        newHeight = 50;
-//        tableMilieu.add(table4).height(newHeight);
+        tableMilieu.add(table4);
         tableMilieu.row();
-
-        final ScrollPane scroller = new ScrollPane(table4);
-        scroller.setHeight(newHeight);
-//        table.setFillParent(true);
-        tableMilieu.add(scroller).fill().expand();
-
-//        if (tableMilieu.getChildren().size > 4)
-//        {
-//            tableMilieu.clearChildren();
-//        }
 
         table.pack();
 
+
+        cptInstructions++;
+
+        float labelHeight = label3.getHeight();
+
         topYTablePosition = Gdx.graphics.getHeight() - table.getHeight() - tableTitre.getHeight();
 
-        table.setPosition(widthScreen / 2 - widthEnonce / 2, topYTablePosition);
-
+        //table.setPosition(widthScreen / 2 - widthEnonce / 2, topYTablePosition);
+        float nextTestY = currentY - labelHeight;
+        if (nextTestY > topYTablePosition)
+        {
+            currentY = currentY - labelHeight;
+            table.setY(currentY);
+        }
+        else
+        {
+            currentY = topYTablePosition;
+            table.setY(topYTablePosition);
+        }
 
 
     }

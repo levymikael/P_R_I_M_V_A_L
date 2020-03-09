@@ -47,7 +47,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     boolean isVisible = true;
     final boolean oiseauxInMove = false;
 
-    MyButtonValidus myButtonValidus;
+    protected MyButtonValidus myButtonValidus;
 
     protected ArrayList<MyDrawInterface> allDrawables;
     protected ArrayList<MyTouchInterface> objectTouchedList;

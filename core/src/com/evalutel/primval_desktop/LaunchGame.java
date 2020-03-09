@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
+import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Chapitre1;
 
 
 public class LaunchGame extends Game implements ApplicationListener
@@ -34,7 +35,8 @@ public class LaunchGame extends Game implements ApplicationListener
 
 //		this.setScreen(new ScreenOnglet());
 //		this.setScreen(new ScreenEx1_1());
-		this.setScreen(new ScreenEx1_2());
+//		this.setScreen(new ScreenEx1_2());
+		this.setScreen(new Screen_Chapitre1());
 		//this.setScreen();
 
 	}

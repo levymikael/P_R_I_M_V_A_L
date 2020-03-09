@@ -85,9 +85,9 @@ public class DragTestScreen implements Screen
         //stage.addActor(billeAnimation4);
 
 
-//        Texture texture = new Texture("Images/oiseau/oiseau1_1_00000" + 4 + ".png");
+//        Texture textureFleche = new Texture("Images/oiseau/oiseau1_1_00000" + 4 + ".png");
 //
-//        TextureRegion region = new TextureRegion(texture);
+//        TextureRegion region = new TextureRegion(textureFleche);
 //        region.setRegionWidth(100);
 //        region.setRegionHeight(200);
 //
