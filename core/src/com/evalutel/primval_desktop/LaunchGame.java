@@ -36,7 +36,7 @@ public class LaunchGame extends Game implements ApplicationListener
 //		this.setScreen(new ScreenOnglet());
 //		this.setScreen(new ScreenEx1_1());
 //		this.setScreen(new ScreenEx1_2());
-		this.setScreen(new Screen_Chapitre1());
+		this.setScreen(new Screen_Chapitre1(this));
 		//this.setScreen();
 
 	}

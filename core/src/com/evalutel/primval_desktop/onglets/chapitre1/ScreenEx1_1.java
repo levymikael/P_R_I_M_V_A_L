@@ -1,5 +1,6 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
+import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.EnonceView;
 import com.evalutel.primval_desktop.Metronome;
 import com.evalutel.primval_desktop.MyButtonValidus;
@@ -40,9 +41,9 @@ public class ScreenEx1_1 extends ScreenOnglet
     EnonceView enonceView;
 
 
-    public ScreenEx1_1()
+    public ScreenEx1_1(Game game)
     {
-        super();
+        super(game);
 
         int largeurBille = 200;
         int largeurPlanche = largeurBille * 4;

@@ -1,5 +1,6 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.CalculetteViewTest;
+import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyButtonValidus;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.MyTouchInterface;
@@ -45,7 +47,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     Button.ButtonStyle buttonStyle;
     MyImageButton startPausebutton;
     boolean isVisible = true;
-    final boolean oiseauxInMove = false;
 
     protected MyButtonValidus myButtonValidus;
 
@@ -53,15 +54,20 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected ArrayList<MyTouchInterface> objectTouchedList;
     private ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
 
+    private Game game;
+
 
     int mousePointerX, mousePointerY;
     UneMain uneMain;
     public java.util.Timer timer = new java.util.Timer();
 
 
-    public ScreenOnglet()
+    public ScreenOnglet(Game game)
     {
         stage = new Stage();
+
+        this.game = game;
+
 
         screenHeight = Gdx.graphics.getHeight();
         screenWidth = Gdx.graphics.getWidth();
@@ -78,8 +84,12 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         batch = new SpriteBatch();
 
+        MyButtonBackToPreviousMenu myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200);
+        myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
+        allDrawables.add(myButtonBackToPreviousMenu);
+
         startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", "Images/StartPause/button_lecture.png", 200, 200);
-        startPausebutton.setPosition(0, 4 * screenHeight / 5);
+        startPausebutton.setPosition(0, 5 * screenHeight / 7);
         stage.addActor(startPausebutton);
 
         myButtonValidus = new MyButtonValidus(stage, 300, 300);

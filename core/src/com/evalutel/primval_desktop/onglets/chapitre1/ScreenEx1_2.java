@@ -1,12 +1,13 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Timer;
+//import com.badlogic.gdx.Gdx;
+//import com.badlogic.gdx.graphics.Color;
+//import com.badlogic.gdx.graphics.g2d.BitmapFont;
+//import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+//import com.badlogic.gdx.scenes.scene2d.InputEvent;
+//import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+//import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.EnonceView;
@@ -44,9 +45,9 @@ public class ScreenEx1_2 extends ScreenOnglet
     private int cptOiseau;
 
 
-    public ScreenEx1_2()
+    public ScreenEx1_2(Game game)
     {
-        super();
+        super(game);
 
         int largeurBille = 200;
         int largeurPlanche = largeurBille * 4;
@@ -97,7 +98,6 @@ public class ScreenEx1_2 extends ScreenOnglet
         timer.schedule(new PresentationExercice(2000), 100);
 
         getNumberOiseauxArList();
-
 
     }
 
