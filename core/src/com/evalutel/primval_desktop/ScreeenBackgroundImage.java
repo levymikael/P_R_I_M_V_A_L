@@ -22,6 +22,15 @@ public class ScreeenBackgroundImage extends TextureRegion implements MyDrawInter
         return bgImageRegion;
     }
 
+    public TextureRegion SetBackGroundSize(ScreeenBackgroundImage screeenBackgroundImage, int width, int height)
+    {
+        bgImageRegion.setRegionWidth(width);
+        bgImageRegion.setRegionHeight(height);
+
+        return bgImageRegion;
+
+    }
+
 
     @Override
     public boolean isVisible()
@@ -40,5 +49,10 @@ public class ScreeenBackgroundImage extends TextureRegion implements MyDrawInter
     public void myDraw(Batch batch)
     {
         batch.draw(bgImageRegion, 0, 0, screenWidth, screenHeight);
+    }
+
+    public void myDraw2(Batch batch, int width, int height)
+    {
+        batch.draw(bgImageRegion, 0, 0, width, height);
     }
 }

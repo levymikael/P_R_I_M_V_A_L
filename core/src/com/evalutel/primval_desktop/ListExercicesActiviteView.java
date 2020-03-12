@@ -2,7 +2,6 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -46,15 +45,15 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
         Table container = new Table();
         stage.addActor(container);
-        container.setSize(screenWidth, 500);
-        container.setPosition(0, screenHeight / 2 - container.getHeight() / 2);
+        container.setSize(screenWidth, 3 * screenHeight / 5);
+        container.setPosition(0, 3 * screenHeight / 7 - container.getHeight() / 2);
 
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", 70, 70, "font/comic_sans_ms.ttf");
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/comic_sans_ms.ttf");
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", 50, 50, "font/comic_sans_ms.ttf");
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/comic_sans_ms.ttf");
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/comic_sans_ms.ttf");
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/comic_sans_ms.ttf");
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", 70, 70, "font/FRHND521_0.TTF");
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", 50, 50, "font/FRHND521_0.TTF");
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
 
         Table table = new Table();
         Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red");
@@ -66,23 +65,23 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
         table.add(tableEx1).width(screenWidth).height(screenHeight / 12);
         table.row();
-        table.add().height(20);
+        table.add().height(5);
         table.row();
         table.add(tableEx2).width(screenWidth).height(screenHeight / 12);
         table.row();
-        table.add().height(20);
+        table.add().height(5);
         table.row();
         table.add(tableEx3).width(screenWidth).height(screenHeight / 12);
         table.row();
-        table.add().height(20);
+        table.add().height(5);
         table.row();
         table.add(tableEx4).width(screenWidth).height(screenHeight / 12);
         table.row();
-        table.add().height(20);
+        table.add().height(5);
         table.row();
         table.add(tableEx5).width(screenWidth).height(screenHeight / 12);
         table.row();
-        table.add().height(20);
+        table.add().height(5);
         table.row();
         table.add(tableEx6).width(screenWidth).height(screenHeight / 12);
         table.row();
@@ -94,7 +93,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
         container.add(scroll).height(2 * screenHeight / 5);
         container.row();
-        container.debug();
+//        container.debug();
 
         tableEx1.addListener(new ClickListener()
         {

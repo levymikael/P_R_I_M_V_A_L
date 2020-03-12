@@ -20,8 +20,13 @@ public class LigneTableaux
 {
     public static Table getLigne(MyTextButton button, Label label, Texture texture, String borderColor)
     {
+        Table container = new Table();
         Table table = new Table();
+        Table tablebord1 = new Table();
+        Table tablebord2 = new Table();
+
         int screenWidth = Gdx.graphics.getWidth();
+        int screenHeight = Gdx.graphics.getHeight();
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -41,10 +46,12 @@ public class LigneTableaux
         labelNotes.setWidth(50);
         labelNotes.setWrap(true);
 
-//        table.setWidth(150);
-//        table.setHeight(150);
         table.setWidth(screenWidth);
+        table.setHeight(screenHeight / 12);
 
+        label.setWidth(screenWidth / 4);
+
+        table.add().width(100);
         button.setHeight(70);
         button.setWidth(70);
         table.add(button);
@@ -55,10 +62,9 @@ public class LigneTableaux
         table.add(labelDuration).align(Align.center).width(screenWidth / 6);
         table.add().width(200);
         table.add(labelNotes).align(Align.center).width(screenWidth / 6);
+        table.add().width(screenWidth - 200 - (2 * screenWidth / 3) - 30 - 200 - 400);
 
-        Table container = new Table();
 
-        container.add(table);
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmWhite.setColor(Color.WHITE);
         pmWhite.fill();
@@ -73,18 +79,28 @@ public class LigneTableaux
         pmBlue.setColor(Color.BLUE);
         pmBlue.fill();
 
+
         if (borderColor == "red")
         {
-            container.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
+            tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
+            tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
         }
         else if ((borderColor == "blue"))
         {
-            container.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
+            tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
+            tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
         }
+
+
+        container.add(tablebord1).width(screenWidth).height(2);
+        container.row();
+        container.add(table);
+        container.row();
+        container.add(tablebord2).width(screenWidth).height(2);
+
         table.setTouchable(Touchable.enabled);
 //        table.setFillParent(true);
         container.setTouchable(Touchable.enabled);
-
 
 
         return container;

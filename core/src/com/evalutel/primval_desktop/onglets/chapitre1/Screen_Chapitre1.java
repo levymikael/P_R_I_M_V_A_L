@@ -6,16 +6,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
 import com.evalutel.primval_desktop.MrNotes;
@@ -38,10 +40,16 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     private SpriteBatch batch;
     private Game game;
 
-    TextureRegion bandeauSuperieur;
-    TextureRegion sacDeBilles;
+
+
+    private Viewport viewport;
+    private OrthographicCamera camera;
+
+    Texture sacDebilles;
 
     ListExercicesActiviteView listExercicesActiviteView;
+    ScreeenBackgroundImage fondEspaceParent;
+    ScreeenBackgroundImage fondSommaire;
     MrNotes mrNotes;
     MrTemps mrTemps;
 
@@ -77,35 +85,20 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         allDrawables = new ArrayList<>();
 
-        ScreeenBackgroundImage fondEspaceParent = new ScreeenBackgroundImage();
+        fondEspaceParent = new ScreeenBackgroundImage();
         fondEspaceParent.ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
-        allDrawables.add(fondEspaceParent);
 
-        Table secondBackground = new Table();
-        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmWhite.setColor(Color.WHITE);
-        pmWhite.fill();
+        fondSommaire = new ScreeenBackgroundImage();
+        fondSommaire.ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
+//        fondSommaire.SetBackGroundSize(fondSommaire, screenWidth, 5 * screenHeight / 6);
 
-        secondBackground.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
-        secondBackground.setWidth(screenWidth);
-        secondBackground.setHeight(5 * screenHeight / 6);
-        stage.addActor(secondBackground);
 
         listExercicesActiviteView = new ListExercicesActiviteView(stage, game, labelStyle);
 
         myButtonRetour = new MyButtonRetour(stage, 200, 200);
         myButtonRetour.setPosition(0, 4 * screenHeight / 5);
 
-        Table sacDeBilles = new Table();
-        sacDeBilles.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Images/chapitre_circle_1.png")))));
-
-
-        Table sacDeBillesContainer = new Table();
-        sacDeBillesContainer.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Images/background_photo.png")))));
-        sacDeBillesContainer.setPosition(screenWidth / 2, 9 * screenHeight / 10);
-        sacDeBillesContainer.add(sacDeBilles);
-        stage.addActor(sacDeBillesContainer);
-
+        sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
 
 
         Label labelChap1Titre = new Label("Pratique des nombres de 1 a 9", labelStyleBlue);
@@ -184,9 +177,13 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     @Override
     public void render(float delta)
     {
-
-
         batch.begin();
+        batch.setTransformMatrix(new Matrix4());
+//        batch.setProjectionMatrix(new Matrix4());
+
+
+        fondEspaceParent.myDraw(batch);
+        fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -196,9 +193,12 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
                 newItem.myDraw(batch);
             }
         }
-//        batch.draw(sacDeBilles, screenWidth / 2 - sacDeBilles.getRegionWidth() / 2, 1400);
+
+        batch.draw(sacDebilles, screenWidth / 2 - sacDebilles.getWidth() / 2, 4 * screenHeight / 5);
+
 
         batch.end();
+
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
@@ -219,6 +219,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     @Override
     public void resize(int width, int height)
     {
+
 
     }
 
