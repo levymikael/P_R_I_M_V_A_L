@@ -47,7 +47,7 @@ public class LigneTableaux
         labelNotes.setWrap(true);
 
         table.setWidth(screenWidth);
-        table.setHeight(screenHeight / 12);
+        table.setHeight(screenHeight / 10);
 
         label.setWidth(screenWidth / 4);
 
@@ -63,7 +63,6 @@ public class LigneTableaux
         table.add().width(200);
         table.add(labelNotes).align(Align.center).width(screenWidth / 6);
         table.add().width(screenWidth - 200 - (2 * screenWidth / 3) - 30 - 200 - 400);
-
 
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmWhite.setColor(Color.WHITE);
@@ -94,7 +93,7 @@ public class LigneTableaux
 
         container.add(tablebord1).width(screenWidth).height(2);
         container.row();
-        container.add(table);
+        container.add(table).height(screenHeight/15);
         container.row();
         container.add(tablebord2).width(screenWidth).height(2);
 

@@ -63,27 +63,17 @@ public class ListExercicesActiviteView implements MyDrawInterface
         Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue");
         Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue");
 
-        table.add(tableEx1).width(screenWidth).height(screenHeight / 12);
+        table.add(tableEx1).width(screenWidth).height(screenHeight / 11);
         table.row();
-        table.add().height(5);
+        table.add(tableEx2).width(screenWidth).height(screenHeight / 11);
         table.row();
-        table.add(tableEx2).width(screenWidth).height(screenHeight / 12);
+        table.add(tableEx3).width(screenWidth).height(screenHeight / 11);
         table.row();
-        table.add().height(5);
+        table.add(tableEx4).width(screenWidth).height(screenHeight / 11);
         table.row();
-        table.add(tableEx3).width(screenWidth).height(screenHeight / 12);
+        table.add(tableEx5).width(screenWidth).height(screenHeight / 11);
         table.row();
-        table.add().height(5);
-        table.row();
-        table.add(tableEx4).width(screenWidth).height(screenHeight / 12);
-        table.row();
-        table.add().height(5);
-        table.row();
-        table.add(tableEx5).width(screenWidth).height(screenHeight / 12);
-        table.row();
-        table.add().height(5);
-        table.row();
-        table.add(tableEx6).width(screenWidth).height(screenHeight / 12);
+        table.add(tableEx6).width(screenWidth).height(screenHeight / 11);
         table.row();
 
         table.setWidth(screenWidth);

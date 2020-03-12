@@ -5,8 +5,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,6 +19,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
@@ -40,10 +43,10 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     private SpriteBatch batch;
     private Game game;
 
+    private Camera camera;
 
 
     private Viewport viewport;
-    private OrthographicCamera camera;
 
     Texture sacDebilles;
 
@@ -170,9 +173,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
     @Override
     public void show()
-    {
-
-    }
+    { }
 
     @Override
     public void render(float delta)
@@ -210,6 +211,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     public void create()
     {
         this.setScreen(game);
+        camera = new PerspectiveCamera();
+        viewport = new FitViewport(800, 480, camera);
     }
 
     private void setScreen(Game game)
@@ -220,6 +223,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     public void resize(int width, int height)
     {
 
+        stage.getViewport().update(width, height, true);
 
     }
 
