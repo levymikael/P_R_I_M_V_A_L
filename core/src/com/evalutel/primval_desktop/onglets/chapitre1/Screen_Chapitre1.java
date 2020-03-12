@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.evalutel.primval_desktop.General.LigneTableaux;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
 import com.evalutel.primval_desktop.MrNotes;
@@ -24,6 +24,7 @@ import com.evalutel.primval_desktop.MyButtonBuyAnotherChapter;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.MyTouchInterface;
+import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnePlancheNew;
 
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     TextureRegion sacDeBilles;
 
     ListExercicesActiviteView listExercicesActiviteView;
+    MrNotes mrNotes;
+    MrTemps mrTemps;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
     protected ArrayList<MyTouchInterface> objectTouchedList;
@@ -55,7 +58,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         batch = new SpriteBatch();
         BitmapFont bitmapFont;
 
-
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 40;
@@ -66,40 +68,60 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         labelStyle.font = bitmapFont;
         labelStyle.fontColor = Color.BLACK;
 
-        listExercicesActiviteView = new ListExercicesActiviteView(stage, game, labelStyle);
-
+        Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
+        labelStyleBlue.font = bitmapFont;
+        labelStyleBlue.fontColor = Color.BLUE;
 
         screenHeight = Gdx.graphics.getHeight();
         screenWidth = Gdx.graphics.getWidth();
 
         allDrawables = new ArrayList<>();
 
+        ScreeenBackgroundImage fondEspaceParent = new ScreeenBackgroundImage();
+        fondEspaceParent.ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
+        allDrawables.add(fondEspaceParent);
+
+        Table secondBackground = new Table();
+        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pmWhite.setColor(Color.WHITE);
+        pmWhite.fill();
+
+        secondBackground.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
+        secondBackground.setWidth(screenWidth);
+        secondBackground.setHeight(5 * screenHeight / 6);
+        stage.addActor(secondBackground);
+
+        listExercicesActiviteView = new ListExercicesActiviteView(stage, game, labelStyle);
 
         myButtonRetour = new MyButtonRetour(stage, 200, 200);
         myButtonRetour.setPosition(0, 4 * screenHeight / 5);
 
-        bandeauSuperieur = new TextureRegion(new Texture(Gdx.files.internal("Images/Chapitre1/bandeau_haut_resultats.jpg")));
-        bandeauSuperieur.setRegionWidth((screenWidth * 1024) / 110);
-
-        sacDeBilles = new TextureRegion(new Texture(Gdx.files.internal("Images/button_chapitre_new1.jpg")));
+        Table sacDeBilles = new Table();
+        sacDeBilles.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Images/chapitre_circle_1.png")))));
 
 
-        Label labelChap1Titre = new Label("Pratique des nombres de 1 a 9", labelStyle);
+        Table sacDeBillesContainer = new Table();
+        sacDeBillesContainer.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Images/background_photo.png")))));
+        sacDeBillesContainer.setPosition(screenWidth / 2, 9 * screenHeight / 10);
+        sacDeBillesContainer.add(sacDeBilles);
+        stage.addActor(sacDeBillesContainer);
 
+
+
+        Label labelChap1Titre = new Label("Pratique des nombres de 1 a 9", labelStyleBlue);
         Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
 
         Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, textureNumber1);
-        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 8 * screenHeight / 10);
+        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 3 * screenHeight / 4);
         stage.addActor(nomChapitre);
 
-        MrNotes mrNotes = new MrNotes(5 * screenWidth / 7, 4 * screenHeight / 5, 200, 200);
-        allDrawables.add(mrNotes);
 
-        MrTemps mrTemps = new MrTemps(6 * screenWidth / 7, 4 * screenHeight / 5, 200, 200);
-        allDrawables.add(mrTemps);
+        mrNotes = new MrNotes(stage, "Notes");
+        mrTemps = new MrTemps(stage, "Temps");
 
-        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 700, 150);
-        myButtonBuyAnotherChapter.setPosition(3 * screenWidth / 4, screenHeight / 7);
+
+        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 800, 150);
+        myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -162,8 +184,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     @Override
     public void render(float delta)
     {
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 
         batch.begin();
 
@@ -175,9 +196,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
                 newItem.myDraw(batch);
             }
         }
-        batch.draw(sacDeBilles, screenWidth / 2 - sacDeBilles.getRegionWidth() / 2, 1400);
+//        batch.draw(sacDeBilles, screenWidth / 2 - sacDeBilles.getRegionWidth() / 2, 1400);
 
-        batch.draw(bandeauSuperieur, 0, screenHeight - bandeauSuperieur.getRegionHeight());
         batch.end();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));

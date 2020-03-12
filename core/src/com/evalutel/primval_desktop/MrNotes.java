@@ -1,40 +1,86 @@
 package com.evalutel.primval_desktop;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.evalutel.primval_desktop.General.LigneTableaux;
+import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
+import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
+import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
-
-public class MrNotes extends AnimationImageNew implements MyDrawInterface
+public class MrNotes implements MyDrawInterface
 {
-    public int largeurBille;
+    public float screenWidth;
+    private boolean isVisible = true;
+    BitmapFont bitmapFont;
 
-    public MrNotes(int startPositionX, int startpositionY, int animationWidth, int animationHeight)
+
+    public MrNotes(Stage stage, String Notes)
     {
+        screenWidth = Gdx.graphics.getWidth();
+        final int screenHeight = Gdx.graphics.getHeight();
 
-        super("Images/mr_notes1.png", startPositionX, startpositionY, animationWidth, animationHeight);
-    }
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 40;
+        bitmapFont = generator.generateFont(parameter);
+        generator.dispose();
 
-    /**
-     * @param currentPositionX point x coordinate
-     * @param currentPositionY point y coordinate
-     * @return whether the point is contained in the rectangle
-     */
-    public boolean contains(float currentPositionX, float currentPositionY)
-    {
-        return this.currentPositionX <= currentPositionX && this.currentPositionX + this.animationWidth >= currentPositionX && this.currentPositionY <= currentPositionY && this.currentPositionY + this.animationHeight >= currentPositionY;
+// Configuration police
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = bitmapFont;
+        labelStyle.fontColor = Color.RED;
+        Label labelNotes = new Label(Notes, labelStyle);
+
+        Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes1.png"));
+
+        Table container = new Table();
+        stage.addActor(container);
+        container.setSize(200, 500);
+        container.setPosition(7 * screenWidth / 8, 7 * screenHeight / 10);
+
+        Table mrNotes = new Table();
+        mrNotes.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
+
+        Table notes = new Table();
+        notes.add(labelNotes);
+
+        container.add(mrNotes);
+        container.row();
+        container.add(notes);
+
+
     }
 
 
     @Override
-    public void myDraw(Batch batch)
+    public boolean isVisible()
     {
-        TextureRegion textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/mr_notes1.png")));
-
-        batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
-
+        return isVisible;
     }
 
+    @Override
+    public void setVisible(boolean visible)
+    {
+        isVisible = visible;
+    }
 
+    @Override
+    public void myDraw(Batch batch)
+    {
+
+    }
 }

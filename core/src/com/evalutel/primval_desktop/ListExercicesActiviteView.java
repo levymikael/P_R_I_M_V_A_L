@@ -57,22 +57,32 @@ public class ListExercicesActiviteView implements MyDrawInterface
         MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/comic_sans_ms.ttf");
 
         Table table = new Table();
-        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours);
-        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices);
-        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours);
-        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices);
-        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices);
-        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices);
+        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red");
+        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue");
+        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red");
+        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue");
+        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue");
+        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue");
 
         table.add(tableEx1).width(screenWidth).height(screenHeight / 12);
         table.row();
+        table.add().height(20);
+        table.row();
         table.add(tableEx2).width(screenWidth).height(screenHeight / 12);
+        table.row();
+        table.add().height(20);
         table.row();
         table.add(tableEx3).width(screenWidth).height(screenHeight / 12);
         table.row();
+        table.add().height(20);
+        table.row();
         table.add(tableEx4).width(screenWidth).height(screenHeight / 12);
         table.row();
+        table.add().height(20);
+        table.row();
         table.add(tableEx5).width(screenWidth).height(screenHeight / 12);
+        table.row();
+        table.add().height(20);
         table.row();
         table.add(tableEx6).width(screenWidth).height(screenHeight / 12);
         table.row();
@@ -102,7 +112,6 @@ public class ListExercicesActiviteView implements MyDrawInterface
             {
                 System.out.println("I got clicked!2");
                 game.setScreen(new ScreenEx1_2(game));
-
             }
         });
         tableEx3.addListener(new ClickListener()
