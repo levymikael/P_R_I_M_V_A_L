@@ -10,11 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.evalutel.primval_desktop.MyDrawInterface;
 
 public class MyImageButton extends ImageButton implements MyDrawInterface
-
 {
-
-    Stage stage;
-
     public int currentPositionX, currentPositionY;
 
     public float width, height;

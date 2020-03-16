@@ -54,6 +54,16 @@ project(":desktop") {
         implementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         implementation group: 'de.dfki.mary', name: 'voice-cmu-slt-hsmm', version: '5.2'
 
+        implementation group:'org.xerial', name:'sqlite-jdbc', version:'3.8.11.2'
+
+
+        implementation "com.github.myrealitycoding:jpersis:1.0.0"
+
+//        implementation "de.longri.gdx-sqlite:gdx-sqlite-platform:$gdxSqliteVersion:natives-desktop"
+
+
+//        implementation 'gdx-sqlite-desktop.jar'
+//        implementation 'sqlite-jdbc-3.7.2.jar'
 
     }
 }
@@ -82,5 +92,14 @@ project(":core") {
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+
+        implementation "com.github.myrealitycoding:jpersis:1.0.0"
+
+        implementation group:'org.xerial', name:'sqlite-jdbc', version:'3.8.11.2'
+
+//        implementation "de.longri.gdx-sqlite:gdx-sqlite:$gdxSqliteVersion"
+//        implementation "sqlite-jdbc-3.7.2.jar"
+
+
     }
 }

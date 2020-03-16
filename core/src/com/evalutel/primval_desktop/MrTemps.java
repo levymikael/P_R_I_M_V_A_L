@@ -13,6 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
+import de.bitbrain.jpersis.JPersis;
+import de.bitbrain.jpersis.drivers.Driver;
+import de.bitbrain.jpersis.drivers.sqllite.SQLiteDriver;
+
 public class MrTemps implements MyDrawInterface
 {
     public float screenWidth;
@@ -25,6 +29,23 @@ public class MrTemps implements MyDrawInterface
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
 
+
+
+        User user = new User();
+        //user.setIdProfil(39);
+        user.setName("userTest");
+
+
+        Profil profilTest = new Profil(2,"prenomTest", "nomTest", 6,"CP",1);
+
+        user.setProfil(2);
+
+
+
+
+        String userName = user.getName();
+
+
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 40;
@@ -35,7 +56,7 @@ public class MrTemps implements MyDrawInterface
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
         labelStyle.fontColor = Color.GREEN;
-        Label labelNotes = new Label(Notes, labelStyle);
+        Label labelNotes = new Label(userName, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_temps1.png"));
 

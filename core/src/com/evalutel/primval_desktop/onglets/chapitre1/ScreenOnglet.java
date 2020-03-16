@@ -68,7 +68,6 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         this.game = game;
 
-
         screenHeight = Gdx.graphics.getHeight();
         screenWidth = Gdx.graphics.getWidth();
 

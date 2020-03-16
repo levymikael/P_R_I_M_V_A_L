@@ -3,7 +3,6 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.EnonceView;
 import com.evalutel.primval_desktop.Metronome;
-import com.evalutel.primval_desktop.MyButtonValidus;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -27,16 +26,15 @@ public class ScreenEx1_1 extends ScreenOnglet
     boolean isVisible = true;
     boolean isActive = false;
 
-    MyButtonValidus myButtonValidus;
+//    MyButtonValidus myButtonValidus;
     Metronome metronome;
 
-    boolean state = false;
-    int rand_int;
     int cptOiseau, cptBille = 0;
-    int cpt = -1;
 
     double mainDoigtX = 0.1 * uneMain.getWidth();
     double mainDoigtY = 0.9 * uneMain.getHeight();
+
+    long startTime;
 
     EnonceView enonceView;
 
@@ -47,6 +45,10 @@ public class ScreenEx1_1 extends ScreenOnglet
 
         int largeurBille = 200;
         int largeurPlanche = largeurBille * 4;
+
+        startTime = System.currentTimeMillis();
+// wait for activity here
+
 
         bgScreenEx1_1 = new ScreeenBackgroundImage();
         bgScreenEx1_1.ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
@@ -74,8 +76,8 @@ public class ScreenEx1_1 extends ScreenOnglet
         enonceView = new EnonceView(stage, 50, 2000, enonceWidth, numExercice, consigneExercice);
         allDrawables.add(enonceView);
 
-        myButtonValidus = new MyButtonValidus(stage, 300, 300);
-        allDrawables.add(myButtonValidus);
+//        myButtonValidus = new MyButtonValidus(stage, 300, 300);
+//        allDrawables.add(myButtonValidus);
 
         metronome = new Metronome(0, 2 * screenHeight / 5, 300, 300);
         allDrawables.add(metronome);
@@ -436,6 +438,11 @@ public class ScreenEx1_1 extends ScreenOnglet
 
             TaskEtape nextEtape = new MoveMainToValidus(1000);
             uneMain.moveTo(50, posX, posY, nextEtape, 1000);
+
+            long endTime = System.currentTimeMillis();
+            long seconds = (endTime - startTime) / 1000;
+
+
         }
     }
 

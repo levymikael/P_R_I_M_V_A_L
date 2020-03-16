@@ -22,7 +22,6 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface, M
         super(stage, "Images/vo00000.png", width, height);
         setTouchable(Touchable.enabled);
 
-
         addListener(new ClickListener()
         {
             @Override
@@ -34,7 +33,6 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface, M
                     {
                         etapeCorrection.run();
                     }
-
                 }
             }
         });
@@ -57,7 +55,6 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface, M
         TextureRegion textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("Images/vo00000.png")));
 
         batch.draw(textureRegion2, currentPositionX, currentPositionY, width, height);
-
     }
 
     @Override
