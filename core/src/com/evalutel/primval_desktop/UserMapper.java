@@ -28,7 +28,6 @@ public interface UserMapper
     @Select(condition = "name = $1")
     User findByUserName(String userName);
 
-
-
-
+    @Insert
+    void insertTemps(float duration);
 }

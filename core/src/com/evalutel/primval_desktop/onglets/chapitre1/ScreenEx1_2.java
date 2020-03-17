@@ -9,8 +9,8 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 //import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.ActiviteView;
+import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.EcrinDiamantView;
-import com.evalutel.primval_desktop.EnonceView;
 import com.evalutel.primval_desktop.General.MyMath;
 import com.evalutel.primval_desktop.Metronome;
 import com.evalutel.primval_desktop.MyTouchInterface;
@@ -20,7 +20,6 @@ import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 
-import java.io.*;
 //import com.sun.speech.freetts;
 
 import java.util.ArrayList;
@@ -45,9 +44,10 @@ public class ScreenEx1_2 extends ScreenOnglet
     private int cptOiseau;
 
 
-    public ScreenEx1_2(Game game)
+    public ScreenEx1_2(Game game, DatabaseDesktop dataBase)
     {
-        super(game);
+        super(game, dataBase);
+
 
         int largeurBille = 200;
         int largeurPlanche = largeurBille * 4;

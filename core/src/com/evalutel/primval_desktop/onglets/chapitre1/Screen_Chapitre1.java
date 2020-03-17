@@ -7,13 +7,10 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -21,6 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.evalutel.primval_desktop.Database.DataBase;
+import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
 import com.evalutel.primval_desktop.MrNotes;
@@ -37,6 +36,7 @@ import java.util.ArrayList;
 
 public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, ApplicationListener
 {
+    private DataBase dataBase;
     protected Stage stage;
     int screenWidth;
     int screenHeight;
@@ -62,9 +62,11 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
     MyButtonRetour myButtonRetour;
 
-    public Screen_Chapitre1(Game game)
+    public Screen_Chapitre1(Game game, DatabaseDesktop dataBase)
     {
         this.game = game;
+        this.dataBase = dataBase;
+
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFont;
@@ -96,7 +98,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 //        fondSommaire.SetBackGroundSize(fondSommaire, screenWidth, 5 * screenHeight / 6);
 
 
-        listExercicesActiviteView = new ListExercicesActiviteView(stage, game, labelStyle);
+        listExercicesActiviteView = new ListExercicesActiviteView(stage, game, labelStyle, dataBase);
 
         myButtonRetour = new MyButtonRetour(stage, 200, 200);
         myButtonRetour.setPosition(0, 4 * screenHeight / 5);
@@ -173,7 +175,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
     @Override
     public void show()
-    { }
+    {
+    }
 
     @Override
     public void render(float delta)
@@ -222,9 +225,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     @Override
     public void resize(int width, int height)
     {
-
         stage.getViewport().update(width, height, true);
-
     }
 
     @Override

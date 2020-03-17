@@ -3,9 +3,9 @@ package com.evalutel.primval_desktop;
 public class Profil
 {
 
-    private String name;
-    private float duration;
-    private int notes;
+//    private String name;
+//    private float duration;
+//    private int notes;
 
 
     int idCompte;

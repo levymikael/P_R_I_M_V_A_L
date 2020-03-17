@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.CalculetteViewTest;
+import com.evalutel.primval_desktop.Database.DataBase;
+import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyButtonValidus;
 import com.evalutel.primval_desktop.MyDrawInterface;
@@ -21,11 +23,17 @@ import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UneMain;
 import com.evalutel.primval_desktop.UnePlancheNew;
+import com.evalutel.primval_desktop.User;
+import com.evalutel.primval_desktop.UserMapper;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
 import java.util.TimerTask;
+
+import de.bitbrain.jpersis.JPersis;
+import de.bitbrain.jpersis.drivers.Driver;
+import de.bitbrain.jpersis.drivers.sqllite.SQLiteDriver;
 
 
 public class ScreenOnglet implements Screen, InputProcessor
@@ -55,6 +63,9 @@ public class ScreenOnglet implements Screen, InputProcessor
     private ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
 
     private Game game;
+    private  DataBase dataBase;
+
+
 
 
     int mousePointerX, mousePointerY;
@@ -62,11 +73,20 @@ public class ScreenOnglet implements Screen, InputProcessor
     public java.util.Timer timer = new java.util.Timer();
 
 
-    public ScreenOnglet(Game game)
+    Driver driver = new SQLiteDriver("database.sql");
+    JPersis jpersis = new JPersis(driver);
+
+    User user;
+
+    UserMapper mapper = jpersis.map(UserMapper.class);
+
+
+    public ScreenOnglet(Game game, DatabaseDesktop dataBase)
     {
         stage = new Stage();
 
         this.game = game;
+        this.dataBase = dataBase;
 
         screenHeight = Gdx.graphics.getHeight();
         screenWidth = Gdx.graphics.getWidth();
@@ -83,7 +103,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         batch = new SpriteBatch();
 
-        MyButtonBackToPreviousMenu myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200);
+        MyButtonBackToPreviousMenu myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase);
         myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
         allDrawables.add(myButtonBackToPreviousMenu);
 

@@ -1,6 +1,7 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
+import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.EnonceView;
 import com.evalutel.primval_desktop.Metronome;
 import com.evalutel.primval_desktop.MyTouchInterface;
@@ -10,6 +11,7 @@ import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 
@@ -26,7 +28,7 @@ public class ScreenEx1_1 extends ScreenOnglet
     boolean isVisible = true;
     boolean isActive = false;
 
-//    MyButtonValidus myButtonValidus;
+    //    MyButtonValidus myButtonValidus;
     Metronome metronome;
 
     int cptOiseau, cptBille = 0;
@@ -38,10 +40,11 @@ public class ScreenEx1_1 extends ScreenOnglet
 
     EnonceView enonceView;
 
+    DatabaseDesktop db;
 
-    public ScreenEx1_1(Game game)
+    public ScreenEx1_1(Game game, DatabaseDesktop dataBase)
     {
-        super(game);
+        super(game, dataBase);
 
         int largeurBille = 200;
         int largeurPlanche = largeurBille * 4;
@@ -49,6 +52,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         startTime = System.currentTimeMillis();
 // wait for activity here
 
+        db = dataBase;
 
         bgScreenEx1_1 = new ScreeenBackgroundImage();
         bgScreenEx1_1.ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
@@ -87,7 +91,9 @@ public class ScreenEx1_1 extends ScreenOnglet
 
         timer.schedule(new PresentationMetrologue(2000), 1000);
 
+
     }
+
 
     private class PresentationMetrologue extends TaskEtape
     {
@@ -104,6 +110,12 @@ public class ScreenEx1_1 extends ScreenOnglet
             enonceView.addTextEnonce("Tu veux jouer ?");
 
             timer.schedule(new VoiciLaRegleDuJeu(2000), 2000);
+
+
+            Time timeTest = Time.valueOf("00:32:23");
+
+            db.onCreate(timeTest);
+
         }
     }
 
@@ -280,6 +292,7 @@ public class ScreenEx1_1 extends ScreenOnglet
             super(durMillis);
         }
 
+
         @Override
         public void run()
         {
@@ -346,7 +359,7 @@ public class ScreenEx1_1 extends ScreenOnglet
             uneMain.setVisible(true);
 
             float posX = myButtonValidus.currentPositionX + myButtonValidus.getWidth() / 2;
-            float posY = myButtonValidus.currentPositionY + myButtonValidus.getHeight() / 2;
+            float posY = screenHeight / 7 - myButtonValidus.getHeight() / 2;
 
             if (billesList.size() == 4)
             {

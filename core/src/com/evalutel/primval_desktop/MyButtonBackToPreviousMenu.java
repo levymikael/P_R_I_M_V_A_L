@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
+import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Chapitre1;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
@@ -20,14 +20,16 @@ public class MyButtonBackToPreviousMenu extends MyImageButton implements MyDrawI
     private boolean isActif;
 
     Game game;
+    final DatabaseDesktop dataBase;
 
 
-    public MyButtonBackToPreviousMenu(final Game game, Stage stage, float width, float height)
+    public MyButtonBackToPreviousMenu(final Game game, Stage stage, float width, float height, final DatabaseDesktop dataBase)
     {
         super(stage, "Images/button_menu.png", width, height);
         setTouchable(Touchable.enabled);
 
         this.game = game;
+        this.dataBase = dataBase;
 
         addListener(new ClickListener()
                     {
@@ -35,7 +37,7 @@ public class MyButtonBackToPreviousMenu extends MyImageButton implements MyDrawI
                         public void clicked(InputEvent event, float x, float y)
                         {
                             System.out.println("click on Back to Menu");
-                            game.setScreen(new Screen_Chapitre1(game));
+                            game.setScreen(new Screen_Chapitre1(game, dataBase));
                         }
                     }
         );

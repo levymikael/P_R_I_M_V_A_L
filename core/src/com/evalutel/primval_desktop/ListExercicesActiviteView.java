@@ -4,15 +4,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.evalutel.primval_desktop.Database.DataBase;
+import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.LigneTableaux;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
@@ -20,17 +19,21 @@ import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 public class ListExercicesActiviteView implements MyDrawInterface
 {
+    DataBase dataBase;
     public float screenWidth;
     private boolean isVisible = true;
 
     Game game;
 
-    public ListExercicesActiviteView(Stage stage, final Game game, Label.LabelStyle labelStyle)
+    DatabaseDesktop db;
+
+    public ListExercicesActiviteView(Stage stage, final Game game, Label.LabelStyle labelStyle, DatabaseDesktop dataBase)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
 
         this.game = game;
+        this.dataBase = dataBase;
 
 // Configuration police
         Label label1 = new Label("Les nombres de 1 a 9. Badix, Metrologue et validus", labelStyle);
@@ -90,7 +93,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_1(game));
+                game.setScreen(new ScreenEx1_1(game, db));
                 System.out.println("I got clicked!1");
             }
         });
@@ -100,7 +103,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!2");
-                game.setScreen(new ScreenEx1_2(game));
+                game.setScreen(new ScreenEx1_2(game, db));
             }
         });
         tableEx3.addListener(new ClickListener()
