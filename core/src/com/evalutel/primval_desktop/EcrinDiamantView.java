@@ -122,6 +122,11 @@ public class EcrinDiamantView implements MyDrawInterface
         updateText();
     }
 
+    public int getDiamantCount ()
+    {
+        return diamant;
+    }
+
 
     public void addPierre(int nbReponsesPossibles)
     {

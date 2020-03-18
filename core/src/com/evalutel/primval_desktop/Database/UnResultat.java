@@ -17,9 +17,9 @@ public class UnResultat
     private int mPointsPossibles = 0;
     private int mPointsMaxi;
     private boolean estResultatInsere = false;
-    private String dateResultat;
+    private long dateResultat;
 
-    public UnResultat(String mnemo, int chapitre, int onglet, int page, String intitule, int nbPointsMax, String dateResultat, int idResultatLocal, int idResultatServer, int idProfil)
+    public UnResultat(String mnemo, int chapitre, int onglet, int page, String intitule, int nbPointsMax, long dateResultat, int mPointsObtenus, int idResultatLocal, int idResultatServer, int idProfil)
     {
         this.idProfil = idProfil;
         this.dateResultat = dateResultat;
@@ -31,6 +31,7 @@ public class UnResultat
         mPointsMaxi = nbPointsMax;
         this.idResultatServer = idResultatServer;
         this.idResultatLocal = idResultatLocal;
+        this.mPointsObtenus = mPointsObtenus;
     }
 
     public int getIdProfil()
@@ -53,7 +54,7 @@ public class UnResultat
         return mIdEleve;
     }
 
-    public String getDateResultat()
+    public long getDateResultat()
     {
         return dateResultat;
     }
@@ -118,7 +119,7 @@ public class UnResultat
         estResultatInsere = true;
     }
 
-    public void setDate(String date)
+    public void setDate(long date)
     {
         dateResultat = date;
     }

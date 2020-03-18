@@ -3,6 +3,7 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
+import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.EnonceView;
 import com.evalutel.primval_desktop.Metronome;
 import com.evalutel.primval_desktop.MyTouchInterface;
@@ -475,7 +476,9 @@ public class ScreenEx1_1 extends ScreenOnglet
             long dateTest = new Date().getTime() / 1000L;
 
 
-            db.insertResultat(seconds, dateTest, "1", "1", "0", consigneExercice, "0", "0", "0");
+            UnResultat resultatEx1_1 = new UnResultat("Primval",1,1,0,consigneExercice,0,dateTest, 0,0,0,123);
+
+            db.insertResultat(resultatEx1_1);
 
 
         }

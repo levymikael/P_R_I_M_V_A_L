@@ -70,19 +70,19 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         this.dataBase = dataBase;
 
 
-        MyDataBase db = new MyDataBase(dataBase);
-
-
-        java.util.Date date = new java.util.Date();
-
-
-        int ok = 9;
-
-        long dateTest = new Date().getTime() / 1000L;
-
-        String consigneExercice = "Les nombres de ' 1 a 9 Badix, Metrologue et Validus.";
-
-        db.insertResultat(150, dateTest, "1", "1", "0", consigneExercice, "0", "0", "0");
+//        MyDataBase db = new MyDataBase(dataBase);
+//
+//
+//        java.util.Date date = new java.util.Date();
+//
+//
+//        int ok = 9;
+//
+//        long dateTest = new Date().getTime() / 1000L;
+////
+////        String consigneExercice = "Les nombres de ' 1 a 9 Badix, Metrologue et Validus.";
+////
+////        db.insertResultat(150, dateTest, "1", "1", "0", consigneExercice, "0", "0", "0");
 
         stage = new Stage();
         batch = new SpriteBatch();

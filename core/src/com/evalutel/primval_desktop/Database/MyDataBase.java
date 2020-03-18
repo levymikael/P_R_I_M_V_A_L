@@ -40,27 +40,25 @@ public class MyDataBase
     }
 
 
-    public void insertResultat(long duration, long dateResultat, String chapitre, String onglet, String page, String intitule, String points_obtenus, String points_possibles, String points_max)
+    public void insertResultat(UnResultat resultat)
+//    public void insertResultat(long duration, long dateResultat, String chapitre, String onglet, String page, String intitule, String points_obtenus, String points_possibles, String points_max)
     {
-//        String date = resultat.getDateResultat();
-//        long duree = resultat.getDuree();
-//        int chapitre = resultat.getChapitre();
-//        int onglet = resultat.getOnglet();
-//        int page = resultat.getPage();
-//        String intitule = resultat.getIntitule();
-//        int pointsObtenus = resultat.getPointsObtenus();
-//        int pointsPossibles = resultat.getPointsPossibles();
-//        int pointsMaxi = resultat.getPointsMaxi();
-//        int idProfil = resultat.getIdProfil();
-
-//        String esccapeStr = DatabaseUtils.sqlEscapeString(String)
+        long date = resultat.getDateResultat();
+        long duree = resultat.getDuree();
+        int chapitre = resultat.getChapitre();
+        int onglet = resultat.getOnglet();
+        int page = resultat.getPage();
+        String intitule = resultat.getIntitule();
+        int pointsObtenus = resultat.getPointsObtenus();
+        int pointsPossibles = resultat.getPointsPossibles();
+        int pointsMaxi = resultat.getPointsMaxi();
+        int idProfil = resultat.getIdProfil();
 
 
         String intituleNew = intitule.replace("'", "''");
-        String sqlRequest  ="INSERT INTO RESULTAT " +
+        String sqlRequest = "INSERT INTO RESULTAT " +
                 "(duree, date_resultat, chapitre, onglet, page, intitule, points_obtenus, points_possibles, points_max) " +
-                "VALUES (" + duration + "," + dateResultat + "," + valueOf(chapitre) + "," + valueOf(onglet) + "," + valueOf(page) + "," + "'" + intituleNew + "'" + "," + "'" + valueOf(points_obtenus) + "'" + "," + "'" + valueOf(points_possibles) + "'" + "," + "'" + valueOf(points_max) + "')";
-
+                "VALUES (" + duree + "," + date + "," + valueOf(chapitre) + "," + valueOf(onglet) + "," + valueOf(page) + "," + "'" + intituleNew + "'" + "," + "'" + valueOf(pointsObtenus) + "'" + "," + "'" + valueOf(pointsPossibles) + "'" + "," + "'" + valueOf(pointsMaxi) + "')";
 
 
         database.execute(sqlRequest);

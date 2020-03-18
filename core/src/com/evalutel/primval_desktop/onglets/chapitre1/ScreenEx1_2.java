@@ -10,6 +10,8 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
+import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.General.MyMath;
 import com.evalutel.primval_desktop.Metronome;
@@ -23,6 +25,7 @@ import com.evalutel.primval_desktop.UnePlancheNew;
 //import com.sun.speech.freetts;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ScreenEx1_2 extends ScreenOnglet
@@ -43,10 +46,18 @@ public class ScreenEx1_2 extends ScreenOnglet
     private int randNumOiseau;
     private int cptOiseau;
 
+    long startTime, endTime, seconds;
+    DatabaseDesktop dataBase;
+
+    String consigneExercice;
+
+
 
     public ScreenEx1_2(Game game, DatabaseDesktop dataBase)
     {
         super(game, dataBase);
+
+        this.dataBase = dataBase;
 
 
         int largeurBille = 200;
@@ -82,7 +93,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         float activiteWidth = (screenWidth / 4) * 3;
 
         String numExercice = "1-2";
-        String consigneExercice = "Faire correspondre des billes a des oiseaux, de 1 a 9";
+         consigneExercice = "Faire correspondre des billes a des oiseaux, de 1 a 9";
         String exDansChapitre = "3/9";
 
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, exDansChapitre);
@@ -294,6 +305,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                 failedAttempts = 0;
                 ecrinDiamantView.addDiamond(1);
+
             }
             else
             {
@@ -312,7 +324,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             }
         }
     }
-
 
     private class EtapeRectification1 extends TaskEtape
     {
@@ -509,6 +520,23 @@ public class ScreenEx1_2 extends ScreenOnglet
             if (questionCourante == 9)
             {
                 // fin exercice
+                endTime = System.currentTimeMillis();
+                seconds = (endTime - startTime) / 1000L;
+
+                MyDataBase db = new MyDataBase(dataBase);
+
+                java.util.Date date = new java.util.Date();
+
+                int ok = 9;
+
+                long dateTest = new Date().getTime() / 1000L;
+
+
+                int score = ecrinDiamantView.getDiamantCount();
+
+                UnResultat resultatEx1_2 = new UnResultat("Primval",1,2,0,consigneExercice,9,dateTest, score,0,0,123);
+
+                db.insertResultat(resultatEx1_2);
             }
             else
             {
