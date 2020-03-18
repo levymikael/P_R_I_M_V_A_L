@@ -63,7 +63,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     private ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
 
     private Game game;
-    private  DataBase dataBase;
+    DatabaseDesktop dataBase;
 
 
 

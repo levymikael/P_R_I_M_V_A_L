@@ -2,6 +2,7 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.EnonceView;
 import com.evalutel.primval_desktop.Metronome;
 import com.evalutel.primval_desktop.MyTouchInterface;
@@ -12,7 +13,11 @@ import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ScreenEx1_1 extends ScreenOnglet
@@ -36,11 +41,14 @@ public class ScreenEx1_1 extends ScreenOnglet
     double mainDoigtX = 0.1 * uneMain.getWidth();
     double mainDoigtY = 0.9 * uneMain.getHeight();
 
-    long startTime;
 
     EnonceView enonceView;
 
-    DatabaseDesktop db;
+    DatabaseDesktop dataBase;
+    long startTime, endTime, seconds;
+
+    String consigneExercice;
+
 
     public ScreenEx1_1(Game game, DatabaseDesktop dataBase)
     {
@@ -49,10 +57,8 @@ public class ScreenEx1_1 extends ScreenOnglet
         int largeurBille = 200;
         int largeurPlanche = largeurBille * 4;
 
-        startTime = System.currentTimeMillis();
-// wait for activity here
+        this.dataBase = dataBase;
 
-        db = dataBase;
 
         bgScreenEx1_1 = new ScreeenBackgroundImage();
         bgScreenEx1_1.ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
@@ -75,7 +81,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         float enonceWidth = (screenWidth / 4) * 3;
 
         String numExercice = "1-1";
-        String consigneExercice = "Les nombres de 1 a 9. Badix, Metrologue et Validus";
+        consigneExercice = "Les nombres de 1 a 9 Badix, Metrologue et Validus.";
 
         enonceView = new EnonceView(stage, 50, 2000, enonceWidth, numExercice, consigneExercice);
         allDrawables.add(enonceView);
@@ -112,9 +118,8 @@ public class ScreenEx1_1 extends ScreenOnglet
             timer.schedule(new VoiciLaRegleDuJeu(2000), 2000);
 
 
-            Time timeTest = Time.valueOf("00:32:23");
-
-            db.onCreate(timeTest);
+            startTime = System.currentTimeMillis();
+// wait for activity here
 
         }
     }
@@ -184,6 +189,8 @@ public class ScreenEx1_1 extends ScreenOnglet
             enonceView.addTextEnonce(str);
 
             timer.schedule(new MoveMainToReserve1(2000), 500);
+
+
         }
     }
 
@@ -452,8 +459,23 @@ public class ScreenEx1_1 extends ScreenOnglet
             TaskEtape nextEtape = new MoveMainToValidus(1000);
             uneMain.moveTo(50, posX, posY, nextEtape, 1000);
 
-            long endTime = System.currentTimeMillis();
-            long seconds = (endTime - startTime) / 1000;
+
+            endTime = System.currentTimeMillis();
+            seconds = (endTime - startTime) / 1000L;
+
+
+            MyDataBase db = new MyDataBase(dataBase);
+
+
+            java.util.Date date = new java.util.Date();
+
+
+            int ok = 9;
+
+            long dateTest = new Date().getTime() / 1000L;
+
+
+            db.insertResultat(seconds, dateTest, "1", "1", "0", consigneExercice, "0", "0", "0");
 
 
         }
@@ -481,14 +503,12 @@ public class ScreenEx1_1 extends ScreenOnglet
 
     public ArrayList getNumberOiseauxArList()
     {
-//
         oiseauxList = new ArrayList<>();
 
         int firstPositionOiseauX = screenWidth + 200;
         int firstPositionOiseauY = screenHeight + 200;
 
-//        int secondPositionOiseauX = 200;
-//        int secondPositionOiseauY = 700;
+//
         for (int i = 0; i < 3; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
@@ -598,7 +618,6 @@ public class ScreenEx1_1 extends ScreenOnglet
 
         if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
         {
-            System.out.println("clickedOnReserve");
             UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille);
             objectTouchedList.add(billeAdded);
             allDrawables.add(billeAdded);

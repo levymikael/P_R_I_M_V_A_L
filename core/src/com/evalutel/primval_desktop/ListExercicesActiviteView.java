@@ -19,15 +19,14 @@ import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 public class ListExercicesActiviteView implements MyDrawInterface
 {
-    DataBase dataBase;
     public float screenWidth;
     private boolean isVisible = true;
 
     Game game;
 
-    DatabaseDesktop db;
+    DatabaseDesktop dataBase;
 
-    public ListExercicesActiviteView(Stage stage, final Game game, Label.LabelStyle labelStyle, DatabaseDesktop dataBase)
+    public ListExercicesActiviteView(Stage stage, final Game game, Label.LabelStyle labelStyle, final DatabaseDesktop dataBase)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
@@ -93,7 +92,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_1(game, db));
+                game.setScreen(new ScreenEx1_1(game, dataBase));
                 System.out.println("I got clicked!1");
             }
         });
@@ -103,7 +102,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!2");
-                game.setScreen(new ScreenEx1_2(game, db));
+                game.setScreen(new ScreenEx1_2(game, dataBase));
             }
         });
         tableEx3.addListener(new ClickListener()

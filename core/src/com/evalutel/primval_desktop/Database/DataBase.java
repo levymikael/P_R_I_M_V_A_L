@@ -4,7 +4,6 @@ package com.evalutel.primval_desktop.Database;
 //General class that needs to be implemented on Android and Desktop Applications
 public abstract class DataBase
 {
-
     protected static String database_name = "database";
     protected static DataBase instance = null;
     protected static int version = 1;
@@ -24,6 +23,8 @@ public abstract class DataBase
         execute("CREATE TABLE RESULTAT (id INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL UNIQUE , id_profil INTEGER, duree REAL, date_resultat VARCHAR, mnemonique VARCHAR, chapitre INTEGER, onglet INTEGER, page INTEGER, intitule VARCHAR, points_obtenus INTEGER, points_possibles INTEGER, points_max INTEGER, id_resultat INTEGER UNIQUE)");
         execute("CREATE TABLE IF NOT EXISTS PROFILS " +
                 "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , id_profil INTEGER UNIQUE, id_compte INTEGER, nom VARCHAR, prenom VARCHAR, age INTEGER, classe VARCHAR, avatar INTEGER, photo VARCHAR)");
+        // example query
+
 //        execute("INSERT INTO 'Duration'(name,duration) values ('Cris',1234)");
         //Example of query to get DB data of Highscore table
 ////        Result q = query("SELECT * FROM 'Duration'");
