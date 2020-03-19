@@ -21,6 +21,8 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
         super(getDrawable(imagePathUp, width, height), getDrawable(imagePathDown, width, height));
 
 
+
+
         this.width = width;
         this.height = height;
 
@@ -31,6 +33,8 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
     public MyImageButton(Stage stage, String imagePathUp, float width, float height)
     {
         super(getDrawable(imagePathUp, width, height));
+
+
 
 
         this.width = width;
@@ -49,11 +53,12 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
         return new SpriteDrawable(sprite);
     }
 
+    /*
 
     public MyPoint getPosition()
     {
         return new MyPoint(currentPositionX, currentPositionY);
-    }
+    }*/
 
 
     public float getWidth()
@@ -65,6 +70,16 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
     public float getHeight()
     {
         return height;
+    }
+
+
+    @Override
+    public void draw(Batch batch, float parentAlpha)
+    {
+        super.draw(batch, parentAlpha);
+
+
+
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.Ex;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.SnapshotArray;
+import com.evalutel.primval_desktop.MyDrawInterface;
 
 import java.util.ArrayList;
 import java.util.TimerTask;
@@ -170,7 +171,6 @@ public class EnonceView implements MyDrawInterface
         });
 
 
-
     }
 
     /*
@@ -186,11 +186,6 @@ public class EnonceView implements MyDrawInterface
 
     public void addTextEnonce(String string)
     {
-
-
-
-
-
         Table table4 = new Table();
 
         Label.LabelStyle labelStyle3 = new Label.LabelStyle();
@@ -210,17 +205,16 @@ public class EnonceView implements MyDrawInterface
         tableMilieu.add(table4);
         tableMilieu.row();
 
-        if (tableMilieu.getChildren().size > 4)
-        {
-            tableMilieu.clearChildren();
-        }
+//        if (tableMilieu.getChildren().size > 4)
+//        {
+//            tableMilieu.clearChildren();
+//        }
 
         table.pack();
 
         topYTablePosition = Gdx.graphics.getHeight() - table.getHeight() - tableTitre.getHeight();
 
         table.setPosition(widthScreen / 2 - widthEnonce / 2, topYTablePosition /*- heightTop*/);
-
 
 
     }

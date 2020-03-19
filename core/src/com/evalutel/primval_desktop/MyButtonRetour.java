@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
 
-public class MyButtonRetour extends MyImageButton implements MyDrawInterface, MyTouchInterface
+public class MyButtonRetour extends MyImageButton implements MyDrawInterface
 {
     public com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet.TaskEtape etapeCorrection;
     private boolean isActif;
@@ -47,34 +47,10 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface, My
     @Override
     public void myDraw(Batch batch)
     {
-        TextureRegion textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("Images/fleche_retour.png")));
+        /*TextureRegion textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("Images/fleche_retour.png")));
 
-        batch.draw(textureRegion2, currentPositionX, currentPositionY, width, height);
+        batch.draw(textureRegion2, currentPositionX, currentPositionY, width, height);*/
 
     }
 
-    @Override
-    public boolean isTouched(int x, int y)
-    {
-        return false;
-    }
-
-    @Override
-    public void setPosition(int x, int y)
-    {
-        super.setPosition(x, y);
-    }
-
-
-    @Override
-    public boolean isActive()
-    {
-        return isActif;
-    }
-
-    @Override
-    public void setActive(boolean active)
-    {
-        isActif = active;
-    }
 }

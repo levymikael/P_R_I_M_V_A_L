@@ -107,11 +107,9 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         allDrawables = new ArrayList<>();
 
-        fondEspaceParent = new ScreeenBackgroundImage();
-        fondEspaceParent.ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
+        fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
 
-        fondSommaire = new ScreeenBackgroundImage();
-        fondSommaire.ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
+        fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
 //        fondSommaire.SetBackGroundSize(fondSommaire, screenWidth, 5 * screenHeight / 6);
 
 
@@ -123,7 +121,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
 
 
-        Label labelChap1Titre = new Label("Pratique des nombres de 1 a 9", labelStyleBlue);
+        Label labelChap1Titre = new Label("Pratique des nombres de 1 à 9", labelStyleBlue);
         Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
 
         Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, textureNumber1);

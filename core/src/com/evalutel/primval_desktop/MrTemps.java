@@ -12,10 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-
-import de.bitbrain.jpersis.JPersis;
-import de.bitbrain.jpersis.drivers.Driver;
-import de.bitbrain.jpersis.drivers.sqllite.SQLiteDriver;
+import com.evalutel.primval_desktop.Ex.User;
 
 public class MrTemps implements MyDrawInterface
 {

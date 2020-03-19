@@ -5,12 +5,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import java.io.File;
+import java.util.ArrayList;
 
-public class Metronome extends AnimationImageNew implements MyDrawInterface
+
+public class Metrologue extends AnimationImageNew implements MyDrawInterface
 {
     public int largeurBille;
 
-    public Metronome(int startPositionX, int startpositionY, int animationWidth, int animationHeight) {
+    public Metrologue(int startPositionX, int startpositionY, int animationWidth, int animationHeight) {
 
         super("Images/me00000.png",  startPositionX, startpositionY, animationWidth, animationHeight);
     }
@@ -30,6 +33,23 @@ public class Metronome extends AnimationImageNew implements MyDrawInterface
         TextureRegion textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/me00000.png")));
 
         batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+
+    }
+
+
+    private static ArrayList<String> getAnimationMetrologue()
+    {
+        ArrayList<String> imgMetrologuePaths = new ArrayList<>();
+
+        int validusDirectorySize = new File("/Users/mikaellevy/Documents/Developper/Desktop/Primval-Dekstop/android/assets/Images/Validus").listFiles().length;
+
+        for (int i = 0; i < validusDirectorySize; i++)
+        {
+            String imgaux = "Images/Metrologue/vo0000" + i + ".png";
+            imgMetrologuePaths.add(imgaux);
+        }
+
+        return imgMetrologuePaths;
 
     }
 

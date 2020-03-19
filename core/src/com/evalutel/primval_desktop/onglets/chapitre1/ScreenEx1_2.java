@@ -1,12 +1,6 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
-//import com.badlogic.gdx.Gdx;
-//import com.badlogic.gdx.graphics.Color;
-//import com.badlogic.gdx.graphics.g2d.BitmapFont;
-//import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-//import com.badlogic.gdx.scenes.scene2d.InputEvent;
-//import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-//import com.badlogic.gdx.utils.Timer;
+
 import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
@@ -14,7 +8,7 @@ import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.General.MyMath;
-import com.evalutel.primval_desktop.Metronome;
+import com.evalutel.primval_desktop.Metrologue;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -22,7 +16,6 @@ import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 
-//import com.sun.speech.freetts;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,11 +24,10 @@ import java.util.Date;
 public class ScreenEx1_2 extends ScreenOnglet
 {
     ScreeenBackgroundImage bgScreenEx1_2;
-    Metronome metronome;
     EcrinDiamantView ecrinDiamantView;
     boolean state = false;
     int posX, posY;
-    int firstPositionOiseauX, firstPositionOiseauY;
+    //    private int firstPositionOiseauX, firstPositionOiseauY;
     int failedAttempts;
     ActiviteView activiteView;
     private ArrayList<UneBille> billesList;
@@ -46,11 +38,10 @@ public class ScreenEx1_2 extends ScreenOnglet
     private int randNumOiseau;
     private int cptOiseau;
 
-    long startTime, endTime, seconds;
+    private long startTime, endTime, seconds;
     DatabaseDesktop dataBase;
 
-    String consigneExercice;
-
+    private String consigneExercice;
 
 
     public ScreenEx1_2(Game game, DatabaseDesktop dataBase)
@@ -59,12 +50,10 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         this.dataBase = dataBase;
 
-
         int largeurBille = 200;
         int largeurPlanche = largeurBille * 4;
 
-        bgScreenEx1_2 = new ScreeenBackgroundImage();
-        bgScreenEx1_2.ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
+        bgScreenEx1_2 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_2);
 
         reserveBilles = new ReserveBilles(screenWidth - 300, screenHeight - 300, 200, 200);
@@ -93,14 +82,14 @@ public class ScreenEx1_2 extends ScreenOnglet
         float activiteWidth = (screenWidth / 4) * 3;
 
         String numExercice = "1-2";
-         consigneExercice = "Faire correspondre des billes a des oiseaux, de 1 a 9";
+        consigneExercice = "Faire correspondre des billes à des oiseaux, de 1 a 9";
         String exDansChapitre = "3/9";
 
-        activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, exDansChapitre);
+        activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, exDansChapitre, "activite");
         allDrawables.add(activiteView);
 
-        metronome = new Metronome(0, 2 * screenHeight / 5, 300, 300);
-        allDrawables.add(metronome);
+        Metrologue metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
+        allDrawables.add(metrologue);
 
         ecrinDiamantView = new EcrinDiamantView(stage, myButtonValidus.getWidth(), 9);
         ecrinDiamantView.updateText();
@@ -115,8 +104,8 @@ public class ScreenEx1_2 extends ScreenOnglet
 
     public ArrayList getNumberOiseauxArList()
     {
-        firstPositionOiseauX = screenWidth + 200;
-        firstPositionOiseauY = screenHeight + 200;
+        int firstPositionOiseauX = screenWidth + 200;
+        int firstPositionOiseauY = screenHeight + 200;
         oiseauxList = new ArrayList<>();
         for (int i = 0; i < 9; i++)
         {
@@ -205,7 +194,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            activiteView.addTextActivite("Place autant de billes que d'oiseaux que tu vois et demande a Mademoiselle Validus si c'est juste pour avoir un diamant.");
+            activiteView.addTextActivite("Place autant de billes que d'oiseaux que tu vois et demande à Mademoiselle Validus si c'est juste pour avoir un diamant.");
             timer.schedule(new EtapeInstruction(2000), 1000);
         }
     }
@@ -226,13 +215,13 @@ public class ScreenEx1_2 extends ScreenOnglet
 
             randNumOiseau = numOiseauArray[questionCourante];
 
-            timer.schedule(new Displayoiseaux(1000), 500);
+            timer.schedule(new DisplayOiseaux(1000), 500);
         }
     }
 
-    private class Displayoiseaux extends TaskEtape
+    private class DisplayOiseaux extends TaskEtape
     {
-        private Displayoiseaux(long durMillis)
+        private DisplayOiseaux(long durMillis)
         {
             super(durMillis);
         }
@@ -240,7 +229,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            Displayoiseaux nextEtape = new Displayoiseaux(0);
+            DisplayOiseaux nextEtape = new DisplayOiseaux(0);
 
             if (cptOiseau < randNumOiseau)
             {
@@ -281,7 +270,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             else
             {
                 myButtonValidus.etapeCorrection = new CheckValidus(0);
-                myButtonValidus.setActive(true);
+                myButtonValidus.isActif = true;
             }
         }
     }
@@ -298,7 +287,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             if (planche1.getNumberBilles() == randNumOiseau)
             {
-                myButtonValidus.setActive(false);
+                myButtonValidus.isActif = false;
                 activiteView.addTextActivite("C'est bien continue " + questionCourante);
 
                 timer.schedule(new EtapeNextQuestion(1000), 500);
@@ -309,12 +298,12 @@ public class ScreenEx1_2 extends ScreenOnglet
             }
             else
             {
-                activiteView.addTextActivite("Tu t'es trompe essaie encore.");
+                activiteView.addTextActivite("Tu t'es trompé essaie encore.");
                 failedAttempts++;
 
                 if (failedAttempts == 2)
                 {
-                    myButtonValidus.setActive(false);
+                    myButtonValidus.isActif = false;
                     failedAttempts = 0;
                     ecrinDiamantView.addPierre(1);
                     activiteView.addTextActivite("Voici la correction");
@@ -534,9 +523,11 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                 int score = ecrinDiamantView.getDiamantCount();
 
-                UnResultat resultatEx1_2 = new UnResultat("Primval",1,2,0,consigneExercice,9,dateTest, score,0,0,123);
+                UnResultat resultatEx1_2 = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, score, 0, 0, 123);
 
                 db.insertResultat(resultatEx1_2);
+
+                timer.cancel();
             }
             else
             {

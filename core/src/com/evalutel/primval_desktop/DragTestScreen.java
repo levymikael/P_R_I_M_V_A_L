@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.evalutel.primval_desktop.Ex.CalculetteView;
+import com.evalutel.primval_desktop.Ex.EnonceView;
 import com.evalutel.primval_desktop.Ex.UneBilleAnimation;
 import com.evalutel.primval_desktop.Ex.UneBilleAnimation2;
 import com.evalutel.primval_desktop.Ex.UneBilleAnimation3;

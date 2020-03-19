@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.AnimationImageNew;
 import com.evalutel.primval_desktop.BackgroundColor;
-import com.evalutel.primval_desktop.EnonceView;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.MyTouchInterface;
 
@@ -109,18 +108,18 @@ public class EnonceViewEx1_1 extends AnimationImageNew implements MyDrawInterfac
 // Deroulement enonce dans tableau
 
         str0 = "Bonjour,\n" +
-                "Je suis le professeur Metrologue, on va faire un jeu amusant qui s’appelle Badix.";
+                "Je suis le professeur Métrologue, on va faire un jeu amusant qui s’appelle Badix.";
         str1 = "Tu veux jouer ?";
         str2 = "Voici la règle du jeu: \n";
         str3 = " Je vois un oiseau\n";
         str4 = "Je saisis une bille du sac et je la depose sur le plateau\n";
         str5 = "Je vois maintenant 2 oiseaux \n";
-        str6 = " Je depose encore une bille\n";
+        str6 = "Je depose encore une bille\n";
         str7 = "Tiens ! Encore un oiseau \n";
         str8 = "Mince,  je crois que je me suis trompe, je clique sur Mademoiselle Validus pour savoir si c’est juste.\n";
-        str9 = "Validus: Non, non tu t’es trompée \n";
-        str10 = "Metronome : Pour corriger mon erreur, je retire une bille de la planche puis je demande a Mademoiselle Validus./n";
-        str11 = "Validus:  Youpi ! Tu as gagne un diamant\t.\n";
+        str9 = "Validus: Non, non tu t’es trompé \n";
+        str10 = "Metrologue : Pour corriger mon erreur, je retire une bille de la planche puis je demande a Mademoiselle Validus./n";
+        str11 = "Validus:  Youpi ! Tu as gagné un diamant\t.\n";
 
 
         String[] strs = {str0, str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11};

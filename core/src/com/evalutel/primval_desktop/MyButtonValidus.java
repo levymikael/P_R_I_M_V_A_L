@@ -1,5 +1,6 @@
 package com.evalutel.primval_desktop;
 
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -10,16 +11,21 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
+import java.io.File;
+import java.util.ArrayList;
 
-public class MyButtonValidus extends MyImageButton implements MyDrawInterface, MyTouchInterface
+
+public class MyButtonValidus extends MyImageButton implements MyDrawInterface
 {
     public com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet.TaskEtape etapeCorrection;
-    private boolean isActif;
+    public boolean isActif;
 
 
     public MyButtonValidus(Stage stage, float width, float height)
     {
         super(stage, "Images/vo00000.png", width, height);
+
+        setZIndex(0);
         setTouchable(Touchable.enabled);
 
         addListener(new ClickListener()
@@ -27,15 +33,22 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface, M
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                if(isActif)
+                if (isActif)
                 {
-                    if(etapeCorrection != null)
+                    if (etapeCorrection != null)
                     {
                         etapeCorrection.run();
                     }
                 }
             }
         });
+    }
+
+
+    public void ValidusSound(Audio audioFile)
+    {
+
+        // class for Audio
     }
 
     /**
@@ -52,33 +65,29 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface, M
     @Override
     public void myDraw(Batch batch)
     {
-        TextureRegion textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("Images/vo00000.png")));
+        /*TextureRegion textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("Images/vo00000.png")));
 
-        batch.draw(textureRegion2, currentPositionX, currentPositionY, width, height);
+        batch.draw(textureRegion2, currentPositionX, currentPositionY, width, height);*/
     }
 
-    @Override
-    public boolean isTouched(int x, int y)
+
+    private static ArrayList<String> getAnimationValidus()
     {
-        return false;
+
+      //  https://www.reddit.com/r/libgdx/comments/4gwxod/best_way_to_make_an_animated_button_in_scene2d/
+
+        ArrayList<String> imgValidusPaths = new ArrayList<>();
+
+        int validusDirectorySize = new File("/Users/mikaellevy/Documents/Developper/Desktop/Primval-Dekstop/android/assets/Images/Validus").listFiles().length;
+
+        for (int i = 0; i < validusDirectorySize; i++)
+        {
+            String imgaux = "Images/Validus/vo0000" + i + ".png";
+            imgValidusPaths.add(imgaux);
+        }
+
+        return imgValidusPaths;
+
     }
 
-    @Override
-    public void setPosition(int x, int y)
-    {
-        super.setPosition(x,y);
-    }
-
-
-    @Override
-    public boolean isActive()
-    {
-        return isActif;
-    }
-
-    @Override
-    public void setActive(boolean active)
-    {
-        isActif = active;
-    }
 }

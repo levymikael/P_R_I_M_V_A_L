@@ -35,12 +35,12 @@ public class ListExercicesActiviteView implements MyDrawInterface
         this.dataBase = dataBase;
 
 // Configuration police
-        Label label1 = new Label("Les nombres de 1 a 9. Badix, Metrologue et validus", labelStyle);
-        Label label2 = new Label("Faire correspondre des billes a des oiseaux", labelStyle);
-        Label label3 = new Label("Ecriture des chiffres 1 a 9", labelStyle);
-        Label label4 = new Label("Prononciation des chiffres 1 a 9", labelStyle);
+        Label label1 = new Label("Les nombres de 1 à 9. Badix, Métrologue et Validus", labelStyle);
+        Label label2 = new Label("Faire correspondre des billes à des oiseaux", labelStyle);
+        Label label3 = new Label("Écriture des chiffres 1 à 9", labelStyle);
+        Label label4 = new Label("Prononciation des chiffres 1 à 9", labelStyle);
         Label label5 = new Label("Compter des oiseaux et taper leur nombre", labelStyle);
-        Label label6 = new Label("un gateau pour plusieurs anniversaires", labelStyle);
+        Label label6 = new Label("Un gâteau pour plusieurs anniversaires", labelStyle);
 
         Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
         Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));

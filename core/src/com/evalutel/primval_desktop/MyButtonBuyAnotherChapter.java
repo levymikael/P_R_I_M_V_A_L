@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
 
-public class MyButtonBuyAnotherChapter extends MyImageButton implements MyDrawInterface, MyTouchInterface
+public class MyButtonBuyAnotherChapter extends MyImageButton implements MyDrawInterface
 {
     public com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet.TaskEtape etapeCorrection;
     private boolean isActif;
@@ -55,28 +55,4 @@ public class MyButtonBuyAnotherChapter extends MyImageButton implements MyDrawIn
 
     }
 
-    @Override
-    public boolean isTouched(int x, int y)
-    {
-        return false;
-    }
-
-    @Override
-    public void setPosition(int x, int y)
-    {
-        super.setPosition(x, y);
-    }
-
-
-    @Override
-    public boolean isActive()
-    {
-        return isActif;
-    }
-
-    @Override
-    public void setActive(boolean active)
-    {
-        isActif = active;
-    }
 }

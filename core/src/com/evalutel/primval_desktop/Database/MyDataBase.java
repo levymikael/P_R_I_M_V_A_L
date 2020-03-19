@@ -1,13 +1,8 @@
 package com.evalutel.primval_desktop.Database;
 
 
-import com.evalutel.primval_desktop.Database.DataBase;
 import com.evalutel.primval_desktop.Profil;
-import com.evalutel.primval_desktop.User;
-
-import java.sql.Time;
-import java.time.LocalDateTime;
-import java.util.Date;
+import com.evalutel.primval_desktop.Ex.User;
 
 import static java.lang.String.valueOf;
 

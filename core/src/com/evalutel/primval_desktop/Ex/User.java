@@ -1,4 +1,6 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.Ex;
+
+import com.evalutel.primval_desktop.Profil;
 
 import de.bitbrain.jpersis.annotations.PrimaryKey;
 

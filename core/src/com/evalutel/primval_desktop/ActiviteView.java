@@ -40,16 +40,19 @@ public class ActiviteView implements MyDrawInterface
     private Texture textureMilieuEnonce;
     Texture textureFleche;
 
+    String activiteType;
 
-    public ActiviteView(Stage stage, float width, String numExercice, String consigneExercice, String exDansChapitre)
+
+    public ActiviteView(Stage stage, float width, String numExercice, String consigneExercice, String exDansChapitre, String activiteType)
     {
         textureFleche = new Texture(Gdx.files.internal("Images/EnonceUIElements/icons8-arrow-100.png"));
         textureMilieuEnonce = new Texture("Images/EnonceUIElements/enonce_milieu_new.png");
         widthEnonce = width;
         heightTop = widthEnonce * 100 / 1626;
 
-// Configuration police de l'enonce
+        this.activiteType = activiteType;
 
+// Configuration police de l'enonce
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 40;
@@ -96,7 +99,17 @@ public class ActiviteView implements MyDrawInterface
         table.add(tableMilieu);
         table.row();
 
-        textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/activite.png"));
+        if (activiteType == "activite")
+        {
+            textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/activite.png"));
+        }
+        else if (activiteType == "enonce")
+        {
+            textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_text.png"));
+
+        }
+
+
         spriteEnonceText = new Sprite(textureTextEnonce);
         TextField.TextFieldStyle textFieldStyleEnonce = new TextField.TextFieldStyle();
         textFieldStyleEnonce.font = bitmapFont;
@@ -119,7 +132,6 @@ public class ActiviteView implements MyDrawInterface
 
 
 // Positionnement du tableau sur ecran:
-
         final int screenHeight = Gdx.graphics.getHeight();
         widthScreen = Gdx.graphics.getWidth();
         tableTitre.pack();
@@ -177,7 +189,6 @@ public class ActiviteView implements MyDrawInterface
                 {
                     currentY = currentY + moveY;
                     table.setY(currentY);
-
                 }
             }
         });
@@ -196,24 +207,28 @@ public class ActiviteView implements MyDrawInterface
         Color colorWhite = new Color();
         colorWhite.add(255, 255, 255, 0);
 
-
         Label.LabelStyle labelStyle4 = new Label.LabelStyle();
         labelStyle4.font = bitmapFont;
         labelStyle4.fontColor = Color.BLACK;
         Label label4 = new Label("", labelStyle3);
 
-        if (cptInstructions == 0)
 
+        if (cptInstructions == 0)
         {
             Sprite sprite = new Sprite(textureFleche);
-            sprite.setSize(30,40);
+            sprite.setSize(30, 40);
             SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(sprite);
 
-
             Table table5 = new Table();
-            table5.setBackground(flecheSpriteDrawable);
 
-//            table5.setHeight(50);
+            if (activiteType == "activite")
+            {
+                table5.setBackground(flecheSpriteDrawable);
+            }
+            else
+            {
+                table5.setWidth(30);
+            }
 
             table4.add().width(20);
             table4.add(table5).width(50);
@@ -222,7 +237,6 @@ public class ActiviteView implements MyDrawInterface
         }
         else
         {
-
             table4.add().width(20);
             table4.add(label4).width(50);
             table4.add(label3).width(widthEnonce - 90);
@@ -256,8 +270,6 @@ public class ActiviteView implements MyDrawInterface
             currentY = topYTablePosition;
             table.setY(topYTablePosition);
         }
-
-
     }
 
     @Override

@@ -6,14 +6,14 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.evalutel.primval_desktop.CalculetteViewTest;
-import com.evalutel.primval_desktop.Database.DataBase;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyButtonValidus;
@@ -23,18 +23,11 @@ import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UneMain;
 import com.evalutel.primval_desktop.UnePlancheNew;
-import com.evalutel.primval_desktop.User;
-import com.evalutel.primval_desktop.UserMapper;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
 import java.util.TimerTask;
-
-import de.bitbrain.jpersis.JPersis;
-import de.bitbrain.jpersis.drivers.Driver;
-import de.bitbrain.jpersis.drivers.sqllite.SQLiteDriver;
-
 
 public class ScreenOnglet implements Screen, InputProcessor
 {
@@ -42,17 +35,17 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected ReserveBilles reserveBilles;
     int firstPositionX, firstPositionY;
     MyTouchInterface objectTouched;
-    private int appWidth = 2048;
-    private int appHeight = 1536;
+    //    private int appWidth = 2048;
+//    private int appHeight = 1536;
     private SpriteBatch batch;
     private CalculetteViewTest calculetteViewTest;
     private UnePlancheNew planche1, planche2, planche3, touchedPlanche;
     protected Stage stage;
     int screenWidth;
     int screenHeight;
-    TextButton.TextButtonStyle textButtonStyle;
-    TextButton textButtton;
-    Button.ButtonStyle buttonStyle;
+    //    TextButton.TextButtonStyle textButtonStyle;
+//    TextButton textButtton;
+//    Button.ButtonStyle buttonStyle;
     MyImageButton startPausebutton;
     boolean isVisible = true;
 
@@ -66,23 +59,24 @@ public class ScreenOnglet implements Screen, InputProcessor
     DatabaseDesktop dataBase;
 
 
-
-
     int mousePointerX, mousePointerY;
     UneMain uneMain;
     public java.util.Timer timer = new java.util.Timer();
 
 
-    Driver driver = new SQLiteDriver("database.sql");
-    JPersis jpersis = new JPersis(driver);
-
-    User user;
-
-    UserMapper mapper = jpersis.map(UserMapper.class);
+//    Driver driver = new SQLiteDriver("database.sql");
+//    JPersis jpersis = new JPersis(driver);
+//
+//    User user;
+//
+//    UserMapper mapper = jpersis.map(UserMapper.class);
 
 
     public ScreenOnglet(Game game, DatabaseDesktop dataBase)
     {
+
+        batch = new SpriteBatch();
+
         stage = new Stage();
 
         this.game = game;
@@ -101,7 +95,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         objectTouchedList = new ArrayList<>();
         allDrawables = new ArrayList<>();
 
-        batch = new SpriteBatch();
+
 
         MyButtonBackToPreviousMenu myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase);
         myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
@@ -113,7 +107,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         myButtonValidus = new MyButtonValidus(stage, 300, 300);
         myButtonValidus.setPosition(0, screenHeight / 7);
-        allDrawables.add(myButtonValidus);
+        //allDrawables.add(myButtonValidus);
 
         startPausebutton.addListener(new ClickListener()
         {
@@ -176,9 +170,12 @@ public class ScreenOnglet implements Screen, InputProcessor
         Gdx.gl.glClearColor(1, 1, 1, 1); // center
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stage.act(delta);
+
+
 
         batch.begin();
+
+        myButtonValidus.myDraw(batch);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -188,13 +185,26 @@ public class ScreenOnglet implements Screen, InputProcessor
                 newItem.myDraw(batch);
             }
         }
+
+        batch.end();
+
+        stage.act(delta);
+        stage.draw();
+
+
+        batch.begin();
         if (uneMain.isVisible())
         {
             uneMain.myDraw(batch);
         }
 
+
+
         batch.end();
-        stage.draw();
+
+
+
+
     }
 
     @Override
@@ -340,7 +350,6 @@ public class ScreenOnglet implements Screen, InputProcessor
 //                    }
 //                }
             }
-
         }
         objectTouched = null;
         return false;

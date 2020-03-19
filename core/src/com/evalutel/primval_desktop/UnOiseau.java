@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 public class UnOiseau extends AnimationImageNew /*implements MyDrawInterface */
 {
-
-
-    public UnOiseau(int startPositionX, int startPositionY, float animationWidth,float animationHeight )
+    public UnOiseau(int startPositionX, int startPositionY, float animationWidth, float animationHeight)
     {
-        super(getAnimationOiseau(), startPositionX, startPositionY, animationWidth, animationHeight );
+        super(getAnimationOiseau(), startPositionX, startPositionY, animationWidth, animationHeight);
 
 //
 //        setTouchable(Touchable.enabled);
@@ -72,7 +70,5 @@ public class UnOiseau extends AnimationImageNew /*implements MyDrawInterface */
         }
 
         return imgOiseauPaths;
-
     }
-
 }

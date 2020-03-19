@@ -115,9 +115,6 @@ public class AnimationImageNew implements MyDrawInterface
         long deltaTime = 20;
         long nbIterations = animationDureemillis / deltaTime;
 
-//        double deltaXd = (double) (deplacementEnX - currentPositionX) / (double)nbIterations;
-//        double deltaYd = (double) (deplacementEnY - currentPositionY) / (double)nbIterations;
-
         float deltaX = (float) (deplacementEnX - currentPositionX) / (float) nbIterations;
         float deltaY = (float) (deplacementEnY - currentPositionY) / (float) nbIterations;
 

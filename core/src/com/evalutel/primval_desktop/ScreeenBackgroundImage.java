@@ -15,21 +15,19 @@ public class ScreeenBackgroundImage extends TextureRegion implements MyDrawInter
     protected boolean isActive = true;
 
 
-    public TextureRegion ScreeenBackgroundImage(String bgImagePath)
+    public ScreeenBackgroundImage(String bgImagePath)
     {
         bgImageRegion = new TextureRegion(new Texture(Gdx.files.internal(bgImagePath)));
-
-        return bgImageRegion;
     }
 
-    public TextureRegion SetBackGroundSize(ScreeenBackgroundImage screeenBackgroundImage, int width, int height)
-    {
-        bgImageRegion.setRegionWidth(width);
-        bgImageRegion.setRegionHeight(height);
-
-        return bgImageRegion;
-
-    }
+//    public TextureRegion SetBackGroundSize(ScreeenBackgroundImage screeenBackgroundImage, int width, int height)
+//    {
+//        bgImageRegion.setRegionWidth(width);
+//        bgImageRegion.setRegionHeight(height);
+//
+//        return bgImageRegion;
+//
+//    }
 
 
     @Override

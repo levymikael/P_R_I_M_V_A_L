@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.Ex;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.evalutel.primval_desktop.AnimationImageNew;
+import com.evalutel.primval_desktop.MyDrawInterface;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class TexteDeroulant extends AnimationImageNew implements MyDrawInterface
 //        str7 = "Tiens ! Encore un oiseau \n";
 //        str8 = "Mince,  je crois que je me suis trompe, je clique sur Mademoiselle Validus pour savoir si c’est juste.\n";
 //        str9 = "Validus: Non, non tu t’es trompée \n";
-//        str10 = "Metronome : Pour corriger mon erreur, je retire une bille de la planche puis je demande a Mademoiselle Validus./n";
+//        str10 = "Metrologue : Pour corriger mon erreur, je retire une bille de la planche puis je demande a Mademoiselle Validus./n";
 //        str11 = "Validus:  Youpi ! Tu as gagne un diamant\t.\n";
 
 
@@ -48,7 +50,7 @@ public class TexteDeroulant extends AnimationImageNew implements MyDrawInterface
 
 
         int framesToAnimateQuantity = instructions.size();
-        animationFrames = new TextureRegion[framesToAnimateQuantity];
+//        animationFrames = new TextureRegion[framesToAnimateQuantity];
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
@@ -61,10 +63,10 @@ public class TexteDeroulant extends AnimationImageNew implements MyDrawInterface
 //            Texture imgAux = new Texture(txtAux);
 //            TextureRegion textureRegionAux = new TextureRegion(imgAux);
 //            animationFrames[i] = textureRegionAux;
-            animationFrames[i] = (TextureRegion) txtAux;
+//            animationFrames[i] = (TextureRegion) txtAux;
         }
 
-        animation = new Animation(1f / 6f, animationFrames);
+//        animation = new Animation(1f / 6f, animationFrames);
     }
 
 
