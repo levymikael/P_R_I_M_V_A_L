@@ -2,6 +2,7 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
 import java.io.File;
@@ -44,11 +46,37 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface
         });
     }
 
+//    public MyButtonValidus(Stage stage, float width, float height)
+//    {
+//        super(stage, getAnimationValidus(), width, height);
+//
+//        setZIndex(0);
+//        setTouchable(Touchable.enabled);
+//
+//        addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                if (isActif)
+//                {
+//                    if (etapeCorrection != null)
+//                    {
+//                        etapeCorrection.run();
+//                    }
+//                }
+//            }
+//        });
+//    }
 
-    public void ValidusSound(Audio audioFile)
+    public void ValidusSound(String audioPath)
     {
 
-        // class for Audio
+        Sound sound = Gdx.audio.newSound(Gdx.files.internal(audioPath));
+        sound.play(1.0f);
+
+
+
     }
 
     /**
@@ -74,7 +102,7 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface
     private static ArrayList<String> getAnimationValidus()
     {
 
-      //  https://www.reddit.com/r/libgdx/comments/4gwxod/best_way_to_make_an_animated_button_in_scene2d/
+        //  https://www.reddit.com/r/libgdx/comments/4gwxod/best_way_to_make_an_animated_button_in_scene2d/
 
         ArrayList<String> imgValidusPaths = new ArrayList<>();
 

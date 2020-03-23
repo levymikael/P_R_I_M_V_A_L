@@ -9,7 +9,7 @@ public class UneMain extends AnimationImageNew implements MyTouchInterface, MyDr
 
     public UnePlancheNew plancheNew = null;
 
-    public UneMain( int startPositionX, int startPositionY, int animationWidth)
+    public UneMain(int startPositionX, int startPositionY, int animationWidth)
     {
         super("Images/EnonceUIElements/doigt_new.png", startPositionX, startPositionY, animationWidth, animationWidth);
     }
@@ -18,34 +18,33 @@ public class UneMain extends AnimationImageNew implements MyTouchInterface, MyDr
     {
         imageUp();
 
-        int deplacemenNewY = (int)(deplacementEnY - animationHeight*0.9f);
-        int deplacemenNewX = (int)(deplacementEnX - animationWidth*0.1f);
+        int deplacemenNewY = (int) (deplacementEnY - animationHeight * 0.9f);
+        int deplacemenNewX = (int) (deplacementEnX - animationWidth * 0.1f);
 
-        animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext);
+        animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext, 1f / 6f);
     }
 
     public void cliqueTo(long animationDureemillis, int deplacementEnX, int deplacementEnY, ScreenOnglet.TaskEtape taskEtape, long delayNext)
     {
         imageDown();
 
-        int deplacemenNewY = (int)(deplacementEnY - animationHeight*0.9f);
-        int deplacemenNewX = (int)(deplacementEnX - animationWidth*0.1f);
+        int deplacemenNewY = (int) (deplacementEnY - animationHeight * 0.9f);
+        int deplacemenNewX = (int) (deplacementEnX - animationWidth * 0.1f);
 
-        animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext);
+        animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext, 1f / 6f);
     }
 
     public void imageDown()
     {
-        animationWidth = screenWidth/9;
-        animationHeight = screenWidth/9;
+        animationWidth = screenWidth / 9;
+        animationHeight = screenWidth / 9;
     }
 
     public void imageUp()
     {
-        animationWidth = screenWidth/8;
-        animationHeight = screenWidth/8;
+        animationWidth = screenWidth / 8;
+        animationHeight = screenWidth / 8;
     }
-
 
 
     @Override

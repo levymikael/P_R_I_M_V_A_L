@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,6 +24,7 @@ import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UneMain;
 import com.evalutel.primval_desktop.UnePlancheNew;
+import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
@@ -58,6 +60,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     private Game game;
     DatabaseDesktop dataBase;
 
+    ValidusAnimated validusAnimated;
 
     int mousePointerX, mousePointerY;
     UneMain uneMain;
@@ -74,7 +77,6 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     public ScreenOnglet(Game game, DatabaseDesktop dataBase)
     {
-
         batch = new SpriteBatch();
 
         stage = new Stage();
@@ -94,7 +96,6 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         objectTouchedList = new ArrayList<>();
         allDrawables = new ArrayList<>();
-
 
 
         MyButtonBackToPreviousMenu myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase);
@@ -123,6 +124,16 @@ public class ScreenOnglet implements Screen, InputProcessor
         int posY = screenHeight / 2;
         uneMain = new UneMain(posX, posY, 200);
         uneMain.setVisible(false);
+
+
+        validusAnimated = new ValidusAnimated(0, 0, 200, 200);
+        validusAnimated.setPosition(1000, 1000);
+        //allDrawables.add(validusAnimated);
+//
+//        sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Metrologue/Place autant de billes.mp3"));
+//        sound1 = Gdx.audio.newSound(Gdx.files.internal("Sounds/Validus/Validus - C'est bien continue.mp3"));
+//        sound2 = Gdx.audio.newSound(Gdx.files.internal("Sounds/Validus/Validus - tu t'es trompe.mp3"));
+
 
 
         /*
@@ -170,9 +181,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         Gdx.gl.glClearColor(1, 1, 1, 1); // center
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
-
-
         batch.begin();
 
         myButtonValidus.myDraw(batch);
@@ -186,6 +194,8 @@ public class ScreenOnglet implements Screen, InputProcessor
             }
         }
 
+        validusAnimated.myDraw(batch);
+
         batch.end();
 
         stage.act(delta);
@@ -198,13 +208,7 @@ public class ScreenOnglet implements Screen, InputProcessor
             uneMain.myDraw(batch);
         }
 
-
-
         batch.end();
-
-
-
-
     }
 
     @Override
@@ -235,6 +239,9 @@ public class ScreenOnglet implements Screen, InputProcessor
     public void dispose()
     {
         stage.dispose();
+//        sound.dispose();
+//        sound1.dispose();
+//        sound2.dispose();
     }
 
     @Override
@@ -284,6 +291,11 @@ public class ScreenOnglet implements Screen, InputProcessor
 //            firstPositionX = mousePointerX;
 //            firstPositionY = mousePointerY;
         }
+
+        else if (validusAnimated.contains(screenX, reversedScreenY))
+        {
+            System.out.println("validus touchdown");
+        }
         else /*si bille part de la planche*/
         {
             for (int i = 0; i < objectTouchedList.size(); i++)
@@ -323,7 +335,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     {
         if (objectTouched != null)
         {
-            //AnimationImageNew animationImageNewAux = (AnimationImageNew) objectTouched;
             if (objectTouched instanceof UneBille)
             {
                 UneBille billeAux = (UneBille) objectTouched;

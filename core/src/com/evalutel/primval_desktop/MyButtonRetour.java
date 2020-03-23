@@ -23,14 +23,7 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
         setTouchable(Touchable.enabled);
 
 
-        addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                //revenir a ecran precedent
-            }
-        });
+
     }
 
     /**

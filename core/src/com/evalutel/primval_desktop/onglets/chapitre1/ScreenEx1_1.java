@@ -2,7 +2,10 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.evalutel.primval_desktop.ActiviteView;
+import com.evalutel.primval_desktop.AnimationImageNew;
+import com.evalutel.primval_desktop.Assets;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
@@ -45,6 +48,7 @@ public class ScreenEx1_1 extends ScreenOnglet
 
     String consigneExercice;
 
+    Animation testmetro;
 
     public ScreenEx1_1(Game game, DatabaseDesktop dataBase)
     {
@@ -91,7 +95,16 @@ public class ScreenEx1_1 extends ScreenOnglet
         metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
         allDrawables.add(metrologue);
 
+        metrologue.animateImage(500, true, 0, 0, null, 1000, 1f / 50f);
+
         billesList = autoFillPlanche();
+
+
+//       metrologue.animateImage(500,true,0,0,null,500);
+
+
+//        testmetro = new Animation(1 / 10f, Assets.atlas.findRegions("me"));
+//        testmetro.setPlayMode(Animation.PlayMode.LOOP);
 
 
         timer.schedule(new PresentationMetrologue(2000), 1000);
@@ -152,17 +165,17 @@ public class ScreenEx1_1 extends ScreenOnglet
 
             if (cptOiseau == 0)
             {
-                oiseau.animateImage(1000, true, posX, posY, new JeVoisUnOIseau(2000), 500);
+                oiseau.animateImage(1000, true, posX, posY, new JeVoisUnOIseau(2000), 500, 1f / 50f);
             }
             else if (cptOiseau == 2)
             {
                 activiteView.addTextActivite("Tiens ! Encore un oiseau");
 
-                oiseau.animateImage(1000, true, posX, posY, null, 500);
+                oiseau.animateImage(1000, true, posX, posY, null, 500, 1f / 50f);
             }
             else
             {
-                oiseau.animateImage(1000, true, posX, posY, null, 500);
+                oiseau.animateImage(1000, true, posX, posY, null, 500, 1f / 50f);
                 activiteView.addTextActivite("Je vois maintenant 2 oiseaux");
             }
             cptOiseau++;
@@ -265,25 +278,25 @@ public class ScreenEx1_1 extends ScreenOnglet
             {
                 activiteView.addTextActivite("Je saisis une bille du sac et je la dépose sur le plateau ");
 
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
+                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500, 1f / 6f);
 
                 uneMain.cliqueTo(durationMillis, posX, posY, nextEtape2, 0);
             }
             else if (cptBille == 1)
             {
 
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
+                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500, 1f / 6f);
                 uneMain.cliqueTo(durationMillis, posX, posY, nextEtape2, 0);
             }
             else if (cptBille == 2)
             {
 
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
+                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500, 1f / 6f);
                 uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
             }
             else if (cptBille == 3)
             {
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
+                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500, 1f / 6f);
                 uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
             }
         }
@@ -426,7 +439,7 @@ public class ScreenEx1_1 extends ScreenOnglet
 
             TaskEtape nextEtape = new LastOne(500);
 
-            bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500);
+            bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500, 1f / 6f);
         }
     }
 
@@ -563,14 +576,14 @@ public class ScreenEx1_1 extends ScreenOnglet
 //    }
 //
 //    @Override
-//    public boolean touchUp(int screenX, int screenY, int pointer, int button)
+//    public boolean TouchUp(int screenX, int screenY, int pointer, int button)
 //    {
 //        if (objectTouched != null)
 //        {
 //            if (objectTouched instanceof UneMain)
 //            {
 //                UneMain mainAux = (UneMain) objectTouched;
-//                mainAux.touchUp(planche1, screenX, screenHeight - screenY);
+//                mainAux.TouchUp(planche1, screenX, screenHeight - screenY);
 ////
 ////                else /*si bille pas deposee dans planche*/
 ////                    {

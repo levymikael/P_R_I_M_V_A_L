@@ -104,13 +104,13 @@ public class AnimationImageNew implements MyDrawInterface
         return animationHeight;
     }
 
-    public void animateImage(long animationDureemillis, boolean animationContinue, int deplacementEnX, int deplacementEnY, ScreenOnglet.TaskEtape taskEtape, long delayNext)
+    public void animateImage(long animationDureemillis, boolean animationContinue, int deplacementEnX, int deplacementEnY, ScreenOnglet.TaskEtape taskEtape, long delayNext, float vitesse)
     {
         this.animationContinue = animationContinue;
         this.deplacementEnX = deplacementEnX;
         this.deplacementEnY = deplacementEnY;
 
-        animation = new Animation(1f / 6f, animationFrames);
+        animation = new Animation(vitesse, animationFrames);
 
         long deltaTime = 20;
         long nbIterations = animationDureemillis / deltaTime;

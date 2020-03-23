@@ -10,8 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
+import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Chapitre1;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
+
+import java.util.Date;
 
 
 public class MyButtonBackToPreviousMenu extends MyImageButton implements MyDrawInterface
@@ -42,6 +46,26 @@ public class MyButtonBackToPreviousMenu extends MyImageButton implements MyDrawI
                     }
         );
     }
+
+// implement sql query
+ /*   endTime = System.currentTimeMillis();
+    seconds = (endTime - startTime) / 1000L;
+
+    MyDataBase db = new MyDataBase(dataBase);
+
+    java.util.Date date = new java.util.Date();
+
+
+    long dateTest = new Date().getTime() / 1000L;
+
+
+    int score = ecrinDiamantView.getDiamantCount();
+
+    UnResultat resultatEx1_2 = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, score, 0, 0, 123);
+
+                db.insertResultat(resultatEx1_2);
+
+*/
 
     /**
      * @param currentPositionX point x coordinate

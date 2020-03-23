@@ -1,6 +1,7 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,9 +14,10 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
 {
     public int largeurBille;
 
-    public Metrologue(int startPositionX, int startpositionY, int animationWidth, int animationHeight) {
+    public Metrologue(int startPositionX, int startpositionY, int animationWidth, int animationHeight)
+    {
 
-        super("Images/me00000.png",  startPositionX, startpositionY, animationWidth, animationHeight);
+        super(getAnimationMetrologue(), startPositionX, startpositionY, animationWidth, animationHeight);
     }
 
     /**
@@ -23,13 +25,26 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
      * @param currentPositionY point y coordinate
      * @return whether the point is contained in the rectangle
      */
-    public boolean contains(float currentPositionX, float currentPositionY) {
+    public boolean contains(float currentPositionX, float currentPositionY)
+    {
         return this.currentPositionX <= currentPositionX && this.currentPositionX + this.animationWidth >= currentPositionX && this.currentPositionY <= currentPositionY && this.currentPositionY + this.animationHeight >= currentPositionY;
     }
 
 
+    public void MetrologueSound(String audioPath)
+    {
+
+        Sound sound = Gdx.audio.newSound(Gdx.files.internal(audioPath));
+        sound.play(1.0f);
+
+
+
+    }
+
+
     @Override
-    public void myDraw(Batch batch) {
+    public void myDraw(Batch batch)
+    {
         TextureRegion textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/me00000.png")));
 
         batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
@@ -41,13 +56,29 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
     {
         ArrayList<String> imgMetrologuePaths = new ArrayList<>();
 
-        int validusDirectorySize = new File("/Users/mikaellevy/Documents/Developper/Desktop/Primval-Dekstop/android/assets/Images/Validus").listFiles().length;
+        int metrologueDirectorySize = new File("/Users/mikaellevy/Documents/Developper/Desktop/Primval-Dekstop/android/assets/Images/Metrologue").listFiles().length;
 
-        for (int i = 0; i < validusDirectorySize; i++)
+        String imgaux = "";
+
+        for (int i = 0; i < metrologueDirectorySize-1; i++)
         {
-            String imgaux = "Images/Metrologue/vo0000" + i + ".png";
-            imgMetrologuePaths.add(imgaux);
+            if (i < 10)
+            {
+                imgaux = "Images/Metrologue/me0000" + i + ".png";
+                imgMetrologuePaths.add(imgaux);
+            }
+            else if (i >= 10 && i < 100)
+            {
+                imgaux = "Images/Metrologue/me000" + i + ".png";
+                imgMetrologuePaths.add(imgaux);
+            }
+            else
+            {
+                imgaux = "Images/Metrologue/me00" + i + ".png";
+                imgMetrologuePaths.add(imgaux);
+            }
         }
+
 
         return imgMetrologuePaths;
 

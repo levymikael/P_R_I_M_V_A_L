@@ -112,5 +112,4 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
             }
         }
     }
-
 }
