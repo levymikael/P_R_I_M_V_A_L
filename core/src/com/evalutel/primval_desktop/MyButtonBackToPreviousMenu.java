@@ -26,14 +26,20 @@ public class MyButtonBackToPreviousMenu extends MyImageButton implements MyDrawI
     Game game;
     final DatabaseDesktop dataBase;
 
+    MyDataBase db ;
 
-    public MyButtonBackToPreviousMenu(final Game game, Stage stage, float width, float height, final DatabaseDesktop dataBase)
+
+
+    public MyButtonBackToPreviousMenu(final Game game, Stage stage, float width, float height, final DatabaseDesktop dataBase, MyDataBase db, UnResultat resultat)
     {
         super(stage, "Images/button_menu.png", width, height);
         setTouchable(Touchable.enabled);
 
         this.game = game;
         this.dataBase = dataBase;
+
+         db = new MyDataBase(dataBase);
+
 
         addListener(new ClickListener()
                     {

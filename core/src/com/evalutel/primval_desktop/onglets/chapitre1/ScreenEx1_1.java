@@ -10,6 +10,7 @@ import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.Metrologue;
+import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -48,7 +49,7 @@ public class ScreenEx1_1 extends ScreenOnglet
 
     String consigneExercice;
 
-    Animation testmetro;
+    UnResultat resultatEx1_1;
 
     public ScreenEx1_1(Game game, DatabaseDesktop dataBase)
     {
@@ -88,10 +89,6 @@ public class ScreenEx1_1 extends ScreenOnglet
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "enonce");
         allDrawables.add(activiteView);
 
-
-//        myButtonValidus = new MyButtonValidus(stage, 300, 300);
-//        allDrawables.add(myButtonValidus);
-
         metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
         allDrawables.add(metrologue);
 
@@ -99,12 +96,9 @@ public class ScreenEx1_1 extends ScreenOnglet
 
         billesList = autoFillPlanche();
 
-
-//       metrologue.animateImage(500,true,0,0,null,500);
-
-
-//        testmetro = new Animation(1 / 10f, Assets.atlas.findRegions("me"));
-//        testmetro.setPlayMode(Animation.PlayMode.LOOP);
+        MyButtonBackToPreviousMenu myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase, resultatEx1_1);
+        myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
+        allDrawables.add(myButtonBackToPreviousMenu);
 
 
         timer.schedule(new PresentationMetrologue(2000), 1000);
@@ -476,9 +470,9 @@ public class ScreenEx1_1 extends ScreenOnglet
             long dateTest = new Date().getTime() / 1000L;
 
 
-            UnResultat resultatEx1_1 = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, dateTest, 0, 0, 0, 123);
+            resultatEx1_1 = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, dateTest, 0, 0, 0, 123);
 
-            db.insertResultat(resultatEx1_1);
+//            db.insertResultat(resultatEx1_1);
 
 
             timer.cancel();

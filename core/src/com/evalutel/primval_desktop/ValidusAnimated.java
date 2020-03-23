@@ -3,6 +3,8 @@ package com.evalutel.primval_desktop;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -18,6 +20,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
     public com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet.TaskEtape etapeCorrection;
     private boolean isActif;
+    boolean isSpeaking;
 
 
     public ValidusAnimated(int startPositionX, int startPositionY, float animationWidth, float animationHeight)
@@ -30,6 +33,8 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
     public void ValidusPlaySound(String audioPath)
     {
+        isSpeaking = true;
+
         Music music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
 //        music.setLooping(false);
         music.play();
@@ -41,6 +46,8 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
             public void onCompletion(Music music)
             {
                 music.dispose();
+                isSpeaking = false;
+
             }
         });
     }
@@ -115,5 +122,14 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     {
         System.out.println("touchUp validus");
 
+    }
+
+
+    @Override
+    public void myDraw(Batch batch)
+    {
+        elapsedTime += Gdx.graphics.getDeltaTime();
+        TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, isSpeaking);
+        batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
     }
 }

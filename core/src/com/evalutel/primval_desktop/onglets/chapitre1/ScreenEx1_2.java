@@ -17,7 +17,6 @@ import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
-import com.evalutel.primval_desktop.ValidusAnimated;
 
 
 import java.util.ArrayList;
@@ -48,9 +47,9 @@ public class ScreenEx1_2 extends ScreenOnglet
     private String consigneExercice;
 
 
-    Metrologue metrologue;
+//    Metrologue metrologue;
 
-    Sound sound, sound1, sound2;
+//    Sound sound, sound1, sound2;
 
     public ScreenEx1_2(Game game, DatabaseDesktop dataBase)
     {
@@ -96,10 +95,9 @@ public class ScreenEx1_2 extends ScreenOnglet
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, exDansChapitre, "activite");
         allDrawables.add(activiteView);
 
-        metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
-        allDrawables.add(metrologue);
+//        allDrawables.add(metrologue);
 
-        ecrinDiamantView = new EcrinDiamantView(stage, myButtonValidus.getWidth(), 9);
+        ecrinDiamantView = new EcrinDiamantView(stage, validusAnimated.getWidth(), 9);
         ecrinDiamantView.updateText();
         allDrawables.add(ecrinDiamantView);
 
@@ -144,7 +142,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         }
         else if (validusAnimated.contains(mousePointerX, mousePointerY))
         {
-            System.out.println("toucheeeeee");
+//            System.out.println("toucheeeeee");
 
             validusAnimated.etapeCorrection = new CheckValidus(0);
             validusAnimated.etapeCorrection.run();
@@ -213,12 +211,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             activiteView.addTextActivite("Place autant de billes que d'oiseaux que tu vois et demande à Mademoiselle Validus si c'est juste pour avoir un diamant.");
 
-
-//           Sound  sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Metrologue/Place autant de billes.mp3"));
-//            sound.play(1.0f);
-//
-//            sound.dispose();
-
+            metrologue.MetrologuePlaySound("Sounds/Metrologue/Place autant de billes.mp3");
 
             timer.schedule(new EtapeInstruction(2000), 1000);
         }
@@ -294,7 +287,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             }
             else
             {
-//                myButtonValidus.etapeCorrection = new CheckValidus(0);
 //
 //                myButtonValidus.isActif = true;
 
@@ -325,29 +317,29 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                 failedAttempts = 0;
                 ecrinDiamantView.addDiamond(1);
-
-
             }
             else
             {
-                activiteView.addTextActivite("Tu t'es trompé essaie encore.");
-
-
-
-                validusAnimated.ValidusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
-
-                failedAttempts++;
-
                 if (failedAttempts == 2)
                 {
                     myButtonValidus.isActif = false;
                     failedAttempts = 0;
                     ecrinDiamantView.addPierre(1);
                     activiteView.addTextActivite("Voici la correction");
+                    validusAnimated.ValidusPlaySound("Sounds/Validus/Voici la correction.mp3");
 
 
                     timer.schedule(new EtapeRectification1(1000), 500);
                 }
+                else
+                {
+                    activiteView.addTextActivite("Tu t'es trompé essaie encore.");
+
+                    validusAnimated.ValidusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+
+                }
+                failedAttempts++;
+
             }
         }
     }
@@ -367,7 +359,6 @@ public class ScreenEx1_2 extends ScreenOnglet
 //                Sound sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Validus/Voici la correction.mp3"));
 //                sound.play(1.0f);
 
-                validusAnimated.ValidusPlaySound("Sounds/Validus/Voici la correction.mp3");
 
                 uneMain.setVisible(true);
                 timer.schedule(new MoveMainToReserve1(500), 500);

@@ -1,6 +1,7 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -14,10 +15,16 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
 {
     public int largeurBille;
 
+    boolean isSpeaking;
+
     public Metrologue(int startPositionX, int startpositionY, int animationWidth, int animationHeight)
     {
 
         super(getAnimationMetrologue(), startPositionX, startpositionY, animationWidth, animationHeight);
+
+
+
+
     }
 
     /**
@@ -31,24 +38,31 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
     }
 
 
-    public void MetrologueSound(String audioPath)
+    public void MetrologuePlaySound(String audioPath)
     {
-
-        Sound sound = Gdx.audio.newSound(Gdx.files.internal(audioPath));
-        sound.play(1.0f);
-
-
-
+        isSpeaking = true;
+        Music music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
+//        music.setLooping(false);
+        music.play();
+////       boolean isLooping = false;
+        music.setOnCompletionListener(new Music.OnCompletionListener()
+        {
+            @Override
+            public void onCompletion(Music music)
+            {
+                music.dispose();
+                isSpeaking = false;
+            }
+        });
     }
 
 
     @Override
     public void myDraw(Batch batch)
     {
-        TextureRegion textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/me00000.png")));
-
+        elapsedTime += Gdx.graphics.getDeltaTime();
+        TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, isSpeaking);
         batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
-
     }
 
 
@@ -60,7 +74,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
 
         String imgaux = "";
 
-        for (int i = 0; i < metrologueDirectorySize-1; i++)
+        for (int i = 0; i < metrologueDirectorySize - 1; i++)
         {
             if (i < 10)
             {

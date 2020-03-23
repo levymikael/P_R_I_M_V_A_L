@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Metrologue;
 import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyButtonValidus;
 import com.evalutel.primval_desktop.MyDrawInterface;
@@ -62,6 +63,8 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     ValidusAnimated validusAnimated;
 
+    Metrologue metrologue;
+
     int mousePointerX, mousePointerY;
     UneMain uneMain;
     public java.util.Timer timer = new java.util.Timer();
@@ -98,17 +101,17 @@ public class ScreenOnglet implements Screen, InputProcessor
         allDrawables = new ArrayList<>();
 
 
-        MyButtonBackToPreviousMenu myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase);
-        myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
-        allDrawables.add(myButtonBackToPreviousMenu);
+//        MyButtonBackToPreviousMenu myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase);
+//        myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
+//        allDrawables.add(myButtonBackToPreviousMenu);
 
         startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", "Images/StartPause/button_lecture.png", 200, 200);
         startPausebutton.setPosition(0, 5 * screenHeight / 7);
         stage.addActor(startPausebutton);
 
-        myButtonValidus = new MyButtonValidus(stage, 300, 300);
-        myButtonValidus.setPosition(0, screenHeight / 7);
-        //allDrawables.add(myButtonValidus);
+//        myButtonValidus = new MyButtonValidus(stage, 300, 300);
+//        myButtonValidus.setPosition(0, screenHeight / 7);
+//        //allDrawables.add(myButtonValidus);
 
         startPausebutton.addListener(new ClickListener()
         {
@@ -126,16 +129,14 @@ public class ScreenOnglet implements Screen, InputProcessor
         uneMain.setVisible(false);
 
 
-        validusAnimated = new ValidusAnimated(0, 0, 200, 200);
-        validusAnimated.setPosition(1000, 1000);
+        validusAnimated = new ValidusAnimated(0, 0, 300, 300);
+        validusAnimated.setPosition(0, screenHeight / 7);
         //allDrawables.add(validusAnimated);
+
+        metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
+
 //
-//        sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Metrologue/Place autant de billes.mp3"));
-//        sound1 = Gdx.audio.newSound(Gdx.files.internal("Sounds/Validus/Validus - C'est bien continue.mp3"));
-//        sound2 = Gdx.audio.newSound(Gdx.files.internal("Sounds/Validus/Validus - tu t'es trompe.mp3"));
-
-
-
+//
         /*
         calculetteViewTest = new CalculetteViewTest(stage, 200, 200, 700, 600);
 
@@ -183,7 +184,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         batch.begin();
 
-        myButtonValidus.myDraw(batch);
+//        myButtonValidus.myDraw(batch);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -195,6 +196,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         }
 
         validusAnimated.myDraw(batch);
+        metrologue.myDraw(batch);
 
         batch.end();
 
@@ -239,9 +241,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     public void dispose()
     {
         stage.dispose();
-//        sound.dispose();
-//        sound1.dispose();
-//        sound2.dispose();
     }
 
     @Override
@@ -292,10 +291,6 @@ public class ScreenOnglet implements Screen, InputProcessor
 //            firstPositionY = mousePointerY;
         }
 
-        else if (validusAnimated.contains(screenX, reversedScreenY))
-        {
-            System.out.println("validus touchdown");
-        }
         else /*si bille part de la planche*/
         {
             for (int i = 0; i < objectTouchedList.size(); i++)
