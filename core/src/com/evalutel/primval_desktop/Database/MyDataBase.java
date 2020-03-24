@@ -51,14 +51,29 @@ public class MyDataBase
 
 
         String intituleNew = intitule.replace("'", "''");
-        String sqlRequest = "INSERT INTO RESULTAT " +
+        String sqlQuery = "INSERT INTO RESULTAT " +
                 "(duree, date_resultat, chapitre, onglet, page, intitule, points_obtenus, points_possibles, points_max) " +
                 "VALUES (" + duree + "," + date + "," + valueOf(chapitre) + "," + valueOf(onglet) + "," + valueOf(page) + "," + "'" + intituleNew + "'" + "," + "'" + valueOf(pointsObtenus) + "'" + "," + "'" + valueOf(pointsPossibles) + "'" + "," + "'" + valueOf(pointsMaxi) + "')";
 
 
-        database.execute(sqlRequest);
+        database.execute(sqlQuery);
 
 
+    }
+
+    public int getHighestNote(int chapitre, int onglet)
+    {
+        int highestNote = 0;
+
+        String sqlQuery = "SELECT max(points_obtenus) from RESULTAT where chapitre = " + chapitre + " AND onglet = " + onglet;
+
+//        database.execute(sqlQuery);
+
+        DataBase.Result test =  database.query(sqlQuery);
+
+//      highestNote=
+
+        return highestNote;
     }
 
 

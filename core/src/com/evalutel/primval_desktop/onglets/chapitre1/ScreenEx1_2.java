@@ -2,14 +2,13 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.evalutel.primval_desktop.ActiviteView;
+import com.evalutel.primval_desktop.Database.DataBase;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.General.MyMath;
-import com.evalutel.primval_desktop.Metrologue;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -20,7 +19,6 @@ import com.evalutel.primval_desktop.ValidusAnimated;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class ScreenEx1_2 extends ScreenOnglet
@@ -87,6 +85,10 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         String numExercice = "1-2";
         consigneExercice = "Faire correspondre des billes à des oiseaux, de 1 a 9";
+
+       db.getHighestNote(1,2);
+
+
         String noteMaxObtenue = "3/9";
 
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, noteMaxObtenue, "activite");
@@ -102,7 +104,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         getNumberOiseauxArList();
 
-        resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, score, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, ecrinDiamantView.getDiamantCount(), 0, 0, 123);
 
 
     }
@@ -339,6 +341,9 @@ public class ScreenEx1_2 extends ScreenOnglet
                 validusAnimated.isActif = false;
                 timer.schedule(new EtapeNextQuestion(1000), 500);
                 ecrinDiamantView.addDiamond(1);
+
+                resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, ecrinDiamantView.getDiamantCount(), 0, 0, 123);
+
             }
             else
             {
@@ -350,6 +355,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                     activiteView.addTextActivite("Voici la correction");
                     validusAnimated.ValidusPlaySound("Sounds/Validus/Voici la correction.mp3");
 
+                    resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, ecrinDiamantView.getDiamantCount(), 0, 0, 123);
 
                     timer.schedule(new EtapeRectification1(1000), 500);
                 }
@@ -357,6 +363,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                 {
                     activiteView.addTextActivite("Tu t'es trompé essaie encore.");
                     validusAnimated.ValidusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+                    resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, ecrinDiamantView.getDiamantCount(), 0, 0, 123);
 
                 }
                 failedAttempts++;
@@ -580,7 +587,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                 score = ecrinDiamantView.getDiamantCount();
 
-                resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, score, 0, 0, 123);
+//                resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, score, 0, 0, 123);
 
 
                 timer.cancel();
