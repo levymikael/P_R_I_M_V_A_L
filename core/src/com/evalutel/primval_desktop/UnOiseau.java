@@ -1,5 +1,7 @@
 package com.evalutel.primval_desktop;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+
 import java.util.ArrayList;
 
 public class UnOiseau extends AnimationImageNew /*implements MyDrawInterface */
@@ -9,6 +11,8 @@ public class UnOiseau extends AnimationImageNew /*implements MyDrawInterface */
         super(getAnimationOiseau(), startPositionX, startPositionY, animationWidth, animationHeight);
 
 //
+
+        animation = new Animation(1f/6f, animationFrames);
 //        setTouchable(Touchable.enabled);
 //
 //        setWidth(200);

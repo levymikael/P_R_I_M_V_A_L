@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -15,7 +16,9 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
 {
     public int largeurBille;
 
-    boolean isSpeaking;
+    public boolean isActif;
+    private boolean isSpeaking;
+    private TextureRegion defaultTextureRegion;
 
     public Metrologue(int startPositionX, int startpositionY, int animationWidth, int animationHeight)
     {
@@ -23,7 +26,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
         super(getAnimationMetrologue(), startPositionX, startpositionY, animationWidth, animationHeight);
 
 
-
+        animation = new Animation(1f / 15f, animationFrames);
 
     }
 

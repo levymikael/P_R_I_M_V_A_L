@@ -46,6 +46,11 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
         bille.reserveBilles = this;
     }
 
+    @Override
+    public boolean isDragable()
+    {
+        return false;
+    }
 
     @Override
     public boolean isTouched(int x, int y)

@@ -1,10 +1,9 @@
 package com.evalutel.primval_desktop;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet;
 
 
-public class UneMain extends AnimationImageNew implements MyTouchInterface, MyDrawInterface
+public class UneMain extends AnimationImageNew implements MyDrawInterface
 {
 
     public UnePlancheNew plancheNew = null;
@@ -47,30 +46,12 @@ public class UneMain extends AnimationImageNew implements MyTouchInterface, MyDr
     }
 
 
-    @Override
-    public boolean isTouched(int x, int y)
-    {
-        Rectangle rectangle = new Rectangle(currentPositionX, currentPositionY, animationWidth, animationHeight);
-        return rectangle.contains(x, y);
-    }
 
     @Override
     public void setPosition(int x, int y)
     {
         currentPositionX = x;
         currentPositionY = y;
-    }
-
-    @Override
-    public boolean isActive()
-    {
-        return false;
-    }
-
-    @Override
-    public void setActive(boolean active)
-    {
-
     }
 
 

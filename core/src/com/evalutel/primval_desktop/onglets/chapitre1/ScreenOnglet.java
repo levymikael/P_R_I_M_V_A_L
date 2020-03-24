@@ -5,20 +5,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
+import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.Metrologue;
 import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
-import com.evalutel.primval_desktop.MyButtonValidus;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
@@ -30,6 +27,7 @@ import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.TimerTask;
 
 public class ScreenOnglet implements Screen, InputProcessor
@@ -52,11 +50,13 @@ public class ScreenOnglet implements Screen, InputProcessor
     MyImageButton startPausebutton;
     boolean isVisible = true;
 
-    protected MyButtonValidus myButtonValidus;
 
     protected ArrayList<MyDrawInterface> allDrawables;
     protected ArrayList<MyTouchInterface> objectTouchedList;
     private ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
+
+    long startTime, endTime, seconds, dateTest;
+
 
     private Game game;
     DatabaseDesktop dataBase;
@@ -69,13 +69,11 @@ public class ScreenOnglet implements Screen, InputProcessor
     UneMain uneMain;
     public java.util.Timer timer = new java.util.Timer();
 
+    MyDataBase db;
 
-//    Driver driver = new SQLiteDriver("database.sql");
-//    JPersis jpersis = new JPersis(driver);
-//
-//    User user;
-//
-//    UserMapper mapper = jpersis.map(UserMapper.class);
+    UnResultat resultatExercice;
+
+    MyButtonBackToPreviousMenu myButtonBackToPreviousMenu;
 
 
     public ScreenOnglet(Game game, DatabaseDesktop dataBase)
@@ -90,6 +88,9 @@ public class ScreenOnglet implements Screen, InputProcessor
         screenHeight = Gdx.graphics.getHeight();
         screenWidth = Gdx.graphics.getWidth();
 
+        db = new MyDataBase(dataBase);
+
+
         //Garde aspect ratio
 
 //        stage = new Stage(new FitViewport(screenWidth, screenHeight));
@@ -100,18 +101,36 @@ public class ScreenOnglet implements Screen, InputProcessor
         objectTouchedList = new ArrayList<>();
         allDrawables = new ArrayList<>();
 
+        startTime = System.currentTimeMillis();
 
-//        MyButtonBackToPreviousMenu myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase);
-//        myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
-//        allDrawables.add(myButtonBackToPreviousMenu);
+
+        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase);
+        myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
+        myButtonBackToPreviousMenu.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                ScreenOnglet.this.game.dispose();
+                System.out.println("click on Back to Menu");
+
+
+                endTime = System.currentTimeMillis();
+                seconds = (endTime - startTime) / 1000L;
+
+//            java.util.Date date = new java.util.Date();
+
+                dateTest = new Date().getTime() / 1000L;
+                ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game, ScreenOnglet.this.dataBase));
+                ScreenOnglet.this.db.insertResultat(resultatExercice);
+            }
+        });
+        allDrawables.add(myButtonBackToPreviousMenu);
 
         startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", "Images/StartPause/button_lecture.png", 200, 200);
         startPausebutton.setPosition(0, 5 * screenHeight / 7);
         stage.addActor(startPausebutton);
 
-//        myButtonValidus = new MyButtonValidus(stage, 300, 300);
-//        myButtonValidus.setPosition(0, screenHeight / 7);
-//        //allDrawables.add(myButtonValidus);
 
         startPausebutton.addListener(new ClickListener()
         {
@@ -129,8 +148,8 @@ public class ScreenOnglet implements Screen, InputProcessor
         uneMain.setVisible(false);
 
 
-        validusAnimated = new ValidusAnimated(0, 0, 300, 300);
-        validusAnimated.setPosition(0, screenHeight / 7);
+        validusAnimated = new ValidusAnimated(0, screenHeight / 7, 300, 300);
+//        validusAnimated.setPosition(0, screenHeight / 7);
         //allDrawables.add(validusAnimated);
 
         metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
@@ -184,7 +203,6 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         batch.begin();
 
-//        myButtonValidus.myDraw(batch);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -234,13 +252,14 @@ public class ScreenOnglet implements Screen, InputProcessor
     @Override
     public void hide()
     {
-
+        this.dispose();
     }
+
 
     @Override
     public void dispose()
     {
-        stage.dispose();
+//        stage.dispose();
     }
 
     @Override

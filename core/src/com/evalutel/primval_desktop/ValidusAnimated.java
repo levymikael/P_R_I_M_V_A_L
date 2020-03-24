@@ -2,31 +2,30 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.io.File;
 import java.util.ArrayList;
-
-import static jdk.nashorn.internal.runtime.PropertyListeners.addListener;
 
 public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterface */ implements MyTouchInterface
 {
 
     public com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet.TaskEtape etapeCorrection;
-    private boolean isActif;
-    boolean isSpeaking;
+    public boolean isActif;
+    private boolean isSpeaking;
+    private TextureRegion defaultTextureRegion;
 
 
     public ValidusAnimated(int startPositionX, int startPositionY, float animationWidth, float animationHeight)
     {
         super(getAnimationValidus(), startPositionX, startPositionY, animationWidth, animationHeight);
 
+        defaultTextureRegion = animationFrames[0];
+
+        animation = new Animation(1f/15f, animationFrames);
 
     }
 
@@ -38,8 +37,8 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
         Music music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
 //        music.setLooping(false);
         music.play();
-////       boolean isLooping = false;
-//
+//       boolean isLooping = false;
+
         music.setOnCompletionListener(new Music.OnCompletionListener()
         {
             @Override
@@ -65,25 +64,25 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
         int validusDirectorySize = new File("Images/Validus").listFiles().length;
 
-        String imgaux = "";
+        String imgAux = "";
 
 
         for (int i = 0; i < validusDirectorySize - 1; i++)
         {
             if (i < 10)
             {
-                imgaux = "Images/Validus/vo0000" + i + ".png";
-                imgValidusPaths.add(imgaux);
+                imgAux = "Images/Validus/vo0000" + i + ".png";
+                imgValidusPaths.add(imgAux);
             }
             else if (i >= 10 && i < 100)
             {
-                imgaux = "Images/Validus/vo000" + i + ".png";
-                imgValidusPaths.add(imgaux);
+                imgAux = "Images/Validus/vo000" + i + ".png";
+                imgValidusPaths.add(imgAux);
             }
             else
             {
-                imgaux = "Images/Validus/vo00" + i + ".png";
-                imgValidusPaths.add(imgaux);
+                imgAux = "Images/Validus/vo00" + i + ".png";
+                imgValidusPaths.add(imgAux);
             }
         }
 
@@ -118,10 +117,23 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
     }
 
-    public void TouchUp(ArrayList<UnePlancheNew> planches, int firstPositionX, int firstPositionY)
+    @Override
+    public boolean isDragable()
+    {
+        return false;
+    }
+
+    public void touchUp(int firstPositionX, int firstPositionY)
     {
         System.out.println("touchUp validus");
 
+        if (isActif && (!isSpeaking))
+        {
+            if (etapeCorrection != null)
+            {
+                etapeCorrection.run();
+            }
+        }
     }
 
 
@@ -129,7 +141,14 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     public void myDraw(Batch batch)
     {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, isSpeaking);
-        batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+        if (isSpeaking)
+        {
+            TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, true);
+            batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+        }
+        else
+        {
+            batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+        }
     }
 }

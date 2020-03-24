@@ -1,16 +1,10 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
-
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.evalutel.primval_desktop.ActiviteView;
-import com.evalutel.primval_desktop.AnimationImageNew;
-import com.evalutel.primval_desktop.Assets;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
-import com.evalutel.primval_desktop.Metrologue;
-import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -35,8 +29,6 @@ public class ScreenEx1_1 extends ScreenOnglet
     boolean isVisible = true;
     boolean isActive = false;
 
-    Metrologue metrologue;
-
     int cptOiseau, cptBille = 0;
 
     double mainDoigtX = 0.1 * uneMain.getWidth();
@@ -45,11 +37,9 @@ public class ScreenEx1_1 extends ScreenOnglet
     ActiviteView activiteView;
 
     DatabaseDesktop dataBase;
-    long startTime, endTime, seconds;
 
     String consigneExercice;
 
-    UnResultat resultatEx1_1;
 
     public ScreenEx1_1(Game game, DatabaseDesktop dataBase)
     {
@@ -77,7 +67,6 @@ public class ScreenEx1_1 extends ScreenOnglet
         allPlanches = new ArrayList<>();
         allPlanches.add(planche1);
 
-//        float enonceWidth = (screenWidth / 4) * 3;
 
         String numExercice = "1-1";
         consigneExercice = "Les nombres de 1 à 9 Badix, Métrologue et Validus.";
@@ -89,16 +78,10 @@ public class ScreenEx1_1 extends ScreenOnglet
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "enonce");
         allDrawables.add(activiteView);
 
-        metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
-        allDrawables.add(metrologue);
-
-        metrologue.animateImage(500, true, 0, 0, null, 1000, 1f / 50f);
 
         billesList = autoFillPlanche();
 
-        MyButtonBackToPreviousMenu myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase, resultatEx1_1);
-        myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
-        allDrawables.add(myButtonBackToPreviousMenu);
+        resultatExercice = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, dateTest, 0, 0, 0, 123);
 
 
         timer.schedule(new PresentationMetrologue(2000), 1000);
@@ -118,11 +101,9 @@ public class ScreenEx1_1 extends ScreenOnglet
             activiteView.addTextActivite("Bonjour,");
             activiteView.addTextActivite("Je suis le professeur Metrologue, on va faire un jeu amusant qui s'appelle Badix.");
             activiteView.addTextActivite("Tu veux jouer ?");
+            metrologue.MetrologuePlaySound("Sounds/Metrologue/Bonjour je suis le prof.mp3");
 
-            timer.schedule(new VoiciLaRegleDuJeu(2000), 2000);
-
-            startTime = System.currentTimeMillis();
-
+            timer.schedule(new VoiciLaRegleDuJeu(2000), 7000);
         }
     }
 
@@ -136,10 +117,10 @@ public class ScreenEx1_1 extends ScreenOnglet
         @Override
         public void run()
         {
-            String str = "Voici la règle du jeu:";
-            activiteView.addTextActivite(str);
+            activiteView.addTextActivite("Voici la règle du jeu:");
+            metrologue.MetrologuePlaySound("Sounds/Metrologue/Voici la regle du jeu.mp3");
 
-            timer.schedule(new EtapeAddOiseau(1000), 500);
+            timer.schedule(new EtapeAddOiseau(1000), 1500);
         }
     }
 
@@ -164,13 +145,15 @@ public class ScreenEx1_1 extends ScreenOnglet
             else if (cptOiseau == 2)
             {
                 activiteView.addTextActivite("Tiens ! Encore un oiseau");
+                metrologue.MetrologuePlaySound("Sounds/Metrologue/Tiens encore un oiseau.mp3");
 
-                oiseau.animateImage(1000, true, posX, posY, null, 500, 1f / 50f);
+                oiseau.animateImage(1000, true, posX, posY, null, 1500, 1f / 50f);
             }
             else
             {
-                oiseau.animateImage(1000, true, posX, posY, null, 500, 1f / 50f);
+                oiseau.animateImage(1000, true, posX, posY, null, 1500, 1f / 50f);
                 activiteView.addTextActivite("Je vois maintenant 2 oiseaux");
+                metrologue.MetrologuePlaySound("Sounds/Metrologue/Je vois maintenant.mp3");
             }
             cptOiseau++;
         }
@@ -186,12 +169,10 @@ public class ScreenEx1_1 extends ScreenOnglet
         @Override
         public void run()
         {
-            String str = "Je vois un oiseau";
-            activiteView.addTextActivite(str);
+            activiteView.addTextActivite("Je vois un oiseau");
+            metrologue.MetrologuePlaySound("Sounds/Metrologue/je vois un oiseau.mp3");
 
-            timer.schedule(new MoveMainToReserve1(2000), 500);
-
-
+            timer.schedule(new MoveMainToReserve1(2000), 1500);
         }
     }
 
@@ -215,11 +196,12 @@ public class ScreenEx1_1 extends ScreenOnglet
                 int posY = (int) posYf;
 
                 TaskEtape nextEtape = new DisplayBilleReserve(500);
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
+                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1500);
 
                 if (cptOiseau == 2)
                 {
-                    activiteView.addTextActivite("Je depose encore une bille.");
+                    activiteView.addTextActivite("Je dépose encore une bille.");
+                    metrologue.MetrologuePlaySound("Sounds/Metrologue/je depose encore une bille.mp3");
                 }
             }
         }
@@ -271,6 +253,7 @@ public class ScreenEx1_1 extends ScreenOnglet
             if (cptBille == 0)
             {
                 activiteView.addTextActivite("Je saisis une bille du sac et je la dépose sur le plateau ");
+                metrologue.MetrologuePlaySound("Sounds/Metrologue/Je saisis une bille du sac.mp3");
 
                 bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500, 1f / 6f);
 
@@ -318,8 +301,9 @@ public class ScreenEx1_1 extends ScreenOnglet
             {
                 uneMain.moveTo(50, posX, posY, null, 1000);
 
-                activiteView.addTextActivite("Mince, je crois que je me suis trompe, je clique sur Mademoiselle Validus pour savoir si c'est juste.");
-                timer.schedule(new MoveMainToValidus(1000), 1000);
+                activiteView.addTextActivite("Mince, je crois que je me suis trompé, je clique sur Mademoiselle Validus pour savoir si c'est juste.");
+                metrologue.MetrologuePlaySound("Sounds/Metrologue/Mince je crois que.mp3");
+                timer.schedule(new MoveMainToValidus(1000), 6000);
             }
             else
             {
@@ -342,8 +326,8 @@ public class ScreenEx1_1 extends ScreenOnglet
         {
             uneMain.setVisible(true);
 
-            float posX = myButtonValidus.getX() + myButtonValidus.getWidth() / 2;
-            float posY = myButtonValidus.getY() + myButtonValidus.getHeight() / 2;
+            float posX = validusAnimated.getPosition().x + validusAnimated.getWidth() / 2;
+            float posY = validusAnimated.getPosition().y + validusAnimated.getHeight() / 2;
 
             TaskEtape nextEtape = new ClickToValidus(500);
 
@@ -368,12 +352,13 @@ public class ScreenEx1_1 extends ScreenOnglet
         {
             uneMain.setVisible(true);
 
-            float posX = myButtonValidus.getX() + myButtonValidus.getWidth() / 2;
-            float posY = myButtonValidus.getY() + myButtonValidus.getHeight() / 2;
+            float posX = validusAnimated.getPosition().x + validusAnimated.getWidth() / 2;
+            float posY = validusAnimated.getPosition().y + validusAnimated.getHeight() / 2;
 
             if (billesList.size() == 4)
             {
                 activiteView.addTextActivite("Validus: Non, non tu t'es trompée ");
+                validusAnimated.ValidusPlaySound("Sounds/Validus/non non tu tes trompe.mp3");
 
                 TaskEtape nextEtape = new MoveMainBackToPlanche(1000);
 
@@ -383,6 +368,7 @@ public class ScreenEx1_1 extends ScreenOnglet
             {
                 uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, null, 1000);
                 activiteView.addTextActivite("Youpi ! Tu as gagne un diamant. ");
+                validusAnimated.ValidusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
             }
         }
     }
@@ -404,10 +390,11 @@ public class ScreenEx1_1 extends ScreenOnglet
 
             TaskEtape nextEtape = new MoveBilleOutOfPlanche(500);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 6000);
             uneMain.imageDown();
 
             activiteView.addTextActivite("Metrologue : Pour corriger mon erreur, je retire une bille de la planche puis je demande a Mademoiselle Validus.");
+            metrologue.MetrologuePlaySound("Sounds/Metrologue/Pour corriger mon erreur.mp3");
         }
     }
 
@@ -461,16 +448,7 @@ public class ScreenEx1_1 extends ScreenOnglet
             uneMain.moveTo(50, posX, posY, nextEtape, 1000);
 
 
-            endTime = System.currentTimeMillis();
-            seconds = (endTime - startTime) / 1000L;
-
-            MyDataBase db = new MyDataBase(dataBase);
-            java.util.Date date = new java.util.Date();
-
-            long dateTest = new Date().getTime() / 1000L;
-
-
-            resultatEx1_1 = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, dateTest, 0, 0, 0, 123);
+            resultatExercice = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, dateTest, 0, 0, 0, 123);
 
 //            db.insertResultat(resultatEx1_1);
 
@@ -495,7 +473,6 @@ public class ScreenEx1_1 extends ScreenOnglet
             allDrawables.add(billeAdded);
             billeAdded.setVisible(false);
         }
-
         return billesList;
     }
 
@@ -514,7 +491,6 @@ public class ScreenEx1_1 extends ScreenOnglet
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
         }
-
         return oiseauxList;
     }
 

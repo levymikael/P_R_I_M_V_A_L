@@ -3,7 +3,6 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
@@ -17,6 +16,7 @@ import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
+import com.evalutel.primval_desktop.ValidusAnimated;
 
 
 import java.util.ArrayList;
@@ -40,16 +40,13 @@ public class ScreenEx1_2 extends ScreenOnglet
     private int randNumOiseau;
     private int cptOiseau;
 
-    private long startTime, endTime, seconds;
     DatabaseDesktop dataBase;
 
+    int score;
 
-    private String consigneExercice;
 
+    String consigneExercice;
 
-//    Metrologue metrologue;
-
-//    Sound sound, sound1, sound2;
 
     public ScreenEx1_2(Game game, DatabaseDesktop dataBase)
     {
@@ -90,9 +87,9 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         String numExercice = "1-2";
         consigneExercice = "Faire correspondre des billes à des oiseaux, de 1 a 9";
-        String exDansChapitre = "3/9";
+        String noteMaxObtenue = "3/9";
 
-        activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, exDansChapitre, "activite");
+        activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, noteMaxObtenue, "activite");
         allDrawables.add(activiteView);
 
 //        allDrawables.add(metrologue);
@@ -104,6 +101,8 @@ public class ScreenEx1_2 extends ScreenOnglet
         timer.schedule(new PresentationExercice(2000), 100);
 
         getNumberOiseauxArList();
+
+        resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, score, 0, 0, 123);
 
 
     }
@@ -143,9 +142,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         else if (validusAnimated.contains(mousePointerX, mousePointerY))
         {
 //            System.out.println("toucheeeeee");
-
-            validusAnimated.etapeCorrection = new CheckValidus(0);
-            validusAnimated.etapeCorrection.run();
+            objectTouched = validusAnimated;
         }
         else /*si bille part de la planche*/
         {
@@ -174,7 +171,7 @@ public class ScreenEx1_2 extends ScreenOnglet
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer)
     {
-        if (objectTouched != null)
+        if ((objectTouched != null) && (objectTouched.isDragable()))
         {
             objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (screenHeight - screenY - objectTouched.getHeight() / 2));
         }
@@ -184,6 +181,10 @@ public class ScreenEx1_2 extends ScreenOnglet
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button)
     {
+        int reversedScreenY = screenHeight - screenY;
+        mousePointerX = screenX;
+        mousePointerY = reversedScreenY;
+
         if (objectTouched != null)
         {
             if (objectTouched instanceof UneBille)
@@ -192,6 +193,15 @@ public class ScreenEx1_2 extends ScreenOnglet
                 billeAux.touchUp(allPlanches, screenX, screenHeight - screenY);
 
                 billesList.add(billeAux);
+
+            }
+            else if (objectTouched instanceof ValidusAnimated)
+            {
+                if (validusAnimated.contains(mousePointerX, mousePointerY))
+                {
+                    validusAnimated.touchUp(mousePointerX, mousePointerY);
+                }
+
 
             }
         }
@@ -287,12 +297,26 @@ public class ScreenEx1_2 extends ScreenOnglet
             }
             else
             {
-//
-//                myButtonValidus.isActif = true;
 
-                validusAnimated.etapeCorrection = new CheckValidus(0);
-
+                timer.schedule(new EtapeAttendreValidus(1000), 100);
             }
+        }
+    }
+
+
+    private class EtapeAttendreValidus extends TaskEtape
+    {
+        private EtapeAttendreValidus(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            failedAttempts = 0;
+            validusAnimated.isActif = true;
+            validusAnimated.etapeCorrection = new CheckValidus(0);
         }
     }
 
@@ -308,21 +332,19 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             if (planche1.getNumberBilles() == randNumOiseau)
             {
-                myButtonValidus.isActif = false;
+                validusAnimated.isActif = false;
                 activiteView.addTextActivite("C'est bien continue " + questionCourante);
 
                 validusAnimated.ValidusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3");
-
+                validusAnimated.isActif = false;
                 timer.schedule(new EtapeNextQuestion(1000), 500);
-
-                failedAttempts = 0;
                 ecrinDiamantView.addDiamond(1);
             }
             else
             {
-                if (failedAttempts == 2)
+                if (failedAttempts == 1)
                 {
-                    myButtonValidus.isActif = false;
+                    validusAnimated.isActif = false;
                     failedAttempts = 0;
                     ecrinDiamantView.addPierre(1);
                     activiteView.addTextActivite("Voici la correction");
@@ -334,7 +356,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                 else
                 {
                     activiteView.addTextActivite("Tu t'es trompé essaie encore.");
-
                     validusAnimated.ValidusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
 
                 }
@@ -553,17 +574,14 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                 MyDataBase db = new MyDataBase(dataBase);
 
-                java.util.Date date = new java.util.Date();
+//                java.util.Date date = new java.util.Date();
 
+//                long dateTest = new Date().getTime() / 1000L;
 
-                long dateTest = new Date().getTime() / 1000L;
+                score = ecrinDiamantView.getDiamantCount();
 
+                resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, score, 0, 0, 123);
 
-                int score = ecrinDiamantView.getDiamantCount();
-
-                UnResultat resultatEx1_2 = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, score, 0, 0, 123);
-
-                db.insertResultat(resultatEx1_2);
 
                 timer.cancel();
             }

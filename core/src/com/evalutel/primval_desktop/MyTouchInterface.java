@@ -6,6 +6,7 @@ public interface MyTouchInterface
 {
 
     boolean isTouched(int x, int y);
+    boolean isDragable();
 
     void setPosition(int x, int y);
 

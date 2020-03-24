@@ -54,6 +54,11 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
 
     }
 
+    @Override
+    public boolean isDragable()
+    {
+        return true;
+    }
 
     private static String getImageRandom()
     {

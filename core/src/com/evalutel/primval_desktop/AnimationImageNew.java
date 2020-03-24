@@ -16,7 +16,7 @@ import java.util.TimerTask;
 
 public class AnimationImageNew implements MyDrawInterface
 {
-    TextureRegion[] animationFrames;
+    protected TextureRegion[] animationFrames;
     Animation animation;
     private Timer timer = new Timer();
 
@@ -64,14 +64,14 @@ public class AnimationImageNew implements MyDrawInterface
     }
 
 
-    public AnimationImageNew(float startPositionX, float startPositionY, int animationWidth, int animationHeight, String numExercice, String consigneExerciceTa)
-    {
-    }
-
-    public AnimationImageNew(int startPositionX, int startPositionY, float animationWidth)
-    {
-
-    }
+//    public AnimationImageNew(float startPositionX, float startPositionY, int animationWidth, int animationHeight, String numExercice, String consigneExerciceTa)
+//    {
+//    }
+//
+//    public AnimationImageNew(int startPositionX, int startPositionY, float animationWidth)
+//    {
+//
+//    }
 
 
     public void setPosition(int x, int y)
