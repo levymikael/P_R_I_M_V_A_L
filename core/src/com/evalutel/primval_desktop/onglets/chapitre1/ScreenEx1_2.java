@@ -9,6 +9,7 @@ import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.General.MyMath;
+import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -86,10 +87,10 @@ public class ScreenEx1_2 extends ScreenOnglet
         String numExercice = "1-2";
         consigneExercice = "Faire correspondre des billes à des oiseaux, de 1 a 9";
 
-       db.getHighestNote(1,2);
+        int noteMax = db.getHighestNote(1, 2);
 
 
-        String noteMaxObtenue = "3/9";
+        String noteMaxObtenue = noteMax + "/9";
 
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, noteMaxObtenue, "activite");
         allDrawables.add(activiteView);
@@ -211,7 +212,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         return false;
     }
 
-    private class PresentationExercice extends TaskEtape
+    private class PresentationExercice extends MyTimer.TaskEtape
     {
         private PresentationExercice(long durMillis)
         {
@@ -229,7 +230,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         }
     }
 
-    private class EtapeInstruction extends TaskEtape
+    private class EtapeInstruction extends MyTimer.TaskEtape
     {
         private EtapeInstruction(long durMillis)
         {
@@ -249,7 +250,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         }
     }
 
-    private class DisplayOiseaux extends TaskEtape
+    private class DisplayOiseaux extends MyTimer.TaskEtape
     {
         private DisplayOiseaux(long durMillis)
         {
@@ -306,7 +307,7 @@ public class ScreenEx1_2 extends ScreenOnglet
     }
 
 
-    private class EtapeAttendreValidus extends TaskEtape
+    private class EtapeAttendreValidus extends MyTimer.TaskEtape
     {
         private EtapeAttendreValidus(long durMillis)
         {
@@ -322,7 +323,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         }
     }
 
-    private class CheckValidus extends TaskEtape
+    private class CheckValidus extends MyTimer.TaskEtape
     {
         private CheckValidus(long durMillis)
         {
@@ -372,7 +373,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         }
     }
 
-    private class EtapeRectification1 extends TaskEtape
+    private class EtapeRectification1 extends MyTimer.TaskEtape
     {
         private EtapeRectification1(long durMillis)
         {
@@ -409,7 +410,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         }
     }
 
-    private class MoveMainToReserve1 extends TaskEtape
+    private class MoveMainToReserve1 extends MyTimer.TaskEtape
     {
         private MoveMainToReserve1(long durMillis)
         {
@@ -425,12 +426,12 @@ public class ScreenEx1_2 extends ScreenOnglet
             float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
             int posY = (int) posYf;
 
-            TaskEtape nextEtape = new DisplayBilleReserve(500);
+            MyTimer.TaskEtape nextEtape = new DisplayBilleReserve(500);
             uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
         }
     }
 
-    private class DisplayBilleReserve extends TaskEtape
+    private class DisplayBilleReserve extends MyTimer.TaskEtape
     {
         private DisplayBilleReserve(long durMillis)
         {
@@ -449,13 +450,13 @@ public class ScreenEx1_2 extends ScreenOnglet
             billeRectification.setPositionCenter(posX, posY);
             billeRectification.setVisible(true);
 
-            TaskEtape nextEtape = new EtapeDragBille(1000);
+            MyTimer.TaskEtape nextEtape = new EtapeDragBille(1000);
             timer.schedule(nextEtape, 500);
             uneMain.imageDown();
         }
     }
 
-    private class EtapeDragBille extends TaskEtape
+    private class EtapeDragBille extends MyTimer.TaskEtape
     {
         private EtapeDragBille(long durMillis)
         {
@@ -468,13 +469,13 @@ public class ScreenEx1_2 extends ScreenOnglet
             int posX = screenWidth / 2;
             int posY = (int) planche1.getHeight() / 2;
 
-            TaskEtape nextEtape = new EtapeAddBille(1000);
+            MyTimer.TaskEtape nextEtape = new EtapeAddBille(1000);
             billeRectification.animateImage(durationMillis, true, (int) (posX - billeRectification.getWidth() / 2), (int) (posY - billeRectification.getWidth() / 2), nextEtape, 500, 1f / 6f);
             uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
         }
     }
 
-    private class EtapeAddBille extends TaskEtape
+    private class EtapeAddBille extends MyTimer.TaskEtape
     {
         private EtapeAddBille(long durMillis)
         {
@@ -492,7 +493,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         }
     }
 
-    private class MoveMainBackToPlanche extends TaskEtape
+    private class MoveMainBackToPlanche extends MyTimer.TaskEtape
     {
         private MoveMainBackToPlanche(long durMillis)
         {
@@ -509,14 +510,14 @@ public class ScreenEx1_2 extends ScreenOnglet
             float posX = billeRectification.getPosition().x + (int) (billeRectification.animationWidth / 2);
             float posY = billeRectification.getPosition().y + (int) (billeRectification.animationWidth / 2);
 
-            TaskEtape nextEtape = new MoveBilleOutOfPlanche(500);
+            MyTimer.TaskEtape nextEtape = new MoveBilleOutOfPlanche(500);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 500);
             uneMain.imageDown();
         }
     }
 
-    private class MoveBilleOutOfPlanche extends TaskEtape
+    private class MoveBilleOutOfPlanche extends MyTimer.TaskEtape
     {
         private MoveBilleOutOfPlanche(long durMillis)
         {
@@ -532,12 +533,12 @@ public class ScreenEx1_2 extends ScreenOnglet
             uneMain.moveTo(durationMillis, posX, posY, null, 500);
             uneMain.cliqueTo(durationMillis, posX, posY, null, 500);
 
-            TaskEtape nextEtape = new LastOne(500);
+            MyTimer.TaskEtape nextEtape = new LastOne(500);
             billeRectification.animateImage(durationMillis, true, (int) (posX - billeRectification.getWidth() / 2), (int) (posY - billeRectification.getWidth() / 2), nextEtape, 500, 1f / 6f);
         }
     }
 
-    private class LastOne extends TaskEtape
+    private class LastOne extends MyTimer.TaskEtape
     {
         private LastOne(long durMillis)
         {
@@ -552,7 +553,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
             reserveBilles.addBilleToReserve(billeRectification);
 
-            TaskEtape nextEtape = new EtapeRectification1(1000);
+            MyTimer.TaskEtape nextEtape = new EtapeRectification1(1000);
             uneMain.moveTo(50, posX, posY, nextEtape, 1000);
 
             if (planche1.getNumberBilles() == randNumOiseau)
@@ -562,7 +563,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         }
     }
 
-    private class EtapeNextQuestion extends TaskEtape
+    private class EtapeNextQuestion extends MyTimer.TaskEtape
     {
         private EtapeNextQuestion(long durMillis)
         {

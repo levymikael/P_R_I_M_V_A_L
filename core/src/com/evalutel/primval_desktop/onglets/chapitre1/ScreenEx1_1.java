@@ -3,8 +3,8 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
+import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -13,7 +13,6 @@ import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class ScreenEx1_1 extends ScreenOnglet
@@ -88,7 +87,7 @@ public class ScreenEx1_1 extends ScreenOnglet
     }
 
 
-    private class PresentationMetrologue extends TaskEtape
+    private class PresentationMetrologue extends MyTimer.TaskEtape
     {
         private PresentationMetrologue(long durMillis)
         {
@@ -107,7 +106,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         }
     }
 
-    private class VoiciLaRegleDuJeu extends TaskEtape
+    private class VoiciLaRegleDuJeu extends MyTimer.TaskEtape
     {
         private VoiciLaRegleDuJeu(long durMillis)
         {
@@ -124,7 +123,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         }
     }
 
-    private class EtapeAddOiseau extends TaskEtape
+    private class EtapeAddOiseau extends MyTimer.TaskEtape
     {
         private EtapeAddOiseau(long durMillis)
         {
@@ -159,7 +158,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         }
     }
 
-    private class JeVoisUnOIseau extends TaskEtape
+    private class JeVoisUnOIseau extends MyTimer.TaskEtape
     {
         private JeVoisUnOIseau(long durMillis)
         {
@@ -177,7 +176,7 @@ public class ScreenEx1_1 extends ScreenOnglet
     }
 
 
-    private class MoveMainToReserve1 extends TaskEtape
+    private class MoveMainToReserve1 extends MyTimer.TaskEtape
     {
         private MoveMainToReserve1(long durMillis)
         {
@@ -195,7 +194,7 @@ public class ScreenEx1_1 extends ScreenOnglet
                 float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
                 int posY = (int) posYf;
 
-                TaskEtape nextEtape = new DisplayBilleReserve(500);
+                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve(500);
                 uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1500);
 
                 if (cptOiseau == 2)
@@ -207,7 +206,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         }
     }
 
-    private class DisplayBilleReserve extends TaskEtape
+    private class DisplayBilleReserve extends MyTimer.TaskEtape
     {
         private DisplayBilleReserve(long durMillis)
         {
@@ -226,13 +225,13 @@ public class ScreenEx1_1 extends ScreenOnglet
             bille.setPositionCenter(posX, posY);
             bille.setVisible(true);
 
-            TaskEtape nextEtape = new EtapeDragBille(1000);
+            MyTimer.TaskEtape nextEtape = new EtapeDragBille(1000);
             timer.schedule(nextEtape, 500);
             uneMain.imageDown();
         }
     }
 
-    private class EtapeDragBille extends TaskEtape
+    private class EtapeDragBille extends MyTimer.TaskEtape
     {
         private EtapeDragBille(long durMillis)
         {
@@ -247,8 +246,8 @@ public class ScreenEx1_1 extends ScreenOnglet
             int posX = screenWidth / 2;
             int posY = (int) planche1.getHeight() / 2;
 
-            TaskEtape nextEtape = new EtapeAddBille(1000);
-            TaskEtape nextEtape2 = new EtapeAddOiseau(1000);
+            MyTimer.TaskEtape nextEtape = new EtapeAddBille(1000);
+            MyTimer.TaskEtape nextEtape2 = new EtapeAddOiseau(1000);
 
             if (cptBille == 0)
             {
@@ -279,7 +278,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         }
     }
 
-    private class EtapeAddBille extends TaskEtape
+    private class EtapeAddBille extends MyTimer.TaskEtape
     {
         private EtapeAddBille(long durMillis)
         {
@@ -307,14 +306,14 @@ public class ScreenEx1_1 extends ScreenOnglet
             }
             else
             {
-                TaskEtape nextEtape = new MoveMainToReserve1(1000);
+                MyTimer.TaskEtape nextEtape = new MoveMainToReserve1(1000);
                 uneMain.moveTo(50, posX, posY, nextEtape, 1000);
             }
         }
     }
 
 
-    private class MoveMainToValidus extends TaskEtape
+    private class MoveMainToValidus extends MyTimer.TaskEtape
     {
         private MoveMainToValidus(long durMillis)
         {
@@ -329,7 +328,7 @@ public class ScreenEx1_1 extends ScreenOnglet
             float posX = validusAnimated.getPosition().x + validusAnimated.getWidth() / 2;
             float posY = validusAnimated.getPosition().y + validusAnimated.getHeight() / 2;
 
-            TaskEtape nextEtape = new ClickToValidus(500);
+            MyTimer.TaskEtape nextEtape = new ClickToValidus(500);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 500);
 
@@ -340,7 +339,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         }
     }
 
-    private class ClickToValidus extends TaskEtape
+    private class ClickToValidus extends MyTimer.TaskEtape
     {
         private ClickToValidus(long durMillis)
         {
@@ -360,7 +359,7 @@ public class ScreenEx1_1 extends ScreenOnglet
                 activiteView.addTextActivite("Validus: Non, non tu t'es trompée ");
                 validusAnimated.ValidusPlaySound("Sounds/Validus/non non tu tes trompe.mp3");
 
-                TaskEtape nextEtape = new MoveMainBackToPlanche(1000);
+                MyTimer.TaskEtape nextEtape = new MoveMainBackToPlanche(1000);
 
                 uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
             }
@@ -373,7 +372,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         }
     }
 
-    private class MoveMainBackToPlanche extends TaskEtape
+    private class MoveMainBackToPlanche extends MyTimer.TaskEtape
     {
         private MoveMainBackToPlanche(long durMillis)
         {
@@ -388,7 +387,7 @@ public class ScreenEx1_1 extends ScreenOnglet
             float posX = bille.getPosition().x + (int) (bille.animationWidth / 2);
             float posY = bille.getPosition().y + (int) (bille.animationWidth / 2);
 
-            TaskEtape nextEtape = new MoveBilleOutOfPlanche(500);
+            MyTimer.TaskEtape nextEtape = new MoveBilleOutOfPlanche(500);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 6000);
             uneMain.imageDown();
@@ -399,7 +398,7 @@ public class ScreenEx1_1 extends ScreenOnglet
     }
 
 
-    private class MoveBilleOutOfPlanche extends TaskEtape
+    private class MoveBilleOutOfPlanche extends MyTimer.TaskEtape
     {
         private MoveBilleOutOfPlanche(long durMillis)
         {
@@ -418,14 +417,14 @@ public class ScreenEx1_1 extends ScreenOnglet
 
             uneMain.moveTo(durationMillis, posX, posY, null, 1000);
 
-            TaskEtape nextEtape = new LastOne(500);
+            MyTimer.TaskEtape nextEtape = new LastOne(500);
 
             bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500, 1f / 6f);
         }
     }
 
 
-    private class LastOne extends TaskEtape
+    private class LastOne extends MyTimer.TaskEtape
     {
         private LastOne(long durMillis)
         {
@@ -444,7 +443,7 @@ public class ScreenEx1_1 extends ScreenOnglet
 
             billesList.remove(bille);
 
-            TaskEtape nextEtape = new MoveMainToValidus(1000);
+            MyTimer.TaskEtape nextEtape = new MoveMainToValidus(1000);
             uneMain.moveTo(50, posX, posY, nextEtape, 1000);
 
 

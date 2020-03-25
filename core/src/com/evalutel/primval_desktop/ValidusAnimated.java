@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterface */ implements MyTouchInterface
 {
 
-    public com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet.TaskEtape etapeCorrection;
+    public MyTimer.TaskEtape etapeCorrection;
     public boolean isActif;
     private boolean isSpeaking;
     private TextureRegion defaultTextureRegion;
@@ -25,7 +25,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
         defaultTextureRegion = animationFrames[0];
 
-        animation = new Animation(1f/15f, animationFrames);
+        animation = new Animation(1f / 15f, animationFrames);
 
     }
 

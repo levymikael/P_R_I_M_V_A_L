@@ -17,6 +17,7 @@ import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.Metrologue;
 import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyDrawInterface;
+import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.UneBille;
@@ -28,7 +29,6 @@ import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.TimerTask;
 
 public class ScreenOnglet implements Screen, InputProcessor
 {
@@ -49,6 +49,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 //    Button.ButtonStyle buttonStyle;
     MyImageButton startPausebutton;
     boolean isVisible = true;
+    protected MyTimer timer;
 
 
     protected ArrayList<MyDrawInterface> allDrawables;
@@ -67,7 +68,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     int mousePointerX, mousePointerY;
     UneMain uneMain;
-    public java.util.Timer timer = new java.util.Timer();
+
 
     MyDataBase db;
 
@@ -149,11 +150,12 @@ public class ScreenOnglet implements Screen, InputProcessor
 
 
         validusAnimated = new ValidusAnimated(0, screenHeight / 7, 300, 300);
-//        validusAnimated.setPosition(0, screenHeight / 7);
-        //allDrawables.add(validusAnimated);
+
 
         metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
 
+
+        timer = new MyTimer();
 //
 //
         /*
@@ -381,19 +383,5 @@ public class ScreenOnglet implements Screen, InputProcessor
     }
 
 
-    public class TaskEtape extends TimerTask
-    {
-        protected long durationMillis;
 
-        protected TaskEtape(long dT)
-        {
-            durationMillis = dT;
-        }
-
-        @Override
-        public void run()
-        {
-
-        }
-    }
 }

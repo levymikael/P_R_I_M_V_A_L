@@ -13,7 +13,7 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface
         super("Images/EnonceUIElements/doigt_new.png", startPositionX, startPositionY, animationWidth, animationWidth);
     }
 
-    public void moveTo(long animationDureemillis, int deplacementEnX, int deplacementEnY, ScreenOnglet.TaskEtape taskEtape, long delayNext)
+    public void moveTo(long animationDureemillis, int deplacementEnX, int deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext)
     {
         imageUp();
 
@@ -23,7 +23,7 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface
         animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext, 1f / 6f);
     }
 
-    public void cliqueTo(long animationDureemillis, int deplacementEnX, int deplacementEnY, ScreenOnglet.TaskEtape taskEtape, long delayNext)
+    public void cliqueTo(long animationDureemillis, int deplacementEnX, int deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext)
     {
         imageDown();
 

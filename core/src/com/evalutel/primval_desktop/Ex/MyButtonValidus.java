@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.Ex;
 
 import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
+import com.evalutel.primval_desktop.MyDrawInterface;
+import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
 import java.io.File;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 
 public class MyButtonValidus extends MyImageButton implements MyDrawInterface
 {
-    public com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet.TaskEtape etapeCorrection;
+    MyTimer.TaskEtape etapeCorrection;
     public boolean isActif;
 
 

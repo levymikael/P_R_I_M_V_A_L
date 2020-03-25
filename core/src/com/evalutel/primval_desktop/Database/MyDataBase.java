@@ -1,8 +1,8 @@
 package com.evalutel.primval_desktop.Database;
 
 
-import com.evalutel.primval_desktop.Profil;
 import com.evalutel.primval_desktop.Ex.User;
+import com.evalutel.primval_desktop.Profil;
 
 import static java.lang.String.valueOf;
 
@@ -66,12 +66,29 @@ public class MyDataBase
         int highestNote = 0;
 
         String sqlQuery = "SELECT max(points_obtenus) from RESULTAT where chapitre = " + chapitre + " AND onglet = " + onglet;
+        //String sqlQuery = "SELECT id_profil, id, points_obtenus from RESULTAT where chapitre = " + chapitre + " AND onglet = " + onglet;
 
-//        database.execute(sqlQuery);
+        DataBase.Result test = database.query(sqlQuery);
 
-        DataBase.Result test =  database.query(sqlQuery);
 
-//      highestNote=
+        if (!test.isEmpty())
+        {
+            /*while (test.moveToNext())
+            {
+                int idProfil = test.getInt(1);
+                int id = test.getInt(2);
+                int pointObtenu = test.getInt(1);
+
+
+                int ok = 5;
+                ok++;
+            }*/
+
+            test.moveToNext();
+            highestNote = test.getInt(1);
+
+        }
+
 
         return highestNote;
     }

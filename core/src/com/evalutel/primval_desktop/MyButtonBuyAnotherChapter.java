@@ -13,7 +13,6 @@ import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
 public class MyButtonBuyAnotherChapter extends MyImageButton implements MyDrawInterface
 {
-    public com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet.TaskEtape etapeCorrection;
     private boolean isActif;
 
 

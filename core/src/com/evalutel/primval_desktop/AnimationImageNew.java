@@ -18,7 +18,7 @@ public class AnimationImageNew implements MyDrawInterface
 {
     protected TextureRegion[] animationFrames;
     Animation animation;
-    private Timer timer = new Timer();
+   MyTimer timer = new MyTimer();
 
 
     public float elapsedTime, animationVitesse, animationHeight, animationWidth;
@@ -104,7 +104,7 @@ public class AnimationImageNew implements MyDrawInterface
         return animationHeight;
     }
 
-    public void animateImage(long animationDureemillis, boolean animationContinue, int deplacementEnX, int deplacementEnY, ScreenOnglet.TaskEtape taskEtape, long delayNext, float vitesse)
+    public void animateImage(long animationDureemillis, boolean animationContinue, int deplacementEnX, int deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext, float vitesse)
     {
         this.animationContinue = animationContinue;
         this.deplacementEnX = deplacementEnX;
@@ -118,22 +118,25 @@ public class AnimationImageNew implements MyDrawInterface
         float deltaX = (float) (deplacementEnX - currentPositionX) / (float) nbIterations;
         float deltaY = (float) (deplacementEnY - currentPositionY) / (float) nbIterations;
 
+
+        //MyTimer.TaskEtape
+
         timer.schedule(new TaskMoveAnimation(currentPositionX, currentPositionY, deltaX, deltaY, deltaTime, taskEtape, delayNext), deltaTime);
 
     }
 
 
-    protected class TaskMoveAnimation extends TimerTask
+    protected class TaskMoveAnimation extends MyTimer.TaskEtape
     {
         private float deltaX;
         private float deltaY;
         private long deltaTime;
         private float currentPositionFloatX;
         private float currentPositionFloatY;
-        private ScreenOnglet.TaskEtape nextEtape;
+        private MyTimer.TaskEtape nextEtape;
         private long delayNext;
 
-        protected TaskMoveAnimation(float currxF, float curryf, float dx, float dy, long dT, ScreenOnglet.TaskEtape nextEtape, long delayNext)
+        protected TaskMoveAnimation(float currxF, float curryf, float dx, float dy, long dT, MyTimer.TaskEtape nextEtape, long delayNext)
         {
             deltaX = dx;
             deltaY = dy;

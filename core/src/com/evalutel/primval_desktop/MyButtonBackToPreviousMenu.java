@@ -20,14 +20,12 @@ import java.util.Date;
 
 public class MyButtonBackToPreviousMenu extends MyImageButton implements MyDrawInterface
 {
-    public com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet.TaskEtape etapeCorrection;
     private boolean isActif;
 
     Game game;
     final DatabaseDesktop dataBase;
 
 //    MyDataBase db ;
-
 
 
     public MyButtonBackToPreviousMenu(final Game game, Stage stage, float width, float height, final DatabaseDesktop dataBase/*, MyDataBase db,  UnResultat resultat*/)
