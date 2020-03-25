@@ -14,6 +14,7 @@ import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
+import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.Metrologue;
 import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyDrawInterface;
@@ -40,7 +41,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 //    private int appHeight = 1536;
     private SpriteBatch batch;
     private CalculetteViewTest calculetteViewTest;
-    private UnePlancheNew planche1, planche2, planche3, touchedPlanche;
+    //    private UnePlancheNew planche1, planche2, planche3, touchedPlanche;
     protected Stage stage;
     int screenWidth;
     int screenHeight;
@@ -58,7 +59,6 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     long startTime, endTime, seconds, dateTest;
 
-
     private Game game;
     DatabaseDesktop dataBase;
 
@@ -69,15 +69,16 @@ public class ScreenOnglet implements Screen, InputProcessor
     int mousePointerX, mousePointerY;
     UneMain uneMain;
 
-
     MyDataBase db;
 
     UnResultat resultatExercice;
 
     MyButtonBackToPreviousMenu myButtonBackToPreviousMenu;
 
+    EcrinDiamantView ecrinDiamantView;
 
-    public ScreenOnglet(Game game, DatabaseDesktop dataBase)
+
+    public ScreenOnglet(Game game, DatabaseDesktop dataBase, int chapitre, int onglet, boolean ecrin)
     {
         batch = new SpriteBatch();
 
@@ -105,6 +106,12 @@ public class ScreenOnglet implements Screen, InputProcessor
         startTime = System.currentTimeMillis();
 
 
+
+        resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0,0);
+
+
+
+
         myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase);
         myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
         myButtonBackToPreviousMenu.addListener(new ClickListener()
@@ -119,11 +126,20 @@ public class ScreenOnglet implements Screen, InputProcessor
                 endTime = System.currentTimeMillis();
                 seconds = (endTime - startTime) / 1000L;
 
+
+                int ok = 5;
+                ok++;
 //            java.util.Date date = new java.util.Date();
 
-                dateTest = new Date().getTime() / 1000L;
-                ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game, ScreenOnglet.this.dataBase));
+                long dateEnd = new Date().getTime() / 1000L;
+                long duree = dateEnd - resultatExercice.getDateResultat();
+                resultatExercice.setDuree(duree);
+                resultatExercice.setDate(endTime);
                 ScreenOnglet.this.db.insertResultat(resultatExercice);
+
+
+                ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game, ScreenOnglet.this.dataBase));
+
             }
         });
         allDrawables.add(myButtonBackToPreviousMenu);
@@ -151,13 +167,21 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         validusAnimated = new ValidusAnimated(0, screenHeight / 7, 300, 300);
 
+        if (ecrin)
+        {
+            ecrinDiamantView = new EcrinDiamantView(stage, validusAnimated.getWidth(), 9);
+            ecrinDiamantView.updateText();
+            allDrawables.add(ecrinDiamantView);
+
+        }
+
+
 
         metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
 
 
         timer = new MyTimer();
-//
-//
+
         /*
         calculetteViewTest = new CalculetteViewTest(stage, 200, 200, 700, 600);
 
@@ -382,6 +406,18 @@ public class ScreenOnglet implements Screen, InputProcessor
         return false;
     }
 
+    protected void addDiamands(int nbDiamant)
+    {
+        ecrinDiamantView.addDiamond(nbDiamant);
+        resultatExercice.setmPointsObtenus(resultatExercice.getPointsObtenus() + nbDiamant);
+        resultatExercice.setmPointsPossibles(resultatExercice.getPointsPossibles() + nbDiamant);
+    }
+
+    protected void addPierres(int nbPierres)
+    {
+        ecrinDiamantView.addPierre(nbPierres);
+        resultatExercice.setmPointsPossibles(resultatExercice.getPointsPossibles() + nbPierres);
+    }
 
 
 }

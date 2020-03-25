@@ -13,13 +13,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 
 public class LigneTableaux
 {
-    public static Table getLigne(MyTextButton button, Label label, Texture texture, String borderColor)
+
+    static MyDataBase db;
+
+    public static Table getLigne(MyTextButton button, Label label, Texture texture, String borderColor, int chapitre, int onglet, DatabaseDesktop dataBase)
     {
+
+
         Table container = new Table();
         Table table = new Table();
         Table tablebord1 = new Table();
@@ -38,7 +45,16 @@ public class LigneTableaux
         labelStyle.font = bitmapFont;
         labelStyle.fontColor = Color.BLACK;
 
-        Label labelDuration = new Label("Duration to implement", labelStyle);
+        db = new MyDataBase(dataBase);
+
+        int durationPerExercice = 0;
+        durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet)/1000;
+
+        int ok = 5;
+        ok++;
+
+
+        Label labelDuration = new Label(Integer.toString(durationPerExercice), labelStyle);
         labelDuration.setWidth(50);
         labelDuration.setWrap(true);
 
@@ -93,7 +109,7 @@ public class LigneTableaux
 
         container.add(tablebord1).width(screenWidth).height(2);
         container.row();
-        container.add(table).height(screenHeight/15);
+        container.add(table).height(screenHeight / 15);
         container.row();
         container.add(tablebord2).width(screenWidth).height(2);
 

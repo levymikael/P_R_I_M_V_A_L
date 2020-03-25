@@ -52,13 +52,11 @@ public class MyDataBase
 
         String intituleNew = intitule.replace("'", "''");
         String sqlQuery = "INSERT INTO RESULTAT " +
-                "(duree, date_resultat, chapitre, onglet, page, intitule, points_obtenus, points_possibles, points_max) " +
-                "VALUES (" + duree + "," + date + "," + valueOf(chapitre) + "," + valueOf(onglet) + "," + valueOf(page) + "," + "'" + intituleNew + "'" + "," + "'" + valueOf(pointsObtenus) + "'" + "," + "'" + valueOf(pointsPossibles) + "'" + "," + "'" + valueOf(pointsMaxi) + "')";
+                "(id_profil, duree, date_resultat, chapitre, onglet, page, intitule, points_obtenus, points_possibles, points_max) " +
+                "VALUES (" + idProfil + "," + duree + "," + date + "," + valueOf(chapitre) + "," + valueOf(onglet) + "," + valueOf(page) + "," + "'" + intituleNew + "'" + "," + "'" + valueOf(pointsObtenus) + "'" + "," + "'" + valueOf(pointsPossibles) + "'" + "," + "'" + valueOf(pointsMaxi) + "')";
 
 
         database.execute(sqlQuery);
-
-
     }
 
     public int getHighestNote(int chapitre, int onglet)
@@ -69,7 +67,6 @@ public class MyDataBase
         //String sqlQuery = "SELECT id_profil, id, points_obtenus from RESULTAT where chapitre = " + chapitre + " AND onglet = " + onglet;
 
         DataBase.Result test = database.query(sqlQuery);
-
 
         if (!test.isEmpty())
         {
@@ -88,8 +85,6 @@ public class MyDataBase
             highestNote = test.getInt(1);
 
         }
-
-
         return highestNote;
     }
 
@@ -107,11 +102,39 @@ public class MyDataBase
 
     }
 
-    public int getMaxDureePageForIdProfil(User idProfil, int chapitre, int onglet, int page)
+    public int getMaxDureePageForIdProfil(/*User idProfil,*/ int chapitre, int onglet/*, int page*/)
     {
 
+        int maxDureePageForIdProfil = 0;
+
+        String sqlQuery = "SELECT sum(duree) FROM RESULTAT WHERE  chapitre =" + chapitre + " AND onglet= " + onglet;
+
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
+            /*while (test.moveToNext())
+            {
+                int idProfil = test.getInt(1);
+                int id = test.getInt(2);
+                int pointObtenu = test.getInt(1);
+
+
+                int ok = 5;
+                ok++;
+            }*/
+
+            test.moveToNext();
+            maxDureePageForIdProfil = test.getInt(1);
+
+            int ok = 5;
+            ok++;
+
+        }
 
         return maxDureePageForIdProfil;
+
+
     }
 
     public float getTotalDureePageForIdProfil(User idProfil, int chapitre, int onglet, int page)

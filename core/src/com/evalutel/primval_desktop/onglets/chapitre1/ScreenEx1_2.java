@@ -49,7 +49,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
     public ScreenEx1_2(Game game, DatabaseDesktop dataBase)
     {
-        super(game, dataBase);
+        super(game, dataBase, 1, 2, true);
 
         this.dataBase = dataBase;
 
@@ -84,8 +84,11 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         float activiteWidth = (screenWidth / 4) * 3;
 
-        String numExercice = "1-2";
+        String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Faire correspondre des billes à des oiseaux, de 1 a 9";
+
+        resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, 0, dateTest, 0, 0, 0, 123);
+
 
         int noteMax = db.getHighestNote(1, 2);
 
@@ -95,19 +98,10 @@ public class ScreenEx1_2 extends ScreenOnglet
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, noteMaxObtenue, "activite");
         allDrawables.add(activiteView);
 
-//        allDrawables.add(metrologue);
-
-        ecrinDiamantView = new EcrinDiamantView(stage, validusAnimated.getWidth(), 9);
-        ecrinDiamantView.updateText();
-        allDrawables.add(ecrinDiamantView);
 
         timer.schedule(new PresentationExercice(2000), 100);
 
         getNumberOiseauxArList();
-
-        resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, ecrinDiamantView.getDiamantCount(), 0, 0, 123);
-
-
     }
 
 
@@ -341,9 +335,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                 validusAnimated.ValidusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3");
                 validusAnimated.isActif = false;
                 timer.schedule(new EtapeNextQuestion(1000), 500);
-                ecrinDiamantView.addDiamond(1);
-
-                resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, ecrinDiamantView.getDiamantCount(), 0, 0, 123);
+                addDiamands(1);
 
             }
             else
@@ -352,11 +344,10 @@ public class ScreenEx1_2 extends ScreenOnglet
                 {
                     validusAnimated.isActif = false;
                     failedAttempts = 0;
-                    ecrinDiamantView.addPierre(1);
                     activiteView.addTextActivite("Voici la correction");
                     validusAnimated.ValidusPlaySound("Sounds/Validus/Voici la correction.mp3");
 
-                    resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, ecrinDiamantView.getDiamantCount(), 0, 0, 123);
+                    addPierres(1);
 
                     timer.schedule(new EtapeRectification1(1000), 500);
                 }
@@ -364,7 +355,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                 {
                     activiteView.addTextActivite("Tu t'es trompé essaie encore.");
                     validusAnimated.ValidusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
-                    resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, ecrinDiamantView.getDiamantCount(), 0, 0, 123);
 
                 }
                 failedAttempts++;
@@ -584,7 +574,6 @@ public class ScreenEx1_2 extends ScreenOnglet
 
 //                java.util.Date date = new java.util.Date();
 
-//                long dateTest = new Date().getTime() / 1000L;
 
                 score = ecrinDiamantView.getDiamantCount();
 

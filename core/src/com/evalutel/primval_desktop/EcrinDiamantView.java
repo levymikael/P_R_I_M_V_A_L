@@ -110,8 +110,6 @@ public class EcrinDiamantView implements MyDrawInterface
 
         String str2 = "  /" + pierre + "/" + pointsMax;
         currentLabel1.setText(str2);
-
-
     }
 
     public void addDiamond(int nbDiamant)
@@ -122,7 +120,7 @@ public class EcrinDiamantView implements MyDrawInterface
         updateText();
     }
 
-    public int getDiamantCount ()
+    public int getDiamantCount()
     {
         return diamant;
     }

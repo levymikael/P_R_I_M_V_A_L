@@ -17,6 +17,8 @@ public class DesktopLauncher {
 		config.height = 1536;
 		config.useHDPI = true;
 
+//		config.resizable = false;
+
 
 
 //		config.fullscreen = true;

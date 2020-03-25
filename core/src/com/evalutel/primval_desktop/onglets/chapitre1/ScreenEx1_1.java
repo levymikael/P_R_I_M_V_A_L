@@ -42,7 +42,7 @@ public class ScreenEx1_1 extends ScreenOnglet
 
     public ScreenEx1_1(Game game, DatabaseDesktop dataBase)
     {
-        super(game, dataBase);
+        super(game, dataBase, 1, 1, false);
 
         int largeurBille = 200;
         int largeurPlanche = largeurBille * 4;
@@ -67,7 +67,7 @@ public class ScreenEx1_1 extends ScreenOnglet
         allPlanches.add(planche1);
 
 
-        String numExercice = "1-1";
+        String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Les nombres de 1 à 9 Badix, Métrologue et Validus.";
 
 
@@ -80,7 +80,7 @@ public class ScreenEx1_1 extends ScreenOnglet
 
         billesList = autoFillPlanche();
 
-        resultatExercice = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, 0, dateTest, 0, 0, 0, 123);
 
 
         timer.schedule(new PresentationMetrologue(2000), 1000);
@@ -447,7 +447,7 @@ public class ScreenEx1_1 extends ScreenOnglet
             uneMain.moveTo(50, posX, posY, nextEtape, 1000);
 
 
-            resultatExercice = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, dateTest, 0, 0, 0, 123);
+            resultatExercice = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, 0, dateTest, 0, 0, 0, 123);
 
 //            db.insertResultat(resultatEx1_1);
 

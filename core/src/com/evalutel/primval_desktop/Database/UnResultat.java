@@ -19,10 +19,11 @@ public class UnResultat
     private boolean estResultatInsere = false;
     private long dateResultat;
 
-    public UnResultat(String mnemo, int chapitre, int onglet, int page, String intitule, int nbPointsMax, long dateResultat, int mPointsObtenus, int idResultatLocal, int idResultatServer, int idProfil)
+    public UnResultat(String mnemo, int chapitre, int onglet, int page, String intitule, int nbPointsMax, long duree, long dateResultat, int mPointsObtenus, int idResultatLocal, int idResultatServer, int idProfil)
     {
         this.idProfil = idProfil;
         this.dateResultat = dateResultat;
+        this.mDuree = duree;
         mMnemo = mnemo;
         mChapitre = chapitre;
         mOnglet = onglet;
@@ -92,6 +93,16 @@ public class UnResultat
     public int getPointsObtenus()
     {
         return mPointsObtenus;
+    }
+
+    public void setmPointsObtenus(int mPointsObtenus)
+    {
+        this.mPointsObtenus = mPointsObtenus;
+    }
+
+    public void setmPointsPossibles(int mPointsPossibles)
+    {
+        this.mPointsPossibles = mPointsPossibles;
     }
 
     public int getPointsPossibles()

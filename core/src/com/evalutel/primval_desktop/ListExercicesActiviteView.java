@@ -58,12 +58,12 @@ public class ListExercicesActiviteView implements MyDrawInterface
         MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
 
         Table table = new Table();
-        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red");
-        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue");
-        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red");
-        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue");
-        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue");
-        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue");
+        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
+        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 2, dataBase);
+        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
 
         table.add(tableEx1).width(screenWidth).height(screenHeight / 11);
         table.row();
@@ -85,7 +85,6 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
         container.add(scroll).height(2 * screenHeight / 5);
         container.row();
-//        container.debug();
 
         tableEx1.addListener(new ClickListener()
         {

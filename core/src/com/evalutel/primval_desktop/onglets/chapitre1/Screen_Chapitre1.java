@@ -85,6 +85,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         batch = new SpriteBatch();
         BitmapFont bitmapFont;
 
+
+
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 40;
@@ -240,6 +242,11 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     public void resize(int width, int height)
     {
         stage.getViewport().update(width, height, true);
+        width = 2400;
+        height = 1350;
+
+
+//        viewport.update(width, height);
     }
 
     @Override
