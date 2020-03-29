@@ -19,9 +19,22 @@ public class DesktopLauncher {
 
 //		config.resizable = false;
 
-//        https://stackoverflow.com/questions/23588219/libgdx-find-out-if-a-given-screen-resolution-is-supported-on-the-current-devic
+//        https://stackoverflow.com/questions/23588219/lib	gdx-find-out-if-a-given-screen-resolution-is-supported-on-the-current-devic
+
+//		http://www.java-gaming.org/topics/libgdx-desktoplauncher-set-resolution-to-desktopdisplaymode/35948/view.html
 
 
+		config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
+		//If I want to test windowed
+		boolean fullscreen = false;
+		if(!fullscreen ){
+			config.fullscreen = false;
+			config.width /= 1.2f;
+			config.height /= 1.2f;
+		}
+		config.resizable = false;
+		config.samples = 4;
+		config.vSyncEnabled = true;
 //		config.fullscreen = true;
 
 		new LwjglApplication(new LaunchGame(), config);

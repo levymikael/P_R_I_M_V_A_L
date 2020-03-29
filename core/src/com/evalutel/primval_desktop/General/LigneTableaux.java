@@ -87,12 +87,16 @@ public class LigneTableaux
         table.add(button);
         table.add().width(200);
         table.add(label).align(Align.center).width(screenWidth / 3);
-        table.add(new Image(texture)).width(30).height(30).align(Align.center);
-        table.add().width(200);
+        table.add(new Image(texture)).width(screenWidth/93).height(30).align(Align.center);
+        table.add().width(screenWidth/14);
         table.add(labelDuration).align(Align.center).width(screenWidth / 6);
-        table.add().width(200);
+        table.add().width(screenWidth/14);
         table.add(labelNotes).align(Align.center).width(screenWidth / 6);
         table.add().width(screenWidth - 200 - (2 * screenWidth / 3) - 30 - 200 - 400);
+
+        int ok = 5;
+        ok++;
+
 
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmWhite.setColor(Color.WHITE);
