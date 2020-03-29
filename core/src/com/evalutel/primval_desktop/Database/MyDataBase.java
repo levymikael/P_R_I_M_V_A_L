@@ -1,14 +1,10 @@
 package com.evalutel.primval_desktop.Database;
 
 
-import com.evalutel.primval_desktop.Ex.User;
-import com.evalutel.primval_desktop.Profil;
-
 import static java.lang.String.valueOf;
 
 public class MyDataBase
 {
-
     public DataBase database;
 
     int maxNotePageForIdProfil = 0;
@@ -19,15 +15,12 @@ public class MyDataBase
     public MyDataBase(DatabaseDesktop database)
     {
         this.database = database;
-
     }
-
 
     public void insertProfil(int idprofil, String nom, String prenom, int age, String classe, int avatar, String photoPath)
     {
         database.execute("INSERT OR REPLACE INTO PROFILS (id_profil, id_compte, nom, prenom, age, classe, avatar, photo) VALUES ('%d', '%d', '%@', '%@', %ld, '%@', %ld, '%@')");
     }
-
 
     public void updateprofil()
     {
@@ -83,7 +76,6 @@ public class MyDataBase
 
             test.moveToNext();
             highestNote = test.getInt(1);
-
         }
         return highestNote;
     }
@@ -94,20 +86,9 @@ public class MyDataBase
         database.execute("INSERT OR REPLACE INTO PROFILS (id_profil, id_compte, nom, prenom, age, classe, avatar, photo) VALUES ('%d', '%d', '%@', '%@', %ld, '%@', %ld, '%@')");
     }
 
-    public int getMaxNotePageForIdProfil(Profil idProfil, int chapitre, int onglet, int page)
+    public int getMaxNotePerExercice(/*Profil idProfil,*/ int chapitre, int onglet, int page)
     {
-
-
-        return maxNotePageForIdProfil;
-
-    }
-
-    public int getMaxDureePageForIdProfil(/*User idProfil,*/ int chapitre, int onglet/*, int page*/)
-    {
-
-        int maxDureePageForIdProfil = 0;
-
-        String sqlQuery = "SELECT sum(duree) FROM RESULTAT WHERE  chapitre =" + chapitre + " AND onglet= " + onglet;
+        String sqlQuery = "SELECT max( points_max) from RESULTAT where chapitre = " + chapitre + " AND onglet = " + onglet;
 
         DataBase.Result test = database.query(sqlQuery);
 
@@ -123,25 +104,133 @@ public class MyDataBase
                 int ok = 5;
                 ok++;
             }*/
+            test.moveToNext();
+            maxNotePageForIdProfil = test.getInt(1);
+        }
 
+        int ok = 5;
+        ok++;
+
+        return maxNotePageForIdProfil;
+
+    }
+
+
+    public int getMaxNotePossiblePerExercice(/*Profil idProfil,*/ int chapitre, int onglet, int page)
+    {
+        String sqlQuery = "SELECT max( points_possibles) from RESULTAT where chapitre = " + chapitre + " AND onglet =" + onglet;
+
+        int maxNotePossiblePerExercice = 0;
+
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
+            /*while (test.moveToNext())
+            {
+                int idProfil = test.getInt(1);
+                int id = test.getInt(2);
+                int pointObtenu = test.getInt(1);
+
+
+                int ok = 5;
+                ok++;
+            }*/
+            test.moveToNext();
+            maxNotePossiblePerExercice = test.getInt(1);
+        }
+
+
+        return maxNotePossiblePerExercice;
+
+    }
+
+    public int getMaxDureePageForIdProfil(/*User idProfil,*/ int chapitre, int onglet/*, int page*/)
+    {
+        String sqlQuery = "SELECT sum(duree) FROM RESULTAT WHERE  chapitre =" + chapitre + " AND onglet= " + onglet;
+
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
             test.moveToNext();
             maxDureePageForIdProfil = test.getInt(1);
+        }
+        return maxDureePageForIdProfil;
+    }
+
+    public long getTotalDureePageForIdProfil(/*User idProfil,*/ int chapitre)
+    {
+        long totalDureePageForIdProfil = 0;
+
+        String sqlQuery = "SELECT sum(duree) from RESULTAT WHERE chapitre = " + chapitre;
+
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
+            test.moveToNext();
+            totalDureePageForIdProfil = test.getInt(1);
 
             int ok = 5;
             ok++;
+        }
+        return totalDureePageForIdProfil;
+    }
+
+
+    public String getTotalNotePageForIdProfil(/*User idProfil*/)
+    {
+        int totalObtainedNoteforIdProfil = 0;
+        int totalMaxNoteforIdProfil = 0;
+        int totalPossibleNoteforIdProfil = 0;
+
+        String sqlQueryNoteObtained = "SELECT max(points_obtenus) from RESULTAT";
+        String sqlQueryNotePossible = "SELECT  max(points_possibles)  from RESULTAT";
+        String sqlQueryNoteMax = "SELECT max(points_max)  from RESULTAT";
+
+        DataBase.Result totalNoteObtained = database.query(sqlQueryNoteObtained);
+
+        if (!totalNoteObtained.isEmpty())
+        {
+            totalNoteObtained.moveToNext();
+            totalObtainedNoteforIdProfil = totalNoteObtained.getInt(1);
+
+            int ok = 5;
+            ok++;
+        }
+
+
+        DataBase.Result totalNotePossible = database.query(sqlQueryNotePossible);
+
+        if (!totalNotePossible.isEmpty())
+        {
+            totalNotePossible.moveToNext();
+            totalPossibleNoteforIdProfil = totalNotePossible.getInt(1);
+
+            int ok = 5;
+            ok++;
+        }
+
+        DataBase.Result totalNoteMax = database.query(sqlQueryNoteMax);
+
+        if (!totalNoteMax.isEmpty())
+        {
+            totalNoteMax.moveToNext();
+            totalMaxNoteforIdProfil = totalNoteMax.getInt(1);
 
         }
 
-        return maxDureePageForIdProfil;
+
+        String totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/" + totalMaxNoteforIdProfil;
 
 
+        int ok = 5;
+        ok++;
+
+        return totalNotePageForIdProfil;
     }
 
-    public float getTotalDureePageForIdProfil(User idProfil, int chapitre, int onglet, int page)
-    {
-
-        return totalDureePageForIdProfil;
-    }
 
     public void removeOnglet(int onglet)
     {

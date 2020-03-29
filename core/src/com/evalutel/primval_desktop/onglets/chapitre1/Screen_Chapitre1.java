@@ -44,7 +44,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
     private Camera camera;
 
-
     private Viewport viewport;
 
     Texture sacDebilles;
@@ -65,26 +64,16 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     {
         this.game = game;
         this.dataBase = dataBase;
-
-
-//        MyDataBase db = new MyDataBase(dataBase);
-//
 //
 //        java.util.Date date = new java.util.Date();
-//
 //
 //        int ok = 9;
 //
 //        long dateTest = new Date().getTime() / 1000L;
-////
-////        String consigneExercice = "Les nombres de ' 1 a 9 Badix, Metrologue et Validus.";
-////
-////        db.insertResultat(150, dateTest, "1", "1", "0", consigneExercice, "0", "0", "0");
 
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFont;
-
 
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
@@ -128,8 +117,10 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         stage.addActor(nomChapitre);
 
 
-        mrNotes = new MrNotes(stage, "Notes");
-        mrTemps = new MrTemps(stage, "Temps");
+        int chapritreNum = 1;
+
+        mrNotes = new MrNotes(stage, dataBase);
+        mrTemps = new MrTemps(stage, dataBase, chapritreNum);
 
 
         MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 800, 150);

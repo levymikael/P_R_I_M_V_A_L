@@ -17,16 +17,17 @@ import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class LigneTableaux
 {
-
     static MyDataBase db;
+
+    static String notes2Implement;
 
     public static Table getLigne(MyTextButton button, Label label, Texture texture, String borderColor, int chapitre, int onglet, DatabaseDesktop dataBase)
     {
-
-
         Table container = new Table();
         Table table = new Table();
         Table tablebord1 = new Table();
@@ -47,18 +48,31 @@ public class LigneTableaux
 
         db = new MyDataBase(dataBase);
 
-        int durationPerExercice = 0;
-        durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet)/1000;
+        long durationPerExercice = 0;
+        durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
 
-        int ok = 5;
-        ok++;
+        String duration = MillisToDuration(durationPerExercice);
 
-
-        Label labelDuration = new Label(Integer.toString(durationPerExercice), labelStyle);
+        Label labelDuration = new Label(duration, labelStyle);
         labelDuration.setWidth(50);
         labelDuration.setWrap(true);
 
-        Label labelNotes = new Label("Notes to implement", labelStyle);
+        int highestNote = 0;
+
+        highestNote = db.getHighestNote(chapitre, onglet);
+
+
+        int noteMaxPerExercice = 0;
+        noteMaxPerExercice = db.getMaxNotePerExercice(chapitre, onglet, 0);
+
+        int notePossiblePerExercice = 0;
+        notePossiblePerExercice = db.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
+
+
+        notes2Implement = highestNote + " / " + notePossiblePerExercice + " / " + noteMaxPerExercice;
+
+
+        Label labelNotes = new Label(notes2Implement, labelStyle);
         labelNotes.setWidth(50);
         labelNotes.setWrap(true);
 
@@ -120,4 +134,15 @@ public class LigneTableaux
 
         return container;
     }
+
+
+    public static String MillisToDuration(long seconds)
+    {
+        String hms = String.format("%02d:%02d:%02d", TimeUnit.SECONDS.toHours(seconds),
+                TimeUnit.SECONDS.toMinutes(seconds) - TimeUnit.SECONDS.toMinutes(TimeUnit.SECONDS.toHours(seconds)),
+                TimeUnit.SECONDS.toSeconds(TimeUnit.SECONDS.toMinutes(seconds)));
+        System.out.println(hms);
+        return hms;
+    }
 }
+

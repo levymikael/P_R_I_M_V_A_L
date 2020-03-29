@@ -19,6 +19,7 @@ public class DesktopLauncher {
 
 //		config.resizable = false;
 
+//        https://stackoverflow.com/questions/23588219/libgdx-find-out-if-a-given-screen-resolution-is-supported-on-the-current-devic
 
 
 //		config.fullscreen = true;

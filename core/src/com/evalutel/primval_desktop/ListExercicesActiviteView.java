@@ -136,8 +136,6 @@ public class ListExercicesActiviteView implements MyDrawInterface
                 System.out.println("I got clicked!6");
             }
         });
-
-
     }
 
 

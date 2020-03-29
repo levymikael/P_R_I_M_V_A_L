@@ -12,7 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Ex.User;
+
+import java.util.concurrent.TimeUnit;
 
 public class MrTemps implements MyDrawInterface
 {
@@ -21,11 +25,20 @@ public class MrTemps implements MyDrawInterface
     BitmapFont bitmapFont;
 
 
-    public MrTemps(Stage stage, String Notes)
+    MyDataBase db;
+
+    public MrTemps(Stage stage, DatabaseDesktop dataBase, int chapitre)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
 
+
+        db = new MyDataBase(dataBase);
+
+        long totalDuree = db.getTotalDureePageForIdProfil(chapitre);
+
+
+        String duration = MillisToDuration(totalDuree);
 
 
         User user = new User();
@@ -33,11 +46,9 @@ public class MrTemps implements MyDrawInterface
         user.setName("userTest");
 
 
-        Profil profilTest = new Profil(2,"prenomTest", "nomTest", 6,"CP",1);
+        Profil profilTest = new Profil(2, "prenomTest", "nomTest", 6, "CP", 1);
 
         user.setProfil(2);
-
-
 
 
         String userName = user.getName();
@@ -53,7 +64,7 @@ public class MrTemps implements MyDrawInterface
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
         labelStyle.fontColor = Color.GREEN;
-        Label labelNotes = new Label(userName, labelStyle);
+        Label labelNotes = new Label(duration, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_temps1.png"));
 
@@ -73,6 +84,17 @@ public class MrTemps implements MyDrawInterface
         container.add(notes);
 
 
+    }
+
+
+    public static String MillisToDuration(long seconds)
+    {
+        String hms = String.format("%02dh%02dmn", TimeUnit.SECONDS.toHours(seconds),
+                TimeUnit.SECONDS.toMinutes(seconds) - TimeUnit.HOURS.toMinutes(TimeUnit.SECONDS.toHours(seconds)));
+        System.out.println(hms);
+
+
+        return hms;
     }
 
 

@@ -105,11 +105,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         startTime = System.currentTimeMillis();
 
-
-
-        resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0,0);
-
-
+        resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0, 0);
 
 
         myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase);
@@ -127,19 +123,20 @@ public class ScreenOnglet implements Screen, InputProcessor
                 seconds = (endTime - startTime) / 1000L;
 
 
+                long dateEnd = new Date().getTime() / 1000L;
+//                long duree = dateEnd - startTime;
+                resultatExercice.setDuree(seconds);
+                resultatExercice.setDate(endTime);
+
+
                 int ok = 5;
                 ok++;
-//            java.util.Date date = new java.util.Date();
 
-                long dateEnd = new Date().getTime() / 1000L;
-                long duree = dateEnd - resultatExercice.getDateResultat();
-                resultatExercice.setDuree(duree);
-                resultatExercice.setDate(endTime);
+
                 ScreenOnglet.this.db.insertResultat(resultatExercice);
 
 
                 ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game, ScreenOnglet.this.dataBase));
-
             }
         });
         allDrawables.add(myButtonBackToPreviousMenu);
@@ -174,7 +171,6 @@ public class ScreenOnglet implements Screen, InputProcessor
             allDrawables.add(ecrinDiamantView);
 
         }
-
 
 
         metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
@@ -266,13 +262,11 @@ public class ScreenOnglet implements Screen, InputProcessor
     @Override
     public void pause()
     {
-
     }
 
     @Override
     public void resume()
     {
-
     }
 
     @Override
@@ -406,7 +400,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         return false;
     }
 
-    protected void addDiamands(int nbDiamant)
+    protected void addDiamonds(int nbDiamant)
     {
         ecrinDiamantView.addDiamond(nbDiamant);
         resultatExercice.setmPointsObtenus(resultatExercice.getPointsObtenus() + nbDiamant);
@@ -418,6 +412,4 @@ public class ScreenOnglet implements Screen, InputProcessor
         ecrinDiamantView.addPierre(nbPierres);
         resultatExercice.setmPointsPossibles(resultatExercice.getPointsPossibles() + nbPierres);
     }
-
-
 }

@@ -3,7 +3,6 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.ActiviteView;
-import com.evalutel.primval_desktop.Database.DataBase;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
@@ -28,7 +27,6 @@ public class ScreenEx1_2 extends ScreenOnglet
     EcrinDiamantView ecrinDiamantView;
     boolean state = false;
     int posX, posY;
-    //    private int firstPositionOiseauX, firstPositionOiseauY;
     int failedAttempts;
     ActiviteView activiteView;
     private ArrayList<UneBille> billesList;
@@ -42,7 +40,6 @@ public class ScreenEx1_2 extends ScreenOnglet
     DatabaseDesktop dataBase;
 
     int score;
-
 
     String consigneExercice;
 
@@ -85,10 +82,9 @@ public class ScreenEx1_2 extends ScreenOnglet
         float activiteWidth = (screenWidth / 4) * 3;
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
-        consigneExercice = "Faire correspondre des billes à des oiseaux, de 1 a 9";
+        consigneExercice = "Faire correspondre des billes à des oiseaux, de 1 à 9";
 
         resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, 0, dateTest, 0, 0, 0, 123);
-
 
         int noteMax = db.getHighestNote(1, 2);
 
@@ -190,7 +186,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                 billeAux.touchUp(allPlanches, screenX, screenHeight - screenY);
 
                 billesList.add(billeAux);
-
             }
             else if (objectTouched instanceof ValidusAnimated)
             {
@@ -198,8 +193,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                 {
                     validusAnimated.touchUp(mousePointerX, mousePointerY);
                 }
-
-
             }
         }
         objectTouched = null;
@@ -294,7 +287,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             }
             else
             {
-
                 timer.schedule(new EtapeAttendreValidus(1000), 100);
             }
         }
@@ -335,7 +327,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                 validusAnimated.ValidusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3");
                 validusAnimated.isActif = false;
                 timer.schedule(new EtapeNextQuestion(1000), 500);
-                addDiamands(1);
+                addDiamonds(1);
 
             }
             else
@@ -375,20 +367,11 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             if (planche1.getNumberBilles() < randNumOiseau)
             {
-//                Sound sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Validus/Voici la correction.mp3"));
-//                sound.play(1.0f);
-
-
                 uneMain.setVisible(true);
                 timer.schedule(new MoveMainToReserve1(500), 500);
             }
             else if (planche1.getNumberBilles() > randNumOiseau)
             {
-//                Sound sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Validus/Voici la correction.mp3"));
-//                sound.play(1.0f);
-//
-
-
                 uneMain.setVisible(true);
                 timer.schedule(new MoveMainBackToPlanche(500), 500);
             }
@@ -570,7 +553,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                 endTime = System.currentTimeMillis();
                 seconds = (endTime - startTime) / 1000L;
 
-                MyDataBase db = new MyDataBase(dataBase);
+//                MyDataBase db = new MyDataBase(dataBase);
 
 //                java.util.Date date = new java.util.Date();
 

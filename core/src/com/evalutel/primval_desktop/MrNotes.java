@@ -16,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.General.LigneTableaux;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
@@ -27,8 +29,9 @@ public class MrNotes implements MyDrawInterface
     private boolean isVisible = true;
     BitmapFont bitmapFont;
 
+    MyDataBase db;
 
-    public MrNotes(Stage stage, String Notes)
+    public MrNotes(Stage stage, DatabaseDesktop dataBase)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
@@ -39,11 +42,18 @@ public class MrNotes implements MyDrawInterface
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
+        String totalNotes = "";
+
+        db = new MyDataBase(dataBase);
+
+        totalNotes = db.getTotalNotePageForIdProfil();
+
+
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
         labelStyle.fontColor = Color.RED;
-        Label labelNotes = new Label(Notes, labelStyle);
+        Label labelNotes = new Label(totalNotes, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes1.png"));
 
