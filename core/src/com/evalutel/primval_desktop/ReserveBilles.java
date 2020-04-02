@@ -64,7 +64,7 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
     @Override
     public boolean isActive()
     {
-        return true;
+        return isActive;
     }
 
 

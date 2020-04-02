@@ -61,7 +61,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     MyButtonRetour myButtonRetour;
 
 
-
     public Screen_Chapitre1(Game game, DatabaseDesktop dataBase)
     {
         this.game = game;
@@ -78,10 +77,10 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.BLACK;
-
+//        Label.LabelStyle labelStyle = new Label.LabelStyle();
+//        labelStyle.font = bitmapFont;
+//        labelStyle.fontColor = Color.BLACK;
+//
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
         labelStyleBlue.fontColor = Color.BLUE;
@@ -95,10 +94,10 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
 
-        listExercicesActiviteView = new ListExercicesActiviteView(stage, game, labelStyle, dataBase);
+        listExercicesActiviteView = new ListExercicesActiviteView(stage, game, dataBase);
 
-        myButtonRetour = new MyButtonRetour(stage, 200, 200);
-        myButtonRetour.setPosition(0, 4 * screenHeight / 5);
+        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15);
+        myButtonRetour.setPosition(screenWidth / 25, 4 * screenHeight / 5);
 
         sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
 
@@ -117,12 +116,10 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         mrTemps = new MrTemps(stage, dataBase, chapritreNum);
 
 
-        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, screenWidth/4, screenHeight / 12);
+        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, screenWidth / 4, screenHeight / 12);
         myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);
 
         Gdx.input.setInputProcessor(stage);
-
-
     }
 
 
@@ -184,11 +181,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     {
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
-//        batch.setProjectionMatrix(new Matrix4());
 
-
-
-            fondEspaceParent.myDraw(batch);
+        fondEspaceParent.myDraw(batch);
         fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6);
 
         for (int i = 0; i < allDrawables.size(); i++)

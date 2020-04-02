@@ -127,7 +127,7 @@ public class ScreenOnglet implements Screen, InputProcessor
             public void clicked(InputEvent event, float x, float y)
             {
                 ScreenOnglet.this.game.dispose();
-                System.out.println("click on Back to Menu");
+                Gdx.app.log("button click", "click!");
 
                 endTime = System.currentTimeMillis();
                 seconds = (endTime - startTime) / 1000L;
@@ -135,6 +135,17 @@ public class ScreenOnglet implements Screen, InputProcessor
                 long dateEnd = new Date().getTime() / 1000L;
                 resultatExercice.setDuree(seconds);
                 resultatExercice.setDate(endTime);
+
+                if ((metrologue.isSpeaking))
+                {
+                    metrologue.stopMusic();
+                }
+                else if ((validusAnimated.isSpeaking))
+                {
+                    validusAnimated.stopMusic();
+                }
+
+                timer.cancel();
 
                 ScreenOnglet.this.db.insertResultat(resultatExercice);
 
@@ -190,7 +201,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         int posX = 6 * screenWidth / 7;
         int posY = screenHeight / 2;
-        uneMain = new UneMain(posX, posY, 200);
+        uneMain = new UneMain(posX, posY, screenWidth/6);
         uneMain.setVisible(false);
 
 

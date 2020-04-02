@@ -15,11 +15,10 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
     public int largeurBille;
 
     public boolean isActif;
-    private boolean isSpeaking;
+     public boolean isSpeaking;
 
     protected boolean isPaused = true;
     private TextureRegion defaultTextureRegion;
-
 
     Music music;
 
@@ -44,7 +43,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
     }
 
 
-    public void MetrologuePlaySound(String audioPath)
+    public void metrologuePlaySound(String audioPath)
     {
         isSpeaking = true;
         music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
@@ -62,11 +61,19 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
         });
     }
 
+    public void stopMusic ()
+    {
+        music.stop();
+        music.dispose();
+    }
+
 
     @Override
     public void myDraw(Batch batch)
     {
         elapsedTime += Gdx.graphics.getDeltaTime();
+
+
         TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, isSpeaking);
         batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
     }

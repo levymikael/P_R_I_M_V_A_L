@@ -61,9 +61,9 @@ public class AnimationImageNew implements MyDrawInterface
 
     }
 
-    public AnimationImageNew(String oneImagePath, int startPositionX, int startPositionY, float animationHeight, float animationWidth)
+    public AnimationImageNew(String oneImagePath, int startPositionX, int startPositionY, float animationWidth, float animationHeight)
     {
-        this(arrayFromImage(oneImagePath), startPositionX, startPositionY, animationHeight, animationWidth);
+        this(arrayFromImage(oneImagePath), startPositionX, startPositionY, animationWidth, animationHeight);
     }
 
 

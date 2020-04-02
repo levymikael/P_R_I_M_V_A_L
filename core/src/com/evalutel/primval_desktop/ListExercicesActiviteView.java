@@ -27,7 +27,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
     DatabaseDesktop dataBase;
 
-    public ListExercicesActiviteView(Stage stage, final Game game, Label.LabelStyle labelStyle, final DatabaseDesktop dataBase)
+    public ListExercicesActiviteView(Stage stage, final Game game/*, Label.LabelStyle labelStyle*/, final DatabaseDesktop dataBase)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
@@ -35,13 +35,12 @@ public class ListExercicesActiviteView implements MyDrawInterface
         this.game = game;
         this.dataBase = dataBase;
 
-// Configuration police
-        Label label1 = new Label("Les nombres de 1 à 9. Badix, Métrologue et Validus", labelStyle);
-        Label label2 = new Label("Faire correspondre des billes à des oiseaux", labelStyle);
-        Label label3 = new Label("Écriture des chiffres 1 à 9", labelStyle);
-        Label label4 = new Label("Prononciation des chiffres 1 à 9", labelStyle);
-        Label label5 = new Label("Compter des oiseaux et taper leur nombre", labelStyle);
-        Label label6 = new Label("Un gâteau pour plusieurs anniversaires", labelStyle);
+        String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
+        String label2 = "Faire correspondre des billes à des oiseaux";
+        String label3 = "Écriture des chiffres 1 à 9";
+        String label4 = "Prononciation des chiffres 1 à 9";
+        String label5 = "Compter des oiseaux et taper leur nombre";
+        String label6 = "Un gâteau pour plusieurs anniversaires";
 
         Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
         Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
@@ -65,6 +64,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
         Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
         Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
         Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
+
 
         table.add(tableEx1).width(screenWidth).height(screenHeight / 11).align(Align.center);
         table.row();

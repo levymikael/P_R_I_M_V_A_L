@@ -21,6 +21,16 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
         super(stage, "Images/fleche_retour.png", width, height);
         setTouchable(Touchable.enabled);
 
+        addListener(new ClickListener()
+                    {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y)
+                        {
+                            Gdx.app.log("Back to Previous menu", "click sur menu precedent");
+                            // achat next chapter to implement
+                        }
+                    }
+        );
 
 
     }

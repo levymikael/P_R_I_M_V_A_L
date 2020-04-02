@@ -52,7 +52,7 @@ public class MrNotes implements MyDrawInterface
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.RED;
+        labelStyle.fontColor = Color.ORANGE;
         Label labelNotes = new Label(totalNotes, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes1.png"));
@@ -71,8 +71,6 @@ public class MrNotes implements MyDrawInterface
         container.add(mrNotes);
         container.row();
         container.add(notes);
-
-
     }
 
 

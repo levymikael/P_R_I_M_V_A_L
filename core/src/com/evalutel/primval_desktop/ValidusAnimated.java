@@ -15,7 +15,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
     public MyTimer.TaskEtape etapeCorrection;
     public boolean isActif;
-    private boolean isSpeaking;
+    public boolean isSpeaking;
     private TextureRegion defaultTextureRegion;
 
     Music music;
@@ -32,7 +32,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     }
 
 
-    public void ValidusPlaySound(String audioPath)
+    public void validusPlaySound(String audioPath)
     {
         isSpeaking = true;
 
@@ -53,6 +53,12 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
             }
         });
+    }
+
+    public void stopMusic ()
+    {
+        music.stop();
+        music.dispose();
     }
 
 

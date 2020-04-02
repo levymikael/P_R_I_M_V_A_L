@@ -4,7 +4,6 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.General.MyMath;
@@ -208,7 +207,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             activiteView.addTextActivite("Place autant de billes que d'oiseaux que tu vois et demande à Mademoiselle Validus si c'est juste pour avoir un diamant.");
 
-            metrologue.MetrologuePlaySound("Sounds/Metrologue/Place autant de billes.mp3");
+            metrologue.metrologuePlaySound("Sounds/Metrologue/Place autant de billes.mp3");
 
             timer.schedule(new EtapeInstruction(2000), 1000);
         }
@@ -321,7 +320,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                 validusAnimated.isActif = false;
                 activiteView.addTextActivite("C'est bien continue " + questionCourante);
 
-                validusAnimated.ValidusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3");
+                validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3");
                 validusAnimated.isActif = false;
                 timer.schedule(new EtapeNextQuestion(1000), 500);
                 addDiamonds(1);
@@ -333,7 +332,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                     validusAnimated.isActif = false;
                     failedAttempts = 0;
                     activiteView.addTextActivite("Voici la correction");
-                    validusAnimated.ValidusPlaySound("Sounds/Validus/Voici la correction.mp3");
+                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3");
 
                     addPierres(1);
 
@@ -342,7 +341,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                 else
                 {
                     activiteView.addTextActivite("Tu t'es trompé essaie encore.");
-                    validusAnimated.ValidusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
 
                 }
                 failedAttempts++;

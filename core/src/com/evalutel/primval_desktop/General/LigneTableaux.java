@@ -17,8 +17,6 @@ import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class LigneTableaux
 {
@@ -26,7 +24,7 @@ public class LigneTableaux
 
     static String notes2Implement;
 
-    public static Table getLigne(MyTextButton button, Label label, Texture texture, String borderColor, int chapitre, int onglet, DatabaseDesktop dataBase)
+    public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, DatabaseDesktop dataBase)
     {
         Table container = new Table();
         Table table = new Table();
@@ -36,74 +34,6 @@ public class LigneTableaux
         int screenWidth = Gdx.graphics.getWidth();
         int screenHeight = Gdx.graphics.getHeight();
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 32;
-        BitmapFont bitmapFont = generator.generateFont(parameter);
-        generator.dispose();
-
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.BLACK;
-
-        db = new MyDataBase(dataBase);
-
-        long durationPerExercice = 0;
-        durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
-
-        String duration = MillisToDuration(durationPerExercice);
-
-        Label labelDuration = new Label(duration, labelStyle);
-        labelDuration.setWidth(50);
-        labelDuration.setWrap(true);
-
-        int highestNote = 0;
-
-        highestNote = db.getHighestNote(chapitre, onglet);
-
-
-        int noteMaxPerExercice = 0;
-        noteMaxPerExercice = db.getMaxNotePerExercice(chapitre, onglet, 0);
-
-        int notePossiblePerExercice = 0;
-        notePossiblePerExercice = db.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
-
-
-        notes2Implement = highestNote + " / " + notePossiblePerExercice + " / " + noteMaxPerExercice;
-
-
-        Label labelNotes = new Label(notes2Implement, labelStyle);
-        labelNotes.setWidth(50);
-        labelNotes.setWrap(true);
-
-        table.setWidth(screenWidth);
-        table.setHeight(screenHeight / 10);
-
-        label.setWidth(screenWidth / 4);
-
-        table.debug();
-        label.debug();
-        labelDuration.debug();
-
-//        table.add().width(screenWidth/4);
-        table.add(button).height(70).width(screenWidth/13).align(Align.center);
-        table.add(button).align(Align.center);
-        table.add().width(screenWidth / 9);
-        table.add(label).align(Align.center).width((float) (screenWidth * 0.5));
-        table.add(new Image(texture)).width(screenWidth / 70).height(30).align(Align.center);
-        table.add().width(screenWidth / 8);
-        table.add(labelDuration).align(Align.right).width(screenWidth / 12);
-        table.add().width(screenWidth / 14);
-        table.add(labelNotes).align(Align.center).width(screenWidth / 12);
-//        table.add().width(screenWidth - 200 - (2 * screenWidth / 3) - 30 - 200 - 400);
-
-
-        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmWhite.setColor(Color.WHITE);
-        pmWhite.fill();
-
-        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
-
         Pixmap pmRed = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmRed.setColor(Color.RED);
         pmRed.fill();
@@ -112,17 +42,100 @@ public class LigneTableaux
         pmBlue.setColor(Color.BLUE);
         pmBlue.fill();
 
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 32;
+        BitmapFont bitmapFont = generator.generateFont(parameter);
+        generator.dispose();
+
+        Label.LabelStyle labelStyleOnglet = new Label.LabelStyle();
+        labelStyleOnglet.font = bitmapFont;
+
+
+        db = new MyDataBase(dataBase);
+
+        long durationPerExercice = 0;
+        durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
+
+        String duration = MillisToDuration(durationPerExercice);
+
+
+        Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
+        labelStyleDuration.fontColor = Color.GREEN;
+        labelStyleDuration.font = bitmapFont;
+
+        Label labelDuration = new Label(duration, labelStyleDuration);
+        labelDuration.setWidth(50);
+        labelDuration.setWrap(true);
+
 
         if (borderColor == "red")
         {
             tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
             tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
+            labelStyleOnglet.fontColor = Color.RED;
         }
         else if ((borderColor == "blue"))
         {
             tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
             tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
+            labelStyleOnglet.fontColor = Color.BLUE;
         }
+
+        Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
+
+
+        int highestNote, noteMaxPerExercice, notePossiblePerExercice;
+
+        highestNote = db.getHighestNote(chapitre, onglet);
+
+        noteMaxPerExercice = db.getMaxNotePerExercice(chapitre, onglet, 0);
+
+        notePossiblePerExercice = db.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
+
+
+        notes2Implement = highestNote + " / " + notePossiblePerExercice + " / " + noteMaxPerExercice;
+
+
+        Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
+        labelStyleNotes.fontColor = Color.ORANGE;
+        labelStyleNotes.font = bitmapFont;
+
+
+        Label labelNotes = new Label(notes2Implement, labelStyleNotes);
+        labelNotes.setWidth(50);
+        labelNotes.setWrap(true);
+
+        table.setWidth(screenWidth);
+        table.setHeight(screenHeight / 10);
+
+        labelOnglet.setWidth(screenWidth / 4);
+
+        table.debug();
+        labelOnglet.debug();
+        labelDuration.debug();
+
+        table.add().width(screenWidth / 30);
+        table.add(button).height(70).width(screenWidth / 13).align(Align.center);
+        table.add(button).align(Align.center);
+        table.add().width(screenWidth / 25);
+        table.add(labelOnglet).align(Align.center).width((float) (screenWidth * 0.5));
+
+        table.add(new Image(texture)).width(screenWidth / 70).height(30).align(Align.center);
+        table.add().width(screenWidth / 20);
+        table.add(labelDuration).align(Align.right).width(screenWidth / 12).align(Align.center);
+        table.add().width(screenWidth / 25);
+        table.add(labelNotes).align(Align.center).width(screenWidth / 12).align(Align.center);
+        table.add().width(screenWidth / 20);
+
+//        table.add().width(screenWidth - 200 - (2 * screenWidth / 3) - 30 - 200 - 400);
+
+
+        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pmWhite.setColor(Color.WHITE);
+        pmWhite.fill();
+
+        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
 
         container.add(tablebord1).width(screenWidth).height(2);
@@ -142,9 +155,12 @@ public class LigneTableaux
 
     public static String MillisToDuration(long seconds)
     {
-        String hms = String.format("%02d:%02d:%02d", TimeUnit.SECONDS.toHours(seconds),
-                TimeUnit.SECONDS.toMinutes(seconds) - TimeUnit.SECONDS.toMinutes(TimeUnit.SECONDS.toHours(seconds)),
-                TimeUnit.SECONDS.toSeconds(TimeUnit.SECONDS.toMinutes(seconds)));
+        int sec = (int) seconds % 60;
+        int min = (((int) seconds) / 60) % 60;
+        int hours = (((int) seconds) / 60) / 60;
+
+        String hms = String.format("%02d:%02d:%02d", hours, min, sec);
+
         System.out.println(hms);
         return hms;
     }
