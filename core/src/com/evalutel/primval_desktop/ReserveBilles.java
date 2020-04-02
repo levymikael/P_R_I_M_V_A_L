@@ -1,14 +1,16 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import java.util.ArrayList;
 
 
-public class ReserveBilles extends AnimationImageNew implements MyDrawInterface, MyTouchInterface
+public class ReserveBilles extends AnimationImageNew implements MyDrawInterface, MyTouchInterface, MyPauseInterface
 {
     public int largeurBille;
     boolean isActive = true;
@@ -16,8 +18,9 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
 
     public ReserveBilles(int startPositionX, int startpositionY, int animationWidth, int animationHeight)
     {
-
         super("Images/Badix/boite900_vide.png", startPositionX, startpositionY, animationWidth, animationHeight);
+
+
     }
 
     /**
@@ -33,7 +36,7 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
 
     public UneBille getBilleAndRemove()
     {
-        UneBille retour = arrrayBilles.get(arrrayBilles.size()-1);
+        UneBille retour = arrrayBilles.get(arrrayBilles.size() - 1);
         arrrayBilles.remove(retour);
 
         return retour;
@@ -65,7 +68,6 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
     }
 
 
-
     public void setActive(boolean active)
     {
         isActive = active;
@@ -77,5 +79,17 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
     {
         TextureRegion textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/Badix/boite900_vide.png")));
         batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+    }
+
+    @Override
+    public void myPause()
+    {
+
+    }
+
+    @Override
+    public void myResume()
+    {
+
     }
 }

@@ -60,16 +60,12 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
     MyButtonRetour myButtonRetour;
 
+
+
     public Screen_Chapitre1(Game game, DatabaseDesktop dataBase)
     {
         this.game = game;
         this.dataBase = dataBase;
-//
-//        java.util.Date date = new java.util.Date();
-//
-//        int ok = 9;
-//
-//        long dateTest = new Date().getTime() / 1000L;
 
         stage = new Stage();
         batch = new SpriteBatch();
@@ -78,7 +74,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = 36;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -98,8 +94,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
 
         fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
-//        fondSommaire.SetBackGroundSize(fondSommaire, screenWidth, 5 * screenHeight / 6);
-
 
         listExercicesActiviteView = new ListExercicesActiviteView(stage, game, labelStyle, dataBase);
 
@@ -123,7 +117,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         mrTemps = new MrTemps(stage, dataBase, chapritreNum);
 
 
-        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 800, 150);
+        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, screenWidth/4, screenHeight / 12);
         myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);
 
         Gdx.input.setInputProcessor(stage);
@@ -193,7 +187,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 //        batch.setProjectionMatrix(new Matrix4());
 
 
-        fondEspaceParent.myDraw(batch);
+
+            fondEspaceParent.myDraw(batch);
         fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6);
 
         for (int i = 0; i < allDrawables.size(); i++)

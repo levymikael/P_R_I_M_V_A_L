@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 
 
-public class ActiviteView implements MyDrawInterface
+public class ActiviteView implements MyDrawInterface, MyPauseInterface
 {
     private Table table, tableTitre, tableBandeauBas;
     private Table tableMilieu;
@@ -55,7 +55,7 @@ public class ActiviteView implements MyDrawInterface
 // Configuration police de l'enonce
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = 36;
 
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
@@ -286,6 +286,18 @@ public class ActiviteView implements MyDrawInterface
 
     @Override
     public void myDraw(Batch batch)
+    {
+
+    }
+
+    @Override
+    public void myPause()
+    {
+
+    }
+
+    @Override
+    public void myResume()
     {
 
     }

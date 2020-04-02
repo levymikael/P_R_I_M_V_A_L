@@ -6,10 +6,15 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
@@ -18,6 +23,8 @@ import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.Metrologue;
 import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyDrawInterface;
+import com.evalutel.primval_desktop.MyPauseGeneral;
+import com.evalutel.primval_desktop.MyPauseInterface;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
@@ -37,11 +44,8 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected ReserveBilles reserveBilles;
     int firstPositionX, firstPositionY;
     MyTouchInterface objectTouched;
-    //    private int appWidth = 2048;
-//    private int appHeight = 1536;
     private SpriteBatch batch;
     private CalculetteViewTest calculetteViewTest;
-    //    private UnePlancheNew planche1, planche2, planche3, touchedPlanche;
     protected Stage stage;
     int screenWidth;
     int screenHeight;
@@ -52,10 +56,12 @@ public class ScreenOnglet implements Screen, InputProcessor
     boolean isVisible = true;
     protected MyTimer timer;
 
+    boolean isInPause = true;
 
     protected ArrayList<MyDrawInterface> allDrawables;
     protected ArrayList<MyTouchInterface> objectTouchedList;
     private ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
+//    private ArrayList<MyPauseInterface> allPauseables = new ArrayList<>();
 
     long startTime, endTime, seconds, dateTest;
 
@@ -67,7 +73,11 @@ public class ScreenOnglet implements Screen, InputProcessor
     Metrologue metrologue;
 
     int mousePointerX, mousePointerY;
+
+    int largeurBille, largeurPlanche;
     UneMain uneMain;
+
+    MyPauseGeneral myPauseGeneral;
 
     MyDataBase db;
 
@@ -92,6 +102,8 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         db = new MyDataBase(dataBase);
 
+        largeurBille = screenWidth / 15;
+        largeurPlanche = largeurBille * 4;
 
         //Garde aspect ratio
 
@@ -107,8 +119,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0, 0);
 
-
-        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, 200, 200, dataBase);
+        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, screenWidth / 15, screenWidth / 15, dataBase);
         myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
@@ -118,40 +129,61 @@ public class ScreenOnglet implements Screen, InputProcessor
                 ScreenOnglet.this.game.dispose();
                 System.out.println("click on Back to Menu");
 
-
                 endTime = System.currentTimeMillis();
                 seconds = (endTime - startTime) / 1000L;
 
-
                 long dateEnd = new Date().getTime() / 1000L;
-//                long duree = dateEnd - startTime;
                 resultatExercice.setDuree(seconds);
                 resultatExercice.setDate(endTime);
 
-
-                int ok = 5;
-                ok++;
-
-
                 ScreenOnglet.this.db.insertResultat(resultatExercice);
-
 
                 ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game, ScreenOnglet.this.dataBase));
             }
         });
         allDrawables.add(myButtonBackToPreviousMenu);
 
-        startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", "Images/StartPause/button_lecture.png", 200, 200);
+        startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", screenWidth / 15, screenWidth / 15);
         startPausebutton.setPosition(0, 5 * screenHeight / 7);
         stage.addActor(startPausebutton);
 
+        myPauseGeneral = new MyPauseGeneral();
 
         startPausebutton.addListener(new ClickListener()
         {
             public void clicked(InputEvent event, float x, float y)
             {
+                String pausePlayButtonPath;
+
+                if (isInPause)
+                {
+                    pausePlayButtonPath = "Images/StartPause/button_lecture.png";
+
+                    myPauseGeneral.pause();
+
+                    isInPause = !isInPause;
+                }
+                else
+                {
+                    pausePlayButtonPath = "Images/StartPause/button_pause.png";
+
+                    isInPause = !isInPause;
+                    myPauseGeneral.resume();
+                }
+
+
+                Texture texture = new Texture(Gdx.files.internal(pausePlayButtonPath));
+                Sprite sprite = new Sprite(texture);
+                sprite.setSize(screenWidth / 15, screenWidth / 15);
+
+                startPausebutton.getStyle().imageUp = new SpriteDrawable(sprite);
+                ;//new TextureRegionDrawable(new Texture(pausePlayButtonPath));
                 PauseSingleton pauseSingleton = PauseSingleton.getInstance();
                 pauseSingleton.isPause = !pauseSingleton.isPause;
+
+                int ok = 5;
+                ok++;
+
             }
         });
 
@@ -162,7 +194,8 @@ public class ScreenOnglet implements Screen, InputProcessor
         uneMain.setVisible(false);
 
 
-        validusAnimated = new ValidusAnimated(0, screenHeight / 7, 300, 300);
+        validusAnimated = new ValidusAnimated(0, screenHeight / 7, screenHeight / 5, screenHeight / 5);
+        myPauseGeneral.addElements(validusAnimated);
 
         if (ecrin)
         {
@@ -172,8 +205,8 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         }
 
-
-        metrologue = new Metrologue(0, 2 * screenHeight / 5, 300, 300);
+        metrologue = new Metrologue(0, 2 * screenHeight / 5, screenHeight / 5, screenHeight / 5);
+        myPauseGeneral.addElements(metrologue);
 
 
         timer = new MyTimer();
@@ -224,7 +257,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -372,7 +404,7 @@ public class ScreenOnglet implements Screen, InputProcessor
             if (objectTouched instanceof UneBille)
             {
                 UneBille billeAux = (UneBille) objectTouched;
-                billeAux.touchUp(allPlanches, screenX, screenHeight - screenY);
+                billeAux.touchUp(allPlanches/*, screenX, screenHeight - screenY*/);
 //
 //                else /*si bille pas deposee dans planche*/
 //                    {

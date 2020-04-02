@@ -46,7 +46,7 @@ public class MyDataBase
         String intituleNew = intitule.replace("'", "''");
         String sqlQuery = "INSERT INTO RESULTAT " +
                 "(id_profil, duree, date_resultat, chapitre, onglet, page, intitule, points_obtenus, points_possibles, points_max) " +
-                "VALUES (" + idProfil + "," + duree + "," + date + "," + valueOf(chapitre) + "," + valueOf(onglet) + "," + valueOf(page) + "," + "'" + intituleNew + "'" + "," + "'" + valueOf(pointsObtenus) + "'" + "," + "'" + valueOf(pointsPossibles) + "'" + "," + "'" + valueOf(pointsMaxi) + "')";
+                "VALUES (" + idProfil + "," + duree + "," + date + "," + chapitre + "," + onglet + "," + page + "," + "'" + intituleNew + "'" + "," + "'" + pointsObtenus + "'" + "," + "'" + pointsPossibles + "'" + "," + "'" + pointsMaxi + "')";
 
 
         database.execute(sqlQuery);
@@ -155,6 +155,11 @@ public class MyDataBase
         {
             test.moveToNext();
             maxDureePageForIdProfil = test.getInt(1);
+
+            int ok = 5;
+            ok++;
+
+
         }
         return maxDureePageForIdProfil;
     }

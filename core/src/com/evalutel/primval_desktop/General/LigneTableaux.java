@@ -38,7 +38,7 @@ public class LigneTableaux
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = 32;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -81,21 +81,21 @@ public class LigneTableaux
 
         label.setWidth(screenWidth / 4);
 
-        table.add().width(100);
-        button.setHeight(70);
-        button.setWidth(70);
-        table.add(button);
-        table.add().width(200);
-        table.add(label).align(Align.center).width(screenWidth / 3);
-        table.add(new Image(texture)).width(screenWidth/93).height(30).align(Align.center);
-        table.add().width(screenWidth/14);
-        table.add(labelDuration).align(Align.center).width(screenWidth / 6);
-        table.add().width(screenWidth/14);
-        table.add(labelNotes).align(Align.center).width(screenWidth / 6);
-        table.add().width(screenWidth - 200 - (2 * screenWidth / 3) - 30 - 200 - 400);
+        table.debug();
+        label.debug();
+        labelDuration.debug();
 
-        int ok = 5;
-        ok++;
+//        table.add().width(screenWidth/4);
+        table.add(button).height(70).width(screenWidth/13).align(Align.center);
+        table.add(button).align(Align.center);
+        table.add().width(screenWidth / 9);
+        table.add(label).align(Align.center).width((float) (screenWidth * 0.5));
+        table.add(new Image(texture)).width(screenWidth / 70).height(30).align(Align.center);
+        table.add().width(screenWidth / 8);
+        table.add(labelDuration).align(Align.right).width(screenWidth / 12);
+        table.add().width(screenWidth / 14);
+        table.add(labelNotes).align(Align.center).width(screenWidth / 12);
+//        table.add().width(screenWidth - 200 - (2 * screenWidth / 3) - 30 - 200 - 400);
 
 
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);

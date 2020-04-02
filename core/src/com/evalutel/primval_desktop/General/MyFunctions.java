@@ -70,7 +70,6 @@
 //        AlertDialog.Builder bld = new AlertDialog.Builder(context);
 //        bld.setMessage(message);
 //        bld.setNeutralButton("OK", null);
-//        bld.create().show();
 //    }
 //
 //    public static void setOrUpdatePurchaseTest(Context context)

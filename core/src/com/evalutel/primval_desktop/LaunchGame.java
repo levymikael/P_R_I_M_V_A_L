@@ -44,5 +44,11 @@ public class LaunchGame extends Game implements ApplicationListener
 
     }
 
+
+    @Override
+    public void pause()
+    {
+        super.pause();
+    }
 }
 

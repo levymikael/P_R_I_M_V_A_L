@@ -17,6 +17,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     private Object unePlancheNew;
     private Object unContainer;
     public ReserveBilles reserveBilles;
+    public boolean isActif;
 
 
     public UneBille(int startPositionX, int startPositionY, float animationHeight)
@@ -80,40 +81,46 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
         }
     }
 
-    public void touchUp(ArrayList<UnePlancheNew> planches, int firstPositionX, int firstPositionY)
+    public void touchUp(ArrayList<UnePlancheNew> planches/*, int firstPositionX, int firstPositionY*/)
     {
         boolean isAddedToPlanche = false;
-
-        for (int i = 0; i < planches.size(); i++)
+        if (this.isActif)
         {
-            UnePlancheNew plancheAux = planches.get(i);
-            if (plancheAux.isInRect(this))
-            {
-                isAddedToPlanche = true;
-                plancheAux.addBilleAndOrganize(this);
-                break;
-            }
-        }
 
-        if (!isAddedToPlanche)
-        {
-            if (this.plancheNew != null)
+            for (int i = 0; i < planches.size(); i++)
             {
-                if (this.plancheNew.shouldReturnToReserve)
+                UnePlancheNew plancheAux = planches.get(i);
+                if (plancheAux.isInRect(this))
                 {
-                    this.plancheNew = null;
-                    this.setPosition(100000, 100000);
-                    reserveBilles.addBilleToReserve(this);
+                    isAddedToPlanche = true;
+                    plancheAux.addBilleAndOrganize(this);
+                    break;
+                }
+            }
+
+            if (!isAddedToPlanche)
+            {
+                if (this.plancheNew != null)
+                {
+                    if (this.plancheNew.shouldReturnToReserve)
+                    {
+                        this.plancheNew = null;
+                        this.setPosition(100000, 100000);
+                        reserveBilles.addBilleToReserve(this);
+                    }
+                    else
+                    {
+                        this.plancheNew.addBilleAndOrganize(this);
+                    }
                 }
                 else
                 {
-                    this.plancheNew.addBilleAndOrganize(this);
+                    if (this != null)
+                    {
+                        reserveBilles.addBilleToReserve(this);
+                        this.setPosition(100000, 100000);
+                    }
                 }
-            }
-            else
-            {
-                reserveBilles.addBilleToReserve(this);
-                this.setPosition(100000, 100000);
             }
         }
     }

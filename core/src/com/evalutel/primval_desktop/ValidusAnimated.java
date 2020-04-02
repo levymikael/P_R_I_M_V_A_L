@@ -10,13 +10,15 @@ import com.badlogic.gdx.math.Rectangle;
 import java.io.File;
 import java.util.ArrayList;
 
-public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterface */ implements MyTouchInterface
+public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterface */ implements MyTouchInterface, MyPauseInterface
 {
 
     public MyTimer.TaskEtape etapeCorrection;
     public boolean isActif;
     private boolean isSpeaking;
     private TextureRegion defaultTextureRegion;
+
+    Music music;
 
 
     public ValidusAnimated(int startPositionX, int startPositionY, float animationWidth, float animationHeight)
@@ -34,10 +36,12 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     {
         isSpeaking = true;
 
-        Music music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
+        music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
 //        music.setLooping(false);
         music.play();
 //       boolean isLooping = false;
+        int ok = 34;
+        ok++;
 
         music.setOnCompletionListener(new Music.OnCompletionListener()
         {
@@ -66,7 +70,6 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
         String imgAux = "";
 
-
         for (int i = 0; i < validusDirectorySize - 1; i++)
         {
             if (i < 10)
@@ -85,7 +88,6 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
                 imgValidusPaths.add(imgAux);
             }
         }
-
 
         return imgValidusPaths;
     }
@@ -112,9 +114,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
     public void TouchDown()
     {
-
         System.out.println("touchdown validus");
-
     }
 
     @Override
@@ -149,6 +149,28 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
         else
         {
             batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+        }
+    }
+
+    @Override
+    public void myPause()
+    {
+        if (music != null)
+
+        {
+            music.pause();
+        }
+
+
+    }
+
+    @Override
+    public void myResume()
+    {
+        if (music != null)
+
+        {
+            music.play();
         }
     }
 }

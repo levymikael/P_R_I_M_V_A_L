@@ -2,8 +2,6 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,13 +10,18 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-public class Metrologue extends AnimationImageNew implements MyDrawInterface
+public class Metrologue extends AnimationImageNew implements MyDrawInterface, MyPauseInterface
 {
     public int largeurBille;
 
     public boolean isActif;
     private boolean isSpeaking;
+
+    protected boolean isPaused = true;
     private TextureRegion defaultTextureRegion;
+
+
+    Music music;
 
     public Metrologue(int startPositionX, int startpositionY, int animationWidth, int animationHeight)
     {
@@ -44,7 +47,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
     public void MetrologuePlaySound(String audioPath)
     {
         isSpeaking = true;
-        Music music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
+        music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
 //        music.setLooping(false);
         music.play();
 ////       boolean isLooping = false;
@@ -75,7 +78,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
 
         int metrologueDirectorySize = new File("/Users/mikaellevy/Documents/Developper/Desktop/Primval-Dekstop/android/assets/Images/Metrologue").listFiles().length;
 
-        String imgaux = "";
+        String imgaux;
 
         for (int i = 0; i < metrologueDirectorySize - 1; i++)
         {
@@ -95,11 +98,28 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface
                 imgMetrologuePaths.add(imgaux);
             }
         }
-
-
         return imgMetrologuePaths;
-
     }
 
 
+    @Override
+    public void myPause()
+    {
+        if (music != null)
+        {
+            music.pause();
+
+            Gdx.app.log("SONG",Float.toString(music.getPosition()));
+        }
+    }
+
+    @Override
+    public void myResume()
+    {
+        if (music != null)
+
+        {
+            music.play();
+        }
+    }
 }

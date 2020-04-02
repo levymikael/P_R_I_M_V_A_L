@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
@@ -18,7 +19,7 @@ public class AnimationImageNew implements MyDrawInterface
 {
     protected TextureRegion[] animationFrames;
     Animation animation;
-   MyTimer timer = new MyTimer();
+    MyTimer timer = new MyTimer();
 
 
     public float elapsedTime, animationVitesse, animationHeight, animationWidth;
@@ -55,6 +56,8 @@ public class AnimationImageNew implements MyDrawInterface
         }
 
         animation = new Animation(1f / 6f, animationFrames);
+
+
 
     }
 
@@ -119,8 +122,6 @@ public class AnimationImageNew implements MyDrawInterface
         float deltaY = (float) (deplacementEnY - currentPositionY) / (float) nbIterations;
 
 
-        //MyTimer.TaskEtape
-
         timer.schedule(new TaskMoveAnimation(currentPositionX, currentPositionY, deltaX, deltaY, deltaTime, taskEtape, delayNext), deltaTime);
 
     }
@@ -181,8 +182,6 @@ public class AnimationImageNew implements MyDrawInterface
             {
                 timer.schedule(new TaskMoveAnimation(currentPositionFloatX, currentPositionFloatY, deltaX, deltaY, deltaTime, nextEtape, delayNext), deltaTime);
             }
-
-
         }
     }
 

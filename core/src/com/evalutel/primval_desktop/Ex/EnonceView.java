@@ -54,7 +54,7 @@ public class EnonceView implements MyDrawInterface
 //
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = 36;
 
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();

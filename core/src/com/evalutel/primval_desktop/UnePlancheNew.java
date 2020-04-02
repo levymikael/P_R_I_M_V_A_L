@@ -5,11 +5,13 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 import java.util.ArrayList;
 
 
-public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
+public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface, MyPauseInterface
 {
     public boolean shouldReturnToReserve = false;
     private ArrayList<MyPoint> positionsBilles = new ArrayList<>();
     private ArrayList<UneBille> allBilles = new ArrayList<>();
+    public boolean isActif;
+
 
     int spaceBille;
 
@@ -159,11 +161,11 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
         allBilles.remove(uneBille);
     }
 
-    public void removeBilleToReserve(UneBille uneBille)
-    {
-        allBilles.remove(uneBille);
-        uneBille.reserveBilles.addBilleToReserve(uneBille);
-    }
+//    public void removeBilleToReserve(UneBille uneBille)
+//    {
+//        allBilles.remove(uneBille);
+//        uneBille.reserveBilles.addBilleToReserve(uneBille);
+//    }
 
     public void removeMain(UneMain uneMain)
     {
@@ -176,4 +178,15 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface
     }
 
 
+    @Override
+    public void myPause()
+    {
+
+    }
+
+    @Override
+    public void myResume()
+    {
+
+    }
 }

@@ -27,7 +27,7 @@ public class MyButtonBuyAnotherChapter extends MyImageButton implements MyDrawIn
                         @Override
                         public void clicked(InputEvent event, float x, float y)
                         {
-                            System.out.println("click on Buy new chapter button");
+                            Gdx.app.log("Buy another chapter", "Acheter un autre chapitre clicqué");
                             // achat next chapter to implement
                         }
                     }
@@ -48,9 +48,6 @@ public class MyButtonBuyAnotherChapter extends MyImageButton implements MyDrawIn
     @Override
     public void myDraw(Batch batch)
     {
-        TextureRegion textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("Images/vo00000.png")));
-
-        batch.draw(textureRegion2, currentPositionX, currentPositionY, width, height);
 
     }
 

@@ -20,15 +20,6 @@ public class ScreeenBackgroundImage extends TextureRegion implements MyDrawInter
         bgImageRegion = new TextureRegion(new Texture(Gdx.files.internal(bgImagePath)));
     }
 
-//    public TextureRegion SetBackGroundSize(ScreeenBackgroundImage screeenBackgroundImage, int width, int height)
-//    {
-//        bgImageRegion.setRegionWidth(width);
-//        bgImageRegion.setRegionHeight(height);
-//
-//        return bgImageRegion;
-//
-//    }
-
 
     @Override
     public boolean isVisible()

@@ -56,7 +56,7 @@ public class MrTemps implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = 36;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -70,7 +70,7 @@ public class MrTemps implements MyDrawInterface
 
         Table container = new Table();
         stage.addActor(container);
-        container.setSize(200, 500);
+        container.setSize(screenWidth / 15, screenWidth / 7);
         container.setPosition(6 * screenWidth / 8, 7 * screenHeight / 10);
 
         Table mrNotes = new Table();

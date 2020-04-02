@@ -9,6 +9,4 @@ public interface MyDrawInterface {
     boolean isVisible();
     void setVisible(boolean visible);
 
-
-
 }

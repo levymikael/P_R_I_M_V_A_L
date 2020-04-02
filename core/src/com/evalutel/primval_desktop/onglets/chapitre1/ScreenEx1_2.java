@@ -50,13 +50,10 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         this.dataBase = dataBase;
 
-        int largeurBille = 200;
-        int largeurPlanche = largeurBille * 4;
-
         bgScreenEx1_2 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_2);
 
-        reserveBilles = new ReserveBilles(screenWidth - 300, screenHeight - 300, 200, 200);
+        reserveBilles = new ReserveBilles(screenWidth - 300, screenHeight - 300, screenWidth / 15, screenWidth / 15);
         reserveBilles.largeurBille = largeurBille;
         allDrawables.add(reserveBilles);
 
@@ -183,7 +180,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             if (objectTouched instanceof UneBille)
             {
                 UneBille billeAux = (UneBille) objectTouched;
-                billeAux.touchUp(allPlanches, screenX, screenHeight - screenY);
+                billeAux.touchUp(allPlanches);
 
                 billesList.add(billeAux);
             }
@@ -328,7 +325,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                 validusAnimated.isActif = false;
                 timer.schedule(new EtapeNextQuestion(1000), 500);
                 addDiamonds(1);
-
             }
             else
             {
@@ -500,8 +496,8 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            int posX = 600;
-            int posY = 400;
+            int posX = screenHeight / 5;
+            int posY = screenWidth / 8;
 
             uneMain.moveTo(durationMillis, posX, posY, null, 500);
             uneMain.cliqueTo(durationMillis, posX, posY, null, 500);
@@ -553,15 +549,8 @@ public class ScreenEx1_2 extends ScreenOnglet
                 endTime = System.currentTimeMillis();
                 seconds = (endTime - startTime) / 1000L;
 
-//                MyDataBase db = new MyDataBase(dataBase);
-
-//                java.util.Date date = new java.util.Date();
-
 
                 score = ecrinDiamantView.getDiamantCount();
-
-//                resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, score, 0, 0, 123);
-
 
                 timer.cancel();
             }

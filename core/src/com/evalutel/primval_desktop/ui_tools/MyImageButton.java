@@ -30,7 +30,6 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
 
     TextureRegion[] animationFrames;
 
-
     Animation animation;
 
 
@@ -40,8 +39,8 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
         super(getDrawable(imagePathUp, width, height), getDrawable(imagePathDown, width, height));
 
 
-        this.width = width;
-        this.height = height;
+//        this.width = width;
+//        this.height = height;
 
         stage.addActor(this);
 
@@ -103,20 +102,11 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
 
     private static SpriteDrawable getDrawable(String imagePath, float width, float height)
     {
-
         Texture texture = new Texture(Gdx.files.internal(imagePath));
         Sprite sprite = new Sprite(texture);
         sprite.setSize(width, height);
         return new SpriteDrawable(sprite);
     }
-
-    /*
-
-    public MyPoint getPosition()
-    {
-        return new MyPoint(currentPositionX, currentPositionY);
-    }*/
-
 
     public float getWidth()
     {
@@ -134,8 +124,6 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
     public void draw(Batch batch, float parentAlpha)
     {
         super.draw(batch, parentAlpha);
-
-
     }
 
     @Override
@@ -150,6 +138,5 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
 
     public void addListener()
     {
-
     }
 }

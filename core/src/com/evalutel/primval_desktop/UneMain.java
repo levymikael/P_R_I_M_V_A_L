@@ -1,9 +1,7 @@
 package com.evalutel.primval_desktop;
 
-import com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet;
 
-
-public class UneMain extends AnimationImageNew implements MyDrawInterface
+public class UneMain extends AnimationImageNew implements MyDrawInterface, MyPauseInterface
 {
 
     public UnePlancheNew plancheNew = null;
@@ -46,7 +44,6 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface
     }
 
 
-
     @Override
     public void setPosition(int x, int y)
     {
@@ -66,7 +63,6 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface
 
     public void touchUp(UnePlancheNew planche, int firstPositionX, int firstPositionY)
     {
-
         boolean isAddedToPlanche = false;
 
 //        for (int i = 0; i < planche.size(); i++)
@@ -78,22 +74,18 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface
 //                break;
         }
     }
-//        if (!isAddedToPlanche)
-//        {
-//            if (this.planche != null)
-//            {
-//                if (this.plancheNew.shouldReturnToReserve)
-//                {
-//                    this.plancheNew = null;
-//                    this.setPosition(100000, 100000);
-//                } else
-//                {
-//                    this.plancheNew.addBilleAndOrganize(this);
-//                }
-//            } else
-//            {
-//                this.setPosition(100000, 100000);
-//            }
-//        }
+
+    @Override
+    public void myPause()
+    {
+
+    }
+
+    @Override
+    public void myResume()
+    {
+
+    }
+
 }
 

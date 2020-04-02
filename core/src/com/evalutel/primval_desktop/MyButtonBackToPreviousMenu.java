@@ -25,8 +25,6 @@ public class MyButtonBackToPreviousMenu extends MyImageButton implements MyDrawI
     Game game;
     final DatabaseDesktop dataBase;
 
-//    MyDataBase db ;
-
 
     public MyButtonBackToPreviousMenu(final Game game, Stage stage, float width, float height, final DatabaseDesktop dataBase/*, MyDataBase db,  UnResultat resultat*/)
     {
@@ -35,33 +33,8 @@ public class MyButtonBackToPreviousMenu extends MyImageButton implements MyDrawI
 
         this.game = game;
         this.dataBase = dataBase;
-
-//        MyDataBase db = new MyDataBase(dataBase);
-
-
-//        final MyDataBase finalDb = db;
-
     }
 
-// implement sql query
- /*   endTime = System.currentTimeMillis();
-    seconds = (endTime - startTime) / 1000L;
-
-    MyDataBase db = new MyDataBase(dataBase);
-
-    java.util.Date date = new java.util.Date();
-
-
-    long dateTest = new Date().getTime() / 1000L;
-
-
-    int score = ecrinDiamantView.getDiamantCount();
-
-    UnResultat resultatEx1_2 = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, dateTest, score, 0, 0, 123);
-
-                db.insertResultat(resultatEx1_2);
-
-*/
 
     /**
      * @param currentPositionX point x coordinate
@@ -77,11 +50,5 @@ public class MyButtonBackToPreviousMenu extends MyImageButton implements MyDrawI
     @Override
     public void myDraw(Batch batch)
     {
-        TextureRegion textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("Images/vo00000.png")));
-
-        batch.draw(textureRegion2, currentPositionX, currentPositionY, width, height);
-
     }
-
-
 }
