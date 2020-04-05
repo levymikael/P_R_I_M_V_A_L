@@ -125,8 +125,17 @@ public class LigneTableaux
         table.add().width(screenWidth / 20);
         table.add(labelDuration).align(Align.right).width(screenWidth / 12).align(Align.center);
         table.add().width(screenWidth / 25);
-        table.add(labelNotes).align(Align.center).width(screenWidth / 12).align(Align.center);
-        table.add().width(screenWidth / 20);
+        if (borderColor == "red")
+        {
+            table.add().align(Align.center).width(screenWidth / 12).align(Align.center);
+            table.add().width(screenWidth / 20);
+        }
+        else
+        {
+            table.add(labelNotes).align(Align.center).width(screenWidth / 12).align(Align.center);
+            table.add().width(screenWidth / 20);
+        }
+
 
 //        table.add().width(screenWidth - 200 - (2 * screenWidth / 3) - 30 - 200 - 400);
 

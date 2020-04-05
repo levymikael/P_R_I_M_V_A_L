@@ -80,25 +80,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
         resultatExercice = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, 0, dateTest, 0, 0, 0, 123);
 
-        uneMain.setVisible(true);
         timer.schedule(new PresentationMetrologue(2000), 1000);
-
-//        Gdx.input.setInputProcessor(new InputAdapter()
-//        {
-//            public boolean touchDown(int screenX, int screenY, int pointer, int button)
-//            {
-//                if (reserveBilles.contains(screenX, screenY))
-//                {
-//                    Gdx.app.log("mouse click", "click on reserve");
-//                }
-//                else
-//                {
-//                    Gdx.app.log("mouse click", "click out of reserve");
-//                }
-//                return true;
-//            }
-//
-//        });
 
     }
 
@@ -173,6 +155,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
                 metrologue.metrologuePlaySound("Sounds/Metrologue/Je vois maintenant.mp3");
             }
             cptOiseau++;
+
         }
     }
 

@@ -63,7 +63,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 // Numero exerice/consigne:
         Label.LabelStyle labelStyle2 = new Label.LabelStyle();
         labelStyle2.font = bitmapFont;
-        labelStyle2.fontColor = Color.WHITE;
+        labelStyle2.fontColor = Color.YELLOW;
         Label label2 = new Label(numExercice, labelStyle2);
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
