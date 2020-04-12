@@ -17,7 +17,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     //    private Object unePlancheNew;
 //    private Object unContainer;
     public ReserveBilles reserveBilles;
-    public boolean isActif = true;
+    boolean isActive = true;
 
 
     public UneBille(int startPositionX, int startPositionY, float animationHeight)
@@ -46,14 +46,15 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     @Override
     public boolean isActive()
     {
-        return false;
+        return isActive;
     }
 
-    @Override
+
     public void setActive(boolean active)
     {
-
+        isActive = active;
     }
+
 
     @Override
     public boolean isDragable()
@@ -85,7 +86,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     public void touchUp(ArrayList<UnePlancheNew> planches/*, int firstPositionX, int firstPositionY*/)
     {
         boolean isAddedToPlanche = false;
-        if (this.isActif)
+        if (this.isActive)
         {
             for (int i = 0; i < planches.size(); i++)
             {

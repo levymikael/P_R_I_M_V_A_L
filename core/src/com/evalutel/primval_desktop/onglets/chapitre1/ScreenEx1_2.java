@@ -149,7 +149,8 @@ public class ScreenEx1_2 extends ScreenOnglet
                     if (objectTouched instanceof UneBille)
                     {
                         UneBille billeAux = (UneBille) objectTouched;
-//                        billeAux.isActif = true;
+                        reserveBilles.isActive();
+                        reserveBilles.setActive(true);
                         billeAux.touchDown();
                         break;
                     }
