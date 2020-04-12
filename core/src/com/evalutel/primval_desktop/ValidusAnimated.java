@@ -2,6 +2,7 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,6 +18,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     public boolean isActif;
     public boolean isSpeaking;
     private TextureRegion defaultTextureRegion;
+    private TextureRegion textureRegionInactif;
 
     Music music;
 
@@ -27,7 +29,10 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
         defaultTextureRegion = animationFrames[0];
 
+        textureRegionInactif = new TextureRegion(new Texture(Gdx.files.internal("Images/Validus/validusAlpha.png")));
+
         animation = new Animation(1f / 15f, animationFrames);
+
 
     }
 
@@ -55,7 +60,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
         });
     }
 
-    public void stopMusic ()
+    public void stopMusic()
     {
         music.stop();
         music.dispose();
@@ -72,9 +77,9 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     {
         ArrayList<String> imgValidusPaths = new ArrayList<>();
 
-        int validusDirectorySize = new File("Images/Validus").listFiles().length;
+        int validusDirectorySize = new File("Images/Validus").listFiles().length - 1;
 
-        String imgAux = "";
+        String imgAux;
 
         for (int i = 0; i < validusDirectorySize - 1; i++)
         {
@@ -154,7 +159,14 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
         }
         else
         {
-            batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+            if (isActif)
+            {
+                batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+            }
+            else
+            {
+                batch.draw(textureRegionInactif, currentPositionX, currentPositionY, animationWidth, animationHeight);
+            }
         }
     }
 

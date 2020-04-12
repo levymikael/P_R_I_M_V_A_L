@@ -11,13 +11,13 @@ import java.util.Timer;
 
 public class UneBille extends AnimationImageNew implements MyTouchInterface, MyDrawInterface
 {
-    Animation animation;
+    //    Animation animation;
     private Timer timer = new Timer();
     public UnePlancheNew plancheNew = null;
-    private Object unePlancheNew;
-    private Object unContainer;
+    //    private Object unePlancheNew;
+//    private Object unContainer;
     public ReserveBilles reserveBilles;
-    public boolean isActif;
+    public boolean isActif = true;
 
 
     public UneBille(int startPositionX, int startPositionY, float animationHeight)
@@ -79,6 +79,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
         {
             plancheNew.removeBille(this);
         }
+
     }
 
     public void touchUp(ArrayList<UnePlancheNew> planches/*, int firstPositionX, int firstPositionY*/)
@@ -86,7 +87,6 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
         boolean isAddedToPlanche = false;
         if (this.isActif)
         {
-
             for (int i = 0; i < planches.size(); i++)
             {
                 UnePlancheNew plancheAux = planches.get(i);

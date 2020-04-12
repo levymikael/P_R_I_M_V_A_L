@@ -126,6 +126,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             UneBille billeAdded = reserveBilles.getBilleAndRemove();
             billeAdded.setVisible(true);
             objectTouched = billeAdded;
+            billeAdded.setActive(true);
 
         }
         else if (validusAnimated.contains(mousePointerX, mousePointerY))
@@ -148,6 +149,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                     if (objectTouched instanceof UneBille)
                     {
                         UneBille billeAux = (UneBille) objectTouched;
+//                        billeAux.isActif = true;
                         billeAux.touchDown();
                         break;
                     }
@@ -180,7 +182,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             {
                 UneBille billeAux = (UneBille) objectTouched;
                 billeAux.touchUp(allPlanches);
-
                 billesList.add(billeAux);
             }
             else if (objectTouched instanceof ValidusAnimated)
@@ -342,7 +343,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                 {
                     activiteView.addTextActivite("Tu t'es trompé essaie encore.");
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
-
                 }
                 failedAttempts++;
 
