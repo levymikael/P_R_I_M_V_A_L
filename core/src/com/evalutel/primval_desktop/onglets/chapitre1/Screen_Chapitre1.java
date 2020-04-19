@@ -60,6 +60,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
     MyButtonRetour myButtonRetour;
 
+    FreeTypeFontGenerator generator;
+
 
     public Screen_Chapitre1(Game game, DatabaseDesktop dataBase)
     {
@@ -71,7 +73,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         BitmapFont bitmapFont;
 
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 36;
         bitmapFont = generator.generateFont(parameter);

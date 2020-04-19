@@ -77,7 +77,12 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     {
         ArrayList<String> imgValidusPaths = new ArrayList<>();
 
-        int validusDirectorySize = new File("Images/Validus").listFiles().length - 1;
+
+
+        int validusDirectorySize = new File("/Images/Validus").listFiles().length - 1;
+
+        int ok = 5;
+        ok++;
 
         String imgAux;
 
