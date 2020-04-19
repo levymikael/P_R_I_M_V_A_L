@@ -2,6 +2,7 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -13,12 +14,14 @@ import java.util.ArrayList;
 
 public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterface */ implements MyTouchInterface, MyPauseInterface
 {
-
     public MyTimer.TaskEtape etapeCorrection;
     public boolean isActif;
     public boolean isSpeaking;
-    private TextureRegion defaultTextureRegion;
+    protected TextureRegion defaultTextureRegion;
     private TextureRegion textureRegionInactif;
+
+    static String directory = System.getProperty("user.dir");
+    static FileHandle fh = Gdx.files.absolute(directory + "/Images/Validus");
 
     Music music;
 
@@ -27,11 +30,20 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     {
         super(getAnimationValidus(), startPositionX, startPositionY, animationWidth, animationHeight);
 
-        defaultTextureRegion = animationFrames[0];
-
+//        if (animationFrames.length != 0)
+//        {
+            defaultTextureRegion = animationFrames[0];
+//        }
+//        else
+//        {
+//            defaultTextureRegion = new TextureRegion(new Texture(fh + "/vo00000.png"));
+//        }
         textureRegionInactif = new TextureRegion(new Texture(Gdx.files.internal("Images/Validus/validusAlpha.png")));
 
         animation = new Animation(1f / 15f, animationFrames);
+
+        int ok = 5;
+        ok++;
 
 
     }
@@ -78,8 +90,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
         ArrayList<String> imgValidusPaths = new ArrayList<>();
 
 
-
-        int validusDirectorySize = new File("/Images/Validus").listFiles().length - 1;
+        int validusDirectorySize = fh.list().length - 1;
 
         int ok = 5;
         ok++;
@@ -90,17 +101,17 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
         {
             if (i < 10)
             {
-                imgAux = "Images/Validus/vo0000" + i + ".png";
+                imgAux = fh + "/vo0000" + i + ".png";
                 imgValidusPaths.add(imgAux);
             }
             else if (i >= 10 && i < 100)
             {
-                imgAux = "Images/Validus/vo000" + i + ".png";
+                imgAux = fh + "/vo000" + i + ".png";
                 imgValidusPaths.add(imgAux);
             }
             else
             {
-                imgAux = "Images/Validus/vo00" + i + ".png";
+                imgAux = fh + "/vo00" + i + ".png";
                 imgValidusPaths.add(imgAux);
             }
         }
@@ -179,7 +190,6 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     public void myPause()
     {
         if (music != null)
-
         {
             music.pause();
         }
@@ -191,7 +201,6 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     public void myResume()
     {
         if (music != null)
-
         {
             music.play();
         }

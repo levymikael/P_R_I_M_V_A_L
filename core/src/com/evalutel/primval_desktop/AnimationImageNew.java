@@ -30,6 +30,7 @@ public class AnimationImageNew implements MyDrawInterface
     protected int screenHeight;
 
     protected boolean isVisible = true;
+    int framesToAnimateQuantity;
 
 
     public AnimationImageNew(ArrayList<String> imagesPaths, int startPositionX, int startPositionY, float animationWidth, float animationHeight)
@@ -39,7 +40,18 @@ public class AnimationImageNew implements MyDrawInterface
         this.currentPositionX = startPositionX;
         this.currentPositionY = startPositionY;
 
-        int framesToAnimateQuantity = imagesPaths.size();
+        if (imagesPaths.size() == 0)
+        {
+             framesToAnimateQuantity = 1;
+        }
+        else
+        {
+             framesToAnimateQuantity = imagesPaths.size();
+        }
+        int ok = 5;
+        ok++;
+
+
         animationFrames = new TextureRegion[framesToAnimateQuantity];
 
         screenWidth = Gdx.graphics.getWidth();
@@ -58,23 +70,12 @@ public class AnimationImageNew implements MyDrawInterface
         animation = new Animation(1f / 6f, animationFrames);
 
 
-
     }
 
     public AnimationImageNew(String oneImagePath, int startPositionX, int startPositionY, float animationWidth, float animationHeight)
     {
         this(arrayFromImage(oneImagePath), startPositionX, startPositionY, animationWidth, animationHeight);
     }
-
-
-//    public AnimationImageNew(float startPositionX, float startPositionY, int animationWidth, int animationHeight, String numExercice, String consigneExerciceTa)
-//    {
-//    }
-//
-//    public AnimationImageNew(int startPositionX, int startPositionY, float animationWidth)
-//    {
-//
-//    }
 
 
     public void setPosition(int x, int y)
