@@ -27,7 +27,8 @@ public class AnimationImage extends Actor implements InputProcessor
     public boolean animationContinue = true;
 
 
-    public AnimationImage(ArrayList<String> imagesPaths, float startPositionX, float startPositionY, float animationHeight, float animationWidth) {
+    public AnimationImage(ArrayList<String> imagesPaths, float startPositionX, float startPositionY, float animationHeight, float animationWidth)
+    {
 
         this.animationHeight = animationHeight;
         this.animationWidth = animationWidth;
@@ -39,7 +40,8 @@ public class AnimationImage extends Actor implements InputProcessor
         animationFrames = new TextureRegion[framesToAnimateQuantity];
 
 
-        for (int i = 0; i < framesToAnimateQuantity; i++) {
+        for (int i = 0; i < framesToAnimateQuantity; i++)
+        {
             String pathAux = imagesPaths.get(i);
             Texture imgAux = new Texture(pathAux);
             TextureRegion textureRegionAux = new TextureRegion(imgAux);
@@ -47,7 +49,7 @@ public class AnimationImage extends Actor implements InputProcessor
 
         }
 
-        animation = new Animation(1f / 6f, animationFrames);
+        animation = new Animation(1f / 6f, (Object[]) animationFrames);
 
         setPosition(startPositionX, startPositionY);
         setWidth(animationWidth);
@@ -56,7 +58,8 @@ public class AnimationImage extends Actor implements InputProcessor
 
 //Veiller a ce que les images a animer possedent la meme nomenclature
 
-    public AnimationImage(String cheminDossier, String nomImageAAnimer, float startPositionX, float startPositionY, float animationHeight, float animationWidth) {
+    public AnimationImage(String cheminDossier, String nomImageAAnimer, float startPositionX, float startPositionY, float animationHeight, float animationWidth)
+    {
 
         this.animationHeight = animationHeight;
         this.animationWidth = animationWidth;
@@ -68,19 +71,21 @@ public class AnimationImage extends Actor implements InputProcessor
         animationFrames = new TextureRegion[framesToAnimateQuantity];
 
 
-        for (int i = 0; i < framesToAnimateQuantity; i++) {
+        for (int i = 0; i < framesToAnimateQuantity; i++)
+        {
             Texture imgAux = new Texture(cheminDossier + "/" + nomImageAAnimer + i + ".png");
             TextureRegion textureRegionAux = new TextureRegion(imgAux);
             animationFrames[i] = textureRegionAux;
 
         }
 
-        animation = new Animation(1f / 6f, animationFrames);
+        animation = new Animation(1f / 6f, (Object[]) animationFrames);
 
         setPosition(startPositionX, startPositionY);
     }
 
-    public void animateImage (long animationDureemillis, boolean animationContinue,float deplacementEnX, float deplacementEnY){
+    public void animateImage(long animationDureemillis, boolean animationContinue, float deplacementEnX, float deplacementEnY)
+    {
 
         this.animationVitesse = animationDureemillis;
         this.animationContinue = animationContinue;
@@ -88,55 +93,63 @@ public class AnimationImage extends Actor implements InputProcessor
         this.deplacementEnY = deplacementEnY;
 
 
-        animation = new Animation(1f / 6f, animationFrames);
+        animation = new Animation(1f / 6f, (Object[]) animationFrames);
 
         long deltaTime = 10;
-        long nbIterations = animationDureemillis/deltaTime;
+        long nbIterations = animationDureemillis / deltaTime;
 
-        float deltaX = (deplacementEnX - currentPositionX)/nbIterations ;
-        float deltaY = (deplacementEnY - currentPositionY)/nbIterations;
+        float deltaX = (deplacementEnX - currentPositionX) / nbIterations;
+        float deltaY = (deplacementEnY - currentPositionY) / nbIterations;
 
         timer.schedule(new TaskMoveAnimation(deltaX, deltaY, deltaTime), deltaTime);
 
     }
 
     @Override
-    public boolean keyDown(int keycode) {
+    public boolean keyDown(int keycode)
+    {
         return false;
     }
 
     @Override
-    public boolean keyUp(int keycode) {
+    public boolean keyUp(int keycode)
+    {
         return false;
     }
 
     @Override
-    public boolean keyTyped(char character) {
+    public boolean keyTyped(char character)
+    {
         return false;
     }
 
     @Override
-    public boolean mouseMoved(int screenX, int screenY) {
+    public boolean mouseMoved(int screenX, int screenY)
+    {
         return false;
     }
 
     @Override
-    public boolean scrolled(int amount) {
+    public boolean scrolled(int amount)
+    {
         return false;
     }
 
     @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+    public boolean touchDown(int screenX, int screenY, int pointer, int button)
+    {
         return false;
     }
 
     @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
+    public boolean touchDragged(int screenX, int screenY, int pointer)
+    {
         return false;
     }
 
     @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+    public boolean touchUp(int screenX, int screenY, int pointer, int button)
+    {
         return false;
     }
 
@@ -154,16 +167,17 @@ public class AnimationImage extends Actor implements InputProcessor
         }
 
         @Override
-        public void run() {
+        public void run()
+        {
 
             currentPositionX += deltaX;
             currentPositionY += deltaY;
 
-            double distanceCarre = Math.pow((double)(deplacementEnX - currentPositionX),2.0) + Math.pow((double)(deplacementEnY - currentPositionY),2.0);
+            double distanceCarre = Math.pow((double) (deplacementEnX - currentPositionX), 2.0) + Math.pow((double) (deplacementEnY - currentPositionY), 2.0);
 
-            double distanceStop = Math.pow((double)(deltaX),2.0) + Math.pow((double)(deltaY),2.0);
+            double distanceStop = Math.pow((double) (deltaX), 2.0) + Math.pow((double) (deltaY), 2.0);
 
-            if(distanceCarre > distanceStop * 2 )
+            if (distanceCarre > distanceStop * 2)
             {
                 timer.schedule(new TaskMoveAnimation(deltaX, deltaY, deltaTime), deltaTime);
             }
@@ -211,7 +225,8 @@ public class AnimationImage extends Actor implements InputProcessor
     }
 */
     @Override
-    public void act(float delta) {
+    public void act(float delta)
+    {
         super.act(delta);
 
 

@@ -12,7 +12,7 @@ public class UnOiseau extends AnimationImageNew implements MyPauseInterface
 
 //
 
-        animation = new Animation(1f/6f, animationFrames);
+        animation = new Animation(1f/6f, (Object[])animationFrames);
 //        setTouchable(Touchable.enabled);
 //
 //        setWidth(200);

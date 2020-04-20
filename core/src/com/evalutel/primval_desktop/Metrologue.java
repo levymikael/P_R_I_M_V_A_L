@@ -15,7 +15,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
     public int largeurBille;
 
     public boolean isActif;
-     public boolean isSpeaking;
+    public boolean isSpeaking;
 
     protected boolean isPaused = true;
     private TextureRegion defaultTextureRegion;
@@ -28,7 +28,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
         super(getAnimationMetrologue(), startPositionX, startpositionY, animationWidth, animationHeight);
 
 
-        animation = new Animation(1f / 15f, animationFrames);
+        animation = new Animation(1f / 15f, (Object[]) animationFrames);
 
     }
 
@@ -61,7 +61,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
         });
     }
 
-    public void stopMusic ()
+    public void stopMusic()
     {
         music.stop();
         music.dispose();
@@ -116,7 +116,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
         {
             music.pause();
 
-            Gdx.app.log("SONG",Float.toString(music.getPosition()));
+            Gdx.app.log("SONG", Float.toString(music.getPosition()));
         }
     }
 

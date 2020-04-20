@@ -32,7 +32,7 @@ public class Screen2Test implements Screen {
         }
 
         // fps vitesse de l'animation --> utiliser des float
-        animation = new Animation(1f / 6f, animationFrames);
+        animation = new Animation(1f / 6f, (Object[])animationFrames);
 
         //Section bouton
 

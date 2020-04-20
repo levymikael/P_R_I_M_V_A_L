@@ -47,7 +47,7 @@ public class DragReserve2Container extends Actor {
             animationFrames[i] = textureRegionAux;
         }
 
-        animation = new Animation(1f / 17f, animationFrames);
+        animation = new Animation(1f / 17f, (Object[]) animationFrames);
 
         setColor(Color.GREEN);
 

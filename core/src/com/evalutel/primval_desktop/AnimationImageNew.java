@@ -30,7 +30,6 @@ public class AnimationImageNew implements MyDrawInterface
     protected int screenHeight;
 
     protected boolean isVisible = true;
-    int framesToAnimateQuantity;
 
 
     public AnimationImageNew(ArrayList<String> imagesPaths, int startPositionX, int startPositionY, float animationWidth, float animationHeight)
@@ -40,19 +39,26 @@ public class AnimationImageNew implements MyDrawInterface
         this.currentPositionX = startPositionX;
         this.currentPositionY = startPositionY;
 
+        int framesToAnimateQuantity = 0;
+
+
         if (imagesPaths.size() == 0)
         {
-             framesToAnimateQuantity = 1;
+            framesToAnimateQuantity = 1;
+            Gdx.app.log("Methode animation", "imagesPath size =1" + this);
+
         }
         else
         {
-             framesToAnimateQuantity = imagesPaths.size();
+            framesToAnimateQuantity = imagesPaths.size();
+            Gdx.app.log("Methode animation", Integer.toString(framesToAnimateQuantity));
         }
         int ok = 5;
         ok++;
 
 
         animationFrames = new TextureRegion[framesToAnimateQuantity];
+
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
@@ -67,7 +73,7 @@ public class AnimationImageNew implements MyDrawInterface
             animationFrames[i] = textureRegionAux;
         }
 
-        animation = new Animation(1f / 6f, animationFrames);
+        animation = new Animation(1f / 6f, (Object[]) animationFrames);
 
 
     }
@@ -114,7 +120,7 @@ public class AnimationImageNew implements MyDrawInterface
         this.deplacementEnX = deplacementEnX;
         this.deplacementEnY = deplacementEnY;
 
-        animation = new Animation(vitesse, animationFrames);
+        animation = new Animation(vitesse, (Object[]) animationFrames);
 
         long deltaTime = 20;
         long nbIterations = animationDureemillis / deltaTime;

@@ -31,6 +31,8 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
         super(getAnimationValidus(), startPositionX, startPositionY, animationWidth, animationHeight);
 
 //        if (animationFrames.length != 0)
+
+        System.out.println(animationFrames);
 //        {
             defaultTextureRegion = animationFrames[0];
 //        }
@@ -40,7 +42,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 //        }
         textureRegionInactif = new TextureRegion(new Texture(Gdx.files.internal("Images/Validus/validusAlpha.png")));
 
-        animation = new Animation(1f / 15f, animationFrames);
+        animation = new Animation(1f / 15f, (Object[]) animationFrames);
 
         int ok = 5;
         ok++;

@@ -223,15 +223,11 @@ public class MyDataBase
         {
             totalNoteMax.moveToNext();
             totalMaxNoteforIdProfil = totalNoteMax.getInt(1);
-
         }
 
 
         String totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/" + totalMaxNoteforIdProfil;
 
-
-        int ok = 5;
-        ok++;
 
         return totalNotePageForIdProfil;
     }
