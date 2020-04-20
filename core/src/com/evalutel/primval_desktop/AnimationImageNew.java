@@ -39,7 +39,7 @@ public class AnimationImageNew implements MyDrawInterface
         this.currentPositionX = startPositionX;
         this.currentPositionY = startPositionY;
 
-        int framesToAnimateQuantity = 0;
+        int framesToAnimateQuantity ;
 
 
         if (imagesPaths.size() == 0)
@@ -53,8 +53,7 @@ public class AnimationImageNew implements MyDrawInterface
             framesToAnimateQuantity = imagesPaths.size();
             Gdx.app.log("Methode animation", Integer.toString(framesToAnimateQuantity));
         }
-        int ok = 5;
-        ok++;
+
 
 
         animationFrames = new TextureRegion[framesToAnimateQuantity];
@@ -67,6 +66,8 @@ public class AnimationImageNew implements MyDrawInterface
         for (int i = 0; i < framesToAnimateQuantity; i++)
         {
             String pathAux = imagesPaths.get(i);
+            int ok = 5;
+            ok++;
 
             Texture imgAux = new Texture(pathAux);
             TextureRegion textureRegionAux = new TextureRegion(imgAux);

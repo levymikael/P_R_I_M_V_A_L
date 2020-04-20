@@ -15,6 +15,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Chapitre1;
+import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Sommaire_General;
 
 
 public class LaunchGame extends Game implements ApplicationListener
@@ -40,7 +41,8 @@ public class LaunchGame extends Game implements ApplicationListener
 //		this.setScreen(new ScreenOnglet());
 //		this.setScreen(new ScreenEx1_1());
 //		this.setScreen(new ScreenEx1_2());
-        this.setScreen(new Screen_Chapitre1(this, new DatabaseDesktop()));
+        this.setScreen(new Screen_Sommaire_General(this, new DatabaseDesktop()));
+//        this.setScreen(new Screen_Chapitre1(this, new DatabaseDesktop()));
 
     }
 

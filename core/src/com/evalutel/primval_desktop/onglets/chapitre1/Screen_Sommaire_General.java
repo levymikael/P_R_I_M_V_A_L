@@ -13,15 +13,18 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
 import com.evalutel.primval_desktop.MrNotes;
+import com.evalutel.primval_desktop.MrNotes2;
 import com.evalutel.primval_desktop.MrTemps;
 import com.evalutel.primval_desktop.MyButtonBuyAnotherChapter;
 import com.evalutel.primval_desktop.MyButtonRetour;
@@ -33,7 +36,7 @@ import com.evalutel.primval_desktop.UnePlancheNew;
 import java.util.ArrayList;
 
 
-public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, ApplicationListener
+public class Screen_Sommaire_General extends Game implements Screen, InputProcessor, ApplicationListener
 {
     private DatabaseDesktop dataBase;
     protected Stage stage;
@@ -49,19 +52,23 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     Texture sacDebilles;
 
     ListExercicesActiviteView listExercicesActiviteView;
-    ScreeenBackgroundImage fondEspaceParent;
+    ScreeenBackgroundImage fondSommairee;
     ScreeenBackgroundImage fondSommaire;
-    MrNotes mrNotes;
+    ScreeenBackgroundImage imgSommaire;
+
+    MrNotes2 mrNotes2;
     MrTemps mrTemps;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
-    //
-    MyButtonRetour myButtonRetour;
+
+    Table chapitresOnglet;
 
     FreeTypeFontGenerator generator;
 
+    Texture logoTitre;
 
-    public Screen_Chapitre1(Game game, DatabaseDesktop dataBase)
+
+    public Screen_Sommaire_General(final Game game, final DatabaseDesktop dataBase)
     {
         this.game = game;
         this.dataBase = dataBase;
@@ -77,10 +84,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
-//        Label.LabelStyle labelStyle = new Label.LabelStyle();
-//        labelStyle.font = bitmapFont;
-//        labelStyle.fontColor = Color.BLACK;
-//
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
         labelStyleBlue.fontColor = Color.BLUE;
@@ -90,34 +93,53 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         allDrawables = new ArrayList<>();
 
-        fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
+        fondSommairee = new ScreeenBackgroundImage("Images/Sommaire/fond_sommaire_color.jpg");
 
-        fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
+        fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/sommaire_bandeau_gauche.jpg");
 
-        listExercicesActiviteView = new ListExercicesActiviteView(stage, game, dataBase);
-
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase);
-        myButtonRetour.setPosition(screenWidth / 25, 4 * screenHeight / 5);
-
-        sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
+        imgSommaire = new ScreeenBackgroundImage("Images/Sommaire/image_sommaire.png");
 
 
-        Label labelChap1Titre = new Label("Pratique des nombres de 1 à 9", labelStyleBlue);
-        Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
-
-        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, textureNumber1);
-        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 3 * screenHeight / 4);
-        stage.addActor(nomChapitre);
+//        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15);
+//        myButtonRetour.setPosition(screenWidth / 25, 4 * screenHeight / 5);
+//
+//        sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
 
 
-        int chapritreNum = 1;
+//        Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
 
-        mrNotes = new MrNotes(stage, dataBase);
-        mrTemps = new MrTemps(stage, dataBase, chapritreNum);
+//        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, textureNumber1);
+//        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 3 * screenHeight / 4);
+//        stage.addActor(nomChapitre);
+
+        logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
 
 
-        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, screenWidth / 4, screenHeight / 12);
-        myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);
+        mrNotes2 = new MrNotes2(stage, dataBase);
+
+        chapitresOnglet = new Table();
+        chapitresOnglet.setPosition(7 * screenWidth / 8, 11 * screenHeight / 12);
+
+        Label labelChapitres = new Label("Chapitres", labelStyleBlue);
+
+
+        Table chapitresButton = new Table();
+        chapitresButton.setPosition(screenWidth / 25, 2 * screenHeight / 7);
+        chapitresButton.add(labelChapitres);
+        stage.addActor(chapitresButton);
+
+        chapitresButton.addListener(
+                new ClickListener()
+                {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y)
+                    {
+                        game.setScreen(new Screen_Chapitre1(game, dataBase));
+
+                        System.out.println("I got clicked!5");
+                    }
+                }
+        );
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -182,8 +204,9 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        fondEspaceParent.myDraw(batch);
-        fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6,0,0);
+        fondSommairee.myDraw(batch);
+        fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);
+        imgSommaire.myDraw2(batch, 4 * screenWidth / 5, 4 * screenHeight / 5, screenWidth / 5, 0);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -194,7 +217,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
             }
         }
 
-        batch.draw(sacDebilles, screenWidth / 2 - sacDebilles.getWidth() / 2, 4 * screenHeight / 5);
+        batch.draw(logoTitre, screenWidth / 30, 14 * screenHeight / 15 - logoTitre.getHeight());
 
 
         batch.end();

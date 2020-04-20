@@ -34,8 +34,8 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
         System.out.println(animationFrames);
 //        {
-            defaultTextureRegion = animationFrames[0];
-//        }
+            defaultTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/Validus/vo" +
+                    "00000.png")));
 //        else
 //        {
 //            defaultTextureRegion = new TextureRegion(new Texture(fh + "/vo00000.png"));

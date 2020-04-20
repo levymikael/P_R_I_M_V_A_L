@@ -139,7 +139,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 0)
             {
-                oiseau.animateImage(1000, true, posX, posY, new JeVoisUnOIseau(2000), 1000, 1f /6f);
+                oiseau.animateImage(1000, true, posX, posY, new JeVoisUnOIseau(2000), 1000, 1f / 6f);
             }
             else if (cptOiseau == 2)
             {
@@ -460,8 +460,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
         }
     }
-
-
 
 
     public ArrayList<UneBille> autoFillPlanche()
