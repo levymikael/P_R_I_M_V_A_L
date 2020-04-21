@@ -8,8 +8,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
@@ -18,10 +20,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
+import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
 import com.evalutel.primval_desktop.MrNotes;
 import com.evalutel.primval_desktop.MrNotes2;
@@ -49,7 +56,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
     private Viewport viewport;
 
-    Texture sacDebilles;
 
     ListExercicesActiviteView listExercicesActiviteView;
     ScreeenBackgroundImage fondSommairee;
@@ -61,7 +67,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
 
-    Table chapitresOnglet;
+//    Table chapitresOnglet;
 
     FreeTypeFontGenerator generator;
 
@@ -78,7 +84,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         BitmapFont bitmapFont;
 
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 36;
         bitmapFont = generator.generateFont(parameter);
@@ -100,46 +106,70 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         imgSommaire = new ScreeenBackgroundImage("Images/Sommaire/image_sommaire.png");
 
 
-//        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15);
-//        myButtonRetour.setPosition(screenWidth / 25, 4 * screenHeight / 5);
-//
-//        sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
-
-
-//        Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
-
-//        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, textureNumber1);
-//        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 3 * screenHeight / 4);
-//        stage.addActor(nomChapitre);
-
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
 
 
         mrNotes2 = new MrNotes2(stage, dataBase);
 
-        chapitresOnglet = new Table();
-        chapitresOnglet.setPosition(7 * screenWidth / 8, 11 * screenHeight / 12);
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
+        Label labelResultats = new Label("Résultats", labelStyleBlue);
+        Label labelEspaceParents = new Label("Espace Parents", labelStyleBlue);
+        Label labelPresentation = new Label("Présentation", labelStyleBlue);
+
+
+        Table container = new Table();
+        container.setPosition(screenWidth / 30, 2 * screenHeight / 7);
+        container.setWidth(screenWidth / 7);
+        container.setHeight(screenHeight / 6);
+
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
 
 
         Table chapitresButton = new Table();
-        chapitresButton.setPosition(screenWidth / 25, 2 * screenHeight / 7);
         chapitresButton.add(labelChapitres);
-        stage.addActor(chapitresButton);
+        chapitresButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+        chapitresButton.setSize(screenWidth / 10, screenHeight / 12);
 
-        chapitresButton.addListener(
-                new ClickListener()
-                {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y)
-                    {
-                        game.setScreen(new Screen_Chapitre1(game, dataBase));
+        Table resultatsButton = new Table();
+        resultatsButton.add(labelResultats);
+        resultatsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
-                        System.out.println("I got clicked!5");
-                    }
-                }
-        );
+
+        Table espaceParentsButton = new Table();
+        espaceParentsButton.add(labelEspaceParents);
+        espaceParentsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+
+
+        Table presentation = new Table();
+        presentation.add(labelPresentation);
+        presentation.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+
+
+        container.add(chapitresButton).pad(20).align(Align.center);
+        container.row();
+        container.add(resultatsButton).pad(20).align(Align.center);
+        container.row();
+        container.add(espaceParentsButton).pad(20).align(Align.center);
+        container.row();
+        container.add(presentation).pad(20).align(Align.center);
+
+
+        container.debug();
+
+
+        stage.addActor(container);
+
+        chapitresButton.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                game.setScreen(new Screen_Chapitre1(game, dataBase));
+
+                Gdx.app.log("chapitres button", "I got clicked!");
+            }
+        });
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -206,7 +236,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         fondSommairee.myDraw(batch);
         fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);
-        imgSommaire.myDraw2(batch, 4 * screenWidth / 5, 4 * screenHeight / 5, screenWidth / 5, 0);
+        imgSommaire.myDraw2(batch, ((3 * screenWidth / 5) * 600) / 680, ((3 * screenHeight / 5) * 600) / 680, screenWidth / 3, screenHeight/5);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -248,8 +278,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         width = 2400;
         height = 1350;
 
-
-//        viewport.update(width, height);
     }
 
     @Override

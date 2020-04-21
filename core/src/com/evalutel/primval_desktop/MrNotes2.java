@@ -51,14 +51,15 @@ public class MrNotes2 implements MyDrawInterface
 
         Table container = new Table();
         stage.addActor(container);
-        container.setSize(screenWidth / 10, screenWidth / 9);
-        container.setPosition( screenWidth / 25, 4 * screenHeight / 10);
+        container.setSize(screenWidth / 10, screenWidth / 25);
+        container.setPosition(screenWidth / 25, 5 * screenHeight / 10);
 
         Table mrNotes = new Table();
         mrNotes.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
 
         Table notes = new Table();
         notes.add(labelNotes);
+        notes.setBackground(new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("Images/Backgrounds/web_hi_res_512.png")))));
 
         container.add(mrNotes);
         container.add(notes);

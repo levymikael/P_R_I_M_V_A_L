@@ -42,16 +42,17 @@ public class AnimationImageNew implements MyDrawInterface
         int framesToAnimateQuantity ;
 
 
+
         if (imagesPaths.size() == 0)
         {
             framesToAnimateQuantity = 1;
-            Gdx.app.log("Methode animation", "imagesPath size =1" + this);
+            Gdx.app.log("Methode animation", "imagesPath size = 0" + this);
 
         }
         else
         {
             framesToAnimateQuantity = imagesPaths.size();
-            Gdx.app.log("Methode animation", Integer.toString(framesToAnimateQuantity));
+            Gdx.app.log("Methode animation", Integer.toString(framesToAnimateQuantity) + this);
         }
 
 

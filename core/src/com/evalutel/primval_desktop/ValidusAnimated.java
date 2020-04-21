@@ -34,8 +34,8 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
         System.out.println(animationFrames);
 //        {
-            defaultTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/Validus/vo" +
-                    "00000.png")));
+        defaultTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/Validus/vo" +
+                "00000.png")));
 //        else
 //        {
 //            defaultTextureRegion = new TextureRegion(new Texture(fh + "/vo00000.png"));
@@ -92,28 +92,28 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
         ArrayList<String> imgValidusPaths = new ArrayList<>();
 
 
-        int validusDirectorySize = fh.list().length - 1;
+//        int validusDirectorySize = fh.list().length - 1;
 
         int ok = 5;
         ok++;
 
         String imgAux;
 
-        for (int i = 0; i < validusDirectorySize - 1; i++)
+        for (int i = 0; i < 29; i++)
         {
             if (i < 10)
             {
-                imgAux = fh + "/vo0000" + i + ".png";
+                imgAux = "Images/Validus/vo0000" + i + ".png";
                 imgValidusPaths.add(imgAux);
             }
             else if (i >= 10 && i < 100)
             {
-                imgAux = fh + "/vo000" + i + ".png";
+                imgAux = "Images/Validus//vo000" + i + ".png";
                 imgValidusPaths.add(imgAux);
             }
             else
             {
-                imgAux = fh + "/vo00" + i + ".png";
+                imgAux = "/Images/Validus/vo00" + i + ".png";
                 imgValidusPaths.add(imgAux);
             }
         }

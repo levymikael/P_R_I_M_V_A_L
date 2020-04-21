@@ -83,7 +83,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
     {
         ArrayList<String> imgMetrologuePaths = new ArrayList<>();
 
-        int metrologueDirectorySize = new File("/Users/mikaellevy/Documents/Developper/Desktop/Primval-Dekstop/android/assets/Images/Metrologue").listFiles().length;
+        int metrologueDirectorySize = new File("Images/Metrologue").listFiles().length;
 
         String imgaux;
 

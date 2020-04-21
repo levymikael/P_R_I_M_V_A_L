@@ -183,7 +183,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         batch.setTransformMatrix(new Matrix4());
 
         fondEspaceParent.myDraw(batch);
-        fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6,0,0);
+        fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6, 0, 0);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
