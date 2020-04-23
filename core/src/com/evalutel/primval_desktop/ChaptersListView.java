@@ -6,19 +6,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.evalutel.primval_desktop.Database.DataBase;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.LigneTableaux;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
-public class ListExercicesActiviteView implements MyDrawInterface
+public class ChaptersListView implements MyDrawInterface
 {
     public float screenWidth;
     private boolean isVisible = true;
@@ -27,7 +25,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
     DatabaseDesktop dataBase;
 
-    public ListExercicesActiviteView(Stage stage, final Game game, final DatabaseDesktop dataBase)
+    public ChaptersListView(Stage stage, final Game game, final DatabaseDesktop dataBase)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
@@ -47,8 +45,8 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
         Table container = new Table();
         stage.addActor(container);
-        container.setSize(screenWidth, 3 * screenHeight / 5);
-        container.setPosition(0, 3 * screenHeight / 7 - container.getHeight() / 2);
+        container.setSize(screenWidth, 2 * screenHeight / 5);
+        container.setPosition(screenWidth / 40, screenHeight / 3 - container.getHeight());
 
         MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", 70, 70, "font/FRHND521_0.TTF");
         MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");

@@ -96,7 +96,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         listExercicesActiviteView = new ListExercicesActiviteView(stage, game, dataBase);
 
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase);
+        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase, "chapitres");
         myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
 
         sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
