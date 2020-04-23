@@ -2,6 +2,7 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,6 +22,9 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
     private TextureRegion defaultTextureRegion;
 
     Music music;
+
+    static String directory = System.getProperty("user.dir");
+    static FileHandle fh = Gdx.files.absolute(directory + "/Images/Metrologue");
 
     public Metrologue(int startPositionX, int startpositionY, int animationWidth, int animationHeight)
     {
@@ -83,11 +87,11 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
     {
         ArrayList<String> imgMetrologuePaths = new ArrayList<>();
 
-        int metrologueDirectorySize = new File("Images/Metrologue").listFiles().length;
+//        int metrologueDirectorySize = new File("Images/Metrologue").listFiles().length;
 
         String imgaux;
 
-        for (int i = 0; i < metrologueDirectorySize - 1; i++)
+        for (int i = 0; i < 29; i++)
         {
             if (i < 10)
             {

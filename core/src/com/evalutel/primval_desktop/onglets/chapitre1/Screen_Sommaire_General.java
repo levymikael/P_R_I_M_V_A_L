@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
@@ -57,7 +58,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     private Viewport viewport;
 
 
-    ListExercicesActiviteView listExercicesActiviteView;
     ScreeenBackgroundImage fondSommairee;
     ScreeenBackgroundImage fondSommaire;
     ScreeenBackgroundImage imgSommaire;
@@ -109,7 +109,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
 
 
-        mrNotes2 = new MrNotes2(stage, dataBase);
+        mrNotes2 = new MrNotes2(stage, dataBase,screenWidth / 25, 5 * screenHeight / 10);
 
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
@@ -126,14 +126,14 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
 
 
-        Table chapitresButton = new Table();
-        chapitresButton.add(labelChapitres);
-        chapitresButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-        chapitresButton.setSize(screenWidth / 10, screenHeight / 12);
+        Table chaptersButton = new Table();
+        chaptersButton.add(labelChapitres);
+        chaptersButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+        chaptersButton.setSize(screenWidth / 10, screenHeight / 12);
 
-        Table resultatsButton = new Table();
-        resultatsButton.add(labelResultats);
-        resultatsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+        Table resultsButton = new Table();
+        resultsButton.add(labelResultats);
+        resultsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
 
         Table espaceParentsButton = new Table();
@@ -146,9 +146,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         presentation.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
 
-        container.add(chapitresButton).pad(20).align(Align.center);
+        container.add(chaptersButton).pad(20).align(Align.center);
         container.row();
-        container.add(resultatsButton).pad(20).align(Align.center);
+        container.add(resultsButton).pad(20).align(Align.center);
         container.row();
         container.add(espaceParentsButton).pad(20).align(Align.center);
         container.row();
@@ -160,7 +160,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         stage.addActor(container);
 
-        chapitresButton.addListener(new ClickListener()
+        chaptersButton.addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -236,7 +236,8 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         fondSommairee.myDraw(batch);
         fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);
-        imgSommaire.myDraw2(batch, ((3 * screenWidth / 5) * 600) / 680, ((3 * screenHeight / 5) * 600) / 680, screenWidth / 3, screenHeight/5);
+        imgSommaire.myDraw2(batch, 680*2, 600*2 , screenWidth / 3, screenHeight/5);
+
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -255,19 +256,20 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-
-
     }
 
     @Override
     public void create()
     {
-        this.setScreen(game);
+//
         camera = new PerspectiveCamera();
         viewport = new FitViewport(800, 480, camera);
+
+//        stage = new Stage(new StretchViewport(width, height));
+
     }
 
-    private void setScreen(Game game)
+    private void setScreen()
     {
     }
 
@@ -275,8 +277,10 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     public void resize(int width, int height)
     {
         stage.getViewport().update(width, height, true);
-        width = 2400;
-        height = 1350;
+//        width = 2400;
+//        height = 1350;
+//        viewport.update(width, height);
+
 
     }
 

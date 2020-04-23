@@ -22,18 +22,18 @@ import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
 import com.evalutel.primval_desktop.MrNotes;
+import com.evalutel.primval_desktop.MrNotes2;
 import com.evalutel.primval_desktop.MrTemps;
+import com.evalutel.primval_desktop.MrTemps2;
 import com.evalutel.primval_desktop.MyButtonBuyAnotherChapter;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
-import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
-import com.evalutel.primval_desktop.UnePlancheNew;
 
 import java.util.ArrayList;
 
 
-public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, ApplicationListener
+public class Screen_All_Chapters extends Game implements Screen, InputProcessor, ApplicationListener
 {
     private DatabaseDesktop dataBase;
     protected Stage stage;
@@ -51,8 +51,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     ListExercicesActiviteView listExercicesActiviteView;
     ScreeenBackgroundImage fondEspaceParent;
     ScreeenBackgroundImage fondSommaire;
-    MrNotes mrNotes;
-    MrTemps mrTemps;
+    MrNotes2 mrNotes;
+    MrTemps2 mrTemps;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
     //
@@ -61,7 +61,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     FreeTypeFontGenerator generator;
 
 
-    public Screen_Chapitre1(Game game, DatabaseDesktop dataBase)
+    public Screen_All_Chapters(Game game, DatabaseDesktop dataBase)
     {
         this.game = game;
         this.dataBase = dataBase;
@@ -71,9 +71,9 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         BitmapFont bitmapFont;
 
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 36;
+        parameter.size = 50;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -81,9 +81,13 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 //        labelStyle.font = bitmapFont;
 //        labelStyle.fontColor = Color.BLACK;
 //
+        Label.LabelStyle labelStyleWhite = new Label.LabelStyle();
+        labelStyleWhite.font = bitmapFont;
+        labelStyleWhite.fontColor = Color.WHITE;
+
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
-        labelStyleBlue.fontColor = Color.BLUE;
+        labelStyleBlue.fontColor = Color.NAVY;
 
         screenHeight = Gdx.graphics.getHeight();
         screenWidth = Gdx.graphics.getWidth();
@@ -94,30 +98,28 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
 
-        listExercicesActiviteView = new ListExercicesActiviteView(stage, game, dataBase);
 
         myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase);
         myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
 
-        sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
 
+        Label labelChap1Titre = new Label("Calcul et géométrie", labelStyleWhite);
 
-        Label labelChap1Titre = new Label("Pratique des nombres de 1 à 9", labelStyleBlue);
-        Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
-
-        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, textureNumber1);
-        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 3 * screenHeight / 4);
+        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
+        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 9 * screenHeight / 10);
         stage.addActor(nomChapitre);
 
 
         int chapritreNum = 1;
 
-        mrNotes = new MrNotes(stage, dataBase);
-        mrTemps = new MrTemps(stage, dataBase, chapritreNum);
+        mrNotes = new MrNotes2(stage, dataBase, 21 * screenWidth / 25, 4 * screenHeight / 5);
+        mrTemps = new MrTemps2(stage, dataBase, chapritreNum);
 
 
-        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, screenWidth / 4, screenHeight / 12);
-        myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);
+        Table evalutelMotto = new Table();
+        evalutelMotto.
+
+
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -194,8 +196,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
             }
         }
 
-        batch.draw(sacDebilles, screenWidth / 2 - sacDebilles.getWidth() / 2, 4 * screenHeight / 5);
-
 
         batch.end();
 
@@ -209,11 +209,12 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     @Override
     public void create()
     {
+        this.setScreen(game);
         camera = new PerspectiveCamera();
         viewport = new FitViewport(800, 480, camera);
     }
 
-    private void setScreen()
+    private void setScreen(Game game)
     {
     }
 

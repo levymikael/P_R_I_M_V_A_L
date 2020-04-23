@@ -2,6 +2,7 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,23 +16,22 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Ex.User;
+import com.evalutel.primval_desktop.General.UIDesign;
 
 import java.util.concurrent.TimeUnit;
 
-public class MrTemps implements MyDrawInterface
+public class MrTemps2 implements MyDrawInterface
 {
     public float screenWidth;
     private boolean isVisible = true;
     BitmapFont bitmapFont;
 
-
     MyDataBase db;
 
-    public MrTemps(Stage stage, DatabaseDesktop dataBase, int chapitre)
+    public MrTemps2(Stage stage, DatabaseDesktop dataBase, int chapitre)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
-
 
         db = new MyDataBase(dataBase);
 
@@ -56,7 +56,7 @@ public class MrTemps implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 36;
+        parameter.size = 40;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -64,23 +64,28 @@ public class MrTemps implements MyDrawInterface
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
         labelStyle.fontColor = Color.GREEN;
-        Label labelNotes = new Label(duration, labelStyle);
+        Label labelTemps = new Label(duration, labelStyle);
 
-        Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_temps1.png"));
+        Texture textureMrTemps = new Texture(Gdx.files.internal("Images/mr_temps1.png"));
 
         Table container = new Table();
         stage.addActor(container);
-        container.setSize(screenWidth / 15, screenWidth / 7);
-        container.setPosition(6 * screenWidth / 8, 7 * screenHeight / 10);
+        container.setSize(screenWidth / 8, screenWidth / 25);
+        container.setPosition(16 * screenWidth / 25, 4 * screenHeight / 5);
 
         Table mrTemps = new Table();
-        mrTemps.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
+        mrTemps.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrTemps))));
+
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle((int) screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
+
+
 
         Table temps = new Table();
-        temps.add(labelNotes);
+        temps.add(labelTemps);
+        temps.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+
 
         container.add(mrTemps);
-        container.row();
         container.add(temps);
 
 
