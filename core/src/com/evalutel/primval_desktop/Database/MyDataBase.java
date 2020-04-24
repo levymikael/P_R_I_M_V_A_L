@@ -107,12 +107,7 @@ public class MyDataBase
             test.moveToNext();
             maxNotePageForIdProfil = test.getInt(1);
         }
-
-        int ok = 5;
-        ok++;
-
         return maxNotePageForIdProfil;
-
     }
 
 
@@ -139,10 +134,7 @@ public class MyDataBase
             test.moveToNext();
             maxNotePossiblePerExercice = test.getInt(1);
         }
-
-
         return maxNotePossiblePerExercice;
-
     }
 
     public int getMaxDureePageForIdProfil(/*User idProfil,*/ int chapitre, int onglet/*, int page*/)
@@ -155,11 +147,6 @@ public class MyDataBase
         {
             test.moveToNext();
             maxDureePageForIdProfil = test.getInt(1);
-
-            int ok = 5;
-            ok++;
-
-
         }
         return maxDureePageForIdProfil;
     }
@@ -169,6 +156,25 @@ public class MyDataBase
         long totalDureePageForIdProfil = 0;
 
         String sqlQuery = "SELECT sum(duree) from RESULTAT WHERE chapitre = " + chapitre;
+
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
+            test.moveToNext();
+            totalDureePageForIdProfil = test.getInt(1);
+
+            int ok = 5;
+            ok++;
+        }
+        return totalDureePageForIdProfil;
+    }
+
+    public long getTotalDureeAllForIdProfil()
+    {
+        long totalDureePageForIdProfil = 0;
+
+        String sqlQuery = "SELECT sum(duree) from RESULTAT";
 
         DataBase.Result test = database.query(sqlQuery);
 

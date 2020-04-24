@@ -28,18 +28,16 @@ public class MrTemps2 implements MyDrawInterface
 
     MyDataBase db;
 
-    public MrTemps2(Stage stage, DatabaseDesktop dataBase, int chapitre)
+    public MrTemps2(Stage stage, DatabaseDesktop dataBase)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
 
         db = new MyDataBase(dataBase);
 
-        long totalDuree = db.getTotalDureePageForIdProfil(chapitre);
-
+        long totalDuree = db.getTotalDureeAllForIdProfil();
 
         String duration = MillisToDuration(totalDuree);
-
 
         User user = new User();
         //user.setIdProfil(39);
@@ -77,7 +75,6 @@ public class MrTemps2 implements MyDrawInterface
         mrTemps.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrTemps))));
 
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle((int) screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
-
 
 
         Table temps = new Table();

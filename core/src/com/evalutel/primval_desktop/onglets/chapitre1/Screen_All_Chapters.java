@@ -16,27 +16,28 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.evalutel.primval_desktop.BackgroundColor;
-import com.evalutel.primval_desktop.ChaptersListView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.General.LigneTableaux;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
-import com.evalutel.primval_desktop.MrNotes;
 import com.evalutel.primval_desktop.MrNotes2;
-import com.evalutel.primval_desktop.MrTemps;
 import com.evalutel.primval_desktop.MrTemps2;
-import com.evalutel.primval_desktop.MyButtonBuyAnotherChapter;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
+import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 import java.util.ArrayList;
 
@@ -70,6 +71,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     FreeTypeFontGenerator generatorZAP;
     TextureRegionDrawable textureRegionDrawableBg;
 
+    BitmapFont bitmapFontZAP;
+
 
     public Screen_All_Chapters(Game game, DatabaseDesktop dataBase)
     {
@@ -79,7 +82,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFontFRHND;
-        BitmapFont bitmapFontZAP;
 
 
         generatorFRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
@@ -94,11 +96,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         bitmapFontZAP = generatorZAP.generateFont(parameterZAP);
         generatorZAP.dispose();
 
-
-//        Label.LabelStyle labelStyle = new Label.LabelStyle();
-//        labelStyle.font = bitmapFont;
-//        labelStyle.fontColor = Color.BLACK;
-//
         Label.LabelStyle labelStyleWhite = new Label.LabelStyle();
         labelStyleWhite.font = bitmapFontFRHND;
         labelStyleWhite.fontColor = Color.WHITE;
@@ -107,9 +104,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         labelStyleBlue.font = bitmapFontFRHND;
         labelStyleBlue.fontColor = Color.NAVY;
 
-        Label.LabelStyle labelStyleBlue2 = new Label.LabelStyle();
-        labelStyleBlue2.font = bitmapFontZAP;
-        labelStyleBlue2.fontColor = Color.NAVY;
 
         screenHeight = Gdx.graphics.getHeight();
         screenWidth = Gdx.graphics.getWidth();
@@ -119,7 +113,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
 
         fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
-
 
         myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase, "sommaire general");
         myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
@@ -131,16 +124,169 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 9 * screenHeight / 10);
         stage.addActor(nomChapitre);
 
-
-        int chapitreNum = 1;
-
         mrNotes = new MrNotes2(stage, dataBase, 21 * screenWidth / 25, 4 * screenHeight / 5);
-        mrTemps = new MrTemps2(stage, dataBase, chapitreNum);
+        mrTemps = new MrTemps2(stage, dataBase);
 
+        //tableau deroulant pour Evalutel motto et liste de chapitre
+
+
+        Table container = new Table();
+        Table table = new Table();
+
+        Table evalutelMotto = evalutelMotto();
+
+        Label labelChapterTitle = new Label("Chapitres", labelStyleBlue);
+
+        Table chapterTitle = TableauxTitreChapitre.getLigne(labelChapterTitle, null);
+//        chapterTitle.setPosition(screenWidth / 2 - chapterTitle.getWidth() / 2,  screenHeight / 40);
+//        chapterTitle.padTop(screenHeight / 40);
+//        stage.addActor(chapterTitle);
+
+        Table chaptersListView = chaptersListView();
+
+        ScrollPane scroll = new ScrollPane(table);
+        scroll.layout();
+
+        container.setSize(screenWidth, 2 * screenHeight / 3);
+
+
+        container.add(scroll).height(2 * screenHeight / 5);
+
+//        container.setWidth(screenWidth);
+        container.debug();
+        container.add(evalutelMotto);
+        container.row();
+        container.add(chapterTitle);
+        container.row();
+        container.add(chaptersListView);
+
+        stage.addActor(container);
+
+        Gdx.input.setInputProcessor(stage);
+    }
+
+
+    public Table chaptersListView()
+    {
+        screenWidth = Gdx.graphics.getWidth();
+        final int screenHeight = Gdx.graphics.getHeight();
+
+//        this.game = game;
+//        this.dataBase = dataBase;
+
+        String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
+        String label2 = "Faire correspondre des billes à des oiseaux";
+        String label3 = "Écriture des chiffres 1 à 9";
+        String label4 = "Prononciation des chiffres 1 à 9";
+        String label5 = "Compter des oiseaux et taper leur nombre";
+        String label6 = "Un gâteau pour plusieurs anniversaires";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
+
+        Table container = new Table();
+        container.setSize(screenWidth, 2 * screenHeight / 5);
+//        container.setPosition(screenWidth / 40, screenHeight / 3 - container.getHeight());
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", 70, 70, "font/FRHND521_0.TTF");
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", 50, 50, "font/FRHND521_0.TTF");
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
+
+        Table table = new Table();
+        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
+        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 2, dataBase);
+        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
+
+        table.add(tableEx1).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.row();
+        table.add(tableEx2).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.row();
+        table.add(tableEx3).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.row();
+        table.add(tableEx4).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.row();
+        table.add(tableEx5).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.row();
+        table.add(tableEx6).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.row();
+
+        table.setWidth(screenWidth);
+//
+//        ScrollPane scroll = new ScrollPane(table);
+//        scroll.layout();
+
+//        container.add(scroll).height(2 * screenHeight / 5);
+        container.row();
+
+        tableEx1.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                game.setScreen(new ScreenEx1_1(game, dataBase));
+                System.out.println("I got clicked!1");
+            }
+        });
+        tableEx2.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("I got clicked!2");
+                game.setScreen(new ScreenEx1_2(game, dataBase));
+            }
+        });
+        tableEx3.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("I got clicked!3");
+            }
+        });
+        tableEx4.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("I got clicked!4");
+            }
+        });
+        tableEx5.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("I got clicked!5");
+            }
+        });
+        tableEx6.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("I got clicked!6");
+            }
+        });
+
+        return container;
+    }
+
+    public Table evalutelMotto()
+    {
+        Label.LabelStyle labelStyleBlue2 = new Label.LabelStyle();
+        labelStyleBlue2.font = bitmapFontZAP;
+        labelStyleBlue2.fontColor = Color.NAVY;
+        Label labelMottoTitle = new Label("Primval développé par Evalutel, propose un programe complet de Math et de géométrie pour le Primaire basé sur notre devise:", labelStyleBlue2);
 
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
 
-        Label labelMottoTitle = new Label("Primval développé par Evalutel, propose un programe complet de Math et de géométrie pour le Primaire basé sur notre devise:", labelStyleBlue2);
 
         Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
         bgPixmap.setColor(Color.rgb888(234, 241, 250));
@@ -150,14 +296,13 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Table evalutelMotto = new Table();
         evalutelMotto.setBackground((textureRegionDrawableBg));
-
         evalutelMotto.setSize(19 * screenWidth / 20, screenHeight / 3);
-        evalutelMotto.setPosition(screenWidth / 40, (myButtonRetour.getY() - evalutelMotto.getHeight() - screenHeight / 40));
+//        container.setPosition(screenWidth / 40, /*(myButtonRetour.getY() - container.getHeight() - screenHeight / 40)*/0);
 
         evalutelMotto.add(labelMottoTitle).padBottom(screenHeight / 40);
+        evalutelMotto.padTop(screenHeight/40);
         evalutelMotto.row();
-        stage.addActor(evalutelMotto);
-        evalutelMotto.debug();
+//        evalutelMotto.debug();
 
         Table evalutelMottoDetails = new Table();
 
@@ -170,7 +315,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         manipulerTable.add(labelManipulerTitle);
         manipulerTable.row();
-        manipulerTable.add(labelManipulerText).width(screenWidth / 4).padLeft(screenWidth / 20).height(screenHeight / 5);
+        manipulerTable.add(labelManipulerText).width(screenWidth / 4).padLeft(screenWidth / 40).height(screenHeight / 5).padRight(screenWidth/40);
         manipulerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table apprendreTable = new Table();
@@ -181,9 +326,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         apprendreTable.add(labelApprendreTitle);
         apprendreTable.row();
-        apprendreTable.add(labelApprendreText).width(screenWidth / 4).padLeft(screenWidth / 20).height(screenHeight / 5);
+        apprendreTable.add(labelApprendreText).width(screenWidth / 4).padLeft(screenWidth / 40).height(screenHeight / 5).padRight(screenWidth/40);
         apprendreTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-
 
         Table evaluerTable = new Table();
         Label labelEvaluerTitle = new Label("EVALUER", labelStyleBlue2);
@@ -196,26 +340,13 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         evaluerTable.add(labelEvaluerText).width(screenWidth / 5).padLeft(screenWidth / 40).height(screenHeight / 5).padRight(screenWidth / 40);
         evaluerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
-        evalutelMottoDetails.add(manipulerTable).padLeft(screenWidth / 40);
-        evalutelMottoDetails.add(apprendreTable).padLeft(screenWidth / 40);
-        evalutelMottoDetails.add(evaluerTable).padLeft(screenWidth / 40);
-
-        evalutelMotto.add(evalutelMottoDetails);
-        stage.addActor(evalutelMotto);
-        evalutelMotto.debug();
+        evalutelMottoDetails.add(manipulerTable).padLeft(screenWidth / 80);
+        evalutelMottoDetails.add(apprendreTable).padLeft(screenWidth / 80);
+        evalutelMottoDetails.add(evaluerTable).padLeft(screenWidth / 80);
+        evalutelMotto.add(evalutelMottoDetails).padBottom(screenWidth/80);
 
 
-        Label labelChapterTitle = new Label("Chapitres", labelStyleBlue);
-
-        Table chapterTitle = TableauxTitreChapitre.getLigne(labelChapterTitle, null);
-
-        chapterTitle.setPosition(screenWidth / 2 - chapterTitle.getWidth() / 2, evalutelMotto.getY() - screenHeight / 40);
-        chapterTitle.padTop(screenHeight / 40);
-        stage.addActor(chapterTitle);
-
-        ChaptersListView chaptersListView = new ChaptersListView(stage, game, dataBase);
-
-        Gdx.input.setInputProcessor(stage);
+        return evalutelMotto;
     }
 
 

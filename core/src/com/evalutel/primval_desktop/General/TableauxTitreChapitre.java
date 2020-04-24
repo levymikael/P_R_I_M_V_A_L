@@ -13,14 +13,12 @@ import com.badlogic.gdx.utils.Align;
 
 public class TableauxTitreChapitre
 {
-
     static FreeTypeFontGenerator generator;
 
     public static Table getLigne(Label label, Texture texture)
     {
         Table table = new Table();
         int screenWidth = Gdx.graphics.getWidth();
-
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
 
@@ -33,14 +31,13 @@ public class TableauxTitreChapitre
         labelStyle.font = bitmapFont;
         labelStyle.fontColor = Color.BLACK;
 
-
         if (texture == null)
         {
-            table.add().width(120).height(120).align(Align.center);
+            table.add().width(screenWidth/12).height(120).align(Align.center);
         }
         else
         {
-            table.add(new Image(texture)).width(120).height(120).align(Align.center);
+            table.add(new Image(texture)).width(screenWidth/12).height(120).align(Align.center);
         }
         table.add().width(50).height(150);
         label.setFontScale(2);
