@@ -77,10 +77,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
-//        Label.LabelStyle labelStyle = new Label.LabelStyle();
-//        labelStyle.font = bitmapFont;
-//        labelStyle.fontColor = Color.BLACK;
-//
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
         labelStyleBlue.fontColor = Color.BLUE;

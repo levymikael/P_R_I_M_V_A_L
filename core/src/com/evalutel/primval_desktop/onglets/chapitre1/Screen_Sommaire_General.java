@@ -109,7 +109,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
 
 
-        mrNotes2 = new MrNotes2(stage, dataBase,screenWidth / 25, 5 * screenHeight / 10);
+        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 25, 5 * screenHeight / 10);
 
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
@@ -125,7 +125,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
 
-
         Table chaptersButton = new Table();
         chaptersButton.add(labelChapitres);
         chaptersButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
@@ -140,11 +139,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         espaceParentsButton.add(labelEspaceParents);
         espaceParentsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
-
         Table presentation = new Table();
         presentation.add(labelPresentation);
         presentation.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-
 
         container.add(chaptersButton).pad(20).align(Align.center);
         container.row();
@@ -155,7 +152,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         container.add(presentation).pad(20).align(Align.center);
 
 
-        container.debug();
+//        container.debug();
 
 
         stage.addActor(container);
@@ -165,9 +162,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new Screen_Chapitre1(game, dataBase));
+                game.setScreen(new Screen_All_ChaptersNew(game, dataBase));
 
-                Gdx.app.log("chapitres button", "I got clicked!");
+                Gdx.app.log("Screen All chapters ", "zclicked!");
             }
         });
 
@@ -236,7 +233,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         fondSommairee.myDraw(batch);
         fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);
-        imgSommaire.myDraw2(batch, 680*2, 600*2 , screenWidth / 3, screenHeight/5);
+        imgSommaire.myDraw2(batch, 680 * 2, 600 * 2, screenWidth / 3, screenHeight / 5);
 
 
         for (int i = 0; i < allDrawables.size(); i++)

@@ -121,7 +121,17 @@ public class LigneTableaux
         table.add().width(screenWidth / 25);
         table.add(labelOnglet).align(Align.center).width((float) (screenWidth * 0.5));
 
-        table.add(new Image(texture)).width(screenWidth / 70).height(30).align(Align.center);
+        if (texture == null)
+        {
+            table.add().width(screenWidth / 70).height(30).align(Align.center);
+
+        }
+
+        else
+        {
+            table.add(new Image(texture)).width(screenWidth / 70).height(30).align(Align.center);
+
+        }
         table.add().width(screenWidth / 20);
         table.add(labelDuration).align(Align.right).width(screenWidth / 12).align(Align.center);
         table.add().width(screenWidth / 25);

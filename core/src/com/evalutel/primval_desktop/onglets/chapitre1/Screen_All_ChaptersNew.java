@@ -16,19 +16,27 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.General.BoutonChapitres;
 import com.evalutel.primval_desktop.General.LigneTableaux;
+import com.evalutel.primval_desktop.General.ResourceManager;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
@@ -42,7 +50,7 @@ import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 import java.util.ArrayList;
 
 
-public class Screen_All_Chapters extends Game implements Screen, InputProcessor, ApplicationListener
+public class Screen_All_ChaptersNew extends Game implements Screen, InputProcessor, ApplicationListener
 {
     private DatabaseDesktop dataBase;
     protected Stage stage;
@@ -55,8 +63,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
     private Viewport viewport;
 
-    Texture sacDebilles;
-
     ListExercicesActiviteView listExercicesActiviteView;
     ScreeenBackgroundImage fondEspaceParent;
     ScreeenBackgroundImage fondSommaire;
@@ -64,7 +70,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     MrTemps2 mrTemps;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
-    //
     MyButtonRetour myButtonRetour;
 
     FreeTypeFontGenerator generatorFRHND;
@@ -74,7 +79,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     BitmapFont bitmapFontZAP;
 
 
-    public Screen_All_Chapters(Game game, DatabaseDesktop dataBase)
+    public Screen_All_ChaptersNew(Game game, DatabaseDesktop dataBase)
     {
         this.game = game;
         this.dataBase = dataBase;
@@ -82,7 +87,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFontFRHND;
-
 
         generatorFRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterFRHND = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -127,8 +131,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         mrNotes = new MrNotes2(stage, dataBase, 21 * screenWidth / 25, 4 * screenHeight / 5);
         mrTemps = new MrTemps2(stage, dataBase);
 
-        //tableau deroulant pour Evalutel motto et liste de chapitre
 
+        //tableau deroulant pour Evalutel motto et liste de chapitre
 
         Table container = new Table();
         Table table = new Table();
@@ -138,27 +142,40 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Label labelChapterTitle = new Label("Chapitres", labelStyleBlue);
 
         Table chapterTitle = TableauxTitreChapitre.getLigne(labelChapterTitle, null);
-//        chapterTitle.setPosition(screenWidth / 2 - chapterTitle.getWidth() / 2,  screenHeight / 40);
-//        chapterTitle.padTop(screenHeight / 40);
-//        stage.addActor(chapterTitle);
+        chapterTitle.setPosition(screenWidth / 2 - chapterTitle.getWidth() / 2, screenHeight / 40);
+        chapterTitle.padTop(screenHeight / 40);
 
         Table chaptersListView = chaptersListView();
+
+        container.setSize(screenWidth, (float) (2 * screenHeight));
+        container.setPosition(0, -1000);
+        table.setPosition(0, -1000);
+        table.setSize(screenWidth, (float) (2 * screenHeight));
+        container.setSize(screenWidth,screenHeight *2);
+        container.debug();
+        table.add(evalutelMotto).width(screenWidth).align(Align.center);
+        table.row();
+        table.add(chapterTitle).width(screenWidth).align(Align.center).padBottom(screenHeight / 20);
+        table.row();
+        table.add(chaptersListView).width(screenWidth).align(Align.center);
+        table.row();
+//        table.add(evalutelMotto3).width(screenWidth).align(Align.center);
+//        table.row();
+//        container.add(evalutelMotto2);
+//        container.row();
+//        container.add(evalutelMotto3);
+//        container.row();
+//        container.add(chapterTitle);
+//        container.row();
+//        container.add(chaptersListView);
+
+        table.setWidth(screenWidth);
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
 
-        container.setSize(screenWidth, 2 * screenHeight / 3);
-
-
         container.add(scroll).height(2 * screenHeight / 5);
-
-//        container.setWidth(screenWidth);
-        container.debug();
-        container.add(evalutelMotto);
         container.row();
-        container.add(chapterTitle);
-        container.row();
-        container.add(chaptersListView);
 
         stage.addActor(container);
 
@@ -168,68 +185,40 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
     public Table chaptersListView()
     {
-        screenWidth = Gdx.graphics.getWidth();
-        final int screenHeight = Gdx.graphics.getHeight();
-
-//        this.game = game;
-//        this.dataBase = dataBase;
-
-        String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
-        String label2 = "Faire correspondre des billes à des oiseaux";
-        String label3 = "Écriture des chiffres 1 à 9";
-        String label4 = "Prononciation des chiffres 1 à 9";
-        String label5 = "Compter des oiseaux et taper leur nombre";
-        String label6 = "Un gâteau pour plusieurs anniversaires";
-
-        Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
-
-        Table container = new Table();
-        container.setSize(screenWidth, 2 * screenHeight / 5);
-//        container.setPosition(screenWidth / 40, screenHeight / 3 - container.getHeight());
-
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", 70, 70, "font/FRHND521_0.TTF");
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", 50, 50, "font/FRHND521_0.TTF");
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
+        String chapterLabel1 = "Pratique des nombres de 1 à 9";
+        String chapterLabel2 = "Introduction de l\'addition ";
+        String chapterLabel3 = "Les nombres de 1 à 69 . \n Introduction du zéro et de... ";
+        String chapterLabel4 = "Les nombres de 1 à 99 . \n Additions sans retenue ";
+        String chapterLabel5 = "Additions avec retenue \n Calcul mental";
+        String chapterLabel6 = "Outils de la géométrie. \n Triangle. Points alignés ";
 
         Table table = new Table();
-        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
-        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 2, dataBase);
-        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx1 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_1.png", "Images/IndicesChapitres/chap1.png", chapterLabel1, null, 1, dataBase);
+        Table tableEx2 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_2.png", "Images/IndicesChapitres/chap2.png", chapterLabel2, null, 1, dataBase);
+        Table tableEx3 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_3.png", "Images/IndicesChapitres/chap3.png", chapterLabel3, null, 1, dataBase);
+        Table tableEx4 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_4.png", "Images/IndicesChapitres/chap4.png", chapterLabel4, null, 1, dataBase);
+        Table tableEx5 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_5.png", "Images/IndicesChapitres/chap5.png", chapterLabel5, null, 1, dataBase);
+        Table tableEx6 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_6.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, null, 1, dataBase);
 
-        table.add(tableEx1).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.add(tableEx1).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
+        table.add(tableEx2).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
+        table.add(tableEx3).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
         table.row();
-        table.add(tableEx2).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.add().height(screenWidth / 20);
         table.row();
-        table.add(tableEx3).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.add(tableEx4).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
+        table.add(tableEx5).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
+        table.add(tableEx6).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
         table.row();
-        table.add(tableEx4).width(screenWidth).height(screenHeight / 11).align(Align.center);
-        table.row();
-        table.add(tableEx5).width(screenWidth).height(screenHeight / 11).align(Align.center);
-        table.row();
-        table.add(tableEx6).width(screenWidth).height(screenHeight / 11).align(Align.center);
-        table.row();
-
-        table.setWidth(screenWidth);
 //
-//        ScrollPane scroll = new ScrollPane(table);
-//        scroll.layout();
-
-//        container.add(scroll).height(2 * screenHeight / 5);
-        container.row();
+        table.setWidth(screenWidth);
 
         tableEx1.addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_1(game, dataBase));
+                game.setScreen(new Screen_Chapitre1(game, dataBase));
                 System.out.println("I got clicked!1");
             }
         });
@@ -239,7 +228,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!2");
-                game.setScreen(new ScreenEx1_2(game, dataBase));
+                game.setScreen(new Screen_Chapitre1(game, dataBase));
             }
         });
         tableEx3.addListener(new ClickListener()
@@ -248,34 +237,35 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!3");
+                game.setScreen(new Screen_Chapitre1(game, dataBase));
             }
         });
-        tableEx4.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!4");
-            }
-        });
-        tableEx5.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!5");
-            }
-        });
-        tableEx6.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!6");
-            }
-        });
+//        tableEx4.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!4");
+//            }
+//        });
+//        tableEx5.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!5");
+//            }
+//        });
+//        tableEx6.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!6");
+//            }
+//        });
 
-        return container;
+        return table;
     }
 
     public Table evalutelMotto()
@@ -300,7 +290,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 //        container.setPosition(screenWidth / 40, /*(myButtonRetour.getY() - container.getHeight() - screenHeight / 40)*/0);
 
         evalutelMotto.add(labelMottoTitle).padBottom(screenHeight / 40);
-        evalutelMotto.padTop(screenHeight/40);
+        evalutelMotto.padTop(screenHeight / 40);
         evalutelMotto.row();
 //        evalutelMotto.debug();
 
@@ -315,7 +305,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         manipulerTable.add(labelManipulerTitle);
         manipulerTable.row();
-        manipulerTable.add(labelManipulerText).width(screenWidth / 4).padLeft(screenWidth / 40).height(screenHeight / 5).padRight(screenWidth/40);
+        manipulerTable.add(labelManipulerText).width(screenWidth / 4).padLeft(screenWidth / 40).height(screenHeight / 5).padRight(screenWidth / 40);
         manipulerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table apprendreTable = new Table();
@@ -326,7 +316,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         apprendreTable.add(labelApprendreTitle);
         apprendreTable.row();
-        apprendreTable.add(labelApprendreText).width(screenWidth / 4).padLeft(screenWidth / 40).height(screenHeight / 5).padRight(screenWidth/40);
+        apprendreTable.add(labelApprendreText).width(screenWidth / 4).padLeft(screenWidth / 40).height(screenHeight / 5).padRight(screenWidth / 40);
         apprendreTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table evaluerTable = new Table();
@@ -343,7 +333,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         evalutelMottoDetails.add(manipulerTable).padLeft(screenWidth / 80);
         evalutelMottoDetails.add(apprendreTable).padLeft(screenWidth / 80);
         evalutelMottoDetails.add(evaluerTable).padLeft(screenWidth / 80);
-        evalutelMotto.add(evalutelMottoDetails).padBottom(screenWidth/80);
+        evalutelMotto.add(evalutelMottoDetails).padBottom(screenWidth / 80);
 
 
         return evalutelMotto;
@@ -423,7 +413,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
 
         batch.end();
-
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();

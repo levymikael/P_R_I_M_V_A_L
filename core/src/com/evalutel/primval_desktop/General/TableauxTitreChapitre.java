@@ -19,6 +19,7 @@ public class TableauxTitreChapitre
     {
         Table table = new Table();
         int screenWidth = Gdx.graphics.getWidth();
+        int screenHeight = Gdx.graphics.getHeight();
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
 
@@ -33,13 +34,13 @@ public class TableauxTitreChapitre
 
         if (texture == null)
         {
-            table.add().width(screenWidth/12).height(120).align(Align.center);
+            table.add().width(screenWidth / 12).height(screenHeight / 50).align(Align.center);
         }
         else
         {
-            table.add(new Image(texture)).width(screenWidth/12).height(120).align(Align.center);
+            table.add(new Image(texture)).width(screenWidth / 12).height(screenHeight / 50).align(Align.center);
         }
-        table.add().width(50).height(150);
+        table.add().width(50).height(screenHeight / 40);
         label.setFontScale(2);
         table.add(label).align(Align.center).width(screenWidth / 3);
 
