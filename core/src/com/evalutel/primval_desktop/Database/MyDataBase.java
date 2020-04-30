@@ -63,17 +63,23 @@ public class MyDataBase
 
         if (!test.isEmpty())
         {
-            /*while (test.moveToNext())
-            {
-                int idProfil = test.getInt(1);
-                int id = test.getInt(2);
-                int pointObtenu = test.getInt(1);
+            test.moveToNext();
+            highestNote = test.getInt(1);
+        }
+        return highestNote;
+    }
 
+    public int getHighestNotePerChapter(int chapitre)
+    {
+        int highestNote = 0;
 
-                int ok = 5;
-                ok++;
-            }*/
+        String sqlQuery = "SELECT max(points_obtenus) from RESULTAT where chapitre = " + chapitre;
+        //String sqlQuery = "SELECT id_profil, id, points_obtenus from RESULTAT where chapitre = " + chapitre + " AND onglet = " + onglet;
 
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
             test.moveToNext();
             highestNote = test.getInt(1);
         }
@@ -94,16 +100,20 @@ public class MyDataBase
 
         if (!test.isEmpty())
         {
-            /*while (test.moveToNext())
-            {
-                int idProfil = test.getInt(1);
-                int id = test.getInt(2);
-                int pointObtenu = test.getInt(1);
+            test.moveToNext();
+            maxNotePageForIdProfil = test.getInt(1);
+        }
+        return maxNotePageForIdProfil;
+    }
 
+    public int getMaxNotePerChapter(/*Profil idProfil,*/ int chapitre, int page)
+    {
+        String sqlQuery = "SELECT max( points_max) from RESULTAT where chapitre = " + chapitre;
 
-                int ok = 5;
-                ok++;
-            }*/
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
             test.moveToNext();
             maxNotePageForIdProfil = test.getInt(1);
         }
@@ -121,16 +131,22 @@ public class MyDataBase
 
         if (!test.isEmpty())
         {
-            /*while (test.moveToNext())
-            {
-                int idProfil = test.getInt(1);
-                int id = test.getInt(2);
-                int pointObtenu = test.getInt(1);
+            test.moveToNext();
+            maxNotePossiblePerExercice = test.getInt(1);
+        }
+        return maxNotePossiblePerExercice;
+    }
 
+    public int getMaxNotePossiblePerChapter(/*Profil idProfil,*/ int chapitre, int page)
+    {
+        String sqlQuery = "SELECT max( points_possibles) from RESULTAT where chapitre = " + chapitre;
 
-                int ok = 5;
-                ok++;
-            }*/
+        int maxNotePossiblePerExercice = 0;
+
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
             test.moveToNext();
             maxNotePossiblePerExercice = test.getInt(1);
         }
@@ -163,9 +179,6 @@ public class MyDataBase
         {
             test.moveToNext();
             totalDureePageForIdProfil = test.getInt(1);
-
-            int ok = 5;
-            ok++;
         }
         return totalDureePageForIdProfil;
     }
@@ -198,7 +211,7 @@ public class MyDataBase
 
         String sqlQueryNoteObtained = "SELECT max(points_obtenus) from RESULTAT";
         String sqlQueryNotePossible = "SELECT  max(points_possibles)  from RESULTAT";
-        String sqlQueryNoteMax = "SELECT max(points_max)  from RESULTAT";
+        String sqlQueryNoteMax = "SELECT max(points_max) from RESULTAT";
 
         DataBase.Result totalNoteObtained = database.query(sqlQueryNoteObtained);
 

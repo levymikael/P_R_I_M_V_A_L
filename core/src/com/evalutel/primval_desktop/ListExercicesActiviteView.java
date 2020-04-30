@@ -6,12 +6,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.evalutel.primval_desktop.Database.DataBase;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.LigneTableaux;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
@@ -50,12 +48,12 @@ public class ListExercicesActiviteView implements MyDrawInterface
         container.setSize(screenWidth, 3 * screenHeight / 5);
         container.setPosition(0, 3 * screenHeight / 7 - container.getHeight() / 2);
 
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", 70, 70, "font/FRHND521_0.TTF");
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", 50, 50, "font/FRHND521_0.TTF");
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, 50, "font/FRHND521_0.TTF");
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", 70, "font/FRHND521_0.TTF", 50);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", 50);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", 50, "font/FRHND521_0.TTF", 50);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", 50);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", 50);
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", 50);
 
         Table table = new Table();
         Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);

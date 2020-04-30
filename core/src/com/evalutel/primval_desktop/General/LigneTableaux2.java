@@ -24,12 +24,16 @@ public class LigneTableaux2
 
     static String notes2Implement;
 
+    static String duration = "";
+
+
+    static int highestNote, noteMaxPerExercice, notePossiblePerExercice;
+
+
     public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, DatabaseDesktop dataBase)
     {
         Table container = new Table();
         Table table = new Table();
-//        Table tablebord1 = new Table();
-//        Table tablebord2 = new Table();
 
         int screenWidth = Gdx.graphics.getWidth();
         int screenHeight = Gdx.graphics.getHeight();
@@ -42,9 +46,15 @@ public class LigneTableaux2
         pmBlue.setColor(Color.BLUE);
         pmBlue.fill();
 
+        Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
+        bgOrange.setColor(Color.ORANGE);
+        bgOrange.fill();
+        TextureRegionDrawable orangeBg = new TextureRegionDrawable(new TextureRegion(new Texture(bgOrange)));
+
+
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 20;
+        parameter.size = 25;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -56,7 +66,18 @@ public class LigneTableaux2
         long durationPerExercice = 0;
         durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
 
-        String duration = MillisToDuration(durationPerExercice);
+        long durationPerChapter = 0;
+        durationPerChapter = db.getTotalDureePageForIdProfil(chapitre);
+
+
+        if (borderColor == "white")
+        {
+            duration = MillisToDuration(durationPerChapter);
+        }
+        else
+        {
+            duration = MillisToDuration(durationPerExercice);
+        }
 
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
         labelStyleDuration.fontColor = Color.GREEN;
@@ -66,63 +87,79 @@ public class LigneTableaux2
         labelDuration.setWidth(screenWidth / 20);
         labelDuration.setWrap(true);
 
+        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pmWhite.setColor(Color.WHITE);
+        pmWhite.fill();
+        Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
+
+        Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
+        labelStyleNotes.font = bitmapFont;
+
+
 
         if (borderColor == "red")
         {
-//            tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
-//            tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
             labelStyleOnglet.fontColor = Color.RED;
+            table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
         }
-        else if ((borderColor == "blue"))
+        else if (borderColor == "blue")
         {
-//            tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
-//            tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
             labelStyleOnglet.fontColor = Color.BLUE;
+            table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
+
+            highestNote = db.getHighestNote(chapitre, onglet);
+            noteMaxPerExercice = db.getMaxNotePerExercice(chapitre, onglet, 0);
+            notePossiblePerExercice = db.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
+
+            notes2Implement = highestNote + " / " + notePossiblePerExercice + " / " + noteMaxPerExercice;
+
+            labelStyleNotes.fontColor = Color.ORANGE;
+
+        }
+        else if (borderColor == "white")
+        {
+            labelStyleOnglet.fontColor = Color.WHITE;
+            table.setBackground(orangeBg);
+
+            labelStyleNotes.font = bitmapFont;
+            labelStyleNotes.fontColor = Color.WHITE;
+
+            int notePossiblePerChapter = db.getMaxNotePossiblePerChapter(chapitre, 0);
+            highestNote = db.getHighestNotePerChapter(chapitre);
+            int noteMaxPerChapter = db.getMaxNotePerChapter(chapitre, 0);
+
+            notes2Implement = highestNote + " / " + notePossiblePerChapter + " / " + noteMaxPerChapter;
+
+
         }
 
-        Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
-
-
-        int highestNote, noteMaxPerExercice, notePossiblePerExercice;
-
-        highestNote = db.getHighestNote(chapitre, onglet);
-
-        noteMaxPerExercice = db.getMaxNotePerExercice(chapitre, onglet, 0);
-
-        notePossiblePerExercice = db.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
-
-        notes2Implement = highestNote + " / " + notePossiblePerExercice + " / " + noteMaxPerExercice;
-
-        Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
-        labelStyleNotes.fontColor = Color.ORANGE;
-        labelStyleNotes.font = bitmapFont;
 
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
         labelNotes.setWidth(screenWidth / 20);
         labelNotes.setWrap(true);
 
         table.setWidth(screenWidth);
-        table.setHeight(screenHeight / 30);
+        table.setHeight(screenHeight / 40);
 
-        labelOnglet.setWidth(screenWidth / 4);
+        labelOnglet.setWidth(screenWidth / 10);
 
 //        table.debug();
 //        labelOnglet.debug();
 //        labelDuration.debug();
 
-        table.add().width(screenWidth / 50);
+//        table.add().width(screenWidth / 50);
         table.add(button).height(screenHeight / 40).width(screenWidth / 13).align(Align.center);
         table.add(button).align(Align.center);
-        table.add().width(screenWidth / 25);
+        table.add().width(screenWidth / 15);
         table.add(labelOnglet).align(Align.center).width((float) (screenWidth * 0.5));
 
         if (texture == null)
         {
-            table.add().width(screenWidth / 70).height(screenHeight / 40).align(Align.center);
+            table.add().width(screenWidth / 70).height(screenHeight / 50).align(Align.center);
         }
         else
         {
-            table.add(new Image(texture)).width(screenWidth / 70).height(screenHeight / 40).align(Align.center);
+            table.add(new Image(texture)).width(screenWidth / 70).height(screenHeight / 50).align(Align.center);
         }
         table.add().width(screenWidth / 20);
         table.add(labelDuration).align(Align.right).width(screenWidth / 12).align(Align.center);
@@ -142,24 +179,15 @@ public class LigneTableaux2
 //        table.add().width(screenWidth - 200 - (2 * screenWidth / 3) - 30 - 200 - 400);
 
 
-        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmWhite.setColor(Color.WHITE);
-        pmWhite.fill();
-
-        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
-
-
 //        container.add(tablebord1).width(screenWidth).height(2);
 //        container.row();
-        container.add(table).height(screenHeight / 15);
+        container.add(table).height(screenHeight / 20);
         container.row();
 //        container.add(tablebord2).width(screenWidth).height(2);
 
 //        table.setTouchable(Touchable.enabled);
 ////        table.setFillParent(true);
 //        container.setTouchable(Touchable.enabled);
-
-
         return container;
     }
 

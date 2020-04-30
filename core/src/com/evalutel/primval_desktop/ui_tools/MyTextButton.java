@@ -12,13 +12,12 @@ public class MyTextButton extends TextButton
 
 {
 
-    public MyTextButton ( String text, String backgroundImagePathUp, String backgroundImagePathDown, float width, float height, String font)
+    public MyTextButton(String text, String backgroundImagePathUp, String backgroundImagePathDown, float size, String font, int fontSize)
     {
-        super(text, getStyle(backgroundImagePathUp, backgroundImagePathDown, font, 50));
+        super(text, getStyle(backgroundImagePathUp, backgroundImagePathDown, font, fontSize));
 
-        this.setSize(width, height);
-        this.setPosition(getWidth()/2,getHeight()/2);
-
+        this.setSize(size, size);
+        this.setPosition(getWidth() / 2, getHeight() / 2);
     }
 
     private static TextButtonStyle getStyle(String imagePathUp, String imagePathDown, String fontPath, int fontSize)
@@ -33,13 +32,13 @@ public class MyTextButton extends TextButton
 
         buttonStyle.font = bitmapFont;
 
-        Texture texture   = new Texture(Gdx.files.internal(imagePathUp));
+        Texture texture = new Texture(Gdx.files.internal(imagePathUp));
         Sprite sprite = new Sprite(texture);
         SpriteDrawable spriteDrawable = new SpriteDrawable(sprite);
 
         buttonStyle.up = spriteDrawable;
 
-        texture   = new Texture(Gdx.files.internal(imagePathDown));
+        texture = new Texture(Gdx.files.internal(imagePathDown));
         sprite = new Sprite(texture);
         //sprite.setSize(width, height);
         spriteDrawable = new SpriteDrawable(sprite);
@@ -50,5 +49,4 @@ public class MyTextButton extends TextButton
 
         return buttonStyle;
     }
-
 }

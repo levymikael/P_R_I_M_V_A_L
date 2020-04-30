@@ -11,36 +11,26 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.General.BoutonChapitres;
 import com.evalutel.primval_desktop.General.CollapsibleWidget;
-import com.evalutel.primval_desktop.General.LigneTableaux;
+import com.evalutel.primval_desktop.General.LigneTableaux2;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
-import com.evalutel.primval_desktop.General.UIDesign;
-import com.evalutel.primval_desktop.General.VisTable;
 import com.evalutel.primval_desktop.General.VisUI;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
-import com.evalutel.primval_desktop.MrNotes2;
-import com.evalutel.primval_desktop.MrTemps2;
+import com.evalutel.primval_desktop.MrNotes;
+import com.evalutel.primval_desktop.MrTemps;
 import com.evalutel.primval_desktop.MyButtonDemos;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
@@ -66,8 +56,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     ListExercicesActiviteView listExercicesActiviteView;
     ScreeenBackgroundImage fondEspaceParent;
     ScreeenBackgroundImage fondSommaire;
-    MrNotes2 mrNotes;
-    MrTemps2 mrTemps;
+    MrNotes mrNotes;
+    MrTemps mrTemps;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
     MyButtonRetour myButtonRetour;
@@ -133,8 +123,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 9 * screenHeight / 10);
         stage.addActor(nomChapitre);
 
-        mrNotes = new MrNotes2(stage, dataBase, 21 * screenWidth / 25, 4 * screenHeight / 5);
-        mrTemps = new MrTemps2(stage, dataBase);
+        mrNotes = new MrNotes(stage, dataBase);
+        mrTemps = new MrTemps(stage, dataBase, 1);
 
 
         //tableau deroulant pour Evalutel motto et liste de chapitre
@@ -189,13 +179,11 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //
 //        visTable.debug();
 
-        tableCollapsible.setSize(screenWidth - screenWidth / 50, screenHeight / 20);
+//        tableCollapsible.setSize(screenWidth - screenWidth / 50, screenHeight / 20);
 
-        table2.setBackground(orangeBg);
+//        table2.setBackground(orangeBg);
 
-        table.add(table2).width(screenWidth).align(Align.center).height(screenHeight / 10);
-
-
+        table.add(table2).width(screenWidth).align(Align.center);
 
 
 //        table2.debug();
@@ -206,7 +194,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         container.setFillParent(true);
 
 
-        VisUI.dispose();
+//        VisUI.dispose();
 
         Gdx.input.setInputProcessor(stage);
 
@@ -218,7 +206,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         Table container = new Table();
 
-
+        String labelChapterTitle = "Pratique des nombres de 1 à 9";
         String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
         String label2 = "Faire correspondre des billes à des oiseaux";
         String label3 = "Écriture des chiffres 1 à 9";
@@ -231,34 +219,42 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
 //        stage.addActor(container);
         container.setSize(screenWidth, 2 * screenHeight / 5);
-        container.setPosition(0, 3 * screenHeight / 7 - container.getHeight() / 2);
+        container.setPosition(0, screenHeight / 7);
 
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 20, screenWidth / 20, "font/FRHND521_0.TTF");
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 20, screenWidth / 20, "font/FRHND521_0.TTF");
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 20, screenWidth / 20, "font/FRHND521_0.TTF");
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 20, screenWidth / 20, "font/FRHND521_0.TTF");
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 20, screenWidth / 20, "font/FRHND521_0.TTF");
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 20, screenWidth / 20, "font/FRHND521_0.TTF");
-
-        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
-        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 2, dataBase);
-        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", "Images/IndicesChapitres/chap1.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
 
 
-        table.add(tableEx1).width(screenWidth).height(screenHeight / 15).align(Align.center);
+
+        Table tableChapTitle = LigneTableaux2.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);
+        Table tableEx1 = LigneTableaux2.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
+        Table tableEx2 = LigneTableaux2.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx3 = LigneTableaux2.getLigne(trois_bouton, label3, textureCours, "red", 1, 2, dataBase);
+        Table tableEx4 = LigneTableaux2.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx5 = LigneTableaux2.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx6 = LigneTableaux2.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
+        tableEx6.debug();
+
+        tableChapTitle.setBackground(orangeBg);
+
+        table.add(tableChapTitle).width(screenWidth).height(screenHeight / 25).align(Align.center);
         table.row();
-        table.add(tableEx2).width(screenWidth).height(screenHeight / 15).align(Align.center);
+        table.add(tableEx1).width(screenWidth).height(screenHeight / 25).align(Align.center);
         table.row();
-        table.add(tableEx3).width(screenWidth).height(screenHeight / 15).align(Align.center);
+        table.add(tableEx2).width(screenWidth).height(screenHeight / 25).align(Align.center);
         table.row();
-        table.add(tableEx4).width(screenWidth).height(screenHeight / 15).align(Align.center);
+        table.add(tableEx3).width(screenWidth).height(screenHeight / 25).align(Align.center);
         table.row();
-        table.add(tableEx5).width(screenWidth).height(screenHeight / 15).align(Align.center);
+        table.add(tableEx4).width(screenWidth).height(screenHeight / 25).align(Align.center);
         table.row();
-        table.add(tableEx6).width(screenWidth).height(screenHeight / 15).align(Align.center);
+        table.add(tableEx5).width(screenWidth).height(screenHeight / 25).align(Align.center);
+        table.row();
+        table.add(tableEx6).width(screenWidth).height(screenHeight / 20).align(Align.center);
         table.row();
 
         table.setWidth(screenWidth);
@@ -266,7 +262,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //        ScrollPane scroll = new ScrollPane(table);
 //        scroll.layout();
 
-        container.add(table).height(2 * screenHeight / 5);
+        container.add(table).height(4 * screenHeight / 5);
         container.row();
 
 
