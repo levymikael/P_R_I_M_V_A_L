@@ -87,6 +87,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 36;
+//        parameter.color.set(48 / 255f, 107 / 255f, 62 / 255f, 1);
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -105,21 +106,17 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         imgSommaire = new ScreeenBackgroundImage("Images/Sommaire/image_sommaire.png");
 
-
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
 
-
         mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 25, 5 * screenHeight / 10);
-
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);
         Label labelEspaceParents = new Label("Espace Parents", labelStyleBlue);
         Label labelPresentation = new Label("Présentation", labelStyleBlue);
 
-
         Table container = new Table();
-        container.setPosition(screenWidth / 30, 2 * screenHeight / 7);
+        container.setPosition(screenWidth / 40, 2 * screenHeight / 9);
         container.setWidth(screenWidth / 7);
         container.setHeight(screenHeight / 6);
 
@@ -128,12 +125,11 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Table chaptersButton = new Table();
         chaptersButton.add(labelChapitres);
         chaptersButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-        chaptersButton.setSize(screenWidth / 10, screenHeight / 12);
+//        chaptersButton.setSize(screenWidth / 10, screenHeight / 12);
 
         Table resultsButton = new Table();
         resultsButton.add(labelResultats);
         resultsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-
 
         Table espaceParentsButton = new Table();
         espaceParentsButton.add(labelEspaceParents);
@@ -143,17 +139,15 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         presentation.add(labelPresentation);
         presentation.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
-        container.add(chaptersButton).pad(20).align(Align.center);
+        container.add(chaptersButton).pad(20).align(Align.center).height(screenWidth / 30).width(screenWidth / 8);
         container.row();
-        container.add(resultsButton).pad(20).align(Align.center);
+        container.add(resultsButton).pad(20).align(Align.center).height(screenWidth / 30).width(screenWidth / 8);
         container.row();
-        container.add(espaceParentsButton).pad(20).align(Align.center);
+        container.add(espaceParentsButton).pad(20).align(Align.center).height(screenWidth / 30).width(screenWidth / 8);
         container.row();
-        container.add(presentation).pad(20).align(Align.center);
-
+        container.add(presentation).pad(20).align(Align.center).height(screenWidth / 30).width(screenWidth / 8);
 
 //        container.debug();
-
 
         stage.addActor(container);
 
@@ -164,7 +158,18 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             {
                 game.setScreen(new Screen_All_ChaptersNew(game, dataBase));
 
-                Gdx.app.log("Screen All chapters ", "zclicked!");
+                Gdx.app.log("Screen All chapters ", "clicked!");
+            }
+        });
+
+        resultsButton.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                game.setScreen(new Screen_All_Results(game, dataBase));
+
+                Gdx.app.log("Screen All results ", "clicked!");
             }
         });
 

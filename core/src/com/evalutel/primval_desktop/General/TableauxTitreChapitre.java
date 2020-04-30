@@ -34,13 +34,13 @@ public class TableauxTitreChapitre
 
         if (texture == null)
         {
-            table.add().width(screenWidth / 12).height(screenHeight / 50).align(Align.center);
+            table.add().width(screenWidth / 12).height(screenHeight / 30).align(Align.center);
         }
         else
         {
-            table.add(new Image(texture)).width(screenWidth / 12).height(screenHeight / 50).align(Align.center);
+            table.add(new Image(texture)).width(screenWidth / 15).height(screenWidth / 15).align(Align.center);
+            table.add().width(50).height(screenHeight / 8);
         }
-        table.add().width(50).height(screenHeight / 40);
         label.setFontScale(2);
         table.add(label).align(Align.center).width(screenWidth / 3);
 

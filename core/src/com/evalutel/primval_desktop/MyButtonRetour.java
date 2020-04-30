@@ -51,6 +51,20 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
             );
         }
 
+        else if (screenPrevious == "screen all chapters")
+        {
+            addListener(new ClickListener()
+                        {
+                            @Override
+                            public void clicked(InputEvent event, float x, float y)
+                            {
+                                Gdx.app.log("My button retour", "Screen All Chapters");
+                                game.setScreen(new Screen_All_ChaptersNew(game, dataBase));
+                            }
+                        }
+            );
+        }
+
     }
 
     /**
@@ -67,10 +81,6 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
     @Override
     public void myDraw(Batch batch)
     {
-        /*TextureRegion textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("Images/fleche_retour.png")));
-
-        batch.draw(textureRegion2, currentPositionX, currentPositionY, width, height);*/
-
     }
 
 }

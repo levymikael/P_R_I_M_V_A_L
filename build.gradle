@@ -26,6 +26,7 @@ allprojects {
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
+        visuiVersion = '1.4.2'
     }
 
     repositories {
@@ -60,16 +61,12 @@ project(":desktop") {
 
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
 
-
-
 //        implementation "com.github.myrealitycoding:jpersis:1.0.0"
 
 //        implementation "de.longri.gdx-sqlite:gdx-sqlite-platform:$gdxSqliteVersion:natives-desktop"
 
-
 //        implementation 'gdx-sqlite-desktop.jar'
 //        implementation 'sqlite-jdbc-3.7.2.jar'
-
     }
 
     task deleteJar(type: Delete) {
@@ -84,8 +81,6 @@ project(":desktop") {
     }
 
     createJar.dependsOn(deleteJar, build)
-
-
 
 }
 
@@ -126,6 +121,7 @@ project(":core") {
         implementation group:'org.xerial', name:'sqlite-jdbc', version:'3.8.11.2'
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
 
+        implementation "com.kotcrab.vis:vis-ui:$visuiVersion"
 
 //        implementation "de.longri.gdx-sqlite:gdx-sqlite:$gdxSqliteVersion"
 //        implementation "sqlite-jdbc-3.7.2.jar"
