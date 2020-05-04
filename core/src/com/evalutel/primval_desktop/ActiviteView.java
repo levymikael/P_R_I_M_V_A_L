@@ -58,7 +58,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 // Configuration police de l'enonce
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = (int) widthScreen / 50;
+        parameter.size = (int) widthScreen / 70;
 
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
@@ -67,13 +67,13 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         Label.LabelStyle labelStyle2 = new Label.LabelStyle();
         labelStyle2.font = bitmapFont;
         labelStyle2.fontColor = Color.YELLOW;
-        Label label2 = new Label(numExercice, labelStyle2);
+        Label exoNumLabel = new Label(numExercice, labelStyle2);
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
         labelStyle.fontColor = Color.WHITE;
-        Label label = new Label(consigneExercice, labelStyle);
-        label.setWrap(true);
+        Label exoConsigneLabel = new Label(consigneExercice, labelStyle);
+        exoConsigneLabel.setWrap(true);
 
         Label.LabelStyle labelStyle3 = new Label.LabelStyle();
         labelStyle3.font = bitmapFont;
@@ -88,9 +88,9 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         tableTitre.setBackground(new SpriteDrawable(new Sprite(new Texture("Images/EnonceUIElements/titre_top.png"))));
 
 // Positionnement numero exercice:
-        tableTitre.add().width(50);
-        tableTitre.add(label2).align(Align.center).width(80);
-        tableTitre.add(label).width(widthEnonce - 210).height(100);
+//        tableTitre.add().width(50);
+        tableTitre.add(exoNumLabel).align(Align.center).width(80).padLeft(widthScreen/50);
+        tableTitre.add(exoConsigneLabel).width(widthEnonce - 210).height(100);
         tableTitre.add(label3).align(Align.center).width(80);
 
         table = new Table();
@@ -109,9 +109,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         else if (activiteType == "enonce")
         {
             textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_text.png"));
-
         }
-
 
         spriteEnonceText = new Sprite(textureTextEnonce);
         TextField.TextFieldStyle textFieldStyleEnonce = new TextField.TextFieldStyle();

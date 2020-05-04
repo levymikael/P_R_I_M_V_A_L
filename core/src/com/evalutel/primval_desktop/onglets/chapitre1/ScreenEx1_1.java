@@ -67,9 +67,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Les nombres de 1 à 9 Badix, Métrologue et Validus.";
 
-
         float activiteWidth = (screenWidth / 4) * 3;
-
 
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "enonce");
         allDrawables.add(activiteView);

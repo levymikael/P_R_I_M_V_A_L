@@ -9,12 +9,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class MyTextButton extends TextButton
-
 {
-
     public MyTextButton(String text, String backgroundImagePathUp, String backgroundImagePathDown, float size, String font, int fontSize)
     {
         super(text, getStyle(backgroundImagePathUp, backgroundImagePathDown, font, fontSize));
+
+        this.setSize(size, size);
+        this.setPosition(getWidth() / 2, getHeight() / 2);
+    }
+
+
+    public MyTextButton(String text, String backgroundImagePathUp, float size, String font, int fontSize)
+    {
+        super(text, getStyle2(backgroundImagePathUp, font, fontSize));
 
         this.setSize(size, size);
         this.setPosition(getWidth() / 2, getHeight() / 2);
@@ -32,19 +39,33 @@ public class MyTextButton extends TextButton
 
         buttonStyle.font = bitmapFont;
 
-        Texture texture = new Texture(Gdx.files.internal(imagePathUp));
-        Sprite sprite = new Sprite(texture);
-        SpriteDrawable spriteDrawable = new SpriteDrawable(sprite);
+        SpriteDrawable spriteDrawableUp = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(imagePathUp))));
 
-        buttonStyle.up = spriteDrawable;
+        buttonStyle.up = spriteDrawableUp;
 
-        texture = new Texture(Gdx.files.internal(imagePathDown));
-        sprite = new Sprite(texture);
-        //sprite.setSize(width, height);
-        spriteDrawable = new SpriteDrawable(sprite);
+        SpriteDrawable spriteDrawableDown = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(imagePathDown))));
+
+        buttonStyle.down = spriteDrawableDown;
 
 
-        buttonStyle.down = spriteDrawable;
+        return buttonStyle;
+    }
+
+    private static TextButtonStyle getStyle2(String imagePathUp, String fontPath, int fontSize)
+    {
+        TextButtonStyle buttonStyle = new TextButtonStyle();
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = fontSize;
+        BitmapFont bitmapFont = generator.generateFont(parameter); // font size 12 pixels
+        generator.dispose();
+
+        buttonStyle.font = bitmapFont;
+
+        SpriteDrawable spriteDrawableUp = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(imagePathUp))));
+
+        buttonStyle.up = spriteDrawableUp;
 
 
         return buttonStyle;

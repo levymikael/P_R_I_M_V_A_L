@@ -11,27 +11,31 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.General.CollapsibleWidget;
+import com.evalutel.primval_desktop.General.BoutonChapitres;
 import com.evalutel.primval_desktop.General.LigneTableaux2;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
-import com.evalutel.primval_desktop.General.VisUI;
-import com.evalutel.primval_desktop.ListExercicesActiviteView;
+import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.MrNotes;
+import com.evalutel.primval_desktop.MrNotes2;
 import com.evalutel.primval_desktop.MrTemps;
+import com.evalutel.primval_desktop.MrTemps2;
 import com.evalutel.primval_desktop.MyButtonDemos;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
@@ -54,7 +58,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     private Viewport viewport;
 
-    ListExercicesActiviteView listExercicesActiviteView;
+    //    ListExercicesActiviteView listExercicesActiviteView;
     ScreeenBackgroundImage fondEspaceParent;
     ScreeenBackgroundImage fondSommaire;
     MrNotes mrNotes;
@@ -62,11 +66,13 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
     MyButtonRetour myButtonRetour;
+    MyButtonDemos myButtonDemo;
 
     FreeTypeFontGenerator generatorFRHND;
     FreeTypeFontGenerator generatorZAP;
+    TextureRegionDrawable textureRegionDrawableBg;
     TextureRegionDrawable orangeBg;
-    TextureRegionDrawable blueBg;
+
 
     BitmapFont bitmapFontZAP;
 
@@ -91,7 +97,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         generatorZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterZAP = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterZAP.size = 40;
+        parameterZAP.size = screenWidth / 70;
         bitmapFontZAP = generatorZAP.generateFont(parameterZAP);
         generatorZAP.dispose();
 
@@ -102,6 +108,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFontFRHND;
         labelStyleBlue.fontColor = Color.NAVY;
+
+        allDrawables = new ArrayList<>();
 
         fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
 
@@ -124,30 +132,26 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         bgOrange.fill();
         orangeBg = new TextureRegionDrawable(new TextureRegion(new Texture(bgOrange)));
 
-        Pixmap bgBlue = new Pixmap(1, 1, Pixmap.Format.RGB565);
-        bgBlue.setColor(Color.BLUE);
-        bgBlue.fill();
-        blueBg = new TextureRegionDrawable(new TextureRegion(new Texture(bgBlue)));
-
         //tableau deroulant pour Evalutel motto et liste de chapitre
         Table container = new Table();
         Table table = new Table();
 
         float positionButton = myButtonRetour.getY();
-        float heightContainer = (positionButton) - 100;
+        float heightContainer = (positionButton);
         container.setSize(screenWidth, heightContainer);
         container.setPosition(0, 0);
 
-        Table table2 = chapter1Results();
-        Table table3 = chapter1Results();
-        Table table4 = chapter1Results();
+        Table chapter1Table = chapter1Results();
+        Table chapter2Table = chapter1Results();
+        Table chapter3Table = chapter1Results();
 
-        table.add(table2).width(screenWidth).padBottom(screenHeight / 30);
+        container.debug();
+        table.add(chapter1Table).width(screenWidth - (screenWidth / 19)).align(Align.center).padBottom(screenHeight / 40).padTop(screenHeight / 40);
         table.row();
-        table.add(table3).width(screenWidth).padBottom(screenHeight / 30);
+        table.add(chapter2Table).width(screenWidth).align(Align.center).padBottom(screenHeight / 40);
         table.row();
-        table.add(table4).width(screenWidth).padBottom(screenHeight / 30);
-        table.row();
+        table.add(chapter3Table).width(screenWidth).align(Align.center).padBottom(screenHeight / 40);
+
         table.setWidth(screenWidth);
 
         ScrollPane scroll = new ScrollPane(table);
@@ -155,10 +159,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         container.add(scroll).height(heightContainer);
 
-        container.debug();
-//        table.debug();
-
         stage.addActor(container);
+
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -177,40 +179,35 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
         Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
 
-        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", "Images/IndicesChapitres/chap1.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
 
         Table tableChapTitle = LigneTableaux2.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);
         Table tableEx1 = LigneTableaux2.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
         Table tableEx2 = LigneTableaux2.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx3 = LigneTableaux2.getLigne(trois_bouton, label3, textureCours, "red", 1, 2, dataBase);
-        Table tableEx4 = LigneTableaux2.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx5 = LigneTableaux2.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx6 = LigneTableaux2.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx3 = LigneTableaux2.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
+        Table tableEx4 = LigneTableaux2.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4, dataBase);
+        Table tableEx5 = LigneTableaux2.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
+        Table tableEx6 = LigneTableaux2.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
 
-        tableChapTitle.setBackground(orangeBg);
-
-        table.add(tableChapTitle).width(screenWidth).align(Align.center);
+        table.add(tableChapTitle);
         table.row();
-        table.add(tableEx1).width(screenWidth).align(Align.center);
+        table.add(tableEx1);
         table.row();
-        table.add(tableEx2).width(screenWidth).align(Align.center);
+        table.add(tableEx2);
         table.row();
-        table.add(tableEx3).width(screenWidth).align(Align.center);
+        table.add(tableEx3);
         table.row();
-        table.add(tableEx4).width(screenWidth).align(Align.center);
+        table.add(tableEx4);
         table.row();
-        table.add(tableEx5).width(screenWidth).align(Align.center);
+        table.add(tableEx5);
         table.row();
-        table.add(tableEx6).width(screenWidth).align(Align.center);
-
-        table.setWidth(screenWidth);
-
+        table.add(tableEx6);
 
 //        VisUI.load();
 //
@@ -235,74 +232,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         return table;
     }
-
-    public Table chapter2Results()
-    {
-        Table table = new Table();
-        Table container = new Table();
-
-        String labelChapterTitle = "Pratique des nombres de 1 à 9";
-        String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
-        String label2 = "Faire correspondre des billes à des oiseaux";
-        String label3 = "Écriture des chiffres 1 à 9";
-        String label4 = "Prononciation des chiffres 1 à 9";
-        String label5 = "Compter des oiseaux et taper leur nombre";
-        String label6 = "Un gâteau pour plusieurs anniversaires";
-
-        Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
-
-//        stage.addActor(container);
-        //container.setSize(screenWidth, 2 * screenHeight / 5);
-        //container.setPosition(0, screenHeight / 7);
-
-        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", "Images/IndicesChapitres/chap1.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-
-
-        Table tableChapTitle = LigneTableaux2.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);
-        Table tableEx1 = LigneTableaux2.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
-        Table tableEx2 = LigneTableaux2.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx3 = LigneTableaux2.getLigne(trois_bouton, label3, textureCours, "red", 1, 2, dataBase);
-        Table tableEx4 = LigneTableaux2.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx5 = LigneTableaux2.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx6 = LigneTableaux2.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
-//        tableEx6.debug();
-
-        tableChapTitle.setBackground(orangeBg);
-
-        table.add(tableChapTitle).width(screenWidth).height(screenHeight / 25).align(Align.center);
-        table.row();
-        table.add(tableEx1).width(screenWidth).height(screenHeight / 25).align(Align.center);
-        table.row();
-        table.add(tableEx2).width(screenWidth).height(screenHeight / 25).align(Align.center);
-        table.row();
-        table.add(tableEx3).width(screenWidth).height(screenHeight / 25).align(Align.center);
-        table.row();
-        table.add(tableEx4).width(screenWidth).height(screenHeight / 25).align(Align.center);
-        table.row();
-        table.add(tableEx5).width(screenWidth).height(screenHeight / 25).align(Align.center);
-        table.row();
-        table.add(tableEx6).width(screenWidth).height(screenHeight / 20).align(Align.center);
-        table.row();
-
-        table.setWidth(screenWidth);
-//
-//        ScrollPane scroll = new ScrollPane(table);
-//        scroll.layout();
-
-        container.add(table).height(4 * screenHeight / 5);
-        container.row();
-
-
-        return container;
-    }
-
 
     @Override
     public boolean keyDown(int keycode)
@@ -365,20 +294,20 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         fondEspaceParent.myDraw(batch);
         fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6, 0, 0);
-//
-//        for (int i = 0; i < allDrawables.size(); i++)
-//        {
-//            MyDrawInterface newItem = allDrawables.get(i);
-//            if (newItem.isVisible())
-//            {
-//                newItem.myDraw(batch);
-//            }
-//        }
+
+        for (int i = 0; i < allDrawables.size(); i++)
+        {
+            MyDrawInterface newItem = allDrawables.get(i);
+            if (newItem.isVisible())
+            {
+                newItem.myDraw(batch);
+            }
+        }
 
 
         batch.end();
 
-//        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
 

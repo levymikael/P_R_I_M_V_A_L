@@ -7,41 +7,27 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.General.UIDesign;
-import com.evalutel.primval_desktop.ListExercicesActiviteView;
-import com.evalutel.primval_desktop.MrNotes;
 import com.evalutel.primval_desktop.MrNotes2;
 import com.evalutel.primval_desktop.MrTemps;
-import com.evalutel.primval_desktop.MyButtonBuyAnotherChapter;
-import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
-import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
-import com.evalutel.primval_desktop.UnePlancheNew;
 
 import java.util.ArrayList;
 
@@ -208,7 +194,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new Screen_All_ChaptersNew(game, dataBase));
+                game.setScreen(new Screen_All_Chapters(game, dataBase));
                 Gdx.app.log("Screen All chapters ", "clicked!");
             }
         });
@@ -218,7 +204,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new Screen_All_ChaptersNew(game, dataBase));
+                game.setScreen(new Screen_All_Chapters(game, dataBase));
                 Gdx.app.log("Screen All chapters ", "clicked!");
             }
         });

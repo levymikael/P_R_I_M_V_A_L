@@ -42,7 +42,7 @@ import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import java.util.ArrayList;
 
 
-public class Screen_All_ChaptersNew extends Game implements Screen, InputProcessor, ApplicationListener
+public class Screen_All_Chapters extends Game implements Screen, InputProcessor, ApplicationListener
 {
     private DatabaseDesktop dataBase;
     protected Stage stage;
@@ -72,7 +72,7 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
     BitmapFont bitmapFontZAP;
 
 
-    public Screen_All_ChaptersNew(Game game, DatabaseDesktop dataBase)
+    public Screen_All_Chapters(Game game, DatabaseDesktop dataBase)
     {
         this.game = game;
         this.dataBase = dataBase;

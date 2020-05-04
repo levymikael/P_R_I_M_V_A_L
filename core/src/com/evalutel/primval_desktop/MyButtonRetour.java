@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.onglets.chapitre1.Screen_All_ChaptersNew;
+import com.evalutel.primval_desktop.onglets.chapitre1.Screen_All_Chapters;
 import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Sommaire_General;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
@@ -45,7 +45,7 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
                             public void clicked(InputEvent event, float x, float y)
                             {
                                 Gdx.app.log("My button retour", "Sommaire chapitres");
-                                game.setScreen(new Screen_All_ChaptersNew(game, dataBase));
+                                game.setScreen(new Screen_All_Chapters(game, dataBase));
                             }
                         }
             );
@@ -58,7 +58,7 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
                             public void clicked(InputEvent event, float x, float y)
                             {
                                 Gdx.app.log("My button retour", "Screen All Chapters");
-                                game.setScreen(new Screen_All_ChaptersNew(game, dataBase));
+                                game.setScreen(new Screen_All_Chapters(game, dataBase));
                             }
                         }
             );
