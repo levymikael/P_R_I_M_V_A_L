@@ -45,7 +45,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
         Table container = new Table();
         stage.addActor(container);
-        container.setSize(screenWidth, 3 * screenHeight / 5);
+        container.setSize(screenWidth, 7 * screenHeight / 10);
         container.setPosition(0, 3 * screenHeight / 7 - container.getHeight() / 2);
 
         MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", 70, "font/FRHND521_0.TTF", 50);
@@ -64,15 +64,15 @@ public class ListExercicesActiviteView implements MyDrawInterface
         Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
 
 
-        table.add(tableEx1).width(screenWidth).height(screenHeight / 11).align(Align.center).padBottom(screenHeight / 100);
+        table.add(tableEx1).width(screenWidth).height(screenHeight / 11).align(Align.center);
         table.row();
-        table.add(tableEx2).width(screenWidth).height(screenHeight / 11).align(Align.center).padBottom(screenHeight / 100);
+        table.add(tableEx2).width(screenWidth).height(screenHeight / 11).align(Align.center);
         table.row();
-        table.add(tableEx3).width(screenWidth).height(screenHeight / 11).align(Align.center).padBottom(screenHeight / 100);
+        table.add(tableEx3).width(screenWidth).height(screenHeight / 11).align(Align.center);
         table.row();
-        table.add(tableEx4).width(screenWidth).height(screenHeight / 11).align(Align.center).padBottom(screenHeight / 100);
+        table.add(tableEx4).width(screenWidth).height(screenHeight / 11).align(Align.center);
         table.row();
-        table.add(tableEx5).width(screenWidth).height(screenHeight / 11).align(Align.center).padBottom(screenHeight / 100);
+        table.add(tableEx5).width(screenWidth).height(screenHeight / 11).align(Align.center);
         table.row();
         table.add(tableEx6).width(screenWidth).height(screenHeight / 11).align(Align.center);
 

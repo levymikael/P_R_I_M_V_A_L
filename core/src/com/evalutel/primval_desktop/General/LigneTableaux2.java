@@ -40,11 +40,11 @@ public class LigneTableaux2
         int screenHeight = Gdx.graphics.getHeight();
 
         Pixmap pmRed = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmRed.setColor(Color.RED);
+        pmRed.setColor(new Color(167.0f / 255.0f, 44.0f / 255.0f, 23.0f / 255.0f, 1));
         pmRed.fill();
 
         Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmBlue.setColor(Color.BLUE);
+        pmBlue.setColor(new Color(111.0f / 255.0f, 148.0f / 255.0f, 212.0f / 255.0f, 1));
         pmBlue.fill();
 
         Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
@@ -52,16 +52,12 @@ public class LigneTableaux2
         bgOrange.fill();
         TextureRegionDrawable orangeBg = new TextureRegionDrawable(new TextureRegion(new Texture(bgOrange)));
 
-
-//        Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
-//        bgOrange.setColor(Color.ORANGE);
-
         Pixmap pixmapBg = new Pixmap(1, 1, Pixmap.Format.RGB565);
 
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 25;
+        parameter.size = screenWidth / 90;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -105,14 +101,13 @@ public class LigneTableaux2
 
         if (borderColor == "red")
         {
-            labelStyleOnglet.fontColor = Color.RED;
+            labelStyleOnglet.fontColor = new Color(167.0f / 255.0f, 44.0f / 255.0f, 23.0f / 255.0f, 1);
             pixmapBg.setColor(Color.WHITE);
             pixmapBg.fill();
         }
         else if (borderColor == "blue")
         {
-            labelStyleOnglet.fontColor = Color.BLUE;
-
+            labelStyleOnglet.fontColor = new Color(72.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
             pixmapBg.setColor(Color.WHITE);
             pixmapBg.fill();
 

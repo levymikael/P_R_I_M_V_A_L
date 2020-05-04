@@ -23,6 +23,7 @@ public class LigneTableaux
     static MyDataBase db;
 
     static String notes2Implement;
+    static long durationPerExercice;
 
     public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, DatabaseDesktop dataBase)
     {
@@ -53,7 +54,7 @@ public class LigneTableaux
 
         db = new MyDataBase(dataBase);
 
-        long durationPerExercice = 0;
+
         durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
 
         String duration = MillisToDuration(durationPerExercice);
@@ -65,7 +66,6 @@ public class LigneTableaux
         Label labelDuration = new Label(duration, labelStyleDuration);
         labelDuration.setWidth(screenWidth / 40);
         labelDuration.setWrap(true);
-
 
         if (borderColor == "red")
         {
@@ -81,7 +81,6 @@ public class LigneTableaux
         }
 
         Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
-
 
         int highestNote, noteMaxPerExercice, notePossiblePerExercice;
 
@@ -99,14 +98,13 @@ public class LigneTableaux
 
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
         labelNotes.setWidth(screenWidth / 20);
-        labelNotes.setWrap(true);
+//        labelNotes.setWrap(true);
 
         table.setWidth(screenWidth);
-        table.setHeight(screenHeight / 12);
+        table.setHeight(screenHeight / 13);
 
         labelOnglet.setWidth(screenWidth / 4);
 
-//        table.add().width(screenWidth / 40);
         table.add(button).height(screenHeight / 25).width(screenWidth / 13).align(Align.center);
         table.add(button).align(Align.center);
         table.add().width(screenWidth / 25);

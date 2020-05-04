@@ -55,7 +55,7 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
 
     private Viewport viewport;
 
-    ListExercicesActiviteView listExercicesActiviteView;
+//    ListExercicesActiviteView listExercicesActiviteView;
     ScreeenBackgroundImage fondEspaceParent;
     ScreeenBackgroundImage fondSommaire;
     MrNotes2 mrNotes;
@@ -86,7 +86,7 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
 
         generatorFRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterFRHND = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterFRHND.size = 50;
+        parameterFRHND.size = screenWidth/40;
         bitmapFontFRHND = generatorFRHND.generateFont(parameterFRHND);
         generatorFRHND.dispose();
 
@@ -132,9 +132,13 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
 
 
         //tableau deroulant pour Evalutel motto et liste de chapitre
-
         Table container = new Table();
         Table table = new Table();
+
+        float positionButton = myButtonRetour.getY();
+        float heightContainer = (positionButton);
+        container.setSize(screenWidth, heightContainer);
+        container.setPosition(0, 0);
 
         Table evalutelMotto = evalutelMotto();
 
@@ -147,15 +151,9 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
 
         Table chaptersListView = chaptersListView();
 
-        float positionButton = myButtonRetour.getY();
-        float heightContainer = (positionButton);
-        container.setSize(screenWidth, heightContainer);
-        container.setPosition(0, 0);
-//        table.setPosition(0, 0);
-
-        int widthButton = 1000;
-        int heightButton = widthButton / 4;
-        int cornerRadius = heightButton / 4;
+//        int widthButton = 1000;
+//        int heightButton = widthButton / 4;
+//        int cornerRadius = heightButton / 4;
 
 //
         container.debug();
@@ -163,8 +161,7 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
         table.row();
         table.add(chapterTitle).width(screenWidth).align(Align.center).padBottom(screenHeight / 20);
         table.row();
-        table.add(chaptersListView).width(screenWidth).align(Align.center);
-        table.row();
+        table.add(chaptersListView).width(screenWidth).align(Align.center).padBottom(screenHeight / 20);
 
         table.setWidth(screenWidth);
 
@@ -172,10 +169,8 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
         scroll.layout();
 
         container.add(scroll).height(heightContainer);
-//        container.row();
 
         stage.addActor(container);
-        //container.setFillParent(true);
 
         Gdx.input.setInputProcessor(stage);
     }

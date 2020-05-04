@@ -109,8 +109,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         mrNotes = new MrNotes(stage, dataBase);
         mrTemps = new MrTemps(stage, dataBase, chapritreNum);
 
-        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 2 * screenWidth / 7, screenHeight / 14);
-        myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);
+//        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 2 * screenWidth / 7, screenHeight / 14);
+//        myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -187,7 +187,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
             }
         }
 
-        batch.draw(sacDebilles, screenWidth / 2 - sacDebilles.getWidth() / 2, 4 * screenHeight / 5);
+        batch.draw(sacDebilles, 4 * screenWidth / 9 - sacDebilles.getWidth() / 2, 11 * screenHeight / 15, screenWidth / 3, screenHeight / 4);
 
         batch.end();
 
