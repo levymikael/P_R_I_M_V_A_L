@@ -16,27 +16,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.BoutonChapitres;
-import com.evalutel.primval_desktop.General.LigneTableaux;
-import com.evalutel.primval_desktop.General.ResourceManager;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
@@ -46,7 +38,6 @@ import com.evalutel.primval_desktop.MyButtonDemos;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
-import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 import java.util.ArrayList;
 
@@ -136,7 +127,7 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
         nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 9 * screenHeight / 10);
         stage.addActor(nomChapitre);
 
-        mrNotes = new MrNotes2(stage, dataBase, 21 * screenWidth / 25, 9 * screenHeight / 11);
+        mrNotes = new MrNotes2(stage, dataBase, 21 * screenWidth / 25, 4 * screenHeight / 5);
         mrTemps = new MrTemps2(stage, dataBase);
 
 
@@ -156,8 +147,10 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
 
         Table chaptersListView = chaptersListView();
 
-        container.setSize(screenWidth, (screenHeight - (myButtonRetour.getY())-screenHeight/20));
-        container.setPosition(0, -screenHeight / 12);
+        float positionButton = myButtonRetour.getY();
+        float heightContainer = (positionButton);
+        container.setSize(screenWidth, heightContainer);
+        container.setPosition(0, 0);
 //        table.setPosition(0, 0);
 
         int widthButton = 1000;
@@ -166,7 +159,7 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
 
 //
         container.debug();
-        table.add(evalutelMotto).width(screenWidth - (screenWidth / 19)).align(Align.center).padTop(screenWidth / 30);
+        table.add(evalutelMotto).width(screenWidth - (screenWidth / 19)).align(Align.center).padTop(screenWidth / 90);
         table.row();
         table.add(chapterTitle).width(screenWidth).align(Align.center).padBottom(screenHeight / 20);
         table.row();
@@ -178,11 +171,11 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
 
-        container.add(scroll).height(screenHeight - (screenHeight - (myButtonRetour.getY() + myButtonRetour.getHeight() / 2)));
+        container.add(scroll).height(heightContainer);
 //        container.row();
 
         stage.addActor(container);
-        container.setFillParent(true);
+        //container.setFillParent(true);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -298,18 +291,18 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
         String chapterLabel6 = "Outils de la géométrie. \n Triangle. Points alignés ";
 
         Table table = new Table();
-        Table tableEx1 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_1.png", "Images/IndicesChapitres/chap1.png", chapterLabel1, "yes", null, 1, dataBase);
-        Table tableEx2 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_2.png", "Images/IndicesChapitres/chap2.png", chapterLabel2, "no", null, 1, dataBase);
-        Table tableEx3 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_3.png", "Images/IndicesChapitres/chap3.png", chapterLabel3, "no", null, 1, dataBase);
-        Table tableEx4 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_4.png", "Images/IndicesChapitres/chap4.png", chapterLabel4, "no", null, 1, dataBase);
-        Table tableEx5 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_5.png", "Images/IndicesChapitres/chap5.png", chapterLabel5, "no", null, 1, dataBase);
-        Table tableEx6 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_6.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, "no", null, 1, dataBase);
+        Table tableEx1 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_1.png", "Images/IndicesChapitres/chap1.png", chapterLabel1, null, 1, dataBase);
+        Table tableEx2 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_2.png", "Images/IndicesChapitres/chap2.png", chapterLabel2, null, 1, dataBase);
+        Table tableEx3 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_3.png", "Images/IndicesChapitres/chap3.png", chapterLabel3, null, 1, dataBase);
+        Table tableEx4 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_4.png", "Images/IndicesChapitres/chap4.png", chapterLabel4, null, 1, dataBase);
+        Table tableEx5 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_5.png", "Images/IndicesChapitres/chap5.png", chapterLabel5, null, 1, dataBase);
+        Table tableEx6 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_6.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, null, 1, dataBase);
 
         table.add(tableEx1).width(screenWidth / 4).height(screenHeight / 4).align(Align.center);
         table.add(tableEx2).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
         table.add(tableEx3).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
         table.row();
-        table.add().height(screenWidth /30);
+        table.add().height(screenWidth / 30);
         table.row();
         table.add(tableEx4).width(screenWidth / 4).height(screenHeight / 4).align(Align.center);
         table.add(tableEx5).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);

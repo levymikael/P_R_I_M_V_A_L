@@ -81,7 +81,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
-        labelStyleBlue.fontColor = Color.BLUE;
+        labelStyleBlue.fontColor = new Color(65.0f / 255.0f, 111.0f / 255.0f, 193.0f / 255.0f, 1);
 
         allDrawables = new ArrayList<>();
 
@@ -109,7 +109,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         mrNotes = new MrNotes(stage, dataBase);
         mrTemps = new MrTemps(stage, dataBase, chapritreNum);
 
-        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 2*screenWidth / 7, screenHeight / 14);
+        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 2 * screenWidth / 7, screenHeight / 14);
         myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);
 
         Gdx.input.setInputProcessor(stage);

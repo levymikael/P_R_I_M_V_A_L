@@ -83,7 +83,7 @@ public class MrTemps implements MyDrawInterface
         Pixmap greenBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.OLIVE);
 
         Table border = new Table();
-        border.pad(screenWidth / 500);
+        border.pad(screenWidth / 1000);
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(greenBorder))));
         border.add(temps);
 

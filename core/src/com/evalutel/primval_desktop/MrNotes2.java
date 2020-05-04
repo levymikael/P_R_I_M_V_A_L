@@ -50,36 +50,17 @@ public class MrNotes2 implements MyDrawInterface
         labelStyle.fontColor = Color.ORANGE;
         Label labelNotes = new Label(newTotalNotes, labelStyle);
 
-        Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes1.png"));
+        Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes.png"));
 
         Table container = new Table();
-        stage.addActor(container);
-        container.setSize(screenWidth / 8, screenHeight / 25);
+        container.setSize(screenWidth / 7, screenHeight / 14);
         container.setPosition(positionX, positionY);
 
-        Table mrNotes = new Table();
-        mrNotes.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
+        container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
+        container.add(labelNotes).padLeft(screenWidth/30);
 
-        int widthButton = 500;
-        int heightButton = widthButton / 4;
-        int cornerRadius = heightButton / 4;
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
-
-        Table notes = new Table();
-        notes.add(labelNotes);
-        notes.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-
-        Pixmap orangeBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.ORANGE);
-
-        Table border = new Table();
-        border.pad(screenWidth / 500);
-        border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
-        border.add(notes);
-
-        container.add(mrNotes).width(screenWidth / 30).padBottom(-screenHeight / 100).padTop(-screenHeight / 100);
-
-        container.add(border);
+        stage.addActor(container);
     }
 
 

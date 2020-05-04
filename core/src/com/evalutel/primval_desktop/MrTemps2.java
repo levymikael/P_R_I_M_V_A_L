@@ -62,39 +62,16 @@ public class MrTemps2 implements MyDrawInterface
         labelStyle.fontColor = Color.OLIVE;
         Label labelTemps = new Label(duration, labelStyle);
 
-        Texture textureMrTemps = new Texture(Gdx.files.internal("Images/mr_temps1.png"));
+        Texture textureMrTemps = new Texture(Gdx.files.internal("Images/mr_temps.png"));
 
         Table container = new Table();
+        container.setSize(screenWidth / 8, screenHeight / 14);
+        container.setPosition(17 * screenWidth / 25, 4 * screenHeight / 5);
+
+        container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrTemps))));
+        container.add(labelTemps).padLeft(screenWidth/30);
+
         stage.addActor(container);
-        container.setSize(screenWidth / 8, screenHeight / 25);
-        container.setPosition(17 * screenWidth / 25, 9 * screenHeight / 11);
-
-        Table mrTemps = new Table();
-        mrTemps.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrTemps))));
-
-        int widthButton = 500;
-        int heightButton = widthButton / 4;
-        int cornerRadius = heightButton / 4;
-
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
-
-        Table temps = new Table();
-        temps.add(labelTemps);
-        temps.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-
-        Pixmap orangeBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.ORANGE);
-
-
-        Table border = new Table();
-        border.pad(screenWidth / 500);
-        border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
-        border.add(temps);
-
-
-        container.add(mrTemps).width(screenWidth / 30).padBottom(-screenHeight / 100).padTop(-screenHeight / 100);
-        container.add(border);
-
-
     }
 
 

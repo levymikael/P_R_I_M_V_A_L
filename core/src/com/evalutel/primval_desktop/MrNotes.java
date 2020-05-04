@@ -81,7 +81,7 @@ public class MrNotes implements MyDrawInterface
         Pixmap orangeBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.ORANGE);
 
         Table border = new Table();
-        border.pad(screenWidth / 500);
+        border.pad(screenWidth / 1000);
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
         border.add(notes);
 

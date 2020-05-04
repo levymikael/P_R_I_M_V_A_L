@@ -116,7 +116,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
 
-        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 30, screenHeight / 2);
+        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 40, screenHeight / 2);
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);
@@ -140,9 +140,8 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Table avatarPic = new Table();
         avatarPic.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground2))));
         avatarPic.setWidth(screenWidth / 7);
-        avatarPic.setHeight(screenHeight / 6);
+        avatarPic.setHeight(screenHeight / 5);
         avatarPic.setPosition(screenWidth / 50, 6 * screenHeight / 10);
-
 
         Table chaptersButton = new Table();
         chaptersButton.add(labelChapitres);
@@ -312,7 +311,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             }
         }
 
-        batch.draw(logoTitre, screenWidth / 40, 24 * screenHeight / 25 - logoTitre.getHeight(), screenWidth / 8, screenHeight / 8);
+        batch.draw(logoTitre, screenWidth / 40, 29 * screenHeight / 29 - logoTitre.getHeight(), screenWidth / 8, screenHeight / 8);
 
         batch.end();
 
