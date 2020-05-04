@@ -3,6 +3,7 @@ package com.evalutel.primval_desktop;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.General.LigneTableaux;
+import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
@@ -38,7 +40,7 @@ public class MrNotes implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 36;
+        parameter.size = screenHeight / 40;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -59,18 +61,33 @@ public class MrNotes implements MyDrawInterface
 
         Table container = new Table();
         stage.addActor(container);
-        container.setSize(screenWidth / 12, screenWidth / 7);
-        container.setPosition(7 * screenWidth / 8, 7 * screenHeight / 10);
+        container.setPosition(8 * screenWidth / 9, 21 * screenHeight / 25);
+
+        int widthButton = 500;
+        int heightButton = widthButton / 4;
+        int cornerRadius = heightButton / 4;
+
 
         Table mrNotes = new Table();
+
         mrNotes.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
 
-        Table notes = new Table();
-        notes.add(labelNotes);
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
 
-        container.add(mrNotes);
+        Table notes = new Table();
+        notes.add(labelNotes).height(screenHeight / 30).padLeft(screenWidth / 60).padRight(screenWidth / 60);
+        notes.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+
+        Pixmap orangeBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.ORANGE);
+
+        Table border = new Table();
+        border.pad(screenWidth / 500);
+        border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
+        border.add(notes);
+
+        container.add(mrNotes).height(screenHeight / 10);
         container.row();
-        container.add(notes);
+        container.add(border);
     }
 
 

@@ -1,7 +1,10 @@
 package com.evalutel.primval_desktop.desktop;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.evalutel.primval_desktop.LaunchGame;
 
 import org.lwjgl.opengl.Display;
@@ -14,10 +17,13 @@ public class DesktopLauncher
 {
     public static void main(String[] arg)
     {
+
+
+
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
-        config.width = 2048;
-        config.height = 1536;
+        //config.width = 2048;
+        //config.height = 1536;
         config.useHDPI = true;
 
 //		config.resizable = false;
@@ -29,13 +35,42 @@ public class DesktopLauncher
 
         config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
         //If I want to test windowed
-        boolean fullscreen = false;
-        if (!fullscreen)
+        boolean fullscreen = true;
+        /*if (!fullscreen)
         {
-            config.fullscreen = false;
+            config.fullscreen = true;
             config.width /= 1.2f;
             config.height /= 1.2f;
+        }*/
+
+        //config.fullscreen = true;
+
+        int screenHeight = config.height;
+        int screenWidth = config.width;
+
+        screenHeight /= 1.2f;
+        screenWidth /= 1.2f;
+
+
+        System.out.print("screenheight, screenWidth" +  screenHeight + "/" +screenWidth);
+        //Gdx.app.log("screenheight, screenWidth", screenHeight + "/" +screenWidth);
+
+        float ratioTest = 1024.0f/768.0f;
+
+        float currentRatio = (float)screenWidth/(float)screenHeight;
+
+        if(currentRatio > ratioTest)
+        {
+            screenWidth = (int)(screenHeight*1024.0f/768.0f);
+            config.width = screenWidth;
+            config.height = screenHeight;
         }
+
+
+
+
+        config.fullscreen = false;
+
         config.resizable = false;
         config.samples = 4;
         config.vSyncEnabled = true;

@@ -52,10 +52,13 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
         this.activiteType = activiteType;
 
+        final int screenHeight = Gdx.graphics.getHeight();
+        widthScreen = Gdx.graphics.getWidth();
+
 // Configuration police de l'enonce
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 36;
+        parameter.size = (int) widthScreen / 50;
 
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
@@ -132,8 +135,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
 
 // Positionnement du tableau sur ecran:
-        final int screenHeight = Gdx.graphics.getHeight();
-        widthScreen = Gdx.graphics.getWidth();
+
         tableTitre.pack();
         tableTitre.setPosition(widthScreen / 2 - widthEnonce / 2, screenHeight - tableTitre.getHeight());
 

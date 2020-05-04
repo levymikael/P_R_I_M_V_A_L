@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -57,13 +59,14 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
     private Viewport viewport;
 
-
     ScreeenBackgroundImage fondSommairee;
     ScreeenBackgroundImage fondSommaire;
     ScreeenBackgroundImage imgSommaire;
 
     MrNotes2 mrNotes2;
     MrTemps mrTemps;
+
+    Sprite test;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
 
@@ -73,30 +76,31 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
     Texture logoTitre;
 
-
     public Screen_Sommaire_General(final Game game, final DatabaseDesktop dataBase)
     {
         this.game = game;
         this.dataBase = dataBase;
 
+        Gdx.app.log("screenheight, screenWidth", screenHeight + "/" + screenWidth);
+
+        //Camera camera = new OrthographicCamera();
+        //((OrthographicCamera) camera).setToOrtho(false, screenWidth, screenHeight);
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFont;
 
+        screenHeight = Gdx.graphics.getHeight();
+        screenWidth = Gdx.graphics.getWidth();
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 36;
-//        parameter.color.set(48 / 255f, 107 / 255f, 62 / 255f, 1);
+        parameter.size = screenHeight / 40;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
-        labelStyleBlue.fontColor = Color.BLUE;
-
-        screenHeight = Gdx.graphics.getHeight();
-        screenWidth = Gdx.graphics.getWidth();
+        labelStyleBlue.fontColor = new Color(41.0f / 255.0f, 103.0f / 255.0f, 159.0f / 255.0f, 1);
 
         allDrawables = new ArrayList<>();
 
@@ -105,10 +109,14 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/sommaire_bandeau_gauche.jpg");
 
         imgSommaire = new ScreeenBackgroundImage("Images/Sommaire/image_sommaire.png");
+//        imgSommaire = new Texture(Gdx.files.internal("Images/Sommaire/image_sommaire.png"));
+
+//        test = new Sprite(new Texture("Images/Sommaire/test.png"));
+//        test.setPosition(4 * screenWidth / 15, screenHeight / 5);
 
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
 
-        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 25, 5 * screenHeight / 10);
+        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 30, screenHeight / 2);
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);
@@ -116,39 +124,84 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Label labelPresentation = new Label("Présentation", labelStyleBlue);
 
         Table container = new Table();
-        container.setPosition(screenWidth / 40, 2 * screenHeight / 9);
+        container.setPosition(screenWidth / 50, 2 * screenHeight / 9);
         container.setWidth(screenWidth / 7);
         container.setHeight(screenHeight / 6);
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
+        int widthButton = 500;
+        int heightButton = widthButton / 4;
+        int cornerRadius = heightButton / 2;
+
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
+        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, new Color(41.0f / 255.0f, 103.0f / 255.0f, 159.0f / 255.0f, 1));
+
+        Pixmap whiteRoundedBackground2 = UIDesign.createRoundedRectangle((widthButton * 2), widthButton, cornerRadius, Color.WHITE);
+
+        Table avatarPic = new Table();
+        avatarPic.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground2))));
+        avatarPic.setWidth(screenWidth / 7);
+        avatarPic.setHeight(screenHeight / 6);
+        avatarPic.setPosition(screenWidth / 50, 6 * screenHeight / 10);
+
 
         Table chaptersButton = new Table();
         chaptersButton.add(labelChapitres);
         chaptersButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-//        chaptersButton.setSize(screenWidth / 10, screenHeight / 12);
+
+        Table blueBorderTableChapters = new Table();
+        blueBorderTableChapters.pad(screenWidth / 500);
+        blueBorderTableChapters.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        blueBorderTableChapters.add(chaptersButton);
 
         Table resultsButton = new Table();
         resultsButton.add(labelResultats);
         resultsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
+        Table blueBorderTableResults = new Table();
+        blueBorderTableResults.pad(screenWidth / 500);
+        blueBorderTableResults.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        blueBorderTableResults.add(resultsButton);
+
         Table espaceParentsButton = new Table();
         espaceParentsButton.add(labelEspaceParents);
         espaceParentsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+
+        Table blueBorderTableParentSpace = new Table();
+        blueBorderTableParentSpace.pad(screenWidth / 500);
+        blueBorderTableParentSpace.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        blueBorderTableParentSpace.add(espaceParentsButton);
 
         Table presentation = new Table();
         presentation.add(labelPresentation);
         presentation.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
-        container.add(chaptersButton).pad(20).align(Align.center).height(screenWidth / 30).width(screenWidth / 8);
+        Table blueBorderTablePresentation = new Table();
+        blueBorderTablePresentation.pad(screenWidth / 500);
+        blueBorderTablePresentation.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        blueBorderTablePresentation.add(presentation);
+
+        int widthButton2 = screenWidth / 7;
+        int heightButton2 = widthButton2 / 4;
+
+        container.add(blueBorderTableChapters).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
         container.row();
-        container.add(resultsButton).pad(20).align(Align.center).height(screenWidth / 30).width(screenWidth / 8);
+        container.add(blueBorderTableResults).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
         container.row();
-        container.add(espaceParentsButton).pad(20).align(Align.center).height(screenWidth / 30).width(screenWidth / 8);
+        container.add(blueBorderTableParentSpace).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
         container.row();
-        container.add(presentation).pad(20).align(Align.center).height(screenWidth / 30).width(screenWidth / 8);
+        container.add(blueBorderTablePresentation).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
 
 //        container.debug();
 
+        Table summaryImgTable = new Table();
+        summaryImgTable.setSize(4 * screenWidth / 5, screenHeight);
+        summaryImgTable.setPosition(screenWidth / 5, 0);
+//        summaryImgTable.debug();
+        summaryImgTable.setTouchable(Touchable.enabled);
+
+
+        stage.addActor(summaryImgTable);
+        stage.addActor(avatarPic);
         stage.addActor(container);
 
         chaptersButton.addListener(new ClickListener()
@@ -157,7 +210,16 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             public void clicked(InputEvent event, float x, float y)
             {
                 game.setScreen(new Screen_All_ChaptersNew(game, dataBase));
+                Gdx.app.log("Screen All chapters ", "clicked!");
+            }
+        });
 
+        summaryImgTable.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                game.setScreen(new Screen_All_ChaptersNew(game, dataBase));
                 Gdx.app.log("Screen All chapters ", "clicked!");
             }
         });
@@ -168,7 +230,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             public void clicked(InputEvent event, float x, float y)
             {
                 game.setScreen(new Screen_All_Results(game, dataBase));
-
                 Gdx.app.log("Screen All results ", "clicked!");
             }
         });
@@ -234,11 +295,12 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     public void render(float delta)
     {
         batch.begin();
-        batch.setTransformMatrix(new Matrix4());
 
-        fondSommairee.myDraw(batch);
         fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);
-        imgSommaire.myDraw2(batch, 680 * 2, 600 * 2, screenWidth / 3, screenHeight / 5);
+        fondSommairee.myDraw2(batch, screenWidth, screenHeight, ((screenWidth / 5) - (screenWidth / 70)), 0);
+        imgSommaire.myDraw2(batch, 3 * screenWidth / 5, 3 * screenHeight / 5, ((screenWidth / 5) + ((screenWidth / 5) / 2)), (screenHeight / 2) - ((3 * screenHeight / 5) / 2));
+//        batch.draw(imgSommaire, 4 * screenWidth / 15, screenHeight / 5, 2 * screenWidth / 5, (((2 * screenWidth / 5) * 600) / 680));
+//        test.draw(batch);
 
 
         for (int i = 0; i < allDrawables.size(); i++)
@@ -250,11 +312,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             }
         }
 
-        batch.draw(logoTitre, screenWidth / 30, 14 * screenHeight / 15 - logoTitre.getHeight());
-
+        batch.draw(logoTitre, screenWidth / 40, 24 * screenHeight / 25 - logoTitre.getHeight(), screenWidth / 8, screenHeight / 8);
 
         batch.end();
-
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
@@ -263,9 +323,8 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     @Override
     public void create()
     {
-//
-        camera = new PerspectiveCamera();
-        viewport = new FitViewport(800, 480, camera);
+        //camera = new PerspectiveCamera();
+        //viewport = new FitViewport(800, 480, camera);
 
 //        stage = new Stage(new StretchViewport(width, height));
 
@@ -275,17 +334,19 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     {
     }
 
+
+    /*
     @Override
     public void resize(int width, int height)
     {
-        stage.getViewport().update(width, height, true);
+        //stage.getViewport().update(width, height, true);
 //        width = 2400;
 //        height = 1350;
 //        viewport.update(width, height);
 
 
     }
-
+*/
     @Override
     public void pause()
     {

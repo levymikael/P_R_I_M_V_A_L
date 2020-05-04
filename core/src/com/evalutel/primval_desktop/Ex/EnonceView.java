@@ -49,12 +49,15 @@ public class EnonceView implements MyDrawInterface
         widthEnonce = width;
         heightTop = widthEnonce * 100 / 1626;
 
+        final int screenHeight = Gdx.graphics.getHeight();
+        widthScreen = Gdx.graphics.getWidth();
+
 // Configuration police de l'enonce
         TextField.TextFieldStyle textFieldStyleTest = new TextField.TextFieldStyle();
 //
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 36;
+        parameter.size = (int) widthScreen / 40;
 
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
@@ -113,8 +116,7 @@ public class EnonceView implements MyDrawInterface
 
 // Positionnement du tableau sur ecran:
 
-        final int screenHeight = Gdx.graphics.getHeight();
-        widthScreen = Gdx.graphics.getWidth();
+
         tableTitre.pack();
         tableTitre.setPosition(widthScreen / 2 - widthEnonce / 2, screenHeight - tableTitre.getHeight());
 

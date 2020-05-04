@@ -64,18 +64,17 @@ public class ListExercicesActiviteView implements MyDrawInterface
         Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
 
 
-        table.add(tableEx1).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.add(tableEx1).width(screenWidth).height(screenHeight / 11).align(Align.center).padBottom(screenHeight / 100);
         table.row();
-        table.add(tableEx2).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.add(tableEx2).width(screenWidth).height(screenHeight / 11).align(Align.center).padBottom(screenHeight / 100);
         table.row();
-        table.add(tableEx3).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.add(tableEx3).width(screenWidth).height(screenHeight / 11).align(Align.center).padBottom(screenHeight / 100);
         table.row();
-        table.add(tableEx4).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.add(tableEx4).width(screenWidth).height(screenHeight / 11).align(Align.center).padBottom(screenHeight / 100);
         table.row();
-        table.add(tableEx5).width(screenWidth).height(screenHeight / 11).align(Align.center);
+        table.add(tableEx5).width(screenWidth).height(screenHeight / 11).align(Align.center).padBottom(screenHeight / 100);
         table.row();
         table.add(tableEx6).width(screenWidth).height(screenHeight / 11).align(Align.center);
-        table.row();
 
         table.setWidth(screenWidth);
 
@@ -153,6 +152,5 @@ public class ListExercicesActiviteView implements MyDrawInterface
     @Override
     public void myDraw(Batch batch)
     {
-
     }
 }

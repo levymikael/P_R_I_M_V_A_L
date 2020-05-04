@@ -28,13 +28,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.General.BoutonChapitres;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
-import com.evalutel.primval_desktop.General.UIDesign;
-import com.evalutel.primval_desktop.ListExercicesActiviteView;
-import com.evalutel.primval_desktop.MrNotes2;
-import com.evalutel.primval_desktop.MrTemps2;
-import com.evalutel.primval_desktop.MyButtonDemos;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -55,19 +49,14 @@ public class Screen_Demos extends Game implements Screen, InputProcessor, Applic
 
     private Viewport viewport;
 
-    ListExercicesActiviteView listExercicesActiviteView;
     ScreeenBackgroundImage fondEspaceParent;
-    ScreeenBackgroundImage fondSommaire;
-    MrNotes2 mrNotes;
-    MrTemps2 mrTemps;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
     MyButtonRetour myButtonRetour;
-    MyButtonDemos myButtonDemo;
+
 
     FreeTypeFontGenerator generatorFRHND;
     FreeTypeFontGenerator generatorZAP;
-    TextureRegionDrawable textureRegionDrawableBg;
 
     BitmapFont bitmapFontZAP;
 
@@ -123,7 +112,6 @@ public class Screen_Demos extends Game implements Screen, InputProcessor, Applic
 
 
         Table container = new Table();
-
 
 
         stage.addActor(container);
@@ -223,10 +211,9 @@ public class Screen_Demos extends Game implements Screen, InputProcessor, Applic
     @Override
     public void resize(int width, int height)
     {
-        stage.getViewport().update(width, height, true);
-        width = 2400;
-        height = 1350;
-
+//        stage.getViewport().update(width, height, true);
+//        width = 2400;
+//        height = 1350;
 
 //        viewport.update(width, height);
     }

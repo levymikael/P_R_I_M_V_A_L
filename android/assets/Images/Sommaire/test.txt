@@ -1,0 +1,14 @@
+test.png
+size: 680, 600
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+image_sommaire
+  rotate: false
+  xy: 0, 0
+  size: 680, 600
+  split: 0, 0, 600, 0
+  pad: 170, 170, 150, 150
+  orig: 680, 600
+  offset: 0, 0
+  index: -1

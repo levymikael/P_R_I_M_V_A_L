@@ -44,7 +44,7 @@ public class LigneTableaux
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 32;
+        parameter.size = screenWidth / 70;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -58,9 +58,8 @@ public class LigneTableaux
 
         String duration = MillisToDuration(durationPerExercice);
 
-
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
-        labelStyleDuration.fontColor = Color.GREEN;
+        labelStyleDuration.fontColor = Color.OLIVE;
         labelStyleDuration.font = bitmapFont;
 
         Label labelDuration = new Label(duration, labelStyleDuration);
@@ -99,11 +98,11 @@ public class LigneTableaux
         labelStyleNotes.font = bitmapFont;
 
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
-        labelNotes.setWidth(50);
+        labelNotes.setWidth(screenWidth / 20);
         labelNotes.setWrap(true);
 
         table.setWidth(screenWidth);
-        table.setHeight(screenHeight / 10);
+        table.setHeight(screenHeight / 12);
 
         labelOnglet.setWidth(screenWidth / 4);
 
@@ -112,7 +111,7 @@ public class LigneTableaux
 //        labelDuration.debug();
 
         table.add().width(screenWidth / 30);
-        table.add(button).height(70).width(screenWidth / 13).align(Align.center);
+        table.add(button).height(screenHeight / 25).width(screenWidth / 13).align(Align.center);
         table.add(button).align(Align.center);
         table.add().width(screenWidth / 25);
         table.add(labelOnglet).align(Align.center).width((float) (screenWidth * 0.5));
@@ -139,16 +138,11 @@ public class LigneTableaux
             table.add().width(screenWidth / 20);
         }
 
-
-//        table.add().width(screenWidth - 200 - (2 * screenWidth / 3) - 30 - 200 - 400);
-
-
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmWhite.setColor(Color.WHITE);
         pmWhite.fill();
 
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
-
 
         container.add(tablebord1).width(screenWidth).height(2);
         container.row();
@@ -157,9 +151,7 @@ public class LigneTableaux
         container.add(tablebord2).width(screenWidth).height(2);
 
         table.setTouchable(Touchable.enabled);
-//        table.setFillParent(true);
         container.setTouchable(Touchable.enabled);
-
 
         return container;
     }

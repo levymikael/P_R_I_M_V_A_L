@@ -32,7 +32,7 @@ public class MrNotes2 implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = (int) screenWidth / 60;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -44,10 +44,6 @@ public class MrNotes2 implements MyDrawInterface
 
         String newTotalNotes = totalNotes.substring(0, totalNotes.length() - 2) + "/3593";
 
-        int ok = 5;
-        ok++;
-
-
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
@@ -58,24 +54,32 @@ public class MrNotes2 implements MyDrawInterface
 
         Table container = new Table();
         stage.addActor(container);
-        container.setSize(screenWidth / 8, screenWidth / 25);
+        container.setSize(screenWidth / 8, screenHeight / 25);
         container.setPosition(positionX, positionY);
 
         Table mrNotes = new Table();
         mrNotes.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle((int) screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
+        int widthButton = 500;
+        int heightButton = widthButton / 4;
+        int cornerRadius = heightButton / 4;
 
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
 
         Table notes = new Table();
         notes.add(labelNotes);
         notes.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
-        container.add(mrNotes);
+        Pixmap orangeBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.ORANGE);
 
-        container.add(notes);
+        Table border = new Table();
+        border.pad(screenWidth / 500);
+        border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
+        border.add(notes);
 
+        container.add(mrNotes).width(screenWidth / 30).padBottom(-screenHeight / 100).padTop(-screenHeight / 100);
 
+        container.add(border);
     }
 
 

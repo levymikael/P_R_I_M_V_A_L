@@ -1,6 +1,7 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
@@ -41,8 +42,28 @@ public class LaunchGame extends Game implements ApplicationListener
     @Override
     public void create()
     {
-        camera = new PerspectiveCamera();
-        viewport = new FitViewport(800, 480, camera);
+
+        int screenHeight = Gdx.graphics.getHeight();
+        int screenWidth = Gdx.graphics.getWidth();
+
+
+        float ratioTest = 1024.0f/768.0f;
+
+        float currentRatio = (float)screenWidth/(float)screenHeight;
+
+        if(currentRatio > ratioTest)
+        {
+            screenWidth = (int)(screenHeight*1024.0f/768.0f);
+        }
+
+
+        Camera camera = new OrthographicCamera();
+        //((OrthographicCamera) camera).setToOrtho(false, screenWidth, screenHeight);
+
+        Gdx.app.log("screenheight, screenWidth", screenHeight + "/" +screenWidth);
+
+        //camera = new PerspectiveCamera();
+        //viewport = new FitViewport(800, 480, camera);
 
 //		this.setScreen(new ScreenOnglet());
 //		this.setScreen(new ScreenEx1_1());

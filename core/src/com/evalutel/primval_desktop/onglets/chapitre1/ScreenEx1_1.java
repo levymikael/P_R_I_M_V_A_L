@@ -49,7 +49,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
         oiseauxList = getNumberOiseauxArList();
 
-        reserveBilles = new ReserveBilles(screenWidth - 300, screenHeight - 300, largeurBille, largeurBille);
+        reserveBilles = new ReserveBilles(10 * screenWidth / 11, 9 * screenHeight / 11, largeurBille, largeurBille);
         reserveBilles.largeurBille = largeurBille;
         reserveBilles.isActive();
         reserveBilles.setActive(false);

@@ -24,7 +24,7 @@ public class TableauxTitreChapitre
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
 
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 80;
+        parameter.size = screenWidth / 20;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -38,7 +38,7 @@ public class TableauxTitreChapitre
         }
         else
         {
-            table.add(new Image(texture)).width(screenWidth / 15).height(screenWidth / 15).align(Align.center);
+            table.add(new Image(texture)).width(screenWidth / 20).height(screenWidth / 20).align(Align.center);
             table.add().width(50).height(screenHeight / 8);
         }
         label.setFontScale(2);

@@ -52,7 +52,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         bgScreenEx1_2 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_2);
 
-        reserveBilles = new ReserveBilles(screenWidth - 300, screenHeight - 300, screenWidth / 15, screenWidth / 15);
+        reserveBilles = new ReserveBilles(10 * screenWidth / 11, 9 * screenHeight / 11, largeurBille, largeurBille);
         reserveBilles.largeurBille = largeurBille;
         allDrawables.add(reserveBilles);
 

@@ -55,7 +55,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     MrTemps mrTemps;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
-    //
+
     MyButtonRetour myButtonRetour;
 
     FreeTypeFontGenerator generator;
@@ -70,19 +70,18 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         batch = new SpriteBatch();
         BitmapFont bitmapFont;
 
+        screenHeight = Gdx.graphics.getHeight();
+        screenWidth = Gdx.graphics.getWidth();
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 36;
+        parameter.size = screenHeight / 50;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
         labelStyleBlue.fontColor = Color.BLUE;
-
-        screenHeight = Gdx.graphics.getHeight();
-        screenWidth = Gdx.graphics.getWidth();
 
         allDrawables = new ArrayList<>();
 
@@ -101,18 +100,16 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
 
         Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, textureNumber1);
-        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 3 * screenHeight / 4);
-        nomChapitre.setHeight(screenHeight/25);
+        nomChapitre.setWidth(screenWidth / 7);
+        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 7 * screenHeight / 10);
         stage.addActor(nomChapitre);
-
 
         int chapritreNum = 1;
 
         mrNotes = new MrNotes(stage, dataBase);
         mrTemps = new MrTemps(stage, dataBase, chapritreNum);
 
-
-        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, screenWidth / 4, screenHeight / 12);
+        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 2*screenWidth / 7, screenHeight / 14);
         myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);
 
         Gdx.input.setInputProcessor(stage);
@@ -192,14 +189,10 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         batch.draw(sacDebilles, screenWidth / 2 - sacDebilles.getWidth() / 2, 4 * screenHeight / 5);
 
-
         batch.end();
-
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-
-
     }
 
     @Override

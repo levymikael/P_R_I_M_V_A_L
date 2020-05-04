@@ -209,7 +209,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         if (ecrin)
         {
-            ecrinDiamantView = new EcrinDiamantView(stage, validusAnimated.getWidth(), 9);
+            ecrinDiamantView = new EcrinDiamantView(stage, screenWidth / 8, 9);
             ecrinDiamantView.updateText();
             allDrawables.add(ecrinDiamantView);
 
@@ -321,7 +321,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     @Override
     public void dispose()
     {
-//        stage.dispose();
     }
 
     @Override

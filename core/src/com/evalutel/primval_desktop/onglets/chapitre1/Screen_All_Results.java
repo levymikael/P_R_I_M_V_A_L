@@ -71,11 +71,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     BitmapFont bitmapFontZAP;
 
 
-    boolean isClicked = false;
-
-    CollapsibleWidget collapsibleWidget;
-
-
     public Screen_All_Results(Game game, DatabaseDesktop dataBase)
     {
         this.game = game;
@@ -133,18 +128,12 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table table = new Table();
 
         container.setSize(screenWidth, (float) (2 * screenHeight));
-        container.setPosition(0, 0);
-        table.setPosition(0, 0);
+
 
         table.setWidth(screenWidth);
 
-        ScrollPane scroll = new ScrollPane(table);
-        scroll.layout();
-
-        container.add(scroll).height(screenHeight - (screenHeight - (myButtonRetour.getY() + myButtonRetour.getHeight() / 2)));
-        container.row();
-
         Table table2 = chapter1Results();
+        Table table3 = chapter2Results();
         Table tableCollapsible = new Table();
 
         Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
@@ -183,7 +172,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
 //        table2.setBackground(orangeBg);
 
-        table.add(table2).width(screenWidth).align(Align.center);
+        table.add(table2).width(screenWidth).align(Align.center).padBottom(screenHeight / 15);
+        table.row();
+        table.add(table3).width(screenWidth).align(Align.center);
+
+        ScrollPane scroll = new ScrollPane(table);
+        scroll.layout();
+
+        container.add(scroll).height(screenHeight - (screenHeight - (myButtonRetour.getY() + myButtonRetour.getHeight() / 2)));
+        container.row();
 
 
 //        table2.debug();
@@ -203,7 +200,73 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     public Table chapter1Results()
     {
         Table table = new Table();
+        Table container = new Table();
 
+        String labelChapterTitle = "Pratique des nombres de 1 à 9";
+        String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
+        String label2 = "Faire correspondre des billes à des oiseaux";
+        String label3 = "Écriture des chiffres 1 à 9";
+        String label4 = "Prononciation des chiffres 1 à 9";
+        String label5 = "Compter des oiseaux et taper leur nombre";
+        String label6 = "Un gâteau pour plusieurs anniversaires";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
+
+//        stage.addActor(container);
+        container.setSize(screenWidth, 2 * screenHeight / 5);
+//        container.setPosition(0, screenHeight / 7);
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", "Images/IndicesChapitres/chap1.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+
+
+        Table tableChapTitle = LigneTableaux2.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);
+        Table tableEx1 = LigneTableaux2.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
+        Table tableEx2 = LigneTableaux2.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx3 = LigneTableaux2.getLigne(trois_bouton, label3, textureCours, "red", 1, 2, dataBase);
+        Table tableEx4 = LigneTableaux2.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx5 = LigneTableaux2.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx6 = LigneTableaux2.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
+        tableEx6.debug();
+
+        tableChapTitle.setBackground(orangeBg);
+
+        table.add(tableChapTitle).width(screenWidth).height(screenHeight / 25).align(Align.center);
+        table.row();
+        table.add(tableEx1).width(screenWidth).height(screenHeight / 25).align(Align.center);
+        table.row();
+        table.add(tableEx2).width(screenWidth).height(screenHeight / 25).align(Align.center);
+        table.row();
+        table.add(tableEx3).width(screenWidth).height(screenHeight / 25).align(Align.center);
+        table.row();
+        table.add(tableEx4).width(screenWidth).height(screenHeight / 25).align(Align.center);
+        table.row();
+        table.add(tableEx5).width(screenWidth).height(screenHeight / 25).align(Align.center);
+        table.row();
+        table.add(tableEx6).width(screenWidth).height(screenHeight / 20).align(Align.center);
+        table.row();
+
+        table.setWidth(screenWidth);
+//
+//        ScrollPane scroll = new ScrollPane(table);
+//        scroll.layout();
+
+        container.add(table).height(4 * screenHeight / 5);
+//        container.row();
+
+
+        return container;
+    }
+
+    public Table chapter2Results()
+    {
+        Table table = new Table();
         Table container = new Table();
 
         String labelChapterTitle = "Pratique des nombres de 1 à 9";
@@ -222,13 +285,12 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         container.setPosition(0, screenHeight / 7);
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", "Images/IndicesChapitres/chap1.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
-
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
 
 
         Table tableChapTitle = LigneTableaux2.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);

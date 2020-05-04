@@ -23,7 +23,7 @@ public class EcrinDiamantView implements MyDrawInterface
     private Label currentLabel1;
     private Label currentLabel2;
     private Table table, tableTitre;
-    public float widthScreen;
+    public float widthScreen, screenHeight;
 
     int diamant, pierre;
 
@@ -46,12 +46,14 @@ public class EcrinDiamantView implements MyDrawInterface
         this.pointsMax = pointsMax;
         widthEcrin = width;
 
+        widthScreen = Gdx.graphics.getWidth();
+        screenHeight = Gdx.graphics.getHeight();
 
         // Configuration police de l'enonce
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = (int) widthScreen / 50;
 
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
@@ -80,9 +82,8 @@ public class EcrinDiamantView implements MyDrawInterface
         tableTitre.setBackground(new SpriteDrawable(new Sprite(ecrinDiamantTexture)));
 
 // Positionnement numero exercice:
-        tableTitre.add().width(50);
-        tableTitre.add(currentLabel2).align(Align.right).width(200);
-        tableTitre.add(currentLabel1).width(widthEcrin - 50).height(200);
+        tableTitre.add(currentLabel2).align(Align.right).width(widthScreen / 30).padLeft(widthScreen / 70);
+        tableTitre.add(currentLabel1).width(widthEcrin - 50).height(screenHeight / 11).padLeft(widthScreen / 20);
 
         table = new Table();
         stage.addActor(table);
@@ -93,11 +94,8 @@ public class EcrinDiamantView implements MyDrawInterface
 
 // Positionnement du tableau sur ecran:
 
-        widthScreen = Gdx.graphics.getWidth();
         tableTitre.pack();
         tableTitre.setPosition(10, 50);
-
-        table.pack();
 
         table.setPosition(50, 0);
 

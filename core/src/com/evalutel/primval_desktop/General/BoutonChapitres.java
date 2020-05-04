@@ -5,12 +5,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
@@ -33,7 +35,7 @@ public class BoutonChapitres
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 32;
+        parameter.size = screenWidth / 75;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -57,22 +59,26 @@ public class BoutonChapitres
         Texture textureChapter = new Texture(Gdx.files.internal(sommaireChapImgPath));
         Texture textureChapterIndex = new Texture(Gdx.files.internal(chapterIndexPath));
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
-        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(screenWidth / 20, screenHeight / 30, 10, Color.BLUE);
+        int widthButton = 500;
+        int heightButton = widthButton / 6;
+        int cornerRadius = heightButton / 4;
+
+
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
+        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.BLUE);
 
         table.debug();
         Table table2 = new Table();
-        table2.add(new Image(textureChapterIndex)).width(screenWidth / 40).padRight(screenWidth / 40).padLeft(screenWidth / 40);
+        table2.add(new Image(textureChapterIndex)).width(screenWidth / 40).padRight(screenWidth / 80);
         table2.add(labelOngletBlue).width((float) (screenWidth / 6));
 
         Table table3 = new Table();
 
         if (chapterBought == "no")
         {
-
             Table table4 = new Table();
             table4.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(blueRoundedBackground))));
-            table4.add(labelOngletBuyChapter).width(screenWidth / 8).align(Align.center);
+            table4.add(labelOngletBuyChapter).width(screenWidth / 8).align(Align.center).padRight(screenWidth/100).padLeft(screenWidth/100);
 
             table3.add(table4);
         }
@@ -80,19 +86,27 @@ public class BoutonChapitres
         table3.add().width(screenWidth / 70);
 
 
-        Table table5 = new Table();
-        table5.add(labelOngletSummary);
-        table5.debug();
+        Pixmap blueBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.BLUE);
+
+        Table border = new Table();
+        border.pad(screenWidth / 1000);
+        border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueBorder))));
 
 
-        table3.add(table5);
+        Table summaryBtn = new Table();
+        summaryBtn.add(labelOngletSummary).padRight(screenWidth/100).padLeft(screenWidth/100);
+        summaryBtn.debug();
+        summaryBtn.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
+        border.add(summaryBtn);
 
-        table.add(new Image(textureChapter)).width(screenWidth / 4);
+        table3.add(border);
+
+        table.add(new Image(textureChapter)).width(((screenWidth / 4) * 305) / 521).height(screenHeight / 7);
         table.row();
         table.add(table2).width((float) (screenWidth / 4)).align(Align.center);
         table.row();
-        table.add(table3).width((float) (screenWidth / 9)).align(Align.center).padBottom(screenWidth / 80).padTop(screenWidth / 80);
+        table.add(table3).width((float) (screenWidth / 9)).align(Align.center).padBottom(screenWidth / 80).padTop(screenWidth / 80).height(screenHeight/30);
 
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmWhite.setColor(Color.WHITE);
@@ -110,16 +124,16 @@ public class BoutonChapitres
     }
 
 
-    public static String MillisToDuration(long seconds)
-    {
-        int sec = (int) seconds % 60;
-        int min = (((int) seconds) / 60) % 60;
-        int hours = (((int) seconds) / 60) / 60;
-
-        String hms = String.format("%02d:%02d:%02d", hours, min, sec);
-
-        System.out.println(hms);
-        return hms;
-    }
+//    public static String MillisToDuration(long seconds)
+//    {
+//        int sec = (int) seconds % 60;
+//        int min = (((int) seconds) / 60) % 60;
+//        int hours = (((int) seconds) / 60) / 60;
+//
+//        String hms = String.format("%02d:%02d:%02d", hours, min, sec);
+//
+//        System.out.println(hms);
+//        return hms;
+//    }
 }
 

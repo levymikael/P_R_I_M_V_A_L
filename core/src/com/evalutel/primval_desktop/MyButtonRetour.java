@@ -50,7 +50,6 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
                         }
             );
         }
-
         else if (screenPrevious == "screen all chapters")
         {
             addListener(new ClickListener()
@@ -67,15 +66,7 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
 
     }
 
-    /**
-     * @param currentPositionX point x coordinate
-     * @param currentPositionY point y coordinate
-     * @return whether the point is contained in the rectangle
-     */
-    public boolean contains(float currentPositionX, float currentPositionY)
-    {
-        return this.currentPositionX <= currentPositionX && this.currentPositionX + this.width >= currentPositionX && this.currentPositionY <= currentPositionY && this.currentPositionY + this.height >= currentPositionY;
-    }
+
 
 
     @Override

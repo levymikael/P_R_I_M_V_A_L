@@ -86,6 +86,9 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
         this.game = game;
         this.dataBase = dataBase;
 
+        screenHeight = Gdx.graphics.getHeight();
+        screenWidth = Gdx.graphics.getWidth();
+
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFontFRHND;
@@ -98,7 +101,7 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
 
         generatorZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterZAP = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterZAP.size = 40;
+        parameterZAP.size = screenWidth / 70;
         bitmapFontZAP = generatorZAP.generateFont(parameterZAP);
         generatorZAP.dispose();
 
@@ -109,10 +112,6 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFontFRHND;
         labelStyleBlue.fontColor = Color.NAVY;
-
-
-        screenHeight = Gdx.graphics.getHeight();
-        screenWidth = Gdx.graphics.getWidth();
 
         allDrawables = new ArrayList<>();
 
@@ -128,11 +127,16 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
 
         Label labelChap1Titre = new Label("Calcul et géométrie", labelStyleWhite);
 
+        labelChap1Titre.setFontScale(3);
+        Table allChaptersTitle = new Table();
+        allChaptersTitle.add(labelChap1Titre);
+        stage.addActor(allChaptersTitle);
+
         Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
         nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 9 * screenHeight / 10);
         stage.addActor(nomChapitre);
 
-        mrNotes = new MrNotes2(stage, dataBase, 21 * screenWidth / 25, 4 * screenHeight / 5);
+        mrNotes = new MrNotes2(stage, dataBase, 21 * screenWidth / 25, 9 * screenHeight / 11);
         mrTemps = new MrTemps2(stage, dataBase);
 
 
@@ -144,20 +148,25 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
         Table evalutelMotto = evalutelMotto();
 
         Label labelChapterTitle = new Label("Chapitres", labelStyleBlue);
-
-        Table chapterTitle = TableauxTitreChapitre.getLigne(labelChapterTitle, null);
-        chapterTitle.setPosition(screenWidth / 2 - chapterTitle.getWidth() / 2, 9 * screenHeight / 10);
+        labelChapterTitle.setFontScale(2);
+        Table chapterTitle = new Table();
+        chapterTitle.add(labelChapterTitle);
 
         chapterTitle.padTop(screenHeight / 40);
 
         Table chaptersListView = chaptersListView();
 
-        container.setSize(screenWidth, (float) (2 * screenHeight));
-        container.setPosition(0, 0);
-        table.setPosition(0, 0);
+        container.setSize(screenWidth, (screenHeight - (myButtonRetour.getY())-screenHeight/20));
+        container.setPosition(0, -screenHeight / 12);
+//        table.setPosition(0, 0);
 
+        int widthButton = 1000;
+        int heightButton = widthButton / 4;
+        int cornerRadius = heightButton / 4;
+
+//
         container.debug();
-        table.add(evalutelMotto).width(screenWidth - screenWidth / 20).align(Align.center).padLeft(screenWidth / 40).padRight(screenWidth / 40);
+        table.add(evalutelMotto).width(screenWidth - (screenWidth / 19)).align(Align.center).padTop(screenWidth / 30);
         table.row();
         table.add(chapterTitle).width(screenWidth).align(Align.center).padBottom(screenHeight / 20);
         table.row();
@@ -170,7 +179,7 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
         scroll.layout();
 
         container.add(scroll).height(screenHeight - (screenHeight - (myButtonRetour.getY() + myButtonRetour.getHeight() / 2)));
-        container.row();
+//        container.row();
 
         stage.addActor(container);
         container.setFillParent(true);
@@ -182,28 +191,34 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
     {
         Label.LabelStyle labelStyleBlue2 = new Label.LabelStyle();
         labelStyleBlue2.font = bitmapFontZAP;
-        labelStyleBlue2.fontColor = Color.NAVY;
+        labelStyleBlue2.fontColor = Color.ROYAL;
         Label labelMottoTitle = new Label("Primval développé par Evalutel, propose un programe complet de Math et de géométrie pour le Primaire basé sur notre devise:", labelStyleBlue2);
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
+        int widthButton = 1000;
+        int heightButton = widthButton / 4;
+        int cornerRadius = heightButton / 8;
 
-        Pixmap lightBlueRoundedBackground = UIDesign.createRoundedRectangle(screenWidth / 10, screenHeight / 18, 15, Color.valueOf("234241250"));
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
+
+        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.BLUE);
+        Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
 
         Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
         bgPixmap.setColor(Color.rgb888(234, 241, 250));
 
+        Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pmBlue.setColor(Color.NAVY);
+        pmBlue.fill();
+
         bgPixmap.fill();
-        textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(bgPixmap)));
+        textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(blueRoundedBackground2)));
 
         Table evalutelMotto = new Table();
         evalutelMotto.setBackground((textureRegionDrawableBg));
-        evalutelMotto.setSize(19 * screenWidth / 20, screenHeight / 3);
-//        container.setPosition(screenWidth / 40, /*(myButtonRetour.getY() - container.getHeight() - screenHeight / 40)*/0);
 
-        evalutelMotto.add(labelMottoTitle).padBottom(screenHeight / 40);
+        evalutelMotto.add(labelMottoTitle).padBottom(screenHeight / 80);
         evalutelMotto.padTop(screenHeight / 40).padRight(screenHeight / 40);
         evalutelMotto.row();
-//        evalutelMotto.debug();
 
         Table evalutelMottoDetails = new Table();
 
@@ -216,19 +231,29 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
 
         manipulerTable.add(labelManipulerTitle);
         manipulerTable.row();
-        manipulerTable.add(labelManipulerText).width(screenWidth / 4).padLeft(screenWidth / 40).height(screenHeight / 5).padRight(screenWidth / 40);
+        manipulerTable.add(labelManipulerText).width(screenWidth / 4).padLeft(screenWidth / 50).height(screenHeight / 5).padRight(screenWidth / 50);
         manipulerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+
+        Table borderManipuler = new Table();
+        borderManipuler.pad(screenWidth / 1000);
+        borderManipuler.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        borderManipuler.add(manipulerTable);
 
         Table apprendreTable = new Table();
         Label labelApprendreTitle = new Label("APPRENDRE", labelStyleBlue2);
-        Label labelApprendreText = new Label("Les notions nouvelles sont introduites par des ccours et des exemples. Chaque manipulation est mise en correspondance avec l'opération que l'enfant est invité à faire sur l'ardoise et sur la solution, tout en étant corrigé pas à pas.", labelStyleBlue2);
+        Label labelApprendreText = new Label("Les notions nouvelles sont introduites par des cours et des exemples. Chaque manipulation est mise en correspondance avec l'opération que l'enfant est invité à faire sur l'ardoise et sur la solution, tout en étant corrigé pas à pas.", labelStyleBlue2);
         labelApprendreText.setWrap(true);
         labelApprendreText.setWidth(screenWidth / 5);
 
         apprendreTable.add(labelApprendreTitle);
         apprendreTable.row();
-        apprendreTable.add(labelApprendreText).width(screenWidth / 4).padLeft(screenWidth / 40).height(screenHeight / 5).padRight(screenWidth / 40);
+        apprendreTable.add(labelApprendreText).width(screenWidth / 4).padLeft(screenWidth / 50).height(screenHeight / 5).padRight(screenWidth / 50);
         apprendreTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+
+        Table borderApprendre = new Table();
+        borderApprendre.pad(screenWidth / 1000);
+        borderApprendre.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        borderApprendre.add(apprendreTable);
 
         Table evaluerTable = new Table();
         Label labelEvaluerTitle = new Label("EVALUER", labelStyleBlue2);
@@ -238,15 +263,29 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
 
         evaluerTable.add(labelEvaluerTitle);
         evaluerTable.row();
-        evaluerTable.add(labelEvaluerText).width(screenWidth / 5).padLeft(screenWidth / 40).height(screenHeight / 5).padRight(screenWidth / 40);
+        evaluerTable.add(labelEvaluerText).width(screenWidth / 4).padLeft(screenWidth / 50).height(screenHeight / 5).padRight(screenWidth / 50);
         evaluerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
-        evalutelMottoDetails.add(manipulerTable).padLeft(screenWidth / 80);
-        evalutelMottoDetails.add(apprendreTable).padLeft(screenWidth / 80);
-        evalutelMottoDetails.add(evaluerTable).padLeft(screenWidth / 80);
-        evalutelMotto.add(evalutelMottoDetails).padBottom(screenWidth / 80);
+        Table borderEvaluer = new Table();
+        borderEvaluer.pad(screenWidth / 1000);
+        borderEvaluer.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        borderEvaluer.add(evaluerTable);
 
-        return evalutelMotto;
+        evalutelMottoDetails.add(borderManipuler).padLeft(screenWidth / 80);
+        evalutelMottoDetails.add(borderApprendre).padLeft(screenWidth / 80);
+        evalutelMottoDetails.add(borderEvaluer).padLeft(screenWidth / 80);
+        evalutelMotto.add(evalutelMottoDetails).padBottom(screenWidth / 80);
+//
+//        Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+//        pmBlue.setColor(Color.NAVY);
+//        pmBlue.fill();
+
+        Table border = new Table();
+        border.pad(5);
+        border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        border.add(evalutelMotto);
+
+        return border;
     }
 
     public Table chaptersListView()
@@ -266,13 +305,13 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
         Table tableEx5 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_5.png", "Images/IndicesChapitres/chap5.png", chapterLabel5, "no", null, 1, dataBase);
         Table tableEx6 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_6.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, "no", null, 1, dataBase);
 
-        table.add(tableEx1).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
+        table.add(tableEx1).width(screenWidth / 4).height(screenHeight / 4).align(Align.center);
         table.add(tableEx2).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
         table.add(tableEx3).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
         table.row();
-        table.add().height(screenWidth / 20);
+        table.add().height(screenWidth /30);
         table.row();
-        table.add(tableEx4).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
+        table.add(tableEx4).width(screenWidth / 4).height(screenHeight / 4).align(Align.center);
         table.add(tableEx5).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
         table.add(tableEx6).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
         table.row();
@@ -427,9 +466,9 @@ public class Screen_All_ChaptersNew extends Game implements Screen, InputProcess
     @Override
     public void resize(int width, int height)
     {
-        stage.getViewport().update(width, height, true);
-        width = 2400;
-        height = 1350;
+//        stage.getViewport().update(width, height, true);
+//        width = 2400;
+//        height = 1350;
 
 
 //        viewport.update(width, height);

@@ -48,42 +48,51 @@ public class MrTemps2 implements MyDrawInterface
 
         user.setProfil(2);
 
-
         String userName = user.getName();
-
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = (int) screenWidth / 80;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.GREEN;
+        labelStyle.fontColor = Color.OLIVE;
         Label labelTemps = new Label(duration, labelStyle);
 
         Texture textureMrTemps = new Texture(Gdx.files.internal("Images/mr_temps1.png"));
 
         Table container = new Table();
         stage.addActor(container);
-        container.setSize(screenWidth / 8, screenWidth / 25);
-        container.setPosition(16 * screenWidth / 25, 4 * screenHeight / 5);
+        container.setSize(screenWidth / 8, screenHeight / 25);
+        container.setPosition(17 * screenWidth / 25, 9 * screenHeight / 11);
 
         Table mrTemps = new Table();
         mrTemps.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrTemps))));
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle((int) screenWidth / 10, screenHeight / 18, 25, Color.WHITE);
+        int widthButton = 500;
+        int heightButton = widthButton / 4;
+        int cornerRadius = heightButton / 4;
 
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
 
         Table temps = new Table();
         temps.add(labelTemps);
         temps.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
+        Pixmap orangeBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.ORANGE);
 
-        container.add(mrTemps);
-        container.add(temps);
+
+        Table border = new Table();
+        border.pad(screenWidth / 500);
+        border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
+        border.add(temps);
+
+
+        container.add(mrTemps).width(screenWidth / 30).padBottom(-screenHeight / 100).padTop(-screenHeight / 100);
+        container.add(border);
 
 
     }
