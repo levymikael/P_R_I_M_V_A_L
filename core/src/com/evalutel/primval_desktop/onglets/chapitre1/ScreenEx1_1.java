@@ -73,7 +73,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         allDrawables.add(activiteView);
         myPauseGeneral.addElements(activiteView);
 
-
         billesList = autoFillPlanche();
 
         resultatExercice = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, 0, dateTest, 0, 0, 0, 123);
@@ -133,7 +132,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             UnOiseau oiseau = oiseauxList.get(cptOiseau);
             myPauseGeneral.addElements(oiseau);
             int posY = 5 * screenHeight / 11;
-            int posX = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
+            int posX = ( screenWidth / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
 
             if (cptOiseau == 0)
             {
@@ -408,7 +407,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(1500, posX, posY, null, 500);
 
-
             MyTimer.TaskEtape nextEtape = new LastOne(500);
 
             bille.animateImage(1500, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 500, 1f / 6f);
@@ -437,8 +435,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new MoveMainToValidus(1000);
             uneMain.moveTo(500, posX, posY, nextEtape, 1000);
-
-
         }
     }
 
@@ -454,8 +450,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             timer.cancel();
-
-
         }
     }
 
@@ -489,7 +483,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         for (int i = 0; i < 3; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, 200, 200);
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, screenWidth/15, screenWidth/10);
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
         }

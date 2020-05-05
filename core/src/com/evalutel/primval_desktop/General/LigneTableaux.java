@@ -36,16 +36,16 @@ public class LigneTableaux
         int screenHeight = Gdx.graphics.getHeight();
 
         Pixmap pmRed = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmRed.setColor(new Color(167.0f / 255.0f, 44.0f / 255.0f, 23.0f / 255.0f, 1));
+        pmRed.setColor(new Color(235.0f / 50.0f, 44.0f / 255.0f, 35.0f / 255.0f, 1));
         pmRed.fill();
 
         Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmBlue.setColor(new Color(111.0f / 255.0f, 148.0f / 255.0f, 212.0f / 255.0f, 1));
+        pmBlue.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
         pmBlue.fill();
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = screenWidth / 70;
+        parameter.size = screenWidth / 60;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -53,7 +53,6 @@ public class LigneTableaux
         labelStyleOnglet.font = bitmapFont;
 
         db = new MyDataBase(dataBase);
-
 
         durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
 
@@ -65,19 +64,18 @@ public class LigneTableaux
 
         Label labelDuration = new Label(duration, labelStyleDuration);
         labelDuration.setWidth(screenWidth / 40);
-        labelDuration.setWrap(true);
 
         if (borderColor == "red")
         {
             tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
             tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
-            labelStyleOnglet.fontColor = new Color(167.0f / 255.0f, 44.0f / 255.0f, 23.0f / 255.0f, 1);
+            labelStyleOnglet.fontColor = new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
         }
         else if ((borderColor == "blue"))
         {
             tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
             tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
-            labelStyleOnglet.fontColor = new Color(111.0f / 255.0f, 148.0f / 255.0f, 212.0f / 255.0f, 1);
+            labelStyleOnglet.fontColor = new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
         }
 
         Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
@@ -98,54 +96,41 @@ public class LigneTableaux
 
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
         labelNotes.setWidth(screenWidth / 20);
-//        labelNotes.setWrap(true);
 
         table.setWidth(screenWidth);
         table.setHeight(screenHeight / 13);
 
         labelOnglet.setWidth(screenWidth / 4);
 
-        table.add(button).height(screenHeight / 25).width(screenWidth / 13).align(Align.center);
-        table.add(button).align(Align.center);
-        table.add().width(screenWidth / 25);
-        table.add(labelOnglet).align(Align.center).width((float) (screenWidth * 0.5));
+        table.add(button).padRight(screenWidth / 25).padLeft(screenWidth / 60);
+        table.add(labelOnglet).width((float) (screenWidth * 0.58));
 
-        if (texture == null)
+        if (texture != null)
         {
-            table.add().width(screenWidth / 70).height(30).align(Align.center);
+            table.add(new Image(texture)).width(screenWidth / 70).height(screenWidth / 70);
         }
-        else
-        {
-            table.add(new Image(texture)).width(screenWidth / 70).height(30).align(Align.center);
-        }
-        table.add().width(screenWidth / 20);
-        table.add(labelDuration).align(Align.right).width(screenWidth / 12).align(Align.center);
-        table.add().width(screenWidth / 25);
+        table.add(labelDuration).width(screenWidth / 12).padRight(screenWidth / 22).padLeft(screenWidth / 20);
+
         if (borderColor == "red")
         {
-            table.add().align(Align.center).width(screenWidth / 12).align(Align.center);
-            table.add().width(screenWidth / 20);
+            table.add().width(screenWidth / 12).padRight(screenWidth / 17);
         }
         else
         {
-            table.add(labelNotes).align(Align.center).width(screenWidth / 12).align(Align.center);
-            table.add().width(screenWidth / 20);
+            table.add(labelNotes).width(screenWidth / 12).padRight(screenWidth / 17);
         }
 
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmWhite.setColor(Color.WHITE);
         pmWhite.fill();
 
-        container.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
+        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
         container.add(tablebord1).width(screenWidth).height(4);
         container.row();
-        container.add(table).height(screenHeight / 15);
+        container.add(table).height(screenHeight / 17);
         container.row();
         container.add(tablebord2).width(screenWidth).height(4);
-
-        table.setTouchable(Touchable.enabled);
-        container.setTouchable(Touchable.enabled);
 
         return container;
     }

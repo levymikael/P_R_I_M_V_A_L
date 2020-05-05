@@ -48,9 +48,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected Stage stage;
     int screenWidth;
     int screenHeight;
-    //    TextButton.TextButtonStyle textButtonStyle;
-//    TextButton textButtton;
-//    Button.ButtonStyle buttonStyle;
+
     MyImageButton startPausebutton;
     boolean isVisible = true;
     protected MyTimer timer;
@@ -60,7 +58,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected ArrayList<MyDrawInterface> allDrawables;
     protected ArrayList<MyTouchInterface> objectTouchedList;
     private ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
-//    private ArrayList<MyPauseInterface> allPauseables = new ArrayList<>();
 
     long startTime, endTime, seconds, dateTest;
 

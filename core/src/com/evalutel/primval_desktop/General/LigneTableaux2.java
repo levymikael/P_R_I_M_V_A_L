@@ -40,11 +40,11 @@ public class LigneTableaux2
         int screenHeight = Gdx.graphics.getHeight();
 
         Pixmap pmRed = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmRed.setColor(new Color(167.0f / 255.0f, 44.0f / 255.0f, 23.0f / 255.0f, 1));
+        pmRed.setColor(new Color(235.0f / 50.0f, 44.0f / 255.0f, 35.0f / 255.0f, 1));
         pmRed.fill();
 
         Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmBlue.setColor(new Color(111.0f / 255.0f, 148.0f / 255.0f, 212.0f / 255.0f, 1));
+        pmBlue.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
         pmBlue.fill();
 
         Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
@@ -54,8 +54,6 @@ public class LigneTableaux2
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmWhite.setColor(Color.WHITE);
         pmWhite.fill();
-
-//        TextureRegionDrawable orangeBg = new TextureRegionDrawable(new TextureRegion(new Texture(bgOrange)));
 
         Pixmap pixmapBg = new Pixmap(1, 1, Pixmap.Format.RGB565);
 
@@ -86,11 +84,10 @@ public class LigneTableaux2
         }
 
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
-        labelStyleDuration.fontColor = Color.GREEN;
+        labelStyleDuration.fontColor = Color.OLIVE;
         labelStyleDuration.font = bitmapFont;
 
         Label labelDuration = new Label(duration, labelStyleDuration);
-        labelDuration.setWidth(screenWidth / 20);
 
         Label exerciseTitleLabel = new Label(ongletTitre, labelStyleOnglet);
 
@@ -139,42 +136,71 @@ public class LigneTableaux2
         table.setBackground(tableBG);
 
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
-        labelNotes.setWidth(screenWidth / 20);
 
-        table.add(button).padLeft(screenWidth / 200).padRight(screenWidth / 200);
-        table.add(exerciseTitleLabel).align(Align.center).width((float) (screenWidth * 0.6));
 
         Table durationTable = new Table();
         Table noteTable = new Table();
 
+        durationTable.add(labelDuration).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 20);
         durationTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
+
+        noteTable.add(labelNotes).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 20);
         noteTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
-        if (texture == null)
-        {
-            table.add().width(screenWidth / 70).height(screenHeight / 50).padRight(screenWidth / 17);
 
+        table.add(new Image()).width(screenWidth / 60);
+
+        table.add(button);
+
+        table.add(new Image()).width(screenWidth / 80);
+
+        table.add(exerciseTitleLabel).width((float) (screenWidth * 0.6));
+
+
+        if (texture != null)
+        {
+            table.add(new Image()).width(screenWidth / 100  );
+
+            table.add(new Image(texture)).width(screenWidth / 80).height(screenWidth / 70);
         }
         else
         {
-            table.add(new Image(texture)).width(screenWidth / 70).height(screenHeight / 50).padRight(screenWidth / 17);
+            table.add(new Image()).width(screenWidth / 80);
+
+            table.add(new Image()).width(screenWidth / 100).height(screenWidth / 70);
         }
 
         if (borderColor == "red")
         {
-            durationTable.add(labelDuration).width(screenWidth / 9);
+            table.add(new Image()).width(screenWidth / 30);
 
-            table.add(durationTable).align(Align.center).padRight(screenWidth / 25);
+            table.add(durationTable).width(screenWidth / 12);
+            table.add(new Image()).width(2 * screenWidth / 9);
         }
         else
         {
-            durationTable.add(labelDuration).width(screenWidth / 11).align(Align.center);
+            if (borderColor == "blue")
+            {
+                table.add(new Image()).width(screenWidth / 30);
 
-            table.add(durationTable).padRight(screenWidth / 25);
+                table.add(durationTable).width(screenWidth / 12);
+                table.add(new Image()).width(screenWidth / 30);
 
-            noteTable.add(labelNotes).width(screenWidth / 11).align(Align.center);
+                table.add(noteTable);
+                table.add(new Image()).width(screenWidth / 20);
+            }
+            else
+            {
+//                table.add(new Image()).width(screenWidth / 100);
 
-            table.add(noteTable);
+                table.add(durationTable).width(screenWidth / 10);
+
+                table.add(new Image()).width(screenWidth / 25);
+
+                table.add(noteTable).width(screenWidth / 10);
+                table.add(new Image()).width(screenWidth / 40);
+
+            }
         }
 
         container.add(table).height(screenHeight / 20).width(screenWidth);

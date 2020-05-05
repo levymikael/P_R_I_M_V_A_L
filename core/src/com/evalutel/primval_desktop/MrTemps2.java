@@ -43,7 +43,6 @@ public class MrTemps2 implements MyDrawInterface
         //user.setIdProfil(39);
         user.setName("userTest");
 
-
         Profil profilTest = new Profil(2, "prenomTest", "nomTest", 6, "CP", 1);
 
         user.setProfil(2);
@@ -80,7 +79,6 @@ public class MrTemps2 implements MyDrawInterface
         String hms = String.format("%02dh%02dmn", TimeUnit.SECONDS.toHours(seconds),
                 TimeUnit.SECONDS.toMinutes(seconds) - TimeUnit.HOURS.toMinutes(TimeUnit.SECONDS.toHours(seconds)));
         System.out.println(hms);
-
 
         return hms;
     }

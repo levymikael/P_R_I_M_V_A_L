@@ -84,12 +84,10 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         int noteMax = db.getHighestNote(1, 2);
 
-
         String noteMaxObtenue = noteMax + "/9";
 
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, noteMaxObtenue, "activite");
         allDrawables.add(activiteView);
-
 
         timer.schedule(new PresentationExercice(2000), 100);
 
@@ -105,7 +103,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         for (int i = 0; i < 9; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, 200, 300);
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, screenWidth/15, screenWidth/10);
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
         }
@@ -254,7 +252,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                 if (cptOiseau > 5)
                 {
                     posY = 5 * screenHeight / 11;
-                    posX = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * (cptOiseau - 6);
+                    posX = (screenWidth / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 6);
                 }
                 else
                 {
@@ -262,11 +260,11 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                     if (cptOiseau < 3)
                     {
-                        posX = (2 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
+                        posX = ( screenWidth / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                     else
                     {
-                        posX = (3 * screenWidth / 10) + (int) (oiseau.animationWidth + oiseau.animationWidth / 15) * cptOiseau;
+                        posX = (2 * screenWidth / 9) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                 }
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
