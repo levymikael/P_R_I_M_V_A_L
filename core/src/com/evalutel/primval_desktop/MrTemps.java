@@ -92,7 +92,6 @@ public class MrTemps implements MyDrawInterface
         container.add(border);
 
         stage.addActor(container);
-
     }
 
 

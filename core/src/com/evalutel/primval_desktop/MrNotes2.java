@@ -59,7 +59,6 @@ public class MrNotes2 implements MyDrawInterface
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
         container.add(labelNotes).padLeft(screenWidth/30);
 
-
         stage.addActor(container);
     }
 

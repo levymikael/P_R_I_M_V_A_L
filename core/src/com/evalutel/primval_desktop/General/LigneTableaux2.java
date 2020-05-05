@@ -141,25 +141,24 @@ public class LigneTableaux2
         Table durationTable = new Table();
         Table noteTable = new Table();
 
-        durationTable.add(labelDuration).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 20);
         durationTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
         noteTable.add(labelNotes).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 20);
         noteTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
 
-        table.add(new Image()).width(screenWidth / 60);
+        table.add(new Image()).width(screenWidth / 40);
 
         table.add(button);
 
         table.add(new Image()).width(screenWidth / 80);
 
-        table.add(exerciseTitleLabel).width((float) (screenWidth * 0.6));
+        table.add(exerciseTitleLabel).width((float) (screenWidth * 0.55));
 
 
         if (texture != null)
         {
-            table.add(new Image()).width(screenWidth / 100  );
+            table.add(new Image()).width(screenWidth / 100);
 
             table.add(new Image(texture)).width(screenWidth / 80).height(screenWidth / 70);
         }
@@ -172,31 +171,38 @@ public class LigneTableaux2
 
         if (borderColor == "red")
         {
-            table.add(new Image()).width(screenWidth / 30);
+            durationTable.add(labelDuration).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 20);
+
+            table.add(new Image()).width(screenWidth / 15);
 
             table.add(durationTable).width(screenWidth / 12);
-            table.add(new Image()).width(2 * screenWidth / 9);
+            table.add(new Image()).width(2 * screenWidth / 10);
         }
         else
         {
             if (borderColor == "blue")
             {
-                table.add(new Image()).width(screenWidth / 30);
+                durationTable.add(labelDuration).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 20);
+
+                table.add(new Image()).width(screenWidth / 15);
 
                 table.add(durationTable).width(screenWidth / 12);
-                table.add(new Image()).width(screenWidth / 30);
+                table.add(new Image()).width(screenWidth / 35);
 
                 table.add(noteTable);
-                table.add(new Image()).width(screenWidth / 20);
+                table.add(new Image()).width(screenWidth / 50);
             }
             else
             {
-//                table.add(new Image()).width(screenWidth / 100);
+                durationTable.add(labelDuration).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 40);
+
+                table.add(new Image()).width(screenWidth / 30);
+                labelDuration.setFontScale((float) 1.5);
 
                 table.add(durationTable).width(screenWidth / 10);
 
                 table.add(new Image()).width(screenWidth / 25);
-
+                labelNotes.setFontScale((float) 1.5);
                 table.add(noteTable).width(screenWidth / 10);
                 table.add(new Image()).width(screenWidth / 40);
 
