@@ -44,6 +44,8 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
     String activiteType;
 
+    Label lastLabel;
+
 
     public ActiviteView(Stage stage, float width, String numExercice, String consigneExercice, String exDansChapitre, String activiteType)
     {
@@ -195,20 +197,36 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         });
     }
 
+
     public void addTextActivite(String string)
     {
         Table table4 = new Table();
 
-        Label.LabelStyle labelStyle3 = new Label.LabelStyle();
-        labelStyle3.font = bitmapFont;
-        labelStyle3.fontColor = Color.BLACK;
-        Label label3 = new Label(string, labelStyle3);
+        Label.LabelStyle labelStyleBlack = new Label.LabelStyle();
+        labelStyleBlack.font = bitmapFont;
+        labelStyleBlack.fontColor = Color.BLACK;
+
+        Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
+        labelStyleBlue.font = bitmapFont;
+        labelStyleBlue.fontColor = Color.BLUE;
+
+        if (cptInstructions != 0)
+        {
+            lastLabel.setStyle(labelStyleBlack);
+        }
+
+        Label label3 = new Label(string, labelStyleBlue);
         label3.setWrap(true);
+
+        lastLabel = label3;
+
+        lastLabel.setColor(Color.BLUE);
+
 
         Label.LabelStyle labelStyle4 = new Label.LabelStyle();
         labelStyle4.font = bitmapFont;
         labelStyle4.fontColor = Color.BLACK;
-        Label label4 = new Label("", labelStyle3);
+        Label label4 = new Label("", labelStyleBlack);
 
 
         if (cptInstructions == 0)
@@ -238,7 +256,6 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         }
         else
         {
-
             table4.add().width(20);
             table4.add(label4).width(50);
             table4.add(label3).width(widthEnonce - 90);
@@ -259,7 +276,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
         System.out.println(cptInstructions);
 
-        float labelHeight = label3.getHeight()+ screenHeight/200;
+        float labelHeight = label3.getHeight() + screenHeight / 200;
 
         topYTablePosition = screenHeight - table.getHeight() - tableTitre.getHeight();
 

@@ -379,7 +379,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             UneBille bille = planche1.getBille(3);
 
             float posX = bille.getPosition().x + (int) (bille.animationWidth / 2);
-            float posY = bille.getPosition().y + (int) (bille.animationWidth / 2);
+            float posY = bille.getPosition().y + (int) (bille.animationWidth);
 
             MyTimer.TaskEtape nextEtape = new MoveBilleOutOfPlanche(500);
 
