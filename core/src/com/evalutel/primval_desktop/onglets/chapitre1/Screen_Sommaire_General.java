@@ -3,6 +3,7 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -29,7 +31,10 @@ import com.evalutel.primval_desktop.MrTemps;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Screen_Sommaire_General extends Game implements Screen, InputProcessor, ApplicationListener
@@ -52,8 +57,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     MrNotes2 mrNotes2;
     MrTemps mrTemps;
 
-    Sprite test;
-
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
 
 //    Table chapitresOnglet;
@@ -62,6 +65,8 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
     Texture logoTitre;
 
+    final String strDate;
+
     public Screen_Sommaire_General(final Game game, final DatabaseDesktop dataBase)
     {
         this.game = game;
@@ -69,8 +74,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         Gdx.app.log("screenheight, screenWidth", screenHeight + "/" + screenWidth);
 
-        //Camera camera = new OrthographicCamera();
-        //((OrthographicCamera) camera).setToOrtho(false, screenWidth, screenHeight);
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFont;
@@ -88,6 +91,10 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         labelStyleBlue.font = bitmapFont;
         labelStyleBlue.fontColor = new Color(41.0f / 255.0f, 103.0f / 255.0f, 159.0f / 255.0f, 1);
 
+        Label.LabelStyle labelStyleRed = new Label.LabelStyle();
+        labelStyleRed.font = bitmapFont;
+        labelStyleRed.fontColor = new Color(235.0f / 50.0f, 44.0f / 255.0f, 35.0f / 255.0f, 1);
+
         allDrawables = new ArrayList<>();
 
         fondSommairee = new ScreeenBackgroundImage("Images/Sommaire/fond_sommaire_color.jpg");
@@ -95,10 +102,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/sommaire_bandeau_gauche.jpg");
 
         imgSommaire = new ScreeenBackgroundImage("Images/Sommaire/image_sommaire.png");
-//        imgSommaire = new Texture(Gdx.files.internal("Images/Sommaire/image_sommaire.png"));
-
-//        test = new Sprite(new Texture("Images/Sommaire/test.png"));
-//        test.setPosition(4 * screenWidth / 15, screenHeight / 5);
 
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
 
@@ -120,7 +123,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
         Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, new Color(41.0f / 255.0f, 103.0f / 255.0f, 159.0f / 255.0f, 1));
-
+        Pixmap greyRoundedBackground = UIDesign.createRoundedRectangle((widthButton * 2), widthButton, cornerRadius, Color.GRAY);
         Pixmap whiteRoundedBackground2 = UIDesign.createRoundedRectangle((widthButton * 2), widthButton, cornerRadius, Color.WHITE);
 
         Table avatarPic = new Table();
@@ -176,12 +179,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         container.row();
         container.add(blueBorderTablePresentation).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
 
-//        container.debug();
-
         Table summaryImgTable = new Table();
         summaryImgTable.setSize(4 * screenWidth / 5, screenHeight);
         summaryImgTable.setPosition(screenWidth / 5, 0);
-//        summaryImgTable.debug();
         summaryImgTable.setTouchable(Touchable.enabled);
 
 
@@ -219,6 +219,39 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             }
         });
 
+        Label labelEscape = new Label("Quitter", labelStyleRed);
+
+
+        Table quit = new Table();
+        quit.setTouchable(Touchable.enabled);
+//        quit.setSize(screenWidth / 10, screenWidth / 20);
+        quit.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground2))));
+        quit.add(labelEscape);
+
+        Table quitBorder = new Table();
+        quitBorder.pad(screenWidth / 500);
+        quitBorder.setBackground(new SpriteDrawable(new Sprite(new Texture(greyRoundedBackground))));
+        quitBorder.add(quit);
+        quitBorder.setSize(screenWidth / 10, screenWidth / 20);
+        quitBorder.setPosition(screenWidth - quitBorder.getWidth() - screenWidth / 50, screenHeight - quitBorder.getHeight() - screenHeight / 50);
+
+
+        stage.addActor(quitBorder);
+        Date date = new Date();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        strDate = formatter.format(date);
+
+        quit.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+
+                Gdx.app.exit();
+                Gdx.app.log("Escape", "Quit at " + strDate);
+            }
+        });
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -279,6 +312,11 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     @Override
     public void render(float delta)
     {
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+        {
+            Gdx.app.exit();
+            Gdx.app.log("Escape", "Quit at " + strDate);
+        }
         batch.begin();
 
         fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);

@@ -19,7 +19,6 @@ public class DesktopLauncher
     {
 
 
-
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
         //config.width = 2048;
@@ -52,22 +51,21 @@ public class DesktopLauncher
         screenWidth /= 1.2f;
 
 
-        System.out.print("screenheight, screenWidth" +  screenHeight + "/" +screenWidth);
-        //Gdx.app.log("screenheight, screenWidth", screenHeight + "/" +screenWidth);
+        System.out.print("screenheight, screenWidth" + screenHeight + "/" + screenWidth);
 
-        float ratioTest = 1024.0f/768.0f;
+        float ratioTest = 1024.0f / 768.0f;
 
-        float currentRatio = (float)screenWidth/(float)screenHeight;
+        float currentRatio = (float) screenWidth / (float) screenHeight;
 
-        if(currentRatio > ratioTest)
+        if (currentRatio > ratioTest)
         {
-            screenWidth = (int)(screenHeight*1024.0f/768.0f);
+            screenWidth = (int) (screenHeight * 1024.0f / 768.0f);
             config.width = screenWidth;
             config.height = screenHeight;
         }
 
 
-
+        config.forceExit = false;
 
         config.fullscreen = false;
 

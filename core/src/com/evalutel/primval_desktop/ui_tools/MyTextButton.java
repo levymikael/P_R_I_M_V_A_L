@@ -10,6 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class MyTextButton extends TextButton
 {
+
+    static int screenHeight = Gdx.graphics.getHeight();
+
     public MyTextButton(String text, String backgroundImagePathUp, String backgroundImagePathDown, float size, String font, int fontSize)
     {
         super(text, getStyle(backgroundImagePathUp, backgroundImagePathDown, font, fontSize));

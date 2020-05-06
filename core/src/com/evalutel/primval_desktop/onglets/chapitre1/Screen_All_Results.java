@@ -179,13 +179,13 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
         Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
 
-        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", screenWidth / 40, "font/FRHND521_0.TTF", 20);
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", 40);
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
 
         Table tableChapTitle = LigneTableaux2.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);
         Table tableEx1 = LigneTableaux2.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);

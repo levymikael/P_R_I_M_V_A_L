@@ -1,6 +1,7 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -40,6 +41,11 @@ public class EcrinDiamantView implements MyDrawInterface
     Label label2;
     private int pointsMax;
 
+    Music music;
+
+    public boolean isSpeaking;
+
+
     public EcrinDiamantView(Stage stage, float width, int pointsMax)
     {
         ecrinDiamantTexture = new Texture("Images/ecrin2.png");
@@ -57,13 +63,6 @@ public class EcrinDiamantView implements MyDrawInterface
 
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
-
-        // Numero exerice/consigne:
-//        Label.LabelStyle labelStyle2 = new Label.LabelStyle();
-//        labelStyle2.font = bitmapFont;
-//        labelStyle2.fontColor = Color.WHITE;
-//        label2 = new Label(text, ecrinSkin);
-
 
         Label.LabelStyle labelStyle1 = new Label.LabelStyle();
         labelStyle1.font = bitmapFont;
@@ -128,6 +127,13 @@ public class EcrinDiamantView implements MyDrawInterface
     {
         pierre += nbReponsesPossibles;
         updateText();
+
+        //Appel fonction play Fin onglet
+
+//        if (pierre == pointsMax)
+//        {
+//            finOngletPlaySound();
+//        }
     }
 
 
@@ -147,6 +153,47 @@ public class EcrinDiamantView implements MyDrawInterface
     public void myDraw(Batch batch)
     {
 
+    }
+
+//    public void finOngletPlaySound()
+//    {
+//        music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/fin_ong.wav"));
+////        music.setLooping(false);
+//        music.play();
+////       boolean isLooping = false;
+//
+//        music.setOnCompletionListener(new Music.OnCompletionListener()
+//        {
+//            @Override
+//            public void onCompletion(Music music)
+//            {
+//                music.dispose();
+//            }
+//        });
+//    }
+//
+//    public void stopMusic()
+//    {
+//        music.stop();
+//        music.dispose();
+//    }
+//
+//    public void myPause()
+//    {
+//        if (music != null)
+//        {
+//            music.pause();
+//        }
+
+
+//    }
+
+    public void myResume()
+    {
+        if (music != null)
+        {
+            music.play();
+        }
     }
 
 }

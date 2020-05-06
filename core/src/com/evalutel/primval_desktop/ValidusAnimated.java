@@ -43,11 +43,6 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
         textureRegionInactif = new TextureRegion(new Texture(Gdx.files.internal("Images/Validus/validusAlpha.png")));
 
         animation = new Animation(1f / 15f, (Object[]) animationFrames);
-
-        int ok = 5;
-        ok++;
-
-
     }
 
 
@@ -59,8 +54,6 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 //        music.setLooping(false);
         music.play();
 //       boolean isLooping = false;
-        int ok = 34;
-        ok++;
 
         music.setOnCompletionListener(new Music.OnCompletionListener()
         {
@@ -91,11 +84,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     {
         ArrayList<String> imgValidusPaths = new ArrayList<>();
 
-
 //        int validusDirectorySize = fh.list().length - 1;
-
-        int ok = 5;
-        ok++;
 
         String imgAux;
 

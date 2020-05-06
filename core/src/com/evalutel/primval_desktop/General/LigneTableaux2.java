@@ -137,7 +137,6 @@ public class LigneTableaux2
 
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
 
-
         Table durationTable = new Table();
         Table noteTable = new Table();
 
@@ -146,7 +145,6 @@ public class LigneTableaux2
         noteTable.add(labelNotes).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 20);
         noteTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
-
         table.add(new Image()).width(screenWidth / 40);
 
         table.add(button);
@@ -154,7 +152,6 @@ public class LigneTableaux2
         table.add(new Image()).width(screenWidth / 80);
 
         table.add(exerciseTitleLabel).width((float) (screenWidth * 0.55));
-
 
         if (texture != null)
         {
@@ -205,7 +202,6 @@ public class LigneTableaux2
                 labelNotes.setFontScale((float) 1.5);
                 table.add(noteTable).width(screenWidth / 10);
                 table.add(new Image()).width(screenWidth / 40);
-
             }
         }
 

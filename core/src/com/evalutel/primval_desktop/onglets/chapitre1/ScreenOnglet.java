@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -101,13 +102,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         largeurBille = screenWidth / 15;
         largeurPlanche = largeurBille * 4;
 
-        //Garde aspect ratio
-
-//        stage = new Stage(new FitViewport(screenWidth, screenHeight));
-//
-//        float widthTest = stage.getWidth();
-//        float heightTest = stage.getHeight();
-
         objectTouchedList = new ArrayList<>();
         allDrawables = new ArrayList<>();
 
@@ -116,7 +110,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0, 0);
 
         myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, screenWidth / 15, screenWidth / 15, dataBase);
-        myButtonBackToPreviousMenu.setPosition(0, 6 * screenHeight / 7);
+        myButtonBackToPreviousMenu.setPosition(screenWidth / 60, 6 * screenHeight / 7);
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
             @Override
@@ -128,7 +122,7 @@ public class ScreenOnglet implements Screen, InputProcessor
                 endTime = System.currentTimeMillis();
                 seconds = (endTime - startTime) / 1000L;
 
-                long dateEnd = new Date().getTime() / 1000L;
+//                long dateEnd = new Date().getTime() / 1000L;
                 resultatExercice.setDuree(seconds);
                 resultatExercice.setDate(endTime);
 
@@ -151,7 +145,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         allDrawables.add(myButtonBackToPreviousMenu);
 
         startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", screenWidth / 15, screenWidth / 15);
-        startPausebutton.setPosition(0, 5 * screenHeight / 7);
+        startPausebutton.setPosition(screenWidth / 60, 5 * screenHeight / 7);
         stage.addActor(startPausebutton);
 
         myPauseGeneral = new MyPauseGeneral();
@@ -187,10 +181,6 @@ public class ScreenOnglet implements Screen, InputProcessor
                 ;//new TextureRegionDrawable(new Texture(pausePlayButtonPath));
                 PauseSingleton pauseSingleton = PauseSingleton.getInstance();
                 pauseSingleton.isPause = !pauseSingleton.isPause;
-
-                int ok = 5;
-                ok++;
-
             }
         });
 
@@ -201,7 +191,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         uneMain.setVisible(false);
 
 
-        validusAnimated = new ValidusAnimated(0, screenHeight / 7, screenHeight / 5, screenHeight / 5);
+        validusAnimated = new ValidusAnimated(screenWidth / 60, screenHeight / 7, screenHeight / 5, screenHeight / 5);
         myPauseGeneral.addElements(validusAnimated);
 
         if (ecrin)
@@ -212,7 +202,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         }
 
-        metrologue = new Metrologue(0, 2 * screenHeight / 5, screenHeight / 5, screenHeight / 5);
+        metrologue = new Metrologue(screenWidth / 60, 2 * screenHeight / 5, screenHeight / 5, screenHeight / 5);
         myPauseGeneral.addElements(metrologue);
 
 
@@ -292,10 +282,38 @@ public class ScreenOnglet implements Screen, InputProcessor
         batch.end();
     }
 
+
+    protected class FinOnglet extends MyTimer.TaskEtape
+    {
+        protected FinOnglet(long durMillis)
+        {
+            super(durMillis);
+
+          Music  music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/fin_ong.ogg"));
+//        music.setLooping(false);
+            music.play();
+//       boolean isLooping = false;
+
+            music.setOnCompletionListener(new Music.OnCompletionListener()
+            {
+                @Override
+                public void onCompletion(Music music)
+                {
+                    music.dispose();
+                }
+            });
+        }
+
+        @Override
+        public void run()
+        {
+            timer.cancel();
+        }
+    }
+
     @Override
     public void resize(int width, int height)
     {
-//        stage.getViewport().update(width, height, true);
     }
 
     @Override

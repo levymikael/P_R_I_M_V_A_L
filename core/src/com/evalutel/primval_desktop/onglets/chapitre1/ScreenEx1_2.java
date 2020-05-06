@@ -318,7 +318,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             if (planche1.getNumberBilles() == randNumOiseau)
             {
                 validusAnimated.isActif = false;
-                activiteView.addTextActivite("C'est bien continue " + questionCourante);
+                activiteView.addTextActivite("C'est bien continue " /*+ questionCourante*/);
 
                 validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3");
                 validusAnimated.isActif = false;
@@ -527,6 +527,9 @@ public class ScreenEx1_2 extends ScreenOnglet
             {
                 uneMain.setVisible(false);
             }
+
+            new FinOnglet(1000);
+
         }
     }
 

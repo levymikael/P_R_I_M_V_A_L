@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -24,6 +25,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
     private Table tableMilieu;
     private float heightTop;
     public float widthScreen, topSectionposY;
+    final int screenHeight;
     float topYTablePosition, heightBackGroundImage;
 
     private float firstY, currentY, widthEnonce;
@@ -52,7 +54,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
         this.activiteType = activiteType;
 
-        final int screenHeight = Gdx.graphics.getHeight();
+        screenHeight = Gdx.graphics.getHeight();
         widthScreen = Gdx.graphics.getWidth();
 
 // Configuration police de l'enonce
@@ -88,8 +90,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         tableTitre.setBackground(new SpriteDrawable(new Sprite(new Texture("Images/EnonceUIElements/titre_top.png"))));
 
 // Positionnement numero exercice:
-//        tableTitre.add().width(50);
-        tableTitre.add(exoNumLabel).align(Align.center).width(80).padLeft(widthScreen/50);
+        tableTitre.add(exoNumLabel).align(Align.center).width(80).padLeft(widthScreen / 50);
         tableTitre.add(exoConsigneLabel).width(widthEnonce - 210).height(100);
         tableTitre.add(label3).align(Align.center).width(80);
 
@@ -204,9 +205,6 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         Label label3 = new Label(string, labelStyle3);
         label3.setWrap(true);
 
-        Color colorWhite = new Color();
-        colorWhite.add(255, 255, 255, 0);
-
         Label.LabelStyle labelStyle4 = new Label.LabelStyle();
         labelStyle4.font = bitmapFont;
         labelStyle4.fontColor = Color.BLACK;
@@ -215,9 +213,10 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
         if (cptInstructions == 0)
         {
-            Sprite sprite = new Sprite(textureFleche);
-            sprite.setSize(30, 40);
-            SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(sprite);
+            Sprite flechSprite = new Sprite(textureFleche);
+            flechSprite.setSize(30, 40);
+
+            SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
 
             Table table5 = new Table();
 
@@ -230,6 +229,8 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
                 table5.setWidth(30);
             }
 
+            table4.add(new Image()).height(screenHeight / 200);
+            table4.row();
             table4.add().width(20);
             table4.add(table5).width(50);
             table4.add(label3).width(widthEnonce - 90);
@@ -237,10 +238,13 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         }
         else
         {
+
             table4.add().width(20);
             table4.add(label4).width(50);
             table4.add(label3).width(widthEnonce - 90);
             table4.add().width(20);
+            table4.row();
+            table4.add(new Image()).height(screenHeight / 200);
         }
 
         table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
@@ -251,14 +255,15 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
         table.pack();
 
-
         cptInstructions++;
 
-        float labelHeight = label3.getHeight();
+        System.out.println(cptInstructions);
 
-        topYTablePosition = Gdx.graphics.getHeight() - table.getHeight() - tableTitre.getHeight();
+        float labelHeight = label3.getHeight()+ screenHeight/200;
 
-        //table.setPosition(widthScreen / 2 - widthEnonce / 2, topYTablePosition);
+        topYTablePosition = screenHeight - table.getHeight() - tableTitre.getHeight();
+
+
         float nextTestY = currentY - labelHeight;
         if (nextTestY > topYTablePosition)
         {
