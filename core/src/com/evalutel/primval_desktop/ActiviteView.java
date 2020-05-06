@@ -60,7 +60,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         widthScreen = Gdx.graphics.getWidth();
 
 // Configuration police de l'enonce
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = (int) widthScreen / 70;
 

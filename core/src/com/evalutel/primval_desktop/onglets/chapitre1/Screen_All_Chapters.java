@@ -151,11 +151,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Table chaptersListView = chaptersListView();
 
-//        int widthButton = 1000;
-//        int heightButton = widthButton / 4;
-//        int cornerRadius = heightButton / 4;
-
-//
         container.debug();
         table.add(evalutelMotto).width(screenWidth - (screenWidth / 19)).align(Align.center).padTop(screenWidth / 90);
         table.row();
