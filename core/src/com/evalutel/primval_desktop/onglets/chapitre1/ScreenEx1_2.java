@@ -229,7 +229,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
             randNumOiseau = numOiseauArray[questionCourante];
 
-            timer.schedule(new DisplayOiseaux(1000), 500);
+            timer.schedule(new DisplayOiseaux(1000), 5000);
         }
     }
 
@@ -331,18 +331,18 @@ public class ScreenEx1_2 extends ScreenOnglet
                 {
                     validusAnimated.isActif = false;
                     failedAttempts = 0;
-                    activiteView.addTextActivite("Voici la correction");
-                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3");
+//                    activiteView.addTextActivite("Voici la correction");
+//                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3");
 
                     addPierres(1);
 
                     timer.schedule(new EtapeRectification1(1000), 500);
                 }
-                else
-                {
-                    activiteView.addTextActivite("Tu t'es trompé essaie encore.");
-                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
-                }
+//                else
+//                {
+////                    activiteView.addTextActivite("Tu t'es trompé essaie encore.");
+////                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+//                }
                 failedAttempts++;
 
             }

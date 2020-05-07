@@ -83,7 +83,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         bitmapFontFRHND = MyConstants.FONT_FRHND.generateFont(parameterFRHND);
         FONT_FRHND.dispose();
 
-         FreeTypeFontGenerator FONT_ZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
+        FreeTypeFontGenerator FONT_ZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterZAP = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterZAP.size = MyConstants.SCREENWIDTH / 70;
         bitmapFontZAP = FONT_ZAP.generateFont(parameterZAP);
@@ -126,7 +126,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         float positionButton = myButtonRetour.getY();
         float heightContainer = (positionButton);
-        container.setSize(MyConstants.SCREENWIDTH, heightContainer);
+        container.setSize(MyConstants.SCREENWIDTH, heightContainer - MyConstants.SCREENHEIGHT / 20);
         container.setPosition(0, 0);
 
         Table chapter1Table = chapter1Results();
@@ -134,7 +134,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table chapter3Table = chapter1Results();
 
         container.debug();
-        table.add(chapter1Table).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19)).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40).padTop(MyConstants.SCREENHEIGHT / 40);
+        table.add(chapter1Table).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19)).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40);
         table.row();
         table.add(chapter2Table).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40);
         table.row();

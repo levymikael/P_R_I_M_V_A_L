@@ -50,31 +50,31 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
         MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
         MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
+//        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
+//        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
+//        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
+//        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
 
         Table table = new Table();
         Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
         Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 2, dataBase);
-        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
+//        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 2, dataBase);
+//        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 2, dataBase);
+//        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
+//        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
 
 
         table.add(tableEx1).width(screenWidth).height(screenHeight / 11)/*.padBottom(screenHeight/100)*/;
         table.row();
         table.add(tableEx2).width(screenWidth).height(screenHeight / 11);
         table.row();
-        table.add(tableEx3).width(screenWidth).height(screenHeight / 11);
-        table.row();
-        table.add(tableEx4).width(screenWidth).height(screenHeight / 11);
-        table.row();
-        table.add(tableEx5).width(screenWidth).height(screenHeight / 11);
-        table.row();
-        table.add(tableEx6).width(screenWidth).height(screenHeight / 11);
+//        table.add(tableEx3).width(screenWidth).height(screenHeight / 11);
+//        table.row();
+//        table.add(tableEx4).width(screenWidth).height(screenHeight / 11);
+//        table.row();
+//        table.add(tableEx5).width(screenWidth).height(screenHeight / 11);
+//        table.row();
+//        table.add(tableEx6).width(screenWidth).height(screenHeight / 11);
 
         table.setWidth(screenWidth);
 
@@ -102,38 +102,38 @@ public class ListExercicesActiviteView implements MyDrawInterface
                 game.setScreen(new ScreenEx1_2(game, dataBase));
             }
         });
-        tableEx3.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!3");
-            }
-        });
-        tableEx4.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!4");
-            }
-        });
-        tableEx5.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!5");
-            }
-        });
-        tableEx6.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!6");
-            }
-        });
+//        tableEx3.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!3");
+//            }
+//        });
+//        tableEx4.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!4");
+//            }
+//        });
+//        tableEx5.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!5");
+//            }
+//        });
+//        tableEx6.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!6");
+//            }
+//        });
     }
 
 

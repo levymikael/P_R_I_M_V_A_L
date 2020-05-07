@@ -38,6 +38,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
     Sprite sprite2, spriteEnonceText;
     BitmapFont bitmapFont;
+    BitmapFont bitmapFontComic;
     private boolean isVisible = true;
     private Texture textureMilieuEnonce;
 
@@ -58,13 +59,17 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
 
 // Configuration police de l'enonce
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
+        FreeTypeFontGenerator fontArial = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = MyConstants.SCREENWIDTH / 70;
+        bitmapFont = fontArial.generateFont(parameter);
+        fontArial.dispose();
 
-
-        bitmapFont = generator.generateFont(parameter);
-        generator.dispose();
+        FreeTypeFontGenerator fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterComic = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterComic.size = MyConstants.SCREENWIDTH / 70;
+        bitmapFontComic = fontComic.generateFont(parameter);
+        fontComic.dispose();
 
 // Numero exerice/consigne:
         Label.LabelStyle labelStyle2 = new Label.LabelStyle();
@@ -72,10 +77,10 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         labelStyle2.fontColor = Color.YELLOW;
         Label exoNumLabel = new Label(numExercice, labelStyle2);
 
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.WHITE;
-        Label exoConsigneLabel = new Label(consigneExercice, labelStyle);
+        Label.LabelStyle labelStyleComic = new Label.LabelStyle();
+        labelStyleComic.font = bitmapFontComic;
+        labelStyleComic.fontColor = Color.WHITE;
+        Label exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
         exoConsigneLabel.setWrap(true);
 
         Label.LabelStyle labelStyle3 = new Label.LabelStyle();
