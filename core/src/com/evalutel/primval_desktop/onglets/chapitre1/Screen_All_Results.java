@@ -11,31 +11,24 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.General.BoutonChapitres;
 import com.evalutel.primval_desktop.General.LigneTableaux2;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
-import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.MrNotes;
-import com.evalutel.primval_desktop.MrNotes2;
 import com.evalutel.primval_desktop.MrTemps;
-import com.evalutel.primval_desktop.MrTemps2;
 import com.evalutel.primval_desktop.MyButtonDemos;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
@@ -49,8 +42,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 {
     private DatabaseDesktop dataBase;
     protected Stage stage;
-    int screenWidth;
-    int screenHeight;
+
     private SpriteBatch batch;
     private Game game;
 
@@ -58,7 +50,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     private Viewport viewport;
 
-    //    ListExercicesActiviteView listExercicesActiviteView;
     ScreeenBackgroundImage fondEspaceParent;
     ScreeenBackgroundImage fondSommaire;
     MrNotes mrNotes;
@@ -66,10 +57,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
     MyButtonRetour myButtonRetour;
-    MyButtonDemos myButtonDemo;
 
-    FreeTypeFontGenerator generatorFRHND;
-    FreeTypeFontGenerator generatorZAP;
     TextureRegionDrawable textureRegionDrawableBg;
     TextureRegionDrawable orangeBg;
 
@@ -82,24 +70,24 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         this.game = game;
         this.dataBase = dataBase;
 
-        screenHeight = Gdx.graphics.getHeight();
-        screenWidth = Gdx.graphics.getWidth();
+//        screenHeight = Gdx.graphics.getHeight();
+//        screenWidth = Gdx.graphics.getWidth();
 
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFontFRHND;
 
-        generatorFRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
+        FreeTypeFontGenerator FONT_FRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterFRHND = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterFRHND.size = screenWidth / 40;
-        bitmapFontFRHND = generatorFRHND.generateFont(parameterFRHND);
-        generatorFRHND.dispose();
+        parameterFRHND.size = MyConstants.SCREENWIDTH / 40;
+        bitmapFontFRHND = MyConstants.FONT_FRHND.generateFont(parameterFRHND);
+        FONT_FRHND.dispose();
 
-        generatorZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
+         FreeTypeFontGenerator FONT_ZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterZAP = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterZAP.size = screenWidth / 70;
-        bitmapFontZAP = generatorZAP.generateFont(parameterZAP);
-        generatorZAP.dispose();
+        parameterZAP.size = MyConstants.SCREENWIDTH / 70;
+        bitmapFontZAP = FONT_ZAP.generateFont(parameterZAP);
+        FONT_ZAP.dispose();
 
         Label.LabelStyle labelStyleWhite = new Label.LabelStyle();
         labelStyleWhite.font = bitmapFontFRHND;
@@ -115,13 +103,13 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
 
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase, "sommaire general");
-        myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
+        myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15, game, dataBase, "sommaire general");
+        myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25, 5 * MyConstants.SCREENHEIGHT / 6 - myButtonRetour.getHeight() / 2);
 
         Label labelChap1Titre = new Label("Résultats obtenus", labelStyleWhite);
 
         Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
-        nomChapitre.setPosition(screenWidth / 2 - screenWidth / 12, 9 * screenHeight / 10);
+        nomChapitre.setPosition(MyConstants.SCREENWIDTH / 2 - MyConstants.SCREENWIDTH / 12, 9 * MyConstants.SCREENHEIGHT / 10);
         stage.addActor(nomChapitre);
 
         mrNotes = new MrNotes(stage, dataBase);
@@ -138,7 +126,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         float positionButton = myButtonRetour.getY();
         float heightContainer = (positionButton);
-        container.setSize(screenWidth, heightContainer);
+        container.setSize(MyConstants.SCREENWIDTH, heightContainer);
         container.setPosition(0, 0);
 
         Table chapter1Table = chapter1Results();
@@ -146,13 +134,13 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table chapter3Table = chapter1Results();
 
         container.debug();
-        table.add(chapter1Table).width(screenWidth - (screenWidth / 19)).align(Align.center).padBottom(screenHeight / 40).padTop(screenHeight / 40);
+        table.add(chapter1Table).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19)).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40).padTop(MyConstants.SCREENHEIGHT / 40);
         table.row();
-        table.add(chapter2Table).width(screenWidth).align(Align.center).padBottom(screenHeight / 40);
+        table.add(chapter2Table).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40);
         table.row();
-        table.add(chapter3Table).width(screenWidth).align(Align.center).padBottom(screenHeight / 40);
+        table.add(chapter3Table).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40);
 
-        table.setWidth(screenWidth);
+        table.setWidth(MyConstants.SCREENWIDTH);
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
@@ -179,13 +167,13 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
         Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
 
-        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", screenWidth / 40, "font/FRHND521_0.TTF", screenHeight / 50);
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
 
         Table tableChapTitle = LigneTableaux2.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);
         Table tableEx1 = LigneTableaux2.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
@@ -293,7 +281,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         batch.setTransformMatrix(new Matrix4());
 
         fondEspaceParent.myDraw(batch);
-        fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6, 0, 0);
+        fondSommaire.myDraw2(batch, MyConstants.SCREENWIDTH, 5 * MyConstants.SCREENHEIGHT / 6, 0, 0);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {

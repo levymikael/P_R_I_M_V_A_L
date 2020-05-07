@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.evalutel.primval_desktop.General.MyConstants;
 
 
 public class EcrinDiamantView implements MyDrawInterface
@@ -24,7 +25,6 @@ public class EcrinDiamantView implements MyDrawInterface
     private Label currentLabel1;
     private Label currentLabel2;
     private Table table, tableTitre;
-    public float widthScreen, screenHeight;
 
     int diamant, pierre;
 
@@ -52,17 +52,14 @@ public class EcrinDiamantView implements MyDrawInterface
         this.pointsMax = pointsMax;
         widthEcrin = width;
 
-        widthScreen = Gdx.graphics.getWidth();
-        screenHeight = Gdx.graphics.getHeight();
 
         // Configuration police de l'enonce
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
+        FreeTypeFontGenerator FONT_COMICI = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = (int) widthScreen / 50;
-
-        bitmapFont = generator.generateFont(parameter);
-        generator.dispose();
+        parameter.size = (int) MyConstants.SCREENWIDTH / 60;
+        bitmapFont = FONT_COMICI.generateFont(parameter);
+        FONT_COMICI.dispose();
 
         Label.LabelStyle labelStyle1 = new Label.LabelStyle();
         labelStyle1.font = bitmapFont;
@@ -81,8 +78,8 @@ public class EcrinDiamantView implements MyDrawInterface
         tableTitre.setBackground(new SpriteDrawable(new Sprite(ecrinDiamantTexture)));
 
 // Positionnement numero exercice:
-        tableTitre.add(currentLabel2).align(Align.right).width(widthScreen / 30).padLeft(widthScreen / 70);
-        tableTitre.add(currentLabel1).width(widthEcrin - 50).height(screenHeight / 11).padLeft(widthScreen / 20);
+        tableTitre.add(currentLabel2).align(Align.right).width(MyConstants.SCREENWIDTH / 40).padLeft(MyConstants.SCREENWIDTH / 80);
+        tableTitre.add(currentLabel1).width(widthEcrin - 50).height(MyConstants.SCREENHEIGHT / 11).padLeft(MyConstants.SCREENWIDTH / 50);
 
         table = new Table();
         stage.addActor(table);
@@ -94,9 +91,9 @@ public class EcrinDiamantView implements MyDrawInterface
 // Positionnement du tableau sur ecran:
 
         tableTitre.pack();
-        tableTitre.setPosition(10, 50);
+        tableTitre.setPosition(MyConstants.SCREENWIDTH / 60, 50);
 
-        table.setPosition(50, 0);
+        table.setPosition(MyConstants.SCREENWIDTH / 60, 0);
 
     }
 
@@ -127,13 +124,6 @@ public class EcrinDiamantView implements MyDrawInterface
     {
         pierre += nbReponsesPossibles;
         updateText();
-
-        //Appel fonction play Fin onglet
-
-//        if (pierre == pointsMax)
-//        {
-//            finOngletPlaySound();
-//        }
     }
 
 

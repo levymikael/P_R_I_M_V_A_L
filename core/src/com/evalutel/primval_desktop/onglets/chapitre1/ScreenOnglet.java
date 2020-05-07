@@ -21,6 +21,7 @@ import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.EcrinDiamantView;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.Metrologue;
 import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyDrawInterface;
@@ -47,8 +48,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     private SpriteBatch batch;
     private CalculetteViewTest calculetteViewTest;
     protected Stage stage;
-    int screenWidth;
-    int screenHeight;
+
 
     MyImageButton startPausebutton;
     boolean isVisible = true;
@@ -94,12 +94,9 @@ public class ScreenOnglet implements Screen, InputProcessor
         this.game = game;
         this.dataBase = dataBase;
 
-        screenHeight = Gdx.graphics.getHeight();
-        screenWidth = Gdx.graphics.getWidth();
-
         db = new MyDataBase(dataBase);
 
-        largeurBille = screenWidth / 15;
+        largeurBille = MyConstants.SCREENWIDTH / 15;
         largeurPlanche = largeurBille * 4;
 
         objectTouchedList = new ArrayList<>();
@@ -109,8 +106,8 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0, 0);
 
-        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, screenWidth / 15, screenWidth / 15, dataBase);
-        myButtonBackToPreviousMenu.setPosition(screenWidth / 60, 6 * screenHeight / 7);
+        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15, dataBase);
+        myButtonBackToPreviousMenu.setPosition(MyConstants.SCREENWIDTH / 60, 6 * MyConstants.SCREENHEIGHT / 7);
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
             @Override
@@ -144,8 +141,8 @@ public class ScreenOnglet implements Screen, InputProcessor
         });
         allDrawables.add(myButtonBackToPreviousMenu);
 
-        startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", screenWidth / 15, screenWidth / 15);
-        startPausebutton.setPosition(screenWidth / 60, 5 * screenHeight / 7);
+        startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
+        startPausebutton.setPosition(MyConstants.SCREENWIDTH / 60, 5 * MyConstants.SCREENHEIGHT / 7);
         stage.addActor(startPausebutton);
 
         myPauseGeneral = new MyPauseGeneral();
@@ -175,7 +172,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
                 Texture texture = new Texture(Gdx.files.internal(pausePlayButtonPath));
                 Sprite sprite = new Sprite(texture);
-                sprite.setSize(screenWidth / 15, screenWidth / 15);
+                sprite.setSize(MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
 
                 startPausebutton.getStyle().imageUp = new SpriteDrawable(sprite);
                 ;//new TextureRegionDrawable(new Texture(pausePlayButtonPath));
@@ -185,24 +182,23 @@ public class ScreenOnglet implements Screen, InputProcessor
         });
 
 
-        int posX = 6 * screenWidth / 7;
-        int posY = screenHeight / 2;
-        uneMain = new UneMain(posX, posY, screenWidth / 6);
+        int posX = 6 * MyConstants.SCREENWIDTH / 7;
+        int posY = MyConstants.SCREENHEIGHT / 2;
+        uneMain = new UneMain(posX, posY, MyConstants.SCREENWIDTH / 6);
         uneMain.setVisible(false);
 
 
-        validusAnimated = new ValidusAnimated(screenWidth / 60, screenHeight / 7, screenHeight / 5, screenHeight / 5);
+        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60, MyConstants.SCREENHEIGHT / 7, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5);
         myPauseGeneral.addElements(validusAnimated);
 
         if (ecrin)
         {
-            ecrinDiamantView = new EcrinDiamantView(stage, screenWidth / 8, 9);
+            ecrinDiamantView = new EcrinDiamantView(stage, (MyConstants.SCREENWIDTH / 30) * (168.0f / 59.0f), 9);
             ecrinDiamantView.updateText();
             allDrawables.add(ecrinDiamantView);
-
         }
 
-        metrologue = new Metrologue(screenWidth / 60, 2 * screenHeight / 5, screenHeight / 5, screenHeight / 5);
+        metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5);
         myPauseGeneral.addElements(metrologue);
 
 
@@ -213,7 +209,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         allDrawables.add(calculetteViewTest);
 
-        reserveBilles = new ReserveBilles(screenWidth - 300, screenHeight - 300, 200, 200);
+        reserveBilles = new ReserveBilles(MyConstants.SCREENWIDTH - 300, MyConstants.SCREENHeight - 300, 200, 200);
         allDrawables.add(reserveBilles);
 
         largeurBille = 100;
@@ -289,7 +285,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         {
             super(durMillis);
 
-          Music  music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/fin_ong.ogg"));
+            Music music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/fin_ong.ogg"));
 //        music.setLooping(false);
             music.play();
 //       boolean isLooping = false;
@@ -371,7 +367,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        int reversedScreenY = screenHeight - screenY;
+        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
@@ -415,7 +411,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     {
         if (objectTouched != null)
         {
-            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (screenHeight - screenY - objectTouched.getHeight() / 2));
+            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (MyConstants.SCREENHEIGHT - screenY - objectTouched.getHeight() / 2));
         }
         return true;
     }
@@ -428,7 +424,7 @@ public class ScreenOnglet implements Screen, InputProcessor
             if (objectTouched instanceof UneBille)
             {
                 UneBille billeAux = (UneBille) objectTouched;
-                billeAux.touchUp(allPlanches/*, screenX, screenHeight - screenY*/);
+                billeAux.touchUp(allPlanches/*, screenX, MyConstants.SCREENHeight - screenY*/);
 //
 //                else /*si bille pas deposee dans planche*/
 //                    {

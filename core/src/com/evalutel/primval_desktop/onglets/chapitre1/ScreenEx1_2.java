@@ -6,6 +6,7 @@ import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.EcrinDiamantView;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.MyMath;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
@@ -24,7 +25,6 @@ public class ScreenEx1_2 extends ScreenOnglet
 {
     ScreeenBackgroundImage bgScreenEx1_2;
     EcrinDiamantView ecrinDiamantView;
-    boolean state = false;
     int posX, posY;
     int failedAttempts;
     ActiviteView activiteView;
@@ -52,11 +52,11 @@ public class ScreenEx1_2 extends ScreenOnglet
         bgScreenEx1_2 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_2);
 
-        reserveBilles = new ReserveBilles(10 * screenWidth / 11, 9 * screenHeight / 11, largeurBille, largeurBille);
+        reserveBilles = new ReserveBilles(10 * MyConstants.SCREENWIDTH / 11, 9 * MyConstants.SCREENHEIGHT / 11, largeurBille, largeurBille);
         reserveBilles.largeurBille = largeurBille;
         allDrawables.add(reserveBilles);
 
-        planche1 = new UnePlancheNew(screenWidth / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
+        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
         planche1.shouldReturnToReserve = true;
         allDrawables.add(planche1);
 
@@ -75,7 +75,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         billesList = new ArrayList<>();
 
-        float activiteWidth = (screenWidth / 4) * 3;
+        float activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Faire correspondre des billes à des oiseaux, de 1 à 9";
@@ -97,13 +97,13 @@ public class ScreenEx1_2 extends ScreenOnglet
 
     public ArrayList getNumberOiseauxArList()
     {
-        int firstPositionOiseauX = screenWidth + 200;
-        int firstPositionOiseauY = screenHeight + 200;
+        int firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
+        int firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
         oiseauxList = new ArrayList<>();
         for (int i = 0; i < 9; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, screenWidth/15, screenWidth/10);
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY,  (float)((MyConstants.SCREENWIDTH / 12) * (396.0f / 500.0f)), (float)(MyConstants.SCREENWIDTH / 12) * (500.0f / 396.0f));
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
         }
@@ -114,7 +114,7 @@ public class ScreenEx1_2 extends ScreenOnglet
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        int reversedScreenY = screenHeight - screenY;
+        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
@@ -163,7 +163,7 @@ public class ScreenEx1_2 extends ScreenOnglet
     {
         if ((objectTouched != null) && (objectTouched.isDragable()))
         {
-            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (screenHeight - screenY - objectTouched.getHeight() / 2));
+            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (MyConstants.SCREENHEIGHT - screenY - objectTouched.getHeight() / 2));
         }
         return true;
     }
@@ -171,7 +171,7 @@ public class ScreenEx1_2 extends ScreenOnglet
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button)
     {
-        int reversedScreenY = screenHeight - screenY;
+        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
@@ -251,20 +251,20 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                 if (cptOiseau > 5)
                 {
-                    posY = 5 * screenHeight / 11;
-                    posX = (screenWidth / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 6);
+                    posY = 5 * MyConstants.SCREENHEIGHT / 11;
+                    posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 6);
                 }
                 else
                 {
-                    posY = 7 * screenHeight / 10;
+                    posY = 7 * MyConstants.SCREENHEIGHT / 10;
 
                     if (cptOiseau < 3)
                     {
-                        posX = ( screenWidth / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+                        posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                     else
                     {
-                        posX = (2 * screenWidth / 9) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+                        posX = (2 * MyConstants.SCREENWIDTH / 9) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                 }
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
@@ -274,8 +274,8 @@ public class ScreenEx1_2 extends ScreenOnglet
             else if (cptOiseau > randNumOiseau)
             {
                 UnOiseau oiseau = oiseauxList.get(cptOiseau - 1);
-                int posX = screenWidth * 2;
-                int posY = screenHeight * 2;
+                int posX = MyConstants.SCREENWIDTH * 2;
+                int posY = MyConstants.SCREENHEIGHT * 2;
 
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
                 timer.schedule(nextEtape, 100);
@@ -433,7 +433,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            int posX = screenWidth / 2;
+            int posX = MyConstants.SCREENWIDTH / 2;
             int posY = (int) planche1.getHeight() / 2;
 
             MyTimer.TaskEtape nextEtape = new EtapeAddBille(1000);
@@ -494,8 +494,8 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            int posX = screenHeight / 5;
-            int posY = screenWidth / 8;
+            int posX = MyConstants.SCREENHEIGHT / 5;
+            int posY = MyConstants.SCREENWIDTH / 8;
 
             uneMain.moveTo(durationMillis, posX, posY, null, 500);
             uneMain.cliqueTo(durationMillis, posX, posY, null, 500);
@@ -529,7 +529,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             }
 
             new FinOnglet(1000);
-
         }
     }
 
@@ -549,7 +548,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                 // fin exercice
                 endTime = System.currentTimeMillis();
                 seconds = (endTime - startTime) / 1000L;
-
 
                 score = ecrinDiamantView.getDiamantCount();
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.UnResultat;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
@@ -49,14 +50,14 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
         oiseauxList = getNumberOiseauxArList();
 
-        reserveBilles = new ReserveBilles(10 * screenWidth / 11, 9 * screenHeight / 11, largeurBille, largeurBille);
+        reserveBilles = new ReserveBilles(10 * MyConstants.SCREENWIDTH / 11, 9 * MyConstants.SCREENHEIGHT / 11, largeurBille, largeurBille);
         reserveBilles.largeurBille = largeurBille;
         reserveBilles.isActive();
         reserveBilles.setActive(false);
         allDrawables.add(reserveBilles);
         myPauseGeneral.addElements(reserveBilles);
 
-        planche1 = new UnePlancheNew(screenWidth / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
+        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
 //        planche1.shouldReturnToReserve = true;
         allDrawables.add(planche1);
         myPauseGeneral.addElements(planche1);
@@ -67,7 +68,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Les nombres de 1 à 9 Badix, Métrologue et Validus.";
 
-        float activiteWidth = (screenWidth / 4) * 3;
+        float activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
 
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "enonce");
         allDrawables.add(activiteView);
@@ -130,8 +131,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         {
             UnOiseau oiseau = oiseauxList.get(cptOiseau);
             myPauseGeneral.addElements(oiseau);
-            int posY = 5 * screenHeight / 11;
-            int posX = (screenWidth / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+            int posY = 5 * MyConstants.SCREENHEIGHT / 11;
+            int posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
 
             if (cptOiseau == 0)
             {
@@ -241,7 +242,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         {
             UneBille bille = billesList.get(cptBille);
             bille.setVisible(true);
-            int posX = screenWidth / 2;
+            int posX = MyConstants.SCREENWIDTH / 2;
             int posY = (int) planche1.getHeight() / 2;
 
             MyTimer.TaskEtape nextEtape = new EtapeAddBille(1500);
@@ -285,7 +286,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             UneBille bille = billesList.get(cptBille);
-            int posX = screenWidth / 2;
+            int posX = MyConstants.SCREENWIDTH / 2;
             int posY = (int) planche1.getHeight() / 2;
 
             planche1.addBilleAndOrganize(bille);
@@ -480,13 +481,13 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
     {
         oiseauxList = new ArrayList<>();
 
-        int firstPositionOiseauX = screenWidth + 200;
-        int firstPositionOiseauY = screenHeight + 200;
+        int firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
+        int firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
 
         for (int i = 0; i < 3; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, screenWidth / 15, screenWidth / 10);
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (float) ((MyConstants.SCREENWIDTH / 12) * (396.0f / 500.0f)), (float) (MyConstants.SCREENWIDTH / 12) * (500.0f / 396.0f));
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
         }
@@ -497,7 +498,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 //    @Override
 //    public boolean touchDown(int screenX, int screenY, int pointer, int button)
 //    {
-//        int reversedScreenY = screenHeight - screenY;
+//        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
 //        mousePointerX = screenX;
 //        mousePointerY = reversedScreenY;
 //
@@ -539,7 +540,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 //    {
 //        if (objectTouched != null)
 //        {
-//            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (screenHeight - screenY - objectTouched.getHeight() / 2));
+//            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (MyConstants.SCREENHEIGHT - screenY - objectTouched.getHeight() / 2));
 //        }
 //        return true;
 //    }
@@ -552,7 +553,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 //            if (objectTouched instanceof UneMain)
 //            {
 //                UneMain mainAux = (UneMain) objectTouched;
-//                mainAux.TouchUp(planche1, screenX, screenHeight - screenY);
+//                mainAux.TouchUp(planche1, screenX, MyConstants.SCREENHEIGHT - screenY);
 ////
 ////                else /*si bille pas deposee dans planche*/
 ////                    {
@@ -585,7 +586,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        int reversedScreenY = screenHeight - screenY;
+        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
@@ -627,7 +628,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
     {
         if (objectTouched != null)
         {
-            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (screenHeight - screenY - objectTouched.getHeight() / 2));
+            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (MyConstants.SCREENHEIGHT - screenY - objectTouched.getHeight() / 2));
         }
         return true;
     }
@@ -643,7 +644,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
                 if (billeAux != null)
                 {
-                    billeAux.touchUp(allPlanches/*, screenX, screenHeight - screenY*/);
+                    billeAux.touchUp(allPlanches/*, screenX, MyConstants.SCREENHEIGHT - screenY*/);
                 }
 //
 //                else /*si bille pas deposee dans planche*/

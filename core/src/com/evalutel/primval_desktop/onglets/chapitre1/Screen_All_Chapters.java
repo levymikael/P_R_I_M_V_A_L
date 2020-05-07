@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.BoutonChapitres;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.ListExercicesActiviteView;
@@ -46,8 +47,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 {
     private DatabaseDesktop dataBase;
     protected Stage stage;
-    int screenWidth;
-    int screenHeight;
+
     private SpriteBatch batch;
     private Game game;
 
@@ -55,7 +55,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
     private Viewport viewport;
 
-//    ListExercicesActiviteView listExercicesActiviteView;
+    //    ListExercicesActiviteView listExercicesActiviteView;
     ScreeenBackgroundImage fondEspaceParent;
     ScreeenBackgroundImage fondSommaire;
     MrNotes2 mrNotes;
@@ -65,8 +65,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     MyButtonRetour myButtonRetour;
     MyButtonDemos myButtonDemo;
 
-    FreeTypeFontGenerator generatorFRHND;
-    FreeTypeFontGenerator generatorZAP;
+
     TextureRegionDrawable textureRegionDrawableBg;
 
     BitmapFont bitmapFontZAP;
@@ -77,24 +76,21 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         this.game = game;
         this.dataBase = dataBase;
 
-        screenHeight = Gdx.graphics.getHeight();
-        screenWidth = Gdx.graphics.getWidth();
-
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFontFRHND;
 
-        generatorFRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
+        FreeTypeFontGenerator FONT_FRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterFRHND = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterFRHND.size = screenWidth/40;
-        bitmapFontFRHND = generatorFRHND.generateFont(parameterFRHND);
-        generatorFRHND.dispose();
+        parameterFRHND.size = MyConstants.SCREENWIDTH / 40;
+        bitmapFontFRHND = FONT_FRHND.generateFont(parameterFRHND);
+        FONT_FRHND.dispose();
 
-        generatorZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
+        FreeTypeFontGenerator FONT_ZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterZAP = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterZAP.size = screenWidth / 70;
-        bitmapFontZAP = generatorZAP.generateFont(parameterZAP);
-        generatorZAP.dispose();
+        parameterZAP.size = MyConstants.SCREENWIDTH / 70;
+        bitmapFontZAP = FONT_ZAP.generateFont(parameterZAP);
+        FONT_ZAP.dispose();
 
         Label.LabelStyle labelStyleWhite = new Label.LabelStyle();
         labelStyleWhite.font = bitmapFontFRHND;
@@ -110,11 +106,13 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
 
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase, "sommaire general");
-        myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
+        myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15, game, dataBase, "sommaire general");
+        myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25, 5 * MyConstants.SCREENHEIGHT / 6 - myButtonRetour.getHeight() / 2);
 
-        myButtonDemo = new MyButtonDemos(stage, screenWidth / 6, screenWidth / 20, game, dataBase);
-        myButtonDemo.setPosition(4 * screenWidth / 25, 5 * screenHeight / 6 - myButtonDemo.getHeight() / 2);
+        myButtonDemo = new MyButtonDemos(stage, (float) MyConstants.SCREENWIDTH / 20.0f * (447.0f / 93.0f), (float) MyConstants.SCREENHEIGHT / 4.0f* (93.0f / 447.0f), game, dataBase);
+        float posY = (float) (5.0f * MyConstants.SCREENHEIGHT / 6.0f - myButtonDemo.getHeight() / 2.0f);
+        float posX = (float) (4.0f * MyConstants.SCREENWIDTH / 25.0f);
+        myButtonDemo.setPosition(posX, posY);
 
         Label labelChap1Titre = new Label("Calcul et géométrie", labelStyleWhite);
 
@@ -124,10 +122,10 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         stage.addActor(allChaptersTitle);
 
         Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
-        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 9 * screenHeight / 10);
+        nomChapitre.setPosition(3*MyConstants.SCREENWIDTH / 7 /*- nomChapitre.getWidth() / 2*/, 11 * MyConstants.SCREENHEIGHT / 12);
         stage.addActor(nomChapitre);
 
-        mrNotes = new MrNotes2(stage, dataBase, 21 * screenWidth / 25, 4 * screenHeight / 5);
+        mrNotes = new MrNotes2(stage, dataBase, 21 * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5);
         mrTemps = new MrTemps2(stage, dataBase);
 
 
@@ -137,7 +135,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         float positionButton = myButtonRetour.getY();
         float heightContainer = (positionButton);
-        container.setSize(screenWidth, heightContainer);
+        container.setSize(MyConstants.SCREENWIDTH, heightContainer);
         container.setPosition(0, 0);
 
         Table evalutelMotto = evalutelMotto();
@@ -147,18 +145,18 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table chapterTitle = new Table();
         chapterTitle.add(labelChapterTitle);
 
-        chapterTitle.padTop(screenHeight / 40);
+        chapterTitle.padTop(MyConstants.SCREENHEIGHT / 40);
 
         Table chaptersListView = chaptersListView();
 
-        container.debug();
-        table.add(evalutelMotto).width(screenWidth - (screenWidth / 19)).align(Align.center).padTop(screenWidth / 90);
+//        container.debug();
+        table.add(evalutelMotto).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19)).align(Align.center).padTop(MyConstants.SCREENWIDTH / 90);
         table.row();
-        table.add(chapterTitle).width(screenWidth).align(Align.center).padBottom(screenHeight / 20);
+        table.add(chapterTitle).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 20);
         table.row();
-        table.add(chaptersListView).width(screenWidth).align(Align.center).padBottom(screenHeight / 20);
+        table.add(chaptersListView).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 20);
 
-        table.setWidth(screenWidth);
+        table.setWidth(MyConstants.SCREENWIDTH);
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
@@ -199,26 +197,26 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table evalutelMotto = new Table();
         evalutelMotto.setBackground((textureRegionDrawableBg));
 
-        evalutelMotto.add(labelMottoTitle).padBottom(screenHeight / 80);
-        evalutelMotto.padTop(screenHeight / 40).padRight(screenHeight / 40);
+        evalutelMotto.add(labelMottoTitle).padBottom(MyConstants.SCREENHEIGHT / 80);
+        evalutelMotto.padTop(MyConstants.SCREENHEIGHT / 40).padRight(MyConstants.SCREENHEIGHT / 40);
         evalutelMotto.row();
 
         Table evalutelMottoDetails = new Table();
 
         Table manipulerTable = new Table();
-        manipulerTable.setSize(screenWidth / 4, screenHeight / 5);
+        manipulerTable.setSize(MyConstants.SCREENWIDTH / 4, MyConstants.SCREENHEIGHT / 5);
         Label labelManipulerTitle = new Label("MANIPULER", labelStyleBlue2);
         Label labelManipulerText = new Label("Des objets interactifs et ludiques sont conçus pour permettre à l'enfant de comprendre la numération , les opérations arithmétiques et les notions de base de géométrie.", labelStyleBlue2);
         labelManipulerText.setWrap(true);
-        labelManipulerText.setWidth(screenWidth / 5);
+        labelManipulerText.setWidth(MyConstants.SCREENWIDTH / 5);
 
         manipulerTable.add(labelManipulerTitle);
         manipulerTable.row();
-        manipulerTable.add(labelManipulerText).width(screenWidth / 4).padLeft(screenWidth / 50).height(screenHeight / 5).padRight(screenWidth / 50);
+        manipulerTable.add(labelManipulerText).width(MyConstants.SCREENWIDTH / 4).padLeft(MyConstants.SCREENWIDTH / 50).height(MyConstants.SCREENHEIGHT / 5).padRight(MyConstants.SCREENWIDTH / 50);
         manipulerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table borderManipuler = new Table();
-        borderManipuler.pad(screenWidth / 1000);
+        borderManipuler.pad(MyConstants.SCREENWIDTH / 1000);
         borderManipuler.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
         borderManipuler.add(manipulerTable);
 
@@ -226,15 +224,15 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Label labelApprendreTitle = new Label("APPRENDRE", labelStyleBlue2);
         Label labelApprendreText = new Label("Les notions nouvelles sont introduites par des cours et des exemples. Chaque manipulation est mise en correspondance avec l'opération que l'enfant est invité à faire sur l'ardoise et sur la solution, tout en étant corrigé pas à pas.", labelStyleBlue2);
         labelApprendreText.setWrap(true);
-        labelApprendreText.setWidth(screenWidth / 5);
+        labelApprendreText.setWidth(MyConstants.SCREENWIDTH / 5);
 
         apprendreTable.add(labelApprendreTitle);
         apprendreTable.row();
-        apprendreTable.add(labelApprendreText).width(screenWidth / 4).padLeft(screenWidth / 50).height(screenHeight / 5).padRight(screenWidth / 50);
+        apprendreTable.add(labelApprendreText).width(MyConstants.SCREENWIDTH / 4).padLeft(MyConstants.SCREENWIDTH / 50).height(MyConstants.SCREENHEIGHT / 5).padRight(MyConstants.SCREENWIDTH / 50);
         apprendreTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table borderApprendre = new Table();
-        borderApprendre.pad(screenWidth / 1000);
+        borderApprendre.pad(MyConstants.SCREENWIDTH / 1000);
         borderApprendre.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
         borderApprendre.add(apprendreTable);
 
@@ -242,22 +240,22 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Label labelEvaluerTitle = new Label("EVALUER", labelStyleBlue2);
         Label labelEvaluerText = new Label("Tous les exercices/problèmes sont notés. L'enfant peut toujours améliorer sa note en refaisant l'exercice. Un tableau récapitule les sujets abordés complètement ou partiellement, les temps passés et les résultats obtenus.", labelStyleBlue2);
         labelEvaluerText.setWrap(true);
-        labelEvaluerText.setWidth(screenWidth / 4);
+        labelEvaluerText.setWidth(MyConstants.SCREENWIDTH / 4);
 
         evaluerTable.add(labelEvaluerTitle);
         evaluerTable.row();
-        evaluerTable.add(labelEvaluerText).width(screenWidth / 4).padLeft(screenWidth / 50).height(screenHeight / 5).padRight(screenWidth / 50);
+        evaluerTable.add(labelEvaluerText).width(MyConstants.SCREENWIDTH / 4).padLeft(MyConstants.SCREENWIDTH / 50).height(MyConstants.SCREENHEIGHT / 5).padRight(MyConstants.SCREENWIDTH / 50);
         evaluerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table borderEvaluer = new Table();
-        borderEvaluer.pad(screenWidth / 1000);
+        borderEvaluer.pad(MyConstants.SCREENWIDTH / 1000);
         borderEvaluer.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
         borderEvaluer.add(evaluerTable);
 
-        evalutelMottoDetails.add(borderManipuler).padLeft(screenWidth / 80);
-        evalutelMottoDetails.add(borderApprendre).padLeft(screenWidth / 80);
-        evalutelMottoDetails.add(borderEvaluer).padLeft(screenWidth / 80);
-        evalutelMotto.add(evalutelMottoDetails).padBottom(screenWidth / 80);
+        evalutelMottoDetails.add(borderManipuler).padLeft(MyConstants.SCREENWIDTH / 80);
+        evalutelMottoDetails.add(borderApprendre).padLeft(MyConstants.SCREENWIDTH / 80);
+        evalutelMottoDetails.add(borderEvaluer).padLeft(MyConstants.SCREENWIDTH / 80);
+        evalutelMotto.add(evalutelMottoDetails).padBottom(MyConstants.SCREENWIDTH / 80);
 //
 //        Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
 //        pmBlue.setColor(Color.NAVY);
@@ -288,18 +286,18 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table tableEx5 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_5.png", "Images/IndicesChapitres/chap5.png", chapterLabel5, null, 1, dataBase);
         Table tableEx6 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_6.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, null, 1, dataBase);
 
-        table.add(tableEx1).width(screenWidth / 4).height(screenHeight / 4).align(Align.center);
-        table.add(tableEx2).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
-        table.add(tableEx3).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
+        table.add(tableEx1).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center);
+        table.add(tableEx2).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
+        table.add(tableEx3).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
         table.row();
-        table.add().height(screenWidth / 30);
+        table.add().height(MyConstants.SCREENWIDTH / 30);
         table.row();
-        table.add(tableEx4).width(screenWidth / 4).height(screenHeight / 4).align(Align.center);
-        table.add(tableEx5).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
-        table.add(tableEx6).width(screenWidth / 4).height(screenHeight / 4).align(Align.center).padLeft(screenWidth / 20);
+        table.add(tableEx4).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center);
+        table.add(tableEx5).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
+        table.add(tableEx6).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
         table.row();
 //
-        table.setWidth(screenWidth);
+        table.setWidth(MyConstants.SCREENWIDTH);
 
         tableEx1.addListener(new ClickListener()
         {
@@ -417,7 +415,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         batch.setTransformMatrix(new Matrix4());
 
         fondEspaceParent.myDraw(batch);
-        fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6, 0, 0);
+        fondSommaire.myDraw2(batch, MyConstants.SCREENWIDTH, 5 * MyConstants.SCREENHEIGHT / 6, 0, 0);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {

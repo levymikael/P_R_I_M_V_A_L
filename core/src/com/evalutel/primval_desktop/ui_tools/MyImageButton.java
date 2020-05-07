@@ -24,23 +24,15 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
 
     public boolean animationContinue = true;
 
-
     protected int screenWidth;
     protected int screenHeight;
 
-    TextureRegion[] animationFrames;
-
     Animation animation;
-
 
 
     public MyImageButton(Stage stage, String imagePathUp, String imagePathDown, float width, float height)
     {
         super(getDrawable(imagePathUp, width, height), getDrawable(imagePathDown, width, height));
-
-
-//        this.width = width;
-//        this.height = height;
 
         stage.addActor(this);
 
@@ -50,12 +42,10 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
     {
         super(getDrawable(imagePathUp, width, height));
 
-
         this.width = width;
         this.height = height;
 
         stage.addActor(this);
-
     }
 
 //    @Override
@@ -97,7 +87,6 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
 
 //        throw new GdxRuntimeException("No drawable registered with name " + name);
 //    }
-
 
 
     private static SpriteDrawable getDrawable(String imagePath, float width, float height)

@@ -14,14 +14,11 @@ import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
 public class MyButtonDemos extends MyImageButton implements MyDrawInterface
 {
-    private boolean isActif;
-
 
     public MyButtonDemos(Stage stage, float width, float height, final Game game, final DatabaseDesktop dataBase)
     {
         super(stage, "Images/button_demonstration.png", width, height);
         setTouchable(Touchable.enabled);
-
 
         addListener(new ClickListener()
                     {
@@ -39,5 +36,4 @@ public class MyButtonDemos extends MyImageButton implements MyDrawInterface
     public void myDraw(Batch batch)
     {
     }
-
 }

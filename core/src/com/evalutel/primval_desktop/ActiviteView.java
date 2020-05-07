@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.evalutel.primval_desktop.General.MyConstants;
 
 
 public class ActiviteView implements MyDrawInterface, MyPauseInterface
@@ -24,8 +25,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
     private Table table, tableTitre, tableBandeauBas;
     private Table tableMilieu;
     private float heightTop;
-    public float widthScreen, topSectionposY;
-    final int screenHeight;
+    public float topSectionposY;
     float topYTablePosition, heightBackGroundImage;
 
     private float firstY, currentY, widthEnonce;
@@ -40,29 +40,28 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
     BitmapFont bitmapFont;
     private boolean isVisible = true;
     private Texture textureMilieuEnonce;
-    Texture textureFleche;
 
     String activiteType;
 
     Label lastLabel;
 
+    Sprite flechSprite = new Sprite(new Texture(Gdx.files.internal("Images/EnonceUIElements/black_right_pointing_pointer.png")));
+
 
     public ActiviteView(Stage stage, float width, String numExercice, String consigneExercice, String exDansChapitre, String activiteType)
     {
-        textureFleche = new Texture(Gdx.files.internal("Images/EnonceUIElements/icons8-arrow-100.png"));
         textureMilieuEnonce = new Texture("Images/EnonceUIElements/enonce_milieu_new.png");
         widthEnonce = width;
         heightTop = widthEnonce * 100 / 1626;
 
         this.activiteType = activiteType;
 
-        screenHeight = Gdx.graphics.getHeight();
-        widthScreen = Gdx.graphics.getWidth();
 
 // Configuration police de l'enonce
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = (int) widthScreen / 70;
+        parameter.size = MyConstants.SCREENWIDTH / 70;
+
 
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
@@ -83,7 +82,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         labelStyle3.font = bitmapFont;
         labelStyle3.fontColor = Color.YELLOW;
         Label label3 = new Label(exDansChapitre, labelStyle3);
-        label3.setWidth(50);
+        label3.setWidth(MyConstants.SCREENWIDTH / 46);
         label3.setWrap(true);
 
 
@@ -92,7 +91,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         tableTitre.setBackground(new SpriteDrawable(new Sprite(new Texture("Images/EnonceUIElements/titre_top.png"))));
 
 // Positionnement numero exercice:
-        tableTitre.add(exoNumLabel).align(Align.center).width(80).padLeft(widthScreen / 50);
+        tableTitre.add(exoNumLabel).align(Align.center).width(80).padLeft(MyConstants.SCREENWIDTH / 46);
         tableTitre.add(exoConsigneLabel).width(widthEnonce - 210).height(100);
         tableTitre.add(label3).align(Align.center).width(80);
 
@@ -138,20 +137,18 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 // Positionnement du tableau sur ecran:
 
         tableTitre.pack();
-        tableTitre.setPosition(widthScreen / 2 - widthEnonce / 2, screenHeight - tableTitre.getHeight());
+        tableTitre.setPosition(MyConstants.SCREENWIDTH / 2 - widthEnonce / 2, MyConstants.SCREENHEIGHT - tableTitre.getHeight());
 
         table.pack();
         final float tableHeight = table.getHeight();
         float temptableHeight = tableHeight;
 
-        topYTablePosition = screenHeight - tableHeight - tableTitre.getHeight();
+        topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - tableTitre.getHeight();
 
-//        titreTop = new Texture("Images/EnonceUIElements/titre_top.png");
-
-        topSectionposY = Gdx.graphics.getHeight() - heightTop;
+        topSectionposY = MyConstants.SCREENHEIGHT - heightTop;
 
         currentY = topYTablePosition;
-        table.setPosition(widthScreen / 2 - widthEnonce / 2, topYTablePosition /*- heightTop*/);
+        table.setPosition(MyConstants.SCREENWIDTH / 2 - widthEnonce / 2, topYTablePosition /*- heightTop*/);
 
         table.setTouchable(Touchable.enabled);
 
@@ -183,10 +180,10 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
                     currentY = topYTablePosition;
                     table.setY(topYTablePosition);
                 }
-                else if (nextY > (screenHeight - heightBackGroundImage - tableTitre.getHeight())) // si souris depasse bandeau alors on cache texte consigne
+                else if (nextY > (MyConstants.SCREENHEIGHT - heightBackGroundImage - tableTitre.getHeight())) // si souris depasse bandeau alors on cache texte consigne
                 {
-                    currentY = screenHeight - heightBackGroundImage - tableTitre.getHeight();
-                    table.setY(screenHeight - heightBackGroundImage - tableTitre.getHeight());
+                    currentY = MyConstants.SCREENHEIGHT - heightBackGroundImage - tableTitre.getHeight();
+                    table.setY(MyConstants.SCREENHEIGHT - heightBackGroundImage - tableTitre.getHeight());
                 }
                 else
                 {
@@ -222,7 +219,6 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
         lastLabel.setColor(Color.BLUE);
 
-
         Label.LabelStyle labelStyle4 = new Label.LabelStyle();
         labelStyle4.font = bitmapFont;
         labelStyle4.fontColor = Color.BLACK;
@@ -231,26 +227,25 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
         if (cptInstructions == 0)
         {
-            Sprite flechSprite = new Sprite(textureFleche);
             flechSprite.setSize(30, 40);
 
             SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
 
-            Table table5 = new Table();
+            Table pointerTable = new Table();
 
             if (activiteType == "activite")
             {
-                table5.setBackground(flecheSpriteDrawable);
+                pointerTable.setBackground(flecheSpriteDrawable);
             }
             else
             {
-                table5.setWidth(30);
+                pointerTable.setWidth(30);
             }
 
-            table4.add(new Image()).height(screenHeight / 200);
+            table4.add(new Image()).height(MyConstants.SCREENHEIGHT / 200);
             table4.row();
             table4.add().width(20);
-            table4.add(table5).width(50);
+            table4.add(pointerTable).width(MyConstants.SCREENWIDTH / 46).height(MyConstants.SCREENHEIGHT / 40).align(Align.top);
             table4.add(label3).width(widthEnonce - 90);
             table4.add().width(20);
         }
@@ -261,7 +256,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
             table4.add(label3).width(widthEnonce - 90);
             table4.add().width(20);
             table4.row();
-            table4.add(new Image()).height(screenHeight / 200);
+            table4.add(new Image()).height(MyConstants.SCREENHEIGHT / 200);
         }
 
         table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
@@ -274,11 +269,11 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
         cptInstructions++;
 
-        System.out.println(cptInstructions);
+//        System.out.println(cptInstructions);
 
-        float labelHeight = label3.getHeight() + screenHeight / 200;
+        float labelHeight = label3.getHeight() + MyConstants.SCREENHEIGHT / 200;
 
-        topYTablePosition = screenHeight - table.getHeight() - tableTitre.getHeight();
+        topYTablePosition = MyConstants.SCREENHEIGHT - table.getHeight() - tableTitre.getHeight();
 
 
         float nextTestY = currentY - labelHeight;
