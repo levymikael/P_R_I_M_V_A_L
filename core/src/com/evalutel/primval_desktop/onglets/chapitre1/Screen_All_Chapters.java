@@ -66,7 +66,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     MyButtonDemos myButtonDemo;
 
 
-    TextureRegionDrawable textureRegionDrawableBg;
+    TextureRegionDrawable textureRegionDrawableBg, textureRegionDrawableBg2;
 
     BitmapFont bitmapFontZAP;
 
@@ -98,18 +98,18 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFontFRHND;
-        labelStyleBlue.fontColor = Color.NAVY;
+        labelStyleBlue.fontColor = new Color(65.0f / 255.0f, 111.0f / 255.0f, 193.0f / 255.0f, 1);
 
         allDrawables = new ArrayList<>();
 
         fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
 
-        fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
+        fondSommaire = new ScreeenBackgroundImage("Images/Backgrounds/web_hi_res_512.png");
 
         myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15, game, dataBase, "sommaire general");
         myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25, 5 * MyConstants.SCREENHEIGHT / 6 - myButtonRetour.getHeight() / 2);
 
-        myButtonDemo = new MyButtonDemos(stage, (float) MyConstants.SCREENWIDTH / 20.0f * (447.0f / 93.0f), (float) MyConstants.SCREENHEIGHT / 4.0f* (93.0f / 447.0f), game, dataBase);
+        myButtonDemo = new MyButtonDemos(stage, (float) MyConstants.SCREENWIDTH / 22.0f * (447.0f / 93.0f), (float) MyConstants.SCREENWIDTH / 22.0f, game, dataBase);
         float posY = (float) (5.0f * MyConstants.SCREENHEIGHT / 6.0f - myButtonDemo.getHeight() / 2.0f);
         float posX = (float) (4.0f * MyConstants.SCREENWIDTH / 25.0f);
         myButtonDemo.setPosition(posX, posY);
@@ -122,7 +122,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         stage.addActor(allChaptersTitle);
 
         Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
-        nomChapitre.setPosition(3*MyConstants.SCREENWIDTH / 7 /*- nomChapitre.getWidth() / 2*/, 11 * MyConstants.SCREENHEIGHT / 12);
+        nomChapitre.setPosition(3 * MyConstants.SCREENWIDTH / 7 /*- nomChapitre.getWidth() / 2*/, 11 * MyConstants.SCREENHEIGHT / 12);
         stage.addActor(nomChapitre);
 
         mrNotes = new MrNotes2(stage, dataBase, 21 * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5);
@@ -175,14 +175,15 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         labelStyleBlue2.fontColor = Color.ROYAL;
         Label labelMottoTitle = new Label("Primval développé par Evalutel, propose un programe complet de Math et de géométrie pour le Primaire basé sur notre devise:", labelStyleBlue2);
 
-        int widthButton = 1000;
-        int heightButton = widthButton / 4;
+        int widthButton = 4000;
+        int heightButton = widthButton / 10;
         int cornerRadius = heightButton / 8;
 
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
 
-        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.BLUE);
         Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
+        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.ROYAL);
+        ;
 
         Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
         bgPixmap.setColor(Color.rgb888(234, 241, 250));
@@ -193,6 +194,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         bgPixmap.fill();
         textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(blueRoundedBackground2)));
+        textureRegionDrawableBg2 = new TextureRegionDrawable(new TextureRegion(new Texture(blueRoundedBackground2)));
 
         Table evalutelMotto = new Table();
         evalutelMotto.setBackground((textureRegionDrawableBg));
@@ -256,13 +258,9 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         evalutelMottoDetails.add(borderApprendre).padLeft(MyConstants.SCREENWIDTH / 80);
         evalutelMottoDetails.add(borderEvaluer).padLeft(MyConstants.SCREENWIDTH / 80);
         evalutelMotto.add(evalutelMottoDetails).padBottom(MyConstants.SCREENWIDTH / 80);
-//
-//        Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-//        pmBlue.setColor(Color.NAVY);
-//        pmBlue.fill();
 
         Table border = new Table();
-        border.pad(5);
+        border.pad(2);
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
         border.add(evalutelMotto);
 

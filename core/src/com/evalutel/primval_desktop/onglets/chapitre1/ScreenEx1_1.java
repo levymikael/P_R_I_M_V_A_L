@@ -78,7 +78,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
         resultatExercice = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, 0, dateTest, 0, 0, 0, 123);
 
-        timer.schedule(new PresentationMetrologue(2000), 1000);
+        timer.schedule(new PresentationMetrologue(3000), 1000);
     }
 
 
@@ -96,31 +96,38 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             activiteView.addTextActivite("Bonjour,");
             activiteView.addTextActivite("Je suis le professeur Metrologue, on va faire un jeu amusant qui s'appelle Badix.");
             activiteView.addTextActivite("Tu veux jouer ?");
-            metrologue.metrologuePlaySound("Sounds/Metrologue/Bonjour je suis le prof.mp3");
 
-            timer.schedule(new VoiciLaRegleDuJeu(2000), 7000);
+            MyTimer.TaskEtape nextEtape = new VoiciLaRegleDuJeu(3000, 3000);
+
+            metrologue.metrologuePlaySound("Sounds/Metrologue/Bonjour je suis le prof.mp3", nextEtape);
         }
     }
 
     private class VoiciLaRegleDuJeu extends MyTimer.TaskEtape
     {
-        private VoiciLaRegleDuJeu(long durMillis)
+        private VoiciLaRegleDuJeu(long durMillis, long delay)
         {
-            super(durMillis);
+            super(durMillis, delay);
         }
 
         @Override
         public void run()
         {
             activiteView.addTextActivite("Voici la règle du jeu:");
-            metrologue.metrologuePlaySound("Sounds/Metrologue/Voici la regle du jeu.mp3");
+            MyTimer.TaskEtape nextEtape = new EtapeAddOiseau(2000, 1000);
 
-            timer.schedule(new EtapeAddOiseau(1000), 1500);
+            metrologue.metrologuePlaySound("Sounds/Metrologue/Voici la regle du jeu.mp3", nextEtape);
+
         }
     }
 
     private class EtapeAddOiseau extends MyTimer.TaskEtape
     {
+        private EtapeAddOiseau(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
         private EtapeAddOiseau(long durMillis)
         {
             super(durMillis);
@@ -143,11 +150,11 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
                 activiteView.addTextActivite("Tiens ! Encore un oiseau");
                 metrologue.metrologuePlaySound("Sounds/Metrologue/Tiens encore un oiseau.mp3");
 
-                oiseau.animateImage(1000, true, posX, posY, null, 1500, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, null, 2500, 1f / 6f);
             }
             else
             {
-                oiseau.animateImage(1000, true, posX, posY, null, 1500, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, null, 2500, 1f / 6f);
                 activiteView.addTextActivite("Je vois maintenant 2 oiseaux");
                 metrologue.metrologuePlaySound("Sounds/Metrologue/Je vois maintenant.mp3");
             }
@@ -167,18 +174,19 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             activiteView.addTextActivite("Je vois un oiseau");
-            metrologue.metrologuePlaySound("Sounds/Metrologue/je vois un oiseau.mp3");
 
-            timer.schedule(new MoveMainToReserve1(2000), 1500);
+            MyTimer.TaskEtape nextEtape = new MoveMainToReserve1(2000, 1000);
+
+            metrologue.metrologuePlaySound("Sounds/Metrologue/je vois un oiseau.mp3", nextEtape);
         }
     }
 
 
     private class MoveMainToReserve1 extends MyTimer.TaskEtape
     {
-        private MoveMainToReserve1(long durMillis)
+        private MoveMainToReserve1(long durMillis, long delay)
         {
-            super(durMillis);
+            super(durMillis, delay);
         }
 
         @Override
@@ -193,12 +201,17 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
                 int posY = (int) posYf;
 
                 MyTimer.TaskEtape nextEtape = new DisplayBilleReserve(500);
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1500);
+
 
                 if (cptOiseau == 2)
                 {
+                    uneMain.moveTo(durationMillis, (int) posXmain, posY, null, 1500);
                     activiteView.addTextActivite("Je dépose encore une bille.");
-                    metrologue.metrologuePlaySound("Sounds/Metrologue/je depose encore une bille.mp3");
+                    metrologue.metrologuePlaySound("Sounds/Metrologue/je depose encore une bille.mp3", nextEtape);
+                }
+                else
+                {
+                    uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1500);
                 }
             }
         }
@@ -225,7 +238,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             bille.setActive(false);
 
             MyTimer.TaskEtape nextEtape = new EtapeDragBille(1000);
-            timer.schedule(nextEtape, 500);
+            timer.schedule(nextEtape, 1000);
             uneMain.imageDown();
         }
     }
@@ -245,8 +258,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             int posX = MyConstants.SCREENWIDTH / 2;
             int posY = (int) planche1.getHeight() / 2;
 
-            MyTimer.TaskEtape nextEtape = new EtapeAddBille(1500);
-            MyTimer.TaskEtape nextEtape2 = new EtapeAddOiseau(2000);
+            MyTimer.TaskEtape nextEtape = new EtapeAddBille(1500, 1500);
+            MyTimer.TaskEtape nextEtape2 = new EtapeAddOiseau(2000, 1500);
 
             if (cptBille == 0)
             {
@@ -277,9 +290,9 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
     private class EtapeAddBille extends MyTimer.TaskEtape
     {
-        private EtapeAddBille(long durMillis)
+        private EtapeAddBille(long durMillis, long delay)
         {
-            super(durMillis);
+            super(durMillis, delay);
         }
 
         @Override
@@ -302,7 +315,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             }
             else
             {
-                MyTimer.TaskEtape nextEtape = new MoveMainToReserve1(1000);
+                MyTimer.TaskEtape nextEtape = new MoveMainToReserve1(1000, 500);
                 uneMain.moveTo(50, posX, posY, nextEtape, 1000);
             }
         }
@@ -347,7 +360,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             if (billesList.size() == 4)
             {
-                activiteView.addTextActivite("Validus: Non, non tu t'es trompée ");
+                activiteView.addTextActivite("Validus: Non, non tu t'es trompé.");
                 validusAnimated.validusPlaySound("Sounds/Validus/non non tu tes trompe.mp3");
 
                 MyTimer.TaskEtape nextEtape = new MoveMainBackToPlanche(1000);
@@ -356,13 +369,10 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             }
             else if (billesList.size() == 3)
             {
-//                MyTimer.TaskEtape nextEtape = new FinOnglet(1000);
+                MyTimer.TaskEtape nextEtape = new FinOnglet(1000, 1500);
                 uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, null, 1000);
                 activiteView.addTextActivite("Youpi ! Tu as gagné un diamant.");
-                validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
-
-                new FinOnglet(2000);
-
+                validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3", nextEtape);
             }
         }
     }

@@ -69,7 +69,7 @@ public class LigneTableaux
         {
             tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
             tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
-            labelStyleOnglet.fontColor = new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
+            labelStyleOnglet.fontColor = new Color(235.0f / 50.0f, 44.0f / 255.0f, 35.0f / 255.0f, 1);
         }
         else if ((borderColor == "blue"))
         {

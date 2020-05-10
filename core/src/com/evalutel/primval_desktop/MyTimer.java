@@ -21,6 +21,7 @@ public class MyTimer
     public static class TaskEtape extends TimerTask
     {
         protected long durationMillis;
+        protected long delayN;
 
         public TaskEtape()
         {
@@ -32,10 +33,15 @@ public class MyTimer
             durationMillis = dT;
         }
 
+        public TaskEtape(long dT, long delayNext)
+        {
+            durationMillis = dT;
+            delayN = delayNext;
+        }
+
         @Override
         public void run()
         {
-
         }
     }
 

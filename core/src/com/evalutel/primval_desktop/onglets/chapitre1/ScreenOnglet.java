@@ -187,8 +187,9 @@ public class ScreenOnglet implements Screen, InputProcessor
         uneMain = new UneMain(posX, posY, MyConstants.SCREENWIDTH / 6);
         uneMain.setVisible(false);
 
+        timer = new MyTimer();
 
-        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60, MyConstants.SCREENHEIGHT / 7, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5);
+        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60, MyConstants.SCREENHEIGHT / 7, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
         myPauseGeneral.addElements(validusAnimated);
 
         if (ecrin)
@@ -198,11 +199,12 @@ public class ScreenOnglet implements Screen, InputProcessor
             allDrawables.add(ecrinDiamantView);
         }
 
-        metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5);
+
+        metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
         myPauseGeneral.addElements(metrologue);
 
 
-        timer = new MyTimer();
+
 
         /*
         calculetteViewTest = new CalculetteViewTest(stage, 200, 200, 700, 600);
@@ -230,6 +232,35 @@ public class ScreenOnglet implements Screen, InputProcessor
         planche3.shouldReturnToReserve = true;
         allDrawables.add(planche3);*/
 
+    }
+
+
+    protected class FinOnglet extends MyTimer.TaskEtape
+    {
+        protected FinOnglet(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+
+        }
+
+        @Override
+        public void run()
+        {
+            timer.cancel();
+            Music music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/fin_ong.ogg"));
+//        music.setLooping(false);
+            music.play();
+//       boolean isLooping = false;
+
+            music.setOnCompletionListener(new Music.OnCompletionListener()
+            {
+                @Override
+                public void onCompletion(Music music)
+                {
+                    music.dispose();
+                }
+            });
+        }
     }
 
     @Override
@@ -278,34 +309,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         batch.end();
     }
 
-
-    protected class FinOnglet extends MyTimer.TaskEtape
-    {
-        protected FinOnglet(long durMillis)
-        {
-            super(durMillis);
-
-            Music music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/fin_ong.ogg"));
-//        music.setLooping(false);
-            music.play();
-//       boolean isLooping = false;
-
-            music.setOnCompletionListener(new Music.OnCompletionListener()
-            {
-                @Override
-                public void onCompletion(Music music)
-                {
-                    music.dispose();
-                }
-            });
-        }
-
-        @Override
-        public void run()
-        {
-            timer.cancel();
-        }
-    }
 
     @Override
     public void resize(int width, int height)
