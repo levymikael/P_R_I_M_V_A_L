@@ -104,8 +104,10 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         imgSommaire = new ScreeenBackgroundImage("Images/Sommaire/image_sommaire.png");
 
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
+        logoTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 40, screenHeight / 2);
+
+        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 80, screenHeight / 2);
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);
@@ -127,7 +129,10 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Pixmap whiteRoundedBackground2 = UIDesign.createRoundedRectangle((widthButton * 2), widthButton, cornerRadius, Color.WHITE);
 
         Table avatarPic = new Table();
-        avatarPic.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground2))));
+        Texture avatarTexture = new Texture(Gdx.files.internal("Images/avatar_1.png"));
+        avatarTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        avatarPic.setBackground(new SpriteDrawable(new Sprite(avatarTexture)));
         avatarPic.setWidth(screenWidth / 7);
         avatarPic.setHeight(screenHeight / 5);
         avatarPic.setPosition(screenWidth / 50, 6 * screenHeight / 10);
@@ -173,11 +178,11 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         container.add(blueBorderTableChapters).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
         container.row();
-        container.add(blueBorderTableResults).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
-        container.row();
-        container.add(blueBorderTableParentSpace).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
-        container.row();
-        container.add(blueBorderTablePresentation).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
+//        container.add(blueBorderTableResults).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
+//        container.row();
+//        container.add(blueBorderTableParentSpace).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
+//        container.row();
+//        container.add(blueBorderTablePresentation).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
 
         Table summaryImgTable = new Table();
         summaryImgTable.setSize(4 * screenWidth / 5, screenHeight);
@@ -321,7 +326,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);
         fondSommairee.myDraw2(batch, screenWidth, screenHeight, ((screenWidth / 5) - (screenWidth / 70)), 0);
-        imgSommaire.myDraw2(batch, 3 * screenWidth / 5, 3 * screenHeight / 5, ((screenWidth / 5) + ((screenWidth / 5) / 2)), (screenHeight / 2) - ((3 * screenHeight / 5) / 2));
+        imgSommaire.myDraw2(batch, (3 * screenWidth / 5) * (680 / 600), (int) (3 * screenHeight / 5), ((screenWidth / 5) + ((screenWidth / 5) / 2)), (screenHeight / 2) - ((3 * screenHeight / 5) / 2));
 //        batch.draw(imgSommaire, 4 * screenWidth / 15, screenHeight / 5, 2 * screenWidth / 5, (((2 * screenWidth / 5) * 600) / 680));
 //        test.draw(batch);
 

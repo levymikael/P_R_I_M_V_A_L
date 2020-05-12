@@ -42,11 +42,17 @@ public class MyTextButton extends TextButton
 
         buttonStyle.font = bitmapFont;
 
-        SpriteDrawable spriteDrawableUp = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(imagePathUp))));
+        Texture textureUp = new Texture(Gdx.files.internal(imagePathUp));
+        textureUp.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        SpriteDrawable spriteDrawableUp = new SpriteDrawable(new Sprite(textureUp));
 
         buttonStyle.up = spriteDrawableUp;
 
-        SpriteDrawable spriteDrawableDown = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(imagePathDown))));
+        Texture textureDown = new Texture(Gdx.files.internal(imagePathUp));
+        textureDown.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        SpriteDrawable spriteDrawableDown = new SpriteDrawable(new Sprite(textureDown));
 
         buttonStyle.down = spriteDrawableDown;
 
@@ -66,7 +72,10 @@ public class MyTextButton extends TextButton
 
         buttonStyle.font = bitmapFont;
 
-        SpriteDrawable spriteDrawableUp = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal(imagePathUp))));
+        Texture textureUp = new Texture(Gdx.files.internal(imagePathUp));
+        textureUp.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        SpriteDrawable spriteDrawableUp = new SpriteDrawable(new Sprite(textureUp));
 
         buttonStyle.up = spriteDrawableUp;
 

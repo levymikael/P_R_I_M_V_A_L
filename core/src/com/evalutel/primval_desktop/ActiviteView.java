@@ -52,6 +52,8 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
     public ActiviteView(Stage stage, float width, String numExercice, String consigneExercice, String exDansChapitre, String activiteType)
     {
         textureMilieuEnonce = new Texture("Images/EnonceUIElements/enonce_milieu_new.png");
+        textureMilieuEnonce.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         widthEnonce = width;
         heightTop = widthEnonce * 100 / 1626;
 
@@ -93,7 +95,10 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
 // Creation cellule tableau pour numero d'exerice:
         tableTitre = new Table();
-        tableTitre.setBackground(new SpriteDrawable(new Sprite(new Texture("Images/EnonceUIElements/titre_top.png"))));
+        Texture textureTitre = new Texture("Images/EnonceUIElements/titre_top.png");
+        textureTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        tableTitre.setBackground(new SpriteDrawable(new Sprite(textureTitre)));
 
 // Positionnement numero exercice:
         tableTitre.add(exoNumLabel).align(Align.center).width(80).padLeft(MyConstants.SCREENWIDTH / 46);
@@ -117,6 +122,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         {
             textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_text.png"));
         }
+        textureTextEnonce.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         spriteEnonceText = new Sprite(textureTextEnonce);
         TextField.TextFieldStyle textFieldStyleEnonce = new TextField.TextFieldStyle();
@@ -128,6 +134,9 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
         tableBandeauBas = new Table();
         heightBackGroundImage = widthEnonce * 59 / 808;
         texture2 = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_bas_bleu.png"));
+        texture2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
         sprite2 = new Sprite(texture2);
         tableBandeauBas.setBackground(new SpriteDrawable(sprite2));
         float heightImageEnonce = heightBackGroundImage * 2 / 3;
@@ -210,7 +219,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
-        labelStyleBlue.fontColor = Color.BLUE;
+        labelStyleBlue.fontColor = new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
 
         if (cptInstructions != 0)
         {
@@ -222,7 +231,7 @@ public class ActiviteView implements MyDrawInterface, MyPauseInterface
 
         lastLabel = label3;
 
-        lastLabel.setColor(Color.BLUE);
+        lastLabel.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
 
         Label.LabelStyle labelStyle4 = new Label.LabelStyle();
         labelStyle4.font = bitmapFont;

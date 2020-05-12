@@ -1,17 +1,22 @@
 package com.evalutel.primval_desktop.General;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -19,16 +24,24 @@ import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 
 
-public class BoutonChapitres
+public class BoutonChapitres implements Screen
 {
     static MyDataBase db;
 
-    public static Table getLigne(String sommaireChapImgPath, String chapterIndexPath, String ongletTitre, Texture texture, int chapitre, DatabaseDesktop dataBase)
+    static TextureAtlas textureAtlas;
+
+    static Sprite chap1;
+
+    SpriteBatch batch;
+
+    public static Table getLigne( String sommaireChapImgPath, String chapterIndexPath, String ongletTitre, Texture texture, int chapitre, DatabaseDesktop dataBase)
     {
         Table container = new Table();
         Table table = new Table();
 
         db = new MyDataBase(dataBase);
+
+//        batch = batch1;
 
         int screenWidth = Gdx.graphics.getWidth();
         int screenHeight = Gdx.graphics.getHeight();
@@ -57,15 +70,35 @@ public class BoutonChapitres
         labelOngletBlue.setWidth(screenWidth / 4);
 
         Texture textureChapter = new Texture(Gdx.files.internal(sommaireChapImgPath));
+        textureChapter.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         Texture textureChapterIndex = new Texture(Gdx.files.internal(chapterIndexPath));
+        textureChapterIndex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
 
         int widthButton = 1000;
         int heightButton = widthButton / 4;
         int cornerRadius = heightButton / 8;
 
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.WHITE);
 //        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.BLUE);
+
+//        textureAtlas = new TextureAtlas("Images/IndicesChapitres/indicesChapSprite.txt");
+//
+//
+//        chap1 = textureAtlas.createSprite("chap1");
+
+
+        NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("Images/border9_patch_test.9.png")), 3, 3, 3, 3);
+        NinePatchDrawable background = new NinePatchDrawable(patch);
+
+        Table border = new Table();
+
+
+//        border.setBackground(background);
+//        border.add(table);
+
 
         Table table2 = new Table();
         table2.add(new Image(textureChapterIndex)).width(screenWidth / 30).height(screenWidth / 30).padRight(screenWidth / 150).padLeft(MyConstants.SCREENWIDTH / 400);
@@ -75,8 +108,7 @@ public class BoutonChapitres
 
         table3.add().width(screenWidth / 70);
 
-        Pixmap blueBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.BLUE);
-
+        Pixmap blueBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.BLUE);
 
 //        Table summaryBtn = new Table();
 //        summaryBtn.add(labelOngletSummary).padRight(screenWidth / 100).padLeft(screenWidth / 100);
@@ -97,27 +129,73 @@ public class BoutonChapitres
         pmWhite.setColor(Color.WHITE);
         pmWhite.fill();
 
-        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(whiteRoundedBackground))));
+        Texture bgTable = new Texture("Sans titre.png");
+        bgTable.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+//        table.setBackground(new TextureRegionDrawable(new TextureRegion(bgTable)));
 
         Pixmap darkGrayRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.DARK_GRAY);
 
         TextureRegionDrawable textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(darkGrayRoundedBackground)));
 
-        Table border = new Table();
-        border.pad(screenWidth / 1000);
-        border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueBorder))));
+//        Table border = new Table();
+//        border.pad(screenWidth / 1000);
+//        border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueBorder))));
 
 
         table.pad(MyConstants.SCREENWIDTH / 500);
-        container.setBackground(textureRegionDrawableBg);
+//        container.setBackground(textureRegionDrawableBg);
         container.add(table).height(screenHeight / 4);
         container.row();
 
-        container.debug();
+//        container.debug();
 
         table.setTouchable(Touchable.enabled);
 
         return container;
     }
+
+    @Override
+    public void show()
+    {
+
+    }
+
+    @Override
+    public void render(float delta)
+    {
+        chap1.draw(batch);
+    }
+
+    @Override
+    public void resize(int width, int height)
+    {
+
+    }
+
+    @Override
+    public void pause()
+    {
+
+    }
+
+    @Override
+    public void resume()
+    {
+
+    }
+
+    @Override
+    public void hide()
+    {
+
+    }
+
+    @Override
+    public void dispose()
+    {
+        textureAtlas.dispose();
+    }
+
 }
 

@@ -1,10 +1,15 @@
 package com.evalutel.primval_desktop;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 
@@ -19,11 +24,29 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     public ReserveBilles reserveBilles;
     boolean isActive = true;
 
+    TextureAtlas textureAtlas = new TextureAtlas("Images/Sprite_Billes/billes_Sprites.txt");
+
+    final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
+
 
     public UneBille(int startPositionX, int startPositionY, float animationHeight)
     {
         super(getImageRandom(), startPositionX, startPositionY, animationHeight, animationHeight);
 
+        addSprites();
+
+    }
+
+    private void addSprites()
+    {
+        Array<TextureAtlas.AtlasRegion> regions = textureAtlas.getRegions();
+
+        for (TextureAtlas.AtlasRegion region : regions)
+        {
+            Sprite sprite = textureAtlas.createSprite(region.name);
+
+            sprites.put(region.name, sprite);
+        }
     }
 
 
@@ -80,7 +103,6 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
         {
             plancheNew.removeBille(this);
         }
-
     }
 
     public void touchUp(ArrayList<UnePlancheNew> planches/*, int firstPositionX, int firstPositionY*/)

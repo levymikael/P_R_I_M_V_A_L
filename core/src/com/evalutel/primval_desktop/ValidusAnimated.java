@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import java.io.File;
 import java.util.ArrayList;
 
-public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterface */ implements MyTouchInterface, MyPauseInterface
+public class ValidusAnimated extends AnimationImageNew implements MyTouchInterface, MyPauseInterface, MyCorrectionInterface
 {
     public MyTimer.TaskEtape etapeCorrection;
     public boolean isActif;
@@ -37,10 +37,14 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
         System.out.println(animationFrames);
 
-        defaultTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/Validus/vo" +
-                "00000.png")));
 
-        textureRegionInactif = new TextureRegion(new Texture(Gdx.files.internal("Images/Validus/validusAlpha.png")));
+        Texture validusTexture = new Texture(Gdx.files.internal("Images/Validus/vo" + "00000.png"));
+        validusTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        defaultTextureRegion = new TextureRegion(validusTexture);
+
+        Texture validusInactifTexture = new Texture(Gdx.files.internal("Images/Validus/validusAlpha.png"));
+        validusInactifTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        textureRegionInactif = new TextureRegion(validusInactifTexture);
 
         animation = new Animation(1f / 15f, (Object[]) animationFrames);
     }
@@ -48,23 +52,7 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
     public void validusPlaySound(String audioPath)
     {
-        isSpeaking = true;
-
-        music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
-//        music.setLooping(false);
-        music.play();
-//       boolean isLooping = false;
-
-        music.setOnCompletionListener(new Music.OnCompletionListener()
-        {
-            @Override
-            public void onCompletion(Music music)
-            {
-                music.dispose();
-                isSpeaking = false;
-
-            }
-        });
+       validusPlaySound(audioPath, null);
     }
 
 
@@ -72,16 +60,16 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
     {
         isSpeaking = true;
         music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
-//        music.setLooping(false);
         music.play();
-////       boolean isLooping = false;
         music.setOnCompletionListener(new Music.OnCompletionListener()
         {
             @Override
-            public void onCompletion(Music music)
+            public void onCompletion(Music music2)
             {
                 music.dispose();
+                music2.dispose();
                 isSpeaking = false;
+                music = null;
 
                 if (nextEtape != null)
                 {
@@ -163,8 +151,6 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
 
     public void touchUp(int firstPositionX, int firstPositionY)
     {
-        System.out.println("touchUp validus");
-
         if (isActif && (!isSpeaking))
         {
             if (etapeCorrection != null)
@@ -213,5 +199,17 @@ public class ValidusAnimated extends AnimationImageNew /*implements MyDrawInterf
         {
             music.play();
         }
+    }
+
+    @Override
+    public void myCorrection()
+    {
+
+    }
+
+    @Override
+    public void myExerciseFlowing()
+    {
+
     }
 }

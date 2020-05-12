@@ -38,6 +38,7 @@ public class TableauxTitreChapitre
         }
         else
         {
+            texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             table.add(new Image(texture)).width(screenWidth / 20).height(screenWidth / 20).align(Align.center);
             table.add().width(50).height(screenHeight / 8);
         }

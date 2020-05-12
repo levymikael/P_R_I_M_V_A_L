@@ -92,6 +92,8 @@ public class MyImageButton extends ImageButton implements MyDrawInterface
     private static SpriteDrawable getDrawable(String imagePath, float width, float height)
     {
         Texture texture = new Texture(Gdx.files.internal(imagePath));
+        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         Sprite sprite = new Sprite(texture);
         sprite.setSize(width, height);
         return new SpriteDrawable(sprite);

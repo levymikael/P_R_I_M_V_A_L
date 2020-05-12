@@ -44,8 +44,6 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface, MyPau
         int ecartY = (int) (exHeight - animationHeight);
 
         currentPositionY = currentPositionY + ecartY;
-
-
     }
 
     public void imageUp()
@@ -60,9 +58,6 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface, MyPau
         int deplacemenNewX = (int) (deplacementEnX + ecartY);
 
         currentPositionY = currentPositionY - ecartY;
-
-        int ok = 5;
-        ok++;
     }
 
 

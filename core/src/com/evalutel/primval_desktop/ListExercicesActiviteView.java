@@ -41,7 +41,11 @@ public class ListExercicesActiviteView implements MyDrawInterface
         String label6 = "Un gâteau pour plusieurs anniversaires";
 
         Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
         Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
         stage.addActor(container);

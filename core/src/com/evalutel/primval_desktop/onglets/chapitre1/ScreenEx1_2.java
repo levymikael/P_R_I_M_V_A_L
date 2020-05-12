@@ -209,6 +209,10 @@ public class ScreenEx1_2 extends ScreenOnglet
 
             metrologue.metrologuePlaySound("Sounds/Metrologue/Place autant de billes.mp3", nextEtape);
 
+
+            int ok =5;
+            ok ++;
+
             //timer.schedule(new EtapeInstruction(2000), 1000);
         }
     }

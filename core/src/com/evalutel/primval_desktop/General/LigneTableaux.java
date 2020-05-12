@@ -32,11 +32,9 @@ public class LigneTableaux
         Table tablebord1 = new Table();
         Table tablebord2 = new Table();
 
-        int screenWidth = Gdx.graphics.getWidth();
-        int screenHeight = Gdx.graphics.getHeight();
 
         Pixmap pmRed = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmRed.setColor(new Color(235.0f / 50.0f, 44.0f / 255.0f, 35.0f / 255.0f, 1));
+        pmRed.setColor(new Color(167.0f / 255.0f, 45.0f / 255.0f, 23.0f / 255.0f, 1));
         pmRed.fill();
 
         Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
@@ -45,7 +43,7 @@ public class LigneTableaux
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = screenWidth / 60;
+        parameter.size = MyConstants.SCREENWIDTH / 60;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -63,13 +61,13 @@ public class LigneTableaux
         labelStyleDuration.font = bitmapFont;
 
         Label labelDuration = new Label(duration, labelStyleDuration);
-        labelDuration.setWidth(screenWidth / 40);
+        labelDuration.setWidth(MyConstants.SCREENWIDTH / 40);
 
         if (borderColor == "red")
         {
             tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
             tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
-            labelStyleOnglet.fontColor = new Color(235.0f / 50.0f, 44.0f / 255.0f, 35.0f / 255.0f, 1);
+            labelStyleOnglet.fontColor = new Color(167.0f / 255.0f, 45.0f / 255.0f, 23.0f / 255.0f, 1);
         }
         else if ((borderColor == "blue"))
         {
@@ -95,29 +93,29 @@ public class LigneTableaux
         labelStyleNotes.font = bitmapFont;
 
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
-        labelNotes.setWidth(screenWidth / 20);
+        labelNotes.setWidth(MyConstants.SCREENWIDTH / 20);
 
-        table.setWidth(screenWidth);
-        table.setHeight(screenHeight / 13);
+        table.setWidth(MyConstants.SCREENWIDTH);
+        table.setHeight(MyConstants.SCREENHEIGHT / 13);
 
-        labelOnglet.setWidth(screenWidth / 4);
+        labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4);
 
-        table.add(button).padRight(screenWidth / 25).padLeft(screenWidth / 60);
-        table.add(labelOnglet).width((float) (screenWidth * 0.58));
+        table.add(button).padRight(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 60);
+        table.add(labelOnglet).width((float) (MyConstants.SCREENWIDTH * 0.58));
 
         if (texture != null)
         {
-            table.add(new Image(texture)).width(screenWidth / 70).height(screenWidth / 70);
+            table.add(new Image(texture)).width(MyConstants.SCREENWIDTH / 70).height(MyConstants.SCREENWIDTH / 70);
         }
-        table.add(labelDuration).width(screenWidth / 12).padRight(screenWidth / 22).padLeft(screenWidth / 20);
+        table.add(labelDuration).width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 22).padLeft(MyConstants.SCREENWIDTH / 20);
 
         if (borderColor == "red")
         {
-            table.add().width(screenWidth / 12).padRight(screenWidth / 17);
+            table.add().width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 17);
         }
         else
         {
-            table.add(labelNotes).width(screenWidth / 12).padRight(screenWidth / 17);
+            table.add(labelNotes).width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 17);
         }
 
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
@@ -126,11 +124,11 @@ public class LigneTableaux
 
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
-        container.add(tablebord1).width(screenWidth).height(4);
+        container.add(tablebord1).width(MyConstants.SCREENWIDTH).height(4);
         container.row();
-        container.add(table).height(screenHeight / 17);
+        container.add(table).height(MyConstants.SCREENHEIGHT / 17);
         container.row();
-        container.add(tablebord2).width(screenWidth).height(4);
+        container.add(tablebord2).width(MyConstants.SCREENWIDTH).height(4);
 
         return container;
     }

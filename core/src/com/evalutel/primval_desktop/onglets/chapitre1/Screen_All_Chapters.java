@@ -65,7 +65,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     MyButtonRetour myButtonRetour;
     MyButtonDemos myButtonDemo;
 
-
     TextureRegionDrawable textureRegionDrawableBg, textureRegionDrawableBg2;
 
     BitmapFont bitmapFontZAP;
@@ -109,10 +108,10 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15, game, dataBase, "sommaire general");
         myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25, 5 * MyConstants.SCREENHEIGHT / 6 - myButtonRetour.getHeight() / 2);
 
-        myButtonDemo = new MyButtonDemos(stage, (float) MyConstants.SCREENWIDTH / 22.0f * (447.0f / 93.0f), (float) MyConstants.SCREENWIDTH / 22.0f, game, dataBase);
-        float posY = (float) (5.0f * MyConstants.SCREENHEIGHT / 6.0f - myButtonDemo.getHeight() / 2.0f);
-        float posX = (float) (4.0f * MyConstants.SCREENWIDTH / 25.0f);
-        myButtonDemo.setPosition(posX, posY);
+//        myButtonDemo = new MyButtonDemos(stage, (float) MyConstants.SCREENWIDTH / 22.0f * (447.0f / 93.0f), (float) MyConstants.SCREENWIDTH / 22.0f, game, dataBase);
+//        float posY = (float) (5.0f * MyConstants.SCREENHEIGHT / 6.0f - myButtonDemo.getHeight() / 2.0f);
+//        float posX = (float) (4.0f * MyConstants.SCREENWIDTH / 25.0f);
+//        myButtonDemo.setPosition(posX, posY);
 
         Label labelChap1Titre = new Label("Calcul et géométrie", labelStyleWhite);
 
@@ -125,7 +124,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         nomChapitre.setPosition(3 * MyConstants.SCREENWIDTH / 7 /*- nomChapitre.getWidth() / 2*/, 11 * MyConstants.SCREENHEIGHT / 12);
         stage.addActor(nomChapitre);
 
-        mrNotes = new MrNotes2(stage, dataBase, 21 * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5);
+        mrNotes = new MrNotes2(stage, dataBase, 20 * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5);
         mrTemps = new MrTemps2(stage, dataBase);
 
 
@@ -141,7 +140,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table evalutelMotto = evalutelMotto();
 
         Label labelChapterTitle = new Label("Chapitres", labelStyleBlue);
-        labelChapterTitle.setFontScale(2);
+        labelChapterTitle.setFontScale((int) 1.5);
         Table chapterTitle = new Table();
         chapterTitle.add(labelChapterTitle);
 
@@ -179,11 +178,11 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         int heightButton = widthButton / 10;
         int cornerRadius = heightButton / 8;
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.WHITE);
 
-        Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
-        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.ROYAL);
-        ;
+        Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
+        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.ROYAL);
+
 
         Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
         bgPixmap.setColor(Color.rgb888(234, 241, 250));
@@ -194,6 +193,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         bgPixmap.fill();
         textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(blueRoundedBackground2)));
+
         textureRegionDrawableBg2 = new TextureRegionDrawable(new TextureRegion(new Texture(blueRoundedBackground2)));
 
         Table evalutelMotto = new Table();
@@ -285,15 +285,15 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table tableEx6 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_6.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, null, 1, dataBase);
 
         table.add(tableEx1).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center);
-        table.add(tableEx2).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
-        table.add(tableEx3).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
-        table.row();
-        table.add().height(MyConstants.SCREENWIDTH / 30);
-        table.row();
-        table.add(tableEx4).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center);
-        table.add(tableEx5).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
-        table.add(tableEx6).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
-        table.row();
+//        table.add(tableEx2).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
+//        table.add(tableEx3).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
+//        table.row();
+//        table.add().height(MyConstants.SCREENWIDTH / 30);
+//        table.row();
+//        table.add(tableEx4).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center);
+//        table.add(tableEx5).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
+//        table.add(tableEx6).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
+//        table.row();
 //
         table.setWidth(MyConstants.SCREENWIDTH);
 
@@ -324,30 +324,30 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
                 game.setScreen(new Screen_Chapitre1(game, dataBase));
             }
         });
-//        tableEx4.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                System.out.println("I got clicked!4");
-//            }
-//        });
-//        tableEx5.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                System.out.println("I got clicked!5");
-//            }
-//        });
-//        tableEx6.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                System.out.println("I got clicked!6");
-//            }
-//        });
+        tableEx4.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("I got clicked!4");
+            }
+        });
+        tableEx5.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("I got clicked!5");
+            }
+        });
+        tableEx6.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("I got clicked!6");
+            }
+        });
 
         return table;
     }
@@ -437,10 +437,10 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         camera = new PerspectiveCamera();
         viewport = new FitViewport(800, 480, camera);
     }
-
-    private void setScreen()
-    {
-    }
+//
+//    private void setScreen()
+//    {
+//    }
 
     @Override
     public void resize(int width, int height)

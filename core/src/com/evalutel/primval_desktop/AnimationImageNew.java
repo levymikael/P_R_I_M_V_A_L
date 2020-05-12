@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet;
@@ -11,6 +13,7 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,6 +34,8 @@ public class AnimationImageNew implements MyDrawInterface
 
     protected boolean isVisible = true;
 
+    final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
+
 
     public AnimationImageNew(ArrayList<String> imagesPaths, int startPositionX, int startPositionY, float animationWidth, float animationHeight)
     {
@@ -39,9 +44,7 @@ public class AnimationImageNew implements MyDrawInterface
         this.currentPositionX = startPositionX;
         this.currentPositionY = startPositionY;
 
-        int framesToAnimateQuantity ;
-
-
+        int framesToAnimateQuantity;
 
         if (imagesPaths.size() == 0)
         {
@@ -55,10 +58,7 @@ public class AnimationImageNew implements MyDrawInterface
             Gdx.app.log("Methode animation", Integer.toString(framesToAnimateQuantity) + this);
         }
 
-
-
         animationFrames = new TextureRegion[framesToAnimateQuantity];
-
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
@@ -71,13 +71,13 @@ public class AnimationImageNew implements MyDrawInterface
             ok++;
 
             Texture imgAux = new Texture(pathAux);
+            imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
             TextureRegion textureRegionAux = new TextureRegion(imgAux);
             animationFrames[i] = textureRegionAux;
         }
 
         animation = new Animation(1f / 6f, (Object[]) animationFrames);
-
-
     }
 
     public AnimationImageNew(String oneImagePath, int startPositionX, int startPositionY, float animationWidth, float animationHeight)
@@ -132,7 +132,6 @@ public class AnimationImageNew implements MyDrawInterface
 
 
         timer.schedule(new TaskMoveAnimation(currentPositionX, currentPositionY, deltaX, deltaY, deltaTime, taskEtape, delayNext), deltaTime);
-
     }
 
 
@@ -216,11 +215,20 @@ public class AnimationImageNew implements MyDrawInterface
     }
 
 
+    private void drawSprite(String name, float x, float y, SpriteBatch batch)
+    {
+        Sprite sprite = sprites.get(name);
+
+        sprite.setPosition(x, y);
+
+        sprite.draw(batch);
+    }
+
+
     private static ArrayList<String> arrayFromImage(String image)
     {
         ArrayList<String> retour = new ArrayList<>();
         retour.add(image);
         return retour;
     }
-
 }

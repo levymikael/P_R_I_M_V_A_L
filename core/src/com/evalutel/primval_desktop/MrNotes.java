@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.General.LigneTableaux;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
@@ -58,15 +59,15 @@ public class MrNotes implements MyDrawInterface
         Label labelNotes = new Label(totalNotes, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes1.png"));
+        textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
         stage.addActor(container);
-        container.setPosition(8 * screenWidth / 9, 21 * screenHeight / 25);
+        container.setPosition(17 * screenWidth / 18, 21 * screenHeight / 25);
 
         int widthButton = 500;
         int heightButton = widthButton / 4;
         int cornerRadius = heightButton / 4;
-
 
         Table mrNotes = new Table();
 
@@ -85,7 +86,7 @@ public class MrNotes implements MyDrawInterface
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
         border.add(notes);
 
-        container.add(mrNotes).height(screenHeight / 10);
+        container.add(mrNotes).height(screenHeight / 10).width((MyConstants.SCREENHEIGHT / 10) * (172.0f / 223.0f));
         container.row();
         container.add(border);
     }

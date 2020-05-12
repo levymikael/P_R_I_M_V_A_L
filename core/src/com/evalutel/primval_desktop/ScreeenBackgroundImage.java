@@ -14,10 +14,15 @@ public class ScreeenBackgroundImage extends TextureRegion implements MyDrawInter
     protected boolean isVisible = true;
     protected boolean isActive = true;
 
+    Texture texture;
+
 
     public ScreeenBackgroundImage(String bgImagePath)
     {
-        bgImageRegion = new TextureRegion(new Texture(Gdx.files.internal(bgImagePath)));
+        texture = new Texture(Gdx.files.internal(bgImagePath));
+        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+//        bgImageRegion = new TextureRegion(texture);
     }
 
 
@@ -37,11 +42,11 @@ public class ScreeenBackgroundImage extends TextureRegion implements MyDrawInter
     @Override
     public void myDraw(Batch batch)
     {
-        batch.draw(bgImageRegion, 0, 0, screenWidth, screenHeight);
+        batch.draw(texture, 0, 0, screenWidth, screenHeight);
     }
 
     public void myDraw2(Batch batch, int width, int height, int x, int y)
     {
-        batch.draw(bgImageRegion, x, y, width, height);
+        batch.draw(texture, x, y, width, height);
     }
 }

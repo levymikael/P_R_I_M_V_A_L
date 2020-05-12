@@ -49,6 +49,8 @@ public class EcrinDiamantView implements MyDrawInterface
     public EcrinDiamantView(Stage stage, float width, int pointsMax)
     {
         ecrinDiamantTexture = new Texture("Images/ecrin2.png");
+        ecrinDiamantTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         this.pointsMax = pointsMax;
         widthEcrin = width;
 
@@ -76,6 +78,7 @@ public class EcrinDiamantView implements MyDrawInterface
 // Creation cellule tableau pour numero d'exerice:
         tableTitre = new Table();
         tableTitre.setBackground(new SpriteDrawable(new Sprite(ecrinDiamantTexture)));
+        tableTitre.setSize((float)MyConstants.SCREENHEIGHT/20,(float)MyConstants.SCREENHEIGHT/25);
 
 // Positionnement numero exercice:
         tableTitre.add(currentLabel2).align(Align.right).width(MyConstants.SCREENWIDTH / 40).padLeft(MyConstants.SCREENWIDTH / 80);
@@ -185,5 +188,4 @@ public class EcrinDiamantView implements MyDrawInterface
             music.play();
         }
     }
-
 }

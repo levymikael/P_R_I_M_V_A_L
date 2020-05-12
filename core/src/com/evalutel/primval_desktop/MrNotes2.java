@@ -33,7 +33,7 @@ public class MrNotes2 implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = (int) screenWidth / 80;
+        parameter.size = (int) screenWidth / 70;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -52,13 +52,14 @@ public class MrNotes2 implements MyDrawInterface
         Label labelNotes = new Label(newTotalNotes, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes.png"));
+        textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
-        container.setSize(screenWidth / 9, screenHeight / 14);
+        container.setSize(screenWidth /6, screenHeight / 14);
         container.setPosition(positionX, positionY);
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
-        container.add(labelNotes).padLeft(screenWidth/40).align(Align.bottom);
+        container.add(labelNotes).padLeft(screenWidth / 30).align(Align.bottom);
 
         stage.addActor(container);
     }

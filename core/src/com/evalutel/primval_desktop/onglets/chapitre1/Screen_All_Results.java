@@ -70,9 +70,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         this.game = game;
         this.dataBase = dataBase;
 
-//        screenHeight = Gdx.graphics.getHeight();
-//        screenWidth = Gdx.graphics.getWidth();
-
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFontFRHND;
@@ -165,7 +162,11 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label6 = "Un gâteau pour plusieurs anniversaires";
 
         Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
         MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);

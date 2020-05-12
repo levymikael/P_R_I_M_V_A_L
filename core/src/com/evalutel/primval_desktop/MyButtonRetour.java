@@ -67,8 +67,6 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
     }
 
 
-
-
     @Override
     public void myDraw(Batch batch)
     {

@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Ex.User;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
 
 import java.util.concurrent.TimeUnit;
@@ -62,9 +63,10 @@ public class MrTemps implements MyDrawInterface
         Label labelTemps = new Label(duration, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_temps1.png"));
+        textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
-        container.setPosition(6 * screenWidth / 8, 21 * screenHeight / 25);
+        container.setPosition(13 * screenWidth / 16, 21 * screenHeight / 25);
 
         int widthButton = 500;
         int heightButton = widthButton / 4;
@@ -87,7 +89,7 @@ public class MrTemps implements MyDrawInterface
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(greenBorder))));
         border.add(temps);
 
-        container.add(mrTemps).height(screenHeight / 10);
+        container.add(mrTemps).height(screenHeight / 10).width((MyConstants.SCREENHEIGHT / 10) * (172.0f / 223.0f));
         container.row();
         container.add(border);
 

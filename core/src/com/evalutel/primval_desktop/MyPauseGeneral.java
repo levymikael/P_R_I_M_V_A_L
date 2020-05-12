@@ -6,7 +6,6 @@ public class MyPauseGeneral
 {
     protected ArrayList<MyPauseInterface> allPauseables = new ArrayList<>();
 
-
     public MyPauseGeneral()
     {
     }
@@ -34,6 +33,4 @@ public class MyPauseGeneral
             myPauseInterfaceObject.myResume();
         }
     }
-
-
 }

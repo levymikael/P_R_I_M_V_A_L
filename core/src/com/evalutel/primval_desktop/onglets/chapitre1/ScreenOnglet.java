@@ -167,10 +167,13 @@ public class ScreenOnglet implements Screen, InputProcessor
 
                     isInPause = !isInPause;
                     myPauseGeneral.resume();
+
+
                 }
 
-
                 Texture texture = new Texture(Gdx.files.internal(pausePlayButtonPath));
+                texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
                 Sprite sprite = new Sprite(texture);
                 sprite.setSize(MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
 
@@ -203,9 +206,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
         myPauseGeneral.addElements(metrologue);
 
-
-
-
         /*
         calculetteViewTest = new CalculetteViewTest(stage, 200, 200, 700, 600);
 
@@ -231,7 +231,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         allDrawables.add(planche2);
         planche3.shouldReturnToReserve = true;
         allDrawables.add(planche3);*/
-
     }
 
 

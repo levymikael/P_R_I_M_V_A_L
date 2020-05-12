@@ -3,6 +3,7 @@ package com.evalutel.primval_desktop;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,7 +12,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-public class Metrologue extends AnimationImageNew implements MyDrawInterface, MyPauseInterface
+public class Metrologue extends AnimationImageNew implements MyDrawInterface, MyPauseInterface, MyCorrectionInterface
 {
     public boolean isActif;
     public boolean isSpeaking;
@@ -27,10 +28,13 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
 
     public Metrologue(int startPositionX, int startpositionY, int animationWidth, int animationHeight, MyTimer timer)
     {
-
         super(getAnimationMetrologue(), startPositionX, startpositionY, animationWidth, animationHeight);
 
         myTimer = timer;
+
+        Texture metrologueTexture = new Texture(Gdx.files.internal("Images/Metrologue/me" + "00000.png"));
+        metrologueTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        defaultTextureRegion = new TextureRegion(metrologueTexture);
 
         animation = new Animation(1f / 15f, (Object[]) animationFrames);
     }
@@ -43,35 +47,22 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
 
     public void metrologuePlaySound(String audioPath)
     {
-        isSpeaking = true;
-        music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
-//        music.setLooping(false);
-        music.play();
-////       boolean isLooping = false;
-        music.setOnCompletionListener(new Music.OnCompletionListener()
-        {
-            @Override
-            public void onCompletion(Music music)
-            {
-                music.dispose();
-                isSpeaking = false;
-            }
-        });
+        metrologuePlaySound(audioPath, null);
     }
 
     public void metrologuePlaySound(String audioPath, final MyTimer.TaskEtape nextEtape)
     {
         isSpeaking = true;
         music = Gdx.audio.newMusic(Gdx.files.internal(audioPath));
-//        music.setLooping(false);
         music.play();
-////       boolean isLooping = false;
         music.setOnCompletionListener(new Music.OnCompletionListener()
         {
             @Override
-            public void onCompletion(Music music)
+            public void onCompletion(Music music2)
             {
                 music.dispose();
+                music2.dispose();
+                music = null;
                 isSpeaking = false;
 
                 if (nextEtape != null)
@@ -94,8 +85,15 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
     {
         elapsedTime += Gdx.graphics.getDeltaTime();
 
-        TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, isSpeaking);
-        batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+        if (isSpeaking)
+        {
+            TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, isSpeaking);
+            batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+        }
+        else
+        {
+            batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+        }
     }
 
 
@@ -145,5 +143,17 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
         {
             music.play();
         }
+    }
+
+    @Override
+    public void myCorrection()
+    {
+
+    }
+
+    @Override
+    public void myExerciseFlowing()
+    {
+
     }
 }

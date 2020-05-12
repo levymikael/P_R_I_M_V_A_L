@@ -10,12 +10,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
@@ -95,6 +97,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
 
         sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
+        sacDebilles.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Label labelChap1Titre = new Label("Pratique des nombres de 1 à 9", labelStyleBlue);
         Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));

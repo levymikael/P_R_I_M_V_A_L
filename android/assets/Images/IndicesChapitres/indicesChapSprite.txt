@@ -1,0 +1,214 @@
+indicesChapSprite.png
+size: 225, 673
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+chap1
+  rotate: false
+  xy: 65, 0
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap2
+  rotate: false
+  xy: 138, 69
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap3
+  rotate: false
+  xy: 69, 207
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap4
+  rotate: false
+  xy: 138, 207
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap5
+  rotate: false
+  xy: 0, 276
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap6
+  rotate: false
+  xy: 69, 276
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap7
+  rotate: false
+  xy: 138, 276
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap8
+  rotate: false
+  xy: 0, 345
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap9
+  rotate: false
+  xy: 69, 345
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap10
+  rotate: false
+  xy: 134, 0
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap11
+  rotate: false
+  xy: 0, 69
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap12
+  rotate: false
+  xy: 69, 69
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap13
+  rotate: false
+  xy: 0, 489
+  size: 95, 92
+  split: 17, 17, 17, 17
+  pad: 24, 24, 23, 23
+  orig: 95, 92
+  offset: 0, 0
+  index: -1
+chap14
+  rotate: false
+  xy: 95, 489
+  size: 95, 92
+  split: 17, 17, 17, 17
+  pad: 24, 24, 23, 23
+  orig: 95, 92
+  offset: 0, 0
+  index: -1
+chap15
+  rotate: false
+  xy: 0, 581
+  size: 95, 92
+  split: 17, 17, 17, 17
+  pad: 24, 24, 23, 23
+  orig: 95, 92
+  offset: 0, 0
+  index: -1
+chap16
+  rotate: false
+  xy: 138, 345
+  size: 75, 72
+  split: 17, 17, 17, 17
+  pad: 19, 19, 18, 18
+  orig: 75, 72
+  offset: 0, 0
+  index: -1
+chap17
+  rotate: false
+  xy: 0, 417
+  size: 75, 72
+  split: 17, 17, 17, 17
+  pad: 19, 19, 18, 18
+  orig: 75, 72
+  offset: 0, 0
+  index: -1
+chap18
+  rotate: false
+  xy: 75, 417
+  size: 75, 72
+  split: 17, 17, 17, 17
+  pad: 19, 19, 18, 18
+  orig: 75, 72
+  offset: 0, 0
+  index: -1
+chap19
+  rotate: false
+  xy: 150, 417
+  size: 75, 72
+  split: 17, 17, 17, 17
+  pad: 19, 19, 18, 18
+  orig: 75, 72
+  offset: 0, 0
+  index: -1
+chap20
+  rotate: false
+  xy: 0, 0
+  size: 65, 62
+  split: 17, 17, 17, 17
+  pad: 16, 16, 16, 15
+  orig: 65, 62
+  offset: 0, 0
+  index: -1
+chap21
+  rotate: false
+  xy: 0, 138
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap22
+  rotate: false
+  xy: 69, 138
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap23
+  rotate: false
+  xy: 138, 138
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+chap24
+  rotate: false
+  xy: 95, 581
+  size: 95, 92
+  split: 17, 17, 17, 17
+  pad: 24, 24, 23, 23
+  orig: 95, 92
+  offset: 0, 0
+  index: -1
+chap25
+  rotate: false
+  xy: 0, 207
+  size: 69, 69
+  split: 17, 17, 17, 17
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
