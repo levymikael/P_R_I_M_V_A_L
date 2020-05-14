@@ -181,7 +181,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.WHITE);
 
         Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
-        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.ROYAL);
+//        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.ROYAL);
 
 
         Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
@@ -200,7 +200,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         evalutelMotto.setBackground((textureRegionDrawableBg));
 
         evalutelMotto.add(labelMottoTitle).padBottom(MyConstants.SCREENHEIGHT / 80);
-        evalutelMotto.padTop(MyConstants.SCREENHEIGHT / 40).padRight(MyConstants.SCREENHEIGHT / 40);
+        evalutelMotto.padTop(MyConstants.SCREENHEIGHT / 80).padRight(MyConstants.SCREENHEIGHT / 40).padBottom(MyConstants.SCREENHEIGHT/80);
         evalutelMotto.row();
 
         Table evalutelMottoDetails = new Table();
@@ -218,8 +218,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         manipulerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table borderManipuler = new Table();
-        borderManipuler.pad(MyConstants.SCREENWIDTH / 1000);
-        borderManipuler.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        borderManipuler.pad(MyConstants.SCREENWIDTH / 200);
+        borderManipuler.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground2))));
         borderManipuler.add(manipulerTable);
 
         Table apprendreTable = new Table();
@@ -234,8 +234,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         apprendreTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table borderApprendre = new Table();
-        borderApprendre.pad(MyConstants.SCREENWIDTH / 1000);
-        borderApprendre.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        borderApprendre.pad(MyConstants.SCREENWIDTH / 200);
+        borderApprendre.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground2))));
         borderApprendre.add(apprendreTable);
 
         Table evaluerTable = new Table();
@@ -246,27 +246,28 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         int screenHeightTest = MyConstants.SCREENHEIGHT;
 
-        evaluerTable.add(labelEvaluerTitle);
+        evaluerTable.add(labelEvaluerTitle).padBottom(MyConstants.SCREENHEIGHT / 100);
         evaluerTable.row();
         evaluerTable.add(labelEvaluerText).width(MyConstants.SCREENWIDTH / 4).padLeft(MyConstants.SCREENWIDTH / 50).height(MyConstants.SCREENHEIGHT / 5).padRight(MyConstants.SCREENWIDTH / 50);
         evaluerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table borderEvaluer = new Table();
-        borderEvaluer.pad(MyConstants.SCREENWIDTH / 1000);
-        borderEvaluer.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+        borderEvaluer.pad(MyConstants.SCREENWIDTH / 200);
+        borderEvaluer.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground2))));
         borderEvaluer.add(evaluerTable);
 
-        int padLeftInnerTables = MyConstants.SCREENWIDTH/80;
+        int padLeftInnerTables = MyConstants.SCREENWIDTH / 80;
+        int heightEvalutelMottoTables = MyConstants.SCREENHEIGHT / 5;
 
-        evalutelMottoDetails.add(borderManipuler).padLeft(padLeftInnerTables).height(MyConstants.SCREENHEIGHT / 5);
-        evalutelMottoDetails.add(borderApprendre).padLeft(padLeftInnerTables);
-        evalutelMottoDetails.add(borderEvaluer).padLeft(padLeftInnerTables);
-        evalutelMotto.add(evalutelMottoDetails).padLeft(padLeftInnerTables);
+        evalutelMottoDetails.add(borderManipuler).padLeft(padLeftInnerTables).height(heightEvalutelMottoTables);
+        evalutelMottoDetails.add(borderApprendre).padLeft(padLeftInnerTables).height(heightEvalutelMottoTables);
+        evalutelMottoDetails.add(borderEvaluer).padLeft(padLeftInnerTables).height(heightEvalutelMottoTables);
+        evalutelMotto.add(evalutelMottoDetails).padLeft(padLeftInnerTables).height(heightEvalutelMottoTables);
 
         Table border = new Table();
         border.pad(2);
-        border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        border.add(evalutelMotto);
+        border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground2))));
+        border.add(evalutelMotto).height(MyConstants.SCREENHEIGHT / 3);
 
         return border;
     }
