@@ -244,6 +244,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         labelEvaluerText.setWrap(true);
         labelEvaluerText.setWidth(MyConstants.SCREENWIDTH / 4);
 
+        int screenHeightTest = MyConstants.SCREENHEIGHT;
+
         evaluerTable.add(labelEvaluerTitle);
         evaluerTable.row();
         evaluerTable.add(labelEvaluerText).width(MyConstants.SCREENWIDTH / 4).padLeft(MyConstants.SCREENWIDTH / 50).height(MyConstants.SCREENHEIGHT / 5).padRight(MyConstants.SCREENWIDTH / 50);
@@ -254,10 +256,12 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         borderEvaluer.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
         borderEvaluer.add(evaluerTable);
 
-        evalutelMottoDetails.add(borderManipuler).padLeft(MyConstants.SCREENWIDTH / 80);
-        evalutelMottoDetails.add(borderApprendre).padLeft(MyConstants.SCREENWIDTH / 80);
-        evalutelMottoDetails.add(borderEvaluer).padLeft(MyConstants.SCREENWIDTH / 80);
-        evalutelMotto.add(evalutelMottoDetails).padBottom(MyConstants.SCREENWIDTH / 80);
+        int padLeftInnerTables = MyConstants.SCREENWIDTH/80;
+
+        evalutelMottoDetails.add(borderManipuler).padLeft(padLeftInnerTables).height(MyConstants.SCREENHEIGHT / 5);
+        evalutelMottoDetails.add(borderApprendre).padLeft(padLeftInnerTables);
+        evalutelMottoDetails.add(borderEvaluer).padLeft(padLeftInnerTables);
+        evalutelMotto.add(evalutelMottoDetails).padLeft(padLeftInnerTables);
 
         Table border = new Table();
         border.pad(2);

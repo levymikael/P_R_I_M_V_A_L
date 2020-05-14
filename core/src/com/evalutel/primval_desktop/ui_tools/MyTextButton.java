@@ -18,7 +18,7 @@ public class MyTextButton extends TextButton
         super(text, getStyle(backgroundImagePathUp, backgroundImagePathDown, font, fontSize));
 
         this.setSize(size, size);
-        this.setPosition(getWidth() / 2, getHeight() / 2);
+//        this.setPosition(getWidth() / 2, getHeight() / 2);
     }
 
 
@@ -27,7 +27,7 @@ public class MyTextButton extends TextButton
         super(text, getStyle2(backgroundImagePathUp, font, fontSize));
 
         this.setSize(size, size);
-        this.setPosition(getWidth() / 2, getHeight() / 2);
+//        this.setPosition(getWidth() / 2, getHeight() / 2);
     }
 
     private static TextButtonStyle getStyle(String imagePathUp, String imagePathDown, String fontPath, int fontSize)
@@ -55,7 +55,6 @@ public class MyTextButton extends TextButton
         SpriteDrawable spriteDrawableDown = new SpriteDrawable(new Sprite(textureDown));
 
         buttonStyle.down = spriteDrawableDown;
-
 
         return buttonStyle;
     }

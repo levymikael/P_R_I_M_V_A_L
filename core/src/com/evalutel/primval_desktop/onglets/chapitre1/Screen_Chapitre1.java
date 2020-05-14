@@ -190,7 +190,9 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
             }
         }
 
-        batch.draw(sacDebilles, 4 * screenWidth / 9 - sacDebilles.getWidth() / 2, 11 * screenHeight / 15, screenWidth / 3, screenHeight / 4);
+        int sacDeBillesWidth = screenWidth / 3;
+
+        batch.draw(sacDebilles, screenWidth / 2 - (sacDeBillesWidth / 2), 11 * screenHeight / 15, sacDeBillesWidth, sacDeBillesWidth * (305.0f / 521.0f));
 
         batch.end();
 

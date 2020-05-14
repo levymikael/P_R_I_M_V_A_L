@@ -56,7 +56,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         textureMilieuEnonce.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         widthEnonce = width;
-        heightTop = widthEnonce * 100 / 1626;
+        heightTop = widthEnonce * 42 / 1626;
 
         this.activiteType = activiteType;
 
@@ -84,18 +84,17 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         labelStyleComic.font = bitmapFontComic;
         labelStyleComic.fontColor = Color.WHITE;
         Label exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
-        exoConsigneLabel.setWrap(true);
 
         Label.LabelStyle labelStyle3 = new Label.LabelStyle();
         labelStyle3.font = bitmapFontArial;
         labelStyle3.fontColor = Color.YELLOW;
         Label label3 = new Label(exDansChapitre, labelStyle3);
         label3.setWidth(MyConstants.SCREENWIDTH / 46);
-        label3.setWrap(true);
 
 
 // Creation cellule tableau pour numero d'exerice:
         tableTitre = new Table();
+
         Texture textureTitre = new Texture("Images/EnonceUIElements/titre_top.png");
         textureTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
@@ -103,7 +102,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
 // Positionnement numero exercice:
         tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
-        tableTitre.add(exoConsigneLabel).width(widthEnonce - MyConstants.SCREENWIDTH / 9).height(100);
+        tableTitre.add(exoConsigneLabel).width(widthEnonce - MyConstants.SCREENWIDTH / 9)/*.height(100)*/;
         tableTitre.add(label3).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
 
         table = new Table();
@@ -146,7 +145,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         tableBandeauBas.add(textFieldEnonce).width(widthImageEnonce).height(heightImageEnonce);
 
-        table.add(tableBandeauBas).width(widthEnonce - MyConstants.SCREENWIDTH / 200).height(heightBackGroundImage);
+        table.add(tableBandeauBas).width(widthEnonce ).height(heightBackGroundImage);
         table.row();
 
 
@@ -155,13 +154,13 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         tableTitre.pack();
 
         float xTableTitre = (MyConstants.SCREENWIDTH / 2 - widthEnonce / 2);
-        tableTitre.setPosition(xTableTitre, MyConstants.SCREENHEIGHT - tableTitre.getHeight());
+        tableTitre.setPosition(xTableTitre, MyConstants.SCREENHEIGHT - heightTop);
 
         table.pack();
         final float tableHeight = table.getHeight();
         float temptableHeight = tableHeight;
 
-        topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - tableTitre.getHeight();
+        topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - heightTop;
 
         topSectionposY = MyConstants.SCREENHEIGHT - heightTop;
 
@@ -198,10 +197,10 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
                     currentY = topYTablePosition;
                     table.setY(topYTablePosition);
                 }
-                else if (nextY > (MyConstants.SCREENHEIGHT - heightBackGroundImage - tableTitre.getHeight())) // si souris depasse bandeau alors on cache texte consigne
+                else if (nextY > (MyConstants.SCREENHEIGHT - heightBackGroundImage - heightTop)) // si souris depasse bandeau alors on cache texte consigne
                 {
-                    currentY = MyConstants.SCREENHEIGHT - heightBackGroundImage - tableTitre.getHeight();
-                    table.setY(MyConstants.SCREENHEIGHT - heightBackGroundImage - tableTitre.getHeight());
+                    currentY = MyConstants.SCREENHEIGHT - heightBackGroundImage - heightTop;
+                    table.setY(MyConstants.SCREENHEIGHT - heightBackGroundImage - heightTop);
                 }
                 else
                 {
@@ -210,6 +209,10 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
                 }
             }
         });
+
+
+        tableTitre.setWidth(widthEnonce);
+        tableTitre.setHeight(heightTop);
     }
 
 
@@ -255,19 +258,19 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
             {
                 pointerTable.setBackground(flecheSpriteDrawable);
             }
-            else
-            {
-                pointerTable.setWidth(MyConstants.SCREENWIDTH / 30);
-            }
+//            else
+//            {
+//                pointerTable.setWidth(MyConstants.SCREENWIDTH / 30);
+//            }
 
 
-            table4.add(pointerTable).width(MyConstants.SCREENWIDTH / 70).height(MyConstants.SCREENHEIGHT / 40).align(Align.top).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100);
-            table4.add(label3).width(widthEnonce - MyConstants.SCREENWIDTH / 20).padRight(MyConstants.SCREENWIDTH / 120);
+            table4.add(pointerTable).width(MyConstants.SCREENWIDTH / 65).height(MyConstants.SCREENHEIGHT / 40).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100);
+            table4.add(label3).width(widthEnonce - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 120))).padRight(MyConstants.SCREENWIDTH / 120).padTop(MyConstants.SCREENHEIGHT / 50);
         }
         else
         {
-            table4.add(new Image()).width(MyConstants.SCREENWIDTH / 25);
-            table4.add(label3).width(widthEnonce - MyConstants.SCREENWIDTH / 11 - 10).padRight(MyConstants.SCREENWIDTH / 20);
+            table4.add(new Image()).width(MyConstants.SCREENWIDTH / 30);
+            table4.add(label3).width(widthEnonce - MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 20);
         }
 
         table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
@@ -281,7 +284,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         float labelHeight = label3.getHeight() + MyConstants.SCREENHEIGHT / 200;
 
-        topYTablePosition = MyConstants.SCREENHEIGHT - table.getHeight() - tableTitre.getHeight();
+        topYTablePosition = MyConstants.SCREENHEIGHT - table.getHeight() - heightTop;
 
 
         float nextTestY = currentY - labelHeight;

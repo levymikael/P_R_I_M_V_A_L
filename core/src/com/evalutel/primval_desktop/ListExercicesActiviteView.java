@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.LigneTableaux;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
@@ -53,12 +54,15 @@ public class ListExercicesActiviteView implements MyDrawInterface
         container.setSize(screenWidth, 7 * screenHeight / 10);
         container.setPosition(0, 3 * screenHeight / 7 - container.getHeight() / 2);
 
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
+        int buttonSize = MyConstants.SCREENWIDTH / 30;
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
 //        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
 //        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
 //        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
-//        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
+//        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);\
+        un_bouton.setSize(buttonSize, buttonSize);
 
         Table table = new Table();
         Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);

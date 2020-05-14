@@ -344,7 +344,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             }
         }
 
-        batch.draw(logoTitre, screenWidth / 40, 29 * screenHeight / 29 - logoTitre.getHeight(), screenWidth / 8, screenHeight / 8);
+        float logoHeight = screenHeight / 8;
+
+        batch.draw(logoTitre, screenWidth / 40, screenHeight - logoHeight-screenHeight/50.0f, screenWidth / 8, logoHeight);
 
         batch.end();
 
