@@ -1,12 +1,8 @@
 package com.evalutel.primval_desktop;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +10,7 @@ import java.util.Random;
 import java.util.Timer;
 
 
-public class UneBille extends AnimationImageNew implements MyTouchInterface, MyDrawInterface
+public class UneBille extends AnimationImageNew implements MyTouchInterface, MyDrawInterface, MyCorrectionAndPauseInterface
 {
     //    Animation animation;
     private Timer timer = new Timer();
@@ -33,21 +29,20 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     {
         super(getImageRandom(), startPositionX, startPositionY, animationHeight, animationHeight);
 
-        addSprites();
-
+//        addSprites();
     }
 
-    private void addSprites()
-    {
-        Array<TextureAtlas.AtlasRegion> regions = textureAtlas.getRegions();
-
-        for (TextureAtlas.AtlasRegion region : regions)
-        {
-            Sprite sprite = textureAtlas.createSprite(region.name);
-
-            sprites.put(region.name, sprite);
-        }
-    }
+//    private void addSprites()
+//    {
+//        Array<TextureAtlas.AtlasRegion> regions = textureAtlas.getRegions();
+//
+//        for (TextureAtlas.AtlasRegion region : regions)
+//        {
+//            Sprite sprite = textureAtlas.createSprite(region.name);
+//
+//            sprites.put(region.name, sprite);
+//        }
+//    }
 
 
     @Override
@@ -73,11 +68,11 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     }
 
 
+    @Override
     public void setActive(boolean active)
     {
         isActive = active;
     }
-
 
     @Override
     public boolean isDragable()
@@ -146,5 +141,36 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
                 }
             }
         }
+    }
+
+    @Override
+    public void myPause()
+    {
+        this.setActive(false);
+    }
+
+    @Override
+    public void myResume()
+    {
+        this.setActive(true);
+    }
+
+    @Override
+    public boolean isPause()
+    {
+        return isPaused;
+    }
+
+    @Override
+    public void myCorrectionStart()
+    {
+        this.setActive(false);
+    }
+
+    @Override
+    public void myCorrectionStop()
+    {
+        this.setActive(true);
+
     }
 }

@@ -106,8 +106,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
         logoTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-
-        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 80, screenHeight / 2);
+        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 100, screenHeight / 2);
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);
@@ -185,6 +184,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 //        container.add(blueBorderTablePresentation).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
 
         Table summaryImgTable = new Table();
+        summaryImgTable.setTouchable(Touchable.enabled);
         summaryImgTable.setSize(4 * screenWidth / 5, screenHeight);
         summaryImgTable.setPosition(screenWidth / 5, 0);
         summaryImgTable.setTouchable(Touchable.enabled);
@@ -194,6 +194,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         stage.addActor(avatarPic);
         stage.addActor(container);
 
+        chaptersButton.setTouchable(Touchable.enabled);
         chaptersButton.addListener(new ClickListener()
         {
             @Override
@@ -326,7 +327,10 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);
         fondSommairee.myDraw2(batch, screenWidth, screenHeight, ((screenWidth / 5) - (screenWidth / 70)), 0);
-        imgSommaire.myDraw2(batch, (3 * screenWidth / 5) * (680 / 600), (int) (3 * screenHeight / 5), ((screenWidth / 5) + ((screenWidth / 5) / 2)), (screenHeight / 2) - ((3 * screenHeight / 5) / 2));
+
+        float x = (int) (3 * screenWidth / 5) * (680.0f / 600.0f);
+        float y = (3 * screenWidth / 5);
+        imgSommaire.myDraw2(batch, (int) x, (int) y, ((screenWidth / 4)), (int) ((screenHeight / 2) - (y / 2)));
 //        batch.draw(imgSommaire, 4 * screenWidth / 15, screenHeight / 5, 2 * screenWidth / 5, (((2 * screenWidth / 5) * 600) / 680));
 //        test.draw(batch);
 

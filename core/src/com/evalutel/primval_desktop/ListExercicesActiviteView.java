@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -88,6 +89,9 @@ public class ListExercicesActiviteView implements MyDrawInterface
         container.add(scroll).height(2 * screenHeight / 5);
         container.row();
 
+//        tableEx1.debug();
+        tableEx1.setTouchable(Touchable.enabled);
+        tableEx2.setTouchable(Touchable.enabled);
         tableEx1.addListener(new ClickListener()
         {
             @Override

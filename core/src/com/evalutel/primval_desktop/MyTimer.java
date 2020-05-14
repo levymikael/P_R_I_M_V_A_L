@@ -8,12 +8,21 @@ public class MyTimer
 
     public void schedule(TaskEtape etape, long afterDelay)
     {
-        timer.schedule(etape, afterDelay);
+        try
+        {
+            timer.schedule(etape, afterDelay);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
 
     public void cancel()
     {
+
         timer.cancel();
     }
 

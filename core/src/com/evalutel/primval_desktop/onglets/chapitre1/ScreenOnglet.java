@@ -12,10 +12,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
@@ -24,6 +23,8 @@ import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.Metrologue;
 import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
+import com.evalutel.primval_desktop.MyCorrectionAndPauseGeneral;
+import com.evalutel.primval_desktop.MyCorrectionAndPauseInterface;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.MyPauseGeneral;
 import com.evalutel.primval_desktop.MyTimer;
@@ -37,7 +38,6 @@ import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ScreenOnglet implements Screen, InputProcessor
 {
@@ -54,10 +54,12 @@ public class ScreenOnglet implements Screen, InputProcessor
     boolean isVisible = true;
     protected MyTimer timer;
 
-    boolean isInPause = true;
+    boolean isInPause = false;
 
     protected ArrayList<MyDrawInterface> allDrawables;
+    protected ArrayList<MyCorrectionAndPauseInterface> allCorrigibles;
     protected ArrayList<MyTouchInterface> objectTouchedList;
+
     private ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
 
     long startTime, endTime, seconds, dateTest;
@@ -74,7 +76,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     int largeurBille, largeurPlanche;
     UneMain uneMain;
 
-    MyPauseGeneral myPauseGeneral;
+    MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;
 
     MyDataBase db;
 
@@ -83,6 +85,11 @@ public class ScreenOnglet implements Screen, InputProcessor
     MyButtonBackToPreviousMenu myButtonBackToPreviousMenu;
 
     EcrinDiamantView ecrinDiamantView;
+
+    float activiteWidth;
+
+    ActiviteView activiteView;
+
 
 
     public ScreenOnglet(Game game, DatabaseDesktop dataBase, int chapitre, int onglet, boolean ecrin)
@@ -101,8 +108,14 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         objectTouchedList = new ArrayList<>();
         allDrawables = new ArrayList<>();
+        allCorrigibles = new ArrayList<>();
 
         startTime = System.currentTimeMillis();
+
+        myCorrectionAndPauseGeneral = new MyCorrectionAndPauseGeneral();
+
+         activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
+
 
         resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0, 0);
 
@@ -145,7 +158,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         startPausebutton.setPosition(MyConstants.SCREENWIDTH / 60, 5 * MyConstants.SCREENHEIGHT / 7);
         stage.addActor(startPausebutton);
 
-        myPauseGeneral = new MyPauseGeneral();
+//        myPauseGeneral = new MyPauseGeneral();
 
         startPausebutton.addListener(new ClickListener()
         {
@@ -153,20 +166,22 @@ public class ScreenOnglet implements Screen, InputProcessor
             {
                 String pausePlayButtonPath;
 
-                if (isInPause)
+                if (!isInPause)
                 {
-                    pausePlayButtonPath = "Images/StartPause/button_lecture.png";
 
-                    myPauseGeneral.pause();
+                    pausePlayButtonPath = "Images/StartPause/button_lecture.png";
+                    myCorrectionAndPauseGeneral.pause();
 
                     isInPause = !isInPause;
+
                 }
                 else
                 {
                     pausePlayButtonPath = "Images/StartPause/button_pause.png";
 
+
                     isInPause = !isInPause;
-                    myPauseGeneral.resume();
+                    myCorrectionAndPauseGeneral.resume();
 
 
                 }
@@ -193,7 +208,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         timer = new MyTimer();
 
         validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60, MyConstants.SCREENHEIGHT / 7, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
-        myPauseGeneral.addElements(validusAnimated);
+        myCorrectionAndPauseGeneral.addElements(validusAnimated);
 
         if (ecrin)
         {
@@ -204,7 +219,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
 
         metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
-        myPauseGeneral.addElements(metrologue);
+        myCorrectionAndPauseGeneral.addElements(metrologue);
 
         /*
         calculetteViewTest = new CalculetteViewTest(stage, 200, 200, 700, 600);
@@ -239,7 +254,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         protected FinOnglet(long durMillis, long delay)
         {
             super(durMillis, delay);
-
         }
 
         @Override
@@ -247,9 +261,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         {
             timer.cancel();
             Music music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/fin_ong.ogg"));
-//        music.setLooping(false);
             music.play();
-//       boolean isLooping = false;
 
             music.setOnCompletionListener(new Music.OnCompletionListener()
             {

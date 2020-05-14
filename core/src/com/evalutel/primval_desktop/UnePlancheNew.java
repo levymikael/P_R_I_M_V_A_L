@@ -5,12 +5,12 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 import java.util.ArrayList;
 
 
-public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface, MyPauseInterface
+public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
     public boolean shouldReturnToReserve = false;
     private ArrayList<MyPoint> positionsBilles = new ArrayList<>();
     private ArrayList<UneBille> allBilles = new ArrayList<>();
-    public boolean isActif;
+    boolean isActive = true;
 
 
     int spaceBille;
@@ -72,9 +72,9 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
 
     public UneBille getLastBille()
     {
-        if(allBilles.size() > 0)
+        if (allBilles.size() > 0)
         {
-            return allBilles.get(allBilles.size()-1);
+            return allBilles.get(allBilles.size() - 1);
         }
         else
         {
@@ -85,7 +85,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
 
     public void SetAllBillesInactive()
     {
-        for (int i = 0 ; i < allBilles.size(); i ++)
+        for (int i = 0; i < allBilles.size(); i++)
         {
             UneBille bille = allBilles.get(i);
             bille.setActive(false);
@@ -94,7 +94,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
 
     public void SetAllBillesActive()
     {
-        for (int i = 0 ; i < allBilles.size(); i ++)
+        for (int i = 0; i < allBilles.size(); i++)
         {
             UneBille bille = allBilles.get(i);
             bille.setActive(true);
@@ -186,6 +186,18 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
 
     @Override
     public void myResume()
+    {
+
+    }
+
+
+    @Override
+    public void myCorrectionStart()
+    {
+    }
+
+    @Override
+    public void myCorrectionStop()
     {
 
     }

@@ -7,18 +7,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
-public class AnimationImageNew implements MyDrawInterface
+public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
     protected TextureRegion[] animationFrames;
     Animation animation;
@@ -33,6 +29,7 @@ public class AnimationImageNew implements MyDrawInterface
     protected int screenHeight;
 
     protected boolean isVisible = true;
+    protected boolean isPaused = false;
 
     final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 
@@ -67,8 +64,8 @@ public class AnimationImageNew implements MyDrawInterface
         for (int i = 0; i < framesToAnimateQuantity; i++)
         {
             String pathAux = imagesPaths.get(i);
-            int ok = 5;
-            ok++;
+//            int ok = 5;
+//            ok++;
 
             Texture imgAux = new Texture(pathAux);
             imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -135,6 +132,39 @@ public class AnimationImageNew implements MyDrawInterface
     }
 
 
+
+
+    @Override
+    public void myCorrectionStart()
+    {
+
+    }
+
+    @Override
+    public void myCorrectionStop()
+    {
+
+    }
+
+    @Override
+    public void myPause()
+    {
+        isPaused = true;
+    }
+
+    @Override
+    public void myResume()
+    {
+        isPaused = false;
+    }
+
+    @Override
+    public boolean isPause()
+    {
+        return isPaused;
+    }
+
+
     protected class TaskMoveAnimation extends MyTimer.TaskEtape
     {
         private float deltaX;
@@ -161,7 +191,7 @@ public class AnimationImageNew implements MyDrawInterface
         public void run()
         {
             PauseSingleton pauseSingleton = PauseSingleton.getInstance();
-            if (!pauseSingleton.isPause)
+            if ( !isPaused)
             {
                 currentPositionFloatX += deltaX;
                 currentPositionFloatY += deltaY;

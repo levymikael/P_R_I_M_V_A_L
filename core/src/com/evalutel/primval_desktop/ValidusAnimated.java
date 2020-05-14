@@ -2,20 +2,18 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
-import java.io.File;
 import java.util.ArrayList;
 
-public class ValidusAnimated extends AnimationImageNew implements MyTouchInterface, MyPauseInterface, MyCorrectionInterface
+public class ValidusAnimated extends AnimationImageNew implements MyTouchInterface, MyCorrectionAndPauseInterface
 {
     public MyTimer.TaskEtape etapeCorrection;
-    public boolean isActif;
+    public boolean isActive;
     public boolean isSpeaking;
 
     private MyTimer myTimer;
@@ -23,8 +21,8 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
     protected TextureRegion defaultTextureRegion;
     private TextureRegion textureRegionInactif;
 
-    static String directory = System.getProperty("user.dir");
-    static FileHandle fh = Gdx.files.absolute(directory + "/Images/Validus");
+//    static String directory = System.getProperty("user.dir");
+//    static FileHandle fh = Gdx.files.absolute(directory + "/Images/Validus");
 
     Music music;
 
@@ -36,7 +34,6 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
         myTimer = timer;
 
         System.out.println(animationFrames);
-
 
         Texture validusTexture = new Texture(Gdx.files.internal("Images/Validus/vo" + "00000.png"));
         validusTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -52,7 +49,7 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
 
     public void validusPlaySound(String audioPath)
     {
-       validusPlaySound(audioPath, null);
+        validusPlaySound(audioPath, null);
     }
 
 
@@ -130,12 +127,13 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
     @Override
     public boolean isActive()
     {
-        return false;
+        return isActive;
     }
 
     @Override
     public void setActive(boolean active)
     {
+        isActive  = active;
     }
 
     public void TouchDown()
@@ -151,7 +149,7 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
 
     public void touchUp(int firstPositionX, int firstPositionY)
     {
-        if (isActif && (!isSpeaking))
+        if (isActive && (!isSpeaking))
         {
             if (etapeCorrection != null)
             {
@@ -172,7 +170,7 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
         }
         else
         {
-            if (isActif)
+            if (isActive)
             {
                 batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
             }
@@ -184,31 +182,53 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
     }
 
     @Override
+    public boolean isPause()
+    {
+        return isPaused;
+    }
+
+    @Override
     public void myPause()
     {
+        super.myPause();
         if (music != null)
         {
             music.pause();
         }
+
+        if (isSpeaking)
+        {
+            isSpeaking = !isSpeaking;
+        }
+
+
+
     }
 
     @Override
     public void myResume()
     {
+        super.myResume();
         if (music != null)
         {
             music.play();
+
+            isSpeaking = !isSpeaking;
         }
+
+
+
     }
 
+
     @Override
-    public void myCorrection()
+    public void myCorrectionStart()
     {
 
     }
 
     @Override
-    public void myExerciseFlowing()
+    public void myCorrectionStop()
     {
 
     }

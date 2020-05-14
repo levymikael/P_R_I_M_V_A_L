@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Ex.User;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
 
 import java.util.concurrent.TimeUnit;
@@ -51,7 +52,7 @@ public class MrTemps2 implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = (int) screenWidth / 80;
+        parameter.size = (int) screenWidth / 70;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -69,7 +70,10 @@ public class MrTemps2 implements MyDrawInterface
         container.setPosition(16 * screenWidth / 25, 4 * screenHeight / 5);
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrTemps))));
-        container.add(labelTemps).padLeft(screenWidth / 30);
+        container.add(labelTemps).padLeft(screenWidth / 20).padTop(MyConstants.SCREENHEIGHT / 160).expand().fill();
+
+//        container.add(labelTemps).expandX().width(MyConstants.SCREENWIDTH/200).padTop(MyConstants.SCREENHEIGHT/150);
+
 
         stage.addActor(container);
     }

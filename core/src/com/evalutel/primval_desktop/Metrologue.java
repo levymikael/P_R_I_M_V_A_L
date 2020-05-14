@@ -8,11 +8,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import java.io.File;
 import java.util.ArrayList;
 
 
-public class Metrologue extends AnimationImageNew implements MyDrawInterface, MyPauseInterface, MyCorrectionInterface
+public class Metrologue extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
     public boolean isActif;
     public boolean isSpeaking;
@@ -134,6 +133,12 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
 
             Gdx.app.log("SONG", Float.toString(music.getPosition()));
         }
+
+
+        if (isSpeaking)
+        {
+            isSpeaking = !isSpeaking;
+        }
     }
 
     @Override
@@ -142,17 +147,21 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
         if (music != null)
         {
             music.play();
+
+            isSpeaking = !isSpeaking;
+
         }
     }
 
+
     @Override
-    public void myCorrection()
+    public void myCorrectionStart()
     {
 
     }
 
     @Override
-    public void myExerciseFlowing()
+    public void myCorrectionStop()
     {
 
     }

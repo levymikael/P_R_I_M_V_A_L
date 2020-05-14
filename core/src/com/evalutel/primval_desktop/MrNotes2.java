@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
 
 public class MrNotes2 implements MyDrawInterface
@@ -55,11 +56,12 @@ public class MrNotes2 implements MyDrawInterface
         textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
-        container.setSize(screenWidth /6, screenHeight / 14);
+        container.setSize(screenWidth / 6, screenHeight / 14);
         container.setPosition(positionX, positionY);
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
-        container.add(labelNotes).padLeft(screenWidth / 30).align(Align.bottom);
+        container.add(labelNotes).padLeft(screenWidth / 15).padTop(MyConstants.SCREENHEIGHT / 160).expand().fill();
+//        labelNotes.debug();
 
         stage.addActor(container);
     }

@@ -24,7 +24,7 @@ public class EcrinDiamantView implements MyDrawInterface
 {
     private Label currentLabel1;
     private Label currentLabel2;
-    private Table table, tableTitre;
+    private Table tableTitre;
 
     int diamant, pierre;
 
@@ -43,8 +43,6 @@ public class EcrinDiamantView implements MyDrawInterface
 
     Music music;
 
-    public boolean isSpeaking;
-
 
     public EcrinDiamantView(Stage stage, float width, int pointsMax)
     {
@@ -54,12 +52,11 @@ public class EcrinDiamantView implements MyDrawInterface
         this.pointsMax = pointsMax;
         widthEcrin = width;
 
-
         // Configuration police de l'enonce
 
         FreeTypeFontGenerator FONT_COMICI = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = (int) MyConstants.SCREENWIDTH / 60;
+        parameter.size = (int) MyConstants.SCREENWIDTH / 70;
         bitmapFont = FONT_COMICI.generateFont(parameter);
         FONT_COMICI.dispose();
 
@@ -78,26 +75,19 @@ public class EcrinDiamantView implements MyDrawInterface
 // Creation cellule tableau pour numero d'exerice:
         tableTitre = new Table();
         tableTitre.setBackground(new SpriteDrawable(new Sprite(ecrinDiamantTexture)));
-        tableTitre.setSize((float)MyConstants.SCREENHEIGHT/20,(float)MyConstants.SCREENHEIGHT/25);
+        tableTitre.setSize((float) MyConstants.SCREENHEIGHT / 20, (float) MyConstants.SCREENHEIGHT / 25);
 
 // Positionnement numero exercice:
-        tableTitre.add(currentLabel2).align(Align.right).width(MyConstants.SCREENWIDTH / 40).padLeft(MyConstants.SCREENWIDTH / 80);
+        tableTitre.add(currentLabel2).align(Align.right).width(MyConstants.SCREENWIDTH / 40).padLeft(MyConstants.SCREENWIDTH / 120);
         tableTitre.add(currentLabel1).width(widthEcrin - 50).height(MyConstants.SCREENHEIGHT / 11).padLeft(MyConstants.SCREENWIDTH / 50);
 
-        table = new Table();
-        stage.addActor(table);
         stage.addActor(tableTitre);
-
-        table.row();
-
 
 // Positionnement du tableau sur ecran:
 
         tableTitre.pack();
         tableTitre.setPosition(MyConstants.SCREENWIDTH / 60, 50);
-
-        table.setPosition(MyConstants.SCREENWIDTH / 60, 0);
-
+        tableTitre.setSize(MyConstants.SCREENWIDTH / 7, (MyConstants.SCREENWIDTH / 7) * (59.0f / 168.0f));
     }
 
     public void updateText()

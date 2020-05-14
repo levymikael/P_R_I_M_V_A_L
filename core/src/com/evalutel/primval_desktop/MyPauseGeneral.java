@@ -22,6 +22,8 @@ public class MyPauseGeneral
         {
             MyPauseInterface myPauseInterfaceObject = allPauseables.get(i);
             myPauseInterfaceObject.myPause();
+
+//            myPauseInterfaceObject.setActive(false);
         }
     }
 
@@ -31,6 +33,9 @@ public class MyPauseGeneral
         {
             MyPauseInterface myPauseInterfaceObject = allPauseables.get(i);
             myPauseInterfaceObject.myResume();
+
+//            myPauseInterfaceObject.setActive(false);
+
         }
     }
 }

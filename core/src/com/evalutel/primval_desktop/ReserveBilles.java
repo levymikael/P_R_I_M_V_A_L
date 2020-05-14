@@ -1,16 +1,14 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import java.util.ArrayList;
 
 
-public class ReserveBilles extends AnimationImageNew implements MyDrawInterface, MyTouchInterface, MyPauseInterface
+public class ReserveBilles extends AnimationImageNew implements MyDrawInterface, MyTouchInterface, MyCorrectionAndPauseInterface
 {
     public int largeurBille;
     boolean isActive = true;
@@ -19,8 +17,6 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
     public ReserveBilles(int startPositionX, int startpositionY, int animationWidth, int animationHeight)
     {
         super("Images/Badix/boite900_vide.png", startPositionX, startpositionY, animationWidth, animationHeight);
-
-
     }
 
     /**
@@ -84,12 +80,25 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
     @Override
     public void myPause()
     {
-
+        this.isActive = false;
     }
 
     @Override
     public void myResume()
     {
+        this.isActive = true;
+    }
 
+
+    @Override
+    public void myCorrectionStart()
+    {
+        this.setActive(false);
+    }
+
+    @Override
+    public void myCorrectionStop()
+    {
+        this.setActive(true);
     }
 }

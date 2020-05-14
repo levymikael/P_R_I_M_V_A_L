@@ -1,7 +1,7 @@
 package com.evalutel.primval_desktop;
 
 
-public class UneMain extends AnimationImageNew implements MyDrawInterface, MyPauseInterface
+public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
 
 //    public UnePlancheNew plancheNew = null;
@@ -68,29 +68,18 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface, MyPau
         currentPositionY = y;
     }
 
-//
-//    public void touchDown()
-//    {
-//        if (plancheNew != null)
-//        {
-//            plancheNew.removeMain(this);
-//        }
-//    }
-//
-//
-//    public void touchUp(UnePlancheNew planche, int firstPositionX, int firstPositionY)
-//    {
-//        boolean isAddedToPlanche = false;
-//
-////        for (int i = 0; i < planche.size(); i++)
-////        {
-//        //  UnePlancheNew plancheAux = planche.get(i);
-//        if (planche.isInRect(this))
-//        {
-//            isAddedToPlanche = true;
-////                break;
-//        }
-//    }
+
+    @Override
+    public void myCorrectionStart()
+    {
+
+    }
+
+    @Override
+    public void myCorrectionStop()
+    {
+
+    }
 
     @Override
     public void myPause()

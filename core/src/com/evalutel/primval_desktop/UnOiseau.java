@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 
 import java.util.ArrayList;
 
-public class UnOiseau extends AnimationImageNew implements MyPauseInterface
+public class UnOiseau extends AnimationImageNew implements MyCorrectionAndPauseInterface
 {
     public UnOiseau(int startPositionX, int startPositionY, float animationWidth, float animationHeight)
     {
@@ -75,14 +75,26 @@ public class UnOiseau extends AnimationImageNew implements MyPauseInterface
     }
 
     @Override
-    public void myPause()
+    public void myCorrectionStart()
     {
 
     }
 
     @Override
-    public void myResume()
+    public void myCorrectionStop()
     {
 
     }
+
+//    @Override
+//    public void myPause()
+//    {
+//
+//    }
+//
+//    @Override
+//    public void myResume()
+//    {
+//
+//    }
 }
