@@ -19,12 +19,12 @@ import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 
 public class ScreenEx1_2 extends ScreenOnglet
 {
     ScreeenBackgroundImage bgScreenEx1_2;
-    EcrinDiamantView ecrinDiamantView;
     int posX, posY;
     int failedAttempts;
     private ArrayList<UneBille> billesList;
@@ -37,7 +37,6 @@ public class ScreenEx1_2 extends ScreenOnglet
 
     DatabaseDesktop dataBase;
 
-    int score;
 
     String consigneExercice;
 
@@ -76,7 +75,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             objectTouchedList.add(bille);
             bille.setVisible(false);
             myCorrectionAndPauseGeneral.addElements(bille);
-//            myCorrectionAndPauseGeneral.addElements(bille);
             allCorrigibles.add(bille);
         }
 
@@ -84,8 +82,6 @@ public class ScreenEx1_2 extends ScreenOnglet
         allPlanches.add(planche1);
 
         billesList = new ArrayList<>();
-
-//        float activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Faire correspondre des billes à des oiseaux, de 1 à 9";
@@ -139,7 +135,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             billeAdded.setActive(true);
 
         }
-        else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && ( ! validusAnimated.isPause()))
+        else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))
         {
             objectTouched = validusAnimated;
         }
@@ -340,7 +336,11 @@ public class ScreenEx1_2 extends ScreenOnglet
 //                MyTimer.TaskEtape nextEtape = new EtapeInstruction(2000, 500);
                 MyTimer.TaskEtape nextEtape = new EtapeNextQuestion(1000, 500);
 
-                validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", nextEtape);
+                if (questionCourante != 9)
+                {
+
+                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", nextEtape);
+                }
                 validusAnimated.isActive = false;
                 addDiamonds(1);
                 planche1.SetAllBillesActive();
@@ -585,13 +585,15 @@ public class ScreenEx1_2 extends ScreenOnglet
             questionCourante++;
             if (questionCourante == 9)
             {
+
+                new FinOnglet(1000, 500);
+
                 // fin exercice
                 endTime = System.currentTimeMillis();
                 seconds = (endTime - startTime) / 1000L;
 
-                score = ecrinDiamantView.getDiamantCount();
+                ecrinDiamantView.getDiamantCount();
 
-                new FinOnglet(1000, 1500);
 
                 timer.cancel();
             }

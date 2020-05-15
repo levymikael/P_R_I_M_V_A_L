@@ -79,14 +79,14 @@ public class EcrinDiamantView implements MyDrawInterface
 
 // Positionnement numero exercice:
         tableTitre.add(currentLabel2).align(Align.right).width(MyConstants.SCREENWIDTH / 40).padLeft(MyConstants.SCREENWIDTH / 120);
-        tableTitre.add(currentLabel1).width(widthEcrin - 50).height(MyConstants.SCREENHEIGHT / 11).padLeft(MyConstants.SCREENWIDTH / 50);
+        tableTitre.add(currentLabel1).width(widthEcrin - MyConstants.SCREENWIDTH / 120).height(MyConstants.SCREENHEIGHT / 11).padLeft(MyConstants.SCREENWIDTH / 50);
 
         stage.addActor(tableTitre);
 
 // Positionnement du tableau sur ecran:
 
         tableTitre.pack();
-        tableTitre.setPosition(MyConstants.SCREENWIDTH / 60, 50);
+        tableTitre.setPosition(MyConstants.SCREENWIDTH / 60, MyConstants.SCREENHEIGHT / 20);
         tableTitre.setSize(MyConstants.SCREENWIDTH / 7, (MyConstants.SCREENWIDTH / 7) * (59.0f / 168.0f));
     }
 

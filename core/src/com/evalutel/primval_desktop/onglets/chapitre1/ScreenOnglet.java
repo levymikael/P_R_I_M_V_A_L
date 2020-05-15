@@ -259,7 +259,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         @Override
         public void run()
         {
-            timer.cancel();
             Music music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/fin_ong.ogg"));
             music.play();
 
@@ -271,6 +270,8 @@ public class ScreenOnglet implements Screen, InputProcessor
                     music.dispose();
                 }
             });
+//            timer.cancel();
+
         }
     }
 

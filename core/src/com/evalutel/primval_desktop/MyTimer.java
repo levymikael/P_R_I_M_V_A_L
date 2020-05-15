@@ -1,5 +1,7 @@
 package com.evalutel.primval_desktop;
 
+import com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet;
+
 import java.util.TimerTask;
 
 public class MyTimer
@@ -25,6 +27,7 @@ public class MyTimer
 
         timer.cancel();
     }
+
 
 
     public static class TaskEtape extends TimerTask
