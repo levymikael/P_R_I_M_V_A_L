@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.evalutel.primval_desktop.General.MyConstants;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,8 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
         defaultTextureRegion = new TextureRegion(metrologueTexture);
 
         animation = new Animation(1f / 15f, (Object[]) animationFrames);
+
+        this.setPosition(MyConstants.SCREENWIDTH / 60,2 * MyConstants.SCREENHEIGHT / 5);
     }
 
     public boolean contains(float currentPositionX, float currentPositionY)
@@ -149,7 +152,6 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
             music.play();
 
             isSpeaking = !isSpeaking;
-
         }
     }
 

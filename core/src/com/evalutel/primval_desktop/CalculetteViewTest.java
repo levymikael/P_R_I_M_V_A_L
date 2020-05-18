@@ -229,9 +229,7 @@ public class CalculetteViewTest implements MyDrawInterface
             {
                 String textNew = exText + string;
                 textFieldTest.setText(textNew);
-
             }
-
         }
     }
 
@@ -275,5 +273,4 @@ public class CalculetteViewTest implements MyDrawInterface
         }
         textFieldTest.draw(batch, 1.0f);
     }
-
 }

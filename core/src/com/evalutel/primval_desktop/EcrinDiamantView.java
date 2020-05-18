@@ -138,38 +138,6 @@ public class EcrinDiamantView implements MyDrawInterface
 
     }
 
-//    public void finOngletPlaySound()
-//    {
-//        music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/fin_ong.wav"));
-////        music.setLooping(false);
-//        music.play();
-////       boolean isLooping = false;
-//
-//        music.setOnCompletionListener(new Music.OnCompletionListener()
-//        {
-//            @Override
-//            public void onCompletion(Music music)
-//            {
-//                music.dispose();
-//            }
-//        });
-//    }
-//
-//    public void stopMusic()
-//    {
-//        music.stop();
-//        music.dispose();
-//    }
-//
-//    public void myPause()
-//    {
-//        if (music != null)
-//        {
-//            music.pause();
-//        }
-
-
-//    }
 
     public void myResume()
     {

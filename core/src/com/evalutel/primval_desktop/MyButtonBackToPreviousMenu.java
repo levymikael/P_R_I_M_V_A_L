@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Chapitre1;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
@@ -33,18 +34,9 @@ public class MyButtonBackToPreviousMenu extends MyImageButton implements MyDrawI
 
         this.game = game;
         this.dataBase = dataBase;
+
+        this.setPosition(MyConstants.SCREENWIDTH / 60, 6 * MyConstants.SCREENHEIGHT / 7);
     }
-
-
-//    /**
-//     * @param currentPositionX point x coordinate
-//     * @param currentPositionY point y coordinate
-//     * @return whether the point is contained in the rectangle
-//     */
-//    public boolean contains(float currentPositionX, float currentPositionY)
-//    {
-//        return this.currentPositionX <= currentPositionX && this.currentPositionX + this.width >= currentPositionX && this.currentPositionY <= currentPositionY && this.currentPositionY + this.height >= currentPositionY;
-//    }
 
 
     @Override

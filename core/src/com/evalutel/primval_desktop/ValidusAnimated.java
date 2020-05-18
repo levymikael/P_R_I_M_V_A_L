@@ -133,7 +133,7 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
     @Override
     public void setActive(boolean active)
     {
-        isActive  = active;
+        isActive = active;
     }
 
     public void TouchDown()
@@ -200,9 +200,6 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
         {
             isSpeaking = !isSpeaking;
         }
-
-
-
     }
 
     @Override
@@ -215,9 +212,6 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
 
             isSpeaking = !isSpeaking;
         }
-
-
-
     }
 
 

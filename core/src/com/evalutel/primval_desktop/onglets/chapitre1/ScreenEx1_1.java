@@ -319,16 +319,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
                 MyTimer.TaskEtape nextEtape = new DisplayBilleReserve2(500);
 
-//                if (cptOiseau == 2)
-//                {
-//                    uneMain.moveTo(durationMillis, (int) posXmain, posY, null, 1500);
-//                    activiteView.addTextActivite("Je dépose encore une bille.");
-//                    metrologue.metrologuePlaySound("Sounds/Metrologue/je depose encore une bille.mp3", nextEtape);
-//                }
-//                else
-//                {
                 uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1500);
-//                }
             }
         }
     }
@@ -504,7 +495,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             if (cptBille == 2)
             {
                 bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 2500, 1f / 6f);
-                uneMain.cliqueTo(durationMillis, posX, posY, null, 0000);
+                uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
             }
         }
     }
@@ -656,7 +647,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             float posX = validusAnimated.getPosition().x + validusAnimated.getWidth() / 2;
             float posY = validusAnimated.getPosition().y + validusAnimated.getHeight() / 2;
 
-            MyTimer.TaskEtape nextEtape = new ClickToValidus1(3500);
+            MyTimer.TaskEtape nextEtape = new ClickToValidus1(3000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 

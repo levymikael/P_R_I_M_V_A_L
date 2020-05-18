@@ -47,7 +47,6 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         {
             framesToAnimateQuantity = 1;
             Gdx.app.log("Methode animation", "imagesPath size = 0" + this);
-
         }
         else
         {
@@ -64,8 +63,6 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         for (int i = 0; i < framesToAnimateQuantity; i++)
         {
             String pathAux = imagesPaths.get(i);
-//            int ok = 5;
-//            ok++;
 
             Texture imgAux = new Texture(pathAux);
             imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -130,8 +127,6 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
 
         timer.schedule(new TaskMoveAnimation(currentPositionX, currentPositionY, deltaX, deltaY, deltaTime, taskEtape, delayNext), deltaTime);
     }
-
-
 
 
     @Override

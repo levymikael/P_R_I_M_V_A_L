@@ -34,16 +34,6 @@ public class MyButtonBuyAnotherChapter extends MyImageButton implements MyDrawIn
         );
     }
 
-    /**
-     * @param currentPositionX point x coordinate
-     * @param currentPositionY point y coordinate
-     * @return whether the point is contained in the rectangle
-     */
-    public boolean contains(float currentPositionX, float currentPositionY)
-    {
-        return this.currentPositionX <= currentPositionX && this.currentPositionX + this.width >= currentPositionX && this.currentPositionY <= currentPositionY && this.currentPositionY + this.height >= currentPositionY;
-    }
-
 
     @Override
     public void myDraw(Batch batch)

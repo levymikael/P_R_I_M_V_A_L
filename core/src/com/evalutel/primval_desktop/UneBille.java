@@ -171,6 +171,5 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     public void myCorrectionStop()
     {
         this.setActive(true);
-
     }
 }

@@ -63,7 +63,6 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
                         }
             );
         }
-
     }
 
 
@@ -71,5 +70,4 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
     public void myDraw(Batch batch)
     {
     }
-
 }

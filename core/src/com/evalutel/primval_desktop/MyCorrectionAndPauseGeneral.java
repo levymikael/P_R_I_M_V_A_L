@@ -50,10 +50,7 @@ public class MyCorrectionAndPauseGeneral
         {
             MyCorrectionAndPauseInterface myCorrectionAndPauseInterfaceObject = allCorrigibles.get(i);
             myCorrectionAndPauseInterfaceObject.myResume();
-
 //            myPauseInterfaceObject.setActive(false);
-
         }
-
     }
 }

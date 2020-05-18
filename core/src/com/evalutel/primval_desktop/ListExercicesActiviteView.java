@@ -29,8 +29,8 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
     public ListExercicesActiviteView(Stage stage, final Game game, final DatabaseDesktop dataBase)
     {
-        screenWidth = Gdx.graphics.getWidth();
-        final int screenHeight = Gdx.graphics.getHeight();
+        screenWidth = MyConstants.SCREENWIDTH;
+        final int screenHeight = MyConstants.SCREENHEIGHT;
 
         this.game = game;
         this.dataBase = dataBase;
@@ -44,7 +44,6 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
         Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
         textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
 
         Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
         textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

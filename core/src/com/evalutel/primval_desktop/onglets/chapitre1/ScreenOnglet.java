@@ -49,7 +49,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     private CalculetteViewTest calculetteViewTest;
     protected Stage stage;
 
-
     MyImageButton startPausebutton;
     boolean isVisible = true;
     protected MyTimer timer;
@@ -91,7 +90,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     ActiviteView activiteView;
 
 
-
     public ScreenOnglet(Game game, DatabaseDesktop dataBase, int chapitre, int onglet, boolean ecrin)
     {
         batch = new SpriteBatch();
@@ -114,13 +112,11 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         myCorrectionAndPauseGeneral = new MyCorrectionAndPauseGeneral();
 
-         activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
-
+        activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
 
         resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0, 0);
 
         myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15, dataBase);
-        myButtonBackToPreviousMenu.setPosition(MyConstants.SCREENWIDTH / 60, 6 * MyConstants.SCREENHEIGHT / 7);
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
             @Override
@@ -158,8 +154,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         startPausebutton.setPosition(MyConstants.SCREENWIDTH / 60, 5 * MyConstants.SCREENHEIGHT / 7);
         stage.addActor(startPausebutton);
 
-//        myPauseGeneral = new MyPauseGeneral();
-
         startPausebutton.addListener(new ClickListener()
         {
             public void clicked(InputEvent event, float x, float y)
@@ -168,22 +162,17 @@ public class ScreenOnglet implements Screen, InputProcessor
 
                 if (!isInPause)
                 {
-
                     pausePlayButtonPath = "Images/StartPause/button_lecture.png";
                     myCorrectionAndPauseGeneral.pause();
 
                     isInPause = !isInPause;
-
                 }
                 else
                 {
                     pausePlayButtonPath = "Images/StartPause/button_pause.png";
 
-
                     isInPause = !isInPause;
                     myCorrectionAndPauseGeneral.resume();
-
-
                 }
 
                 Texture texture = new Texture(Gdx.files.internal(pausePlayButtonPath));
@@ -249,7 +238,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     }
 
 
-    protected class FinOnglet extends MyTimer.TaskEtape
+    public class FinOnglet extends MyTimer.TaskEtape
     {
         protected FinOnglet(long durMillis, long delay)
         {
@@ -271,7 +260,6 @@ public class ScreenOnglet implements Screen, InputProcessor
                 }
             });
 //            timer.cancel();
-
         }
     }
 

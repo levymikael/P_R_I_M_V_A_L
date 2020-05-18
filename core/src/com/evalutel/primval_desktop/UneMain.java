@@ -3,7 +3,6 @@ package com.evalutel.primval_desktop;
 
 public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
-
 //    public UnePlancheNew plancheNew = null;
 
     private int imageWidthInit;
@@ -20,7 +19,6 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCor
 
         int deplacemenNewY = (int) (deplacementEnY - animationHeight * 0.9f);
         //int deplacemenNewX = (int) (deplacementEnX - ecartY);
-
 
         animateImage(animationDureemillis, false, deplacementEnX, deplacemenNewY, taskEtape, delayNext, 1f / 6f);
     }
@@ -92,6 +90,5 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCor
     {
 
     }
-
 }
 

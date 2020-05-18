@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.MrNotes2;
 import com.evalutel.primval_desktop.MrTemps;
@@ -136,12 +137,14 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         avatarPic.setHeight(screenHeight / 5);
         avatarPic.setPosition(screenWidth / 50, 6 * screenHeight / 10);
 
+        int paddingButtonBorders = MyConstants.SCREENWIDTH / 500;
+
         Table chaptersButton = new Table();
         chaptersButton.add(labelChapitres);
         chaptersButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table blueBorderTableChapters = new Table();
-        blueBorderTableChapters.pad(screenWidth / 500);
+        blueBorderTableChapters.pad(paddingButtonBorders);
         blueBorderTableChapters.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
         blueBorderTableChapters.add(chaptersButton);
 
@@ -150,7 +153,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         resultsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table blueBorderTableResults = new Table();
-        blueBorderTableResults.pad(screenWidth / 500);
+        blueBorderTableResults.pad(paddingButtonBorders);
         blueBorderTableResults.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
         blueBorderTableResults.add(resultsButton);
 
@@ -159,7 +162,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         espaceParentsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table blueBorderTableParentSpace = new Table();
-        blueBorderTableParentSpace.pad(screenWidth / 500);
+        blueBorderTableParentSpace.pad(paddingButtonBorders);
         blueBorderTableParentSpace.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
         blueBorderTableParentSpace.add(espaceParentsButton);
 
@@ -168,24 +171,25 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         presentation.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Table blueBorderTablePresentation = new Table();
-        blueBorderTablePresentation.pad(screenWidth / 500);
+        blueBorderTablePresentation.pad(paddingButtonBorders);
         blueBorderTablePresentation.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
         blueBorderTablePresentation.add(presentation);
 
         int widthButton2 = screenWidth / 7;
         int heightButton2 = widthButton2 / 4;
+        int paddingBetweenButtons = MyConstants.SCREENHEIGHT / 120;
 
-        container.add(blueBorderTableChapters).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
-        container.row();
-//        container.add(blueBorderTableResults).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
+        container.add(blueBorderTableChapters).padBottom(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
 //        container.row();
-//        container.add(blueBorderTableParentSpace).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
+//        container.add(blueBorderTableResults).padTop(paddingBetweenButtons).padBottom(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
 //        container.row();
-//        container.add(blueBorderTablePresentation).padTop(10).padBottom(10).align(Align.center).height(heightButton2).width(widthButton2);
+//        container.add(blueBorderTableParentSpace).padTop(paddingBetweenButtons).padBottom(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
+//        container.row();
+//        container.add(blueBorderTablePresentation).padTop(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
 
         Table summaryImgTable = new Table();
         summaryImgTable.setTouchable(Touchable.enabled);
-        summaryImgTable.setSize(4 * screenWidth / 5, screenHeight);
+        summaryImgTable.setSize(4 * screenWidth / 5, MyConstants.SCREENHEIGHT);
         summaryImgTable.setPosition(screenWidth / 5, 0);
         summaryImgTable.setTouchable(Touchable.enabled);
 
@@ -346,7 +350,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         float logoHeight = screenHeight / 8;
 
-        batch.draw(logoTitre, screenWidth / 40, screenHeight - logoHeight-screenHeight/50.0f, screenWidth / 8, logoHeight);
+        batch.draw(logoTitre, screenWidth / 40, screenHeight - logoHeight - screenHeight / 50.0f, screenWidth / 8, logoHeight);
 
         batch.end();
 

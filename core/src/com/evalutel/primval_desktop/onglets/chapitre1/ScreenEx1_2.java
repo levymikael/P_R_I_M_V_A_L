@@ -35,6 +35,8 @@ public class ScreenEx1_2 extends ScreenOnglet
     private int randNumOiseau;
     private int cptOiseau;
 
+    int[] numOiseauArray;
+
     DatabaseDesktop dataBase;
 
 
@@ -98,6 +100,8 @@ public class ScreenEx1_2 extends ScreenOnglet
 
 
         getNumberOiseauxArList();
+
+        numOiseauArray = MyMath.genereTabAleatoire(9);
 
         timer.schedule(new PresentationExercice(2000), 100);
     }
@@ -218,7 +222,6 @@ public class ScreenEx1_2 extends ScreenOnglet
 
             metrologue.metrologuePlaySound("Sounds/Metrologue/Place autant de billes.mp3", nextEtape);
 
-//            //timer.schedule(new EtapeInstruction(2000), 1000);
             reserveBilles.setActive(false);
         }
     }
@@ -233,10 +236,6 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            int[] numOiseauArray = MyMath.genereTabAleatoire(9);
-
-            MyMath.melangeTab(numOiseauArray);
-
             randNumOiseau = numOiseauArray[questionCourante];
 
             timer.schedule(new DisplayOiseaux(1000), 0);
@@ -256,7 +255,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             DisplayOiseaux nextEtape = new DisplayOiseaux(0);
 
             reserveBilles.setActive(true);
-
 
             if (cptOiseau < randNumOiseau)
             {
@@ -336,10 +334,15 @@ public class ScreenEx1_2 extends ScreenOnglet
 //                MyTimer.TaskEtape nextEtape = new EtapeInstruction(2000, 500);
                 MyTimer.TaskEtape nextEtape = new EtapeNextQuestion(1000, 500);
 
-                if (questionCourante != 9)
+                if (questionCourante != 8)
                 {
 
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", nextEtape);
+                }
+                else
+                {
+                    activiteView.addTextActivite("Youpi ! Tu as gagné un diamant.");
+                    validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3", nextEtape);
                 }
                 validusAnimated.isActive = false;
                 addDiamonds(1);
@@ -531,10 +534,9 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            int posX = MyConstants.SCREENHEIGHT / 5;
-            int posY = MyConstants.SCREENWIDTH / 8;
+            int posX = (int) (planche1.currentPositionX + planche1.getWidth()) + MyConstants.SCREENWIDTH / 20;
+            int posY = (int) (planche1.currentPositionY + (planche1.getHeight() / 2));
 
-            //uneMain.moveTo(durationMillis, posX, posY, null, 1000);
             uneMain.cliqueTo(durationMillis, posX, posY, null, 500);
 
             MyTimer.TaskEtape nextEtape = new LastOne(500);
@@ -552,18 +554,18 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            int posX = MyConstants.SCREENHEIGHT / 5;
-            int posY = MyConstants.SCREENWIDTH / 8;
+            int posX = (int) (planche1.currentPositionX + planche1.getWidth()) + MyConstants.SCREENWIDTH / 20;
+            int posY = (int) (planche1.currentPositionY + (planche1.getHeight() / 2));
 
             reserveBilles.addBilleToReserve(billeRectification);
 
             MyTimer.TaskEtape nextEtape = new EtapeRectification1(500);
             uneMain.moveTo(50, posX, posY, nextEtape, 500);
 
-            if (planche1.getNumberBilles() == randNumOiseau)
-            {
-                //uneMain.setVisible(false);
-            }
+//            if (planche1.getNumberBilles() == randNumOiseau)
+//            {
+//                //uneMain.setVisible(false);
+//            }
         }
     }
 
@@ -583,17 +585,15 @@ public class ScreenEx1_2 extends ScreenOnglet
         public void run()
         {
             questionCourante++;
-            if (questionCourante == 9)
+            if (questionCourante == 9)       // fin exercice
             {
+                MyTimer.TaskEtape finOnglet = new FinOnglet(1000, 500);
+                finOnglet.run();
 
-                new FinOnglet(1000, 500);
-
-                // fin exercice
                 endTime = System.currentTimeMillis();
                 seconds = (endTime - startTime) / 1000L;
 
                 ecrinDiamantView.getDiamantCount();
-
 
                 timer.cancel();
             }

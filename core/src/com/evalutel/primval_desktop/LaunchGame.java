@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Sommaire_General;
 
 
@@ -38,33 +39,27 @@ public class LaunchGame extends Game implements ApplicationListener
     @Override
     public void create()
     {
+        int screenHeight = MyConstants.SCREENHEIGHT;
+        int screenWidth = MyConstants.SCREENWIDTH;
 
-        int screenHeight = Gdx.graphics.getHeight();
-        int screenWidth = Gdx.graphics.getWidth();
 
+        float ratioTest = 1024.0f / 768.0f;
 
-        float ratioTest = 1024.0f/768.0f;
+        float currentRatio = (float) screenWidth / (float) screenHeight;
 
-        float currentRatio = (float)screenWidth/(float)screenHeight;
-
-        if(currentRatio > ratioTest)
+        if (currentRatio > ratioTest)
         {
-            screenWidth = (int)(screenHeight*1024.0f/768.0f);
+            screenWidth = (int) (screenHeight * 1024.0f / 768.0f);
         }
-
 
         Camera camera = new OrthographicCamera();
         //((OrthographicCamera) camera).setToOrtho(false, screenWidth, screenHeight);
 
-        Gdx.app.log("screenheight, screenWidth", screenHeight + "/" +screenWidth);
+        Gdx.app.log("screenheight, screenWidth", screenHeight + "/" + screenWidth);
 
         //camera = new PerspectiveCamera();
         //viewport = new FitViewport(800, 480, camera);
 
-//		this.setScreen(new ScreenOnglet());
-//		this.setScreen(new ScreenEx1_1());
-//		this.setScreen(new ScreenEx1_2());
-//        this.setScreen(new Screen_Sommaire_General(this, new DatabaseDesktop()));
         this.setScreen(new Screen_Sommaire_General(this, new DatabaseDesktop()));
     }
 
