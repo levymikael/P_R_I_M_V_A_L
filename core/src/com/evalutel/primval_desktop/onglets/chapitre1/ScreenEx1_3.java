@@ -83,13 +83,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
         resultatExercice = new UnResultat("Primval", 1, 3, 0, consigneExercice, 0, 0, dateTest, 0, 0, 0, 123);
 
-        timer.schedule(new PresentationMetrologue(3000), 1000);
+        timer.schedule(new PresentationOnglet(3000), 1000);
     }
 
 
-    private class PresentationMetrologue extends MyTimer.TaskEtape
+    private class PresentationOnglet extends MyTimer.TaskEtape
     {
-        private PresentationMetrologue(long durMillis)
+        private PresentationOnglet(long durMillis)
         {
             super(durMillis);
         }
@@ -98,18 +98,18 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneMain.imageDown();
-            activiteView.addTextActivite("Bonjour,\nJe suis le professeur Metrologue, on va faire un jeu amusant qui s'appelle Badix.");
-            activiteView.addTextActivite("Tu veux jouer ?");
+//            activiteView.addTextActivite("Bonjour,\nJe suis le professeur Metrologue, on va faire un jeu amusant qui s'appelle Badix.");
+//            activiteView.addTextActivite("Tu veux jouer ?");
 
-            MyTimer.TaskEtape nextEtape = new VoiciLaRegleDuJeu(3000, 2500);
+            MyTimer.TaskEtape nextEtape = new OnVaContinuer(3000, 2500);
 
-            metrologue.metrologuePlaySound("Sounds/Metrologue/Bonjour je suis le prof.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.0 - Ecriture des chiffres de 1 a 9.mp3", nextEtape);
         }
     }
 
-    private class VoiciLaRegleDuJeu extends MyTimer.TaskEtape
+    private class OnVaContinuer extends MyTimer.TaskEtape
     {
-        private VoiciLaRegleDuJeu(long durMillis, long delay)
+        private OnVaContinuer(long durMillis, long delay)
         {
             super(durMillis, delay);
         }
@@ -117,10 +117,10 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            activiteView.addTextActivite("Voici la règle du jeu:");
+//            activiteView.addTextActivite("Voici la règle du jeu:");
             MyTimer.TaskEtape nextEtape = new EtapeAddFirstOiseau(2000, 1000);
 
-            metrologue.metrologuePlaySound("Sounds/Metrologue/Voici la regle du jeu.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.1 - On va continuer.mp3", nextEtape);
         }
     }
 
