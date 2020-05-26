@@ -25,7 +25,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
     private Table table, tableTitre, tableBandeauBas;
     private Table tableMilieu;
     private float heightTop;
-    public float topSectionposY;
     float topYTablePosition, heightBackGroundImage;
 
     private float firstY, currentY, widthEnonce;
@@ -60,7 +59,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         this.activiteType = activiteType;
 
-
 // Configuration police de l'enonce
         FreeTypeFontGenerator fontArial = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -91,7 +89,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         Label label3 = new Label(exDansChapitre, labelStyle3);
         label3.setWidth(MyConstants.SCREENWIDTH / 46);
 
-
 // Creation cellule tableau pour numero d'exerice:
         tableTitre = new Table();
 
@@ -113,6 +110,13 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         table.add(tableMilieu).width(tableTitre.getWidth() + MyConstants.SCREENWIDTH / 100);
         table.row();
+
+        Table paddingTableMilieu = new Table();
+        paddingTableMilieu.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
+
+        table.add(paddingTableMilieu).height(MyConstants.SCREENHEIGHT / 200).width(widthEnonce);
+        table.row();
+
 
         if (activiteType == "activite")
         {
@@ -136,7 +140,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         texture2 = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_bas_bleu.png"));
         texture2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-
         sprite2 = new Sprite(texture2);
         tableBandeauBas.setBackground(new SpriteDrawable(sprite2));
 
@@ -147,7 +150,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         table.add(tableBandeauBas).width(widthEnonce).height(heightBackGroundImage);
         table.row();
-
 
 // Positionnement du tableau sur ecran:
 
@@ -160,15 +162,12 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         final float tableHeight = table.getHeight();
         float temptableHeight = tableHeight;
 
-        topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - heightTop;
-
-        topSectionposY = MyConstants.SCREENHEIGHT - heightTop;
+        topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - heightTop + paddingTableMilieu.getHeight();
 
         currentY = topYTablePosition;
-        table.setPosition(MyConstants.SCREENWIDTH / 2 - widthEnonce / 2, topYTablePosition /*- heightTop*/);
+        table.setPosition(MyConstants.SCREENWIDTH / 2 - widthEnonce / 2, topYTablePosition);
 
         table.setTouchable(Touchable.enabled);
-
 
 //Manipulation bandeau enonce (drag)
 
@@ -210,7 +209,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
             }
         });
 
-
         tableTitre.setWidth(widthEnonce);
         tableTitre.setHeight(heightTop);
     }
@@ -240,12 +238,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         lastLabel.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
 
-        Label.LabelStyle labelStyle4 = new Label.LabelStyle();
-        labelStyle4.font = bitmapFontArial;
-        labelStyle4.fontColor = Color.BLACK;
-        Label label4 = new Label("", labelStyleBlack);
-
-
         if (cptInstructions == 0)
         {
             flechSprite.setSize(MyConstants.SCREENWIDTH / 30, 40);
@@ -258,18 +250,17 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
             {
                 pointerTable.setBackground(flecheSpriteDrawable);
             }
-
-            table4.add(pointerTable).width(MyConstants.SCREENWIDTH / 60).height(MyConstants.SCREENHEIGHT / 40).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100);
-            table4.add(label3).width(widthEnonce - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 120))).padRight(MyConstants.SCREENWIDTH / 120).padTop(MyConstants.SCREENHEIGHT / 50);
+            table4.add(pointerTable).width(MyConstants.SCREENWIDTH / 60).height(MyConstants.SCREENHEIGHT / 40).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100)/*.padTop(MyConstants.SCREENHEIGHT / 20)*/;
+            table4.add(label3).width(widthEnonce - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 120))).padRight(MyConstants.SCREENWIDTH / 120)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
         }
         else
         {
-            table4.add(new Image()).width(MyConstants.SCREENWIDTH / 27 - MyConstants.SCREENWIDTH/1000);
-            table4.add(label3).width(widthEnonce - (MyConstants.SCREENWIDTH / 12 + MyConstants.SCREENWIDTH / 450)).padRight(MyConstants.SCREENWIDTH / 20).padBottom(MyConstants.SCREENHEIGHT / 100);
+            table4.add(new Image()).width(MyConstants.SCREENWIDTH / 27 - MyConstants.SCREENWIDTH / 1000);
+            table4.add(label3).width(widthEnonce - (MyConstants.SCREENWIDTH / 12 + MyConstants.SCREENWIDTH / 450)).padRight(MyConstants.SCREENWIDTH / 20) /*.padBottom(MyConstants.SCREENHEIGHT / 150).padTop(MyConstants.SCREENHEIGHT / 200)*/;
         }
 
         table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
-
+        //tableMilieu.removeActor()
         tableMilieu.add(table4);
         tableMilieu.row();
 

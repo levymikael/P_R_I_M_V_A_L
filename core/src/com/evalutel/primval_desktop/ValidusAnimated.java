@@ -44,6 +44,8 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
         textureRegionInactif = new TextureRegion(validusInactifTexture);
 
         animation = new Animation(1f / 15f, (Object[]) animationFrames);
+
+
     }
 
 
@@ -160,23 +162,39 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
 
 
     @Override
+    public boolean isVisible()
+    {
+        return isVisible;
+    }
+
+    @Override
+    public void setVisible(boolean visible)
+    {
+        isVisible = visible;
+    }
+
+
+    @Override
     public void myDraw(Batch batch)
     {
-        elapsedTime += Gdx.graphics.getDeltaTime();
-        if (isSpeaking)
+        if (isVisible = true)
         {
-            TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, true);
-            batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
-        }
-        else
-        {
-            if (isActive)
+            elapsedTime += Gdx.graphics.getDeltaTime();
+            if (isSpeaking)
             {
-                batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+                TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, true);
+                batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
             }
             else
             {
-                batch.draw(textureRegionInactif, currentPositionX, currentPositionY, animationWidth, animationHeight);
+                if (isActive)
+                {
+                    batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+                }
+                else
+                {
+                    batch.draw(textureRegionInactif, currentPositionX, currentPositionY, animationWidth, animationHeight);
+                }
             }
         }
     }

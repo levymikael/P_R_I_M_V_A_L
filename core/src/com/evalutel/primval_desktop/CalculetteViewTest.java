@@ -14,13 +14,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
+import com.evalutel.primval_desktop.ui_tools.MyPoint;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 import java.util.ArrayList;
 
 
-public class CalculetteViewTest implements MyDrawInterface
+public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, MyCorrectionAndPauseInterface
 {
     float width, height;
 
@@ -48,10 +50,10 @@ public class CalculetteViewTest implements MyDrawInterface
     protected boolean isVisible = true;
     protected boolean isActive = true;
 
-    public CalculetteViewTest(Stage stage, float positionX, float positionY, float width, float height)
+    public CalculetteViewTest(Stage stage, float positionX, float positionY/*, float width, float height*/)
     {
-        this.width = width;
-        this.height = height;
+        this.width = MyConstants.SCREENWIDTH / 6;
+        this.height = MyConstants.SCREENHEIGHT / 3;
 
         posX = positionX;
         posY = positionY;
@@ -61,7 +63,7 @@ public class CalculetteViewTest implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = MyConstants.SCREENWIDTH/40;
         parameter.padLeft = 20;
         parameter.padRight = 50;
         parameter.padBottom = 70;
@@ -114,11 +116,11 @@ public class CalculetteViewTest implements MyDrawInterface
         virguleBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_virgule.png"));
         chiffreAux = new TextureRegion(new Texture("Images/calculetteKeys/clavier_virgule.png"));
 
-        myButtonTest = new MyImageButton(stage, "Images/calculetteKeys/clavier_fond_bis.png", "Images/calculetteKeys/clavier_fond_bis.png", 300, 200);
-
-        myButtonTest.setPosition(200, 100);
-
-        stage.addActor(myButtonTest);
+//        myButtonTest = new MyImageButton(stage, "Images/calculetteKeys/clavier_fond_bis.png", "Images/calculetteKeys/clavier_fond_bis.png", 300, 200);
+//
+//        myButtonTest.setPosition(200, 100);
+//
+//        stage.addActor(myButtonTest);
 
 
         myButtonTest.addListener(new ClickListener()
@@ -197,6 +199,84 @@ public class CalculetteViewTest implements MyDrawInterface
         {
             stage.addActor(textButton);
         }
+
+    }
+
+    @Override
+    public void myCorrectionStart()
+    {
+
+    }
+
+    @Override
+    public void myCorrectionStop()
+    {
+
+    }
+
+    @Override
+    public void myPause()
+    {
+
+    }
+
+    @Override
+    public void myResume()
+    {
+
+    }
+
+    @Override
+    public boolean isPause()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isTouched(int x, int y)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isDragable()
+    {
+        return false;
+    }
+
+    @Override
+    public void setPosition(int x, int y)
+    {
+
+    }
+
+    @Override
+    public MyPoint getPosition()
+    {
+        return null;
+    }
+
+    @Override
+    public float getWidth()
+    {
+        return 0;
+    }
+
+    @Override
+    public float getHeight()
+    {
+        return 0;
+    }
+
+    @Override
+    public boolean isActive()
+    {
+        return false;
+    }
+
+    @Override
+    public void setActive(boolean active)
+    {
 
     }
 

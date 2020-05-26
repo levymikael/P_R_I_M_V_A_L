@@ -17,7 +17,7 @@ import com.evalutel.primval_desktop.UnePlancheNew;
 import java.util.ArrayList;
 
 
-public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
+public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 {
 
     private ArrayList<UneBille> billesList;
@@ -39,7 +39,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
     String consigneExercice;
 
 
-    public ScreenEx1_1(Game game, DatabaseDesktop dataBase)
+    public ScreenEx1_3(Game game, DatabaseDesktop dataBase)
     {
         super(game, dataBase, 1, 1, false);
 
@@ -49,8 +49,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         allDrawables.add(bgScreenEx1_1);
 
         oiseauxList = getNumberOiseauxArList();
-
-
 
         reserveBilles = new ReserveBilles(10 * MyConstants.SCREENWIDTH / 11, 9 * MyConstants.SCREENHEIGHT / 11, largeurBille, largeurBille);
         reserveBilles.largeurBille = largeurBille;
@@ -66,12 +64,15 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(planche1);
         allCorrigibles.add(planche1);
 
+        validusAnimated.setVisible(false);
+
+
 
         allPlanches = new ArrayList<>();
         allPlanches.add(planche1);
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
-        consigneExercice = "Les nombres de 1 à 9 Badix, Métrologue et Validus.";
+        consigneExercice = "Écriture des chiffres de 1 à 9";
 
 
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "enonce");
@@ -80,7 +81,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
         billesList = autoFillPlanche();
 
-        resultatExercice = new UnResultat("Primval", 1, 1, 0, consigneExercice, 0, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 1, 3, 0, consigneExercice, 0, 0, dateTest, 0, 0, 0, 123);
 
         timer.schedule(new PresentationMetrologue(3000), 1000);
     }

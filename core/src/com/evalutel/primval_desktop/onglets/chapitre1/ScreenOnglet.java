@@ -210,11 +210,12 @@ public class ScreenOnglet implements Screen, InputProcessor
         metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
         myCorrectionAndPauseGeneral.addElements(metrologue);
 
-        /*
-        calculetteViewTest = new CalculetteViewTest(stage, 200, 200, 700, 600);
 
+        calculetteViewTest = new CalculetteViewTest(stage, MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH/6), 0);
         allDrawables.add(calculetteViewTest);
 
+
+ /*
         reserveBilles = new ReserveBilles(MyConstants.SCREENWIDTH - 300, MyConstants.SCREENHeight - 300, 200, 200);
         allDrawables.add(reserveBilles);
 
@@ -291,7 +292,17 @@ public class ScreenOnglet implements Screen, InputProcessor
             }
         }
 
-        validusAnimated.myDraw(batch);
+
+        if (validusAnimated.isVisible())
+        {
+            validusAnimated.myDraw(batch);
+        }
+
+
+//        if (calculetteViewTest.isVisible())
+//        {
+//            calculetteViewTest.myDraw(batch);
+//        }
         metrologue.myDraw(batch);
 
         batch.end();
@@ -302,6 +313,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         batch.begin();
         if (uneMain.isVisible())
+
         {
             uneMain.myDraw(batch);
         }
