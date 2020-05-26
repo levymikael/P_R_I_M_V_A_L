@@ -116,11 +116,11 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         virguleBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_virgule.png"));
         chiffreAux = new TextureRegion(new Texture("Images/calculetteKeys/clavier_virgule.png"));
 
-//        myButtonTest = new MyImageButton(stage, "Images/calculetteKeys/clavier_fond_bis.png", "Images/calculetteKeys/clavier_fond_bis.png", 300, 200);
-//
-//        myButtonTest.setPosition(200, 100);
-//
-//        stage.addActor(myButtonTest);
+        myButtonTest = new MyImageButton(stage, "Images/calculetteKeys/clavier_fond_bis.png", "Images/calculetteKeys/clavier_fond_bis.png", 300, 200);
+
+        myButtonTest.setPosition(200, 100);
+
+        stage.addActor(myButtonTest);
 
 
         myButtonTest.addListener(new ClickListener()

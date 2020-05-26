@@ -46,7 +46,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     int firstPositionX, firstPositionY;
     MyTouchInterface objectTouched;
     private SpriteBatch batch;
-    private CalculetteViewTest calculetteViewTest;
+    protected CalculetteViewTest calculetteViewTest;
     protected Stage stage;
 
     MyImageButton startPausebutton;
@@ -211,7 +211,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         myCorrectionAndPauseGeneral.addElements(metrologue);
 
 
-        calculetteViewTest = new CalculetteViewTest(stage, MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH/6), 0);
+        calculetteViewTest = new CalculetteViewTest(stage, MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 6), 0);
         allDrawables.add(calculetteViewTest);
 
 
