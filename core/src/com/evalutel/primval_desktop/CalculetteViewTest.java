@@ -63,7 +63,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = MyConstants.SCREENWIDTH/40;
+        parameter.size = MyConstants.SCREENWIDTH / 40;
         parameter.padLeft = 20;
         parameter.padRight = 50;
         parameter.padBottom = 70;
@@ -140,23 +140,23 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
         inputTest = new InputEvent();
 
-        additionBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_addition.png", "Images/calculetteKeys/highlight/clavier_addition_highlight.png", 50, "font/comic_sans_ms.ttf", 50);
-        soustractionBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_soustraction.png", "Images/calculetteKeys/highlight/clavier_soustraction_highlight.png", 50, "font/comic_sans_ms.ttf", 50);
-        multiplicationBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_multiplication.png", "Images/calculetteKeys/highlight/clavier_multiplication_highlight.png", 50, "font/comic_sans_ms.ttf", 50);
-        egalBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_egal.png", "Images/calculetteKeys/highlight/clavier_egal_highlight.png", 50, "font/comic_sans_ms.ttf", 50);
-        effacerBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_effacer.png", "Images/calculetteKeys/highlight/clavier_effacer_highlight.png", 50, "font/comic_sans_ms.ttf", 50);
-        validerBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_valider.png", "Images/calculetteKeys/highlight/clavier_valider_highlight.png", 50, "font/comic_sans_ms.ttf", 50);
+        additionBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_addition.png", "Images/calculetteKeys/highlight/clavier_addition_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        soustractionBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_soustraction.png", "Images/calculetteKeys/highlight/clavier_soustraction_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        multiplicationBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_multiplication.png", "Images/calculetteKeys/highlight/clavier_multiplication_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        egalBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_egal.png", "Images/calculetteKeys/highlight/clavier_egal_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        effacerBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_effacer.png", "Images/calculetteKeys/highlight/clavier_effacer_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        validerBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_valider.png", "Images/calculetteKeys/highlight/clavier_valider_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
 
-        zero_bouton = new MyTextButton("0", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", 50, "font/comic_sans_ms.ttf", 50);
-        un_bouton = new MyTextButton("1", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", 50, "font/comic_sans_ms.ttf", 50);
-        deux_bouton = new MyTextButton("2", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", 50, "font/comic_sans_ms.ttf", 50);
-        trois_bouton = new MyTextButton("3", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", 50, "font/comic_sans_ms.ttf", 50);
-        quatre_bouton = new MyTextButton("4", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", 50, "font/comic_sans_ms.ttf", 50);
-        cinq_bouton = new MyTextButton("5", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", 50, "font/comic_sans_ms.ttf", 50);
-        six_bouton = new MyTextButton("6", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", 50, "font/comic_sans_ms.ttf", 50);
-        sept_bouton = new MyTextButton("7", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", 50, "font/comic_sans_ms.ttf", 50);
-        huit_bouton = new MyTextButton("8", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", 50, "font/comic_sans_ms.ttf", 50);
-        neuf_bouton = new MyTextButton("9", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", 50, "font/comic_sans_ms.ttf", 50);
+        zero_bouton = new MyTextButton("0", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
+        un_bouton = new MyTextButton("1", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
+        deux_bouton = new MyTextButton("2", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
+        trois_bouton = new MyTextButton("3", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
+        quatre_bouton = new MyTextButton("4", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
+        cinq_bouton = new MyTextButton("5", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
+        six_bouton = new MyTextButton("6", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
+        sept_bouton = new MyTextButton("7", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
+        huit_bouton = new MyTextButton("8", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
+        neuf_bouton = new MyTextButton("9", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
 
 
         arrayListButtons2.add(zero_bouton);

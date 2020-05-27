@@ -80,7 +80,6 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
         {
             return null;
         }
-
     }
 
     public void SetAllBillesInactive()

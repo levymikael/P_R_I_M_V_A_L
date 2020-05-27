@@ -599,7 +599,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             }
             else
             {
-//                MyTimer.TaskEtape nextEtape =  new EtapeInstruction(2000, 500);
                 timer.schedule(new EtapeInstruction(1000, 500), 500);
             }
         }

@@ -1,17 +1,8 @@
 package com.evalutel.primval_desktop.desktop;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.evalutel.primval_desktop.LaunchGame;
-
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
-
-
-import org.lwjgl.util.glu.Util;
+import com.evalutel.primval_desktop.PrimVal;
 
 public class DesktopLauncher
 {
@@ -74,7 +65,7 @@ public class DesktopLauncher
         config.vSyncEnabled = true;
 //		config.fullscreen = true;
 
-        new LwjglApplication(new LaunchGame(), config);
+        new LwjglApplication(new PrimVal(), config);
 
 
     }

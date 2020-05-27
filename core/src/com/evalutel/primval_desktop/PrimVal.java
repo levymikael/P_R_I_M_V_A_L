@@ -20,7 +20,7 @@ import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Sommaire_General;
 
 
-public class LaunchGame extends Game implements ApplicationListener
+public class PrimVal extends Game implements ApplicationListener
 {
     SpriteBatch batch;
     Texture img;
