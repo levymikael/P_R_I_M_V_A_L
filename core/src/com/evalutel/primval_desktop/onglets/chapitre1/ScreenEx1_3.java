@@ -16,6 +16,7 @@ import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
+import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
 
@@ -68,13 +69,11 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
         validusAnimated.setVisible(false);
 
-
         allPlanches = new ArrayList<>();
         allPlanches.add(planche1);
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Écriture des chiffres de 1 à 9";
-
 
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "enonce");
         allDrawables.add(activiteView);
@@ -89,7 +88,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
         timer.schedule(new PresentationOnglet(3000), 1000);
     }
-
 
     private class PresentationOnglet extends MyTimer.TaskEtape
     {
@@ -279,15 +277,41 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            float posX = calculetteViewTest.posX;
-            float posY = calculetteViewTest.posY;
+            MyPoint button1Position = calculetteViewTest.buttonPosition(1);
 
-            MyTimer.TaskEtape nextEtape = new EtapeAddSecondOiseau(3000, 1000);
+            float posX = button1Position.x;
+            float posY = button1Position.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainTo1Validate(3000, 1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+
+            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.4 - Je tape un.mp3");
+        }
+    }
+
+    private class MoveMainTo1Validate extends MyTimer.TaskEtape
+    {
+        private MoveMainTo1Validate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new EtapeAddSecondOiseau(1500, 1000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
             currentLabel = activiteView.addTextActivite("1 -  ");
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.4 - Je tape un.mp3");
         }
     }
 
@@ -426,18 +450,47 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            float posX = calculetteViewTest.posX;
-            float posY = calculetteViewTest.posY;
+            MyPoint button2Position = calculetteViewTest.buttonPosition(2);
 
-            MyTimer.TaskEtape nextEtape = new EtapeAddThirdOiseau(3000, 1000);
+            float posX = button2Position.x;
+            float posY = button2Position.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainTo2Validate(3000, 1000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
+//            StringBuilder ex = currentLabel.getText();
+//            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "2 -  ");
+//
+//            currentLabel.setText(newStrBuilder);
+            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.7 - je tape 2.mp3");
+        }
+    }
+
+    private class MoveMainTo2Validate extends MyTimer.TaskEtape
+    {
+        private MoveMainTo2Validate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new EtapeAddThirdOiseau(1500, 1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "2 -  ");
 
             currentLabel.setText(newStrBuilder);
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.7 - je tape 2.mp3");
         }
     }
 
@@ -578,10 +631,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            float posX = calculetteViewTest.posX;
-            float posY = calculetteViewTest.posY;
+            MyPoint button3Position = calculetteViewTest.buttonPosition(3);
 
-            MyTimer.TaskEtape nextEtape = new EtapeAddFourthOiseau(3000, 1000);
+            float posX = button3Position.x;
+            float posY = button3Position.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainTo3Validate(3000, 1000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
@@ -591,10 +646,34 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             currentLabel.setText(newStrBuilder);
 
-
-//            activiteView.addTextActivite2("3  -");
-
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.10 - je tape 3.mp3");
+        }
+    }
+
+    private class MoveMainTo3Validate extends MyTimer.TaskEtape
+    {
+        private MoveMainTo3Validate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new EtapeAddFourthOiseau(1500, 1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "3 -  ");
+
+            currentLabel.setText(newStrBuilder);
         }
     }
 
@@ -706,10 +785,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
-        private EtapeAddFourthBille(long durMillis)
-        {
-            super(durMillis);
-        }
 
         @Override
         public void run()
@@ -737,16 +812,18 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
-
         @Override
         public void run()
         {
             uneMain.setVisible(true);
 
-            float posX = calculetteViewTest.posX;
-            float posY = calculetteViewTest.posY;
+            MyPoint button4Position = calculetteViewTest.buttonPosition(4);
 
-            MyTimer.TaskEtape nextEtape = new EtapeAddFifthOiseau(3000, 1000);
+            float posX = button4Position.x;
+            float posY = button4Position.y;
+
+
+            MyTimer.TaskEtape nextEtape = new MoveMainTo4Validate(3000, 1000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
@@ -756,6 +833,33 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             currentLabel.setText(newStrBuilder);
 
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.12 - je tape 4.mp3");
+        }
+    }
+
+    private class MoveMainTo4Validate extends MyTimer.TaskEtape
+    {
+        private MoveMainTo4Validate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new EtapeAddFifthOiseau(1500, 1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "4 -  ");
+
+            currentLabel.setText(newStrBuilder);
         }
     }
 
@@ -866,11 +970,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
-//        private EtapeAddFifthBille(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-
         @Override
         public void run()
         {
@@ -902,13 +1001,37 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            float posX = calculetteViewTest.posX;
-            float posY = calculetteViewTest.posY;
+            MyPoint button5Position = calculetteViewTest.buttonPosition(5);
 
-            MyTimer.TaskEtape nextEtape = new EtapeAddSixthOiseau(3000, 1000);
+            float posX = button5Position.x;
+            float posY = button5Position.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainTo5Validate(3000, 1000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+        }
+    }
 
+    private class MoveMainTo5Validate extends MyTimer.TaskEtape
+    {
+        private MoveMainTo5Validate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new EtapeAddSixthOiseau(1500, 1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "5 -  ");
 
@@ -1024,11 +1147,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
-//        private EtapeAddSixthBille(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-
         @Override
         public void run()
         {
@@ -1060,13 +1178,38 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            float posX = calculetteViewTest.posX;
-            float posY = calculetteViewTest.posY;
+            MyPoint button6Position = calculetteViewTest.buttonPosition(6);
 
-            MyTimer.TaskEtape nextEtape = new EtapeAddSeventhOiseau(3000, 1000);
+            float posX = button6Position.x;
+            float posY = button6Position.y;
+
+
+            MyTimer.TaskEtape nextEtape = new MoveMainTo6Validate(3000, 1000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+        }
+    }
 
+    private class MoveMainTo6Validate extends MyTimer.TaskEtape
+    {
+        private MoveMainTo6Validate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new EtapeAddSeventhOiseau(1500, 1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "6 -  ");
 
@@ -1207,25 +1350,46 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint button7Position = calculetteViewTest.buttonPosition(7);
+
+            float posX = button7Position.x;
+            float posY = button7Position.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainTo7Validate(3000, 1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+        }
+    }
+
+    private class MoveMainTo7Validate extends MyTimer.TaskEtape
+    {
+        private MoveMainTo7Validate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
 
         @Override
         public void run()
         {
             uneMain.setVisible(true);
 
-            float posX = calculetteViewTest.posX;
-            float posY = calculetteViewTest.posY;
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
 
-            MyTimer.TaskEtape nextEtape = new EtapeAddEighthOiseau(3000, 1000);
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new EtapeAddEighthOiseau(1500, 1000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
-
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "7 -  ");
 
             currentLabel.setText(newStrBuilder);
-
-//            activiteView.addTextActivite2("7  -");
         }
     }
 
@@ -1362,26 +1526,47 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint button8Position = calculetteViewTest.buttonPosition(8);
+
+            float posX = button8Position.x;
+            float posY = button8Position.y;
+
+
+            MyTimer.TaskEtape nextEtape = new MoveMainTo8Validate(3000, 1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+        }
+    }
+
+    private class MoveMainTo8Validate extends MyTimer.TaskEtape
+    {
+        private MoveMainTo8Validate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
 
         @Override
         public void run()
         {
             uneMain.setVisible(true);
 
-            float posX = calculetteViewTest.posX;
-            float posY = calculetteViewTest.posY;
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
 
-            MyTimer.TaskEtape nextEtape = new EtapeAddNinthOiseau(3000, 1000);
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new EtapeAddNinthOiseau(1500, 1000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
-
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "8 -  ");
 
             currentLabel.setText(newStrBuilder);
-
-
-//            activiteView.addTextActivite2("8  -");
         }
     }
 
@@ -1511,7 +1696,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         }
     }
 
-
     private class MoveMainTo9Calculette extends MyTimer.TaskEtape
     {
         private MoveMainTo9Calculette(long durMillis, long delay)
@@ -1519,21 +1703,44 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint button9Position = calculetteViewTest.buttonPosition(9);
+
+            float posX = button9Position.x;
+            float posY = button9Position.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainTo9Validate(3000, 1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+        }
+    }
+
+    private class MoveMainTo9Validate extends MyTimer.TaskEtape
+    {
+        private MoveMainTo9Validate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
 
         @Override
         public void run()
         {
             uneMain.setVisible(true);
 
-            float posX = calculetteViewTest.posX;
-            float posY = calculetteViewTest.posY;
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
 
-            MyTimer.TaskEtape nextEtape = new Fin(3000, 1000);
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new Fin(1500, 1000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
-
             StringBuilder ex = currentLabel.getText();
-            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "9 -  ");
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "8 -  ");
 
             currentLabel.setText(newStrBuilder);
         }
@@ -1560,7 +1767,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             timer.cancel();
         }
     }
-
 
     public ArrayList<UneBille> autoFillPlanche()
     {

@@ -238,10 +238,19 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
                 buttonPosition.x = (int) neuf_bouton.getX();
                 buttonPosition.y = (int) neuf_bouton.getY();
                 break;
-
-
         }
+        textFieldTest.setText(String.valueOf(buttonNumber));
+
         return buttonPosition;
+    }
+
+    public MyPoint calculetteValidateAndDisplay()
+    {
+        MyPoint buttonValidatePosition = new MyPoint((int) validerBouton2.getX(), (int) validerBouton2.getY());
+
+        textFieldTest.setText("");
+
+        return buttonValidatePosition;
     }
 
     @Override
