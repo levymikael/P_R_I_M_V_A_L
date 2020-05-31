@@ -2,7 +2,10 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.StringBuilder;
 import com.evalutel.primval_desktop.ActiviteView;
+import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
@@ -24,6 +27,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
     private ArrayList<UnOiseau> oiseauxList;
     private ArrayList<UnePlancheNew> allPlanches;
 
+    protected CalculetteViewTest calculetteViewTest;
+
+
     private UnePlancheNew planche1;
     ScreeenBackgroundImage bgScreenEx1_1;
 
@@ -32,6 +38,8 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
     DatabaseDesktop dataBase;
 
     String consigneExercice;
+
+    Label currentLabel;
 
 
     public ScreenEx1_3(Game game, DatabaseDesktop dataBase)
@@ -71,6 +79,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "enonce");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
+
+        calculetteViewTest = new CalculetteViewTest(stage, MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 6), 0);
+        allDrawables.add(calculetteViewTest);
 
         billesList = autoFillPlanche();
 
@@ -275,7 +286,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-            activiteView.addTextActivite2("1  -");
+            currentLabel = activiteView.addTextActivite("1 -  ");
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.4 - Je tape un.mp3");
         }
     }
@@ -422,7 +433,10 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-            activiteView.addTextActivite2("2  -");
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "2 -  ");
+
+            currentLabel.setText(newStrBuilder);
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.7 - je tape 2.mp3");
         }
     }
@@ -475,7 +489,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
                 uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 2000);
 
                 metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.9 - Maintenant ils sont 3 oiseaux.mp3");
-
             }
         }
     }
@@ -572,7 +585,14 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-            activiteView.addTextActivite2("3  -");
+
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "3 -  ");
+
+            currentLabel.setText(newStrBuilder);
+
+
+//            activiteView.addTextActivite2("3  -");
 
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.10 - je tape 3.mp3");
         }
@@ -730,7 +750,10 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-            activiteView.addTextActivite2("4  -");
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "4 -  ");
+
+            currentLabel.setText(newStrBuilder);
 
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.12 - je tape 4.mp3");
         }
@@ -843,10 +866,10 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
-        private EtapeAddFifthBille(long durMillis)
-        {
-            super(durMillis);
-        }
+//        private EtapeAddFifthBille(long durMillis)
+//        {
+//            super(durMillis);
+//        }
 
         @Override
         public void run()
@@ -886,7 +909,10 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-            activiteView.addTextActivite2("5  -");
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "5 -  ");
+
+            currentLabel.setText(newStrBuilder);
         }
     }
 
@@ -998,10 +1024,10 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
-        private EtapeAddSixthBille(long durMillis)
-        {
-            super(durMillis);
-        }
+//        private EtapeAddSixthBille(long durMillis)
+//        {
+//            super(durMillis);
+//        }
 
         @Override
         public void run()
@@ -1041,7 +1067,10 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-            activiteView.addTextActivite2("6  -");
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "6 -  ");
+
+            currentLabel.setText(newStrBuilder);
         }
     }
 
@@ -1191,7 +1220,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-            activiteView.addTextActivite2("7  -");
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "7 -  ");
+
+            currentLabel.setText(newStrBuilder);
+
+//            activiteView.addTextActivite2("7  -");
         }
     }
 
@@ -1341,7 +1375,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-            activiteView.addTextActivite2("8  -");
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "8 -  ");
+
+            currentLabel.setText(newStrBuilder);
+
+
+//            activiteView.addTextActivite2("8  -");
         }
     }
 
@@ -1492,7 +1532,10 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-            activiteView.addTextActivite2("9  -");
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "9 -  ");
+
+            currentLabel.setText(newStrBuilder);
         }
     }
 

@@ -37,7 +37,6 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
     MyTextButton additionBouton2, soustractionBouton2, multiplicationBouton2, egalBouton2, effacerBouton2, validerBouton2, zero_bouton, un_bouton, deux_bouton, trois_bouton, quatre_bouton, cinq_bouton, six_bouton, sept_bouton, huit_bouton, neuf_bouton;
 
-    InputEvent inputTest;
     TextField textFieldTest;
     Skin skin;
     Stage stage;
@@ -63,12 +62,13 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = MyConstants.SCREENWIDTH / 40;
+        parameter.size = MyConstants.SCREENWIDTH / 60;
         parameter.padLeft = 20;
         parameter.padRight = 50;
         parameter.padBottom = 70;
 
         BitmapFont bitmapFont = generator.generateFont(parameter);
+
         generator.dispose();
 
         Color fontColor = new Color(Color.BLACK);
@@ -78,67 +78,59 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         textFieldStyleTest.font = bitmapFont;
 
 
-        float heightTF = height / 4.0f;
+        float heightTF = height / 5.0f;
 
         textFieldTest = new TextField("", textFieldStyleTest);
-        //textFieldTest.setColor(Color.GREEN);
-        textFieldTest.setBounds(positionX, positionY + height - heightTF, width, heightTF);
-        //textFieldTest.setPosition(positionX, positionY+height);
-        //textFieldTest.setWidth(width);
-        //textFieldTest.setHeight(height/7.0f);
-//        TextField.TextFieldStyle tt = textFieldTest.getStyle();
+        textFieldTest.setBounds(positionX, positionY + height - heightTF, width * 1.05f, heightTF);
         textFieldTest.setAlignment(Align.right);
 
         stage.addActor(textFieldTest);
 
-        textFieldTest.addListener(new ClickListener()
-        {
+//        textFieldTest.addListener(new ClickListener()
+//        {
+//
+//        });
 
-        });
-
-        //Gdx.input.setInputProcessor(stage);
         Texture textureFond = new Texture("Images/calculetteKeys/clavier_fond_bis.png");
         textureFond.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         textureRegionFond = new TextureRegion(textureFond);
 
-        Texture textureAddition = new Texture("Images/calculetteKeys/clavier_addition.png");
-        textureAddition.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        additionBouton = new TextureRegion(textureAddition);
+//        Texture textureAddition = new Texture("Images/calculetteKeys/clavier_addition.png");
+//        textureAddition.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+//        additionBouton = new TextureRegion(textureAddition);
+//
+//        divisionBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_division_inactif.png"));
+//        effacerBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_effacer.png"));
+//        egalBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_egal.png"));
+//        multiplicationBouton = new TextureRegion((new Texture("Images/calculetteKeys/clavier_multiplication.png")));
+//        parenthese1Bouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_prenthese_inactive1.png"));
+//        parenthese2Bouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_prenthese_inactive2.png"));
+//        soustractionBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_soustraction.png"));
+//        validerBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_valider.png"));
+//        virguleBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_virgule.png"));
+//        chiffreAux = new TextureRegion(new Texture("Images/calculetteKeys/clavier_virgule.png"));
 
-        divisionBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_division_inactif.png"));
-        effacerBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_effacer.png"));
-        egalBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_egal.png"));
-        multiplicationBouton = new TextureRegion((new Texture("Images/calculetteKeys/clavier_multiplication.png")));
-        parenthese1Bouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_prenthese_inactive1.png"));
-        parenthese2Bouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_prenthese_inactive2.png"));
-        soustractionBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_soustraction.png"));
-        validerBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_valider.png"));
-        virguleBouton = new TextureRegion(new Texture("Images/calculetteKeys/clavier_virgule.png"));
-        chiffreAux = new TextureRegion(new Texture("Images/calculetteKeys/clavier_virgule.png"));
-
-        myButtonTest = new MyImageButton(stage, "Images/calculetteKeys/clavier_fond_bis.png", "Images/calculetteKeys/clavier_fond_bis.png", 300, 200);
-
-        myButtonTest.setPosition(200, 100);
-
-        stage.addActor(myButtonTest);
-
-
-        myButtonTest.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                super.clicked(event, x, y);
-
-            }
-        });
+//        myButtonTest = new MyImageButton(stage, "Images/calculetteKeys/clavier_fond_bis.png", "Images/calculetteKeys/clavier_fond_bis.png", 300, 200);
+//
+//        myButtonTest.setPosition(200, 100);
+//
+//        stage.addActor(myButtonTest);
+//
+//
+//        myButtonTest.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                super.clicked(event, x, y);
+//
+//            }
+//        });
 
         //setTouchable(Touchable.enabled);
 
         //setWidth(width);
         //setHeight(height);
-
-        inputTest = new InputEvent();
 
         additionBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_addition.png", "Images/calculetteKeys/highlight/clavier_addition_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
         soustractionBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_soustraction.png", "Images/calculetteKeys/highlight/clavier_soustraction_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
@@ -199,7 +191,57 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         {
             stage.addActor(textButton);
         }
+    }
 
+    public MyPoint buttonPosition(int buttonNumber)
+    {
+        MyPoint buttonPosition = new MyPoint(0, 0);
+        switch (buttonNumber)
+        {
+            case 0:
+                buttonPosition.x = (int) zero_bouton.getX();
+                buttonPosition.y = (int) zero_bouton.getY();
+                break;
+            case 1:
+                buttonPosition.x = (int) un_bouton.getX();
+                buttonPosition.y = (int) un_bouton.getY();
+                break;
+            case 2:
+                buttonPosition.x = (int) deux_bouton.getX();
+                buttonPosition.y = (int) deux_bouton.getY();
+                break;
+            case 3:
+                buttonPosition.x = (int) trois_bouton.getX();
+                buttonPosition.y = (int) trois_bouton.getY();
+                break;
+            case 4:
+                buttonPosition.x = (int) quatre_bouton.getX();
+                buttonPosition.y = (int) quatre_bouton.getY();
+                break;
+            case 5:
+                buttonPosition.x = (int) cinq_bouton.getX();
+                buttonPosition.y = (int) cinq_bouton.getY();
+                break;
+            case 6:
+                buttonPosition.x = (int) six_bouton.getX();
+                buttonPosition.y = (int) six_bouton.getY();
+                break;
+            case 7:
+                buttonPosition.x = (int) sept_bouton.getX();
+                buttonPosition.y = (int) sept_bouton.getY();
+                break;
+            case 8:
+                buttonPosition.x = (int) huit_bouton.getX();
+                buttonPosition.y = (int) huit_bouton.getY();
+                break;
+            case 9:
+                buttonPosition.x = (int) neuf_bouton.getX();
+                buttonPosition.y = (int) neuf_bouton.getY();
+                break;
+
+
+        }
+        return buttonPosition;
     }
 
     @Override
@@ -277,6 +319,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     @Override
     public void setActive(boolean active)
     {
+        isActive = active;
 
     }
 
@@ -331,7 +374,9 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     {
         float paddingLeft = width / 20;
         float paddingBottom = height / 20;
-        batch.draw(textureRegionFond, posX, posY, width, height);
+        batch.draw(textureRegionFond, MyConstants.SCREENWIDTH - MyConstants.SCREENWIDTH / 6, 0, width, height);
+//        batch.draw(textureRegionFond, MyConstants.SCREENWIDTH - 500, 0, 200, 200);
+
 
         int cpt = 0;
         float widthButton = width / 4.5f;
@@ -341,7 +386,6 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         {
             for (int j = 0; j < 4; j++)
             {
-
                 MyTextButton buttonAux = arrayListButtons2.get(cpt);
                 buttonAux.setSize(widthButton, heightButton);
                 buttonAux.setPosition(paddingLeft + posX + widthButton * i, paddingBottom + posY + heightButton * j);

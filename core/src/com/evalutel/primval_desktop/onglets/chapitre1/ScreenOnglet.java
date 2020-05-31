@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.evalutel.primval_desktop.ActiviteView;
-import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
@@ -46,7 +45,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     int firstPositionX, firstPositionY;
     MyTouchInterface objectTouched;
     private SpriteBatch batch;
-    protected CalculetteViewTest calculetteViewTest;
     protected Stage stage;
 
     MyImageButton startPausebutton;
@@ -211,8 +209,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         myCorrectionAndPauseGeneral.addElements(metrologue);
 
 
-        calculetteViewTest = new CalculetteViewTest(stage, MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 6), 0);
-        allDrawables.add(calculetteViewTest);
+
 
 
  /*
@@ -298,11 +295,6 @@ public class ScreenOnglet implements Screen, InputProcessor
             validusAnimated.myDraw(batch);
         }
 
-
-//        if (calculetteViewTest.isVisible())
-//        {
-//            calculetteViewTest.myDraw(batch);
-//        }
         metrologue.myDraw(batch);
 
         batch.end();
@@ -313,7 +305,6 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         batch.begin();
         if (uneMain.isVisible())
-
         {
             uneMain.myDraw(batch);
         }
