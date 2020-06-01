@@ -23,13 +23,11 @@ import java.util.ArrayList;
 
 public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 {
-
     private ArrayList<UneBille> billesList;
     private ArrayList<UnOiseau> oiseauxList;
     private ArrayList<UnePlancheNew> allPlanches;
 
     protected CalculetteViewTest calculetteViewTest;
-
 
     private UnePlancheNew planche1;
     ScreeenBackgroundImage bgScreenEx1_1;
@@ -284,7 +282,8 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new MoveMainTo1Validate(3000, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
+            uneMain.imageDown();
 
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.4 - Je tape un.mp3");
         }
@@ -301,6 +300,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneMain.setVisible(true);
+            uneMain.imageUp();
 
             MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
 
@@ -309,8 +309,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new EtapeAddSecondOiseau(1500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
-
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
+            uneMain.imageDown();
+            uneMain.imageUp();
             currentLabel = activiteView.addTextActivite("1 -  ");
         }
     }
@@ -455,14 +456,10 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             float posX = button2Position.x;
             float posY = button2Position.y;
 
-            MyTimer.TaskEtape nextEtape = new MoveMainTo2Validate(3000, 1000);
+            MyTimer.TaskEtape nextEtape = new MoveMainTo2Validate(2000, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
 
-//            StringBuilder ex = currentLabel.getText();
-//            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "2 -  ");
-//
-//            currentLabel.setText(newStrBuilder);
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.7 - je tape 2.mp3");
         }
     }
@@ -486,7 +483,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new EtapeAddThirdOiseau(1500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "2 -  ");
 
@@ -636,15 +633,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             float posX = button3Position.x;
             float posY = button3Position.y;
 
-            MyTimer.TaskEtape nextEtape = new MoveMainTo3Validate(3000, 1000);
+            MyTimer.TaskEtape nextEtape = new MoveMainTo3Validate(2000, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
-
-
-            StringBuilder ex = currentLabel.getText();
-            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "3 -  ");
-
-            currentLabel.setText(newStrBuilder);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1500);
 
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.10 - je tape 3.mp3");
         }
@@ -669,7 +660,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new EtapeAddFourthOiseau(1500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1500);
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "3 -  ");
 
@@ -822,15 +813,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             float posX = button4Position.x;
             float posY = button4Position.y;
 
+            MyTimer.TaskEtape nextEtape = new MoveMainTo4Validate(2000, 1000);
 
-            MyTimer.TaskEtape nextEtape = new MoveMainTo4Validate(3000, 1000);
-
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
-
-            StringBuilder ex = currentLabel.getText();
-            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "4 -  ");
-
-            currentLabel.setText(newStrBuilder);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
 
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.12 - je tape 4.mp3");
         }
@@ -855,7 +840,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new EtapeAddFifthOiseau(1500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "4 -  ");
 
@@ -1006,9 +991,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             float posX = button5Position.x;
             float posY = button5Position.y;
 
-            MyTimer.TaskEtape nextEtape = new MoveMainTo5Validate(3000, 1000);
+            MyTimer.TaskEtape nextEtape = new MoveMainTo5Validate(2000, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
         }
     }
 
@@ -1031,7 +1016,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new EtapeAddSixthOiseau(1500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "5 -  ");
 
@@ -1184,9 +1169,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             float posY = button6Position.y;
 
 
-            MyTimer.TaskEtape nextEtape = new MoveMainTo6Validate(3000, 1000);
+            MyTimer.TaskEtape nextEtape = new MoveMainTo6Validate(2000, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
         }
     }
 
@@ -1209,7 +1194,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new EtapeAddSeventhOiseau(1500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "6 -  ");
 
@@ -1360,9 +1345,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             float posX = button7Position.x;
             float posY = button7Position.y;
 
-            MyTimer.TaskEtape nextEtape = new MoveMainTo7Validate(3000, 1000);
+            MyTimer.TaskEtape nextEtape = new MoveMainTo7Validate(2500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
         }
     }
 
@@ -1385,7 +1370,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new EtapeAddEighthOiseau(1500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "7 -  ");
 
@@ -1537,9 +1522,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             float posY = button8Position.y;
 
 
-            MyTimer.TaskEtape nextEtape = new MoveMainTo8Validate(3000, 1000);
+            MyTimer.TaskEtape nextEtape = new MoveMainTo8Validate(2500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
         }
     }
 
@@ -1562,7 +1547,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new EtapeAddNinthOiseau(1500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "8 -  ");
 
@@ -1713,9 +1698,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             float posX = button9Position.x;
             float posY = button9Position.y;
 
-            MyTimer.TaskEtape nextEtape = new MoveMainTo9Validate(3000, 1000);
+            MyTimer.TaskEtape nextEtape = new MoveMainTo9Validate(2500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
         }
     }
 
@@ -1738,9 +1723,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new Fin(1500, 1000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 2000);
             StringBuilder ex = currentLabel.getText();
-            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "8 -  ");
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "9 -  ");
 
             currentLabel.setText(newStrBuilder);
         }
@@ -1756,13 +1741,11 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-
             MyTimer.TaskEtape finOnglet = new FinOnglet(1000, 500);
             finOnglet.run();
 
             endTime = System.currentTimeMillis();
             seconds = (endTime - startTime) / 1000L;
-
 
             timer.cancel();
         }

@@ -328,10 +328,6 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             if (planche1.getNumberBilles() == randNumOiseau)
             {
-//                validusAnimated.isActif = false;
-//                activiteView.addTextActivite("C'est bien continue " /*+ questionCourante*/);
-//                timer.schedule(new EtapeNextQuestion(1000), 500);
-//                MyTimer.TaskEtape nextEtape = new EtapeInstruction(2000, 500);
                 MyTimer.TaskEtape nextEtape = new EtapeNextQuestion(1000, 500);
 
                 if (questionCourante != 8)

@@ -31,21 +31,18 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     float posXinCalc = posX + 160.0f;
     float posYinCalc = posY + 220.0f;
 
-    private TextureRegion textureRegionFond, additionBouton, divisionBouton, effacerBouton, egalBouton, multiplicationBouton, parenthese1Bouton, parenthese2Bouton, soustractionBouton, validerBouton, virguleBouton;
+    private TextureRegion textureRegionFond;
 
-    TextureRegion chiffreAux;
-
-    MyTextButton additionBouton2, soustractionBouton2, multiplicationBouton2, egalBouton2, effacerBouton2, validerBouton2, zero_bouton, un_bouton, deux_bouton, trois_bouton, quatre_bouton, cinq_bouton, six_bouton, sept_bouton, huit_bouton, neuf_bouton;
+    MyTextButton additionBouton, soustractionBouton, multiplicationBouton, egalBouton, effacerBouton, validerBouton, zero_bouton, un_bouton, deux_bouton, trois_bouton, quatre_bouton, cinq_bouton, six_bouton, sept_bouton, huit_bouton, neuf_bouton;
 
     TextField textFieldTest;
     Skin skin;
     Stage stage;
     TextField.TextFieldStyle textFieldStyleTest;
 
-    MyImageButton myButtonTest;
+//    MyImageButton myButtonTest;
 
-    // ArrayList<TextureRegion> arrayListButtons = new ArrayList<>();
-    ArrayList<MyTextButton> arrayListButtons2 = new ArrayList<>();
+    ArrayList<MyTextButton> arrayListButtons = new ArrayList<>();
     protected boolean isVisible = true;
     protected boolean isActive = true;
 
@@ -86,10 +83,6 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
         stage.addActor(textFieldTest);
 
-//        textFieldTest.addListener(new ClickListener()
-//        {
-//
-//        });
 
         Texture textureFond = new Texture("Images/calculetteKeys/clavier_fond_bis.png");
         textureFond.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -132,12 +125,12 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         //setWidth(width);
         //setHeight(height);
 
-        additionBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_addition.png", "Images/calculetteKeys/highlight/clavier_addition_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
-        soustractionBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_soustraction.png", "Images/calculetteKeys/highlight/clavier_soustraction_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
-        multiplicationBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_multiplication.png", "Images/calculetteKeys/highlight/clavier_multiplication_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
-        egalBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_egal.png", "Images/calculetteKeys/highlight/clavier_egal_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
-        effacerBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_effacer.png", "Images/calculetteKeys/highlight/clavier_effacer_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
-        validerBouton2 = new MyTextButton("", "Images/calculetteKeys/clavier_valider.png", "Images/calculetteKeys/highlight/clavier_valider_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        additionBouton = new MyTextButton("", "Images/calculetteKeys/clavier_addition.png", "Images/calculetteKeys/highlight/clavier_addition_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        soustractionBouton = new MyTextButton("", "Images/calculetteKeys/clavier_soustraction.png", "Images/calculetteKeys/highlight/clavier_soustraction_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        multiplicationBouton = new MyTextButton("", "Images/calculetteKeys/clavier_multiplication.png", "Images/calculetteKeys/highlight/clavier_multiplication_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        egalBouton = new MyTextButton("", "Images/calculetteKeys/clavier_egal.png", "Images/calculetteKeys/highlight/clavier_egal_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        effacerBouton = new MyTextButton("", "Images/calculetteKeys/clavier_effacer.png", "Images/calculetteKeys/highlight/clavier_effacer_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
+        validerBouton = new MyTextButton("", "Images/calculetteKeys/clavier_valider.png", "Images/calculetteKeys/highlight/clavier_valider_highlight.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 60);
 
         zero_bouton = new MyTextButton("0", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
         un_bouton = new MyTextButton("1", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
@@ -151,43 +144,43 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         neuf_bouton = new MyTextButton("9", "Images/calculetteKeys/vide_inactif.png", "Images/calculetteKeys/highlight/vide_actif.png", MyConstants.SCREENWIDTH / 60, "font/comic_sans_ms.ttf", MyConstants.SCREENWIDTH / 50);
 
 
-        arrayListButtons2.add(zero_bouton);
+        arrayListButtons.add(zero_bouton);
         zero_bouton.addListener(new ButtonOperationsListener("0"));
-        arrayListButtons2.add(un_bouton);
+        arrayListButtons.add(un_bouton);
         un_bouton.addListener(new ButtonOperationsListener("1"));
-        arrayListButtons2.add(quatre_bouton);
+        arrayListButtons.add(quatre_bouton);
         quatre_bouton.addListener(new ButtonOperationsListener("4"));
-        arrayListButtons2.add(sept_bouton);
+        arrayListButtons.add(sept_bouton);
         sept_bouton.addListener(new ButtonOperationsListener("7"));
 
-        arrayListButtons2.add(effacerBouton2);
-        effacerBouton2.addListener(new ButtonOperationsListener(("effacer")));
-        arrayListButtons2.add(deux_bouton);
+        arrayListButtons.add(effacerBouton);
+        effacerBouton.addListener(new ButtonOperationsListener(("effacer")));
+        arrayListButtons.add(deux_bouton);
         deux_bouton.addListener((new ButtonOperationsListener("2")));
-        arrayListButtons2.add(cinq_bouton);
+        arrayListButtons.add(cinq_bouton);
         cinq_bouton.addListener(new ButtonOperationsListener("5"));
-        arrayListButtons2.add(huit_bouton);
+        arrayListButtons.add(huit_bouton);
         huit_bouton.addListener(new ButtonOperationsListener("8"));
 
-        arrayListButtons2.add(validerBouton2);
+        arrayListButtons.add(validerBouton);
         //TODO action a concevoir --> Runnable
-        arrayListButtons2.add(trois_bouton);
+        arrayListButtons.add(trois_bouton);
         trois_bouton.addListener(new ButtonOperationsListener("3"));
-        arrayListButtons2.add(six_bouton);
+        arrayListButtons.add(six_bouton);
         six_bouton.addListener(new ButtonOperationsListener("6"));
-        arrayListButtons2.add(neuf_bouton);
+        arrayListButtons.add(neuf_bouton);
         neuf_bouton.addListener(new ButtonOperationsListener("9"));
 
-        arrayListButtons2.add(egalBouton2);
-        egalBouton2.addListener(new ButtonOperationsListener("="));
-        arrayListButtons2.add(multiplicationBouton2);
-        multiplicationBouton2.addListener(new ButtonOperationsListener("x"));
-        arrayListButtons2.add(soustractionBouton2);
-        soustractionBouton2.addListener(new ButtonOperationsListener("-"));
-        arrayListButtons2.add(additionBouton2);
-        additionBouton2.addListener(new ButtonOperationsListener("+"));
+        arrayListButtons.add(egalBouton);
+        egalBouton.addListener(new ButtonOperationsListener("="));
+        arrayListButtons.add(multiplicationBouton);
+        multiplicationBouton.addListener(new ButtonOperationsListener("x"));
+        arrayListButtons.add(soustractionBouton);
+        soustractionBouton.addListener(new ButtonOperationsListener("-"));
+        arrayListButtons.add(additionBouton);
+        additionBouton.addListener(new ButtonOperationsListener("+"));
 
-        for (MyTextButton textButton : arrayListButtons2)
+        for (MyTextButton textButton : arrayListButtons)
         {
             stage.addActor(textButton);
         }
@@ -246,7 +239,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
     public MyPoint calculetteValidateAndDisplay()
     {
-        MyPoint buttonValidatePosition = new MyPoint((int) validerBouton2.getX(), (int) validerBouton2.getY());
+        MyPoint buttonValidatePosition = new MyPoint((int) validerBouton.getX(), (int) validerBouton.getY());
 
         textFieldTest.setText("");
 
@@ -384,8 +377,6 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         float paddingLeft = width / 20;
         float paddingBottom = height / 20;
         batch.draw(textureRegionFond, MyConstants.SCREENWIDTH - MyConstants.SCREENWIDTH / 6, 0, width, height);
-//        batch.draw(textureRegionFond, MyConstants.SCREENWIDTH - 500, 0, 200, 200);
-
 
         int cpt = 0;
         float widthButton = width / 4.5f;
@@ -395,7 +386,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         {
             for (int j = 0; j < 4; j++)
             {
-                MyTextButton buttonAux = arrayListButtons2.get(cpt);
+                MyTextButton buttonAux = arrayListButtons.get(cpt);
                 buttonAux.setSize(widthButton, heightButton);
                 buttonAux.setPosition(paddingLeft + posX + widthButton * i, paddingBottom + posY + heightButton * j);
                 buttonAux.draw(batch, 1.0f);
