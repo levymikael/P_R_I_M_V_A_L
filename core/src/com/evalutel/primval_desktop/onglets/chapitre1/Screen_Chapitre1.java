@@ -57,7 +57,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     MrNotes mrNotes;
     MrTemps mrTemps;
 
-    protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
+    protected ArrayList<MyDrawInterface> allDrawables ;
 
     MyButtonRetour myButtonRetour;
 

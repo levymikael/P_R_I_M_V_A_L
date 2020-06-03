@@ -1,16 +1,31 @@
 package com.evalutel.primval_desktop;
 
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
 //    public UnePlancheNew plancheNew = null;
 
     private int imageWidthInit;
+    private TextureRegion textureRegionMain;
+    private TextureRegion textureRegionMainClicked;
 
     public UneMain(int startPositionX, int startPositionY, int animationWidth)
     {
-        super("Images/EnonceUIElements/doigt_new.png", startPositionX, startPositionY, animationWidth, animationWidth * 919 / 702);
+        super("Images/EnonceUIElements/doigt_neww.png", startPositionX, startPositionY, animationWidth, animationWidth * 919 / 702);
         imageWidthInit = animationWidth;
+
+
+        Texture imgAux = new Texture("Images/EnonceUIElements/doigt_neww.png");
+        imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        textureRegionMain = new TextureRegion(imgAux);
+
+
+        Texture imgAux2 = new Texture("Images/EnonceUIElements/doigt_neww_click.png");
+        imgAux2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        textureRegionMainClicked = new TextureRegion(imgAux2);
     }
 
     public void moveTo(long animationDureemillis, int deplacementEnX, int deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext)
@@ -34,28 +49,12 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCor
 
     public void imageDown()
     {
-        float exHeight = animationHeight;
-        animationWidth = (float) imageWidthInit * 3.0f / 4.0f;
-        animationHeight = animationWidth * 919.0f / 702.0f;
-
-
-        int ecartY = (int) (exHeight - animationHeight);
-
-        currentPositionY = currentPositionY + ecartY;
+        changeImage(textureRegionMainClicked);
     }
 
     public void imageUp()
     {
-        float exHeight = animationHeight;
-        animationWidth = imageWidthInit;
-        animationHeight = animationWidth * 919.0f / 702.0f;
-
-
-        int ecartY = (int) (animationHeight - exHeight);
-
-        int deplacemenNewX = (int) (deplacementEnX + ecartY);
-
-        currentPositionY = currentPositionY - ecartY;
+        changeImage(textureRegionMain);
     }
 
 
@@ -70,25 +69,25 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCor
     @Override
     public void myCorrectionStart()
     {
-
+        //super.myCorrectionStart();
     }
 
     @Override
     public void myCorrectionStop()
     {
-
+        //super.myCorrectionStop();
     }
 
     @Override
     public void myPause()
     {
-
+        super.myPause();
     }
 
     @Override
     public void myResume()
     {
-
+        super.myResume();
     }
 }
 

@@ -146,12 +146,14 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     @Override
     public void myPause()
     {
+        super.myPause();
         this.setActive(false);
     }
 
     @Override
     public void myResume()
     {
+        super.myResume();
         this.setActive(true);
     }
 

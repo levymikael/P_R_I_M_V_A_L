@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
     protected TextureRegion[] animationFrames;
-    Animation animation;
+    protected Animation animation;
     MyTimer timer = new MyTimer();
 
 
@@ -79,6 +79,12 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         this(arrayFromImage(oneImagePath), startPositionX, startPositionY, animationWidth, animationHeight);
     }
 
+    public void changeImage(TextureRegion textureRegion)
+    {
+        //animationFrames = new TextureRegion[1];
+        animationFrames[0] = textureRegion;
+        animation = new Animation(1f / 6f, (Object[]) animationFrames);
+    }
 
     public void setPosition(int x, int y)
     {

@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -34,7 +35,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
     private TextureRegion textureRegionFond;
 
-    MyTextButton additionBouton, soustractionBouton, multiplicationBouton, egalBouton, effacerBouton, validerBouton, zero_bouton, un_bouton, deux_bouton, trois_bouton, quatre_bouton, cinq_bouton, six_bouton, sept_bouton, huit_bouton, neuf_bouton;
+    public MyTextButton additionBouton, soustractionBouton, multiplicationBouton, egalBouton, effacerBouton, validerBouton, zero_bouton, un_bouton, deux_bouton, trois_bouton, quatre_bouton, cinq_bouton, six_bouton, sept_bouton, huit_bouton, neuf_bouton;
 
     TextField textFieldTest;
     Skin skin;
@@ -128,7 +129,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         int fontSizeButton = MyConstants.SCREENWIDTH / 60;
 
         String emptyButtonInactivePath = "Images/calculetteKeys/vide_inactif.png";
-        String emptyButtonActivePath = "Images/calculetteKeys/highlight/vide_actif.png:";
+        String emptyButtonActivePath = "Images/calculetteKeys/highlight/vide_actif.png";
 
         additionBouton = new MyTextButton("", "Images/calculetteKeys/clavier_addition.png", "Images/calculetteKeys/highlight/clavier_addition_highlight.png", buttonSize, "font/comic_sans_ms.ttf", fontSizeButton);
         soustractionBouton = new MyTextButton("", "Images/calculetteKeys/clavier_soustraction.png", "Images/calculetteKeys/highlight/clavier_soustraction_highlight.png", buttonSize, "font/comic_sans_ms.ttf", fontSizeButton);
@@ -188,6 +189,11 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         {
             stage.addActor(textButton);
         }
+
+//        TextButton.TextButtonStyle styleTest = six_bouton.getStyle();
+//        ClickListener clickListenerTest = six_bouton.getClickListener();
+//        //styleTest.set
+//        clickListenerTest.setVisualPressed(true);
     }
 
     public MyPoint buttonPosition(int buttonNumber)
@@ -196,51 +202,51 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         switch (buttonNumber)
         {
             case 0:
-                buttonPosition.x = (int) zero_bouton.getX();
-                buttonPosition.y = (int) zero_bouton.getY();
+                buttonPosition.x = (int) (zero_bouton.getX() + zero_bouton.getWidth() / 3);
+                buttonPosition.y = (int) (zero_bouton.getY() + zero_bouton.getHeight() / 3);
                 break;
             case 1:
-                buttonPosition.x = (int) un_bouton.getX();
-                buttonPosition.y = (int) un_bouton.getY();
+                buttonPosition.x = (int) (un_bouton.getX() + un_bouton.getWidth() / 3);
+                buttonPosition.y = (int) (un_bouton.getY() + un_bouton.getHeight() / 3);
                 break;
             case 2:
-                buttonPosition.x = (int) deux_bouton.getX();
-                buttonPosition.y = (int) deux_bouton.getY();
+                buttonPosition.x = (int) (deux_bouton.getX() + deux_bouton.getWidth() / 3);
+                buttonPosition.y = (int) (deux_bouton.getY() + deux_bouton.getHeight() / 3);
                 break;
             case 3:
-                buttonPosition.x = (int) trois_bouton.getX();
-                buttonPosition.y = (int) trois_bouton.getY();
+                buttonPosition.x = (int) (trois_bouton.getX() + trois_bouton.getWidth() / 3);
+                buttonPosition.y = (int) (trois_bouton.getY() + trois_bouton.getHeight() / 3);
                 break;
             case 4:
-                buttonPosition.x = (int) quatre_bouton.getX();
-                buttonPosition.y = (int) quatre_bouton.getY();
+                buttonPosition.x = (int) (quatre_bouton.getX() + quatre_bouton.getWidth() / 3);
+                buttonPosition.y = (int) (quatre_bouton.getY() + quatre_bouton.getHeight() / 3);
                 break;
             case 5:
-                buttonPosition.x = (int) cinq_bouton.getX();
-                buttonPosition.y = (int) cinq_bouton.getY();
+                buttonPosition.x = (int) (cinq_bouton.getX() + cinq_bouton.getWidth() / 3);
+                buttonPosition.y = (int) (cinq_bouton.getY() + cinq_bouton.getHeight() / 3);
                 break;
             case 6:
-                buttonPosition.x = (int) six_bouton.getX();
-                buttonPosition.y = (int) six_bouton.getY();
+                buttonPosition.x = (int) (six_bouton.getX() + six_bouton.getWidth() / 3);
+                buttonPosition.y = (int) (six_bouton.getY() + six_bouton.getHeight() / 3);
                 break;
             case 7:
-                buttonPosition.x = (int) sept_bouton.getX();
-                buttonPosition.y = (int) sept_bouton.getY();
+                buttonPosition.x = (int) (sept_bouton.getX() + sept_bouton.getWidth() / 3);
+                buttonPosition.y = (int) (sept_bouton.getY() + sept_bouton.getHeight() / 3);
                 break;
             case 8:
-                buttonPosition.x = (int) huit_bouton.getX();
-                buttonPosition.y = (int) huit_bouton.getY();
+                buttonPosition.x = (int) (huit_bouton.getX() + huit_bouton.getWidth() / 3);
+                buttonPosition.y = (int) (huit_bouton.getY() + huit_bouton.getHeight() / 3);
                 break;
             case 9:
-                buttonPosition.x = (int) neuf_bouton.getX();
-                buttonPosition.y = (int) neuf_bouton.getY();
+                buttonPosition.x = (int) (neuf_bouton.getX() + neuf_bouton.getWidth() / 3);
+                buttonPosition.y = (int) (neuf_bouton.getY() + neuf_bouton.getHeight() / 3);
                 break;
         }
 
         return buttonPosition;
     }
 
-    public void textDisplay (int buttonNumber)
+    public void textDisplay(int buttonNumber)
     {
         textFieldTest.setText(String.valueOf(buttonNumber));
 
@@ -253,7 +259,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         return buttonValidatePosition;
     }
 
-    public void textRemove ()
+    public void textRemove()
     {
         textFieldTest.setText("");
     }
@@ -344,6 +350,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         private ButtonOperationsListener(String str)
         {
             string = str;
+
         }
 
         @Override
@@ -351,7 +358,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         {
             super.clicked(event, x, y);
 
-            if( ! isActive)
+            if (!isActive)
             {
                 return;
             }

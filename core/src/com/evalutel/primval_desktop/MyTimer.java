@@ -1,5 +1,6 @@
 package com.evalutel.primval_desktop;
 
+import com.badlogic.gdx.Gdx;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet;
 
 import java.util.TimerTask;
@@ -13,8 +14,7 @@ public class MyTimer
         try
         {
             timer.schedule(etape, afterDelay);
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -24,10 +24,8 @@ public class MyTimer
 
     public void cancel()
     {
-
         timer.cancel();
     }
-
 
 
     public static class TaskEtape extends TimerTask
@@ -54,6 +52,8 @@ public class MyTimer
         @Override
         public void run()
         {
+            Gdx.app.log("Timer", "timer lancé");
+
         }
     }
 

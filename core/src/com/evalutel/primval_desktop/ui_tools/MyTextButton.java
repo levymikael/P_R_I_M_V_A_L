@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.TimeUtils;
 
 public class MyTextButton extends TextButton
 {
@@ -49,7 +50,7 @@ public class MyTextButton extends TextButton
 
         buttonStyle.up = spriteDrawableUp;
 
-        Texture textureDown = new Texture(Gdx.files.internal(imagePathUp));
+        Texture textureDown = new Texture(Gdx.files.internal(imagePathDown));
         textureDown.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         SpriteDrawable spriteDrawableDown = new SpriteDrawable(new Sprite(textureDown));
@@ -81,4 +82,6 @@ public class MyTextButton extends TextButton
 
         return buttonStyle;
     }
+
+
 }

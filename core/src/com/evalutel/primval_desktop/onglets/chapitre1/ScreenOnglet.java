@@ -191,6 +191,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         int posY = MyConstants.SCREENHEIGHT / 2;
         uneMain = new UneMain(posX, posY, MyConstants.SCREENWIDTH / 6);
         uneMain.setVisible(false);
+        myCorrectionAndPauseGeneral.addElements(uneMain);
 
         timer = new MyTimer();
 
