@@ -160,17 +160,23 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            MyTimer.TaskEtape nextEtape = new MoveMainToReserve1(2000, 500);
+            MyTimer.TaskEtape nextEtape = new MoveMainToReserve(2000, 500);
 
             metrologue.metrologuePlaySound("Sounds/Metrologue/je vois un oiseau.mp3", nextEtape);
         }
     }
 
-    private class MoveMainToReserve1 extends MyTimer.TaskEtape
+
+    private class MoveMainToReserve extends MyTimer.TaskEtape
     {
-        private MoveMainToReserve1(long durMillis, long delay)
+        private MoveMainToReserve(long durMillis, long delay)
         {
             super(durMillis, delay);
+        }
+
+        private MoveMainToReserve(long durMillis)
+        {
+            super(durMillis);
         }
 
         @Override
@@ -184,16 +190,26 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
                 float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
                 int posY = (int) posYf;
 
-                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve1(500);
+                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve(500);
 
                 uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
+
+
+                switch (cptOiseau)
+                {
+                    case 2:
+
+                        metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.9 - Maintenant ils sont 3 oiseaux.mp3");
+                        break;
+                }
             }
         }
     }
 
-    private class DisplayBilleReserve1 extends MyTimer.TaskEtape
+
+    private class DisplayBilleReserve extends MyTimer.TaskEtape
     {
-        private DisplayBilleReserve1(long durMillis)
+        private DisplayBilleReserve(long durMillis)
         {
             super(durMillis);
         }
@@ -211,15 +227,15 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             bille.setVisible(true);
             bille.setActive(false);
 
-            MyTimer.TaskEtape nextEtape = new EtapeDragFirstBille(1000);
+            MyTimer.TaskEtape nextEtape = new EtapeDragBille(1000);
             timer.schedule(nextEtape, 1000);
             uneMain.imageDown();
         }
     }
 
-    private class EtapeDragFirstBille extends MyTimer.TaskEtape
+    private class EtapeDragBille extends MyTimer.TaskEtape
     {
-        private EtapeDragFirstBille(long durMillis)
+        private EtapeDragBille(long durMillis)
         {
             super(durMillis);
         }
@@ -232,39 +248,23 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             int posX = MyConstants.SCREENWIDTH / 2;
             int posY = (int) planche1.getHeight() / 2;
 
-            MyTimer.TaskEtape nextEtape = new EtapeAddFirstBille(2000, 1000);
+            MyTimer.TaskEtape nextEtape = new EtapeAddBille(2000, 1000);
 
-            if (cptBille == 0)
+            bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 2500, 1f / 6f);
+            uneMain.cliqueTo(durationMillis, posX, posY, null, 2000);
+
+            switch (cptBille)
             {
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.3 - Je saisis une bille du sac.mp3");
+                case 0:
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.3 - Je saisis une bille du sac.mp3");
 
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 2500, 1f / 6f);
+                    break;
 
-                uneMain.cliqueTo(durationMillis, posX, posY, null, 2000);
+                case 1:
+
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.6 - je depose encore une bille.mp3", nextEtape);
+                    break;
             }
-        }
-    }
-
-    private class EtapeAddFirstBille extends MyTimer.TaskEtape
-    {
-        private EtapeAddFirstBille(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
-
-            MyTimer.TaskEtape nextEtape = new MoveMainTo1Calculette(2000, 1000);
-
-            uneMain.moveTo(50, posX, posY, nextEtape, 1000);
         }
     }
 
@@ -305,9 +305,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             TextButton.TextButtonStyle styleTest = calculetteViewTest.un_bouton.getStyle();
 
-            //ClickListener clickListenerTest = calculetteViewTest.un_bouton.getClickListener();
-            //styleTest.set
-            //clickListenerTest.setVisualPressed(true);
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
@@ -383,7 +380,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         }
     }
 
-
     private class EtapeAddSecondOiseau extends MyTimer.TaskEtape
     {
         private EtapeAddSecondOiseau(long durMillis, long delay)
@@ -401,109 +397,10 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 1)
             {
-                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve2(1000), 0, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve(1000), 0, 1f / 6f);
                 metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.5 - je vois maintenant 2 oiseaux.mp3");
             }
             cptOiseau++;
-        }
-    }
-
-    private class MoveMainToReserve2 extends MyTimer.TaskEtape
-    {
-        private MoveMainToReserve2(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            if (cptBille < billesList.size())
-            {
-                uneMain.setVisible(true);
-
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-                int posY = (int) posYf;
-
-                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve2(500);
-
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1500);
-            }
-        }
-    }
-
-    private class DisplayBilleReserve2 extends MyTimer.TaskEtape
-    {
-        private DisplayBilleReserve2(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-            int posX = (int) posXmain;
-            int posY = (int) posYf;
-
-            UneBille bille = billesList.get(cptBille);
-            bille.setPositionCenter(posX, posY);
-            bille.setVisible(true);
-            bille.setActive(false);
-
-            MyTimer.TaskEtape nextEtape = new EtapeDragSecondBille(1000);
-            timer.schedule(nextEtape, 1000);
-            uneMain.imageDown();
-        }
-    }
-
-    private class EtapeDragSecondBille extends MyTimer.TaskEtape
-    {
-        private EtapeDragSecondBille(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            bille.setVisible(true);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            MyTimer.TaskEtape nextEtape = new EtapeAddSecondBille(1500, 1000);
-            if (cptBille == 1)
-            {
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), null, 2000, 1f / 6f);
-                uneMain.cliqueTo(durationMillis, posX, posY, null, 1000);
-
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.6 - je depose encore une bille.mp3", nextEtape);
-            }
-        }
-    }
-
-    private class EtapeAddSecondBille extends MyTimer.TaskEtape
-    {
-        private EtapeAddSecondBille(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
-
-            MyTimer.TaskEtape nextEtape = new MoveMainTo2Calculette(1000, 500);
-            uneMain.moveTo(50, posX, posY, nextEtape, 1000);
         }
     }
 
@@ -560,7 +457,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             calculetteViewTest.textDisplay(2);
         }
     }
-
 
     private class MoveMainTo2Validate extends MyTimer.TaskEtape
     {
@@ -638,109 +534,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             {
                 metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.8 - Puis je valide.mp3");
 
-                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve3(1500), 1500, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve(1500), 1500, 1f / 6f);
             }
             cptOiseau++;
-        }
-    }
-
-    private class MoveMainToReserve3 extends MyTimer.TaskEtape
-    {
-        private MoveMainToReserve3(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            if (cptBille < billesList.size())
-            {
-                uneMain.setVisible(true);
-
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-                int posY = (int) posYf;
-
-                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve3(500);
-
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
-
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.9 - Maintenant ils sont 3 oiseaux.mp3");
-            }
-        }
-    }
-
-    private class DisplayBilleReserve3 extends MyTimer.TaskEtape
-    {
-        private DisplayBilleReserve3(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-            int posX = (int) posXmain;
-            int posY = (int) posYf;
-
-            UneBille bille = billesList.get(cptBille);
-            bille.setPositionCenter(posX, posY);
-            bille.setVisible(true);
-            bille.setActive(false);
-
-            MyTimer.TaskEtape nextEtape = new EtapeDragThirdBille(1000);
-            timer.schedule(nextEtape, 1000);
-            uneMain.imageDown();
-        }
-    }
-
-    private class EtapeDragThirdBille extends MyTimer.TaskEtape
-    {
-        private EtapeDragThirdBille(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            bille.setVisible(true);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            MyTimer.TaskEtape nextEtape = new EtapeAddThirdBille(1000, 1000);
-
-            if (cptBille == 2)
-            {
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 1500, 1f / 6f);
-                uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
-            }
-        }
-    }
-
-    private class EtapeAddThirdBille extends MyTimer.TaskEtape
-    {
-        private EtapeAddThirdBille(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
-
-            MyTimer.TaskEtape nextEtape = new MoveMainTo3Calculette(1000, 500);
-            uneMain.moveTo(50, posX, posY, nextEtape, 1000);
         }
     }
 
@@ -822,7 +618,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new ClickOnValidate3(1000, 1000);
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
-
         }
     }
 
@@ -875,113 +670,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             if (cptOiseau == 3)
             {
                 metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.11 - Une de plus ils sont 4.mp3");
-                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve4(2000, 300), 1500, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve(2000, 300), 1500, 1f / 6f);
             }
             cptOiseau++;
         }
     }
 
-    private class MoveMainToReserve4 extends MyTimer.TaskEtape
-    {
-        private MoveMainToReserve4(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            if (cptBille < billesList.size())
-            {
-                uneMain.setVisible(true);
-
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-                int posY = (int) posYf;
-
-                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve4(500);
-
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
-            }
-        }
-    }
-
-    private class DisplayBilleReserve4 extends MyTimer.TaskEtape
-    {
-        private DisplayBilleReserve4(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-            int posX = (int) posXmain;
-            int posY = (int) posYf;
-
-            UneBille bille = billesList.get(cptBille);
-            bille.setPositionCenter(posX, posY);
-            bille.setVisible(true);
-            bille.setActive(false);
-
-            MyTimer.TaskEtape nextEtape = new EtapeDragFourthBille(1000);
-            timer.schedule(nextEtape, 1000);
-            uneMain.imageDown();
-        }
-    }
-
-    private class EtapeDragFourthBille extends MyTimer.TaskEtape
-    {
-        private EtapeDragFourthBille(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            bille.setVisible(true);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            MyTimer.TaskEtape nextEtape = new EtapeAddFourthBille(2000, 1000);
-
-            if (cptBille == 3)
-            {
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 1500, 1f / 6f);
-                uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
-            }
-        }
-    }
-
-    private class EtapeAddFourthBille extends MyTimer.TaskEtape
-    {
-        private EtapeAddFourthBille(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
-
-            if (cptBille == 4)
-            {
-                uneMain.moveTo(50, posX, posY, null, 1000);
-
-                timer.schedule(new MoveMainTo4Calculette(1000, 1000), 1000);
-            }
-        }
-    }
 
     private class MoveMainTo4Calculette extends MyTimer.TaskEtape
     {
@@ -1020,12 +714,8 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-
             TextButton.TextButtonStyle styleTest = calculetteViewTest.quatre_bouton.getStyle();
 
-            //ClickListener clickListenerTest = calculetteViewTest.un_bouton.getClickListener();
-            //styleTest.set
-            //clickListenerTest.setVisualPressed(true);
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
@@ -1116,111 +806,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             if (cptOiseau == 4)
             {
                 metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.13 - Encore un ils sont 5.mp3");
-                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve5(2000, 300), 1500, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve(2000, 300), 1500, 1f / 6f);
             }
             cptOiseau++;
-        }
-    }
-
-    private class MoveMainToReserve5 extends MyTimer.TaskEtape
-    {
-        private MoveMainToReserve5(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            if (cptBille < billesList.size())
-            {
-                uneMain.setVisible(true);
-
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-                int posY = (int) posYf;
-
-                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve5(500);
-
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
-            }
-        }
-    }
-
-    private class DisplayBilleReserve5 extends MyTimer.TaskEtape
-    {
-        private DisplayBilleReserve5(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-            int posX = (int) posXmain;
-            int posY = (int) posYf;
-
-            UneBille bille = billesList.get(cptBille);
-            bille.setPositionCenter(posX, posY);
-            bille.setVisible(true);
-            bille.setActive(false);
-
-            MyTimer.TaskEtape nextEtape = new EtapeDragFifthBille(1000);
-            timer.schedule(nextEtape, 1000);
-            uneMain.imageDown();
-        }
-    }
-
-    private class EtapeDragFifthBille extends MyTimer.TaskEtape
-    {
-        private EtapeDragFifthBille(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            bille.setVisible(true);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            MyTimer.TaskEtape nextEtape = new EtapeAddFifthBille(1500, 1000);
-
-            if (cptBille == 4)
-            {
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 1500, 1f / 6f);
-                uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
-            }
-        }
-    }
-
-    private class EtapeAddFifthBille extends MyTimer.TaskEtape
-    {
-        private EtapeAddFifthBille(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
-
-            if (cptBille == 5)
-            {
-                uneMain.moveTo(50, posX, posY, null, 1000);
-
-                timer.schedule(new MoveMainTo5Calculette(1000, 1000), 1500);
-            }
         }
     }
 
@@ -1350,113 +938,11 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 5)
             {
-                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve6(2000, 300), 1500, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve(2000, 300), 1500, 1f / 6f);
             }
             cptOiseau++;
 
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.14 - Maintenant ils occupennt toute la branche ils sont 6.mp3");
-        }
-    }
-
-    private class MoveMainToReserve6 extends MyTimer.TaskEtape
-    {
-        private MoveMainToReserve6(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            if (cptBille < billesList.size())
-            {
-                uneMain.setVisible(true);
-
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-                int posY = (int) posYf;
-
-                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve6(500);
-
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
-            }
-        }
-    }
-
-    private class DisplayBilleReserve6 extends MyTimer.TaskEtape
-    {
-        private DisplayBilleReserve6(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-            int posX = (int) posXmain;
-            int posY = (int) posYf;
-
-            UneBille bille = billesList.get(cptBille);
-            bille.setPositionCenter(posX, posY);
-            bille.setVisible(true);
-            bille.setActive(false);
-
-            MyTimer.TaskEtape nextEtape = new EtapeDragSixthBille(1000);
-            timer.schedule(nextEtape, 1000);
-            uneMain.imageDown();
-        }
-    }
-
-    private class EtapeDragSixthBille extends MyTimer.TaskEtape
-    {
-        private EtapeDragSixthBille(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            bille.setVisible(true);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            MyTimer.TaskEtape nextEtape = new EtapeAddSixthBille(1000, 1000);
-
-            if (cptBille == 5)
-            {
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 1500, 1f / 6f);
-                uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
-            }
-        }
-    }
-
-    private class EtapeAddSixthBille extends MyTimer.TaskEtape
-    {
-        private EtapeAddSixthBille(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
-
-            if (cptBille == 6)
-            {
-                uneMain.moveTo(50, posX, posY, null, 1000);
-
-                timer.schedule(new MoveMainTo6Calculette(1000, 1000), 1000);
-            }
         }
     }
 
@@ -1587,111 +1073,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             if (cptOiseau == 6)
             {
                 metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.15 - un oiseau tout seul sur la seconde.mp3");
-                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve7(2000, 300), 1500, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve(2000, 300), 1500, 1f / 6f);
             }
             cptOiseau++;
-        }
-    }
-
-    private class MoveMainToReserve7 extends MyTimer.TaskEtape
-    {
-        private MoveMainToReserve7(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            if (cptBille < billesList.size())
-            {
-                uneMain.setVisible(true);
-
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-                int posY = (int) posYf;
-
-                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve7(500);
-
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
-            }
-        }
-    }
-
-    private class DisplayBilleReserve7 extends MyTimer.TaskEtape
-    {
-        private DisplayBilleReserve7(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-            int posX = (int) posXmain;
-            int posY = (int) posYf;
-
-            UneBille bille = billesList.get(cptBille);
-            bille.setPositionCenter(posX, posY);
-            bille.setVisible(true);
-            bille.setActive(false);
-
-            MyTimer.TaskEtape nextEtape = new EtapeDragSeventhBille(1000);
-            timer.schedule(nextEtape, 1000);
-            uneMain.imageDown();
-        }
-    }
-
-    private class EtapeDragSeventhBille extends MyTimer.TaskEtape
-    {
-        private EtapeDragSeventhBille(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            bille.setVisible(true);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            MyTimer.TaskEtape nextEtape = new EtapeAddSeventhBille(1500, 1000);
-
-            if (cptBille == 6)
-            {
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 1500, 1f / 6f);
-                uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
-            }
-        }
-    }
-
-    private class EtapeAddSeventhBille extends MyTimer.TaskEtape
-    {
-        private EtapeAddSeventhBille(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
-
-            if (cptBille == 7)
-            {
-                uneMain.moveTo(50, posX, posY, null, 1000);
-
-                timer.schedule(new MoveMainTo7Calculette(1000, 1000), 1000);
-            }
         }
     }
 
@@ -1822,111 +1206,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             if (cptOiseau == 7)
             {
                 metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.16 - L'oiseau a un compagnon ils sont 8.mp3");
-                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve8(2000, 300), 1500, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve(2000, 300), 1500, 1f / 6f);
             }
             cptOiseau++;
-        }
-    }
-
-    private class MoveMainToReserve8 extends MyTimer.TaskEtape
-    {
-        private MoveMainToReserve8(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            if (cptBille < billesList.size())
-            {
-                uneMain.setVisible(true);
-
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-                int posY = (int) posYf;
-
-                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve8(500);
-
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1500);
-            }
-        }
-    }
-
-    private class DisplayBilleReserve8 extends MyTimer.TaskEtape
-    {
-        private DisplayBilleReserve8(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-            int posX = (int) posXmain;
-            int posY = (int) posYf;
-
-            UneBille bille = billesList.get(cptBille);
-            bille.setPositionCenter(posX, posY);
-            bille.setVisible(true);
-            bille.setActive(false);
-
-            MyTimer.TaskEtape nextEtape = new EtapeDragEighthBille(1000);
-            timer.schedule(nextEtape, 1000);
-            uneMain.imageDown();
-        }
-    }
-
-    private class EtapeDragEighthBille extends MyTimer.TaskEtape
-    {
-        private EtapeDragEighthBille(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            bille.setVisible(true);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            MyTimer.TaskEtape nextEtape = new EtapeAddEighthBille(1000, 1000);
-
-            if (cptBille == 7)
-            {
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 1500, 1f / 6f);
-                uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
-            }
-        }
-    }
-
-    private class EtapeAddEighthBille extends MyTimer.TaskEtape
-    {
-        private EtapeAddEighthBille(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
-
-            if (cptBille == 8)
-            {
-                uneMain.moveTo(50, posX, posY, null, 1000);
-
-                timer.schedule(new MoveMainTo8Calculette(1000, 1000), 1500);
-            }
         }
     }
 
@@ -2057,111 +1339,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             if (cptOiseau == 8)
             {
                 metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.17 - Il n'y a plus de place pour se poser.mp3");
-                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve9(2000, 300), 1500, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve(2000, 300), 1500, 1f / 6f);
             }
             cptOiseau++;
-        }
-    }
-
-    private class MoveMainToReserve9 extends MyTimer.TaskEtape
-    {
-        private MoveMainToReserve9(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            if (cptBille < billesList.size())
-            {
-                uneMain.setVisible(true);
-
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-                int posY = (int) posYf;
-
-                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve9(500);
-
-                uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
-            }
-        }
-    }
-
-    private class DisplayBilleReserve9 extends MyTimer.TaskEtape
-    {
-        private DisplayBilleReserve9(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
-            int posX = (int) posXmain;
-            int posY = (int) posYf;
-
-            UneBille bille = billesList.get(cptBille);
-            bille.setPositionCenter(posX, posY);
-            bille.setVisible(true);
-            bille.setActive(false);
-
-            MyTimer.TaskEtape nextEtape = new EtapeDragNinthBille(1000);
-            timer.schedule(nextEtape, 1000);
-            uneMain.imageDown();
-        }
-    }
-
-    private class EtapeDragNinthBille extends MyTimer.TaskEtape
-    {
-        private EtapeDragNinthBille(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            bille.setVisible(true);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            MyTimer.TaskEtape nextEtape = new EtapeAddNinthBille(1000, 1000);
-
-            if (cptBille == 8)
-            {
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 1500, 1f / 6f);
-                uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
-            }
-        }
-    }
-
-    private class EtapeAddNinthBille extends MyTimer.TaskEtape
-    {
-        private EtapeAddNinthBille(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
-
-            if (cptBille == 9)
-            {
-                uneMain.moveTo(50, posX, posY, null, 1000);
-
-                timer.schedule(new MoveMainTo9Calculette(2000, 1000), 2000);
-            }
         }
     }
 
@@ -2291,6 +1471,83 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             seconds = (endTime - startTime) / 1000L;
 
             timer.cancel();
+        }
+    }
+
+    private class EtapeAddBille extends MyTimer.TaskEtape
+    {
+        private EtapeAddBille(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            UneBille bille = billesList.get(cptBille);
+            int posX = MyConstants.SCREENWIDTH / 2;
+            int posY = (int) planche1.getHeight() / 2;
+
+            planche1.addBilleAndOrganize(bille);
+            cptBille++;
+
+            uneMain.moveTo(50, posX, posY, null, 1000);
+
+            switch (cptBille)
+            {
+                case 1:
+                    timer.schedule(new MoveMainTo1Calculette(2000, 1000), 2000);
+
+                    break;
+
+                case 2:
+
+                    timer.schedule(new MoveMainTo2Calculette(2000, 1000), 2000);
+
+                    break;
+
+                case 3:
+
+                    timer.schedule(new MoveMainTo3Calculette(2000, 1000), 2000);
+
+                    break;
+
+                case 4:
+
+                    timer.schedule(new MoveMainTo4Calculette(2000, 1000), 2000);
+
+                    break;
+
+                case 5:
+
+                    timer.schedule(new MoveMainTo5Calculette(2000, 1000), 2000);
+
+                    break;
+
+                case 6:
+
+                    timer.schedule(new MoveMainTo6Calculette(2000, 1000), 2000);
+
+                    break;
+
+                case 7:
+
+                    timer.schedule(new MoveMainTo7Calculette(2000, 1000), 2000);
+
+                    break;
+
+                case 8:
+
+                    timer.schedule(new MoveMainTo8Calculette(2000, 1000), 2000);
+
+                    break;
+
+                case 9:
+
+                    timer.schedule(new MoveMainTo9Calculette(2000, 1000), 2000);
+
+                    break;
+            }
         }
     }
 
