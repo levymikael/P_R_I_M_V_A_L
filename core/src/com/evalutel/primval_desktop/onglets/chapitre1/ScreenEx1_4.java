@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.StringBuilder;
@@ -20,6 +21,7 @@ import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
+import com.evalutel.primval_desktop.UneArdoise;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
@@ -1563,37 +1565,18 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         int buttonSize = MyConstants.SCREENWIDTH / 15;
 
-        ArrayList<MyTextButton> ardoiseList = new ArrayList<>();
+        ArrayList<Table> ardoiseList = new ArrayList<>();
         for (int i = 0; i < 9; i++)
         {
             int firstPositionArdoiseXNew = firstPositionArdoiseX + (i * 250);
-            MyTextButton uneArdoise = new MyTextButton(String.valueOf(i + 1), "Images/Ardoise/ardoise_fond.png", buttonSize, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
+            UneArdoise uneArdoise = new UneArdoise(stage, String.valueOf(i + 1), firstPositionArdoiseXNew, firstPositionArdoiseY, buttonSize);
             uneArdoise.setPosition(firstPositionArdoiseXNew, firstPositionArdoiseY);
-            allDrawables.add(uneArdoise);
             ardoiseList.add(uneArdoise);
             myCorrectionAndPauseGeneral.addElements(uneArdoise);
 
 
         }
-    }
 
-    public ArrayList<UneBille> autoFillPlanche()
-    {
-        int firstPositionBilleX = (reserveBilles.getPosition().x + reserveBilles.largeurBille / 4);
-        int firstPositionBilleY = (reserveBilles.getPosition().y + reserveBilles.largeurBille);
-
-        billesList = new ArrayList<>();
-
-        for (int i = 0; i < oiseauxList.size() + 1; i++)
-        {
-            UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, reserveBilles.largeurBille);
-            billesList.add(billeAdded);
-            myCorrectionAndPauseGeneral.addElements(billeAdded);
-
-            allDrawables.add(billeAdded);
-            billeAdded.setVisible(false);
-        }
-        return billesList;
     }
 
 
