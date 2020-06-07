@@ -2,17 +2,25 @@ package com.evalutel.primval_desktop.ui_tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.evalutel.primval_desktop.MyCorrectionAndPauseInterface;
+import com.evalutel.primval_desktop.MyDrawInterface;
 
-public class MyTextButton extends TextButton
+public class MyTextButton extends TextButton implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
 
     static int screenHeight = Gdx.graphics.getHeight();
+
+    protected boolean isPaused = false;
+    String backgroundImagePathUp;
+
 
     public MyTextButton(String text, String backgroundImagePathUp, String backgroundImagePathDown, float size, String font, int fontSize)
     {
@@ -20,6 +28,8 @@ public class MyTextButton extends TextButton
 
         this.setSize(size, size);
 //        this.setPosition(getWidth() / 2, getHeight() / 2);
+
+        this.backgroundImagePathUp = backgroundImagePathUp;
     }
 
 
@@ -79,9 +89,48 @@ public class MyTextButton extends TextButton
 
         buttonStyle.up = spriteDrawableUp;
 
-
         return buttonStyle;
     }
 
+
+    @Override
+    public void myDraw(Batch batch)
+    {
+
+        TextureRegion textureRegion = new TextureRegion(new Texture(backgroundImagePathUp));
+
+        batch.draw(textureRegion, 0, 0, getWidth(), getHeight());
+
+    }
+
+    @Override
+    public void myCorrectionStart()
+    {
+
+    }
+
+    @Override
+    public void myCorrectionStop()
+    {
+
+    }
+
+    @Override
+    public void myPause()
+    {
+        isPaused = true;
+    }
+
+    @Override
+    public void myResume()
+    {
+        isPaused = false;
+    }
+
+    @Override
+    public boolean isPause()
+    {
+        return isPaused;
+    }
 
 }

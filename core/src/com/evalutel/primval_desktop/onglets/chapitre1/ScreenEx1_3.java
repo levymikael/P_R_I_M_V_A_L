@@ -166,7 +166,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         }
     }
 
-
     private class MoveMainToReserve extends MyTimer.TaskEtape
     {
         private MoveMainToReserve(long durMillis, long delay)
@@ -190,10 +189,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
                 float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
                 int posY = (int) posYf;
 
-                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve(500);
+                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve(1000);
 
                 uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 1000);
-
 
                 switch (cptOiseau)
                 {
@@ -205,7 +203,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             }
         }
     }
-
 
     private class DisplayBilleReserve extends MyTimer.TaskEtape
     {
@@ -397,7 +394,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 1)
             {
-                oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve(1000), 0, 1f / 6f);
+                oiseau.animateImage(1500, true, posX, posY, new MoveMainToReserve(1500), 0, 1f / 6f);
                 metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.5 - je vois maintenant 2 oiseaux.mp3");
             }
             cptOiseau++;

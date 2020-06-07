@@ -89,7 +89,6 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
         stage.addActor(textFieldTest);
 
-
         Texture textureFond = new Texture("Images/calculetteKeys/clavier_fond_bis.png");
         textureFond.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         textureRegionFond = new TextureRegion(textureFond);

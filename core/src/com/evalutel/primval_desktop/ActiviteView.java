@@ -112,13 +112,19 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         tableMilieu = new Table();
 
-        table.add(tableMilieu).width(tableTitre.getWidth() + MyConstants.SCREENWIDTH / 100);
-        table.row();
-
         Table paddingTableMilieu = new Table();
         paddingTableMilieu.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
 
         table.add(paddingTableMilieu).height(MyConstants.SCREENHEIGHT / 200).width(widthEnonce);
+        table.row();
+
+        table.add(tableMilieu).width(tableTitre.getWidth() + MyConstants.SCREENWIDTH / 100);
+        table.row();
+
+        Table paddingTableMilieu2 = new Table();
+        paddingTableMilieu2.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
+
+        table.add(paddingTableMilieu2).height(MyConstants.SCREENHEIGHT / 200).width(widthEnonce);
         table.row();
 
 
@@ -166,7 +172,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         final float tableHeight = table.getHeight();
         float temptableHeight = tableHeight;
 
-        topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - heightTop + paddingTableMilieu.getHeight();
+        topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - heightTop + (paddingTableMilieu.getHeight()*2);
 
         currentY = topYTablePosition;
         table.setPosition(MyConstants.SCREENWIDTH / 2 - widthEnonce / 2, topYTablePosition);
@@ -272,7 +278,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         cptInstructions++;
 
-        float labelHeight = label3.getHeight() + MyConstants.SCREENHEIGHT / 200;
+        float labelHeight = label3.getHeight() + MyConstants.SCREENHEIGHT / 100;
 
         topYTablePosition = MyConstants.SCREENHEIGHT - table.getHeight() - heightTop;
 

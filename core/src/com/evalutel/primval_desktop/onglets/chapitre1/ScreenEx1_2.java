@@ -98,7 +98,6 @@ public class ScreenEx1_2 extends ScreenOnglet
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
-
         getNumberOiseauxArList();
 
         numOiseauArray = MyMath.genereTabAleatoire(9);
