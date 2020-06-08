@@ -62,8 +62,16 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
             @Override
             public void onCompletion(Music music2)
             {
-                music.dispose();
-                music2.dispose();
+                try
+                {
+                    music.dispose();
+                    music2.dispose();
+                }
+                catch (Exception e)
+                {
+
+                }
+
                 music = null;
                 isSpeaking = false;
 

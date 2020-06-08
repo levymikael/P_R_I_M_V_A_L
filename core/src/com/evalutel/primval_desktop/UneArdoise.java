@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -15,23 +16,34 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.evalutel.primval_desktop.General.MyConstants;
-import com.evalutel.primval_desktop.onglets.chapitre1.Screen_All_Chapters;
+import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 public class UneArdoise extends Table implements MyCorrectionAndPauseInterface, MyDrawInterface
 {
     private final FreeTypeFontGenerator generator;
     private final BitmapFont bitmapFont;
+    public String number;
 
-    public UneArdoise(Stage stage, String number, int posX, int posY, int ardoiseSize)
+    Texture ardoiseBgActive, ardoiseBgInactive;
+
+    boolean isActive = true;
+
+    public float currentPositionX, currentPositionY;
+
+    public UneArdoise(Stage stage, final String number, int posX, int posY, int ardoiseSize)
     {
-
+        this.number = number;
         this.setPosition(posX, posY);
         this.setSize(ardoiseSize, ardoiseSize);
 
-        Texture ardoiseBg = new Texture("Images/Ardoise/ardoise_fond.png");
-        ardoiseBg.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        ardoiseBgActive = new Texture("Images/Ardoise/ardoise_fond.png");
+        ardoiseBgActive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        this.setBackground(new TextureRegionDrawable(new TextureRegion(ardoiseBg)));
+
+        ardoiseBgInactive = new Texture("Images/Ardoise/ardoise_fond.png");
+        ardoiseBgInactive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        this.setBackground(new TextureRegionDrawable(new TextureRegion(ardoiseBgActive)));
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -45,25 +57,34 @@ public class UneArdoise extends Table implements MyCorrectionAndPauseInterface, 
         labelStyleWhite.fontColor = Color.WHITE;
 
         Label ardoiseNum = new Label(number, labelStyleWhite);
-
-
-        setTouchable(Touchable.enabled);
-
-        addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                Gdx.app.log(" ", "Ardoise clicked!");
-            }
-        });
-
         this.add(ardoiseNum);
 
+
+        if (isActive)
+        {
+            setTouchable(Touchable.enabled);
+        }
 
         stage.addActor(this);
     }
 
+    public void setActive(boolean active)
+    {
+        isActive = active;
+    }
+
+
+
+
+    public boolean isActive()
+    {
+        return isActive;
+    }
+
+    public int ardoiseClicked(int number)
+    {
+        return number;
+    }
 
     @Override
     public void myCorrectionStart()

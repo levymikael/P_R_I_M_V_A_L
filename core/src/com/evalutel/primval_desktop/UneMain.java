@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
-//    public UnePlancheNew plancheNew = null;
-
     private int imageWidthInit;
     private TextureRegion textureRegionMain;
     private TextureRegion textureRegionMainClicked;

@@ -137,8 +137,6 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
             uneBille.plancheNew = this;
             uneBille.setVisible(true);
         }
-
-
         return retour;
     }
 
@@ -160,11 +158,6 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
         allBilles.remove(uneBille);
     }
 
-//    public void removeBilleToReserve(UneBille uneBille)
-//    {
-//        allBilles.remove(uneBille);
-//        uneBille.reserveBilles.addBilleToReserve(uneBille);
-//    }
 
     public void removeMain(UneMain uneMain)
     {

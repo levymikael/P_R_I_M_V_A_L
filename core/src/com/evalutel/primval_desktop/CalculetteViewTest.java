@@ -42,6 +42,8 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     Stage stage;
     TextField.TextFieldStyle textFieldStyleTest;
 
+
+String calculetteInput;
     ArrayList<MyTextButton> arrayListButtons = new ArrayList<>();
     protected boolean isVisible = true;
     protected boolean isActive = true;
@@ -195,6 +197,17 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 //        clickListenerTest.setVisualPressed(true);
     }
 
+    public String getInput()
+    {
+        return calculetteInput;
+    }
+
+    public void screenDeletion ()
+    {
+       textFieldTest.clear();
+
+    }
+
     public MyPoint buttonPosition(int buttonNumber)
     {
         MyPoint buttonPosition = new MyPoint(0, 0);
@@ -249,6 +262,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     {
         textFieldTest.setText(String.valueOf(buttonNumber));
 
+
     }
 
     public MyPoint calculetteValidateAndDisplay()
@@ -261,6 +275,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     public void textRemove()
     {
         textFieldTest.setText("");
+
     }
 
     @Override
@@ -370,12 +385,18 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
                 {
                     String textNew = exText.substring(0, exText.length() - 1);
                     textFieldTest.setText(textNew);
+
+                    calculetteInput = textNew;
                 }
             }
             else
             {
                 String textNew = exText + string;
                 textFieldTest.setText(textNew);
+
+
+               calculetteInput = textNew;
+
             }
         }
     }

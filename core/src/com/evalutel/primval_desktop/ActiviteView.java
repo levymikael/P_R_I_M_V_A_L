@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
     private Table table, tableTitre, tableBandeauBas;
-    private Table tableMilieu;
+    private Table tableMilieu, table4;
     private float heightTop;
     float topYTablePosition, heightBackGroundImage;
 
@@ -172,7 +172,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         final float tableHeight = table.getHeight();
         float temptableHeight = tableHeight;
 
-        topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - heightTop + (paddingTableMilieu.getHeight()*2);
+        topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - heightTop + (paddingTableMilieu.getHeight() * 2);
 
         currentY = topYTablePosition;
         table.setPosition(MyConstants.SCREENWIDTH / 2 - widthEnonce / 2, topYTablePosition);
@@ -226,7 +226,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     public Label addTextActivite(String string)
     {
-        Table table4 = new Table();
+        table4 = new Table();
 
         Label.LabelStyle labelStyleBlack = new Label.LabelStyle();
         labelStyleBlack.font = bitmapFontArial;
@@ -296,6 +296,11 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         }
 
         return label3;
+    }
+
+    public void emptyActivite()
+    {
+        tableMilieu.clear();
     }
 
 //    public Label addText(String str)

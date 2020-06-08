@@ -377,40 +377,43 @@ public class ScreenOnglet implements Screen, InputProcessor
         int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
-
-        if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
+        if (reserveBilles != null)
         {
-            System.out.println("clickedOnReserve");
-            UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille);
-            objectTouchedList.add(billeAdded);
-            allDrawables.add(billeAdded);
-            objectTouched = billeAdded;
+            if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
+            {
+                System.out.println("clickedOnReserve");
+                UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille);
+                objectTouchedList.add(billeAdded);
+                allDrawables.add(billeAdded);
+                objectTouched = billeAdded;
 //            firstPositionX = mousePointerX;
 //            firstPositionY = mousePointerY;
-        }
+            }
 
-        else /*si bille part de la planche*/
-        {
-            for (int i = 0; i < objectTouchedList.size(); i++)
+            else /*si bille part de la planche*/
             {
-                MyTouchInterface objetAux = objectTouchedList.get(i);
-
-                if (objetAux.isTouched(screenX, reversedScreenY))
+                for (int i = 0; i < objectTouchedList.size(); i++)
                 {
-                    objectTouched = objetAux;
-                    firstPositionX = objectTouched.getPosition().x;
-                    firstPositionY = objectTouched.getPosition().y;
+                    MyTouchInterface objetAux = objectTouchedList.get(i);
 
-                    if (objectTouched instanceof UneBille)
+                    if (objetAux.isTouched(screenX, reversedScreenY))
                     {
-                        UneBille billeAux = (UneBille) objectTouched;
-                        billeAux.touchDown();
-                        break;
+                        objectTouched = objetAux;
+                        firstPositionX = objectTouched.getPosition().x;
+                        firstPositionY = objectTouched.getPosition().y;
+
+                        if (objectTouched instanceof UneBille)
+                        {
+                            UneBille billeAux = (UneBille) objectTouched;
+                            billeAux.touchDown();
+                            break;
+                        }
                     }
                 }
             }
         }
         return true;
+
     }
 
     @Override

@@ -44,8 +44,6 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
         textureRegionInactif = new TextureRegion(validusInactifTexture);
 
         animation = new Animation(1f / 15f, (Object[]) animationFrames);
-
-
     }
 
 
