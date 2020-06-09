@@ -34,6 +34,7 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
@@ -51,7 +52,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
     DatabaseDesktop dataBase;
 
-    String consigneExercice;
+    String consigneExercice, nbInput;
 
     Drawable drawableAux;
 
@@ -59,6 +60,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
     boolean alreadyClicked = false;
     boolean isAllActive = false;
+    boolean afterCorrection = false;
 
     public ScreenEx1_4(Game game, DatabaseDesktop dataBase)
     {
@@ -66,15 +68,13 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         this.dataBase = dataBase;
 
-        bgScreenEx1_1 = new ScreeenBackgroundImage("Images/FondsSequence/fond03.jpg");
+        bgScreenEx1_1 = new ScreeenBackgroundImage("Images/FondsSequence/" + getBgImageRandom());
         allDrawables.add(bgScreenEx1_1);
 
         planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, MyConstants.SCREENHEIGHT / 10, largeurPlanche, largeurBille);
         allDrawables.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
         allCorrigibles.add(planche1);
-
-//        validusAnimated.setVisible(tr);
 
         allPlanches = new ArrayList<>();
         allPlanches.add(planche1);
@@ -96,7 +96,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         allDrawables.add(calculetteViewTest);
 //        calculetteViewTest.setActive(false);
 
-//        billesList = autoFillPlanche();
 
         displayArdoise();
 
@@ -105,7 +104,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         timer.schedule(new PresentationOnglet(3000), 1000);
 
         billesList = new ArrayList<>();
-
 
         calculetteViewTest.validerBouton.addListener(new ClickListener()
         {
@@ -151,9 +149,9 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             isAllActive = true;
-            metrologue.metrologuePlaySound("Sounds/Onglet1_4/Touche un chiffre pour entendre son nom.mp3");
-            activiteView.addTextActivite("1. Touche un chiffre pour entendre son nom");
 
+            metrologue.metrologuePlaySound("Sounds/Onglet1_4/Touche un chiffre pour entendre son nom.mp3");
+            activiteView.setTextActivite("1. Touche un chiffre pour entendre son nom");
         }
     }
 
@@ -230,8 +228,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-//            MyTimer.TaskEtape nextEtape = new PressValidate(2000, 1000);
-
             metrologue.metrologuePlaySound("Sounds/Onglet1_4/Tape le chiffre au clavier et valide.mp3", null);
             activiteView.addTextActivite("2. Tape le chiffre au clavier et valide");
 
@@ -241,8 +237,14 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
     public void pressValidate()
     {
-        String nbInput = calculetteViewTest.getInput();
-
+        if (!afterCorrection)
+        {
+            nbInput = calculetteViewTest.getInput();
+        }
+        else
+        {
+            afterCorrection = false;
+        }
         if (nbInput != null)
         {
             if (Integer.parseInt(nbInput) == currrentBillesNumber)
@@ -255,25 +257,31 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
                 if (questionCourante != 8)
                 {
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3");
+                    timer.schedule(new InstructionPart2(500), 1500);
                 }
                 else
                 {
                     activiteView.addTextActivite("Youpi ! Tu as gagné un diamant.");
                     validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
+
+                    timer.schedule(new Fin(500), 500);
                 }
                 validusAnimated.isActive = false;
+
+
+                ardoiseAppear();
+
+                questionCourante++;
+
                 addDiamonds(1);
 
-                Texture ardoiseBgInactive = new Texture("Images/Ardoise/ardoise_fond.png");
+                Texture ardoiseBgInactive = new Texture("Images/Ardoise/ardoise_fond_inactive.jpg");
                 ardoiseBgInactive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
                 uneArdoise.setBackground(new TextureRegionDrawable(new TextureRegion(ardoiseBgInactive)));
 
                 cleanPlanche();
                 isAllActive = true;
-                activiteView.emptyActivite();
-
-                timer.schedule(new InstructionPart2(500), 1500);
 
             }
             else
@@ -287,12 +295,13 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
                     validusAnimated.isActive = false;
                     failedAttempts = 0;
 
-
                     validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3");
 
                     addPierres(1);
 
                     timer.schedule(new EtapeRectification(1000), 500);
+                    questionCourante++;
+
                 }
                 else
                 {
@@ -401,11 +410,12 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
             float posX = buttonPosition.x;
             float posY = buttonPosition.y;
 
-//            MyTimer.TaskEtape nextEtape = new MoveMainTo1Validate(1500, 1000);
-
-            uneMain.cliqueTo(500, (int) posX, (int) posY, null, 1000);
+            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, null, 1000);
 
             calculetteViewTest.textDisplay(currrentBillesNumber);
+
+            System.out.println(currrentBillesNumber);
+            ardoiseAppear();
 
             timer.schedule(new MainDisappear(500), 500);
         }
@@ -422,7 +432,10 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneMain.setVisible(false);
-            styleTest.up = styleTest.down;
+            styleTest.up = drawableAux;
+            nbInput = String.valueOf(currrentBillesNumber);
+            afterCorrection = true;
+
         }
     }
 
@@ -431,6 +444,11 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         private Fin(long durMillis, long delay)
         {
             super(durMillis, delay);
+        }
+
+        private Fin(long durMillis)
+        {
+            super(durMillis);
         }
 
         @Override
@@ -485,6 +503,8 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
                             isAllActive = false;
 
                             timer.schedule(new ArdoiseTouched(500), 500);
+
+                            ardoiseDisappear();
 
                         }
                     }
@@ -567,4 +587,45 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         billesList.clear();
     }
+
+    public void ardoiseDisappear()
+    {
+        for (int i = 0; i < ardoiseList.size(); i++)
+        {
+            UneArdoise ardoise = ardoiseList.get(i);
+            ardoise.setVisible(false);
+        }
+    }
+
+    public void ardoiseAppear()
+    {
+        for (int i = 0; i < ardoiseList.size(); i++)
+        {
+            UneArdoise ardoise = ardoiseList.get(i);
+            ardoise.setVisible(true);
+        }
+    }
+
+    public String getBgImageRandom()
+    {
+        String bgImgRandom = "";
+
+        Random rand = new Random();
+
+        int fondSequenceFolderSize = 14;
+        int rand_int = rand.nextInt(fondSequenceFolderSize);
+        if (rand_int < 10)
+        {
+            bgImgRandom = "fond0" + rand_int + ".jpg";
+        }
+        else
+        {
+            bgImgRandom = "fond" + rand_int + ".jpg";
+
+        }
+        return bgImgRandom;
+
+
+    }
+
 }

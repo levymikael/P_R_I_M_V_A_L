@@ -138,7 +138,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 0)
             {
-                oiseau.animateImage(1000, true, posX, posY, new JeVoisUnOIseau(2000), 1000, 1f / 6f);
+                oiseau.animateImage(1000, true, posX, posY, new JeVoisUnOIseau(2000), 1500, 1f / 6f);
             }
             cptOiseau++;
 
@@ -295,10 +295,10 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
     private class MoveMainToReserve2 extends MyTimer.TaskEtape
     {
-        private MoveMainToReserve2(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
+//        private MoveMainToReserve2(long durMillis, long delay)
+//        {
+//            super(durMillis, delay);
+//        }
 
         private MoveMainToReserve2(long durMillis)
         {
@@ -605,10 +605,10 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
-        private EtapeAddFourthBille(long durMillis)
-        {
-            super(durMillis);
-        }
+//     /   private EtapeAddFourthBille(long durMillis)
+//        {
+//            super(durMillis);
+//        }
 
         @Override
         public void run()
@@ -623,7 +623,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             if (cptBille == 4)
             {
                 uneMain.moveTo(50, posX, posY, null, 1000);
-
 
                 timer.schedule(new MoveMainToValidus(1000), 2000);
             }

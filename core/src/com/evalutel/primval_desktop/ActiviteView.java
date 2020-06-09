@@ -53,6 +53,8 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     boolean isPaused;
 
+    Table lastPointerTable;
+
     public ActiviteView(Stage stage, float width, String numExercice, String consigneExercice, String exDansChapitre, String activiteType)
     {
         textureMilieuEnonce = new Texture("Images/EnonceUIElements/enonce_milieu_new.png");
@@ -224,6 +226,15 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
     }
 
 
+    public Label setTextActivite(String string)
+    {
+
+        emptyActivite();
+
+        return addTextActivite(string);
+
+    }
+
     public Label addTextActivite(String string)
     {
         table4 = new Table();
@@ -248,29 +259,48 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         lastLabel.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
 
-        if (cptInstructions == 0)
+
+        if(lastPointerTable != null)
         {
-            flechSprite.setSize(MyConstants.SCREENWIDTH / 30, 40);
-
-            SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
-
-            Table pointerTable = new Table();
-
-            if (activiteType == "activite")
-            {
-                pointerTable.setBackground(flecheSpriteDrawable);
-            }
-            table4.add(pointerTable).width(MyConstants.SCREENWIDTH / 60).height(MyConstants.SCREENHEIGHT / 40).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100)/*.padTop(MyConstants.SCREENHEIGHT / 20)*/;
-            table4.add(label3).width(widthEnonce - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 120))).padRight(MyConstants.SCREENWIDTH / 120)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
+            lastPointerTable.remove();
         }
-        else
+
+        flechSprite.setSize(MyConstants.SCREENWIDTH / 30, 40);
+
+        SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
+
+        lastPointerTable = new Table();
+
+        if (activiteType == "activite")
         {
-            table4.add(new Image()).width(MyConstants.SCREENWIDTH / 27 - MyConstants.SCREENWIDTH / 1000);
-            table4.add(label3).width(widthEnonce - (MyConstants.SCREENWIDTH / 12 + MyConstants.SCREENWIDTH / 450)).padRight(MyConstants.SCREENWIDTH / 20) /*.padBottom(MyConstants.SCREENHEIGHT / 150).padTop(MyConstants.SCREENHEIGHT / 200)*/;
+            lastPointerTable.setBackground(flecheSpriteDrawable);
         }
+
+        table4.add(lastPointerTable).width(MyConstants.SCREENWIDTH / 60).height(MyConstants.SCREENHEIGHT / 40).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100)/*.padTop(MyConstants.SCREENHEIGHT / 20)*/;
+        table4.add(label3).width(widthEnonce - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 120))).padRight(MyConstants.SCREENWIDTH / 120)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
+
+//        if (cptInstructions == 0)
+//        {
+//            flechSprite.setSize(MyConstants.SCREENWIDTH / 30, 40);
+//
+//            SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
+//
+//            Table pointerTable = new Table();
+//
+//            if (activiteType == "activite")
+//            {
+//                pointerTable.setBackground(flecheSpriteDrawable);
+//            }
+//            table4.add(pointerTable).width(MyConstants.SCREENWIDTH / 60).height(MyConstants.SCREENHEIGHT / 40).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100)/*.padTop(MyConstants.SCREENHEIGHT / 20)*/;
+//            table4.add(label3).width(widthEnonce - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 120))).padRight(MyConstants.SCREENWIDTH / 120)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
+//        }
+//        else
+//        {
+//            table4.add(new Image()).width(MyConstants.SCREENWIDTH / 27 - MyConstants.SCREENWIDTH / 1000);
+//            table4.add(label3).width(widthEnonce - (MyConstants.SCREENWIDTH / 12 + MyConstants.SCREENWIDTH / 450)).padRight(MyConstants.SCREENWIDTH / 20) /*.padBottom(MyConstants.SCREENHEIGHT / 150).padTop(MyConstants.SCREENHEIGHT / 200)*/;
+//        }
 
         table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
-        //tableMilieu.removeActor()
         tableMilieu.add(table4);
         tableMilieu.row();
 
