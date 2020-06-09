@@ -43,7 +43,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     TextField.TextFieldStyle textFieldStyleTest;
 
 
-String calculetteInput;
+    String calculetteInput;
     ArrayList<MyTextButton> arrayListButtons = new ArrayList<>();
     protected boolean isVisible = true;
     protected boolean isActive = true;
@@ -199,7 +199,9 @@ String calculetteInput;
 
     public String getInput()
     {
-        return calculetteInput;
+        return textFieldTest.getText();
+
+        //return calculetteInput;
     }
 
     public void screenDeletion ()

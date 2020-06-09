@@ -35,6 +35,7 @@ import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.TimerTask;
 
 
 public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
@@ -61,12 +62,16 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
     boolean alreadyClicked = false;
     boolean isAllActive = false;
     boolean afterCorrection = false;
+    Texture ardoiseBgInactive;
 
     public ScreenEx1_4(Game game, DatabaseDesktop dataBase)
     {
         super(game, dataBase, 1, 4, true);
 
         this.dataBase = dataBase;
+
+        ardoiseBgInactive = new Texture("Images/Ardoise/ardoise_fond_inactive.jpg");
+        ardoiseBgInactive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         bgScreenEx1_1 = new ScreeenBackgroundImage("Images/FondsSequence/" + getBgImageRandom());
         allDrawables.add(bgScreenEx1_1);
@@ -93,9 +98,8 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
         calculetteViewTest = new CalculetteViewTest(stage);
+        calculetteViewTest.setActive(false);
         allDrawables.add(calculetteViewTest);
-//        calculetteViewTest.setActive(false);
-
 
         displayArdoise();
 
@@ -110,11 +114,15 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                Gdx.app.log("", "button validate pressed");
-                pressValidate();
+                if (calculetteViewTest.isActive())
+                {
+                    Gdx.app.log("", "button validate pressed");
+                    pressValidate();
+                }
             }
         });
 
+        uneMain.setPosition(MyConstants.SCREENWIDTH / 2, MyConstants.SCREENHEIGHT / 3);
     }
 
     private class PresentationOnglet extends MyTimer.TaskEtape
@@ -149,6 +157,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             isAllActive = true;
+            failedAttempts = 0;
 
             metrologue.metrologuePlaySound("Sounds/Onglet1_4/Touche un chiffre pour entendre son nom.mp3");
             activiteView.setTextActivite("1. Touche un chiffre pour entendre son nom");
@@ -207,9 +216,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
                     break;
             }
-
             metrologue.metrologuePlaySound(audioPath, nextEtape);
-
         }
     }
 
@@ -230,85 +237,55 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         {
             metrologue.metrologuePlaySound("Sounds/Onglet1_4/Tape le chiffre au clavier et valide.mp3", null);
             activiteView.addTextActivite("2. Tape le chiffre au clavier et valide");
-
+            calculetteViewTest.setActive(true);
         }
     }
 
 
     public void pressValidate()
     {
-        if (!afterCorrection)
+
+        String txtTape = calculetteViewTest.getInput();
+
+        int value = -1;
+
+        try
         {
-            nbInput = calculetteViewTest.getInput();
+            value = Integer.parseInt(txtTape);
+        } catch (Exception e)
+        {
+
+        }
+
+        if (value == currrentBillesNumber)
+        {
+            addDiamonds(1);
+
+            validusAnimated.isActive = false;
+            calculetteViewTest.setActive(false);
+
+            if (questionCourante != 8)
+            {
+                validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new NextQuestion(500));
+            }
         }
         else
         {
-            afterCorrection = false;
-        }
-        if (nbInput != null)
-        {
-            if (Integer.parseInt(nbInput) == currrentBillesNumber)
+            if (failedAttempts == 1)
             {
-                calculetteViewTest.textRemove();
+                myCorrectionAndPauseGeneral.correctionStart();
 
-                UneArdoise uneArdoise = ardoiseList.get(currrentBillesNumber - 1);
-                uneArdoise.setActive(false);
-
-                if (questionCourante != 8)
-                {
-                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3");
-                    timer.schedule(new InstructionPart2(500), 1500);
-                }
-                else
-                {
-                    activiteView.addTextActivite("Youpi ! Tu as gagné un diamant.");
-                    validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
-
-                    timer.schedule(new Fin(500), 500);
-                }
                 validusAnimated.isActive = false;
+                calculetteViewTest.setActive(false);
+                validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2000));
 
-
-                ardoiseAppear();
-
-                questionCourante++;
-
-                addDiamonds(1);
-
-                Texture ardoiseBgInactive = new Texture("Images/Ardoise/ardoise_fond_inactive.jpg");
-                ardoiseBgInactive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-                uneArdoise.setBackground(new TextureRegionDrawable(new TextureRegion(ardoiseBgInactive)));
-
-                cleanPlanche();
-                isAllActive = true;
-
+                addPierres(1);
             }
             else
             {
-                if (failedAttempts == 1)
-                {
-                    myCorrectionAndPauseGeneral.correctionStart();
-
-//                isInCorrection = !isInCorrection;
-
-                    validusAnimated.isActive = false;
-                    failedAttempts = 0;
-
-                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3");
-
-                    addPierres(1);
-
-                    timer.schedule(new EtapeRectification(1000), 500);
-                    questionCourante++;
-
-                }
-                else
-                {
-                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
-                }
-                failedAttempts++;
+                validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
             }
+            failedAttempts++;
         }
     }
 
@@ -324,9 +301,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneMain.setVisible(true);
-            timer.schedule(new MoveMainToCalculette(500), 500);
-
-            uneMain.setVisible(false);
+            timer.schedule(new MoveMainToCalculette(1000), 1000);
         }
     }
 
@@ -372,7 +347,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
                 case 2:
                     styleTest = calculetteViewTest.deux_bouton.getStyle();
                     break;
-
                 case 3:
                     styleTest = calculetteViewTest.trois_bouton.getStyle();
                     break;
@@ -395,7 +369,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
                 case 9:
                     styleTest = calculetteViewTest.neuf_bouton.getStyle();
                     break;
-
                 default:
                     break;
             }
@@ -403,21 +376,71 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            uneMain.setVisible(true);
-
             MyPoint buttonPosition = calculetteViewTest.buttonPosition(currrentBillesNumber);
 
             float posX = buttonPosition.x;
             float posY = buttonPosition.y;
 
-            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, null, 1000);
+            MyTimer.TaskEtape nextEtape = new MoveMainToValidate(500);
+
+            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
 
             calculetteViewTest.textDisplay(currrentBillesNumber);
+        }
+    }
 
-            System.out.println(currrentBillesNumber);
+    private class MoveMainToValidate extends MyTimer.TaskEtape
+    {
+        private MoveMainToValidate(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new ClickOnValidate(1000, 1000);
+
+            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
+
+            styleTest.up = drawableAux;
+        }
+    }
+
+    private class ClickOnValidate extends MyTimer.TaskEtape
+    {
+        private ClickOnValidate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new MainDisappear(500);
+
+            styleTest = calculetteViewTest.validerBouton.getStyle();
+
+            drawableAux = styleTest.up;
+            styleTest.up = styleTest.down;
+
+            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
+
+            calculetteViewTest.textRemove();
+
             ardoiseAppear();
-
-            timer.schedule(new MainDisappear(500), 500);
         }
     }
 
@@ -432,10 +455,46 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneMain.setVisible(false);
-            styleTest.up = drawableAux;
             nbInput = String.valueOf(currrentBillesNumber);
             afterCorrection = true;
+            timer.schedule(new NextQuestion(500), 500);
+            styleTest.up = drawableAux;
+        }
+    }
 
+    private class NextQuestion extends MyTimer.TaskEtape
+    {
+
+        private NextQuestion(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            calculetteViewTest.textRemove();
+
+            ardoiseAppear();
+
+            cleanPlanche();
+            isAllActive = true;
+
+            UneArdoise uneArdoise = ardoiseList.get(currrentBillesNumber - 1);
+            uneArdoise.setActive(false);
+            uneArdoise.setBackground(new TextureRegionDrawable(new TextureRegion(ardoiseBgInactive)));
+
+            if (questionCourante == 8)
+            {
+                timer.schedule(new Fin(500), 500);
+            }
+            else
+            {
+                timer.schedule(new InstructionPart2(500), 500);
+            }
+            questionCourante++;
+
+            nbInput = null;
         }
     }
 
@@ -472,7 +531,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         int buttonSize = MyConstants.SCREENWIDTH / 15;
 
-
         for (int i = 0; i < 9; i++)
         {
             int firstPositionArdoiseXNew = firstPositionArdoiseX + (i * (MyConstants.SCREENWIDTH / 9));
@@ -505,7 +563,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
                             timer.schedule(new ArdoiseTouched(500), 500);
 
                             ardoiseDisappear();
-
                         }
                     }
                 }
@@ -513,52 +570,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
             myCorrectionAndPauseGeneral.addElements(uneArdoise);
         }
     }
-
-//    public void getMp3(int i)
-//    {
-//        String audioPath = "";
-//        switch (i)
-//        {
-//            case 1:
-//                audioPath = "Sounds/Onglet1_4/un.mp3";
-//
-//                break;
-//            case 2:
-//                audioPath = "Sounds/Onglet1_4/deux.mp3";
-//
-//                break;
-//            case 3:
-//                audioPath = "Sounds/Onglet1_4/trois.mp3";
-//
-//                break;
-//            case 4:
-//                audioPath = "Sounds/Onglet1_4/quatre.mp3";
-//
-//                break;
-//            case 5:
-//                audioPath = "Sounds/Onglet1_4/cinq.mp3";
-//
-//                break;
-//            case 6:
-//                audioPath = "Sounds/Onglet1_4/six.mp3";
-//
-//                break;
-//            case 7:
-//                audioPath = "Sounds/Onglet1_4/sept.mp3";
-//
-//                break;
-//            case 8:
-//                audioPath = "Sounds/Onglet1_4/huit.mp3";
-//
-//                break;
-//            case 9:
-//                audioPath = "Sounds/Onglet1_4/neuf.mp3";
-//
-//                break;
-//        }
-//
-//        metrologue.metrologuePlaySound(audioPath);
-//    }
 
     public void displayBille(int nbBillesToDisplay)
     {
@@ -613,7 +624,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         Random rand = new Random();
 
         int fondSequenceFolderSize = 14;
-        int rand_int = rand.nextInt(fondSequenceFolderSize);
+        int rand_int = rand.nextInt(fondSequenceFolderSize) + 1;
         if (rand_int < 10)
         {
             bgImgRandom = "fond0" + rand_int + ".jpg";
@@ -624,8 +635,5 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         }
         return bgImgRandom;
-
-
     }
-
 }
