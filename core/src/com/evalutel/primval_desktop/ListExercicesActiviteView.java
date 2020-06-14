@@ -18,6 +18,7 @@ import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_3;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_4;
+import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_5;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 public class ListExercicesActiviteView implements MyDrawInterface
@@ -61,7 +62,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
         MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
         MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
         MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
-//        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
 //        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);\
         un_bouton.setSize(buttonSize, buttonSize);
 
@@ -70,7 +71,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
         Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
         Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
         Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4, dataBase);
-//        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
 //        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
 
 
@@ -82,8 +83,8 @@ public class ListExercicesActiviteView implements MyDrawInterface
         table.row();
         table.add(tableEx4).width(screenWidth).height(screenHeight / 11);
         table.row();
-//        table.add(tableEx5).width(screenWidth).height(screenHeight / 11);
-//        table.row();
+        table.add(tableEx5).width(screenWidth).height(screenHeight / 11);
+        table.row();
 //        table.add(tableEx6).width(screenWidth).height(screenHeight / 11);
 
         table.setWidth(screenWidth);
@@ -133,14 +134,15 @@ public class ListExercicesActiviteView implements MyDrawInterface
                 System.out.println("I got clicked!4");
             }
         });
-//        tableEx5.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                System.out.println("I got clicked!5");
-//            }
-//        });
+        tableEx5.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                game.setScreen(new ScreenEx1_5(game, dataBase));
+                System.out.println("I got clicked!5");
+            }
+        });
 //        tableEx6.addListener(new ClickListener()
 //        {
 //            @Override
