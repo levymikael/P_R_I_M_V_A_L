@@ -100,6 +100,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         calculetteViewTest = new CalculetteViewTest(stage);
         calculetteViewTest.setActive(false);
         allDrawables.add(calculetteViewTest);
+        myCorrectionAndPauseGeneral.addElements(calculetteViewTest);
 
         displayArdoise();
 
@@ -116,11 +117,15 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
             {
                 if (calculetteViewTest.isActive())
                 {
+
                     Gdx.app.log("", "button validate pressed");
                     pressValidate();
+
                 }
             }
         });
+
+
 
         uneMain.setPosition(MyConstants.SCREENWIDTH / 2, MyConstants.SCREENHEIGHT / 3);
     }

@@ -200,13 +200,11 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     public String getInput()
     {
         return textFieldTest.getText();
-
-        //return calculetteInput;
     }
 
-    public void screenDeletion ()
+    public void screenDeletion()
     {
-       textFieldTest.clear();
+        textFieldTest.clear();
 
     }
 
@@ -283,25 +281,26 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     @Override
     public void myCorrectionStart()
     {
-
+        isActive = false;
     }
 
     @Override
     public void myCorrectionStop()
     {
+        isActive = false;
 
     }
 
     @Override
     public void myPause()
     {
-
+        isActive = false;
     }
 
     @Override
     public void myResume()
     {
-
+        isActive = true;
     }
 
     @Override
@@ -376,6 +375,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
             if (!isActive)
             {
+
                 return;
             }
 
@@ -397,7 +397,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
                 textFieldTest.setText(textNew);
 
 
-               calculetteInput = textNew;
+                calculetteInput = textNew;
 
             }
         }

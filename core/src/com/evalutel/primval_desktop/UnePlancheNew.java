@@ -53,17 +53,17 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
         return test;
     }
 
-    public boolean isInRect(UneMain uneMain)
+/*   public boolean isInRect(UneMain uneMain)
     {
         boolean isInPlanche = (uneMain.currentPositionX > this.currentPositionX) && (uneMain.currentPositionX < (this.currentPositionX + this.animationWidth)) && (uneMain.currentPositionY > this.currentPositionY) && (uneMain.currentPositionY < (this.currentPositionY + this.animationHeight));
 
         return isInPlanche;
-    }
+    }*/
 
-    public MyPoint getPositionBille(int index)
+/*   public MyPoint getPositionBille(int index)
     {
         return positionsBilles.get(index);
-    }
+    }*/
 
     public UneBille getBille(int index)
     {

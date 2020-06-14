@@ -94,7 +94,6 @@ public class ListExercicesActiviteView implements MyDrawInterface
         container.add(scroll).height(2 * screenHeight / 5);
         container.row();
 
-//        tableEx1.debug();
         tableEx1.setTouchable(Touchable.enabled);
         tableEx2.setTouchable(Touchable.enabled);
         tableEx1.addListener(new ClickListener()

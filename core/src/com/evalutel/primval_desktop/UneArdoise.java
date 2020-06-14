@@ -74,8 +74,6 @@ public class UneArdoise extends Table implements MyCorrectionAndPauseInterface, 
     }
 
 
-
-
     public boolean isActive()
     {
         return isActive;
@@ -89,25 +87,25 @@ public class UneArdoise extends Table implements MyCorrectionAndPauseInterface, 
     @Override
     public void myCorrectionStart()
     {
-
+        isActive = false;
     }
 
     @Override
     public void myCorrectionStop()
     {
-
+        isActive = !isActive;
     }
 
     @Override
     public void myPause()
     {
-
+        isActive = false;
     }
 
     @Override
     public void myResume()
     {
-
+        isActive = !isActive;
     }
 
     @Override

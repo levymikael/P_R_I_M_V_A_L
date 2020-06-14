@@ -60,7 +60,6 @@ public class ScreenEx1_2 extends ScreenOnglet
         allDrawables.add(reserveBilles);
         myCorrectionAndPauseGeneral.addElements(reserveBilles);
 
-
         planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
         planche1.shouldReturnToReserve = true;
         allDrawables.add(planche1);
