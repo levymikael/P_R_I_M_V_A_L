@@ -10,28 +10,23 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
-import com.evalutel.primval_desktop.ListExercicesActiviteView;
+import com.evalutel.primval_desktop.ListExercicesActiviteViewChap1;
 import com.evalutel.primval_desktop.MrNotes;
 import com.evalutel.primval_desktop.MrTemps;
-import com.evalutel.primval_desktop.MyButtonBuyAnotherChapter;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
-import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
-import com.evalutel.primval_desktop.UnePlancheNew;
 
 import java.util.ArrayList;
 
@@ -51,7 +46,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
     Texture sacDebilles;
 
-    ListExercicesActiviteView listExercicesActiviteView;
+    ListExercicesActiviteViewChap1 listExercicesActiviteViewChap1;
     ScreeenBackgroundImage fondEspaceParent;
     ScreeenBackgroundImage fondSommaire;
     MrNotes mrNotes;
@@ -92,7 +87,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
 
-        listExercicesActiviteView = new ListExercicesActiviteView(stage, game, dataBase);
+        listExercicesActiviteViewChap1 = new ListExercicesActiviteViewChap1(stage, game, dataBase);
 
         myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase, "chapitres");
         myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);

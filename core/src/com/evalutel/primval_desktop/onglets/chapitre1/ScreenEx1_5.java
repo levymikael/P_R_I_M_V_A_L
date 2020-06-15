@@ -3,14 +3,11 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.StringBuilder;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
@@ -22,7 +19,6 @@ import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
-import com.evalutel.primval_desktop.UneArdoise;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
@@ -37,6 +33,8 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
     private ArrayList<UnOiseau> oiseauxList;
     private ArrayList<UnePlancheNew> allPlanches;
 
+    private UneBille billeRectification;
+
     protected CalculetteViewTest calculetteViewTest;
 
     private UnePlancheNew planche1;
@@ -47,7 +45,6 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
     TextButton.TextButtonStyle styleTest;
 
-
     int posX, posY;
 
     int[] numOiseauArray;
@@ -56,7 +53,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
     boolean isInCorrection = false;
 
-    boolean afterCorrection, isAllActive = false;
+    boolean afterCorrection, isAllActive, touchValidate = false;
 
     DatabaseDesktop dataBase;
 
@@ -75,8 +72,6 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);
 
-        oiseauxList = getNumberOiseauxArList();
-
         reserveBilles = new ReserveBilles(10 * MyConstants.SCREENWIDTH / 11, 9 * MyConstants.SCREENHEIGHT / 11, largeurBille, largeurBille);
         reserveBilles.largeurBille = largeurBille;
         reserveBilles.isActive();
@@ -86,9 +81,22 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         allCorrigibles.add(reserveBilles);
 
         planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
+        planche1.shouldReturnToReserve = true;
         allDrawables.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
         allCorrigibles.add(planche1);
+
+        for (int i = 0; i < 9; i++)
+        {
+            UneBille bille = new UneBille(reserveBilles.currentPositionX, reserveBilles.currentPositionY, reserveBilles.largeurBille);
+
+            reserveBilles.addBilleToReserve(bille);
+            allDrawables.add(bille);
+            objectTouchedList.add(bille);
+            bille.setVisible(false);
+            myCorrectionAndPauseGeneral.addElements(bille);
+            allCorrigibles.add(bille);
+        }
 
         allPlanches = new ArrayList<>();
         allPlanches.add(planche1);
@@ -105,28 +113,29 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         calculetteViewTest = new CalculetteViewTest(stage);
         allDrawables.add(calculetteViewTest);
         calculetteViewTest.setActive(false);
+        myCorrectionAndPauseGeneral.addElements(calculetteViewTest);
 
-        getNumberOiseauxArList();
+
+        oiseauxList = getNumberOiseauxArList();
 
         numOiseauArray = MyMath.genereTabAleatoire(9);
 
-        resultatExercice = new UnResultat("Primval", 1, 5, 0, consigneExercice, 0, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 1, 5, 0, consigneExercice, 9, 0, dateTest, 0, 0, 0, 123);
 
+//        calculetteViewTest.validerBouton.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                if (calculetteViewTest.isActive())
+//                {
+//                    Gdx.app.log("", "button validate pressed");
+//                    timer.schedule(new PressValidate(0), 0);
+//                }
+//            }
+//        });
 
-        calculetteViewTest.validerBouton.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                if (calculetteViewTest.isActive())
-                {
-
-                    Gdx.app.log("", "button validate pressed");
-                    pressValidate();
-
-                }
-            }
-        });
+        uneMain.setPosition(MyConstants.SCREENWIDTH / 2, MyConstants.SCREENHEIGHT / 3);
 
 
         timer.schedule(new PresentationOnglet(3_000), 1_000);
@@ -181,13 +190,10 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
-
         @Override
         public void run()
         {
             DisplayOiseaux nextEtape = new DisplayOiseaux(0, 0);
-
-            reserveBilles.setActive(true);
 
             if (cptOiseau < randNumOiseau)
             {
@@ -229,6 +235,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             {
                 timer.schedule(new InputClavier(1000), 100);
             }
+            reserveBilles.setActive(true);
         }
     }
 
@@ -250,13 +257,89 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             calculetteViewTest.setActive(true);
             validusAnimated.setActive(true);
 
+            validusAnimated.etapeCorrection = new PressValidate(0);
+            calculetteViewTest.etapeCorrection = new PressValidate(0);
+
         }
     }
 
 
-    private class EtapeAttendreValidus extends MyTimer.TaskEtape
+//    private class EtapeAttendreValidus extends MyTimer.TaskEtape
+//    {
+//        private EtapeAttendreValidus(long durMillis)
+//        {
+//            super(durMillis);
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//            failedAttempts = 0;
+//            validusAnimated.isActive = true;
+//            validusAnimated.etapeCorrection = new CheckValidus(0);
+//        }
+//    }
+
+//    private class CheckValidus extends MyTimer.TaskEtape
+//    {
+//        private CheckValidus(long durMillis)
+//        {
+//            super(durMillis);
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//            if (planche1.getNumberBilles() == randNumOiseau)
+//            {
+//                MyTimer.TaskEtape nextEtape = new EtapeNextQuestion(1000, 500);
+//
+//                if (questionCourante != 8)
+//                {
+//
+////                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", nextEtape);
+//                }
+//                else
+//                {
+////                    activiteView.addTextActivite("Youpi ! Tu as gagné un diamant.");
+////                    validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3", nextEtape);
+//                }
+////                validusAnimated.isActive = false;
+////                addDiamonds(1);
+////                planche1.SetAllBillesActive();
+//            }
+//            else
+//            {
+//                if (failedAttempts == 1)
+//                {
+//                    myCorrectionAndPauseGeneral.correctionStart();
+//
+//                    isInCorrection = !isInCorrection;
+//
+//                    validusAnimated.isActive = false;
+//                    planche1.setAllBillesInactive();
+//                    reserveBilles.setActive(false);
+//                    failedAttempts = 0;
+//
+//                    MyTimer.TaskEtape nextEtape = new EtapeRectification(1_000);
+//
+//                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", nextEtape);
+//
+//                    addPierres(1);
+//
+//                }
+//                else
+//                {
+//                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+//                }
+//                failedAttempts++;
+//            }
+//        }
+//    }
+
+    private class PressValidate extends MyTimer.TaskEtape
     {
-        private EtapeAttendreValidus(long durMillis)
+        private PressValidate(long durMillis)
         {
             super(durMillis);
         }
@@ -264,41 +347,36 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            failedAttempts = 0;
-            validusAnimated.isActive = true;
-            validusAnimated.etapeCorrection = new CheckValidus(0);
-        }
-    }
+            String txtTape = calculetteViewTest.getInput();
 
-    private class CheckValidus extends MyTimer.TaskEtape
-    {
-        private CheckValidus(long durMillis)
-        {
-            super(durMillis);
-        }
+            int value = -1;
 
-        @Override
-        public void run()
-        {
+            try
+            {
+                value = Integer.parseInt(txtTape);
+            } catch (Exception e)
+            {
 
-
+            }
             if (planche1.getNumberBilles() == randNumOiseau)
             {
-                MyTimer.TaskEtape nextEtape = new EtapeNextQuestion(1000, 500);
-
-                if (questionCourante != 8)
+                int ok = 5;
+                ok++;
+                if (value == planche1.getNumberBilles())
                 {
-
-                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", nextEtape);
+                    if (questionCourante != 8)
+                    {
+                        validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new EtapeNextQuestion(500, 0));
+                    }
+                    else
+                    {
+                        timer.schedule(new Fin(1_000, 0), 500);
+                        validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
+                    }
+                    validusAnimated.isActive = false;
+                    addDiamonds(1);
+                    planche1.setAllBillesActive();
                 }
-                else
-                {
-                    activiteView.addTextActivite("Youpi ! Tu as gagné un diamant.");
-                    validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3", nextEtape);
-                }
-                validusAnimated.isActive = false;
-                addDiamonds(1);
-                planche1.SetAllBillesActive();
             }
             else
             {
@@ -306,29 +384,35 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                 {
                     myCorrectionAndPauseGeneral.correctionStart();
 
-                    isInCorrection = !isInCorrection;
-
                     validusAnimated.isActive = false;
-                    planche1.SetAllBillesInactive();
-                    reserveBilles.setActive(false);
+                    calculetteViewTest.setActive(false);
+                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2000));
                     failedAttempts = 0;
 
-                    MyTimer.TaskEtape nextEtape = new EtapeRectification(1_000);
-
-                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", nextEtape);
-
                     addPierres(1);
+                }
+                else if (planche1.getNumberBilles() == 0)
+                {
+                    activiteView.setTextActivite("Tu n'as pas mis de bille sur la planche");
+                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+
+                }
+                else if (planche1.getNumberBilles() != value)
+                {
+                    activiteView.setTextActivite("Il n'y a pas autant de billes sur la planche que d'oiseaux");
+                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
 
                 }
                 else
                 {
+                    activiteView.setTextActivite("");
+
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
                 }
                 failedAttempts++;
             }
         }
     }
-
 
     private class EtapeRectification extends MyTimer.TaskEtape
     {
@@ -340,59 +424,46 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            uneMain.setVisible(true);
-            timer.schedule(new MoveMainToCalculette(1000), 1000);
+            timer.schedule(new AddBilles(1000), 1000);
         }
     }
 
-    public void pressValidate()
+
+    private class AddBilles extends MyTimer.TaskEtape
     {
-        String txtTape = calculetteViewTest.getInput();
-
-        int value = -1;
-
-        try
+        private AddBilles(long durMillis)
         {
-            value = Integer.parseInt(txtTape);
-        } catch (Exception e)
-        {
-
+            super(durMillis);
         }
 
-        if (value == currrentBillesNumber)
+        @Override
+        public void run()
         {
-            if (value == randNumOiseau)
+            if (planche1.getNumberBilles() < randNumOiseau)
             {
-                addDiamonds(1);
+                billeRectification = reserveBilles.getBilleAndRemove();
+                billeRectification.setVisible(true);
+                planche1.addBilleAndOrganize(billeRectification);
+                timer.schedule(new EtapeRectification(500), 500);
 
-                validusAnimated.isActive = false;
-                calculetteViewTest.setActive(false);
 
-                if (questionCourante != 8)
-                {
-                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new DisplayOiseaux(500, 0));
-                }
             }
-        }
-        else
-        {
-            if (failedAttempts == 1)
+            else if (planche1.getNumberBilles() > randNumOiseau)
             {
-                myCorrectionAndPauseGeneral.correctionStart();
+                billeRectification = planche1.getLastBille();
+                planche1.removeBille(billeRectification);
+                reserveBilles.addBilleToReserve(billeRectification);
 
-                validusAnimated.isActive = false;
-                calculetteViewTest.setActive(false);
-                validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2000));
+                timer.schedule(new EtapeRectification(500), 500);
 
-                addPierres(1);
             }
-            else
+            else if (planche1.getNumberBilles() == randNumOiseau)
             {
-                validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+                timer.schedule(new MoveMainToCalculette(1000), 1000);
             }
-            failedAttempts++;
         }
     }
+
 
     private class MoveMainToCalculette extends MyTimer.TaskEtape
     {
@@ -406,7 +477,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint buttonPosition = calculetteViewTest.buttonPosition(currrentBillesNumber);
+            MyPoint buttonPosition = calculetteViewTest.buttonPosition(randNumOiseau);
 
             float posX = buttonPosition.x;
             float posY = buttonPosition.y;
@@ -427,7 +498,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            switch (currrentBillesNumber)
+            switch (randNumOiseau)
             {
                 case 1:
                     styleTest = calculetteViewTest.un_bouton.getStyle();
@@ -464,7 +535,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            MyPoint buttonPosition = calculetteViewTest.buttonPosition(currrentBillesNumber);
+            MyPoint buttonPosition = calculetteViewTest.buttonPosition(randNumOiseau);
 
             float posX = buttonPosition.x;
             float posY = buttonPosition.y;
@@ -473,7 +544,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
 
-            calculetteViewTest.textDisplay(currrentBillesNumber);
+            calculetteViewTest.textDisplay(randNumOiseau);
         }
     }
 
@@ -542,10 +613,12 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneMain.setVisible(false);
-            nbInput = String.valueOf(currrentBillesNumber);
+            nbInput = String.valueOf(randNumOiseau);
             afterCorrection = true;
             timer.schedule(new NextQuestion(500), 500);
             styleTest.up = drawableAux;
+            planche1.setAllBillesActive();
+            failedAttempts = 0;
         }
     }
 
@@ -562,8 +635,6 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         {
             calculetteViewTest.textRemove();
 
-
-//            cleanPlanche();
             isAllActive = true;
 
             if (questionCourante == 8)
@@ -611,6 +682,8 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             else
             {
                 timer.schedule(new EtapeInstruction(1000, 500), 500);
+                calculetteViewTest.textRemove();
+
             }
         }
     }
@@ -669,6 +742,88 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         }
     }
 
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button)
+    {
+        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
+        mousePointerX = screenX;
+        mousePointerY = reversedScreenY;
+
+        if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
+        {
+            UneBille billeAdded = reserveBilles.getBilleAndRemove();
+            billeAdded.setVisible(true);
+            objectTouched = billeAdded;
+            billeAdded.setActive(true);
+
+        }
+        else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))
+        {
+            objectTouched = validusAnimated;
+        }
+        else /*si bille part de la planche*/
+        {
+            for (int i = 0; i < objectTouchedList.size(); i++)
+            {
+                MyTouchInterface objetAux = objectTouchedList.get(i);
+
+                if (objetAux.isTouched(screenX, reversedScreenY) && objetAux.isActive())
+                {
+                    objectTouched = objetAux;
+                    firstPositionX = mousePointerX;
+                    firstPositionY = mousePointerY;
+
+                    if (objectTouched instanceof UneBille)
+                    {
+                        UneBille billeAux = (UneBille) objectTouched;
+                        //reserveBilles.isActive();
+                        //reserveBilles.setActive(true);
+                        billeAux.touchDown();
+                        break;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer)
+    {
+        if ((objectTouched != null) && (objectTouched.isDragable()))
+        {
+            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (MyConstants.SCREENHEIGHT - screenY - objectTouched.getHeight() / 2));
+        }
+        return true;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button)
+    {
+        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
+        mousePointerX = screenX;
+        mousePointerY = reversedScreenY;
+
+        if (objectTouched != null)
+        {
+            if (objectTouched instanceof UneBille)
+            {
+                UneBille billeAux = (UneBille) objectTouched;
+                billeAux.touchUp(allPlanches);
+                billesList.add(billeAux);
+            }
+            else if (objectTouched instanceof ValidusAnimated)
+            {
+                if (validusAnimated.contains(mousePointerX, mousePointerY))
+                {
+                    validusAnimated.touchUp(mousePointerX, mousePointerY);
+                }
+            }
+        }
+        objectTouched = null;
+        return false;
+    }
+
 //    public ArrayList<UneBille> autoFillPlanche()
 //    {
 //        int firstPositionBilleX = (reserveBilles.getPosition().x + reserveBilles.largeurBille / 4);
@@ -706,98 +861,4 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         return oiseauxList;
     }
 
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button)
-    {
-        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
-        mousePointerX = screenX;
-        mousePointerY = reversedScreenY;
-
-        boolean isReserveActif = reserveBilles.isActive();
-        if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
-        {
-            UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille);
-            objectTouchedList.add(billeAdded);
-            allDrawables.add(billeAdded);
-            objectTouched = billeAdded;
-        }
-        else /*si bille part de la planche*/
-        {
-            for (int i = 0; i < objectTouchedList.size(); i++)
-            {
-                MyTouchInterface objetAux = objectTouchedList.get(i);
-
-                if (objetAux.isTouched(screenX, reversedScreenY))
-                {
-                    objectTouched = objetAux;
-                    firstPositionX = objectTouched.getPosition().x;
-                    firstPositionY = objectTouched.getPosition().y;
-
-                    if (objectTouched instanceof UneBille)
-                    {
-                        UneBille billeAux = (UneBille) objectTouched;
-                        billeAux.touchDown();
-                        break;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer)
-    {
-        if (objectTouched != null)
-        {
-            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (MyConstants.SCREENHEIGHT - screenY - objectTouched.getHeight() / 2));
-        }
-        return true;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button)
-    {
-        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
-        mousePointerX = screenX;
-        mousePointerY = reversedScreenY;
-
-        if (objectTouched != null)
-        {
-            if (objectTouched instanceof UneBille)
-            {
-                UneBille billeAux = (UneBille) objectTouched;
-                billeAux.touchUp(allPlanches);
-                billesList.add(billeAux);
-            }
-            else if (objectTouched instanceof ValidusAnimated)
-            {
-                if (validusAnimated.contains(mousePointerX, mousePointerY))
-                {
-                    validusAnimated.touchUp(mousePointerX, mousePointerY);
-                }
-            }
-        }
-        objectTouched = null;
-        return false;
-    }
-
-//    @Override
-//    public boolean touchUp(int screenX, int screenY, int pointer, int button)
-//    {
-//        if (objectTouched != null)
-//        {
-//            if ((objectTouched instanceof UneBille) /*&& (objectTouched != null)*/)
-//            {
-//                UneBille billeAux = (UneBille) objectTouched;
-//
-//                if (billeAux != null)
-//                {
-//                    billeAux.touchUp(allPlanches/*, screenX, MyConstants.SCREENHEIGHT - screenY*/);
-//                }
-//            }
-//        }
-//        objectTouched = null;
-//        return false;
-//    }
 }

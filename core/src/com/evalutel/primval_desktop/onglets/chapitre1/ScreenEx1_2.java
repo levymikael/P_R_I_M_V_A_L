@@ -5,10 +5,8 @@ import com.badlogic.gdx.Game;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.UnResultat;
-import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.MyMath;
-import com.evalutel.primval_desktop.MyCorrectionAndPauseGeneral;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.ReserveBilles;
@@ -19,7 +17,6 @@ import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
 
 import java.util.ArrayList;
-import java.util.TimerTask;
 
 
 public class ScreenEx1_2 extends ScreenOnglet
@@ -39,9 +36,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
     DatabaseDesktop dataBase;
 
-
     String consigneExercice;
-
 
     boolean isInCorrection = false;
 
@@ -330,7 +325,6 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                 if (questionCourante != 8)
                 {
-
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", nextEtape);
                 }
                 else
@@ -340,7 +334,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                 }
                 validusAnimated.isActive = false;
                 addDiamonds(1);
-                planche1.SetAllBillesActive();
+                planche1.setAllBillesActive();
             }
             else
             {
@@ -351,7 +345,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                     isInCorrection = !isInCorrection;
 
                     validusAnimated.isActive = false;
-                    planche1.SetAllBillesInactive();
+                    planche1.setAllBillesInactive();
                     reserveBilles.setActive(false);
                     failedAttempts = 0;
 //                    activiteView.addTextActivite("Voici la correction");
@@ -556,10 +550,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             MyTimer.TaskEtape nextEtape = new EtapeRectification1(500);
             uneMain.moveTo(50, posX, posY, nextEtape, 500);
 
-//            if (planche1.getNumberBilles() == randNumOiseau)
-//            {
-//                //uneMain.setVisible(false);
-//            }
         }
     }
 

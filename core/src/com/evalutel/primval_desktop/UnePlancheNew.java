@@ -82,7 +82,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
         }
     }
 
-    public void SetAllBillesInactive()
+    public void setAllBillesInactive()
     {
         for (int i = 0; i < allBilles.size(); i++)
         {
@@ -91,7 +91,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
         }
     }
 
-    public void SetAllBillesActive()
+    public void setAllBillesActive()
     {
         for (int i = 0; i < allBilles.size(); i++)
         {

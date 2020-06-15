@@ -32,7 +32,6 @@ import com.evalutel.primval_desktop.General.BoutonChapitres;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.General.UIDesign;
-import com.evalutel.primval_desktop.ListExercicesActiviteView;
 import com.evalutel.primval_desktop.MrNotes2;
 import com.evalutel.primval_desktop.MrTemps2;
 import com.evalutel.primval_desktop.MyButtonDemos;

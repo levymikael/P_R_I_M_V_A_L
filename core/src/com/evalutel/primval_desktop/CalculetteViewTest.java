@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.General.MyConstants;
+import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_5;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
@@ -28,6 +29,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 {
     float width, height;
 
+    public MyTimer.TaskEtape etapeCorrection;
     //    public float posX;
 //    public float posY;
     float positionX;
@@ -74,7 +76,6 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         parameter.padBottom = 70;
 
         BitmapFont bitmapFont = generator.generateFont(parameter);
-
         generator.dispose();
 
         Color fontColor = new Color(Color.BLACK);
@@ -191,6 +192,21 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
             stage.addActor(textButton);
         }
 
+
+        validerBouton.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                if (isActive )
+                {
+                    if (etapeCorrection != null)
+                    {
+                        etapeCorrection.run();
+                    }
+                }
+            }
+        });
 //        TextButton.TextButtonStyle styleTest = six_bouton.getStyle();
 //        ClickListener clickListenerTest = six_bouton.getClickListener();
 //        //styleTest.set

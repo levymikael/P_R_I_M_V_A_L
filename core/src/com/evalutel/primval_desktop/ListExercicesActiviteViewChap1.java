@@ -21,7 +21,7 @@ import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_4;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_5;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
-public class ListExercicesActiviteView implements MyDrawInterface
+public class ListExercicesActiviteViewChap1 implements MyDrawInterface
 {
     public float screenWidth;
     private boolean isVisible = true;
@@ -30,7 +30,7 @@ public class ListExercicesActiviteView implements MyDrawInterface
 
     DatabaseDesktop dataBase;
 
-    public ListExercicesActiviteView(Stage stage, final Game game, final DatabaseDesktop dataBase)
+    public ListExercicesActiviteViewChap1(Stage stage, final Game game, final DatabaseDesktop dataBase)
     {
         screenWidth = MyConstants.SCREENWIDTH;
         final int screenHeight = MyConstants.SCREENHEIGHT;

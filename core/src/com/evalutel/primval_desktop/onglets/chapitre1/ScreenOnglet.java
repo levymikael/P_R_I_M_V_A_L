@@ -210,9 +210,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         myCorrectionAndPauseGeneral.addElements(metrologue);
 
 
-
-
-
  /*
         reserveBilles = new ReserveBilles(MyConstants.SCREENWIDTH - 300, MyConstants.SCREENHeight - 300, 200, 200);
         allDrawables.add(reserveBilles);
