@@ -153,7 +153,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         {
             uneMain.imageDown();
 
-            MyTimer.TaskEtape nextEtape = new EtapeInstruction(3000, 2_000);
+            MyTimer.TaskEtape nextEtape = new EtapeInstruction(3_000, 2_000);
 
             metrologue.metrologuePlaySound("Sounds/onglet_1_5/Metrologue - onglet titre 1-5.mp3", nextEtape);
         }
@@ -398,10 +398,16 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
 
                 }
-                else if (planche1.getNumberBilles() != value)
+                else if (planche1.getNumberBilles() < value)
                 {
                     activiteView.setTextActivite("Il n'y a pas autant de billes sur la planche que d'oiseaux");
-                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus - Tu'es trompe manque des billes planche.mp3");
+
+                }
+                else if (planche1.getNumberBilles() > value)
+                {
+                    activiteView.setTextActivite("Il n'y a pas autant de billes sur la planche que d'oiseaux");
+                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
 
                 }
                 else
