@@ -66,6 +66,8 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
             case 2:
                 audioPath = "Sounds/Validus/Validus - C'est bien continue.mp3";
                 break;
+            default:
+                break;
         }
 
         validusPlaySound(audioPath, nextEtape);

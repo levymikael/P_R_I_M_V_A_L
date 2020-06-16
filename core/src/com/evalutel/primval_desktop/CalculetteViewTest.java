@@ -49,11 +49,13 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     ArrayList<MyTextButton> arrayListButtons = new ArrayList<>();
     protected boolean isVisible = true;
     protected boolean isActive = true;
+    private ValidusAnimated validusAnimated;
 
     float buttonSize, paddingAux1, paddingAux2;
 
-    public CalculetteViewTest(Stage stage)
+    public CalculetteViewTest(Stage stage, final ValidusAnimated validusAnimated)
     {
+        this.validusAnimated = validusAnimated;
         buttonSize = MyConstants.SCREENWIDTH / 24;
         paddingAux1 = MyConstants.SCREENWIDTH / 100;
         paddingAux2 = MyConstants.SCREENWIDTH / 200;
@@ -198,7 +200,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                if (isActive )
+                if (isActive && ( ! validusAnimated.isSpeaking))
                 {
                     if (etapeCorrection != null)
                     {

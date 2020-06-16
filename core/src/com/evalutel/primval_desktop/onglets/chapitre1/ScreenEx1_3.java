@@ -81,7 +81,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
-        calculetteViewTest = new CalculetteViewTest(stage/*, MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 6) - (MyConstants.SCREENWIDTH / 200),*/);
+        calculetteViewTest = new CalculetteViewTest(stage, validusAnimated);
         allDrawables.add(calculetteViewTest);
         calculetteViewTest.setActive(false);
 

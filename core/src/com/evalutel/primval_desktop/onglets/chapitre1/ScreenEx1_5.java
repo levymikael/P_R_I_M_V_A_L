@@ -110,7 +110,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
-        calculetteViewTest = new CalculetteViewTest(stage);
+        calculetteViewTest = new CalculetteViewTest(stage, validusAnimated);
         allDrawables.add(calculetteViewTest);
         calculetteViewTest.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteViewTest);
@@ -358,26 +358,20 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             {
 
             }
-            if (planche1.getNumberBilles() == randNumOiseau)
+            if ((planche1.getNumberBilles() == randNumOiseau) && (value == planche1.getNumberBilles()))
             {
-                int ok = 5;
-                ok++;
-                if (value == planche1.getNumberBilles())
+                if (questionCourante != 8)
                 {
-                    if (questionCourante != 8)
-                    {
-                        validusAnimated.goodAnswerPlaySound(new EtapeNextQuestion(500, 0));
-//                        validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new EtapeNextQuestion(500, 0));
-                    }
-                    else
-                    {
-                        timer.schedule(new Fin(1_000, 0), 500);
-                        validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
-                    }
-                    validusAnimated.isActive = false;
-                    addDiamonds(1);
-                    planche1.setAllBillesActive();
+                    validusAnimated.goodAnswerPlaySound(new EtapeNextQuestion(500, 0));
                 }
+                else
+                {
+                    timer.schedule(new Fin(1_000, 0), 500);
+                    validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
+                }
+                validusAnimated.isActive = false;
+                addDiamonds(1);
+                planche1.setAllBillesActive();
             }
             else
             {
@@ -394,26 +388,18 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                 }
                 else if (planche1.getNumberBilles() == 0)
                 {
-                    activiteView.setTextActivite("Tu n'as pas mis de bille sur la planche");
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
-
                 }
-                else if (planche1.getNumberBilles() < value)
+                else if (planche1.getNumberBilles() < randNumOiseau)
                 {
-                    activiteView.setTextActivite("Il n'y a pas autant de billes sur la planche que d'oiseaux");
                     validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus - Tu'es trompe manque des billes planche.mp3");
-
                 }
-                else if (planche1.getNumberBilles() > value)
+                else if (planche1.getNumberBilles() > randNumOiseau)
                 {
-                    activiteView.setTextActivite("Il n'y a pas autant de billes sur la planche que d'oiseaux");
                     validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
-
                 }
                 else
                 {
-                    activiteView.setTextActivite("");
-
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
                 }
                 failedAttempts++;
@@ -452,8 +438,6 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                 billeRectification.setVisible(true);
                 planche1.addBilleAndOrganize(billeRectification);
                 timer.schedule(new EtapeRectification(500), 500);
-
-
             }
             else if (planche1.getNumberBilles() > randNumOiseau)
             {
@@ -462,7 +446,6 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                 reserveBilles.addBilleToReserve(billeRectification);
 
                 timer.schedule(new EtapeRectification(500), 500);
-
             }
             else if (planche1.getNumberBilles() == randNumOiseau)
             {

@@ -97,7 +97,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
-        calculetteViewTest = new CalculetteViewTest(stage);
+        calculetteViewTest = new CalculetteViewTest(stage, validusAnimated);
         calculetteViewTest.setActive(false);
         allDrawables.add(calculetteViewTest);
         myCorrectionAndPauseGeneral.addElements(calculetteViewTest);
