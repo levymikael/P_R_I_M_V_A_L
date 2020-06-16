@@ -155,7 +155,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new EtapeInstruction(3000, 2_000);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.0 - Ecriture des chiffres de 1 a 9.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/onglet_1_5/Metrologue - onglet titre 1-5.mp3", nextEtape);
         }
     }
 
@@ -177,8 +177,8 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             randNumOiseau = numOiseauArray[questionCourante];
 
             activiteView.setTextActivite("1. Place autant de billes que d'oiseaux que tu vois tape ce nombre au clavier puis valide");
-
-            timer.schedule(new DisplayOiseaux(1_000, 0), 0);
+            metrologue.metrologuePlaySound("Sounds/onglet_1_5/metrologue - Instructions onglet 1_5.mp3", new DisplayOiseaux(1_000, 0));
+//            timer.schedule(new DisplayOiseaux(1_000, 0), 0);
         }
     }
 
@@ -366,7 +366,8 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                 {
                     if (questionCourante != 8)
                     {
-                        validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new EtapeNextQuestion(500, 0));
+                        validusAnimated.goodAnswerPlaySound(new EtapeNextQuestion(500, 0));
+//                        validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new EtapeNextQuestion(500, 0));
                     }
                     else
                     {
@@ -709,38 +710,38 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         }
     }
 
-    private class EtapeAddBille extends MyTimer.TaskEtape
-    {
-        private EtapeAddBille(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            UneBille bille = billesList.get(cptBille);
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
-
-            planche1.addBilleAndOrganize(bille);
-            cptBille++;
-
-            uneMain.moveTo(50, posX, posY, null, 1_000);
-
-
-            MyPoint buttonPosition = calculetteViewTest.buttonPosition(currrentBillesNumber);
-
-            posX = buttonPosition.x;
-            posY = buttonPosition.y;
-
-            MyTimer.TaskEtape nextEtape = new ClickMainToCalculette(1_500, 1_000);
-
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
-
-
-        }
-    }
+//    private class EtapeAddBille extends MyTimer.TaskEtape
+//    {
+//        private EtapeAddBille(long durMillis, long delay)
+//        {
+//            super(durMillis, delay);
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//            UneBille bille = billesList.get(cptBille);
+//            int posX = MyConstants.SCREENWIDTH / 2;
+//            int posY = (int) planche1.getHeight() / 2;
+//
+//            planche1.addBilleAndOrganize(bille);
+//            cptBille++;
+//
+//            uneMain.moveTo(50, posX, posY, null, 1_000);
+//
+//
+//            MyPoint buttonPosition = calculetteViewTest.buttonPosition(currrentBillesNumber);
+//
+//            posX = buttonPosition.x;
+//            posY = buttonPosition.y;
+//
+//            MyTimer.TaskEtape nextEtape = new ClickMainToCalculette(1_500, 1_000);
+//
+//            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+//
+//
+//        }
+//    }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)

@@ -278,7 +278,8 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
                 if (questionCourante != 8)
                 {
-                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new NextQuestion(500));
+                    validusAnimated.goodAnswerPlaySound(new NextQuestion(500));
+//                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new NextQuestion(500));
                 }
             }
             else

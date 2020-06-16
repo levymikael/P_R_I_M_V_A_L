@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ValidusAnimated extends AnimationImageNew implements MyTouchInterface, MyCorrectionAndPauseInterface
 {
@@ -46,6 +47,29 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
         animation = new Animation(1f / 15f, (Object[]) animationFrames);
     }
 
+    public void goodAnswerPlaySound(MyTimer.TaskEtape nextEtape)
+    {
+
+        Random rand = new Random();
+        int rand_int = rand.nextInt(3);
+
+        String audioPath = "";
+
+        switch (rand_int)
+        {
+            case 0:
+                audioPath = "Sounds/Validus/validus - bravo.mp3";
+                break;
+            case 1:
+                audioPath = "Sounds/Validus/Validus - tres bien.mp3";
+                break;
+            case 2:
+                audioPath = "Sounds/Validus/Validus - C'est bien continue.mp3";
+                break;
+        }
+
+        validusPlaySound(audioPath, nextEtape);
+    }
 
     public void validusPlaySound(String audioPath)
     {
