@@ -110,23 +110,20 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         billesList = new ArrayList<>();
 
-        calculetteViewTest.validerBouton.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                if (calculetteViewTest.isActive())
-                {
-
-                    Gdx.app.log("", "button validate pressed");
-                    pressValidate();
-
-                }
-            }
-        });
-
-
-
+//        calculetteViewTest.validerBouton.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                if (calculetteViewTest.isActive())
+//                {
+//
+//                    Gdx.app.log("", "button validate pressed");
+//                    pressValidate();
+//
+//                }
+//            }
+//        });
         uneMain.setPosition(MyConstants.SCREENWIDTH / 2, MyConstants.SCREENHEIGHT / 3);
     }
 
@@ -243,54 +240,65 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
             metrologue.metrologuePlaySound("Sounds/Onglet1_4/Tape le chiffre au clavier et valide.mp3", null);
             activiteView.addTextActivite("2. Tape le chiffre au clavier et valide");
             calculetteViewTest.setActive(true);
+
+            calculetteViewTest.etapeCorrection = new PressValidate(500);
+
         }
     }
 
 
-    public void pressValidate()
+    private class PressValidate extends MyTimer.TaskEtape
     {
-
-        String txtTape = calculetteViewTest.getInput();
-
-        int value = -1;
-
-        try
+        private PressValidate(long durMillis)
         {
-            value = Integer.parseInt(txtTape);
-        } catch (Exception e)
-        {
-
+            super(durMillis);
         }
 
-        if (value == currrentBillesNumber)
+        @Override
+        public void run()
         {
-            addDiamonds(1);
+            String txtTape = calculetteViewTest.getInput();
 
-            validusAnimated.isActive = false;
-            calculetteViewTest.setActive(false);
+            int value = -1;
 
-            if (questionCourante != 8)
+            try
             {
-                validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new NextQuestion(500));
+                value = Integer.parseInt(txtTape);
+            } catch (Exception e)
+            {
+
             }
-        }
-        else
-        {
-            if (failedAttempts == 1)
+
+            if (value == currrentBillesNumber)
             {
-                myCorrectionAndPauseGeneral.correctionStart();
+                addDiamonds(1);
 
                 validusAnimated.isActive = false;
                 calculetteViewTest.setActive(false);
-                validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2000));
 
-                addPierres(1);
+                if (questionCourante != 8)
+                {
+                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new NextQuestion(500));
+                }
             }
             else
             {
-                validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+                if (failedAttempts == 1)
+                {
+                    myCorrectionAndPauseGeneral.correctionStart();
+
+                    validusAnimated.isActive = false;
+                    calculetteViewTest.setActive(false);
+                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2000));
+
+                    addPierres(1);
+                }
+                else
+                {
+                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+                }
+                failedAttempts++;
             }
-            failedAttempts++;
         }
     }
 
