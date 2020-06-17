@@ -120,7 +120,7 @@ public class ScreenOnglet implements Screen, InputProcessor
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                ScreenOnglet.this.game.dispose();
+//                ScreenOnglet.this.game.dispose();
                 Gdx.app.log("button click", "click!");
 
                 endTime = System.currentTimeMillis();

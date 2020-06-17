@@ -63,7 +63,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
         MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
-//        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);\
+//        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
         un_bouton.setSize(buttonSize, buttonSize);
 
         Table table = new Table();
@@ -72,7 +72,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
         Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4, dataBase);
         Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
-//        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 2, dataBase);
+//        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
 
 
         table.add(tableEx1).width(screenWidth).height(screenHeight / 11)/*.padBottom(screenHeight/100)*/;
@@ -92,7 +92,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
 
-        container.add(scroll).height(2 * screenHeight / 5);
+        container.add(scroll).height(3 * screenHeight / 5);
         container.row();
 
         tableEx1.setTouchable(Touchable.enabled);

@@ -17,6 +17,7 @@ public class SplashScreen implements Screen
         super();
         batch = new SpriteBatch();
         ttrSplash = new Texture("Images/Fond 01 Format 1024x768.jpg");
+        ttrSplash.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }
 
     @Override

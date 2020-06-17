@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class ScreeenBackgroundImage extends TextureRegion implements MyDrawInterface
 {
 
-    TextureRegion bgImageRegion;
     int screenWidth = Gdx.graphics.getWidth();
     int screenHeight = Gdx.graphics.getHeight();
     protected boolean isVisible = true;
@@ -21,8 +20,6 @@ public class ScreeenBackgroundImage extends TextureRegion implements MyDrawInter
     {
         texture = new Texture(Gdx.files.internal(bgImagePath));
         texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-//        bgImageRegion = new TextureRegion(texture);
     }
 
 

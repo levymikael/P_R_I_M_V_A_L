@@ -102,7 +102,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/sommaire_bandeau_gauche.jpg");
 
-        imgSommaire = new ScreeenBackgroundImage("Images/Sommaire/image_sommaire.png");
+        imgSommaire = new ScreeenBackgroundImage("Images/Sommaire/primaire.png");
 
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
         logoTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -331,7 +331,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);
         fondSommairee.myDraw2(batch, screenWidth, screenHeight, ((screenWidth / 5) - (screenWidth / 70)), 0);
 
-        float x = (int) (3 * screenWidth / 5) * (680.0f / 600.0f);
+        float x = (int) (3 * screenWidth / 5) * (709.0f / 626.0f);
         float y = (3 * screenWidth / 5);
         imgSommaire.myDraw2(batch, (int) x, (int) y, ((screenWidth / 4)), (int) ((screenHeight / 2) - (y / 2)));
 //        batch.draw(imgSommaire, 4 * screenWidth / 15, screenHeight / 5, 2 * screenWidth / 5, (((2 * screenWidth / 5) * 600) / 680));
