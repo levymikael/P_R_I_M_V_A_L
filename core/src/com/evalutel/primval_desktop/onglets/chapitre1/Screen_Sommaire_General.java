@@ -229,24 +229,23 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             }
         });
 
-        Label labelEscape = new Label("Quitter", labelStyleRed);
+//        Label labelEscape = new Label("Quitter", labelStyleRed);
 
+        Texture escapeBtn = new Texture(Gdx.files.internal("Images/Quitter primaire.png"));
+        escapeBtn.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table quit = new Table();
         quit.setTouchable(Touchable.enabled);
-//        quit.setSize(screenWidth / 10, screenWidth / 20);
-        quit.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground2))));
-        quit.add(labelEscape);
+        quit.setBackground(new SpriteDrawable(new Sprite(escapeBtn)));
 
         Table quitBorder = new Table();
         quitBorder.pad(screenWidth / 500);
-        quitBorder.setBackground(new SpriteDrawable(new Sprite(new Texture(greyRoundedBackground))));
-        quitBorder.add(quit);
-        quitBorder.setSize(screenWidth / 10, screenWidth / 20);
-        quitBorder.setPosition(screenWidth - quitBorder.getWidth() - screenWidth / 50, screenHeight - quitBorder.getHeight() - screenHeight / 50);
+
+        quit.setSize(screenWidth / 20, screenWidth / 20);
+        quit.setPosition(screenWidth - (float) (quit.getWidth() * 1.5), screenHeight - (float) (quit.getWidth() * 1.5));
 
 
-        stage.addActor(quitBorder);
+        stage.addActor(quit);
         Date date = new Date();
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");

@@ -109,23 +109,13 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Texture chapter1Title = new Texture(Gdx.files.internal("Images/Pages Chapitres/titre Calcul et géométrie.png"));
         chapter1Title.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-//        tableBandeauBas.setBackground(new SpriteDrawable(sprite2));
-
-//        Label labelChap1Titre = new Label("Calcul et géométrie", labelStyleWhite);
-//
-//        labelChap1Titre.setFontScale(3);
         Table allChaptersTitle = new Table();
 
         allChaptersTitle.setBackground(new SpriteDrawable(new Sprite(chapter1Title)));
-        allChaptersTitle.setSize((float) (MyConstants.SCREENWIDTH /2), (float) (((MyConstants.SCREENWIDTH / 4) * 0.14)));
+        allChaptersTitle.setSize((float) (MyConstants.SCREENWIDTH / 2), (float) (((MyConstants.SCREENWIDTH / 4) * 0.14)));
         allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2 - allChaptersTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - ((MyConstants.SCREENWIDTH / 12)));
 
-//        allChaptersTitle.add(labelChap1Titre);
         stage.addActor(allChaptersTitle);
-
-//        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
-//        nomChapitre.setPosition(3 * MyConstants.SCREENWIDTH / 7, 11 * MyConstants.SCREENHEIGHT / 12);
-//        stage.addActor(nomChapitre);
 
         mrNotes = new MrNotes2(stage, dataBase, 20 * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5);
         mrTemps = new MrTemps2(stage, dataBase);

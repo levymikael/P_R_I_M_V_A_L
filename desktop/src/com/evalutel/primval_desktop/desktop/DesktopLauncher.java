@@ -2,6 +2,7 @@ package com.evalutel.primval_desktop.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.evalutel.primval_desktop.GdxSplashScreenGame;
 import com.evalutel.primval_desktop.PrimVal;
 
 public class DesktopLauncher
@@ -65,7 +66,7 @@ public class DesktopLauncher
         config.vSyncEnabled = true;
 //		config.fullscreen = true;
 
-        new LwjglApplication(new PrimVal(), config);
+        new LwjglApplication(new GdxSplashScreenGame(), config);
 
 
     }
