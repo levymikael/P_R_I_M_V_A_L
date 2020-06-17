@@ -148,8 +148,8 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
 // Insertion texte.png dans tableau avec une imageBG.png:
         tableBandeauBas = new Table();
-        heightBackGroundImage = widthEnonce * 59 / 808;
-        texture2 = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_bas_bleu.png"));
+        heightBackGroundImage = widthEnonce * 31 / 809;
+        texture2 = new Texture(Gdx.files.internal("Images/Enoncé-solution/Enoncé-Grand-fond.png"));
         texture2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         sprite2 = new Sprite(texture2);
@@ -260,7 +260,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         lastLabel.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
 
 
-        if(lastPointerTable != null)
+        if (lastPointerTable != null)
         {
             lastPointerTable.remove();
         }

@@ -52,10 +52,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
     private Camera camera;
 
-    private Viewport viewport;
-
-    //    ListExercicesActiviteView listExercicesActiviteView;
-    ScreeenBackgroundImage fondEspaceParent;
+    ScreeenBackgroundImage bandeauHaut;
     ScreeenBackgroundImage fondSommaire;
     MrNotes2 mrNotes;
     MrTemps2 mrTemps;
@@ -100,7 +97,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         allDrawables = new ArrayList<>();
 
-        fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
+        bandeauHaut = new ScreeenBackgroundImage("Images/Pages Chapitres/Bandeau haut.jpg");
 
         fondSommaire = new ScreeenBackgroundImage("Images/Backgrounds/web_hi_res_512.png");
 
@@ -108,17 +105,27 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25, 5 * MyConstants.SCREENHEIGHT / 6 - myButtonRetour.getHeight() / 2);
 
 //        myButtonDemo = new MyButtonDemos(stage, (float) MyConstants.SCREENWIDTH / 22.0f * (447.0f / 93.0f), (float) MyConstants.SCREENWIDTH / 22.0f, game, dataBase);
-//
-        Label labelChap1Titre = new Label("Calcul et géométrie", labelStyleWhite);
 
-        labelChap1Titre.setFontScale(3);
+        Texture chapter1Title = new Texture(Gdx.files.internal("Images/Pages Chapitres/titre Calcul et géométrie.png"));
+        chapter1Title.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+//        tableBandeauBas.setBackground(new SpriteDrawable(sprite2));
+
+//        Label labelChap1Titre = new Label("Calcul et géométrie", labelStyleWhite);
+//
+//        labelChap1Titre.setFontScale(3);
         Table allChaptersTitle = new Table();
-        allChaptersTitle.add(labelChap1Titre);
+
+        allChaptersTitle.setBackground(new SpriteDrawable(new Sprite(chapter1Title)));
+        allChaptersTitle.setSize((float) (MyConstants.SCREENWIDTH /2), (float) (((MyConstants.SCREENWIDTH / 4) * 0.14)));
+        allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2 - allChaptersTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - ((MyConstants.SCREENWIDTH / 12)));
+
+//        allChaptersTitle.add(labelChap1Titre);
         stage.addActor(allChaptersTitle);
 
-        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
-        nomChapitre.setPosition(3 * MyConstants.SCREENWIDTH / 7, 11 * MyConstants.SCREENHEIGHT / 12);
-        stage.addActor(nomChapitre);
+//        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
+//        nomChapitre.setPosition(3 * MyConstants.SCREENWIDTH / 7, 11 * MyConstants.SCREENHEIGHT / 12);
+//        stage.addActor(nomChapitre);
 
         mrNotes = new MrNotes2(stage, dataBase, 20 * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5);
         mrTemps = new MrTemps2(stage, dataBase);
@@ -277,12 +284,12 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         String chapterLabel6 = "Outils de la géométrie. \n Triangle. Points alignés ";
 
         Table table = new Table();
-        Table tableEx1 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_1.png", "Images/IndicesChapitres/chap1.png", chapterLabel1, null, 1, dataBase);
-        Table tableEx2 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_2.png", "Images/IndicesChapitres/chap2.png", chapterLabel2, null, 1, dataBase);
-        Table tableEx3 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_3.png", "Images/IndicesChapitres/chap3.png", chapterLabel3, null, 1, dataBase);
-        Table tableEx4 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_4.png", "Images/IndicesChapitres/chap4.png", chapterLabel4, null, 1, dataBase);
-        Table tableEx5 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_5.png", "Images/IndicesChapitres/chap5.png", chapterLabel5, null, 1, dataBase);
-        Table tableEx6 = BoutonChapitres.getLigne("Sommaire chaps ongs/chapitre_circle_6.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, null, 1, dataBase);
+        Table tableEx1 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 01.jpg", "Images/IndicesChapitres/chap1.png", chapterLabel1, null, 1, dataBase);
+        Table tableEx2 = BoutonChapitres.getLigne("Images/Pages onglets/02.png", "Images/IndicesChapitres/chap2.png", chapterLabel2, null, 1, dataBase);
+        Table tableEx3 = BoutonChapitres.getLigne("Images/Pages onglets/03.png", "Images/IndicesChapitres/chap3.png", chapterLabel3, null, 1, dataBase);
+        Table tableEx4 = BoutonChapitres.getLigne("Images/Pages onglets/04.png", "Images/IndicesChapitres/chap4.png", chapterLabel4, null, 1, dataBase);
+        Table tableEx5 = BoutonChapitres.getLigne("Images/Pages onglets/05.png", "Images/IndicesChapitres/chap5.png", chapterLabel5, null, 1, dataBase);
+        Table tableEx6 = BoutonChapitres.getLigne("Images/Pages onglets/06.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, null, 1, dataBase);
 
         table.add(tableEx1).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center);
 //        table.add(tableEx2).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
@@ -412,7 +419,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        fondEspaceParent.myDraw(batch);
+        bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6));
         fondSommaire.myDraw2(batch, MyConstants.SCREENWIDTH, 5 * MyConstants.SCREENHEIGHT / 6, 0, 0);
 
         for (int i = 0; i < allDrawables.size(); i++)
@@ -435,7 +442,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     public void create()
     {
         camera = new PerspectiveCamera();
-        viewport = new FitViewport(800, 480, camera);
+        Viewport viewport = new FitViewport(800, 480, camera);
     }
 //
 //    private void setScreen()

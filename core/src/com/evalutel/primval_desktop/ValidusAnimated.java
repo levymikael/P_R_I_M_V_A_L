@@ -49,7 +49,6 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
 
     public void goodAnswerPlaySound(MyTimer.TaskEtape nextEtape)
     {
-
         Random rand = new Random();
         int rand_int = rand.nextInt(3);
 

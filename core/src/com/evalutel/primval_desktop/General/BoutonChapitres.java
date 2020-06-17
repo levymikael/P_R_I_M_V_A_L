@@ -34,14 +34,12 @@ public class BoutonChapitres implements Screen
 
     SpriteBatch batch;
 
-    public static Table getLigne( String sommaireChapImgPath, String chapterIndexPath, String ongletTitre, Texture texture, int chapitre, DatabaseDesktop dataBase)
+    public static Table getLigne(String sommaireChapImgPath, String chapterIndexPath, String ongletTitre, Texture texture, int chapitre, DatabaseDesktop dataBase)
     {
         Table container = new Table();
         Table table = new Table();
 
         db = new MyDataBase(dataBase);
-
-//        batch = batch1;
 
         int screenWidth = Gdx.graphics.getWidth();
         int screenHeight = Gdx.graphics.getHeight();
@@ -81,49 +79,14 @@ public class BoutonChapitres implements Screen
         int cornerRadius = heightButton / 8;
 
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.WHITE);
-//        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.BLUE);
-
-//        textureAtlas = new TextureAtlas("Images/IndicesChapitres/indicesChapSprite.txt");
-//
-//
-//        chap1 = textureAtlas.createSprite("chap1");
-
-
-        NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("Images/border9_patch_test.9.png")), 3, 3, 3, 3);
-        NinePatchDrawable background = new NinePatchDrawable(patch);
-
-        Table border = new Table();
-
-
-//        border.setBackground(background);
-//        border.add(table);
-
-
         Table table2 = new Table();
         table2.add(new Image(textureChapterIndex)).width(screenWidth / 30).height(screenWidth / 30).padRight(screenWidth / 150).padLeft(MyConstants.SCREENWIDTH / 400);
         table2.add(labelOngletBlue).width((float) (screenWidth / 6));
 
-        Table table3 = new Table();
 
-        table3.add().width(screenWidth / 70);
-
-        Pixmap blueBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.BLUE);
-
-//        Table summaryBtn = new Table();
-//        summaryBtn.add(labelOngletSummary).padRight(screenWidth / 100).padLeft(screenWidth / 100);
-////        summaryBtn.debug();
-//        summaryBtn.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-//
-//        border.add(summaryBtn);
-//
-//        table3.add(border);
-
-        table.add(new Image(textureChapter)).width(((screenHeight / 7) * 521) / 305).height(screenHeight / 7);
+        table.add(new Image(textureChapter)).width(((screenHeight / 5) * 338) / 305).height(screenHeight / 5);
         table.row();
-        table.add(table2).width((float) (screenWidth / 4)).align(Align.center);
-//        table.row();
-//        table.add(table3).width((float) (screenWidth / 9)).align(Align.center).padBottom(screenWidth / 80).padTop(screenWidth / 80).height(screenHeight / 30);
+        table.add(table2).width((float) (screenWidth / 10)).align(Align.center);
 
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmWhite.setColor(Color.WHITE);
@@ -132,23 +95,11 @@ public class BoutonChapitres implements Screen
         Texture bgTable = new Texture("Sans titre.png");
         bgTable.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-//        table.setBackground(new TextureRegionDrawable(new TextureRegion(bgTable)));
-
-        Pixmap darkGrayRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.DARK_GRAY);
-
-        TextureRegionDrawable textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(darkGrayRoundedBackground)));
-
-//        Table border = new Table();
-//        border.pad(screenWidth / 1000);
-//        border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueBorder))));
-
 
         table.pad(MyConstants.SCREENWIDTH / 500);
-//        container.setBackground(textureRegionDrawableBg);
         container.add(table).height(screenHeight / 4);
         container.row();
 
-//        container.debug();
 
         table.setTouchable(Touchable.enabled);
 
