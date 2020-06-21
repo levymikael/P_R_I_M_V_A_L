@@ -19,6 +19,7 @@ import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_3;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_4;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_5;
+import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_6;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 public class ListExercicesActiviteViewChap1 implements MyDrawInterface
@@ -45,26 +46,27 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         String label5 = "Compter des oiseaux et taper leur nombre";
         String label6 = "Un gâteau pour plusieurs anniversaires";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
         textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
         textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
         stage.addActor(container);
         container.setSize(screenWidth, 7 * screenHeight / 10);
-        container.setPosition(0, 3 * screenHeight / 7 - container.getHeight() / 2);
+        container.setPosition(0, 5 * screenHeight / 14 - container.getHeight() / 2);
 
-        int buttonSize = MyConstants.SCREENWIDTH / 30;
+        int lineHeight = screenHeight / 11;
+        int buttonSize = lineHeight * 5 / 10;
+        int fontSize = screenHeight / 50;
 
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", screenHeight / 50);
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
-//        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", 50, "font/FRHND521_0.TTF", screenHeight / 50);
-        un_bouton.setSize(buttonSize, buttonSize);
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
 
         Table table = new Table();
         Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
@@ -72,20 +74,20 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
         Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4, dataBase);
         Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
-//        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
+        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
 
 
-        table.add(tableEx1).width(screenWidth).height(screenHeight / 11)/*.padBottom(screenHeight/100)*/;
+        table.add(tableEx1).width(screenWidth).height(lineHeight);
         table.row();
-        table.add(tableEx2).width(screenWidth).height(screenHeight / 11);
+        table.add(tableEx2).width(screenWidth).height(lineHeight);
         table.row();
-        table.add(tableEx3).width(screenWidth).height(screenHeight / 11);
+        table.add(tableEx3).width(screenWidth).height(lineHeight);
         table.row();
-        table.add(tableEx4).width(screenWidth).height(screenHeight / 11);
+        table.add(tableEx4).width(screenWidth).height(lineHeight);
         table.row();
-        table.add(tableEx5).width(screenWidth).height(screenHeight / 11);
+        table.add(tableEx5).width(screenWidth).height(lineHeight);
         table.row();
-//        table.add(tableEx6).width(screenWidth).height(screenHeight / 11);
+        table.add(tableEx6).width(screenWidth).height(lineHeight);
 
         table.setWidth(screenWidth);
 
@@ -143,14 +145,15 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
                 System.out.println("I got clicked!5");
             }
         });
-//        tableEx6.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                System.out.println("I got clicked!6");
-//            }
-//        });
+        tableEx6.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("I got clicked!6");
+                game.setScreen(new ScreenEx1_6(game, dataBase));
+            }
+        });
     }
 
 

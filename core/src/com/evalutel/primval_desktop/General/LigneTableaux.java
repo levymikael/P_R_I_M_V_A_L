@@ -100,7 +100,8 @@ public class LigneTableaux
 
         labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4);
 
-        table.add(button).padRight(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 60);
+        table.add(button).height(button.getHeight()).width(button.getWidth()).padRight(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 60);
+        //table.add(button).fillY().expandY().padBottom(15).padTop(15).padRight(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 60);
         table.add(labelOnglet).width((float) (MyConstants.SCREENWIDTH * 0.58));
 
         if (texture != null)
@@ -111,11 +112,11 @@ public class LigneTableaux
 
         if (borderColor == "red")
         {
-            table.add().width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 17);
+            table.add().width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 18);
         }
         else
         {
-            table.add(labelNotes).width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 17);
+            table.add(labelNotes).width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 16);
         }
 
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);

@@ -8,7 +8,7 @@ import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
-import com.evalutel.primval_desktop.ReserveBilles;
+import com.evalutel.primval_desktop.SacDeBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
@@ -50,13 +50,13 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
         oiseauxList = getNumberOiseauxArList();
 
-        reserveBilles = new ReserveBilles(10 * MyConstants.SCREENWIDTH / 11, 9 * MyConstants.SCREENHEIGHT / 11, largeurBille, largeurBille);
-        reserveBilles.largeurBille = largeurBille;
-        reserveBilles.isActive();
-        reserveBilles.setActive(false);
-        allDrawables.add(reserveBilles);
-        myCorrectionAndPauseGeneral.addElements(reserveBilles);
-        allCorrigibles.add(reserveBilles);
+        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float)(largeurBille * 1.5), (float)(largeurBille * 1.5));
+        sacDeBilles.largeurBille = largeurBille;
+        sacDeBilles.isActive();
+        sacDeBilles.setActive(false);
+        allDrawables.add(sacDeBilles);
+        myCorrectionAndPauseGeneral.addElements(sacDeBilles);
+        allCorrigibles.add(sacDeBilles);
 
         planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
 //        planche1.shouldReturnToReserve = true;
@@ -177,8 +177,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             {
                 uneMain.setVisible(true);
 
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+                float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+                float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
                 int posY = (int) posYf;
 
                 MyTimer.TaskEtape nextEtape = new DisplayBilleReserve1(500);
@@ -198,8 +198,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+            float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+            float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
             int posX = (int) posXmain;
             int posY = (int) posYf;
 
@@ -312,8 +312,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             {
                 uneMain.setVisible(true);
 
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+                float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+                float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
                 int posY = (int) posYf;
 
                 MyTimer.TaskEtape nextEtape = new DisplayBilleReserve2(500);
@@ -333,8 +333,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+            float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+            float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
             int posX = (int) posXmain;
             int posY = (int) posYf;
 
@@ -437,8 +437,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             {
                 uneMain.setVisible(true);
 
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+                float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+                float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
                 int posY = (int) posYf;
 
                 MyTimer.TaskEtape nextEtape = new DisplayBilleReserve3(500);
@@ -458,8 +458,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+            float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+            float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
             int posX = (int) posXmain;
             int posY = (int) posYf;
 
@@ -536,8 +536,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             {
                 uneMain.setVisible(true);
 
-                float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-                float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+                float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+                float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
                 int posY = (int) posYf;
 
                 MyTimer.TaskEtape nextEtape = new DisplayBilleReserve4(500);
@@ -557,8 +557,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+            float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+            float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
             int posX = (int) posXmain;
             int posY = (int) posYf;
 
@@ -814,14 +814,14 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
     public ArrayList<UneBille> autoFillPlanche()
     {
-        int firstPositionBilleX = (reserveBilles.getPosition().x + reserveBilles.largeurBille / 4);
-        int firstPositionBilleY = (reserveBilles.getPosition().y + reserveBilles.largeurBille);
+        int firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
+        int firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
 
         billesList = new ArrayList<>();
 
         for (int i = 0; i < oiseauxList.size() + 1; i++)
         {
-            UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, reserveBilles.largeurBille);
+            UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, sacDeBilles.largeurBille);
             billesList.add(billeAdded);
 
             allDrawables.add(billeAdded);
@@ -944,10 +944,10 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
-        boolean isReserveActif = reserveBilles.isActive();
-        if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
+        boolean isReserveActif = sacDeBilles.isActive();
+        if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
-            UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille);
+            UneBille billeAdded = new UneBille(sacDeBilles.currentPositionX + (int) sacDeBilles.animationWidth / 2, sacDeBilles.currentPositionY + (int) sacDeBilles.animationHeight / 2, sacDeBilles.largeurBille);
             objectTouchedList.add(billeAdded);
             allDrawables.add(billeAdded);
             objectTouched = billeAdded;

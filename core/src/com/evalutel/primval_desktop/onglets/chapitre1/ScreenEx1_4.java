@@ -1,41 +1,28 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.StringBuilder;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MyTimer;
-import com.evalutel.primval_desktop.MyTouchInterface;
-import com.evalutel.primval_desktop.ReserveBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
-import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneArdoise;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
-import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
-import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.TimerTask;
 
 
 public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor

@@ -25,10 +25,9 @@ import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
 import com.evalutel.primval_desktop.MyCorrectionAndPauseGeneral;
 import com.evalutel.primval_desktop.MyCorrectionAndPauseInterface;
 import com.evalutel.primval_desktop.MyDrawInterface;
-import com.evalutel.primval_desktop.MyPauseGeneral;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
-import com.evalutel.primval_desktop.ReserveBilles;
+import com.evalutel.primval_desktop.SacDeBilles;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UneMain;
 import com.evalutel.primval_desktop.UnePlancheNew;
@@ -41,7 +40,7 @@ import java.util.ArrayList;
 public class ScreenOnglet implements Screen, InputProcessor
 {
     protected int questionCourante = 0;
-    protected ReserveBilles reserveBilles;
+    protected SacDeBilles sacDeBilles;
     int firstPositionX, firstPositionY;
     MyTouchInterface objectTouched;
     private SpriteBatch batch;
@@ -374,12 +373,12 @@ public class ScreenOnglet implements Screen, InputProcessor
         int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
-        if (reserveBilles != null)
+        if (sacDeBilles != null)
         {
-            if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
+            if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
             {
                 System.out.println("clickedOnReserve");
-                UneBille billeAdded = new UneBille(reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille);
+                UneBille billeAdded = new UneBille(sacDeBilles.currentPositionX + (int) sacDeBilles.animationWidth / 2, sacDeBilles.currentPositionY + (int) sacDeBilles.animationHeight / 2, sacDeBilles.largeurBille);
                 objectTouchedList.add(billeAdded);
                 allDrawables.add(billeAdded);
                 objectTouched = billeAdded;

@@ -13,29 +13,30 @@ import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.MyMath;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
-import com.evalutel.primval_desktop.SacDeBilles;
+import com.evalutel.primval_desktop.UnGateauAnniversaire;
+import com.evalutel.primval_desktop.UneBougie;
+import com.evalutel.primval_desktop.SacDeBougies;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
-import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
 
 
-public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
+public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
 {
-    private ArrayList<UneBille> billesList;
-    private ArrayList<UnOiseau> oiseauxList;
-    private ArrayList<UnePlancheNew> allPlanches;
+    private ArrayList<UneBougie> bougiesList;
+//    private ArrayList<UnOiseau> oiseauxList;
+    private ArrayList<UnGateauAnniversaire> allGateaux;
 
-    private UneBille billeRectification;
+    private UneBougie bougieRectification;
 
     protected CalculetteViewTest calculetteViewTest;
 
-    private UnePlancheNew planche1;
-    ScreeenBackgroundImage bgScreenEx1_1;
+    private UnGateauAnniversaire gateauAnniversaire;
+    ScreeenBackgroundImage bgScreenEx1_6;
 
     int cptOiseau, cptBille = 0;
     private int randNumOiseau;
@@ -44,7 +45,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
     int posX, posY;
 
-    int[] numOiseauArray;
+    int[] numPastilleArray;
 
     int failedAttempts, currrentBillesNumber = 0;
 
@@ -60,45 +61,45 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
     Drawable drawableAux;
 
 
-    public ScreenEx1_5(Game game, DatabaseDesktop dataBase)
+    public ScreenEx1_6(Game game, DatabaseDesktop dataBase)
     {
         super(game, dataBase, 1, 5, true);
 
         this.dataBase = dataBase;
 
-        bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
-        allDrawables.add(bgScreenEx1_1);
+        bgScreenEx1_6 = new ScreeenBackgroundImage("Images/Onglet_1_6/anniversaire.jpg");
+        allDrawables.add(bgScreenEx1_6);
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBille * 1.5), (float) (largeurBille * 1.5));
-        sacDeBilles.largeurBille = largeurBille;
-        sacDeBilles.isActive();
-        sacDeBilles.setActive(false);
-        allDrawables.add(sacDeBilles);
-        myCorrectionAndPauseGeneral.addElements(sacDeBilles);
-        allCorrigibles.add(sacDeBilles);
+        sacDeBougies = new sacDeBougies(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBille * 1.5), (float) (largeurBille * 1.5));
+        sacDeBougies.largeurBille = largeurBille;
+        sacDeBougies.isActive();
+        sacDeBougies.setActive(false);
+        allDrawables.add(sacDeBougies);
+        myCorrectionAndPauseGeneral.addElements(sacDeBougies);
+        allCorrigibles.add(sacDeBougies);
 
-        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
-        planche1.shouldReturnToReserve = true;
-        allDrawables.add(planche1);
-        myCorrectionAndPauseGeneral.addElements(planche1);
-        allCorrigibles.add(planche1);
+        gateauAnniversaire = new UnGateauAnniversaire(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
+        gateauAnniversaire.shouldReturnToReserve = true;
+        allDrawables.add(gateauAnniversaire);
+        myCorrectionAndPauseGeneral.addElements(gateauAnniversaire);
+        allCorrigibles.add(gateauAnniversaire);
 
         for (int i = 0; i < 9; i++)
         {
-            UneBille bille = new UneBille(sacDeBilles.currentPositionX, sacDeBilles.currentPositionY, sacDeBilles.largeurBille);
+            UneBougie bougie = new UneBille(sacDeBougies.currentPositionX, sacDeBougies.currentPositionY, sacDeBougies.largeurBille);
 
-            sacDeBilles.addBilleToReserve(bille);
-            allDrawables.add(bille);
-            objectTouchedList.add(bille);
-            bille.setVisible(false);
-            myCorrectionAndPauseGeneral.addElements(bille);
-            allCorrigibles.add(bille);
+            sacDeBougies.addBougiesToReserves(bougie);
+            allDrawables.add(bougie);
+            objectTouchedList.add(bougie);
+            bougie.setVisible(false);
+            myCorrectionAndPauseGeneral.addElements(bougie);
+            allCorrigibles.add(bougie);
         }
 
-        allPlanches = new ArrayList<>();
-        allPlanches.add(planche1);
+        allGateaux = new ArrayList<>();
+        allGateaux.add(gateauAnniversaire);
 
-        billesList = new ArrayList<>();
+        bougiesList = new ArrayList<>();
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Compter des oiseaux et taper leur nombre";
@@ -113,11 +114,11 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(calculetteViewTest);
 
 
-        oiseauxList = getNumberOiseauxArList();
+//        oiseauxList = getNumberOiseauxArList();
 
-        numOiseauArray = MyMath.genereTabAleatoire(9);
+        numPastilleArray = MyMath.genereTabAleatoire(9);
 
-        resultatExercice = new UnResultat("Primval", 1, 5, 0, consigneExercice, 9, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 1, 6, 0, consigneExercice, 9, 0, dateTest, 0, 0, 0, 123);
 
 //        calculetteViewTest.validerBouton.addListener(new ClickListener()
 //        {
@@ -171,7 +172,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            randNumOiseau = numOiseauArray[questionCourante];
+            randNumPastille = numOiseauArray[questionCourante];
 
             activiteView.setTextActivite("1. Place autant de billes que d'oiseaux que tu vois tape ce nombre au clavier puis valide");
             metrologue.metrologuePlaySound("Sounds/onglet_1_5/metrologue - Instructions onglet 1_5.mp3", new DisplayOiseaux(1_000, 0));
@@ -232,7 +233,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             {
                 timer.schedule(new InputClavier(1_000), 100);
             }
-            sacDeBilles.setActive(true);
+            sacDeBougies.setActive(true);
         }
     }
 
@@ -355,7 +356,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             {
 
             }
-            if ((planche1.getNumberBilles() == randNumOiseau) && (value == planche1.getNumberBilles()))
+            if ((gateauAnniversaire.getNumberBilles() == randNumOiseau) && (value == gateauAnniversaire.getNumberBilles()))
             {
                 if (questionCourante != 8)
                 {
@@ -368,7 +369,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                 }
                 validusAnimated.isActive = false;
                 addDiamonds(1);
-                planche1.setAllBillesActive();
+                gateauAnniversaire.setAllBillesActive();
             }
             else
             {
@@ -383,15 +384,15 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
                     addPierres(1);
                 }
-                else if (planche1.getNumberBilles() == 0)
+                else if (gateauAnniversaire.getNumberBilles() == 0)
                 {
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
                 }
-                else if (planche1.getNumberBilles() < randNumOiseau)
+                else if (gateauAnniversaire.getNumberBilles() < randNumOiseau)
                 {
                     validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus - Tu'es trompe manque des billes planche.mp3");
                 }
-                else if (planche1.getNumberBilles() > randNumOiseau)
+                else if (gateauAnniversaire.getNumberBilles() > randNumOiseau)
                 {
                     validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
                 }
@@ -429,22 +430,22 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            if (planche1.getNumberBilles() < randNumOiseau)
+            if (gateauAnniversaire.getNumberBilles() < randNumOiseau)
             {
-                billeRectification = sacDeBilles.getBilleAndRemove();
-                billeRectification.setVisible(true);
-                planche1.addBilleAndOrganize(billeRectification);
+                bougieRectification = sacDeBougies.getBilleAndRemove();
+                bougieRectification.setVisible(true);
+                gateauAnniversaire.addBilleAndOrganize(bougieRectification);
                 timer.schedule(new EtapeRectification(500), 500);
             }
-            else if (planche1.getNumberBilles() > randNumOiseau)
+            else if (gateauAnniversaire.getNumberBilles() > randNumOiseau)
             {
-                billeRectification = planche1.getLastBille();
-                planche1.removeBille(billeRectification);
-                sacDeBilles.addBilleToReserve(billeRectification);
+                bougieRectification = gateauAnniversaire.getLastBille();
+                gateauAnniversaire.removeBille(bougieRectification);
+                sacDeBougies.addBilleToReserve(bougieRectification);
 
                 timer.schedule(new EtapeRectification(500), 500);
             }
-            else if (planche1.getNumberBilles() == randNumOiseau)
+            else if (gateauAnniversaire.getNumberBilles() == randNumOiseau)
             {
                 timer.schedule(new MoveMainToCalculette(1_000), 1_000);
             }
@@ -604,7 +605,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             afterCorrection = true;
             timer.schedule(new NextQuestion(500), 500);
             styleTest.up = drawableAux;
-            planche1.setAllBillesActive();
+            gateauAnniversaire.setAllBillesActive();
             failedAttempts = 0;
         }
     }
@@ -736,12 +737,12 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
-        if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
+        if (sacDeBougies.contains(screenX, reversedScreenY) && sacDeBougies.isActive()) /*si bille part de la reserve*/
         {
-            UneBille billeAdded = sacDeBilles.getBilleAndRemove();
-            billeAdded.setVisible(true);
-            objectTouched = billeAdded;
-            billeAdded.setActive(true);
+            UneBougie bougieAdded = sacDeBougies.getBilleAndRemove();
+            bougieAdded.setVisible(true);
+            objectTouched = bougieAdded;
+            bougieAdded.setActive(true);
 
         }
         else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))
@@ -795,9 +796,9 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         {
             if (objectTouched instanceof UneBille)
             {
-                UneBille billeAux = (UneBille) objectTouched;
-                billeAux.touchUp(allPlanches);
-                billesList.add(billeAux);
+                UneBougie bougieAux = (UneBougie) objectTouched;
+                bougieAux.touchUp(allGateaux);
+                bougiesList.add(bougieAux);
             }
             else if (objectTouched instanceof ValidusAnimated)
             {
@@ -831,21 +832,21 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 //    }
 
 
-    public ArrayList getNumberOiseauxArList()
-    {
-        oiseauxList = new ArrayList<>();
-
-        int firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
-        int firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
-
-        for (int i = 0; i < 9; i++)
-        {
-            int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (float) ((MyConstants.SCREENWIDTH / 12) * (396.0f / 500.0f)), (float) (MyConstants.SCREENWIDTH / 12) * (500.0f / 396.0f));
-            allDrawables.add(unOiseau);
-            oiseauxList.add(unOiseau);
-        }
-        return oiseauxList;
-    }
+//    public ArrayList getNumberOiseauxArList()
+//    {
+//        oiseauxList = new ArrayList<>();
+//
+//        int firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
+//        int firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
+//
+//        for (int i = 0; i < 9; i++)
+//        {
+//            int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
+//            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (float) ((MyConstants.SCREENWIDTH / 12) * (396.0f / 500.0f)), (float) (MyConstants.SCREENWIDTH / 12) * (500.0f / 396.0f));
+//            allDrawables.add(unOiseau);
+//            oiseauxList.add(unOiseau);
+//        }
+//        return oiseauxList;
+//    }
 
 }

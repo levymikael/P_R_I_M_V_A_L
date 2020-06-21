@@ -10,24 +10,24 @@ import java.util.Random;
 import java.util.Timer;
 
 
-public class UneBille extends AnimationImageNew implements MyTouchInterface, MyDrawInterface, MyCorrectionAndPauseInterface
+public class UneBougie extends AnimationImageNew implements MyTouchInterface, MyDrawInterface, MyCorrectionAndPauseInterface
 {
+    public SacDeBougies sacDeBilles;
     //    Animation animation;
     private Timer timer = new Timer();
-    public UnePlancheNew plancheNew = null;
+    public UnGateauAnniversaire unGateauAnniversaire = null;
     //    private Object unePlancheNew;
 //    private Object unContainer;
-    public SacDeBilles sacDeBilles;
+    public SacDeBougies sacDeBougies;
     boolean isActive = true;
 
-    TextureAtlas textureAtlas = new TextureAtlas("Images/Sprite_Billes/billes_Sprites.txt");
 
     final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 
 
-    public UneBille(int startPositionX, int startPositionY, float animationHeight)
+    public UneBougie(int startPositionX, int startPositionY, float animationHeight)
     {
-        super(getImageRandom(), startPositionX, startPositionY, animationHeight, animationHeight);
+        super("getImageRandom()", startPositionX, startPositionY, animationHeight, animationHeight);
 
 //        addSprites();
     }
@@ -94,9 +94,9 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
 
     public void touchDown()
     {
-        if (plancheNew != null)
+        if (gateauNew != null)
         {
-            plancheNew.removeBille(this);
+            gateauNew.removeBougie(this);
         }
     }
 
@@ -118,24 +118,24 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
 
             if (!isAddedToPlanche)
             {
-                if (this.plancheNew != null)
+                if (this.gateauNew != null)
                 {
-                    if (this.plancheNew.shouldReturnToReserve)
+                    if (this.gateauNew.shouldReturnToReserve)
                     {
-                        this.plancheNew = null;
+                        this.gateauNew = null;
                         this.setPosition(100000, 100000);
-                        sacDeBilles.addBilleToReserve(this);
+                        sacDeBougies.addBougieToReserve(this);
                     }
                     else
                     {
-                        this.plancheNew.addBilleAndOrganize(this);
+                        this.gateauNew.addBilleAndOrganize(this);
                     }
                 }
                 else
                 {
                     if (this != null)
                     {
-                        sacDeBilles.addBilleToReserve(this);
+                        sacDeBougies.addBougieToReserve(this);
                         this.setPosition(100000, 100000);
                     }
                 }

@@ -9,7 +9,7 @@ import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.MyMath;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
-import com.evalutel.primval_desktop.ReserveBilles;
+import com.evalutel.primval_desktop.SacDeBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
@@ -50,10 +50,10 @@ public class ScreenEx1_2 extends ScreenOnglet
         bgScreenEx1_2 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_2);
 
-        reserveBilles = new ReserveBilles(10 * MyConstants.SCREENWIDTH / 11, 9 * MyConstants.SCREENHEIGHT / 11, largeurBille, largeurBille);
-        reserveBilles.largeurBille = largeurBille;
-        allDrawables.add(reserveBilles);
-        myCorrectionAndPauseGeneral.addElements(reserveBilles);
+        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float)(largeurBille * 1.5), (float)(largeurBille * 1.5));
+        sacDeBilles.largeurBille = largeurBille;
+        allDrawables.add(sacDeBilles);
+        myCorrectionAndPauseGeneral.addElements(sacDeBilles);
 
         planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
         planche1.shouldReturnToReserve = true;
@@ -64,9 +64,9 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         for (int i = 0; i < 9; i++)
         {
-            UneBille bille = new UneBille(reserveBilles.currentPositionX, reserveBilles.currentPositionY, reserveBilles.largeurBille);
+            UneBille bille = new UneBille(sacDeBilles.currentPositionX, sacDeBilles.currentPositionY, sacDeBilles.largeurBille);
 
-            reserveBilles.addBilleToReserve(bille);
+            sacDeBilles.addBilleToReserve(bille);
             allDrawables.add(bille);
             objectTouchedList.add(bille);
             bille.setVisible(false);
@@ -124,9 +124,9 @@ public class ScreenEx1_2 extends ScreenOnglet
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
-        if (reserveBilles.contains(screenX, reversedScreenY) && reserveBilles.isActive()) /*si bille part de la reserve*/
+        if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
-            UneBille billeAdded = reserveBilles.getBilleAndRemove();
+            UneBille billeAdded = sacDeBilles.getBilleAndRemove();
             billeAdded.setVisible(true);
             objectTouched = billeAdded;
             billeAdded.setActive(true);
@@ -215,7 +215,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
             metrologue.metrologuePlaySound("Sounds/Metrologue/Place autant de billes.mp3", nextEtape);
 
-            reserveBilles.setActive(false);
+            sacDeBilles.setActive(false);
         }
     }
 
@@ -247,7 +247,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             DisplayOiseaux nextEtape = new DisplayOiseaux(0);
 
-            reserveBilles.setActive(true);
+            sacDeBilles.setActive(true);
 
             if (cptOiseau < randNumOiseau)
             {
@@ -346,7 +346,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                     validusAnimated.isActive = false;
                     planche1.setAllBillesInactive();
-                    reserveBilles.setActive(false);
+                    sacDeBilles.setActive(false);
                     failedAttempts = 0;
 //                    activiteView.addTextActivite("Voici la correction");
 
@@ -398,7 +398,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                 isInCorrection = !isInCorrection;
                 myCorrectionAndPauseGeneral.correctionStop();
 
-                reserveBilles.setActive(true);
+                sacDeBilles.setActive(true);
 
                 timer.schedule(new EtapeNextQuestion(500), 500);
                 uneMain.setVisible(false);
@@ -418,8 +418,8 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             uneMain.setVisible(true);
 
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+            float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+            float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
             int posY = (int) posYf;
 
             MyTimer.TaskEtape nextEtape = new DisplayBilleReserve(500);
@@ -437,12 +437,12 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            float posXmain = reserveBilles.currentPositionX + reserveBilles.getWidth() / 2;
-            float posYf = reserveBilles.currentPositionY + reserveBilles.getHeight() / 2;
+            float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+            float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
             int posX = (int) posXmain;
             int posY = (int) posYf;
 
-            billeRectification = reserveBilles.getBilleAndRemove();
+            billeRectification = sacDeBilles.getBilleAndRemove();
             billeRectification.setPositionCenter(posX, posY);
             billeRectification.setVisible(true);
 
@@ -545,7 +545,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             int posX = (int) (planche1.currentPositionX + planche1.getWidth()) + MyConstants.SCREENWIDTH / 20;
             int posY = (int) (planche1.currentPositionY + (planche1.getHeight() / 2));
 
-            reserveBilles.addBilleToReserve(billeRectification);
+            sacDeBilles.addBilleToReserve(billeRectification);
 
             MyTimer.TaskEtape nextEtape = new EtapeRectification1(500);
             uneMain.moveTo(50, posX, posY, nextEtape, 500);

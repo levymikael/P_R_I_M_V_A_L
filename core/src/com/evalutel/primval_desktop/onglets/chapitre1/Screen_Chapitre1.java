@@ -85,7 +85,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
 
-        fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
+        fondSommaire = new ScreeenBackgroundImage("Images/Pages onglets/fond.jpg");
 
         listExercicesActiviteViewChap1 = new ListExercicesActiviteViewChap1(stage, game, dataBase);
 

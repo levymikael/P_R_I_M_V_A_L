@@ -8,15 +8,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.ArrayList;
 
 
-public class ReserveBilles extends AnimationImageNew implements MyDrawInterface, MyTouchInterface, MyCorrectionAndPauseInterface
+public class SacDeBougies extends AnimationImageNew implements MyDrawInterface, MyTouchInterface, MyCorrectionAndPauseInterface
 {
     public int largeurBille;
     boolean isActive = true;
-    ArrayList<UneBille> arrrayBilles = new ArrayList<>();
+    ArrayList<UneBougie> arrrayBougies = new ArrayList<>();
 
-    public ReserveBilles(int startPositionX, int startpositionY, int animationWidth, int animationHeight)
+    public SacDeBougies(int startPositionX, int startpositionY, float animationWidth, float animationHeight)
     {
-        super("Images/Badix/boite900_vide.png", startPositionX, startpositionY, animationWidth, animationHeight);
+        super("Images/éléments_outils/Bougies_actif.png", startPositionX, startpositionY, animationWidth, animationHeight);
     }
 
     /**
@@ -30,19 +30,19 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
     }
 
 
-    public UneBille getBilleAndRemove()
+    public UneBougie getBougieAndRemove()
     {
-        UneBille retour = arrrayBilles.get(arrrayBilles.size() - 1);
-        arrrayBilles.remove(retour);
+        UneBougie retour = arrrayBougies.get(arrrayBougies.size() - 1);
+        arrrayBougies.remove(retour);
 
         return retour;
     }
 
-    public void addBilleToReserve(UneBille bille)
+    public void addBougieToReserve(UneBougie bougie)
     {
-        bille.isVisible = false;
-        arrrayBilles.add(bille);
-        bille.reserveBilles = this;
+        bougie.isVisible = false;
+        arrrayBougies.add(bougie);
+        bougie.sacDeBilles = this;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class ReserveBilles extends AnimationImageNew implements MyDrawInterface,
     @Override
     public void myDraw(Batch batch)
     {
-        TextureRegion textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/Badix/boite900_vide.png")));
+        TextureRegion textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Images/éléments_outils/Bougies_actif.png")));
         batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
     }
 
