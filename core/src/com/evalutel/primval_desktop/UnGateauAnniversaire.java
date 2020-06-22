@@ -16,20 +16,20 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
     int spaceBougies;
 
 
-    public UnGateauAnniversaire(int startPositionX, int startPositionY, int plancheWidth, int billeWidth)
+    public UnGateauAnniversaire(int startPositionX, int startPositionY, int gateauWidth, int gateauHeight)
     {
-        super("Images/Onglet_1_6/gateau.png", startPositionX, startPositionY, (float) plancheWidth, plancheWidth);
+        super("Images/Onglet_1_6/gateau.png", startPositionX, startPositionY, (float) gateauWidth, gateauHeight);
 
         int startX = (int) animationWidth / 12;
 
-        spaceBougies = (int) animationWidth / 24;
+        spaceBougies = (int) animationWidth / 50;
 
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                int posX = (startX + j * (spaceBougies + billeWidth));
-                int posY = (startX + i * (spaceBougies + billeWidth));
+                int posX = ((startX ) + j * (spaceBougies + gateauWidth/5));
+                int posY = (startX + i * (spaceBougies + gateauHeight/5));
 
                 positionsBougies.add(new MyPoint(currentPositionX + posX, currentPositionY + posY));
             }
@@ -46,9 +46,9 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
         return this.currentPositionX <= currentPositionX && this.currentPositionX + this.animationWidth >= currentPositionX && this.currentPositionY <= currentPositionY && this.currentPositionY + this.animationHeight >= currentPositionY;
     }
 
-    public boolean isInRect(UneBille bille)
+    public boolean isInRect(UneBougie bougie)
     {
-        boolean test = (bille.currentPositionX > this.currentPositionX) && (bille.currentPositionX < (this.currentPositionX + this.animationWidth)) && (bille.currentPositionY > this.currentPositionY) && (bille.currentPositionY < (this.currentPositionY + this.animationHeight));
+        boolean test = (bougie.currentPositionX > this.currentPositionX) && (bougie.currentPositionX < (this.currentPositionX + this.animationWidth)) && (bougie.currentPositionY > this.currentPositionY) && (bougie.currentPositionY < (this.currentPositionY + this.animationHeight));
 
         return test;
     }
@@ -91,7 +91,7 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
         }
     }
 
-    public void setAllBillesActive()
+    public void setAllBougiesActive()
     {
         for (int i = 0; i < allBougies.size(); i++)
         {
@@ -115,7 +115,7 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
     {
         boolean retour = addBougie(uneBougie);
 
-        reorganiseBilles();
+        reorganiseBougies();
 
 
         return retour;
@@ -140,7 +140,7 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
         return retour;
     }
 
-    public void reorganiseBilles()
+    public void reorganiseBougies()
     {
         ArrayList<UneBougie> arrayBougiesAux = new ArrayList<>(allBougies);
 
@@ -153,9 +153,9 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
         }
     }
 
-    public void removeBille(UneBille uneBille)
+    public void removeBougie(UneBougie uneBougie)
     {
-        allBougies.remove(uneBille);
+        allBougies.remove(uneBougie);
     }
 
 
@@ -164,7 +164,7 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
         allBougies.remove(uneMain);
     }
 
-    public int getNumberBilles()
+    public int getNumberBougies()
     {
         return allBougies.size();
     }

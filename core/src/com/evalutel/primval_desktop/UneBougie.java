@@ -12,22 +12,20 @@ import java.util.Timer;
 
 public class UneBougie extends AnimationImageNew implements MyTouchInterface, MyDrawInterface, MyCorrectionAndPauseInterface
 {
-    public SacDeBougies sacDeBilles;
+    public SacDeBougies sacDeBougies;
     //    Animation animation;
     private Timer timer = new Timer();
-    public UnGateauAnniversaire unGateauAnniversaire = null;
+    public UnGateauAnniversaire gateauNew = null;
     //    private Object unePlancheNew;
 //    private Object unContainer;
-    public SacDeBougies sacDeBougies;
     boolean isActive = true;
 
 
-    final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 
 
     public UneBougie(int startPositionX, int startPositionY, float animationHeight)
     {
-        super("getImageRandom()", startPositionX, startPositionY, animationHeight, animationHeight);
+        super("Images/Onglet_1_6/bougie_bleu.png", startPositionX, startPositionY, animationHeight, animationHeight);
 
 //        addSprites();
     }
@@ -100,35 +98,37 @@ public class UneBougie extends AnimationImageNew implements MyTouchInterface, My
         }
     }
 
-    public void touchUp(ArrayList<UnePlancheNew> planches/*, int firstPositionX, int firstPositionY*/)
+    public void touchUp(ArrayList<UnGateauAnniversaire> gateaux/*, int firstPositionX, int firstPositionY*/)
     {
-        boolean isAddedToPlanche = false;
+        boolean isAddedToGateau = false;
         if (this.isActive)
         {
-            for (int i = 0; i < planches.size(); i++)
+            for (int i = 0; i < gateaux.size(); i++)
             {
-                UnePlancheNew plancheAux = planches.get(i);
-                if (plancheAux.isInRect(this))
+                UnGateauAnniversaire gateauAux = gateaux.get(i);
+                if (gateauAux.isInRect(this))
                 {
-                    isAddedToPlanche = true;
-                    plancheAux.addBilleAndOrganize(this);
+                    isAddedToGateau = true;
+                    //this.gateauNew = gateauAux
+                    gateauAux.addBougieAndOrganize(this);
                     break;
                 }
             }
 
-            if (!isAddedToPlanche)
+            if (!isAddedToGateau)
             {
                 if (this.gateauNew != null)
                 {
                     if (this.gateauNew.shouldReturnToReserve)
                     {
+                        //this.gateauNew.removeBougie(this);
                         this.gateauNew = null;
-                        this.setPosition(100000, 100000);
+                        this.setPosition(100_000, 100_000);
                         sacDeBougies.addBougieToReserve(this);
                     }
                     else
                     {
-                        this.gateauNew.addBilleAndOrganize(this);
+                        this.gateauNew.addBougieAndOrganize(this);
                     }
                 }
                 else
@@ -136,7 +136,7 @@ public class UneBougie extends AnimationImageNew implements MyTouchInterface, My
                     if (this != null)
                     {
                         sacDeBougies.addBougieToReserve(this);
-                        this.setPosition(100000, 100000);
+                        this.setPosition(100_000, 100_000);
                     }
                 }
             }

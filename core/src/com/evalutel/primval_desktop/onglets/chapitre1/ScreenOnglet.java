@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.evalutel.primval_desktop.ActiviteView;
+import com.evalutel.primval_desktop.ActiviteViewDouble;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
@@ -28,6 +29,7 @@ import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.SacDeBilles;
+import com.evalutel.primval_desktop.SacDeBougies;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UneMain;
 import com.evalutel.primval_desktop.UnePlancheNew;
@@ -41,9 +43,10 @@ public class ScreenOnglet implements Screen, InputProcessor
 {
     protected int questionCourante = 0;
     protected SacDeBilles sacDeBilles;
+    protected SacDeBougies sacDeBougies;
     int firstPositionX, firstPositionY;
     MyTouchInterface objectTouched;
-    private SpriteBatch batch;
+    protected SpriteBatch batch;
     protected Stage stage;
 
     MyImageButton startPausebutton;
@@ -70,6 +73,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     int mousePointerX, mousePointerY;
 
     int largeurBille, largeurPlanche;
+    int largeurBougie, largeurGateau;
     UneMain uneMain;
 
     MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;
@@ -85,6 +89,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     float activiteWidth;
 
     ActiviteView activiteView;
+    ActiviteViewDouble activiteViewDouble;
 
 
     public ScreenOnglet(Game game, DatabaseDesktop dataBase, int chapitre, int onglet, boolean ecrin)
@@ -100,6 +105,10 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         largeurBille = MyConstants.SCREENWIDTH / 15;
         largeurPlanche = largeurBille * 4;
+
+        largeurBougie = MyConstants.SCREENWIDTH / 15;
+        largeurGateau = largeurBougie * 4;
+
 
         objectTouchedList = new ArrayList<>();
         allDrawables = new ArrayList<>();

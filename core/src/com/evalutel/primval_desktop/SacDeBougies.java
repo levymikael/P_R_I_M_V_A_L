@@ -42,7 +42,13 @@ public class SacDeBougies extends AnimationImageNew implements MyDrawInterface, 
     {
         bougie.isVisible = false;
         arrrayBougies.add(bougie);
-        bougie.sacDeBilles = this;
+        bougie.sacDeBougies = this;
+    }
+
+
+    public int getBillesCount()
+    {
+        return arrrayBougies.size();
     }
 
     @Override
