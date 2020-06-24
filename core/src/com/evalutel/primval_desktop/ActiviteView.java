@@ -26,8 +26,8 @@ import java.util.ArrayList;
 
 public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
-    private Table table, tableTitre, tableBandeauBas;
-    private Table tableMilieu, table4;
+    private Table table, tableTitre, tableBandeauBasBleu, tableBandeauBasVert;
+    private Table tableMilieu, tableMilieuSolution, table4, table5;
     private float heightTop;
     float topYTablePosition, heightBackGroundImage;
 
@@ -39,9 +39,8 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     int cptInstructions;
 
-    Sprite sprite2, spriteEnonceText;
-    BitmapFont bitmapFontArial;
-    BitmapFont bitmapFontComic;
+    Sprite sprite2, sprite3, spriteEnonceText, spriteSolutionText;
+    BitmapFont bitmapFontArial, bitmapFontComic;
     private boolean isVisible = true;
     private Texture textureMilieuEnonce;
 
@@ -53,9 +52,9 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     boolean isPaused;
 
-    Table lastPointerTable;
+    Table lastPointerTable, lastPointerTable2;
 
-    public ActiviteView(Stage stage, float width, String numExercice, String consigneExercice, String exDansChapitre, String activiteType)
+    public ActiviteView(Stage stage, float width, /*float positionX,*/ String numExercice, String consigneExercice, String exDansChapitre, String activiteType)
     {
         textureMilieuEnonce = new Texture("Images/EnonceUIElements/enonce_milieu_new.png");
         textureMilieuEnonce.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -78,39 +77,14 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         bitmapFontComic = fontComic.generateFont(parameter);
         fontComic.dispose();
 
-// Numero exerice/consigne:
-        Label.LabelStyle labelStyleArial = new Label.LabelStyle();
-        labelStyleArial.font = bitmapFontArial;
-        labelStyleArial.fontColor = Color.YELLOW;
-        Label exoNumLabel = new Label(numExercice, labelStyleArial);
-
-        Label.LabelStyle labelStyleComic = new Label.LabelStyle();
-        labelStyleComic.font = bitmapFontComic;
-        labelStyleComic.fontColor = Color.WHITE;
-        Label exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
-
         Label.LabelStyle labelStyle3 = new Label.LabelStyle();
         labelStyle3.font = bitmapFontArial;
         labelStyle3.fontColor = Color.YELLOW;
         Label label3 = new Label(exDansChapitre, labelStyle3);
         label3.setWidth(MyConstants.SCREENWIDTH / 46);
 
-// Creation cellule tableau pour numero d'exerice:
-        tableTitre = new Table();
-
-        Texture textureTitre = new Texture("Images/EnonceUIElements/titre_top.png");
-        textureTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        tableTitre.setBackground(new SpriteDrawable(new Sprite(textureTitre)));
-
-// Positionnement numero exercice:
-        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
-        tableTitre.add(exoConsigneLabel).width(widthEnonce - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(label3).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
-
         table = new Table();
         stage.addActor(table);
-        stage.addActor(tableTitre);
 
         tableMilieu = new Table();
 
@@ -120,7 +94,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         table.add(paddingTableMilieu).height(MyConstants.SCREENHEIGHT / 200).width(widthEnonce);
         table.row();
 
-        table.add(tableMilieu).width(tableTitre.getWidth() + MyConstants.SCREENWIDTH / 100);
+        table.add(tableMilieu).width(widthEnonce + MyConstants.SCREENWIDTH / 100);
         table.row();
 
         Table paddingTableMilieu2 = new Table();
@@ -147,28 +121,25 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         textFieldEnonce = new TextField("", textFieldStyleEnonce);
 
 // Insertion texte.png dans tableau avec une imageBG.png:
-        tableBandeauBas = new Table();
+        tableBandeauBasBleu = new Table();
+
         heightBackGroundImage = widthEnonce * 31 / 809;
         texture2 = new Texture(Gdx.files.internal("Images/Enoncé-solution/Enoncé-Grand-fond.png"));
         texture2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         sprite2 = new Sprite(texture2);
-        tableBandeauBas.setBackground(new SpriteDrawable(sprite2));
+        tableBandeauBasBleu.setBackground(new SpriteDrawable(sprite2));
 
         float heightImageEnonce = heightBackGroundImage * 2 / 3;
         float widthImageEnonce = heightImageEnonce * 218 / 41;
 
-        tableBandeauBas.add(textFieldEnonce).width(widthImageEnonce).height(heightImageEnonce);
+        tableBandeauBasBleu.add(textFieldEnonce).width(widthImageEnonce).height(heightImageEnonce);
 
-        table.add(tableBandeauBas).width(widthEnonce).height(heightBackGroundImage);
+        table.add(tableBandeauBasBleu).width(widthEnonce).height(heightBackGroundImage);
         table.row();
 
 // Positionnement du tableau sur ecran:
 
-        tableTitre.pack();
-
-        float xTableTitre = (MyConstants.SCREENWIDTH / 2 - widthEnonce / 2);
-        tableTitre.setPosition(xTableTitre, MyConstants.SCREENHEIGHT - heightTop);
 
         table.pack();
         final float tableHeight = table.getHeight();
@@ -221,10 +192,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
             }
         });
 
-        tableTitre.setWidth(widthEnonce);
-        tableTitre.setHeight(heightTop);
     }
-
 
     public Label setTextActivite(String string)
     {
@@ -333,6 +301,92 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         tableMilieu.clear();
     }
 
+    public Label setTextSolution(String string)
+    {
+
+        emptySolution();
+
+        return addTextActivite(string);
+
+    }
+
+    public Label addTextSolution(String string)
+    {
+        table5 = new Table();
+
+        Label.LabelStyle labelStyleBlack = new Label.LabelStyle();
+        labelStyleBlack.font = bitmapFontArial;
+        labelStyleBlack.fontColor = Color.BLACK;
+
+        Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
+        labelStyleBlue.font = bitmapFontArial;
+        labelStyleBlue.fontColor = new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
+
+        if (cptInstructions != 0)
+        {
+            lastLabel.setStyle(labelStyleBlack);
+        }
+
+        Label label3 = new Label(string, labelStyleBlue);
+        label3.setWrap(true);
+
+        lastLabel = label3;
+
+        lastLabel.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
+
+
+        if (lastPointerTable != null)
+        {
+            lastPointerTable.remove();
+        }
+
+        flechSprite.setSize(MyConstants.SCREENWIDTH / 30, 40);
+        flechSprite.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
+
+        SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
+
+        lastPointerTable2 = new Table();
+
+        lastPointerTable2.setBackground(flecheSpriteDrawable);
+
+
+        table5.add(lastPointerTable2).width(MyConstants.SCREENWIDTH / 60).height(MyConstants.SCREENHEIGHT / 40).align(Align.left).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100)/*.padTop(MyConstants.SCREENHEIGHT / 20)*/;
+        table5.add(label3).width(widthEnonce / 2 - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 120))).padRight(MyConstants.SCREENWIDTH / 120)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
+
+
+        table5.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
+        tableMilieuSolution.add(table5);
+        tableMilieuSolution.row();
+
+        table.pack();
+
+        cptInstructions++;
+
+        float labelHeight = label3.getHeight() + MyConstants.SCREENHEIGHT / 100;
+
+        topYTablePosition = MyConstants.SCREENHEIGHT - table.getHeight() - heightTop;
+
+
+        float nextTestY = currentY - labelHeight;
+        if (nextTestY > topYTablePosition)
+        {
+            currentY = currentY - labelHeight;
+            table.setY(currentY);
+        }
+        else
+        {
+            currentY = topYTablePosition;
+            table.setY(topYTablePosition);
+        }
+
+        return label3;
+    }
+
+
+    public void emptySolution()
+    {
+        tableMilieuSolution.clear();
+    }
 //    public Label addText(String str)
 //    {
 //        ArrayList<String> textToAdd = new ArrayList<>();

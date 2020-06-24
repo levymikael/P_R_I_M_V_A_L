@@ -6,14 +6,20 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.ActiviteViewDouble;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
@@ -53,6 +59,8 @@ public class ScreenOnglet implements Screen, InputProcessor
     boolean isVisible = true;
     protected MyTimer timer;
 
+    BitmapFont bitmapFontArial, bitmapFontComic;
+
     boolean isInPause = false;
 
     protected ArrayList<MyDrawInterface> allDrawables;
@@ -79,6 +87,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;
 
     MyDataBase db;
+    Table tableTitre;
 
     UnResultat resultatExercice;
 
@@ -86,10 +95,19 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     EcrinDiamantView ecrinDiamantView;
 
-    float activiteWidth;
+    float activiteWidth, heightTop;
 
     ActiviteView activiteView;
+
     ActiviteViewDouble activiteViewDouble;
+
+    Label.LabelStyle labelStyleArial, labelStyleComic, labelStyle3;
+
+    FreeTypeFontGenerator fontArial, fontComic;
+
+    String consigneExercice, numExercice, exDansChapitre;
+
+    Label exoNumLabel, exoConsigneLabel, label3;
 
 
     public ScreenOnglet(Game game, DatabaseDesktop dataBase, int chapitre, int onglet, boolean ecrin)
@@ -102,6 +120,52 @@ public class ScreenOnglet implements Screen, InputProcessor
         this.dataBase = dataBase;
 
         db = new MyDataBase(dataBase);
+
+        tableTitre = new Table();
+
+        Texture textureTitre = new Texture("Images/EnonceUIElements/titre_top.png");
+        textureTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        tableTitre.setBackground(new SpriteDrawable(new Sprite(textureTitre)));
+
+// Positionnement numero exercice:
+
+
+        tableTitre.pack();
+        activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
+
+        heightTop = activiteWidth * 42 / 1626;
+        float xTableTitre = (MyConstants.SCREENWIDTH / 2 - activiteWidth / 2);
+        tableTitre.setPosition(xTableTitre + MyConstants.SCREENWIDTH / 200, MyConstants.SCREENHEIGHT - heightTop);
+
+        tableTitre.setWidth(activiteWidth);
+        tableTitre.setHeight(heightTop);
+
+        fontArial = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = MyConstants.SCREENWIDTH / 70;
+        bitmapFontArial = fontArial.generateFont(parameter);
+        fontArial.dispose();
+
+        fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterComic = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterComic.size = MyConstants.SCREENWIDTH / 70;
+        bitmapFontComic = fontComic.generateFont(parameter);
+        fontComic.dispose();
+
+        labelStyleComic = new Label.LabelStyle();
+        labelStyleComic.font = bitmapFontComic;
+        labelStyleComic.fontColor = Color.WHITE;
+
+        labelStyleArial = new Label.LabelStyle();
+        labelStyleArial.font = bitmapFontArial;
+        labelStyleArial.fontColor = Color.YELLOW;
+
+        labelStyle3 = new Label.LabelStyle();
+        labelStyle3.font = bitmapFontArial;
+        labelStyle3.fontColor = Color.YELLOW;
+
+
 
         largeurBille = MyConstants.SCREENWIDTH / 15;
         largeurPlanche = largeurBille * 4;
@@ -117,8 +181,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         startTime = System.currentTimeMillis();
 
         myCorrectionAndPauseGeneral = new MyCorrectionAndPauseGeneral();
-
-        activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
 
         resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0, 0);
 
@@ -159,6 +221,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
         startPausebutton.setPosition(MyConstants.SCREENWIDTH / 60, 5 * MyConstants.SCREENHEIGHT / 7);
         stage.addActor(startPausebutton);
+
 
         startPausebutton.addListener(new ClickListener()
         {

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.ActiviteViewDouble;
 import com.evalutel.primval_desktop.CalculetteViewTest;
@@ -48,7 +49,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
     private UnGateauAnniversaire gateauAnniversaire;
     ScreeenBackgroundImage bgScreenEx1_6;
 
-    Texture txture;
+    TextureRegion textureRegion;
 
     int cptBougie = 0;
     private int randNumPastille;
@@ -90,8 +91,8 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(sacDeBougies);
         allCorrigibles.add(sacDeBougies);
 
-        int gateauWidth = 7 * MyConstants.SCREENWIDTH / 20;
-        int gateauHeight = gateauWidth * (462 / 266);
+        int gateauWidth = MyConstants.SCREENWIDTH / 2;
+        int gateauHeight = (int) (gateauWidth * (266.0f / 462.0f));
 
         gateauAnniversaire = new UnGateauAnniversaire(3 * MyConstants.SCREENWIDTH / 10 - largeurGateau / 10, MyConstants.SCREENHEIGHT / 20, gateauWidth, gateauHeight);
         gateauAnniversaire.shouldReturnToReserve = true;
@@ -120,9 +121,21 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Un gâteau pour plusieurs anniversaires";
 
-        activiteViewDouble = new ActiviteViewDouble(stage, activiteWidth, numExercice, consigneExercice, "", "activite");
+        activiteViewDouble = new ActiviteViewDouble(stage, activiteWidth, numExercice, consigneExercice, "9", "enonce");
         allDrawables.add(activiteViewDouble);
         myCorrectionAndPauseGeneral.addElements(activiteViewDouble);
+
+        exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
+        exoNumLabel = new Label(numExercice, labelStyleArial);
+        label3 = new Label(exDansChapitre, labelStyle3);
+        label3.setWidth(MyConstants.SCREENWIDTH / 46);
+
+
+        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
+        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
+        tableTitre.add(label3).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+
+        stage.addActor(tableTitre);
 
         calculetteViewTest = new CalculetteViewTest(stage, validusAnimated);
         allDrawables.add(calculetteViewTest);
@@ -149,10 +162,10 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
 
         if (displayPastille)
         {
-            if (txture != null)
+            if (textureRegion != null)
             {
                 batch.begin();
-                batch.draw(txture, MyConstants.SCREENWIDTH / 7, MyConstants.SCREENHEIGHT / 2);
+                batch.draw(textureRegion, MyConstants.SCREENWIDTH / 7, 8 * MyConstants.SCREENHEIGHT / 15, MyConstants.SCREENHEIGHT / 4, MyConstants.SCREENHEIGHT / 4 * (268 / 234));
                 batch.end();
             }
 
@@ -194,7 +207,13 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         {
 
             randNumPastille = numPastilleArray[questionCourante];
-            txture = pastilleList.get(randNumPastille - 1);
+
+
+            Texture txture = pastilleList.get(randNumPastille - 1);
+            textureRegion = new TextureRegion(txture);
+//            textureRegion.setRegionHeight(MyConstants.SCREENHEIGHT / 6);
+//            textureRegion.setRegionWidth(textureRegion.getRegionHeight() * (268 / 234));
+
 
             System.out.println(randNumPastille);
 
@@ -208,62 +227,6 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         }
     }
 
-
-//    private class DisplayPastille extends MyTimer.TaskEtape
-//    {
-//        private DisplayPastille(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            DisplayPastille nextEtape = new getNumberBougies(0, 0);
-//
-//            if (cptOiseau < randNumOiseau)
-//            {
-//                UnOiseau oiseau = bougiesList.get(cptOiseau);
-//
-//                if (cptOiseau > 5)
-//                {
-//                    posY = 5 * MyConstants.SCREENHEIGHT / 11;
-//                    posX = (2 * MyConstants.SCREENWIDTH / 9) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 3);
-//                }
-//                else
-//                {
-//                    posY = 7 * MyConstants.SCREENHEIGHT / 10;
-//
-//                    if (cptOiseau < 3)
-//                    {
-//                        posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
-//                    }
-//                    else
-//                    {
-//                        posX = (2 * MyConstants.SCREENWIDTH / 9) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
-//                    }
-//                }
-//                oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
-//                timer.schedule(nextEtape, 100);
-//                cptOiseau++;
-//            }
-//            else if (cptOiseau > randNumOiseau)
-//            {
-//                UnePastille oiseau = bougiesList.get(cptOiseau - 1);
-//                int posX = MyConstants.SCREENWIDTH * 2;
-//                int posY = MyConstants.SCREENHEIGHT * 2;
-//
-//                oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
-//                timer.schedule(nextEtape, 100);
-//                cptOiseau--;
-//            }
-//            else
-//            {
-//                timer.schedule(new InputClavier(1_000), 100);
-//            }
-//            sacDeBougies.setActive(true);
-//        }
-//    }
 
     private class InputClavier extends MyTimer.TaskEtape
     {
@@ -584,7 +547,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             }
             else
             {
-                timer.schedule(new EtapeInstruction(500), 0);
+                timer.schedule(new SolutionDisplay(500, 0), 0);
             }
             questionCourante++;
 
@@ -617,7 +580,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             }
             else
             {
-                timer.schedule(new EtapeInstruction(1_000, 500), 500);
+                timer.schedule(new SolutionDisplay(1_000, 500), 500);
                 calculetteViewTest.textRemove();
 
             }
@@ -667,44 +630,11 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
-        /* if (sacDeBougies.contains(screenX, reversedScreenY) && sacDeBougies.isActive()) *//*si bille part de la reserve*//*
-        {
-            UneBougie bougieAdded = sacDeBougies.getBougieAndRemove();
-            bougieAdded.setVisible(true);
-            objectTouched = bougieAdded;
-            bougieAdded.setActive(true);
-
-        }
-        else*/
         if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))
         {
             objectTouched = validusAnimated;
         }
-        /*else if(gateauAnniversaire.contains(mousePointerX, mousePointerY) && (!gateauAnniversaire.isPause()));
-        {
-            for (int i = 0; i < objectTouchedList.size(); i++)
-            {
-                MyTouchInterface objetAux = objectTouchedList.get(i);
 
-                if (objetAux.isTouched(screenX, reversedScreenY) && objetAux.isActive())
-                {
-                    objectTouched = objetAux;
-                    firstPositionX = mousePointerX;
-                    firstPositionY = mousePointerY;
-
-                    if (objectTouched instanceof UneBougie)
-                    {
-                        UneBougie bougieAux = gateauAnniversaire.getLastBougie();
-                        bougieAux.touchDown();
-//                        gateauAnniversaire.addBougieAndOrganize(bougieAux);
-//                        gateauAnniversaire.removeBougie(bougieAux);
-//                        bougiesList.add(bougieAux);
-
-                        break;
-                    }
-                }
-            }
-        }*/
         return true;
     }
 
@@ -778,4 +708,53 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         return false;
     }
 
+
+    private class SolutionDisplay extends MyTimer.TaskEtape
+    {
+        private SolutionDisplay(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            switch (randNumPastille)
+            {
+                case 1:
+                    activiteViewDouble.addTextSolution("Lucas a 1 an");
+                    break;
+                case 2:
+                    activiteViewDouble.addTextSolution("Emma a 2 ans");
+                    break;
+                case 3:
+                    activiteViewDouble.addTextSolution("Arthur a 3 ans");
+                    break;
+                case 4:
+                    activiteViewDouble.addTextSolution("Lina a 4 ans");
+                    break;
+                case 5:
+                    activiteViewDouble.addTextSolution("Héloise a 5 ans");
+                    break;
+                case 6:
+                    activiteViewDouble.addTextSolution("Théo a 6 ans");
+                    break;
+                case 7:
+                    activiteViewDouble.addTextSolution("Zoé a 7 ans");
+                    break;
+                case 8:
+                    activiteViewDouble.addTextSolution("Hugo a 8 ans");
+                    break;
+                case 9:
+                    activiteViewDouble.addTextSolution("Chloé a 9 ans");
+                    break;
+                default:
+
+                    break;
+            }
+
+            timer.schedule(new EtapeInstruction(500), 0);
+        }
+
+    }
 }

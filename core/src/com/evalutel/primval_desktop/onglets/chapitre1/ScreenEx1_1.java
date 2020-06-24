@@ -2,6 +2,8 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.UnResultat;
@@ -75,6 +77,18 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "enonce");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
+
+        exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
+        exoNumLabel = new Label(numExercice, labelStyleArial);
+        label3 = new Label(exDansChapitre, labelStyle3);
+        label3.setWidth(MyConstants.SCREENWIDTH / 46);
+
+
+        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
+        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
+        tableTitre.add(label3).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+
+        stage.addActor(tableTitre);
 
         billesList = autoFillPlanche();
 

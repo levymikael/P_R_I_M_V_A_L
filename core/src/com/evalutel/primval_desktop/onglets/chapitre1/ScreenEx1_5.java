@@ -1,10 +1,14 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
@@ -54,7 +58,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
     DatabaseDesktop dataBase;
 
-    String consigneExercice, nbInput;
+    String nbInput;
 
     Label currentLabel;
     Drawable drawableAux;
@@ -100,10 +104,12 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
         billesList = new ArrayList<>();
 
-        String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
+        exDansChapitre = "";
+
+        numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Compter des oiseaux et taper leur nombre";
 
-        activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "activite");
+        activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, exDansChapitre, "activite");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
@@ -111,6 +117,19 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         allDrawables.add(calculetteViewTest);
         calculetteViewTest.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteViewTest);
+
+
+        exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
+        exoNumLabel = new Label(numExercice, labelStyleArial);
+        label3 = new Label(exDansChapitre, labelStyle3);
+        label3.setWidth(MyConstants.SCREENWIDTH / 46);
+
+
+        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
+        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
+        tableTitre.add(label3).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+
+        stage.addActor(tableTitre);
 
 
         oiseauxList = getNumberOiseauxArList();

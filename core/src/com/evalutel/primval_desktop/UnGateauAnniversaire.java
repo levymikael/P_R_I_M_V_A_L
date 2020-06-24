@@ -1,5 +1,6 @@
 package com.evalutel.primval_desktop;
 
+import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
@@ -20,7 +21,9 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
     {
         super("Images/Onglet_1_6/gateau.png", startPositionX, startPositionY, (float) gateauWidth, gateauHeight);
 
-        int startX = (int) animationWidth / 12;
+
+        int startX = (int) animationWidth / 11;
+        int startY = startPositionY + (MyConstants.SCREENHEIGHT / 10);
 
         spaceBougies = (int) animationWidth / 50;
 
@@ -28,11 +31,12 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
         {
             for (int j = 0; j < 3; j++)
             {
-                int posX = ((startX ) + j * (spaceBougies + gateauWidth/5));
-                int posY = (startX + i * (spaceBougies + gateauHeight/5));
+                int posX = ((startX) + j * (spaceBougies + gateauWidth / 5));
+                int posY = (startY + i * (spaceBougies + gateauHeight / 5));
 
                 positionsBougies.add(new MyPoint(currentPositionX + posX, currentPositionY + posY));
             }
+            startX += startX + spaceBougies;
         }
     }
 
