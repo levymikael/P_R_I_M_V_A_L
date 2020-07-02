@@ -21,8 +21,8 @@ Les étapes pour créer un installateur sont les suivantes :
  make setup
  ```
 
- Création d'une mise à jour
- --------------------------
+Création d'une mise à jour
+--------------------------
 Les étapes pour créer une mise à jour sont les suivantes :
  * Placer le fichier Primval.jar dans le dossier setup/Prog
  * Editer le numéro de version dans le fichier setup/define.h
