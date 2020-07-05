@@ -26,14 +26,14 @@ import java.util.ArrayList;
 
 public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
-    private Table table, tableTitre, tableBandeauBasBleu, tableBandeauBasVert;
+    private Table table, tableTitre;
     private Table tableMilieu, tableMilieuSolution, table4, table5;
     private float heightTop;
     float topYTablePosition, heightBackGroundImage;
 
     private float firstY, currentY, widthEnonce;
 
-    Texture texture2, textureTextEnonce, titreTop;
+    Texture texture2, textureTextEnonce, txtureDroiteBleu, txtureGaucheBleu, txtureCentreBleu, txtureDroiteVert, txtureCentreVert, txtureGaucheVert;
 
     TextField textFieldEnonce;
 
@@ -54,12 +54,12 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     Table lastPointerTable, lastPointerTable2;
 
-    public ActiviteView(Stage stage, float width, /*float positionX,*/ String numExercice, String consigneExercice, String exDansChapitre, String activiteType)
+    public ActiviteView(Stage stage, float width, String numExercice, String consigneExercice, String exDansChapitre, String activiteType)
     {
         textureMilieuEnonce = new Texture("Images/EnonceUIElements/enonce_milieu_new.png");
         textureMilieuEnonce.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        widthEnonce = width;
+        widthEnonce = (MyConstants.SCREENWIDTH / 4) * 3;
         heightTop = widthEnonce * 42 / 1626;
 
         this.activiteType = activiteType;
@@ -71,7 +71,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         bitmapFontArial = fontArial.generateFont(parameter);
         fontArial.dispose();
 
-        FreeTypeFontGenerator fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterComic = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterComic.size = MyConstants.SCREENWIDTH / 70;
         bitmapFontComic = fontComic.generateFont(parameter);
@@ -87,6 +87,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         stage.addActor(table);
 
         tableMilieu = new Table();
+        tableMilieuSolution = new Table();
 
         Table paddingTableMilieu = new Table();
         paddingTableMilieu.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
@@ -121,22 +122,84 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         textFieldEnonce = new TextField("", textFieldStyleEnonce);
 
 // Insertion texte.png dans tableau avec une imageBG.png:
-        tableBandeauBasBleu = new Table();
 
+        Table tableBandeauBasBleu = new Table();
         heightBackGroundImage = widthEnonce * 31 / 809;
-        texture2 = new Texture(Gdx.files.internal("Images/Enoncé-solution/Enoncé-Grand-fond.png"));
-        texture2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        sprite2 = new Sprite(texture2);
-        tableBandeauBasBleu.setBackground(new SpriteDrawable(sprite2));
-
         float heightImageEnonce = heightBackGroundImage * 2 / 3;
         float widthImageEnonce = heightImageEnonce * 218 / 41;
 
-        tableBandeauBasBleu.add(textFieldEnonce).width(widthImageEnonce).height(heightImageEnonce);
 
-        table.add(tableBandeauBasBleu).width(widthEnonce).height(heightBackGroundImage);
+//        texture2 = new Texture(Gdx.files.internal("Images/Enoncé-solution/Enoncé-Grand-fond.png"));
+//        texture2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+//        sprite2 = new Sprite(texture2);
+//        tableBandeauBasBleu.setBackground(new SpriteDrawable(sprite2));
+
+        Table tableBandeauBasBleuDroite = new Table();
+        Texture txtureDroiteBleu = new Texture(Gdx.files.internal("Images/Enoncé-solution/droit bleu.png"));
+        txtureDroiteBleu.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Sprite spriteDroiteBleu = new Sprite(txtureDroiteBleu);
+        tableBandeauBasBleuDroite.setBackground(new SpriteDrawable(spriteDroiteBleu));
+
+        Table tableBandeauBasBleuGauche = new Table();
+        Texture txtureGaucheBleu = new Texture(Gdx.files.internal("Images/Enoncé-solution/gauche bleu.png"));
+        txtureGaucheBleu.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Sprite spriteGaucheBleu = new Sprite(txtureGaucheBleu);
+        tableBandeauBasBleuGauche.setBackground(new SpriteDrawable(spriteGaucheBleu));
+
+        float demiBandeauBas = ((widthEnonce - (textFieldEnonce.getWidth() + MyConstants.SCREENWIDTH / 40)) / 2);
+
+        int ok = 5;
+        ok++;
+
+
+        Table tableBandeauBasBleuCentreVierge = new Table();
+        Table tableBandeauBasBleuCentreVierge2 = new Table();
+        Texture txtureCentreBleu = new Texture(Gdx.files.internal("Images/Enoncé-solution/centre bleu.png"));
+        txtureCentreBleu.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Sprite spriteCentreBleu = new Sprite(txtureCentreBleu);
+        tableBandeauBasBleuCentreVierge.setBackground(new SpriteDrawable(spriteCentreBleu));
+        tableBandeauBasBleuCentreVierge2.setBackground(new SpriteDrawable(spriteCentreBleu));
+
+        Table tableBandeauBasBleuCentreEnonce = new Table();
+        tableBandeauBasBleuCentreEnonce.setBackground(new SpriteDrawable(spriteCentreBleu));
+        tableBandeauBasBleuCentreEnonce.add(textFieldEnonce).height(heightImageEnonce).width(widthImageEnonce);
+
+
+        tableBandeauBasBleu.add(tableBandeauBasBleuGauche);
+        tableBandeauBasBleu.add(tableBandeauBasBleuCentreVierge).width(demiBandeauBas);
+        tableBandeauBasBleu.add(tableBandeauBasBleuCentreEnonce);
+        tableBandeauBasBleu.add(tableBandeauBasBleuCentreVierge2).width(demiBandeauBas);
+        tableBandeauBasBleu.add(tableBandeauBasBleuDroite);
+
+        table.add(tableBandeauBasBleu).height(heightBackGroundImage);
         table.row();
+
+
+        Table tableBandeauBasVert = new Table();
+
+        Table tableBandeauBasVertDroite = new Table();
+        Texture txtureDroiteVert = new Texture(Gdx.files.internal("Images/Enoncé-solution/droit vert.png"));
+        txtureDroiteVert.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Sprite spriteDroiteVert = new Sprite(txtureDroiteVert);
+        tableBandeauBasVertDroite.setBackground(new SpriteDrawable(spriteDroiteVert));
+
+        Table tableBandeauBasVertGauche = new Table();
+        Texture txtureGaucheVert = new Texture(Gdx.files.internal("Images/Enoncé-solution/gauche vert.png"));
+        txtureGaucheVert.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Sprite spriteGaucheVert = new Sprite(txtureGaucheVert);
+        tableBandeauBasVertGauche.setBackground(new SpriteDrawable(spriteGaucheVert));
+
+        Table tableBandeauBasVertCentre = new Table();
+        Texture txtureCentreVert = new Texture(Gdx.files.internal("Images/Enoncé-solution/centre vert.png"));
+        txtureCentreVert.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Sprite spriteCentreVert = new Sprite(txtureCentreVert);
+        tableBandeauBasVertCentre.setBackground(new SpriteDrawable(spriteCentreVert));
+
+
+        tableBandeauBasVert.add(tableBandeauBasVertCentre);
+        tableBandeauBasVert.add(tableBandeauBasVertGauche);
+        tableBandeauBasVert.add(tableBandeauBasVertDroite);
+
 
 // Positionnement du tableau sur ecran:
 
@@ -200,7 +263,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         emptyActivite();
 
         return addTextActivite(string);
-
     }
 
     public Label addTextActivite(String string)
@@ -320,7 +382,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFontArial;
-        labelStyleBlue.fontColor = new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
+        labelStyleBlue.fontColor = new Color(new Color(Color.valueOf("004ec0")));
 
         if (cptInstructions != 0)
         {
@@ -332,7 +394,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         lastLabel = label3;
 
-        lastLabel.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
+        lastLabel.setColor(new Color(new Color(Color.valueOf("004ec0"))));
 
 
         if (lastPointerTable != null)

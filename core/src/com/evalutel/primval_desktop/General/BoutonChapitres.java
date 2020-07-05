@@ -28,13 +28,11 @@ public class BoutonChapitres implements Screen
 {
     static MyDataBase db;
 
-    static TextureAtlas textureAtlas;
-
     static Sprite chap1;
 
     SpriteBatch batch;
 
-    public static Table getLigne(String sommaireChapImgPath, String chapterIndexPath, String ongletTitre, Texture texture, int chapitre, DatabaseDesktop dataBase)
+    public static Table getLigne(String sommaireChapImgPath, String chapterIndexPath, String ongletTitre, /*Texture texture, int chapitre,*/ DatabaseDesktop dataBase)
     {
         Table container = new Table();
         Table table = new Table();
@@ -46,13 +44,13 @@ public class BoutonChapitres implements Screen
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = screenWidth / 80;
+        parameter.size = screenWidth / 60;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
         Label.LabelStyle labelStyleOngletBlue = new Label.LabelStyle();
         labelStyleOngletBlue.font = bitmapFont;
-        labelStyleOngletBlue.fontColor = Color.BLUE;
+        labelStyleOngletBlue.fontColor = MyConstants.bluePrimval;
 
         Label.LabelStyle labelStyleOngletWhite = new Label.LabelStyle();
         labelStyleOngletWhite.font = bitmapFont;
@@ -80,28 +78,29 @@ public class BoutonChapitres implements Screen
 
 
         Table table2 = new Table();
-        table2.add(new Image(textureChapterIndex)).width(screenWidth / 30).height(screenWidth / 30).padRight(screenWidth / 150).padLeft(MyConstants.SCREENWIDTH / 400);
-        table2.add(labelOngletBlue).width((float) (screenWidth / 6));
+        table2.debug();
+        table2.add(new Image(textureChapterIndex)).width(MyConstants.SCREENWIDTH / 25).height(MyConstants.SCREENWIDTH / 25).padRight(screenWidth / 150).padTop(MyConstants.SCREENHEIGHT / 70);
+        table2.add(labelOngletBlue).width((MyConstants.SCREENWIDTH / 5)).align(Align.left);
 
 
-        table.add(new Image(textureChapter)).width(((screenHeight / 5) * 338) / 305).height(screenHeight / 5);
+
+        table.setBackground(new SpriteDrawable(new Sprite(textureChapter)));
+        table.setWidth((MyConstants.SCREENHEIGHT / 5));
+        table.setHeight((MyConstants.SCREENHEIGHT / 5));
+        table.add().height(5 * table.getHeight() / 6);
         table.row();
-        table.add(table2).width((float) (screenWidth / 10)).align(Align.center);
+        table.add(table2).width(3000);
 
-        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmWhite.setColor(Color.WHITE);
-        pmWhite.fill();
-
-        Texture bgTable = new Texture("Sans titre.png");
-        bgTable.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        float chapterButtonWidth = 19 * MyConstants.SCREENWIDTH / 60;
+        float chapterButtonHeight = chapterButtonWidth * (308.0f / 335.0f);
 
 
         table.pad(MyConstants.SCREENWIDTH / 500);
-        container.add(table).height(screenHeight / 4);
-        container.row();
+        container.add(table).width(chapterButtonWidth).height(chapterButtonHeight);
+//        container.row();
 
 
-        table.setTouchable(Touchable.enabled);
+        container.setTouchable(Touchable.enabled);
 
         return container;
     }
@@ -145,7 +144,7 @@ public class BoutonChapitres implements Screen
     @Override
     public void dispose()
     {
-        textureAtlas.dispose();
+
     }
 
 }

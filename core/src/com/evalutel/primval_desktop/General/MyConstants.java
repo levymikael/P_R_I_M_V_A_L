@@ -19,8 +19,8 @@ public class MyConstants
     public static FreeTypeFontGenerator FONT_COMICI = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
 
 
-
-
+    public static Color bluePrimval = new Color(Color.valueOf("004ec0"));
+    public static Color redPrimval = new Color(Color.valueOf("a40b00"));
 
 
     public static String DATABASE_TIMESTAMP = "timestamp";

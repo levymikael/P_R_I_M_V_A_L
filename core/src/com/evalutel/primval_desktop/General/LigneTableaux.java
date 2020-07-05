@@ -34,14 +34,14 @@ public class LigneTableaux
 
 
         Pixmap pmRed = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmRed.setColor(new Color(167.0f / 255.0f, 45.0f / 255.0f, 23.0f / 255.0f, 1));
+        pmRed.setColor(MyConstants.redPrimval);
         pmRed.fill();
 
         Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmBlue.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
+        pmBlue.setColor(MyConstants.bluePrimval);
         pmBlue.fill();
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = MyConstants.SCREENWIDTH / 60;
         BitmapFont bitmapFont = generator.generateFont(parameter);
@@ -67,13 +67,13 @@ public class LigneTableaux
         {
             tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
             tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
-            labelStyleOnglet.fontColor = new Color(167.0f / 255.0f, 45.0f / 255.0f, 23.0f / 255.0f, 1);
+            labelStyleOnglet.fontColor = MyConstants.redPrimval;
         }
         else if ((borderColor == "blue"))
         {
             tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
             tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
-            labelStyleOnglet.fontColor = new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
+            labelStyleOnglet.fontColor = MyConstants.bluePrimval;
         }
 
         Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
@@ -100,13 +100,12 @@ public class LigneTableaux
 
         labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4);
 
-        table.add(button).height(button.getHeight()).width(button.getWidth()).padRight(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 60);
-        //table.add(button).fillY().expandY().padBottom(15).padTop(15).padRight(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 60);
-        table.add(labelOnglet).width((float) (MyConstants.SCREENWIDTH * 0.58));
+        table.add(button).height(button.getHeight()).width(button.getWidth()).padRight(MyConstants.SCREENWIDTH / 80).padLeft(MyConstants.SCREENWIDTH / 80);
+        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.6f));
 
         if (texture != null)
         {
-            table.add(new Image(texture)).width(MyConstants.SCREENWIDTH / 70).height(MyConstants.SCREENWIDTH / 70);
+            table.add(new Image(texture)).width(MyConstants.SCREENWIDTH / 50).height(MyConstants.SCREENWIDTH / 50);
         }
         table.add(labelDuration).width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 22).padLeft(MyConstants.SCREENWIDTH / 20);
 
@@ -125,11 +124,11 @@ public class LigneTableaux
 
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
-        container.add(tablebord1).width(MyConstants.SCREENWIDTH).height(4);
+        container.add(tablebord1).width(MyConstants.SCREENWIDTH).height(2);
         container.row();
         container.add(table).height(MyConstants.SCREENHEIGHT / 17);
         container.row();
-        container.add(tablebord2).width(MyConstants.SCREENWIDTH).height(4);
+        container.add(tablebord2).width(MyConstants.SCREENWIDTH).height(2);
 
         return container;
     }

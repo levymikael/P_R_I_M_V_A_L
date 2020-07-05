@@ -18,6 +18,16 @@ public class GdxSplashScreenGame extends Game implements ApplicationListener
     public void create () {
         setScreen(new SplashScreen());
 
+
+
+        Timer.schedule(
+                new Timer.Task() {
+                    @Override
+                    public void run() {
+                        GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General( GdxSplashScreenGame.this, new DatabaseDesktop()));
+                    }
+                }, 2.0f);
+
         final long splash_start_time = System.currentTimeMillis();
         new Thread(new Runnable() {
             @Override
@@ -44,6 +54,7 @@ public class GdxSplashScreenGame extends Game implements ApplicationListener
             }
         }).start();
     }
+
 
     @Override
     public void dispose() {

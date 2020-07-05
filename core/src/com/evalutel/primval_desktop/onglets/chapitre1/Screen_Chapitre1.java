@@ -10,12 +10,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
@@ -71,15 +75,18 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         screenHeight = MyConstants.SCREENHEIGHT;
         screenWidth = MyConstants.SCREENWIDTH;
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = screenHeight / 50;
+        parameter.minFilter = Texture.TextureFilter.Nearest;
+        parameter.magFilter = Texture.TextureFilter.MipMapLinearNearest;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
-        labelStyleBlue.fontColor = new Color(65.0f / 255.0f, 111.0f / 255.0f, 193.0f / 255.0f, 1);
+
+        labelStyleBlue.fontColor = new Color(Color.valueOf("004ec0"));
 
         allDrawables = new ArrayList<>();
 
@@ -98,7 +105,10 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         Label labelChap1Titre = new Label("Pratique des nombres de 1 à 9", labelStyleBlue);
         Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
 
-        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, textureNumber1);
+        Table nomChapitre = new Table();
+        nomChapitre.add(new Image(textureNumber1));
+        nomChapitre.add(labelChap1Titre);
+
         nomChapitre.setWidth(screenWidth / 7);
         nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 7 * screenHeight / 10);
         stage.addActor(nomChapitre);

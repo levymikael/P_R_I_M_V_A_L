@@ -70,7 +70,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
         this.stage = stage;
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = MyConstants.SCREENWIDTH / 60;
         parameter.padLeft = 20;

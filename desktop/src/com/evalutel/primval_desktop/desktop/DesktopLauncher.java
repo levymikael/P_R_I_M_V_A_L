@@ -1,16 +1,15 @@
 package com.evalutel.primval_desktop.desktop;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.evalutel.primval_desktop.GdxSplashScreenGame;
-import com.evalutel.primval_desktop.PrimVal;
 
 public class DesktopLauncher
 {
     public static void main(String[] arg)
     {
-
-
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
         //config.width = 2048;
@@ -39,8 +38,8 @@ public class DesktopLauncher
         int screenHeight = config.height;
         int screenWidth = config.width;
 
-        screenHeight /= 1.2f;
-        screenWidth /= 1.2f;
+        screenHeight /= 1.1f;
+        screenWidth /= 1.1f;
 
 
         System.out.print("screenheight, screenWidth" + screenHeight + "/" + screenWidth);
@@ -56,18 +55,19 @@ public class DesktopLauncher
             config.height = screenHeight;
         }
 
-
-        config.forceExit = false;
+        config.forceExit = true;
 
         config.fullscreen = false;
 
         config.resizable = false;
         config.samples = 4;
         config.vSyncEnabled = true;
+
 //		config.fullscreen = true;
 
         new LwjglApplication(new GdxSplashScreenGame(), config);
 
+        Gdx.graphics.setTitle("Primval");
 
     }
 }

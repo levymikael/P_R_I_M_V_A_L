@@ -20,7 +20,6 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     public SacDeBilles sacDeBilles;
     boolean isActive = true;
 
-    TextureAtlas textureAtlas = new TextureAtlas("Images/Sprite_Billes/billes_Sprites.txt");
 
     final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 

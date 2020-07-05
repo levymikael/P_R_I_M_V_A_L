@@ -147,7 +147,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         bitmapFontArial = fontArial.generateFont(parameter);
         fontArial.dispose();
 
-        fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterComic = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterComic.size = MyConstants.SCREENWIDTH / 70;
         bitmapFontComic = fontComic.generateFont(parameter);
@@ -164,7 +164,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         labelStyle3 = new Label.LabelStyle();
         labelStyle3.font = bitmapFontArial;
         labelStyle3.fontColor = Color.YELLOW;
-
 
 
         largeurBille = MyConstants.SCREENWIDTH / 15;

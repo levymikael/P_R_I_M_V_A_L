@@ -37,6 +37,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.xml.soap.Text;
+
 
 public class Screen_Sommaire_General extends Game implements Screen, InputProcessor, ApplicationListener
 {
@@ -85,16 +87,18 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = screenHeight / 40;
+        parameter.minFilter = Texture.TextureFilter.Nearest;
+        parameter.magFilter = Texture.TextureFilter.MipMapLinearNearest;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
-        labelStyleBlue.fontColor = new Color(41.0f / 255.0f, 103.0f / 255.0f, 159.0f / 255.0f, 1);
+        labelStyleBlue.fontColor = new Color(Color.valueOf("0165a4"));
 
         Label.LabelStyle labelStyleRed = new Label.LabelStyle();
         labelStyleRed.font = bitmapFont;
-        labelStyleRed.fontColor = new Color(235.0f / 50.0f, 44.0f / 255.0f, 35.0f / 255.0f, 1);
+        labelStyleRed.fontColor = MyConstants.redPrimval;
 
         allDrawables = new ArrayList<>();
 
@@ -107,7 +111,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
         logoTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 100, screenHeight / 2);
+        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 100, screenHeight / 2 - MyConstants.SCREENHEIGHT / 50);
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);
@@ -115,18 +119,10 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Label labelPresentation = new Label("Présentation", labelStyleBlue);
 
         Table container = new Table();
-        container.setPosition(screenWidth / 50, 2 * screenHeight / 9);
+        container.setPosition(screenWidth / 50, 2 * screenHeight / 13);
         container.setWidth(screenWidth / 7);
         container.setHeight(screenHeight / 6);
 
-        int widthButton = 500;
-        int heightButton = widthButton / 4;
-        int cornerRadius = heightButton / 2;
-
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
-        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, new Color(41.0f / 255.0f, 103.0f / 255.0f, 159.0f / 255.0f, 1));
-        Pixmap greyRoundedBackground = UIDesign.createRoundedRectangle((widthButton * 2), widthButton, cornerRadius, Color.GRAY);
-        Pixmap whiteRoundedBackground2 = UIDesign.createRoundedRectangle((widthButton * 2), widthButton, cornerRadius, Color.WHITE);
 
         Table avatarPic = new Table();
         Texture avatarTexture = new Texture(Gdx.files.internal("Images/avatar_1.png"));
@@ -139,53 +135,45 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         int paddingButtonBorders = MyConstants.SCREENWIDTH / 500;
 
-        Table chaptersButton = new Table();
-        chaptersButton.add(labelChapitres);
-        chaptersButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+        Texture txtureCellulePrimaire = new Texture("Images/Sommaire/cellule Primaire.png");
+        txtureCellulePrimaire.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        Table blueBorderTableChapters = new Table();
-        blueBorderTableChapters.pad(paddingButtonBorders);
-        blueBorderTableChapters.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        blueBorderTableChapters.add(chaptersButton);
+        Table chaptersButton = new Table();
+        chaptersButton.pad(paddingButtonBorders);
+        chaptersButton.setBackground(new SpriteDrawable(new Sprite(txtureCellulePrimaire)));
+        chaptersButton.add(labelChapitres);
+        chaptersButton.setWidth(MyConstants.SCREENHEIGHT / 100);
 
         Table resultsButton = new Table();
+        resultsButton.pad(paddingButtonBorders);
+        resultsButton.setBackground(new SpriteDrawable(new Sprite(txtureCellulePrimaire)));
         resultsButton.add(labelResultats);
-        resultsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-
-        Table blueBorderTableResults = new Table();
-        blueBorderTableResults.pad(paddingButtonBorders);
-        blueBorderTableResults.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        blueBorderTableResults.add(resultsButton);
+        resultsButton.setWidth(MyConstants.SCREENHEIGHT / 100);
 
         Table espaceParentsButton = new Table();
+        espaceParentsButton.pad(paddingButtonBorders);
+        espaceParentsButton.setBackground(new SpriteDrawable(new Sprite(txtureCellulePrimaire)));
         espaceParentsButton.add(labelEspaceParents);
-        espaceParentsButton.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+        espaceParentsButton.setWidth(MyConstants.SCREENHEIGHT / 100);
 
-        Table blueBorderTableParentSpace = new Table();
-        blueBorderTableParentSpace.pad(paddingButtonBorders);
-        blueBorderTableParentSpace.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        blueBorderTableParentSpace.add(espaceParentsButton);
+        Table presentationButton = new Table();
+        presentationButton.pad(paddingButtonBorders);
+        presentationButton.setBackground(new SpriteDrawable(new Sprite(txtureCellulePrimaire)));
+        presentationButton.add(labelPresentation);
+        presentationButton.setWidth(MyConstants.SCREENHEIGHT / 100);
 
-        Table presentation = new Table();
-        presentation.add(labelPresentation);
-        presentation.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
-        Table blueBorderTablePresentation = new Table();
-        blueBorderTablePresentation.pad(paddingButtonBorders);
-        blueBorderTablePresentation.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        blueBorderTablePresentation.add(presentation);
+        float widthButton2 = screenWidth / 7;
+        float heightButton2 = widthButton2 * (44.0f / 178.0f);
+        int paddingBetweenButtons = MyConstants.SCREENHEIGHT / 150;
 
-        int widthButton2 = screenWidth / 7;
-        int heightButton2 = widthButton2 / 4;
-        int paddingBetweenButtons = MyConstants.SCREENHEIGHT / 120;
-
-        container.add(blueBorderTableChapters).padBottom(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
-//        container.row();
-//        container.add(blueBorderTableResults).padTop(paddingBetweenButtons).padBottom(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
-//        container.row();
-//        container.add(blueBorderTableParentSpace).padTop(paddingBetweenButtons).padBottom(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
-//        container.row();
-//        container.add(blueBorderTablePresentation).padTop(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
+        container.add(chaptersButton).padBottom(paddingBetweenButtons).align(Align.center).width(widthButton2).height(heightButton2);
+        container.row();
+        container.add(resultsButton).padTop(paddingBetweenButtons).padBottom(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
+        container.row();
+        container.add(espaceParentsButton).padTop(paddingBetweenButtons).padBottom(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
+        container.row();
+        container.add(presentationButton).padTop(paddingBetweenButtons).align(Align.center).height(heightButton2).width(widthButton2);
 
         Table summaryImgTable = new Table();
         summaryImgTable.setTouchable(Touchable.enabled);
@@ -219,17 +207,16 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             }
         });
 
-        resultsButton.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                game.setScreen(new Screen_All_Results(game, dataBase));
-                Gdx.app.log("Screen All results ", "clicked!");
-            }
-        });
+//        blueBorderTableResults.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                game.setScreen(new Screen_All_Results(game, dataBase));
+//                Gdx.app.log("Screen All results ", "clicked!");
+//            }
+//        });
 
-//        Label labelEscape = new Label("Quitter", labelStyleRed);
 
         Texture escapeBtn = new Texture(Gdx.files.internal("Images/Quitter primaire.png"));
         escapeBtn.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -237,15 +224,11 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Table quit = new Table();
         quit.setTouchable(Touchable.enabled);
         quit.setBackground(new SpriteDrawable(new Sprite(escapeBtn)));
-
-        Table quitBorder = new Table();
-        quitBorder.pad(screenWidth / 500);
-
         quit.setSize(screenWidth / 20, screenWidth / 20);
         quit.setPosition(screenWidth - (float) (quit.getWidth() * 1.5), screenHeight - (float) (quit.getWidth() * 1.5));
 
-
         stage.addActor(quit);
+
         Date date = new Date();
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");

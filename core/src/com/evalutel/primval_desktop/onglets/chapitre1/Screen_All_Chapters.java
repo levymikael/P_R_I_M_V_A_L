@@ -78,12 +78,16 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         FreeTypeFontGenerator FONT_FRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterFRHND = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterFRHND.size = MyConstants.SCREENWIDTH / 40;
+        parameterFRHND.minFilter = Texture.TextureFilter.Nearest;
+        parameterFRHND.magFilter = Texture.TextureFilter.MipMapLinearNearest;
         bitmapFontFRHND = FONT_FRHND.generateFont(parameterFRHND);
         FONT_FRHND.dispose();
 
         FreeTypeFontGenerator FONT_ZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterZAP = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterZAP.size = MyConstants.SCREENWIDTH / 70;
+        parameterZAP.minFilter = Texture.TextureFilter.Nearest;
+        parameterZAP.magFilter = Texture.TextureFilter.MipMapLinearNearest;
         bitmapFontZAP = FONT_ZAP.generateFont(parameterZAP);
         FONT_ZAP.dispose();
 
@@ -93,7 +97,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFontFRHND;
-        labelStyleBlue.fontColor = new Color(65.0f / 255.0f, 111.0f / 255.0f, 193.0f / 255.0f, 1);
+        labelStyleBlue.fontColor = new Color(new Color(Color.valueOf("004ec0")));
 
         allDrawables = new ArrayList<>();
 
@@ -109,11 +113,12 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Texture chapter1Title = new Texture(Gdx.files.internal("Images/Pages Chapitres/titre Calcul et géométrie.png"));
         chapter1Title.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+
         Table allChaptersTitle = new Table();
 
         allChaptersTitle.setBackground(new SpriteDrawable(new Sprite(chapter1Title)));
-        allChaptersTitle.setSize((float) (MyConstants.SCREENWIDTH / 2), (float) (((MyConstants.SCREENWIDTH / 4) * 0.14)));
-        allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2 - allChaptersTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - ((MyConstants.SCREENWIDTH / 12)));
+        allChaptersTitle.setSize((float) (MyConstants.SCREENWIDTH / 2), (float) (((MyConstants.SCREENWIDTH / 2) * 0.14)));
+        allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2 - allChaptersTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - ((MyConstants.SCREENWIDTH / 11)));
 
         stage.addActor(allChaptersTitle);
 
@@ -133,7 +138,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table evalutelMotto = evalutelMotto();
 
         Label labelChapterTitle = new Label("Chapitres", labelStyleBlue);
-        labelChapterTitle.setFontScale((int) 1.5);
+        labelChapterTitle.setFontScale(1.7f);
         Table chapterTitle = new Table();
         chapterTitle.add(labelChapterTitle);
 
@@ -143,7 +148,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         table.add(evalutelMotto).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19)).align(Align.center).padTop(MyConstants.SCREENWIDTH / 90);
         table.row();
-        table.add(chapterTitle).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 20);
+        table.add(chapterTitle).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 50);
         table.row();
         table.add(chaptersListView).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 20);
 
@@ -164,7 +169,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     {
         Label.LabelStyle labelStyleBlue2 = new Label.LabelStyle();
         labelStyleBlue2.font = bitmapFontZAP;
-        labelStyleBlue2.fontColor = Color.ROYAL;
+        labelStyleBlue2.fontColor = MyConstants.bluePrimval;
         Label labelMottoTitle = new Label("Primval développé par Evalutel, propose un programe complet de Math et de géométrie pour le Primaire basé sur notre devise:", labelStyleBlue2);
 
         int widthButton = 1000;
@@ -172,7 +177,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         int cornerRadius = heightButton / 8;
 
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.WHITE);
-
         Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
         Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.ROYAL);
 
@@ -274,17 +278,17 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         String chapterLabel6 = "Outils de la géométrie. \n Triangle. Points alignés ";
 
         Table table = new Table();
-        Table tableEx1 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 01.jpg", "Images/IndicesChapitres/chap1.png", chapterLabel1, null, 1, dataBase);
-        Table tableEx2 = BoutonChapitres.getLigne("Images/Pages onglets/02.png", "Images/IndicesChapitres/chap2.png", chapterLabel2, null, 1, dataBase);
-        Table tableEx3 = BoutonChapitres.getLigne("Images/Pages onglets/03.png", "Images/IndicesChapitres/chap3.png", chapterLabel3, null, 1, dataBase);
-        Table tableEx4 = BoutonChapitres.getLigne("Images/Pages onglets/04.png", "Images/IndicesChapitres/chap4.png", chapterLabel4, null, 1, dataBase);
-        Table tableEx5 = BoutonChapitres.getLigne("Images/Pages onglets/05.png", "Images/IndicesChapitres/chap5.png", chapterLabel5, null, 1, dataBase);
-        Table tableEx6 = BoutonChapitres.getLigne("Images/Pages onglets/06.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, null, 1, dataBase);
+        Table tableEx1 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 01.jpg", "Images/IndicesChapitres/chap1.png", chapterLabel1, /*null, 1, */dataBase);
+        Table tableEx2 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 02.jpg", "Images/IndicesChapitres/chap2.png", chapterLabel2, /*null, 1,*/ dataBase);
+        Table tableEx3 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 03.jpg", "Images/IndicesChapitres/chap3.png", chapterLabel3, /*null, 1,*/ dataBase);
+        Table tableEx4 = BoutonChapitres.getLigne("Images/Pages onglets/04.png", "Images/IndicesChapitres/chap4.png", chapterLabel4, /*null, 1,*/ dataBase);
+        Table tableEx5 = BoutonChapitres.getLigne("Images/Pages onglets/05.png", "Images/IndicesChapitres/chap5.png", chapterLabel5, /*null, 1,*/ dataBase);
+        Table tableEx6 = BoutonChapitres.getLigne("Images/Pages onglets/06.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, /*null, 1,*/ dataBase);
 
-        table.add(tableEx1).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center);
-//        table.add(tableEx2).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
-//        table.add(tableEx3).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 20);
-//        table.row();
+        table.add(tableEx1);
+        table.add(tableEx2).padLeft(MyConstants.SCREENWIDTH / 100);
+        table.add(tableEx3).padLeft(MyConstants.SCREENWIDTH / 100);
+        table.row();
 //        table.add().height(MyConstants.SCREENWIDTH / 30);
 //        table.row();
 //        table.add(tableEx4).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center);
@@ -409,9 +413,9 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6));
-        fondSommaire.myDraw2(batch, MyConstants.SCREENWIDTH, 5 * MyConstants.SCREENHEIGHT / 6, 0, 0);
 
+        fondSommaire.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT, 0, 0);
+        bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6));
         for (int i = 0; i < allDrawables.size(); i++)
         {
             MyDrawInterface newItem = allDrawables.get(i);

@@ -33,7 +33,6 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
 
-import javax.xml.soap.Text;
 
 
 public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
