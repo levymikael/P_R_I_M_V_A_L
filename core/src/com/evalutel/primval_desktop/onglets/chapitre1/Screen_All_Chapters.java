@@ -193,9 +193,9 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(blueRoundedBackground2)));
 
         int paddingMottoDetailsBorder = MyConstants.SCREENWIDTH / 1000;
-        int heightlabelTitle = MyConstants.SCREENHEIGHT / 20;
+        int heightlabelTitle = MyConstants.SCREENHEIGHT / 25;
         int tableWidth = MyConstants.SCREENWIDTH / 4;
-        int heightTable = MyConstants.SCREENHEIGHT / 5;
+        float heightTable = MyConstants.SCREENHEIGHT / 4.5f;
         int paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 50;
 
         int leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80;
@@ -204,7 +204,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         evalutelMotto.setBackground((textureRegionDrawableBg));
 
         evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails);
-        evalutelMotto.padTop(MyConstants.SCREENHEIGHT / 40).padRight(MyConstants.SCREENHEIGHT / 40);
+        evalutelMotto.padTop(MyConstants.SCREENHEIGHT / 50).padRight(MyConstants.SCREENHEIGHT / 40);
         evalutelMotto.row();
 
         Table evalutelMottoDetails = new Table();
@@ -245,7 +245,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Label labelEvaluerText = new Label("Tous les exercices/problèmes sont notés. L'enfant peut toujours améliorer sa note en refaisant l'exercice. Un tableau récapitule les sujets abordés complètement ou partiellement, les temps passés et les résultats obtenus.", labelStyleBlue2);
         labelEvaluerText.setWrap(true);
 
-        evaluerTable.add(labelEvaluerTitle).height(heightlabelTitle);
+        evaluerTable.add(labelEvaluerTitle).height(heightlabelTitle).padBottom(MyConstants.SCREENHEIGHT / 400);
         evaluerTable.row();
         evaluerTable.add(labelEvaluerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer);
         evaluerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));

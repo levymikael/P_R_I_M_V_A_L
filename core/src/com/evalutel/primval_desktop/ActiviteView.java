@@ -92,6 +92,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         Table paddingTableMilieu = new Table();
         paddingTableMilieu.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
 
+
         table.add(paddingTableMilieu).height(MyConstants.SCREENHEIGHT / 200).width(widthEnonce);
         table.row();
 
@@ -165,11 +166,11 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         tableBandeauBasBleuCentreEnonce.add(textFieldEnonce).height(heightImageEnonce).width(widthImageEnonce);
 
 
-        tableBandeauBasBleu.add(tableBandeauBasBleuGauche);
-        tableBandeauBasBleu.add(tableBandeauBasBleuCentreVierge).width(demiBandeauBas);
-        tableBandeauBasBleu.add(tableBandeauBasBleuCentreEnonce);
-        tableBandeauBasBleu.add(tableBandeauBasBleuCentreVierge2).width(demiBandeauBas);
-        tableBandeauBasBleu.add(tableBandeauBasBleuDroite);
+        tableBandeauBasBleu.add(tableBandeauBasBleuGauche).height(heightImageEnonce);
+        tableBandeauBasBleu.add(tableBandeauBasBleuCentreVierge).width(demiBandeauBas).height(heightImageEnonce);
+        tableBandeauBasBleu.add(tableBandeauBasBleuCentreEnonce).height(heightImageEnonce);
+        tableBandeauBasBleu.add(tableBandeauBasBleuCentreVierge2).width(demiBandeauBas).height(heightImageEnonce);
+        tableBandeauBasBleu.add(tableBandeauBasBleuDroite).height(heightImageEnonce);
 
         table.add(tableBandeauBasBleu).height(heightBackGroundImage);
         table.row();
@@ -211,7 +212,14 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - heightTop + (paddingTableMilieu.getHeight() * 2);
 
         currentY = topYTablePosition;
-        table.setPosition(MyConstants.SCREENWIDTH / 2 - widthEnonce / 2, topYTablePosition);
+
+        int activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
+        heightTop = activiteWidth * 42 / 1626;
+        float xTableTitre = (MyConstants.SCREENWIDTH / 2 - activiteWidth / 2);
+        tableMilieu.setX(xTableTitre + MyConstants.SCREENWIDTH / 200);
+
+
+        table.setPosition((MyConstants.SCREENWIDTH / 2 - activiteWidth / 2), topYTablePosition);
 
         table.setTouchable(Touchable.enabled);
 

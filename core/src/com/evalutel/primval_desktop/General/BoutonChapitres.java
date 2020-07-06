@@ -83,7 +83,6 @@ public class BoutonChapitres implements Screen
         table2.add(labelOngletBlue).width((MyConstants.SCREENWIDTH / 5)).align(Align.left);
 
 
-
         table.setBackground(new SpriteDrawable(new Sprite(textureChapter)));
         table.setWidth((MyConstants.SCREENHEIGHT / 5));
         table.setHeight((MyConstants.SCREENHEIGHT / 5));
@@ -96,7 +95,7 @@ public class BoutonChapitres implements Screen
 
 
         table.pad(MyConstants.SCREENWIDTH / 500);
-        container.add(table).width(chapterButtonWidth).height(chapterButtonHeight);
+        container.add(table).width(chapterButtonWidth).height(chapterButtonHeight).align(Align.left);
 //        container.row();
 
 

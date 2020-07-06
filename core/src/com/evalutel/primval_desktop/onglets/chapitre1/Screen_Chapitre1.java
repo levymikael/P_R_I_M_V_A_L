@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
@@ -78,8 +79,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = screenHeight / 50;
-        parameter.minFilter = Texture.TextureFilter.Nearest;
-        parameter.magFilter = Texture.TextureFilter.MipMapLinearNearest;
+        parameter.minFilter = Texture.TextureFilter.Linear;
+        parameter.magFilter = Texture.TextureFilter.Linear;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -103,20 +104,22 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         sacDebilles.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Label labelChap1Titre = new Label("Pratique des nombres de 1 à 9", labelStyleBlue);
+        labelChap1Titre.setFontScale(1.5f);
         Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
 
         Table nomChapitre = new Table();
-        nomChapitre.add(new Image(textureNumber1));
-        nomChapitre.add(labelChap1Titre);
 
-        nomChapitre.setWidth(screenWidth / 7);
-        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 7 * screenHeight / 10);
+        nomChapitre.debug();
+        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25).height(MyConstants.SCREENWIDTH / 25).padRight(screenWidth / 150).padTop(MyConstants.SCREENHEIGHT / 70);
+        nomChapitre.add(labelChap1Titre).width((MyConstants.SCREENWIDTH / 5)).align(Align.left);
+        nomChapitre.setPosition(4.5f * screenWidth / 10 /*- nomChapitre.getWidth() / 2*/, 7 * screenHeight / 10);
+
         stage.addActor(nomChapitre);
 
-        int chapritreNum = 1;
+        int numChapter = 1;
 
         mrNotes = new MrNotes(stage, dataBase);
-        mrTemps = new MrTemps(stage, dataBase, chapritreNum);
+        mrTemps = new MrTemps(stage, dataBase, numChapter);
 
 //        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 2 * screenWidth / 7, screenHeight / 14);
 //        myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);

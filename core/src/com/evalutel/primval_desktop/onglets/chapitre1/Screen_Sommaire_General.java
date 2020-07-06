@@ -87,8 +87,8 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = screenHeight / 40;
-        parameter.minFilter = Texture.TextureFilter.Nearest;
-        parameter.magFilter = Texture.TextureFilter.MipMapLinearNearest;
+        parameter.minFilter = Texture.TextureFilter.Linear;
+        parameter.magFilter = Texture.TextureFilter.Linear;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
