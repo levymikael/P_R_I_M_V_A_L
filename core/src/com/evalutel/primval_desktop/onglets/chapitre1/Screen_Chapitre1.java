@@ -86,7 +86,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
-
         labelStyleBlue.fontColor = new Color(Color.valueOf("004ec0"));
 
         allDrawables = new ArrayList<>();
@@ -109,16 +108,14 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         Table nomChapitre = new Table();
 
-        nomChapitre.debug();
-        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25).height(MyConstants.SCREENWIDTH / 25).padRight(screenWidth / 150).padTop(MyConstants.SCREENHEIGHT / 70);
+        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25).height(MyConstants.SCREENWIDTH / 25).padRight(screenWidth / 150);
         nomChapitre.add(labelChap1Titre).width((MyConstants.SCREENWIDTH / 5)).align(Align.left);
-        nomChapitre.setPosition(4.5f * screenWidth / 10 /*- nomChapitre.getWidth() / 2*/, 7 * screenHeight / 10);
-
+        nomChapitre.setPosition(4.5f * screenWidth / 10, 7 * screenHeight / 10);
         stage.addActor(nomChapitre);
 
         int numChapter = 1;
 
-        mrNotes = new MrNotes(stage, dataBase);
+        mrNotes = new MrNotes(stage, dataBase, numChapter);
         mrTemps = new MrTemps(stage, dataBase, numChapter);
 
 //        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 2 * screenWidth / 7, screenHeight / 14);

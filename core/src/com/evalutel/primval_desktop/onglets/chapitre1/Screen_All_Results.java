@@ -109,7 +109,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         nomChapitre.setPosition(MyConstants.SCREENWIDTH / 2 - MyConstants.SCREENWIDTH / 12, 9 * MyConstants.SCREENHEIGHT / 10);
         stage.addActor(nomChapitre);
 
-        mrNotes = new MrNotes(stage, dataBase);
+        mrNotes = new MrNotes(stage, dataBase,0);
         mrTemps = new MrTemps(stage, dataBase, 1);
 
         Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);

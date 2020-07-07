@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -40,11 +38,19 @@ public class BoutonChapitres implements Screen
         db = new MyDataBase(dataBase);
 
         int screenWidth = Gdx.graphics.getWidth();
-        int screenHeight = Gdx.graphics.getHeight();
+//        int screenHeight = Gdx.graphics.getHeight();
+
+        float chapterButtonWidth = 19 * MyConstants.SCREENWIDTH / 60;
+        float chapterButtonHeight = chapterButtonWidth * (308.0f / 335.0f);
+
+        float padGen = chapterButtonWidth / 8.0f;
+        float widthIndice = chapterButtonWidth / 7.0f;
+        float widthLabel = chapterButtonWidth - widthIndice - padGen;
+
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = screenWidth / 60;
+        parameter.size = screenWidth / 70;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
@@ -57,13 +63,7 @@ public class BoutonChapitres implements Screen
         labelStyleOngletWhite.fontColor = Color.WHITE;
 
         Label labelOngletBlue = new Label(ongletTitre, labelStyleOngletBlue);
-//        Label labelOngletBuyChapter = new Label("Acheter ce chapitre", labelStyleOngletWhite);
-//        Label labelOngletSummary = new Label("Sommaire", labelStyleOngletBlue);
-
-        table.setWidth(screenWidth / 4);
-        table.setHeight(screenHeight / 4);
-
-        labelOngletBlue.setWidth(screenWidth / 4);
+        labelOngletBlue.setWrap(true);
 
         Texture textureChapter = new Texture(Gdx.files.internal(sommaireChapImgPath));
         textureChapter.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -71,33 +71,19 @@ public class BoutonChapitres implements Screen
         Texture textureChapterIndex = new Texture(Gdx.files.internal(chapterIndexPath));
         textureChapterIndex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-
-        int widthButton = 1000;
-        int heightButton = widthButton / 4;
-        int cornerRadius = heightButton / 8;
-
-
         Table table2 = new Table();
         table2.debug();
-        table2.add(new Image(textureChapterIndex)).width(MyConstants.SCREENWIDTH / 25).height(MyConstants.SCREENWIDTH / 25).padRight(screenWidth / 150).padTop(MyConstants.SCREENHEIGHT / 70);
-        table2.add(labelOngletBlue).width((MyConstants.SCREENWIDTH / 5)).align(Align.left);
+        table2.add(new Image(textureChapterIndex)).width(widthIndice).height(widthIndice).padRight(screenWidth / 150);
+        table2.add(labelOngletBlue).width(widthLabel).align(Align.left);
 
 
         table.setBackground(new SpriteDrawable(new Sprite(textureChapter)));
-        table.setWidth((MyConstants.SCREENHEIGHT / 5));
-        table.setHeight((MyConstants.SCREENHEIGHT / 5));
-        table.add().height(5 * table.getHeight() / 6);
+
+        table.add().height(3.5f * chapterButtonHeight / 6.0f);
         table.row();
-        table.add(table2).width(3000);
+        table.add(table2);
 
-        float chapterButtonWidth = 19 * MyConstants.SCREENWIDTH / 60;
-        float chapterButtonHeight = chapterButtonWidth * (308.0f / 335.0f);
-
-
-        table.pad(MyConstants.SCREENWIDTH / 500);
         container.add(table).width(chapterButtonWidth).height(chapterButtonHeight).align(Align.left);
-//        container.row();
-
 
         container.setTouchable(Touchable.enabled);
 

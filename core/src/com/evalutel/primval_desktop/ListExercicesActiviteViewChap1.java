@@ -60,6 +60,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         int lineHeight = screenHeight / 11;
         int buttonSize = lineHeight * 5 / 10;
         int fontSize = screenHeight / 50;
+        int paddingInterOnglets = MyConstants.SCREENHEIGHT / 1000;
 
         MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
         MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
@@ -76,10 +77,9 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
         Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
 
-        int paddingInterOnglets = MyConstants.SCREENHEIGHT / 1000;
 
         table.add(tableEx1).width(screenWidth).height(lineHeight);
-        table.row().height(paddingInterOnglets);
+        table.row();
         table.add(tableEx2).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row().height(paddingInterOnglets);
         table.add(tableEx3).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
@@ -88,10 +88,10 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         table.row().height(paddingInterOnglets);
         table.add(tableEx5).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row().height(paddingInterOnglets);
-//       // table.add(tableEx6).width(screenWidth).height(lineHeight);
+        table.add(tableEx6).width(screenWidth).height(lineHeight);
 
-        table.setWidth(screenWidth);
         table.align(Align.top);
+        table.setHeight(MyConstants.SCREENHEIGHT/2);
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
@@ -99,8 +99,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         container.add(scroll).height(3 * screenHeight / 5).align(Align.top);
         container.debug();
 
-        tableEx1.setTouchable(Touchable.enabled);
-        tableEx2.setTouchable(Touchable.enabled);
+
         tableEx1.addListener(new ClickListener()
         {
             @Override
@@ -147,15 +146,15 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
                 System.out.println("I got clicked!5");
             }
         });
-//        tableEx6.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                System.out.println("I got clicked!6");
-//                game.setScreen(new ScreenEx1_6(game, dataBase));
-//            }
-//        });
+        tableEx6.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                System.out.println("I got clicked!6");
+                game.setScreen(new ScreenEx1_6(game, dataBase));
+            }
+        });
     }
 
 

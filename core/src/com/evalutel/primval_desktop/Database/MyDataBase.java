@@ -57,7 +57,6 @@ public class MyDataBase
         int highestNote = 0;
 
         String sqlQuery = "SELECT max(points_obtenus) from RESULTAT where chapitre = " + chapitre + " AND onglet = " + onglet;
-        //String sqlQuery = "SELECT id_profil, id, points_obtenus from RESULTAT where chapitre = " + chapitre + " AND onglet = " + onglet;
 
         DataBase.Result test = database.query(sqlQuery);
 
@@ -74,7 +73,6 @@ public class MyDataBase
         int highestNote = 0;
 
         String sqlQuery = "SELECT max(points_obtenus) from RESULTAT where chapitre = " + chapitre;
-        //String sqlQuery = "SELECT id_profil, id, points_obtenus from RESULTAT where chapitre = " + chapitre + " AND onglet = " + onglet;
 
         DataBase.Result test = database.query(sqlQuery);
 
@@ -119,7 +117,6 @@ public class MyDataBase
         }
         return maxNotePageForIdProfil;
     }
-
 
     public int getMaxNotePossiblePerExercice(/*Profil idProfil,*/ int chapitre, int onglet, int page)
     {
@@ -167,51 +164,29 @@ public class MyDataBase
         return maxDureePageForIdProfil;
     }
 
-    public long getTotalDureePageForIdProfil(/*User idProfil,*/ int chapitre)
-    {
-        long totalDureePageForIdProfil = 0;
 
-        String sqlQuery = "SELECT sum(duree) from RESULTAT WHERE chapitre = " + chapitre;
-
-        DataBase.Result test = database.query(sqlQuery);
-
-        if (!test.isEmpty())
-        {
-            test.moveToNext();
-            totalDureePageForIdProfil = test.getInt(1);
-        }
-        return totalDureePageForIdProfil;
-    }
-
-    public long getTotalDureeAllForIdProfil()
-    {
-        long totalDureePageForIdProfil = 0;
-
-        String sqlQuery = "SELECT sum(duree) from RESULTAT";
-
-        DataBase.Result test = database.query(sqlQuery);
-
-        if (!test.isEmpty())
-        {
-            test.moveToNext();
-            totalDureePageForIdProfil = test.getInt(1);
-
-            int ok = 5;
-            ok++;
-        }
-        return totalDureePageForIdProfil;
-    }
-
-
-    public String getTotalNotePageForIdProfil(/*User idProfil*/)
+    public String getTotalNotePageForIdProfil(/*User idProfil,*/ int chapitreNumber)
     {
         int totalObtainedNoteforIdProfil = 0;
         int totalMaxNoteforIdProfil = 0;
         int totalPossibleNoteforIdProfil = 0;
 
-        String sqlQueryNoteObtained = "SELECT max(points_obtenus) from RESULTAT";
-        String sqlQueryNotePossible = "SELECT  max(points_possibles)  from RESULTAT";
-        String sqlQueryNoteMax = "SELECT max(points_max) from RESULTAT";
+        String sqlQueryNoteObtained, sqlQueryNotePossible, sqlQueryNoteMax = "";
+
+        if (chapitreNumber == 0)
+        {
+            sqlQueryNoteObtained = "SELECT max(points_obtenus) from RESULTAT";
+            sqlQueryNotePossible = "SELECT max(points_possibles) from RESULTAT";
+            sqlQueryNoteMax = "SELECT max(points_max) from RESULTAT";
+        }
+        else
+        {
+            sqlQueryNoteObtained = "SELECT max(points_obtenus) from RESULTAT";
+            sqlQueryNotePossible = "SELECT max(points_possibles) from RESULTAT";
+            sqlQueryNoteMax = "SELECT max(points_max) from RESULTAT";
+
+        }
+
 
         DataBase.Result totalNoteObtained = database.query(sqlQueryNoteObtained);
 
@@ -251,6 +226,40 @@ public class MyDataBase
         return totalNotePageForIdProfil;
     }
 
+    public long getTotalDureePageForIdProfil(/*User idProfil,*/ int chapitre)
+    {
+        long totalDureePageForIdProfil = 0;
+
+        String sqlQuery = "SELECT sum(duree) from RESULTAT WHERE chapitre = " + chapitre;
+
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
+            test.moveToNext();
+            totalDureePageForIdProfil = test.getInt(1);
+        }
+        return totalDureePageForIdProfil;
+    }
+
+    public long getTotalDureeAllForIdProfil()
+    {
+        long totalDureePageForIdProfil = 0;
+
+        String sqlQuery = "SELECT sum(duree) from RESULTAT";
+
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
+            test.moveToNext();
+            totalDureePageForIdProfil = test.getInt(1);
+
+            int ok = 5;
+            ok++;
+        }
+        return totalDureePageForIdProfil;
+    }
 
     public void removeOnglet(int onglet)
     {

@@ -390,7 +390,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFontArial;
-        labelStyleBlue.fontColor = new Color(new Color(Color.valueOf("004ec0")));
+        labelStyleBlue.fontColor = new Color(Color.valueOf("004ec0"));
 
         if (cptInstructions != 0)
         {
@@ -402,7 +402,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         lastLabel = label3;
 
-        lastLabel.setColor(new Color(new Color(Color.valueOf("004ec0"))));
+        lastLabel.setColor(new Color(Color.valueOf("004ec0")));
 
 
         if (lastPointerTable != null)

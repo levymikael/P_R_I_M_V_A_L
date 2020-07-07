@@ -29,9 +29,8 @@ public class LigneTableaux
     {
         Table container = new Table();
         Table table = new Table();
-        Table tablebord1 = new Table();
-        Table tablebord2 = new Table();
-
+        Table borderTable1 = new Table();
+        Table borderTable2 = new Table();
 
         Pixmap pmRed = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmRed.setColor(MyConstants.redPrimval);
@@ -41,14 +40,20 @@ public class LigneTableaux
         pmBlue.setColor(MyConstants.bluePrimval);
         pmBlue.fill();
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
+        FreeTypeFontGenerator generatorComicSansMSBold = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = MyConstants.SCREENWIDTH / 60;
-        BitmapFont bitmapFont = generator.generateFont(parameter);
-        generator.dispose();
+        BitmapFont bitmapFontComicSansMSBold = generatorComicSansMSBold.generateFont(parameter);
+        generatorComicSansMSBold.dispose();
+
+        FreeTypeFontGenerator generatorArial = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterArial = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterArial.size = MyConstants.SCREENWIDTH / 60;
+        BitmapFont bitmapFontArial = generatorArial.generateFont(parameter);
+        generatorArial.dispose();
 
         Label.LabelStyle labelStyleOnglet = new Label.LabelStyle();
-        labelStyleOnglet.font = bitmapFont;
+        labelStyleOnglet.font = bitmapFontComicSansMSBold;
 
         db = new MyDataBase(dataBase);
 
@@ -58,21 +63,21 @@ public class LigneTableaux
 
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
         labelStyleDuration.fontColor = Color.OLIVE;
-        labelStyleDuration.font = bitmapFont;
+        labelStyleDuration.font = bitmapFontArial;
 
         Label labelDuration = new Label(duration, labelStyleDuration);
         labelDuration.setWidth(MyConstants.SCREENWIDTH / 40);
 
         if (borderColor == "red")
         {
-            tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
-            tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
+            borderTable2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
+            borderTable1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
             labelStyleOnglet.fontColor = MyConstants.redPrimval;
         }
         else if ((borderColor == "blue"))
         {
-            tablebord1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
-            tablebord2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
+            borderTable1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
+            borderTable2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
             labelStyleOnglet.fontColor = MyConstants.bluePrimval;
         }
 
@@ -86,11 +91,11 @@ public class LigneTableaux
 
         notePossiblePerExercice = db.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
 
-        notes2Implement = highestNote + " / " + notePossiblePerExercice + " / " + noteMaxPerExercice;
+        notes2Implement = highestNote + "/" + notePossiblePerExercice + "/" + noteMaxPerExercice;
 
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
         labelStyleNotes.fontColor = Color.ORANGE;
-        labelStyleNotes.font = bitmapFont;
+        labelStyleNotes.font = bitmapFontArial;
 
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
         labelNotes.setWidth(MyConstants.SCREENWIDTH / 20);
@@ -101,21 +106,24 @@ public class LigneTableaux
         labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4);
 
         table.add(button).height(button.getHeight()).width(button.getWidth()).padRight(MyConstants.SCREENWIDTH / 80).padLeft(MyConstants.SCREENWIDTH / 80);
-        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.6f));
+        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.68f));
+
+
+        int textureSize = MyConstants.SCREENWIDTH / 60;
 
         if (texture != null)
         {
-            table.add(new Image(texture)).width(MyConstants.SCREENWIDTH / 50).height(MyConstants.SCREENWIDTH / 50);
+            table.add(new Image(texture)).width(textureSize).height(textureSize);
         }
-        table.add(labelDuration).width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 22).padLeft(MyConstants.SCREENWIDTH / 20);
+        table.add(labelDuration).width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 17).padLeft(MyConstants.SCREENWIDTH / 50);
 
         if (borderColor == "red")
         {
-            table.add().width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 18);
+            table.add().width(MyConstants.SCREENWIDTH / 12);
         }
         else
         {
-            table.add(labelNotes).width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 16);
+            table.add(labelNotes).width(MyConstants.SCREENWIDTH / 12).expandX();
         }
 
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
@@ -124,11 +132,11 @@ public class LigneTableaux
 
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
-        container.add(tablebord1).width(MyConstants.SCREENWIDTH).height(2);
+        container.add(borderTable1).width(MyConstants.SCREENWIDTH).height(2);
         container.row();
         container.add(table).height(MyConstants.SCREENHEIGHT / 17);
         container.row();
-        container.add(tablebord2).width(MyConstants.SCREENWIDTH).height(2);
+        container.add(borderTable2).width(MyConstants.SCREENWIDTH).height(2);
 
         return container;
     }

@@ -63,7 +63,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
     TextureRegionDrawable textureRegionDrawableBg, textureRegionDrawableBg2;
 
-    BitmapFont bitmapFontZAP;
+    BitmapFont bitmapFontZAP, bitmapFontArialBold, bitmapFontArial;
 
 
     public Screen_All_Chapters(Game game, DatabaseDesktop dataBase)
@@ -77,27 +77,49 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         FreeTypeFontGenerator FONT_FRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterFRHND = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterFRHND.size = MyConstants.SCREENWIDTH / 40;
-        parameterFRHND.minFilter = Texture.TextureFilter.Nearest;
-        parameterFRHND.magFilter = Texture.TextureFilter.MipMapLinearNearest;
+        parameterFRHND.size = MyConstants.SCREENHEIGHT / 40;
+        parameterFRHND.minFilter = Texture.TextureFilter.Linear;
+        parameterFRHND.magFilter = Texture.TextureFilter.Linear;
         bitmapFontFRHND = FONT_FRHND.generateFont(parameterFRHND);
         FONT_FRHND.dispose();
 
         FreeTypeFontGenerator FONT_ZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterZAP = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterZAP.size = MyConstants.SCREENWIDTH / 70;
-        parameterZAP.minFilter = Texture.TextureFilter.Nearest;
-        parameterZAP.magFilter = Texture.TextureFilter.MipMapLinearNearest;
+        parameterZAP.minFilter = Texture.TextureFilter.Linear;
+        parameterZAP.magFilter = Texture.TextureFilter.Linear;
         bitmapFontZAP = FONT_ZAP.generateFont(parameterZAP);
         FONT_ZAP.dispose();
+
+        FreeTypeFontGenerator arialBold = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterArialBold = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterArialBold.size = MyConstants.SCREENWIDTH / 70;
+        parameterArialBold.minFilter = Texture.TextureFilter.Linear;
+        parameterArialBold.magFilter = Texture.TextureFilter.Linear;
+        bitmapFontArialBold = arialBold.generateFont(parameterArialBold);
+        arialBold.dispose();
+
+        FreeTypeFontGenerator arial = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterArial = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterArial.size = MyConstants.SCREENWIDTH / 70;
+        parameterArial.minFilter = Texture.TextureFilter.Linear;
+        parameterArial.magFilter = Texture.TextureFilter.Linear;
+        bitmapFontArial = arial.generateFont(parameterArial);
+        arial.dispose();
+
 
         Label.LabelStyle labelStyleWhite = new Label.LabelStyle();
         labelStyleWhite.font = bitmapFontFRHND;
         labelStyleWhite.fontColor = Color.WHITE;
 
-        Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
-        labelStyleBlue.font = bitmapFontFRHND;
-        labelStyleBlue.fontColor = new Color(new Color(Color.valueOf("004ec0")));
+        Label.LabelStyle labelStyleBlueArialBold = new Label.LabelStyle();
+        labelStyleBlueArialBold.font = bitmapFontArialBold;
+        labelStyleBlueArialBold.fontColor = new Color((Color.valueOf("004ec0")));
+
+        Label.LabelStyle labelStyleBlueFRHND = new Label.LabelStyle();
+        labelStyleBlueFRHND.font = bitmapFontFRHND;
+
+        labelStyleBlueFRHND.fontColor = new Color((Color.valueOf("004ec0")));
 
         allDrawables = new ArrayList<>();
 
@@ -137,7 +159,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Table evalutelMotto = evalutelMotto();
 
-        Label labelChapterTitle = new Label("Chapitres", labelStyleBlue);
+        Label labelChapterTitle = new Label("Chapitres", labelStyleBlueFRHND);
         labelChapterTitle.setFontScale(1.7f);
         Table chapterTitle = new Table();
         chapterTitle.add(labelChapterTitle);
@@ -148,7 +170,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         table.add(evalutelMotto).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19)).align(Align.center).padTop(MyConstants.SCREENWIDTH / 90);
         table.row();
-        table.add(chapterTitle).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 50);
+        table.add(chapterTitle).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 60);
         table.row();
         table.add(chaptersListView).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 20);
 
@@ -167,10 +189,20 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
     public Table evalutelMotto()
     {
-        Label.LabelStyle labelStyleBlue2 = new Label.LabelStyle();
-        labelStyleBlue2.font = bitmapFontZAP;
-        labelStyleBlue2.fontColor = MyConstants.bluePrimval;
-        Label labelMottoTitle = new Label("Primval développé par Evalutel, propose un programe complet de Math et de géométrie pour le Primaire basé sur notre devise:", labelStyleBlue2);
+        Label.LabelStyle labelStyleBlueArialBold = new Label.LabelStyle();
+        labelStyleBlueArialBold.font = bitmapFontArialBold;
+        labelStyleBlueArialBold.fontColor = MyConstants.bluePrimval;
+
+        Label.LabelStyle labelStyleBlueArial = new Label.LabelStyle();
+        labelStyleBlueArial.font = bitmapFontArial;
+        labelStyleBlueArial.fontColor = MyConstants.bluePrimval;
+
+        Label.LabelStyle labelStyleBlueZap = new Label.LabelStyle();
+        labelStyleBlueZap.font = bitmapFontZAP;
+        labelStyleBlueZap.fontColor = MyConstants.bluePrimval;
+
+        Label labelMottoTitle = new Label("Primval développé par Evalutel, propose un programe complet de Math et de géométrie pour le Primaire basé sur notre devise:", labelStyleBlueArialBold);
+        labelMottoTitle.setFontScale(1f);
 
         int widthButton = 1000;
         int heightButton = widthButton / 5;
@@ -195,7 +227,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         int paddingMottoDetailsBorder = MyConstants.SCREENWIDTH / 1000;
         int heightlabelTitle = MyConstants.SCREENHEIGHT / 25;
         int tableWidth = MyConstants.SCREENWIDTH / 4;
-        float heightTable = MyConstants.SCREENHEIGHT / 4.5f;
+        float heightTable = MyConstants.SCREENHEIGHT / 6f;
         int paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 50;
 
         int leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80;
@@ -203,16 +235,15 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table evalutelMotto = new Table();
         evalutelMotto.setBackground((textureRegionDrawableBg));
 
-        evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails);
-        evalutelMotto.padTop(MyConstants.SCREENHEIGHT / 50).padRight(MyConstants.SCREENHEIGHT / 40);
+        evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails).align(Align.center);
+        evalutelMotto.padTop(MyConstants.SCREENHEIGHT / 50).padRight(MyConstants.SCREENHEIGHT / 50);
         evalutelMotto.row();
 
         Table evalutelMottoDetails = new Table();
 
-
         Table manipulerTable = new Table();
-        Label labelManipulerTitle = new Label("MANIPULER", labelStyleBlue2);
-        Label labelManipulerText = new Label("Des objets interactifs et ludiques sont conçus pour permettre à l'enfant de comprendre la numération , les opérations arithmétiques et les notions de base de géométrie.\n \n \n", labelStyleBlue2);
+        Label labelManipulerTitle = new Label("MANIPULER", labelStyleBlueArialBold);
+        Label labelManipulerText = new Label("Des objets interactifs et ludiques sont conçus pour permettre à l'enfant de comprendre la numération , les opérations arithmétiques et les notions de base de géométrie.", labelStyleBlueArial);
         labelManipulerText.setWrap(true);
 
         manipulerTable.add(labelManipulerTitle).height(heightlabelTitle);
@@ -226,8 +257,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         borderManipuler.add(manipulerTable);
 
         Table apprendreTable = new Table();
-        Label labelApprendreTitle = new Label("APPRENDRE", labelStyleBlue2);
-        Label labelApprendreText = new Label("Les notions nouvelles sont introduites par des cours et des exemples. Chaque manipulation est mise en correspondance avec l'opération que l'enfant est invité à faire sur l'ardoise et sur la solution, tout en étant corrigé pas à pas.", labelStyleBlue2);
+        Label labelApprendreTitle = new Label("APPRENDRE", labelStyleBlueArialBold);
+        Label labelApprendreText = new Label("Les notions nouvelles sont introduites par des cours et des exemples. Chaque manipulation est mise en correspondance avec l'opération que l'enfant est invité à faire sur l'ardoise et sur la solution, tout en étant corrigé pas à pas.", labelStyleBlueArial);
         labelApprendreText.setWrap(true);
 
         apprendreTable.add(labelApprendreTitle).height(heightlabelTitle);
@@ -241,8 +272,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         borderApprendre.add(apprendreTable);
 
         Table evaluerTable = new Table();
-        Label labelEvaluerTitle = new Label("EVALUER", labelStyleBlue2);
-        Label labelEvaluerText = new Label("Tous les exercices/problèmes sont notés. L'enfant peut toujours améliorer sa note en refaisant l'exercice. Un tableau récapitule les sujets abordés complètement ou partiellement, les temps passés et les résultats obtenus.", labelStyleBlue2);
+        Label labelEvaluerTitle = new Label("EVALUER", labelStyleBlueArialBold);
+        Label labelEvaluerText = new Label("Tous les exercices/problèmes sont notés. L'enfant peut toujours améliorer sa note en refaisant l'exercice. Un tableau récapitule les sujets abordés complètement ou partiellement, les temps passés et les résultats obtenus.", labelStyleBlueArial);
         labelEvaluerText.setWrap(true);
 
         evaluerTable.add(labelEvaluerTitle).height(heightlabelTitle).padBottom(MyConstants.SCREENHEIGHT / 400);
@@ -263,7 +294,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table border = new Table();
         border.pad(2);
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        border.add(evalutelMotto);
+        border.add(evalutelMotto).height(MyConstants.SCREENHEIGHT / 3.5f);
 
         return border;
     }
@@ -272,7 +303,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     {
         String chapterLabel1 = "Pratique des nombres de 1 à 9";
         String chapterLabel2 = "Introduction de l\'addition ";
-        String chapterLabel3 = "Les nombres de 1 à 69 . \n Introduction du zéro et de... ";
+        String chapterLabel3 = "Les nombres de 1 à 69 . \nIntroduction du zéro et des dizaines";
         String chapterLabel4 = "Les nombres de 1 à 99 . \n Additions sans retenue ";
         String chapterLabel5 = "Additions avec retenue \n Calcul mental";
         String chapterLabel6 = "Outils de la géométrie. \n Triangle. Points alignés ";
@@ -286,8 +317,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table tableEx6 = BoutonChapitres.getLigne("Images/Pages onglets/06.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, /*null, 1,*/ dataBase);
 
         table.add(tableEx1);
-        table.add(tableEx2).padLeft(MyConstants.SCREENWIDTH / 100);
-        table.add(tableEx3).padLeft(MyConstants.SCREENWIDTH / 100);
+        table.add(tableEx2);//.padLeft(MyConstants.SCREENWIDTH / 100);
+        table.add(tableEx3);//.padLeft(MyConstants.SCREENWIDTH / 100);
         table.row();
 //        table.add().height(MyConstants.SCREENWIDTH / 30);
 //        table.row();
@@ -413,7 +444,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-
         fondSommaire.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT, 0, 0);
         bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6));
         for (int i = 0; i < allDrawables.size(); i++)
@@ -424,7 +454,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
                 newItem.myDraw(batch);
             }
         }
-
 
         batch.end();
 

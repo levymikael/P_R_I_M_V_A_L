@@ -44,7 +44,7 @@ public class MrNotes2 implements MyDrawInterface
 
         db = new MyDataBase(dataBase);
 
-        totalNotes = db.getTotalNotePageForIdProfil();
+        totalNotes = db.getTotalNotePageForIdProfil(0);
 
         String newTotalNotes = totalNotes.substring(0, totalNotes.length() - 2) + "/3593";
 

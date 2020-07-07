@@ -34,7 +34,7 @@ public class MrNotes implements MyDrawInterface
 
     MyDataBase db;
 
-    public MrNotes(Stage stage, DatabaseDesktop dataBase)
+    public MrNotes(Stage stage, DatabaseDesktop dataBase, int chapitre)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
@@ -51,7 +51,7 @@ public class MrNotes implements MyDrawInterface
 
         db = new MyDataBase(dataBase);
 
-        totalNotes = db.getTotalNotePageForIdProfil();
+        totalNotes = db.getTotalNotePageForIdProfil(chapitre);
 
 
 // Configuration police
@@ -88,7 +88,7 @@ public class MrNotes implements MyDrawInterface
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
         border.add(notes);
 
-        container.add(mrNotes).height(screenHeight / 10).width((MyConstants.SCREENHEIGHT / 10) * (172.0f / 223.0f));
+        container.add(mrNotes).height(screenHeight / 10).width((MyConstants.SCREENHEIGHT / 10) * (172f / 223f));
         container.row();
         container.add(border);
     }
