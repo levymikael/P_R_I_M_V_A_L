@@ -23,7 +23,7 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
 
     public float elapsedTime, animationVitesse, animationHeight, animationWidth;
 
-    public int currentPositionX, currentPositionY, deplacementEnX, deplacementEnY;
+    public float currentPositionX, currentPositionY, deplacementEnX, deplacementEnY;
     public boolean animationContinue = true;
     protected int screenWidth;
     protected int screenHeight;
@@ -34,7 +34,7 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
     final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 
 
-    public AnimationImageNew(ArrayList<String> imagesPaths, int startPositionX, int startPositionY, float animationWidth, float animationHeight)
+    public AnimationImageNew(ArrayList<String> imagesPaths, float startPositionX, float startPositionY, float animationWidth, float animationHeight)
     {
         this.animationHeight = animationHeight;
         this.animationWidth = animationWidth;
@@ -74,7 +74,7 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         animation = new Animation(1f / 6f, (Object[]) animationFrames);
     }
 
-    public AnimationImageNew(String oneImagePath, int startPositionX, int startPositionY, float animationWidth, float animationHeight)
+    public AnimationImageNew(String oneImagePath, float startPositionX, float startPositionY, float animationWidth, float animationHeight)
     {
         this(arrayFromImage(oneImagePath), startPositionX, startPositionY, animationWidth, animationHeight);
     }
@@ -86,16 +86,16 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         animation = new Animation(1f / 6f, (Object[]) animationFrames);
     }
 
-    public void setPosition(int x, int y)
+    public void setPosition(float x, float y)
     {
         currentPositionX = x;
         currentPositionY = y;
     }
 
-    public void setPositionCenter(int x, int y)
+    public void setPositionCenter(float x, float y)
     {
-        currentPositionX = x - (int) (animationWidth / 2.0f);
-        currentPositionY = y - (int) (animationHeight / 2.0f);
+        currentPositionX = x - (animationWidth / 2f);
+        currentPositionY = y -  (animationHeight / 2f);
     }
 
 
@@ -116,7 +116,7 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         return animationHeight;
     }
 
-    public void animateImage(long animationDureemillis, boolean animationContinue, int deplacementEnX, int deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext, float vitesse)
+    public void animateImage(long animationDureemillis, boolean animationContinue, float deplacementEnX, float deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext, float vitesse)
     {
         this.animationContinue = animationContinue;
         this.deplacementEnX = deplacementEnX;
@@ -192,7 +192,7 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         public void run()
         {
             PauseSingleton pauseSingleton = PauseSingleton.getInstance();
-            if ( !isPaused)
+            if (!isPaused)
             {
                 currentPositionFloatX += deltaX;
                 currentPositionFloatY += deltaY;

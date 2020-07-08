@@ -28,7 +28,7 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
     Music music;
 
 
-    public ValidusAnimated(int startPositionX, int startPositionY, float animationWidth, float animationHeight, MyTimer timer)
+    public ValidusAnimated(float startPositionX, float startPositionY, float animationWidth, float animationHeight, MyTimer timer)
     {
         super(getAnimationValidus(), startPositionX, startPositionY, animationWidth, animationHeight);
 
@@ -142,7 +142,7 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
     }
 
     @Override
-    public boolean isTouched(int x, int y)
+    public boolean isTouched(float x, float y)
     {
         Rectangle rectangle = new Rectangle(currentPositionX, currentPositionY, animationWidth, animationHeight);
 

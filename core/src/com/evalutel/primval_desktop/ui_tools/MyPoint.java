@@ -1,11 +1,11 @@
 package com.evalutel.primval_desktop.ui_tools;
 
-public class MyPoint {
+public class MyPoint
+{
+    public float x;
+    public float y;
 
-    public int x;
-    public int y;
-
-    public MyPoint(int x, int y)
+    public MyPoint(float x, float y)
     {
         this.x = x;
         this.y = y;

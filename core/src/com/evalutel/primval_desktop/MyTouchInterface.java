@@ -5,10 +5,10 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 public interface MyTouchInterface
 {
 
-    boolean isTouched(int x, int y);
+    boolean isTouched(float x, float y);
     boolean isDragable();
 
-    void setPosition(int x, int y);
+    void setPosition(float x, float y);
 
     MyPoint getPosition();
 

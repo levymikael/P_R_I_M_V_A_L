@@ -52,7 +52,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
         oiseauxList = getNumberOiseauxArList();
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float)(largeurBille * 1.5), (float)(largeurBille * 1.5));
+        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBille * 1.5), (float) (largeurBille * 1.5));
         sacDeBilles.largeurBille = largeurBille;
         sacDeBilles.isActive();
         sacDeBilles.setActive(false);
@@ -73,20 +73,19 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Les nombres de 1 à 9 Badix, Métrologue et Validus.";
 
-
-        activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "enonce");
+        activiteView = new ActiviteView(stage, xTableTitre, activiteWidth * 42 / 1626, activiteWidth, /*numExercice, consigneExercice, "",*/ "enonce");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
         exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
-        label3 = new Label(exDansChapitre, labelStyle3);
-        label3.setWidth(MyConstants.SCREENWIDTH / 46);
+        highestMarkObtainedLabel = new Label("", labelStyle3);
+        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
 
-        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
+        tableTitre.add(exoNumLabel)/*.align(Align.center).*/.width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
         tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(label3).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
 
         stage.addActor(tableTitre);
 
@@ -109,8 +108,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneMain.imageDown();
-            activiteView.addTextActivite("Bonjour,\nJe suis le professeur Metrologue, on va faire un jeu amusant qui s'appelle Badix.");
-            activiteView.addTextActivite("Tu veux jouer ?");
+//            activiteView.addTextActivite("Bonjour,\nJe suis le professeur Metrologue, on va faire un jeu amusant qui s'appelle Badix.");
+//            activiteView.addTextActivite("Tu veux jouer ?");
 
             MyTimer.TaskEtape nextEtape = new VoiciLaRegleDuJeu(3000, 2500);
 
@@ -128,7 +127,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            activiteView.addTextActivite("Voici la règle du jeu:");
+//            activiteView.addTextActivite("Voici la règle du jeu:");
             MyTimer.TaskEtape nextEtape = new EtapeAddFirstOiseau(2000, 1000);
 
             metrologue.metrologuePlaySound("Sounds/Metrologue/Voici la regle du jeu.mp3", nextEtape);
@@ -169,7 +168,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            activiteView.addTextActivite("Je vois un oiseau");
+//            activiteView.addTextActivite("Je vois un oiseau");
 
             MyTimer.TaskEtape nextEtape = new MoveMainToReserve1(2000, 500);
 
@@ -247,7 +246,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             if (cptBille == 0)
             {
-                activiteView.addTextActivite("Je saisis une bille du sac et je la dépose sur le plateau ");
+//                activiteView.addTextActivite("Je saisis une bille du sac et je la dépose sur le plateau ");
                 metrologue.metrologuePlaySound("Sounds/Metrologue/Je saisis une bille du sac.mp3");
 
                 bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 2500, 1f / 6f);
@@ -384,7 +383,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
                 bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), null, 2000, 1f / 6f);
                 uneMain.cliqueTo(durationMillis, posX, posY, null, 1000);
 
-                activiteView.addTextActivite("Je dépose encore une bille.");
+//                activiteView.addTextActivite("Je dépose encore une bille.");
                 metrologue.metrologuePlaySound("Sounds/Metrologue/je depose encore une bille.mp3", nextEtape);
             }
         }
@@ -429,7 +428,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 2)
             {
-                activiteView.addTextActivite("Tiens ! Encore un oiseau");
+//                activiteView.addTextActivite("Tiens ! Encore un oiseau");
                 metrologue.metrologuePlaySound("Sounds/Metrologue/Tiens encore un oiseau.mp3");
 
                 oiseau.animateImage(1000, true, posX, posY, new MoveMainToReserve3(2000), 1500, 1f / 6f);
@@ -663,7 +662,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-            activiteView.addTextActivite("Mince, je crois que je me suis trompé, je clique sur Mademoiselle Validus pour savoir si c'est juste.");
+//            activiteView.addTextActivite("Mince, je crois que je me suis trompé, je clique sur Mademoiselle Validus pour savoir si c'est juste.");
             metrologue.metrologuePlaySound("Sounds/Metrologue/Mince je crois que.mp3");
         }
     }
@@ -685,7 +684,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             if (billesList.size() == 4)
             {
-                activiteView.addTextActivite("Validus: Non, non tu t'es trompé.");
+//                activiteView.addTextActivite("Validus: Non, non tu t'es trompé.");
                 validusAnimated.validusPlaySound("Sounds/Validus/non non tu tes trompe.mp3");
 
                 MyTimer.TaskEtape nextEtape = new MoveMainBackToPlanche(500);
@@ -715,7 +714,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3000);
             uneMain.imageDown();
 
-            activiteView.addTextActivite("Metrologue : Pour corriger mon erreur, je retire une bille de la planche puis je demande à Mademoiselle Validus.");
+//            activiteView.addTextActivite("Metrologue : Pour corriger mon erreur, je retire une bille de la planche puis je demande à Mademoiselle Validus.");
             metrologue.metrologuePlaySound("Sounds/Metrologue/Pour corriger mon erreur.mp3");
         }
     }
@@ -819,7 +818,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             {
                 MyTimer.TaskEtape nextEtape = new FinOnglet(1000, 1500);
                 uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, null, 1000);
-                activiteView.addTextActivite("Youpi ! Tu as gagné un diamant.");
+//                activiteView.addTextActivite("Youpi ! Tu as gagné un diamant.");
                 validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3", nextEtape);
             }
         }
@@ -828,8 +827,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
     public ArrayList<UneBille> autoFillPlanche()
     {
-        int firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
-        int firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
+        float firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
+        float firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
 
         billesList = new ArrayList<>();
 

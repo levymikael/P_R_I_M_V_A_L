@@ -56,7 +56,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
         oiseauxList = getNumberOiseauxArList();
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float)(largeurBille * 1.5), (float)(largeurBille * 1.5));
+        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBille * 1.5), (float) (largeurBille * 1.5));
         sacDeBilles.largeurBille = largeurBille;
         sacDeBilles.isActive();
         sacDeBilles.setActive(false);
@@ -77,19 +77,19 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Écriture des chiffres de 1 à 9";
 
-        activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, "", "enonce");
+        activiteView = new ActiviteView(stage, xTableTitre, activiteWidth * 42 / 1626, activiteWidth, "enonce");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
         exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
-        label3 = new Label(exDansChapitre, labelStyle3);
-        label3.setWidth(MyConstants.SCREENWIDTH / 46);
+        highestMarkObtainedLabel = new Label("", labelStyle3);
+        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
 
         tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
         tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(label3).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
 
         stage.addActor(tableTitre);
 
@@ -1562,8 +1562,8 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
     public ArrayList<UneBille> autoFillPlanche()
     {
-        int firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
-        int firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
+        float firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
+        float firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
 
         billesList = new ArrayList<>();
 

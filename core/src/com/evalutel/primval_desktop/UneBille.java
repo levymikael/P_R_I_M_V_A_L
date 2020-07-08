@@ -24,7 +24,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 
 
-    public UneBille(int startPositionX, int startPositionY, float animationHeight)
+    public UneBille(float startPositionX, float startPositionY, float animationHeight)
     {
         super(getImageRandom(), startPositionX, startPositionY, animationHeight, animationHeight);
 
@@ -45,7 +45,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
 
 
     @Override
-    public boolean isTouched(int x, int y)
+    public boolean isTouched(float x, float y)
     {
         Rectangle rectangle = new Rectangle(currentPositionX, currentPositionY, animationWidth, animationHeight);
 
@@ -54,7 +54,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
 
 
     @Override
-    public void setPosition(int x, int y)
+    public void setPosition(float x, float y)
     {
         currentPositionX = x;
         currentPositionY = y;
@@ -99,7 +99,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
         }
     }
 
-    public void touchUp(ArrayList<UnePlancheNew> planches/*, int firstPositionX, int firstPositionY*/)
+    public void touchUp(ArrayList<UnePlancheNew> planches)
     {
         boolean isAddedToPlanche = false;
         if (this.isActive)

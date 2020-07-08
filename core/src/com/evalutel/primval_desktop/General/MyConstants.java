@@ -12,8 +12,6 @@ public class MyConstants
     public static int SCREENHEIGHT = Gdx.graphics.getHeight();
 
 
-    public static int screenWidthQuarter = SCREENWIDTH / 4;
-
     public static FreeTypeFontGenerator FONT_ZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
     public static FreeTypeFontGenerator FONT_FRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
     public static FreeTypeFontGenerator FONT_COMICI = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));

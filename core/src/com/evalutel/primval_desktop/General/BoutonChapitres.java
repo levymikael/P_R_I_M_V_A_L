@@ -72,7 +72,7 @@ public class BoutonChapitres implements Screen
         textureChapterIndex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table table2 = new Table();
-        table2.debug();
+//        table2.debug();
         table2.add(new Image(textureChapterIndex)).width(widthIndice).height(widthIndice).padRight(screenWidth / 150);
         table2.add(labelOngletBlue).width(widthLabel).align(Align.left);
 

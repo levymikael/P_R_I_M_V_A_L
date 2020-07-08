@@ -2,7 +2,6 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -19,9 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.General.MyConstants;
-import com.evalutel.primval_desktop.General.UIDesign;
-
-import java.util.ArrayList;
 
 
 public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterface
@@ -33,7 +28,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     private float firstY, currentY, widthEnonce;
 
-    Texture texture2, textureTextEnonce, txtureDroiteBleu, txtureGaucheBleu, txtureCentreBleu, txtureDroiteVert, txtureCentreVert, txtureGaucheVert;
+    Texture textureTextEnonce;
 
     TextField textFieldEnonce;
 
@@ -46,21 +41,20 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     String activiteType;
 
-    Label lastLabel;
+    Label lastLabel, label1;
 
     Sprite flechSprite = new Sprite(new Texture(Gdx.files.internal("Images/EnonceUIElements/black_right_pointing_pointer.png")));
 
     boolean isPaused;
 
-    Table lastPointerTable, lastPointerTable2;
+    Table lastPointerTable;
 
-    public ActiviteView(Stage stage, float width, String numExercice, String consigneExercice, String exDansChapitre, String activiteType)
+    public ActiviteView(Stage stage, float positionX, float positionY, float width, String activiteType)
     {
         textureMilieuEnonce = new Texture("Images/EnonceUIElements/enonce_milieu_new.png");
         textureMilieuEnonce.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        widthEnonce = (MyConstants.SCREENWIDTH / 4) * 3;
-        heightTop = widthEnonce * 42 / 1626;
+        widthEnonce = width;
 
         this.activiteType = activiteType;
 
@@ -77,32 +71,30 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         bitmapFontComic = fontComic.generateFont(parameter);
         fontComic.dispose();
 
-        Label.LabelStyle labelStyle3 = new Label.LabelStyle();
-        labelStyle3.font = bitmapFontArial;
-        labelStyle3.fontColor = Color.YELLOW;
-        Label label3 = new Label(exDansChapitre, labelStyle3);
-        label3.setWidth(MyConstants.SCREENWIDTH / 46);
-
         table = new Table();
-        stage.addActor(table);
-
         tableMilieu = new Table();
         tableMilieuSolution = new Table();
-
         Table paddingTableMilieu = new Table();
-        paddingTableMilieu.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
-
-
-        table.add(paddingTableMilieu).height(MyConstants.SCREENHEIGHT / 200).width(widthEnonce);
-        table.row();
-
-        table.add(tableMilieu).width(widthEnonce + MyConstants.SCREENWIDTH / 100);
-        table.row();
-
         Table paddingTableMilieu2 = new Table();
+        Table tableBandeauBas = new Table();
+        Table tableBandeauBasDroite = new Table();
+        Table tableBandeauBasGauche = new Table();
+        Table tableBandeauBasCentreVierge = new Table();
+        Table tableBandeauBasCentreVierge2 = new Table();
+        Table tableBandeauBasCentreEnonce = new Table();
+
+        stage.addActor(table);
+
+        float paddingHeightTableMilieu = MyConstants.SCREENHEIGHT / 200;
+
+        paddingTableMilieu.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
         paddingTableMilieu2.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
 
-        table.add(paddingTableMilieu2).height(MyConstants.SCREENHEIGHT / 200).width(widthEnonce);
+        table.add(paddingTableMilieu).height(paddingHeightTableMilieu).width(widthEnonce);
+        table.row();
+        table.add(tableMilieu).width(widthEnonce/* + MyConstants.SCREENWIDTH / 100*/);
+        table.row();
+        table.add(paddingTableMilieu2).height(paddingHeightTableMilieu).width(widthEnonce);
         table.row();
 
 
@@ -114,97 +106,79 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         {
             textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_text.png"));
         }
+        else if (activiteType == "solution")
+        {
+            textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/texte_solution.png"));
+        }
         textureTextEnonce.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        spriteEnonceText = new Sprite(textureTextEnonce);
+
         TextField.TextFieldStyle textFieldStyleEnonce = new TextField.TextFieldStyle();
         textFieldStyleEnonce.font = bitmapFontArial;
-        textFieldStyleEnonce.background = new SpriteDrawable(spriteEnonceText);
+        textFieldStyleEnonce.background = new SpriteDrawable(new Sprite(textureTextEnonce));
         textFieldEnonce = new TextField("", textFieldStyleEnonce);
 
 // Insertion texte.png dans tableau avec une imageBG.png:
+        float widthCote = MyConstants.SCREENWIDTH / 40f;
+        heightBackGroundImage = widthCote * 29f / 28f;
 
-        Table tableBandeauBasBleu = new Table();
-        heightBackGroundImage = widthEnonce * 31 / 809;
-        float heightImageEnonce = heightBackGroundImage * 2 / 3;
-        float widthImageEnonce = heightImageEnonce * 218 / 41;
-
-
-//        texture2 = new Texture(Gdx.files.internal("Images/Enoncé-solution/Enoncé-Grand-fond.png"));
-//        texture2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-//        sprite2 = new Sprite(texture2);
-//        tableBandeauBasBleu.setBackground(new SpriteDrawable(sprite2));
-
-        Table tableBandeauBasBleuDroite = new Table();
-        Texture txtureDroiteBleu = new Texture(Gdx.files.internal("Images/Enoncé-solution/droit bleu.png"));
-        txtureDroiteBleu.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Sprite spriteDroiteBleu = new Sprite(txtureDroiteBleu);
-        tableBandeauBasBleuDroite.setBackground(new SpriteDrawable(spriteDroiteBleu));
-
-        Table tableBandeauBasBleuGauche = new Table();
-        Texture txtureGaucheBleu = new Texture(Gdx.files.internal("Images/Enoncé-solution/gauche bleu.png"));
-        txtureGaucheBleu.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Sprite spriteGaucheBleu = new Sprite(txtureGaucheBleu);
-        tableBandeauBasBleuGauche.setBackground(new SpriteDrawable(spriteGaucheBleu));
-
-        float demiBandeauBas = ((widthEnonce - (textFieldEnonce.getWidth() + MyConstants.SCREENWIDTH / 40)) / 2);
-
-        int ok = 5;
-        ok++;
+        heightTop = positionY;
 
 
-        Table tableBandeauBasBleuCentreVierge = new Table();
-        Table tableBandeauBasBleuCentreVierge2 = new Table();
-        Texture txtureCentreBleu = new Texture(Gdx.files.internal("Images/Enoncé-solution/centre bleu.png"));
-        txtureCentreBleu.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Sprite spriteCentreBleu = new Sprite(txtureCentreBleu);
-        tableBandeauBasBleuCentreVierge.setBackground(new SpriteDrawable(spriteCentreBleu));
-        tableBandeauBasBleuCentreVierge2.setBackground(new SpriteDrawable(spriteCentreBleu));
+        float widthCentre = 300f;
 
-        Table tableBandeauBasBleuCentreEnonce = new Table();
-        tableBandeauBasBleuCentreEnonce.setBackground(new SpriteDrawable(spriteCentreBleu));
-        tableBandeauBasBleuCentreEnonce.add(textFieldEnonce).height(heightImageEnonce).width(widthImageEnonce);
+        float widthVierge = (widthEnonce - 2 * widthCote - widthCentre) / 2f;
+
+        //heightBackGroundImage = widthEnonce * 31 / 809;
+        float heightImageEnonce = heightBackGroundImage * 2f / 3f;
+        float widthImageEnonce = heightImageEnonce * 218f / 41f;
+
+        String txtureDroitePath = "";
+        String txtureGauchePath = "";
+        String txtureCentrePath = "";
+
+        if (activiteType == "activite" || activiteType == "enonce")
+        {
+            txtureDroitePath = "Images/Enoncé-solution/droit bleu.png";
+            txtureGauchePath = "Images/Enoncé-solution/gauche bleu.png";
+            txtureCentrePath = "Images/Enoncé-solution/centre bleu.png";
+        }
+        else if (activiteType == "solution")
+        {
+            txtureDroitePath = "Images/Enoncé-solution/droit vert.png";
+            txtureGauchePath = "Images/Enoncé-solution/gauche vert.png";
+            txtureCentrePath = "Images/Enoncé-solution/centre vert.png";
+        }
+
+        Texture txtureDroite = new Texture(Gdx.files.internal(txtureDroitePath));
+        Texture txtureGauche = new Texture(Gdx.files.internal(txtureGauchePath));
+        Texture txtureCentre = new Texture(Gdx.files.internal(txtureCentrePath));
+
+        txtureCentre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        txtureDroite.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        txtureGauche.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        tableBandeauBasDroite.setBackground(new SpriteDrawable(new Sprite(txtureDroite)));
+        tableBandeauBasGauche.setBackground(new SpriteDrawable(new Sprite(txtureGauche)));
+        tableBandeauBasCentreVierge.setBackground(new SpriteDrawable(new Sprite(txtureCentre)));
+        tableBandeauBasCentreVierge2.setBackground(new SpriteDrawable(new Sprite(txtureCentre)));
+        tableBandeauBasCentreEnonce.setBackground(new SpriteDrawable(new Sprite(txtureCentre)));
+
+        tableBandeauBasCentreEnonce.add(textFieldEnonce).height(heightImageEnonce).width(widthImageEnonce);
 
 
-        tableBandeauBasBleu.add(tableBandeauBasBleuGauche).height(heightImageEnonce);
-        tableBandeauBasBleu.add(tableBandeauBasBleuCentreVierge).width(demiBandeauBas).height(heightImageEnonce);
-        tableBandeauBasBleu.add(tableBandeauBasBleuCentreEnonce).height(heightImageEnonce);
-        tableBandeauBasBleu.add(tableBandeauBasBleuCentreVierge2).width(demiBandeauBas).height(heightImageEnonce);
-        tableBandeauBasBleu.add(tableBandeauBasBleuDroite).height(heightImageEnonce);
+        tableBandeauBas.add(tableBandeauBasGauche).width(widthCote).height(heightBackGroundImage);
+        tableBandeauBas.add(tableBandeauBasCentreVierge).width(widthVierge).height(heightBackGroundImage);
+        tableBandeauBas.add(tableBandeauBasCentreEnonce).width(widthCentre).height(heightBackGroundImage);
+        tableBandeauBas.add(tableBandeauBasCentreVierge2).width(widthVierge).height(heightBackGroundImage);
+        tableBandeauBas.add(tableBandeauBasDroite).width(widthCote).height(heightBackGroundImage);
 
-        table.add(tableBandeauBasBleu).height(heightBackGroundImage);
+        table.add(tableBandeauBas).width(widthEnonce).height(heightBackGroundImage);
+
         table.row();
 
 
-        Table tableBandeauBasVert = new Table();
-
-        Table tableBandeauBasVertDroite = new Table();
-        Texture txtureDroiteVert = new Texture(Gdx.files.internal("Images/Enoncé-solution/droit vert.png"));
-        txtureDroiteVert.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Sprite spriteDroiteVert = new Sprite(txtureDroiteVert);
-        tableBandeauBasVertDroite.setBackground(new SpriteDrawable(spriteDroiteVert));
-
-        Table tableBandeauBasVertGauche = new Table();
-        Texture txtureGaucheVert = new Texture(Gdx.files.internal("Images/Enoncé-solution/gauche vert.png"));
-        txtureGaucheVert.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Sprite spriteGaucheVert = new Sprite(txtureGaucheVert);
-        tableBandeauBasVertGauche.setBackground(new SpriteDrawable(spriteGaucheVert));
-
-        Table tableBandeauBasVertCentre = new Table();
-        Texture txtureCentreVert = new Texture(Gdx.files.internal("Images/Enoncé-solution/centre vert.png"));
-        txtureCentreVert.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Sprite spriteCentreVert = new Sprite(txtureCentreVert);
-        tableBandeauBasVertCentre.setBackground(new SpriteDrawable(spriteCentreVert));
-
-
-        tableBandeauBasVert.add(tableBandeauBasVertCentre);
-        tableBandeauBasVert.add(tableBandeauBasVertGauche);
-        tableBandeauBasVert.add(tableBandeauBasVertDroite);
-
-
 // Positionnement du tableau sur ecran:
-
-
         table.pack();
         final float tableHeight = table.getHeight();
         float temptableHeight = tableHeight;
@@ -213,13 +187,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         currentY = topYTablePosition;
 
-        int activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
-        heightTop = activiteWidth * 42 / 1626;
-        float xTableTitre = (MyConstants.SCREENWIDTH / 2 - activiteWidth / 2);
-        tableMilieu.setX(xTableTitre + MyConstants.SCREENWIDTH / 200);
-
-
-        table.setPosition((MyConstants.SCREENWIDTH / 2 - activiteWidth / 2), topYTablePosition);
+        table.setPosition(positionX, topYTablePosition);
 
         table.setTouchable(Touchable.enabled);
 
@@ -267,7 +235,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     public Label setTextActivite(String string)
     {
-
         emptyActivite();
 
         return addTextActivite(string);
@@ -283,7 +250,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFontArial;
-        labelStyleBlue.fontColor = new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
+        labelStyleBlue.fontColor = new Color(71f / 255f, 107f / 255f, 217f / 255f, 1);
 
         if (cptInstructions != 0)
         {
@@ -295,7 +262,8 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         lastLabel = label3;
 
-        lastLabel.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
+        lastLabel.setColor(new Color(71f / 255f, 107f / 255f, 217f / 255f, 1));
+
 
 
         if (lastPointerTable != null)
@@ -314,8 +282,16 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
             lastPointerTable.setBackground(flecheSpriteDrawable);
         }
 
-        table4.add(lastPointerTable).width(MyConstants.SCREENWIDTH / 60).height(MyConstants.SCREENHEIGHT / 40).align(Align.center).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100)/*.padTop(MyConstants.SCREENHEIGHT / 20)*/;
-        table4.add(label3).width(widthEnonce - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 120))).padRight(MyConstants.SCREENWIDTH / 120)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
+        table4.add(lastPointerTable).width(MyConstants.SCREENWIDTH / 60).align(Align.top).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100);
+
+//        if (activiteType == "enonce" || activiteType == "activite")
+//        {
+//             label1 = new Label("1.", labelStyleBlue);
+//            table4.add(label1).width((MyConstants.SCREENWIDTH / 35));
+//
+//        }
+
+        table4.add(label3).width(widthEnonce - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 110))).padRight(MyConstants.SCREENWIDTH / 120)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
 
 //        if (cptInstructions == 0)
 //        {
@@ -339,7 +315,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 //        }
 
         table4.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
-        tableMilieu.add(table4);
+        tableMilieu.add(table4).width(widthEnonce);
         tableMilieu.row();
 
         table.pack();
@@ -371,93 +347,93 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         tableMilieu.clear();
     }
 
-    public Label setTextSolution(String string)
-    {
-
-        emptySolution();
-
-        return addTextActivite(string);
-
-    }
-
-    public Label addTextSolution(String string)
-    {
-        table5 = new Table();
-
-        Label.LabelStyle labelStyleBlack = new Label.LabelStyle();
-        labelStyleBlack.font = bitmapFontArial;
-        labelStyleBlack.fontColor = Color.BLACK;
-
-        Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
-        labelStyleBlue.font = bitmapFontArial;
-        labelStyleBlue.fontColor = new Color(Color.valueOf("004ec0"));
-
-        if (cptInstructions != 0)
-        {
-            lastLabel.setStyle(labelStyleBlack);
-        }
-
-        Label label3 = new Label(string, labelStyleBlue);
-        label3.setWrap(true);
-
-        lastLabel = label3;
-
-        lastLabel.setColor(new Color(Color.valueOf("004ec0")));
-
-
-        if (lastPointerTable != null)
-        {
-            lastPointerTable.remove();
-        }
-
-        flechSprite.setSize(MyConstants.SCREENWIDTH / 30, 40);
-        flechSprite.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
-
-        SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
-
-        lastPointerTable2 = new Table();
-
-        lastPointerTable2.setBackground(flecheSpriteDrawable);
-
-
-        table5.add(lastPointerTable2).width(MyConstants.SCREENWIDTH / 60).height(MyConstants.SCREENHEIGHT / 40).align(Align.left).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100)/*.padTop(MyConstants.SCREENHEIGHT / 20)*/;
-        table5.add(label3).width(widthEnonce / 2 - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 120))).padRight(MyConstants.SCREENWIDTH / 120)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
-
-
-        table5.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
-        tableMilieuSolution.add(table5);
-        tableMilieuSolution.row();
-
-        table.pack();
-
-        cptInstructions++;
-
-        float labelHeight = label3.getHeight() + MyConstants.SCREENHEIGHT / 100;
-
-        topYTablePosition = MyConstants.SCREENHEIGHT - table.getHeight() - heightTop;
-
-
-        float nextTestY = currentY - labelHeight;
-        if (nextTestY > topYTablePosition)
-        {
-            currentY = currentY - labelHeight;
-            table.setY(currentY);
-        }
-        else
-        {
-            currentY = topYTablePosition;
-            table.setY(topYTablePosition);
-        }
-
-        return label3;
-    }
-
-
-    public void emptySolution()
-    {
-        tableMilieuSolution.clear();
-    }
-//    public Label addText(String str)
+//    public Label setTextSolution(String string)
+//    {
+//
+//        emptySolution();
+//
+//        return addTextActivite(string);
+//
+//    }
+//
+//    public Label addTextSolution(String string)
+//    {
+//        table5 = new Table();
+//
+//        Label.LabelStyle labelStyleBlack = new Label.LabelStyle();
+//        labelStyleBlack.font = bitmapFontArial;
+//        labelStyleBlack.fontColor = Color.BLACK;
+//
+//        Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
+//        labelStyleBlue.font = bitmapFontArial;
+//        labelStyleBlue.fontColor = new Color(Color.valueOf("004ec0"));
+//
+//        if (cptInstructions != 0)
+//        {
+//            lastLabel.setStyle(labelStyleBlack);
+//        }
+//
+//        Label label3 = new Label(string, labelStyleBlue);
+//        label3.setWrap(true);
+//
+//        lastLabel = label3;
+//
+//        lastLabel.setColor(new Color(Color.valueOf("004ec0")));
+//
+//
+//        if (lastPointerTable != null)
+//        {
+//            lastPointerTable.remove();
+//        }
+//
+//        flechSprite.setSize(MyConstants.SCREENWIDTH / 30, 40);
+//        flechSprite.setColor(new Color(71f / 255f, 107f / 255f, 217f / 255f, 1));
+//
+//        SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
+//
+//        lastPointerTable2 = new Table();
+//
+//        lastPointerTable2.setBackground(flecheSpriteDrawable);
+//
+//
+//        table5.add(lastPointerTable2).width(MyConstants.SCREENWIDTH / 60).height(MyConstants.SCREENHEIGHT / 40).align(Align.left).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100)/*.padTop(MyConstants.SCREENHEIGHT / 20)*/;
+//        table5.add(label3).width(widthEnonce / 2 - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 120))).padRight(MyConstants.SCREENWIDTH / 120)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
+//
+//
+//        table5.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
+//        tableMilieuSolution.add(table5);
+//        tableMilieuSolution.row();
+//
+//        table.pack();
+//
+//        cptInstructions++;
+//
+//        float labelHeight = label3.getHeight() + MyConstants.SCREENHEIGHT / 100;
+//
+//        topYTablePosition = MyConstants.SCREENHEIGHT - table.getHeight() - heightTop;
+//
+//
+//        float nextTestY = currentY - labelHeight;
+//        if (nextTestY > topYTablePosition)
+//        {
+//            currentY = currentY - labelHeight;
+//            table.setY(currentY);
+//        }
+//        else
+//        {
+//            currentY = topYTablePosition;
+//            table.setY(topYTablePosition);
+//        }
+//
+//        return label3;
+//    }
+//
+//
+//    public void emptySolution()
+//    {
+//        tableMilieuSolution.clear();
+//    }
+////    public Label addText(String str)
 //    {
 //        ArrayList<String> textToAdd = new ArrayList<>();
 //
@@ -494,7 +470,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 //////
 //////        Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
 //////        labelStyleBlue.font = bitmapFontArial;
-//////        labelStyleBlue.fontColor = new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
+//////        labelStyleBlue.fontColor = new Color(71f / 255f, 107f / 255f, 217f / 255f, 1);
 ////
 //////        if (cptInstructions != 0)
 //////        {
@@ -509,7 +485,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 ////
 //////        lastLabel = label3;
 ////
-//////        lastLabel.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
+//////        lastLabel.setColor(new Color(71f / 255f, 107f / 255f, 217f / 255f, 1));
 ////
 //////        label3.setText(textToAdd);
 ////

@@ -57,7 +57,7 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCor
 
 
     @Override
-    public void setPosition(int x, int y)
+    public void setPosition(float x, float y)
     {
         currentPositionX = x;
         currentPositionY = y;

@@ -52,8 +52,8 @@ public class MrTemps2 implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.minFilter = Texture.TextureFilter.Nearest;
-        parameter.magFilter = Texture.TextureFilter.MipMapLinearNearest;
+        parameter.minFilter = Texture.TextureFilter.Linear;
+        parameter.magFilter = Texture.TextureFilter.Linear;
         parameter.size = (int) screenWidth / 70;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
@@ -69,7 +69,7 @@ public class MrTemps2 implements MyDrawInterface
 
         Table container = new Table();
         container.setSize(screenWidth / 8, screenHeight / 14);
-        container.setPosition(16 * screenWidth / 25, 4 * screenHeight / 5);
+        container.setPosition(17 * screenWidth / 25, 4 * screenHeight / 5);
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrTemps))));
         container.add(labelTemps).padLeft(screenWidth / 20).padTop(MyConstants.SCREENHEIGHT / 160).expand().fill();

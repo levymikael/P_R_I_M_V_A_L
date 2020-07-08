@@ -61,9 +61,9 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     MyButtonRetour myButtonRetour;
     MyButtonDemos myButtonDemo;
 
-    TextureRegionDrawable textureRegionDrawableBg, textureRegionDrawableBg2;
+    TextureRegionDrawable textureRegionDrawableBg;
 
-    BitmapFont bitmapFontZAP, bitmapFontArialBold, bitmapFontArial;
+    BitmapFont bitmapFontZAP, bitmapFontArialBold, bitmapFontArial, bitmapFontFRHND;
 
 
     public Screen_All_Chapters(Game game, DatabaseDesktop dataBase)
@@ -73,7 +73,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         stage = new Stage();
         batch = new SpriteBatch();
-        BitmapFont bitmapFontFRHND;
 
         FreeTypeFontGenerator FONT_FRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterFRHND = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -118,7 +117,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Label.LabelStyle labelStyleBlueFRHND = new Label.LabelStyle();
         labelStyleBlueFRHND.font = bitmapFontFRHND;
-
         labelStyleBlueFRHND.fontColor = new Color((Color.valueOf("004ec0")));
 
         allDrawables = new ArrayList<>();
@@ -138,13 +136,16 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Table allChaptersTitle = new Table();
 
+        float chapterTitleWidth = MyConstants.SCREENWIDTH / 2.5f;
+        float chapterTitleHeight = chapterTitleWidth * (55f / 387f);
+
         allChaptersTitle.setBackground(new SpriteDrawable(new Sprite(chapter1Title)));
-        allChaptersTitle.setSize((float) (MyConstants.SCREENWIDTH / 2), (float) (((MyConstants.SCREENWIDTH / 2) * 0.14)));
+        allChaptersTitle.setSize(chapterTitleWidth, chapterTitleHeight);
         allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2 - allChaptersTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - ((MyConstants.SCREENWIDTH / 11)));
 
         stage.addActor(allChaptersTitle);
 
-        mrNotes = new MrNotes2(stage, dataBase, 20 * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5);
+        mrNotes = new MrNotes2(stage, dataBase, 20.5f * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5, "all chapters");
         mrTemps = new MrTemps2(stage, dataBase);
 
 
@@ -208,15 +209,14 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         int heightButton = widthButton / 5;
         int cornerRadius = heightButton / 8;
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.WHITE);
-        Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
-        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 0, Color.ROYAL);
+        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, Color.WHITE);
+        Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
+        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, Color.ROYAL);
 
 
         Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
         bgPixmap.setColor(Color.rgb888(234, 241, 250));
         bgPixmap.fill();
-
 
         Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmBlue.setColor(Color.NAVY);
@@ -228,7 +228,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         int heightlabelTitle = MyConstants.SCREENHEIGHT / 25;
         int tableWidth = MyConstants.SCREENWIDTH / 4;
         float heightTable = MyConstants.SCREENHEIGHT / 6f;
-        int paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 50;
+        int paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 70;
+        int paddingCoteEvalutelMotto = MyConstants.SCREENHEIGHT / 50;
 
         int leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80;
 
@@ -236,7 +237,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         evalutelMotto.setBackground((textureRegionDrawableBg));
 
         evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails).align(Align.center);
-        evalutelMotto.padTop(MyConstants.SCREENHEIGHT / 50).padRight(MyConstants.SCREENHEIGHT / 50);
+        evalutelMotto.padTop(paddingCoteEvalutelMotto).padRight(paddingCoteEvalutelMotto);
         evalutelMotto.row();
 
         Table evalutelMottoDetails = new Table();
@@ -475,12 +476,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     @Override
     public void resize(int width, int height)
     {
-//        stage.getViewport().update(width, height, true);
-//        width = 2400;
-//        height = 1350;
-
-
-//        viewport.update(width, height);
     }
 
     @Override

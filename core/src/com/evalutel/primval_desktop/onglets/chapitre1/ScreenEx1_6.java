@@ -3,36 +3,26 @@ package com.evalutel.primval_desktop.onglets.chapitre1;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
-import com.evalutel.primval_desktop.ActiviteViewDouble;
 import com.evalutel.primval_desktop.CalculetteViewTest;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.MyMath;
-import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.MyTimer;
-import com.evalutel.primval_desktop.MyTouchInterface;
-import com.evalutel.primval_desktop.UnGateauAnniversaire;
-import com.evalutel.primval_desktop.UneBougie;
 import com.evalutel.primval_desktop.SacDeBougies;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
-import com.evalutel.primval_desktop.UnOiseau;
-import com.evalutel.primval_desktop.UneBille;
+import com.evalutel.primval_desktop.UnGateauAnniversaire;
+import com.evalutel.primval_desktop.UneBougie;
 import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
-
 
 
 public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
@@ -82,7 +72,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         bgScreenEx1_6 = new ScreeenBackgroundImage("Images/Onglet_1_6/anniversaire.jpg");
         allDrawables.add(bgScreenEx1_6);
 
-        sacDeBougies = new SacDeBougies(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBougie * 1.5), (float) (largeurBougie * 1.5));
+        sacDeBougies = new SacDeBougies(5.3f * MyConstants.SCREENWIDTH / 6f, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBougie * 1.5), (float) (largeurBougie * 1.5));
         sacDeBougies.largeurBille = largeurBille;
         sacDeBougies.isActive();
         sacDeBougies.setActive(false);
@@ -91,7 +81,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         allCorrigibles.add(sacDeBougies);
 
         int gateauWidth = MyConstants.SCREENWIDTH / 2;
-        int gateauHeight = (int) (gateauWidth * (266.0f / 462.0f));
+        int gateauHeight = (int) (gateauWidth * (266f / 462f));
 
         gateauAnniversaire = new UnGateauAnniversaire(3 * MyConstants.SCREENWIDTH / 10 - largeurGateau / 10, MyConstants.SCREENHEIGHT / 20, gateauWidth, gateauHeight);
         gateauAnniversaire.shouldReturnToReserve = true;
@@ -120,19 +110,32 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Un gâteau pour plusieurs anniversaires";
 
-        activiteViewDouble = new ActiviteViewDouble(stage, activiteWidth, numExercice, consigneExercice, "9", "enonce");
-        allDrawables.add(activiteViewDouble);
-        myCorrectionAndPauseGeneral.addElements(activiteViewDouble);
+
+        float posEnonceX = (MyConstants.SCREENWIDTH - activiteWidth) / 2f;
+        float posSolutionX = posEnonceX + activiteWidth / 2f;
+
+        activiteView = new ActiviteView(stage, posEnonceX, activiteWidth * 42 / 1626, activiteWidth / 2f, "activite");
+        allDrawables.add(activiteView);
+        myCorrectionAndPauseGeneral.addElements(activiteView);
+
+        solutionView = new ActiviteView(stage, posSolutionX, activiteWidth * 42 / 1626, activiteWidth / 2f, "solution");
+        allDrawables.add(solutionView);
+        myCorrectionAndPauseGeneral.addElements(solutionView);
+
+
+        int noteMax = db.getHighestNote(1, 6);
+
+        String noteMaxObtenue = noteMax + "/9";
 
         exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
-        label3 = new Label(exDansChapitre, labelStyle3);
-        label3.setWidth(MyConstants.SCREENWIDTH / 46);
+        highestMarkObtainedLabel = new Label(noteMaxObtenue, labelStyle3);
+        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
 
         tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
         tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(label3).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
 
         stage.addActor(tableTitre);
 
@@ -164,7 +167,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             if (textureRegion != null)
             {
                 batch.begin();
-                batch.draw(textureRegion, MyConstants.SCREENWIDTH / 7, 8 * MyConstants.SCREENHEIGHT / 15, MyConstants.SCREENHEIGHT / 4, MyConstants.SCREENHEIGHT / 4 * (268 / 234));
+                batch.draw(textureRegion, MyConstants.SCREENWIDTH / 7, 7 * MyConstants.SCREENHEIGHT / 15, MyConstants.SCREENHEIGHT / 4, MyConstants.SCREENHEIGHT / 4 * (268 / 234));
                 batch.end();
             }
 
@@ -183,9 +186,9 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         {
             uneMain.imageDown();
 
-            MyTimer.TaskEtape nextEtape = new EtapeInstruction(3_000, 2_000);
+            MyTimer.TaskEtape nextEtape = new EtapeInstruction(2_000, 1_000);
 
-            metrologue.metrologuePlaySound("Sounds/onglet_1_5/Metrologue - onglet titre 1-5.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_onglet6_Ungateaupourplusieursanniversaires.mp3", nextEtape);
         }
     }
 
@@ -204,25 +207,100 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
+            activiteView.setTextActivite("La famille Dubonheur est réunie pour fêter l'anniversaire de tous les cousins et cousines");
+//            solutionView.setTextActivite("Place autant de billes que d'oiseaux que tu vois tape ce nombre au clavier puis valide");
+            metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_onglet6_lafamilleDubonheur.mp3", new BirthdayKiDPicDisplay(1_000));
 
+        }
+    }
+
+    private void pastilleDraw(int randNumPastille)
+    {
+        Texture txture = pastilleList.get(randNumPastille - 1);
+//        txture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        textureRegion = new TextureRegion(txture);
+    }
+
+    private class BirthdayKiDPicDisplay extends MyTimer.TaskEtape
+    {
+        private BirthdayKiDPicDisplay(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        private BirthdayKiDPicDisplay(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
             randNumPastille = numPastilleArray[questionCourante];
 
+            pastilleDraw(randNumPastille);
 
-            Texture txture = pastilleList.get(randNumPastille - 1);
-            textureRegion = new TextureRegion(txture);
-//            textureRegion.setRegionHeight(MyConstants.SCREENHEIGHT / 6);
-//            textureRegion.setRegionWidth(textureRegion.getRegionHeight() * (268 / 234));
-
-
-            System.out.println(randNumPastille);
-
-            activiteViewDouble.setTextActivite("1. Place autant de billes que d'oiseaux que tu vois tape ce nombre au clavier puis valide");
-            metrologue.metrologuePlaySound("Sounds/onglet_1_5/metrologue - Instructions onglet 1_5.mp3", new InputClavier(500));
             sacDeBougies.setActive(true);
             if (questionCourante == 0)
             {
                 displayPastille = true;
             }
+
+            MyTimer.TaskEtape nextEtape = new InputClavier(500);
+
+
+            switch (randNumPastille)
+            {
+                case 1:
+                    activiteView.setTextActivite("Lucas ne marche pas encore, et il accourt à 4 pattes pour souffler sa 1ère bougie. Lucas a 1 an");
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_onglet6_LucasNeMarchePasEncore.mp3", nextEtape);
+                    break;
+
+                case 2:
+                    activiteView.setTextActivite(" Emma est fière car cette année elle va souffler ses 2 bougies comme une grande. L'année dernière elle avait eu du mal avec la 1ère. Emma a 2 ans");
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_Onglet6_EmmaEstFierecarcetteannee.mp3", nextEtape);
+                    break;
+
+                case 3:
+                    activiteView.setTextActivite("Arthur est très ému, car tout le monde le regarde, mais il souffle vaillamment ses 3 bougies. Arthur a 3 ans");
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_onglet6_Arthuresttresemu.mp3", nextEtape);
+                    break;
+
+                case 4:
+                    activiteView.setTextActivite("Lina est turbulente, après avoir renversé la tasse de sa cousine, elle se dirige vers son gâteau et ses 4 bougies, Lina a 4 ans");
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_Onglet6_LinaestTurbulente.mp3", nextEtape);
+                    break;
+
+                case 5:
+                    activiteView.setTextActivite("Héloïse dit à sa poupée qu'elle est maintenant une grande fille de 5 ans. Héloïse a 5 ans");
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_onglet6_Heloiseditasapoupee.mp3", nextEtape);
+                    break;
+
+                case 6:
+                    activiteView.setTextActivite("Théo est fier, car à 6 ans il va bientôt aller à la grande école. Théo a 6 ans");
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_Onglet6_Theoestfiercara6ans.mp3", nextEtape);
+                    break;
+
+                case 7:
+                    activiteView.setTextActivite("Zoé pose son petit chat dans son panier afin de pouvoir souffler tranquillement ses 7 bougies. Zoé a 7 ans");
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_Onglet6_Zoeposesonpetitchat.mp3", nextEtape);
+                    break;
+
+                case 8:
+                    activiteView.setTextActivite("Hugo est bagarreur, après un croche-pied à son petit frère, il avance pour souffler ses 8 bougies. Hugo a 8 ans");
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_Onglet6_Hugoestbagarreur.mp3", nextEtape);
+                    break;
+
+                case 9:
+                    activiteView.setTextActivite("Chloé est très inquiète, elle se demande si elle va pouvoir souffler ses 9 bougies d'un seul coup. Chloé a 9 ans");
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_onglet6_ChloeEstTresInquiete.mp3", nextEtape);
+                    break;
+
+                default:
+                    break;
+            }
+
+
         }
     }
 
@@ -244,6 +322,13 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         {
             calculetteViewTest.setActive(true);
             validusAnimated.setActive(true);
+
+            activiteView.addTextActivite("Tape avec ton doigt sur la boite de bougies. Une bougie se posera sur le gâteau. Tape sur le clavier le nombre de bougies que tu as placé puis Valide. Tape sur une bougie sur le gâteau si tu veux la retirer");
+            if (questionCourante == 0)
+            {
+                metrologue.metrologuePlaySound("Sounds/Onglet1_6/Chap1_onglet6_Tapeavectondoigtmp3.mp3");
+            }
+
 
             validusAnimated.etapeCorrection = new PressValidate(0);
             calculetteViewTest.etapeCorrection = new PressValidate(0);
@@ -426,6 +511,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
                 case 7:
                     styleTest = calculetteViewTest.sept_bouton.getStyle();
                     break;
+
                 case 8:
                     styleTest = calculetteViewTest.huit_bouton.getStyle();
                     break;
@@ -721,39 +807,37 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             switch (randNumPastille)
             {
                 case 1:
-                    activiteViewDouble.addTextSolution("Lucas a 1 an");
+                    solutionView.addTextActivite("Lucas a 1 an");
                     break;
                 case 2:
-                    activiteViewDouble.addTextSolution("Emma a 2 ans");
+                    solutionView.addTextActivite("Emma a 2 ans");
                     break;
                 case 3:
-                    activiteViewDouble.addTextSolution("Arthur a 3 ans");
+                    solutionView.addTextActivite("Arthur a 3 ans");
                     break;
                 case 4:
-                    activiteViewDouble.addTextSolution("Lina a 4 ans");
+                    solutionView.addTextActivite("Lina a 4 ans");
                     break;
                 case 5:
-                    activiteViewDouble.addTextSolution("Héloise a 5 ans");
+                    solutionView.addTextActivite("Héloise a 5 ans");
                     break;
                 case 6:
-                    activiteViewDouble.addTextSolution("Théo a 6 ans");
+                    solutionView.addTextActivite("Théo a 6 ans");
                     break;
                 case 7:
-                    activiteViewDouble.addTextSolution("Zoé a 7 ans");
+                    solutionView.addTextActivite("Zoé a 7 ans");
                     break;
                 case 8:
-                    activiteViewDouble.addTextSolution("Hugo a 8 ans");
+                    solutionView.addTextActivite("Hugo a 8 ans");
                     break;
                 case 9:
-                    activiteViewDouble.addTextSolution("Chloé a 9 ans");
+                    solutionView.addTextActivite("Chloé a 9 ans");
                     break;
                 default:
-
                     break;
             }
 
             timer.schedule(new EtapeInstruction(500), 0);
         }
-
     }
 }

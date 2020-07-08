@@ -175,16 +175,15 @@ public class MyDataBase
 
         if (chapitreNumber == 0)
         {
-            sqlQueryNoteObtained = "SELECT max(points_obtenus) from RESULTAT";
-            sqlQueryNotePossible = "SELECT max(points_possibles) from RESULTAT";
-            sqlQueryNoteMax = "SELECT max(points_max) from RESULTAT";
+            sqlQueryNoteObtained = "SELECT sum(somme_points_obtenus) FROM(SELECT max(points_obtenus) as somme_points_obtenus from RESULTAT  GROUP by onglet)";
+            sqlQueryNotePossible = "SELECT sum(somme_points_possibles) FROM(SELECT max(points_possibles) as somme_points_possibles from RESULTAT  GROUP by onglet)";
+            sqlQueryNoteMax = "SELECT sum(somme_points_max) FROM(SELECT max(points_max) as somme_points_max from RESULTAT  GROUP by onglet)";
         }
         else
         {
-            sqlQueryNoteObtained = "SELECT max(points_obtenus) from RESULTAT";
-            sqlQueryNotePossible = "SELECT max(points_possibles) from RESULTAT";
-            sqlQueryNoteMax = "SELECT max(points_max) from RESULTAT";
-
+            sqlQueryNoteObtained = "SELECT sum(somme_points_obtenus) FROM(SELECT max(points_obtenus) as somme_points_obtenus from RESULTAT where chapitre = " + chapitreNumber + " GROUP by onglet)";
+            sqlQueryNotePossible = "SELECT sum(somme_points_possibles) FROM(SELECT max(points_possibles) as somme_points_possibles from RESULTAT where chapitre = " + chapitreNumber + " GROUP by onglet)";
+            sqlQueryNoteMax = "SELECT sum(somme_points_max) FROM(SELECT max(points_max) as somme_points_max from RESULTAT where chapitre = " + chapitreNumber + " GROUP by onglet)";
         }
 
 

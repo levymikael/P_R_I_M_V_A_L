@@ -1,10 +1,7 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -104,12 +101,12 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
         billesList = new ArrayList<>();
 
-        exDansChapitre = "";
+
 
         numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
         consigneExercice = "Compter des oiseaux et taper leur nombre";
 
-        activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, exDansChapitre, "activite");
+        activiteView = new ActiviteView(stage, xTableTitre, activiteWidth*42/1626, activiteWidth, /*numExercice, consigneExercice, exDansChapitre,*/ "activite");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
@@ -118,16 +115,19 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         calculetteViewTest.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteViewTest);
 
+        int noteMax = db.getHighestNote(1, 5);
+
+        String noteMaxObtenue = noteMax + "/9";
 
         exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
-        label3 = new Label(exDansChapitre, labelStyle3);
-        label3.setWidth(MyConstants.SCREENWIDTH / 46);
+        highestMarkObtainedLabel = new Label(noteMaxObtenue, labelStyle3);
+        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
 
         tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
         tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(label3).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
 
         stage.addActor(tableTitre);
 
@@ -806,7 +806,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         for (int i = 0; i < 9; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (float) ((MyConstants.SCREENWIDTH / 12) * (396.0f / 500.0f)), (float) (MyConstants.SCREENWIDTH / 12) * (500.0f / 396.0f));
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (float) ((MyConstants.SCREENWIDTH / 12) * (396f / 5f)), (float) (MyConstants.SCREENWIDTH / 12) * (5f / 396f));
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
         }

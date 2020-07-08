@@ -37,9 +37,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.xml.soap.Text;
-
-
 public class Screen_Sommaire_General extends Game implements Screen, InputProcessor, ApplicationListener
 {
     private DatabaseDesktop dataBase;
@@ -111,7 +108,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
         logoTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 100, screenHeight / 2 - MyConstants.SCREENHEIGHT / 50);
+        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 100, screenHeight / 2 - MyConstants.SCREENHEIGHT / 50, "general");
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);

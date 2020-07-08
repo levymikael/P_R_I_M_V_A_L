@@ -27,10 +27,10 @@ public class MrNotes2 implements MyDrawInterface
 
     MyDataBase db;
 
-    public MrNotes2(Stage stage, DatabaseDesktop dataBase, float positionX, float positionY)
+    public MrNotes2(Stage stage, DatabaseDesktop dataBase, float positionX, float positionY, String screen)
     {
-        screenWidth = Gdx.graphics.getWidth();
-        final int screenHeight = Gdx.graphics.getHeight();
+        screenWidth = MyConstants.SCREENWIDTH;
+        final int screenHeight = MyConstants.SCREENHEIGHT;
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -45,8 +45,16 @@ public class MrNotes2 implements MyDrawInterface
         db = new MyDataBase(dataBase);
 
         totalNotes = db.getTotalNotePageForIdProfil(0);
+        String newTotalNotes = "";
 
-        String newTotalNotes = totalNotes.substring(0, totalNotes.length() - 2) + "/3593";
+        if (screen == "general")
+        {
+            newTotalNotes = totalNotes.substring(0, totalNotes.length() - 3) + "/3593";
+        }
+        else
+        {
+            newTotalNotes = totalNotes;
+        }
 
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
@@ -62,8 +70,14 @@ public class MrNotes2 implements MyDrawInterface
         container.setPosition(positionX, positionY);
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
-        container.add(labelNotes).padLeft(screenWidth / 15).padTop(MyConstants.SCREENHEIGHT / 160).expand().fill();
-//        labelNotes.debug();
+        if (screen == "general")
+        {
+            container.add(labelNotes).padLeft(screenWidth / 20).padTop(MyConstants.SCREENHEIGHT / 160).expand().fill();
+        }
+        else
+        {
+            container.add(labelNotes).padLeft(screenWidth / 15).padTop(MyConstants.SCREENHEIGHT / 160).expand().fill();
+        }
 
         stage.addActor(container);
     }

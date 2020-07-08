@@ -82,19 +82,19 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         String noteMaxObtenue = noteMax + "/9";
 
-        activiteView = new ActiviteView(stage, activiteWidth, numExercice, consigneExercice, noteMaxObtenue, "activite");
+        activiteView = new ActiviteView(stage, xTableTitre, activiteWidth * 42 / 1626, activiteWidth, "activite");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
-        exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
-        label3 = new Label(exDansChapitre, labelStyle3);
-        label3.setWidth(MyConstants.SCREENWIDTH / 46);
+        exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
+        highestMarkObtainedLabel = new Label(noteMaxObtenue, labelStyle3);
+        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
 
         tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
         tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(label3).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
 
         stage.addActor(tableTitre);
 

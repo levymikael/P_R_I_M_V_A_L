@@ -50,7 +50,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected int questionCourante = 0;
     protected SacDeBilles sacDeBilles;
     protected SacDeBougies sacDeBougies;
-    int firstPositionX, firstPositionY;
+    float firstPositionX, firstPositionY;
     MyTouchInterface objectTouched;
     protected SpriteBatch batch;
     protected Stage stage;
@@ -95,9 +95,10 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     EcrinDiamantView ecrinDiamantView;
 
-    float activiteWidth, heightTop;
+    float activiteWidth, heightTop, xTableTitre;
 
     ActiviteView activiteView;
+    ActiviteView solutionView;
 
     ActiviteViewDouble activiteViewDouble;
 
@@ -105,9 +106,9 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     FreeTypeFontGenerator fontArial, fontComic;
 
-    String consigneExercice, numExercice, exDansChapitre;
+    String consigneExercice, numExercice;
 
-    Label exoNumLabel, exoConsigneLabel, label3;
+    Label exoNumLabel, exoConsigneLabel, highestMarkObtainedLabel;
 
 
     public ScreenOnglet(Game game, DatabaseDesktop dataBase, int chapitre, int onglet, boolean ecrin)
@@ -129,14 +130,12 @@ public class ScreenOnglet implements Screen, InputProcessor
         tableTitre.setBackground(new SpriteDrawable(new Sprite(textureTitre)));
 
 // Positionnement numero exercice:
-
-
         tableTitre.pack();
-        activiteWidth = (MyConstants.SCREENWIDTH / 4) * 3;
+        activiteWidth = (MyConstants.SCREENWIDTH / 4.0f) * 3.0f;
 
         heightTop = activiteWidth * 42 / 1626;
-        float xTableTitre = (MyConstants.SCREENWIDTH / 2 - activiteWidth / 2);
-        tableTitre.setPosition(xTableTitre + MyConstants.SCREENWIDTH / 200, MyConstants.SCREENHEIGHT - heightTop);
+        xTableTitre = (MyConstants.SCREENWIDTH / 2.0f - activiteWidth / 2.0f);
+        tableTitre.setPosition(xTableTitre /*+ MyConstants.SCREENWIDTH / 200*/, MyConstants.SCREENHEIGHT - heightTop);
 
         tableTitre.setWidth(activiteWidth);
         tableTitre.setHeight(heightTop);
@@ -147,7 +146,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         bitmapFontArial = fontArial.generateFont(parameter);
         fontArial.dispose();
 
-        fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
+        fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterComic = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterComic.size = MyConstants.SCREENWIDTH / 70;
         bitmapFontComic = fontComic.generateFont(parameter);
@@ -193,9 +192,8 @@ public class ScreenOnglet implements Screen, InputProcessor
                 Gdx.app.log("button click", "click!");
 
                 endTime = System.currentTimeMillis();
-                seconds = (endTime - startTime) / 1000L;
+                seconds = (endTime - startTime) / 1_000L;
 
-//                long dateEnd = new Date().getTime() / 1000L;
                 resultatExercice.setDuree(seconds);
                 resultatExercice.setDate(endTime);
 
@@ -213,6 +211,8 @@ public class ScreenOnglet implements Screen, InputProcessor
                 ScreenOnglet.this.db.insertResultat(resultatExercice);
 
                 ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game, ScreenOnglet.this.dataBase));
+
+                ScreenOnglet.this.dispose();
             }
         });
         allDrawables.add(myButtonBackToPreviousMenu);

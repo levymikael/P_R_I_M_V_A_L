@@ -200,7 +200,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                if (isActive && ( ! validusAnimated.isSpeaking))
+                if (isActive && (!validusAnimated.isSpeaking))
                 {
                     if (etapeCorrection != null)
                     {
@@ -328,7 +328,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     }
 
     @Override
-    public boolean isTouched(int x, int y)
+    public boolean isTouched(float x, float y)
     {
         return false;
     }
@@ -340,7 +340,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
     }
 
     @Override
-    public void setPosition(int x, int y)
+    public void setPosition(float x, float y)
     {
 
     }

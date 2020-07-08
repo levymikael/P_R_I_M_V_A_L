@@ -23,7 +23,7 @@ public class UneBougie extends AnimationImageNew implements MyTouchInterface, My
 
 
 
-    public UneBougie(int startPositionX, int startPositionY, float animationHeight)
+    public UneBougie(float startPositionX, float startPositionY, float animationHeight)
     {
         super("Images/Onglet_1_6/bougie_bleu.png", startPositionX, startPositionY, animationHeight, animationHeight);
 
@@ -44,7 +44,7 @@ public class UneBougie extends AnimationImageNew implements MyTouchInterface, My
 
 
     @Override
-    public boolean isTouched(int x, int y)
+    public boolean isTouched(float x, float y)
     {
         Rectangle rectangle = new Rectangle(currentPositionX, currentPositionY, animationWidth, animationHeight);
 
@@ -53,7 +53,7 @@ public class UneBougie extends AnimationImageNew implements MyTouchInterface, My
 
 
     @Override
-    public void setPosition(int x, int y)
+    public void setPosition(float x, float y)
     {
         currentPositionX = x;
         currentPositionY = y;

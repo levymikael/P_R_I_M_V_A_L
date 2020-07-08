@@ -76,7 +76,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         screenHeight = MyConstants.SCREENHEIGHT;
         screenWidth = MyConstants.SCREENWIDTH;
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = screenHeight / 50;
         parameter.minFilter = Texture.TextureFilter.Linear;

@@ -40,15 +40,24 @@ public class LigneTableaux
         pmBlue.setColor(MyConstants.bluePrimval);
         pmBlue.fill();
 
-        FreeTypeFontGenerator generatorComicSansMSBold = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
+        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pmWhite.setColor(Color.WHITE);
+        pmWhite.fill();
+
+        int fontSize = MyConstants.SCREENWIDTH / 60;
+        float buttonPadding = MyConstants.SCREENWIDTH / 80f;
+        int textureSize = MyConstants.SCREENWIDTH / 60;
+
+
+        FreeTypeFontGenerator generatorComicSansMSBold = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = MyConstants.SCREENWIDTH / 60;
+        parameter.size = fontSize;
         BitmapFont bitmapFontComicSansMSBold = generatorComicSansMSBold.generateFont(parameter);
         generatorComicSansMSBold.dispose();
 
         FreeTypeFontGenerator generatorArial = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterArial = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterArial.size = MyConstants.SCREENWIDTH / 60;
+        parameterArial.size = fontSize;
         BitmapFont bitmapFontArial = generatorArial.generateFont(parameter);
         generatorArial.dispose();
 
@@ -105,11 +114,9 @@ public class LigneTableaux
 
         labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4);
 
-        table.add(button).height(button.getHeight()).width(button.getWidth()).padRight(MyConstants.SCREENWIDTH / 80).padLeft(MyConstants.SCREENWIDTH / 80);
+        table.add(button).height(button.getHeight()).width(button.getWidth()).padRight(buttonPadding).padLeft(buttonPadding);
         table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.68f));
 
-
-        int textureSize = MyConstants.SCREENWIDTH / 60;
 
         if (texture != null)
         {
@@ -123,12 +130,9 @@ public class LigneTableaux
         }
         else
         {
-            table.add(labelNotes).width(MyConstants.SCREENWIDTH / 12).expandX();
+            table.add(labelNotes).width(MyConstants.SCREENWIDTH / 12);
         }
 
-        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmWhite.setColor(Color.WHITE);
-        pmWhite.fill();
 
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 

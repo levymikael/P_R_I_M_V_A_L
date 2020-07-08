@@ -14,7 +14,7 @@ public class SacDeBougies extends AnimationImageNew implements MyDrawInterface, 
     boolean isActive = true;
     ArrayList<UneBougie> arrrayBougies = new ArrayList<>();
 
-    public SacDeBougies(int startPositionX, int startpositionY, float animationWidth, float animationHeight)
+    public SacDeBougies(float startPositionX, float startpositionY, float animationWidth, float animationHeight)
     {
         super("Images/éléments_outils/Bougies_actif.png", startPositionX, startpositionY, animationWidth, animationHeight);
     }
@@ -58,7 +58,7 @@ public class SacDeBougies extends AnimationImageNew implements MyDrawInterface, 
     }
 
     @Override
-    public boolean isTouched(int x, int y)
+    public boolean isTouched(float x, float y)
     {
         return false;
     }

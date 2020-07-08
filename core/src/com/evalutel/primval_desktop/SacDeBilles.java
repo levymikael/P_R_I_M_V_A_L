@@ -52,7 +52,7 @@ public class SacDeBilles extends AnimationImageNew implements MyDrawInterface, M
     }
 
     @Override
-    public boolean isTouched(int x, int y)
+    public boolean isTouched(float x, float y)
     {
         return false;
     }
