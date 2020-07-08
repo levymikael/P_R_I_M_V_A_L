@@ -148,7 +148,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterComic = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterComic.size = MyConstants.SCREENWIDTH / 70;
+        parameterComic.size = MyConstants.SCREENWIDTH / 80;
         bitmapFontComic = fontComic.generateFont(parameter);
         fontComic.dispose();
 

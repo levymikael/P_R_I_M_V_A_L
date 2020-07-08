@@ -22,18 +22,27 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
         super("Images/Onglet_1_6/gateau.png", startPositionX, startPositionY, (float) gateauWidth, gateauHeight);
 
 
-        int startX = (int) animationWidth / 11;
+        int startX = (int) animationWidth / 12;
         int startY = startPositionY + (MyConstants.SCREENHEIGHT / 10);
 
         spaceBougies = (int) animationWidth / 50;
+        float posX = 0f;
+        int posY = 0;
 
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                int posX = ((startX) + j * (spaceBougies + gateauWidth / 5));
-                int posY = (startY + i * (spaceBougies + gateauHeight / 5));
-
+                if (i == 2)
+                {
+                    posX = (startX + j * (spaceBougies + gateauWidth / 6f));
+                    posY = (startY + i * (spaceBougies + gateauHeight / 5));
+                }
+                else
+                {
+                    posX = (startX + j * (spaceBougies + gateauWidth / 4.5f));
+                    posY = (startY + i * (spaceBougies + gateauHeight / 5));
+                }
                 positionsBougies.add(new MyPoint(currentPositionX + posX, currentPositionY + posY));
             }
             startX += startX + spaceBougies;

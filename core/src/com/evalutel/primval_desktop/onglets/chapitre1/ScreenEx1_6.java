@@ -45,7 +45,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
 
     TextButton.TextButtonStyle styleTest;
 
-    int posX, posY;
+//    int posX, posY;
 
     int[] numPastilleArray;
 
@@ -167,7 +167,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             if (textureRegion != null)
             {
                 batch.begin();
-                batch.draw(textureRegion, MyConstants.SCREENWIDTH / 7, 7 * MyConstants.SCREENHEIGHT / 15, MyConstants.SCREENHEIGHT / 4, MyConstants.SCREENHEIGHT / 4 * (268 / 234));
+                batch.draw(textureRegion, MyConstants.SCREENWIDTH / 6, 7 * MyConstants.SCREENHEIGHT / 15, MyConstants.SCREENHEIGHT / 4, MyConstants.SCREENHEIGHT / 4 * (268 / 234));
                 batch.end();
             }
 
@@ -207,9 +207,15 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            activiteView.setTextActivite("La famille Dubonheur est réunie pour fêter l'anniversaire de tous les cousins et cousines");
-//            solutionView.setTextActivite("Place autant de billes que d'oiseaux que tu vois tape ce nombre au clavier puis valide");
-            metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_onglet6_lafamilleDubonheur.mp3", new BirthdayKiDPicDisplay(1_000));
+            if (questionCourante == 0)
+            {
+                activiteView.setTextActivite("La famille Dubonheur est réunie pour fêter l'anniversaire de tous les cousins et cousines");
+                metrologue.metrologuePlaySound("Sounds/Onglet1_6/chap1_onglet6_lafamilleDubonheur.mp3", new BirthdayKiDPicDisplay(1_000));
+            }
+            else
+            {
+                timer.schedule(new BirthdayKiDPicDisplay(1_000), 0);
+            }
 
         }
     }
@@ -326,7 +332,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             activiteView.addTextActivite("Tape avec ton doigt sur la boite de bougies. Une bougie se posera sur le gâteau. Tape sur le clavier le nombre de bougies que tu as placé puis Valide. Tape sur une bougie sur le gâteau si tu veux la retirer");
             if (questionCourante == 0)
             {
-                metrologue.metrologuePlaySound("Sounds/Onglet1_6/Chap1_onglet6_Tapeavectondoigtmp3.mp3");
+                metrologue.metrologuePlaySound("Sounds/Onglet1_6/Chap1_onglet6_Tapeavectondoigt.mp3");
             }
 
 
