@@ -17,6 +17,7 @@ import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
+import com.evalutel.primval_desktop.onglets.ScreenOnglet;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class ScreenEx1_2 extends ScreenOnglet
     int failedAttempts;
     private ArrayList<UneBille> billesList;
     private ArrayList<UnOiseau> oiseauxList;
-    private ArrayList<UnePlancheNew> allPlanches;
+//    private ArrayList<UnePlancheNew> allPlanches;
     private UneBille billeRectification;
     private UnePlancheNew planche1;
     private int randNumOiseau;
@@ -38,12 +39,10 @@ public class ScreenEx1_2 extends ScreenOnglet
 
     DatabaseDesktop dataBase;
 
-    String consigneExercice;
-
     boolean isInCorrection = false;
 
 
-    public ScreenEx1_2(Game game, DatabaseDesktop dataBase)
+    public ScreenEx1_2(Game game, DatabaseDesktop dataBase, String ongletTitre)
     {
         super(game, dataBase, 1, 2, true);
 
@@ -52,17 +51,18 @@ public class ScreenEx1_2 extends ScreenOnglet
         bgScreenEx1_2 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_2);
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float)(largeurBille * 1.5), (float)(largeurBille * 1.5));
-        sacDeBilles.largeurBille = largeurBille;
+        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBilleUnique * 1.5), (float) (largeurBilleUnique * 1.5));
+        sacDeBilles.largeurBille = largeurBilleUnique;
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
 
-        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
+        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlancheUnique / 2, 0, largeurPlancheUnique, largeurBilleUnique);
         planche1.shouldReturnToReserve = true;
         allDrawables.add(planche1);
         allCorrigibles.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
-
+//        allPlanches = new ArrayList<>();
+        allPlanches.add(planche1);
 
         for (int i = 0; i < 9; i++)
         {
@@ -76,25 +76,23 @@ public class ScreenEx1_2 extends ScreenOnglet
             allCorrigibles.add(bille);
         }
 
-        allPlanches = new ArrayList<>();
-        allPlanches.add(planche1);
+
 
         billesList = new ArrayList<>();
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
-        consigneExercice = "Faire correspondre des billes à des oiseaux, de 1 à 9";
 
-        resultatExercice = new UnResultat("Primval", 1, 2, 0, consigneExercice, 9, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 1, 2, 0, ongletTitre, 9, 0, dateTest, 0, 0, 0, 123);
 
         int noteMax = db.getHighestNote(1, 2);
 
         String noteMaxObtenue = noteMax + "/9";
 
-        activiteView = new ActiviteView(stage, xTableTitre, activiteWidth*42/1626, activiteWidth,/*numExercice, consigneExercice, exDansChapitre,*/ "activite");
+        activiteView = new ActiviteView(stage, xTableTitre, activiteWidth * 42 / 1626, activiteWidth, "activite");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
-        exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
+        exoConsigneLabel = new Label(ongletTitre, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
         highestMarkObtainedLabel = new Label(noteMaxObtenue, labelStyle3);
         highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);

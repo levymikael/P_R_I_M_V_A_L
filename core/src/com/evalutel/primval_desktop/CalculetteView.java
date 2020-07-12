@@ -25,7 +25,7 @@ import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 import java.util.ArrayList;
 
 
-public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, MyCorrectionAndPauseInterface
+public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorrectionAndPauseInterface
 {
     float width, height;
 
@@ -53,7 +53,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
     float buttonSize, paddingAux1, paddingAux2;
 
-    public CalculetteViewTest(Stage stage, final ValidusAnimated validusAnimated)
+    public CalculetteView(Stage stage, final ValidusAnimated validusAnimated)
     {
         this.validusAnimated = validusAnimated;
         buttonSize = MyConstants.SCREENWIDTH / 24;

@@ -1,10 +1,11 @@
-package com.evalutel.primval_desktop.onglets.chapitre1;
+package com.evalutel.primval_desktop.onglets.chapitre2;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
+import com.evalutel.primval_desktop.CalculetteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
@@ -20,14 +21,13 @@ import com.evalutel.primval_desktop.onglets.ScreenOnglet;
 import java.util.ArrayList;
 
 
-public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
+public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 {
 
     private ArrayList<UneBille> billesList;
     private ArrayList<UnOiseau> oiseauxList;
-    private ArrayList<UnePlancheNew> allPlanches;
 
-    private UnePlancheNew planche1;
+    private UnePlancheNew planche1, planche2, planche3;
     ScreeenBackgroundImage bgScreenEx1_1;
 
 //    boolean isVisible = true;
@@ -39,9 +39,14 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
     DatabaseDesktop dataBase;
 
-    public ScreenEx1_1(Game game, DatabaseDesktop dataBase, String ongletTitre)
+//    String consigneExercice;
+
+    protected CalculetteView calculetteView;
+
+
+    public ScreenEx2_1(Game game, DatabaseDesktop dataBase, String ongletTitre)
     {
-        super(game, dataBase, 1, 1, false);
+        super(game, dataBase, 2, 1, false);
 
         this.dataBase = dataBase;
 
@@ -58,19 +63,26 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
         allCorrigibles.add(sacDeBilles);
 
-        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlancheUnique / 2, 0, largeurPlancheUnique, largeurBilleUnique);
-//        planche1.shouldReturnToReserve = true;
-        allDrawables.add(planche1);
-        myCorrectionAndPauseGeneral.addElements(planche1);
-        allCorrigibles.add(planche1);
-
-
-        allPlanches = new ArrayList<>();
+        planche1 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.9f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        planche2 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.2f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        planche3 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 0.5f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
         allPlanches.add(planche1);
+        allPlanches.add(planche2);
+        allPlanches.add(planche3);
+
+        for (int i = 0; i < allPlanches.size(); i++)
+        {
+            UnePlancheNew unePlanche = allPlanches.get(i);
+            allDrawables.add(unePlanche);
+            myCorrectionAndPauseGeneral.addElements(unePlanche);
+            allCorrigibles.add(unePlanche);
+        }
+
+//        planche1.shouldReturnToReserve = true;
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
 
-        activiteView = new ActiviteView(stage, xTableTitre, activiteWidth * 42 / 1626, activiteWidth, /*numExercice, consigneExercice, "",*/ "enonce");
+        activiteView = new ActiviteView(stage, xTableTitre, activiteWidth * 42 / 1626, activiteWidth, "enonce");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
@@ -80,7 +92,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
 
-        tableTitre.add(exoNumLabel)/*.align(Align.center).*/.width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
+        tableTitre.add(exoNumLabel).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
         tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
         tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
 
@@ -88,7 +100,16 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
         billesList = autoFillPlanche();
 
-        resultatExercice = new UnResultat("Primval", 1, 1, 0, ongletTitre, 0, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 2, 1, 0, ongletTitre, 0, 0, dateTest, 0, 0, 0, 123);
+
+        calculetteView = new CalculetteView(stage, validusAnimated);
+        allDrawables.add(calculetteView);
+        calculetteView.setActive(false);
+        myCorrectionAndPauseGeneral.addElements(calculetteView);
+
+
+        validusAnimated.setVisible(false);
+
 
         timer.schedule(new PresentationMetrologue(3000), 1000);
     }

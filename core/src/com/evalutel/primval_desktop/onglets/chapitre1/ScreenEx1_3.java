@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.evalutel.primval_desktop.ActiviteView;
-import com.evalutel.primval_desktop.CalculetteViewTest;
+import com.evalutel.primval_desktop.CalculetteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
@@ -19,6 +19,7 @@ import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
+import com.evalutel.primval_desktop.onglets.ScreenOnglet;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
     private ArrayList<UnOiseau> oiseauxList;
     private ArrayList<UnePlancheNew> allPlanches;
 
-    protected CalculetteViewTest calculetteViewTest;
+    protected CalculetteView calculetteView;
 
     private UnePlancheNew planche1;
     ScreeenBackgroundImage bgScreenEx1_1;
@@ -39,13 +40,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
     DatabaseDesktop dataBase;
 
-    String consigneExercice;
+//    String consigneExercice;
 
     Label currentLabel;
     Drawable drawableAux;
 
 
-    public ScreenEx1_3(Game game, DatabaseDesktop dataBase)
+    public ScreenEx1_3(Game game, DatabaseDesktop dataBase, String ongletTitre)
     {
         super(game, dataBase, 1, 3, false);
 
@@ -56,15 +57,15 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
         oiseauxList = getNumberOiseauxArList();
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBille * 1.5), (float) (largeurBille * 1.5));
-        sacDeBilles.largeurBille = largeurBille;
+        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBilleUnique * 1.5), (float) (largeurBilleUnique * 1.5));
+        sacDeBilles.largeurBille = largeurBilleUnique;
         sacDeBilles.isActive();
         sacDeBilles.setActive(false);
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
         allCorrigibles.add(sacDeBilles);
 
-        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlanche / 2, 0, largeurPlanche, largeurBille);
+        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlancheUnique / 2, 0, largeurPlancheUnique, largeurBilleUnique);
         allDrawables.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
         allCorrigibles.add(planche1);
@@ -75,13 +76,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         allPlanches.add(planche1);
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
-        consigneExercice = "Écriture des chiffres de 1 à 9";
+//        consigneExercice = "Écriture des chiffres de 1 à 9";
 
         activiteView = new ActiviteView(stage, xTableTitre, activiteWidth * 42 / 1626, activiteWidth, "enonce");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
-        exoConsigneLabel = new Label(consigneExercice, labelStyleComic);
+        exoConsigneLabel = new Label(ongletTitre, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
         highestMarkObtainedLabel = new Label("", labelStyle3);
         highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
@@ -93,13 +94,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
         stage.addActor(tableTitre);
 
-        calculetteViewTest = new CalculetteViewTest(stage, validusAnimated);
-        allDrawables.add(calculetteViewTest);
-        calculetteViewTest.setActive(false);
+        calculetteView = new CalculetteView(stage, validusAnimated);
+        allDrawables.add(calculetteView);
+        calculetteView.setActive(false);
 
         billesList = autoFillPlanche();
 
-        resultatExercice = new UnResultat("Primval", 1, 3, 0, consigneExercice, 0, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 1, 3, 0, ongletTitre, 0, 0, dateTest, 0, 0, 0, 123);
 
         timer.schedule(new PresentationOnglet(3000), 1000);
     }
@@ -289,7 +290,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint button1Position = calculetteViewTest.buttonPosition(1);
+            MyPoint button1Position = calculetteView.buttonPosition(1);
 
             float posX = button1Position.x;
             float posY = button1Position.y;
@@ -312,15 +313,15 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.un_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.un_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            calculetteViewTest.un_bouton.setStyle(styleTest);
+            calculetteView.un_bouton.setStyle(styleTest);
             uneMain.setVisible(true);
 
-            MyPoint button1Position = calculetteViewTest.buttonPosition(1);
+            MyPoint button1Position = calculetteView.buttonPosition(1);
 
             float posX = button1Position.x;
             float posY = button1Position.y;
@@ -329,7 +330,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(500, (int) posX, (int) posY, nextEtape, 1000);
 
-            calculetteViewTest.textDisplay(1);
+            calculetteView.textDisplay(1);
         }
     }
 
@@ -343,15 +344,15 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.un_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.un_bouton.getStyle();
 
             styleTest.up = drawableAux;
 
-            calculetteViewTest.un_bouton.setStyle(styleTest);
+            calculetteView.un_bouton.setStyle(styleTest);
 
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -374,7 +375,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -383,7 +384,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
 
-            calculetteViewTest.textRemove();
+            calculetteView.textRemove();
 
             currentLabel = activiteView.addTextActivite("1 -  ");
         }
@@ -425,7 +426,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint button2Position = calculetteViewTest.buttonPosition(2);
+            MyPoint button2Position = calculetteView.buttonPosition(2);
 
             float posX = button2Position.x;
             float posY = button2Position.y;
@@ -450,12 +451,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.deux_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.deux_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            MyPoint button2Position = calculetteViewTest.buttonPosition(2);
+            MyPoint button2Position = calculetteView.buttonPosition(2);
 
             float posX = button2Position.x;
             float posY = button2Position.y;
@@ -463,7 +464,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new MoveMainTo2Validate(1500, 1000);
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1500);
-            calculetteViewTest.textDisplay(2);
+            calculetteView.textDisplay(2);
         }
     }
 
@@ -477,13 +478,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.deux_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.deux_bouton.getStyle();
 
             styleTest.up = drawableAux;
 
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -506,7 +507,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -515,7 +516,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
 
-            calculetteViewTest.textRemove();
+            calculetteView.textRemove();
 
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "2 -  ");
@@ -561,7 +562,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint button3Position = calculetteViewTest.buttonPosition(3);
+            MyPoint button3Position = calculetteView.buttonPosition(3);
 
             float posX = button3Position.x;
             float posY = button3Position.y;
@@ -586,12 +587,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.trois_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.trois_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            MyPoint button1Position = calculetteViewTest.buttonPosition(3);
+            MyPoint button1Position = calculetteView.buttonPosition(3);
 
             float posX = button1Position.x;
             float posY = button1Position.y;
@@ -599,7 +600,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new MoveMainTo3Validate(1000, 1000);
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1500);
-            calculetteViewTest.textDisplay(3);
+            calculetteView.textDisplay(3);
         }
     }
 
@@ -613,13 +614,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.trois_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.trois_bouton.getStyle();
 
             styleTest.up = drawableAux;
 
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -642,7 +643,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -651,7 +652,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
 
-            calculetteViewTest.textRemove();
+            calculetteView.textRemove();
 
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "3 -  ");
@@ -698,7 +699,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint button4Position = calculetteViewTest.buttonPosition(4);
+            MyPoint button4Position = calculetteView.buttonPosition(4);
 
             float posX = button4Position.x;
             float posY = button4Position.y;
@@ -723,12 +724,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.quatre_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.quatre_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            MyPoint button1Position = calculetteViewTest.buttonPosition(4);
+            MyPoint button1Position = calculetteView.buttonPosition(4);
 
             float posX = button1Position.x;
             float posY = button1Position.y;
@@ -736,7 +737,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new MoveMainTo4Validate(1000, 1000);
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
-            calculetteViewTest.textDisplay(4);
+            calculetteView.textDisplay(4);
         }
     }
 
@@ -750,13 +751,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.quatre_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.quatre_bouton.getStyle();
 
             styleTest.up = drawableAux;
 
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -779,7 +780,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -788,7 +789,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
 
-            calculetteViewTest.textRemove();
+            calculetteView.textRemove();
 
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "4 -  ");
@@ -833,7 +834,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint button5Position = calculetteViewTest.buttonPosition(5);
+            MyPoint button5Position = calculetteView.buttonPosition(5);
 
             float posX = button5Position.x;
             float posY = button5Position.y;
@@ -856,12 +857,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.cinq_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.cinq_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            MyPoint button1Position = calculetteViewTest.buttonPosition(5);
+            MyPoint button1Position = calculetteView.buttonPosition(5);
 
             float posX = button1Position.x;
             float posY = button1Position.y;
@@ -869,7 +870,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new MoveMainTo5Validate(1000, 1000);
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
-            calculetteViewTest.textDisplay(5);
+            calculetteView.textDisplay(5);
         }
     }
 
@@ -883,13 +884,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.cinq_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.cinq_bouton.getStyle();
 
             styleTest.up = drawableAux;
 
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -912,7 +913,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -921,7 +922,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
 
-            calculetteViewTest.textRemove();
+            calculetteView.textRemove();
 
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "5 -  ");
@@ -967,7 +968,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint button6Position = calculetteViewTest.buttonPosition(6);
+            MyPoint button6Position = calculetteView.buttonPosition(6);
 
             float posX = button6Position.x;
             float posY = button6Position.y;
@@ -990,12 +991,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.six_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.six_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            MyPoint button1Position = calculetteViewTest.buttonPosition(6);
+            MyPoint button1Position = calculetteView.buttonPosition(6);
 
             float posX = button1Position.x;
             float posY = button1Position.y;
@@ -1003,7 +1004,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new MoveMainTo6Validate(1000, 1000);
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
-            calculetteViewTest.textDisplay(6);
+            calculetteView.textDisplay(6);
         }
     }
 
@@ -1017,13 +1018,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.six_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.six_bouton.getStyle();
 
             styleTest.up = drawableAux;
 
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -1046,7 +1047,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -1055,7 +1056,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
 
-            calculetteViewTest.textRemove();
+            calculetteView.textRemove();
 
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "6 -  ");
@@ -1100,7 +1101,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint button7Position = calculetteViewTest.buttonPosition(7);
+            MyPoint button7Position = calculetteView.buttonPosition(7);
 
             float posX = button7Position.x;
             float posY = button7Position.y;
@@ -1123,12 +1124,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.sept_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.sept_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            MyPoint button1Position = calculetteViewTest.buttonPosition(7);
+            MyPoint button1Position = calculetteView.buttonPosition(7);
 
             float posX = button1Position.x;
             float posY = button1Position.y;
@@ -1136,7 +1137,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new MoveMainTo7Validate(1000, 1000);
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
-            calculetteViewTest.textDisplay(7);
+            calculetteView.textDisplay(7);
         }
     }
 
@@ -1150,13 +1151,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.sept_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.sept_bouton.getStyle();
 
             styleTest.up = drawableAux;
 
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -1179,7 +1180,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -1188,7 +1189,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
 
-            calculetteViewTest.textRemove();
+            calculetteView.textRemove();
 
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "7 -  ");
@@ -1233,7 +1234,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint button8Position = calculetteViewTest.buttonPosition(8);
+            MyPoint button8Position = calculetteView.buttonPosition(8);
 
             float posX = button8Position.x;
             float posY = button8Position.y;
@@ -1256,12 +1257,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.huit_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.huit_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            MyPoint button1Position = calculetteViewTest.buttonPosition(8);
+            MyPoint button1Position = calculetteView.buttonPosition(8);
 
             float posX = button1Position.x;
             float posY = button1Position.y;
@@ -1269,7 +1270,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new MoveMainTo8Validate(1500, 1000);
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
-            calculetteViewTest.textDisplay(8);
+            calculetteView.textDisplay(8);
         }
     }
 
@@ -1283,13 +1284,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.huit_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.huit_bouton.getStyle();
 
             styleTest.up = drawableAux;
 
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -1312,7 +1313,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -1321,7 +1322,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
 
-            calculetteViewTest.textRemove();
+            calculetteView.textRemove();
 
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "8 -  ");
@@ -1366,7 +1367,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint button9Position = calculetteViewTest.buttonPosition(9);
+            MyPoint button9Position = calculetteView.buttonPosition(9);
 
             float posX = button9Position.x;
             float posY = button9Position.y;
@@ -1389,12 +1390,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.neuf_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.neuf_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            MyPoint button1Position = calculetteViewTest.buttonPosition(9);
+            MyPoint button1Position = calculetteView.buttonPosition(9);
 
             float posX = button1Position.x;
             float posY = button1Position.y;
@@ -1402,7 +1403,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new MoveMainTo9Validate(1500, 1000);
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1500);
-            calculetteViewTest.textDisplay(9);
+            calculetteView.textDisplay(9);
         }
     }
 
@@ -1416,13 +1417,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            TextButton.TextButtonStyle styleTest = calculetteViewTest.neuf_bouton.getStyle();
+            TextButton.TextButtonStyle styleTest = calculetteView.neuf_bouton.getStyle();
 
             styleTest.up = drawableAux;
 
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -1445,7 +1446,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneMain.setVisible(true);
 
-            MyPoint buttonValidatePosition = calculetteViewTest.calculetteValidateAndDisplay();
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
@@ -1454,7 +1455,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1500);
 
-            calculetteViewTest.textRemove();
+            calculetteView.textRemove();
 
             StringBuilder ex = currentLabel.getText();
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "9 -  ");

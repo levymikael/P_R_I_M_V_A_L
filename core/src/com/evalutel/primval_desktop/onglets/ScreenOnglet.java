@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop.onglets.chapitre1;
+package com.evalutel.primval_desktop.onglets;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -21,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.EcrinDiamantView;
-import com.evalutel.primval_desktop.Ex.ActiviteViewDouble;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
@@ -39,6 +38,7 @@ import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UneMain;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
+import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Chapitre1;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
@@ -49,16 +49,16 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected int questionCourante = 0;
     protected SacDeBilles sacDeBilles;
     protected SacDeBougies sacDeBougies;
-    float firstPositionX, firstPositionY;
-    MyTouchInterface objectTouched;
+    protected float firstPositionX, firstPositionY;
+    protected MyTouchInterface objectTouched;
     protected SpriteBatch batch;
     protected Stage stage;
 
-    MyImageButton startPausebutton;
+    protected MyImageButton startPausebutton;
     boolean isVisible = true;
     protected MyTimer timer;
 
-    BitmapFont bitmapFontArial, bitmapFontComic;
+    protected BitmapFont bitmapFontArial, bitmapFontComic;
 
     boolean isInPause = false;
 
@@ -66,49 +66,48 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected ArrayList<MyCorrectionAndPauseInterface> allCorrigibles;
     protected ArrayList<MyTouchInterface> objectTouchedList;
 
-    private ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
+    protected ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
 
-    long startTime, endTime, seconds, dateTest;
+    protected long startTime, endTime, seconds, dateTest;
 
     private Game game;
-    DatabaseDesktop dataBase;
+    protected DatabaseDesktop dataBase;
 
-    ValidusAnimated validusAnimated;
+    protected ValidusAnimated validusAnimated;
 
-    Metrologue metrologue;
+    protected Metrologue metrologue;
 
-    int mousePointerX, mousePointerY;
+    protected int mousePointerX, mousePointerY;
 
-    protected int largeurBille;
-    protected int largeurPlanche;
-    int largeurBougie, largeurGateau;
-    UneMain uneMain;
+    protected int largeurBilleUnique, largeurBilleMultiple;
+    protected int largeurPlancheUnique, largeurPlancheMultiple;
+    protected int largeurBougie, largeurGateau;
+    protected UneMain uneMain;
 
     protected MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;
 
-    MyDataBase db;
-    Table tableTitre;
+    protected MyDataBase db;
+    protected Table tableTitre;
 
-    UnResultat resultatExercice;
+    protected UnResultat resultatExercice;
 
-    MyButtonBackToPreviousMenu myButtonBackToPreviousMenu;
+    protected MyButtonBackToPreviousMenu myButtonBackToPreviousMenu;
 
-    EcrinDiamantView ecrinDiamantView;
+    protected EcrinDiamantView ecrinDiamantView;
 
-    float activiteWidth, heightTop, xTableTitre;
+    protected float activiteWidth, heightTop, xTableTitre;
 
-    ActiviteView activiteView;
-    ActiviteView solutionView;
+    protected ActiviteView activiteView;
+    protected ActiviteView solutionView;
 
-    ActiviteViewDouble activiteViewDouble;
 
-    Label.LabelStyle labelStyleArial, labelStyleComic, labelStyle3;
+    protected Label.LabelStyle labelStyleArial, labelStyleComic, labelStyle3;
 
-    FreeTypeFontGenerator fontArial, fontComic;
+    protected FreeTypeFontGenerator fontArial, fontComic;
 
-    String consigneExercice, numExercice;
+    protected String numExercice;
 
-    Label exoNumLabel, exoConsigneLabel, highestMarkObtainedLabel;
+    protected Label exoNumLabel, exoConsigneLabel, highestMarkObtainedLabel;
 
 
     public ScreenOnglet(Game game, DatabaseDesktop dataBase, int chapitre, int onglet, boolean ecrin)
@@ -165,8 +164,10 @@ public class ScreenOnglet implements Screen, InputProcessor
         labelStyle3.fontColor = Color.YELLOW;
 
 
-        largeurBille = MyConstants.SCREENWIDTH / 15;
-        largeurPlanche = largeurBille * 4;
+        largeurBilleUnique = MyConstants.SCREENWIDTH / 15;
+        largeurPlancheUnique = largeurBilleUnique * 4;
+        largeurBilleMultiple = MyConstants.SCREENWIDTH / 25;
+        largeurPlancheMultiple = largeurBilleMultiple * 4;
 
         largeurBougie = MyConstants.SCREENWIDTH / 15;
         largeurGateau = largeurBougie * 4;
@@ -306,7 +307,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     public class FinOnglet extends MyTimer.TaskEtape
     {
-        protected FinOnglet(long durMillis, long delay)
+        public FinOnglet(long durMillis, long delay)
         {
             super(durMillis, delay);
         }

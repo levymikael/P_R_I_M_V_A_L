@@ -16,7 +16,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
     int spaceBille;
 
 
-    public UnePlancheNew(int startPositionX, int startPositionY, int plancheWidth, int billeWidth)
+    public UnePlancheNew(float startPositionX, float startPositionY, int plancheWidth, int billeWidth)
     {
         super("Images/Badix/planche_9billes.png", startPositionX, startPositionY, (float) plancheWidth, plancheWidth);
 
