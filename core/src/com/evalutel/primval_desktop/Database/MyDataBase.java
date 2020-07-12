@@ -1,8 +1,6 @@
 package com.evalutel.primval_desktop.Database;
 
 
-import static java.lang.String.valueOf;
-
 public class MyDataBase
 {
     public DataBase database;

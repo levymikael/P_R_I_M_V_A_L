@@ -70,7 +70,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
 
         this.stage = stage;
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = MyConstants.SCREENWIDTH / 60;
         parameter.padLeft = 20;
@@ -89,7 +89,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
         float heightTF = height / 5.0f;
 
         textFieldTest = new TextField("", textFieldStyleTest);
-        textFieldTest.setBounds(positionX, positionY + height - heightTF, width * 1.05f, heightTF);
+        textFieldTest.setBounds(positionX, positionY + height - heightTF, width * 1.0f, heightTF);
         textFieldTest.setAlignment(Align.right);
 
         stage.addActor(textFieldTest);
@@ -414,9 +414,7 @@ public class CalculetteViewTest implements MyDrawInterface, MyTouchInterface, My
                 String textNew = exText + string;
                 textFieldTest.setText(textNew);
 
-
                 calculetteInput = textNew;
-
             }
         }
     }

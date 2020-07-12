@@ -19,9 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
-import com.evalutel.primval_desktop.ActiviteViewDouble;
+import com.evalutel.primval_desktop.Ex.ActiviteViewDouble;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
@@ -133,7 +132,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         tableTitre.pack();
         activiteWidth = (MyConstants.SCREENWIDTH / 4.0f) * 3.0f;
 
-        heightTop = activiteWidth * 42 / 1626;
+        heightTop = (activiteWidth * 42 / 1626) + 5;
         xTableTitre = (MyConstants.SCREENWIDTH / 2.0f - activiteWidth / 2.0f);
         tableTitre.setPosition(xTableTitre /*+ MyConstants.SCREENWIDTH / 200*/, MyConstants.SCREENHEIGHT - heightTop);
 

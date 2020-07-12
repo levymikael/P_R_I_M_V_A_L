@@ -41,8 +41,8 @@ public class MrNotes implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.minFilter = Texture.TextureFilter.Nearest;
-        parameter.magFilter = Texture.TextureFilter.MipMapLinearNearest;
+        parameter.minFilter = Texture.TextureFilter.Linear;
+        parameter.magFilter = Texture.TextureFilter.Linear;
         parameter.size = screenHeight / 40;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();

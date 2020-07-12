@@ -1572,7 +1572,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, sacDeBilles.largeurBille);
             billesList.add(billeAdded);
             myCorrectionAndPauseGeneral.addElements(billeAdded);
-
             allDrawables.add(billeAdded);
             billeAdded.setVisible(false);
         }

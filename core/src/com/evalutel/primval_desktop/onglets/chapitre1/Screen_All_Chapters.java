@@ -318,9 +318,9 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table tableEx6 = BoutonChapitres.getLigne("Images/Pages onglets/06.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, /*null, 1,*/ dataBase);
 
         table.add(tableEx1);
-        table.add(tableEx2);//.padLeft(MyConstants.SCREENWIDTH / 100);
-        table.add(tableEx3);//.padLeft(MyConstants.SCREENWIDTH / 100);
-        table.row();
+//        table.add(tableEx2);//.padLeft(MyConstants.SCREENWIDTH / 100);
+//        table.add(tableEx3);//.padLeft(MyConstants.SCREENWIDTH / 100);
+//        table.row();
 //        table.add().height(MyConstants.SCREENWIDTH / 30);
 //        table.row();
 //        table.add(tableEx4).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center);

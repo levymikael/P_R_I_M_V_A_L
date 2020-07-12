@@ -111,20 +111,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         billesList = new ArrayList<>();
 
-//        calculetteViewTest.validerBouton.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                if (calculetteViewTest.isActive())
-//                {
-//
-//                    Gdx.app.log("", "button validate pressed");
-//                    pressValidate();
-//
-//                }
-//            }
-//        });
         uneMain.setPosition(MyConstants.SCREENWIDTH / 2, MyConstants.SCREENHEIGHT / 3);
     }
 

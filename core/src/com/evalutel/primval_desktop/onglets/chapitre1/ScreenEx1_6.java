@@ -398,11 +398,11 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
                 }
                 else if (gateauAnniversaire.getNumberBougies() < randNumPastille)
                 {
-                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus - Tu'es trompe manque des billes planche.mp3");
+                    validusAnimated.validusPlaySound("Sounds/Onglet1_6/Chap1_ong6_Tutestrompecliquesurlaboitepourajouterdesbougies.mp3");
                 }
                 else if (gateauAnniversaire.getNumberBougies() > randNumPastille)
                 {
-                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
+                    validusAnimated.validusPlaySound("Sounds/Onglet1_6/Chap1_Onglet6_tutestrompe,cliquesurlegateaupourenleverdesbougies.mp3");
                 }
                 else
                 {

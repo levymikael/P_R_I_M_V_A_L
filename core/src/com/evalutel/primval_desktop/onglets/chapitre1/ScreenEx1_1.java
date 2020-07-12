@@ -839,6 +839,9 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             allDrawables.add(billeAdded);
             billeAdded.setVisible(false);
+
+            myCorrectionAndPauseGeneral.addElements(billeAdded);
+
         }
         return billesList;
     }

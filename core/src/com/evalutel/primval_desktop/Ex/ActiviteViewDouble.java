@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.Ex;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -17,6 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.General.MyConstants;
+import com.evalutel.primval_desktop.MyCorrectionAndPauseInterface;
+import com.evalutel.primval_desktop.MyDrawInterface;
 
 
 public class ActiviteViewDouble implements MyDrawInterface, MyCorrectionAndPauseInterface

@@ -143,18 +143,30 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     }
 
     @Override
+    public void myCorrectionStart()
+    {
+        //super.myCorrectionStart();
+    }
+
+    @Override
+    public void myCorrectionStop()
+    {
+        //super.myCorrectionStop();
+    }
+
+    @Override
     public void myPause()
     {
         super.myPause();
-        this.setActive(false);
     }
 
     @Override
     public void myResume()
     {
         super.myResume();
-        this.setActive(true);
     }
+
+
 
     @Override
     public boolean isPause()
@@ -162,15 +174,5 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
         return isPaused;
     }
 
-    @Override
-    public void myCorrectionStart()
-    {
-        this.setActive(false);
-    }
 
-    @Override
-    public void myCorrectionStop()
-    {
-        this.setActive(true);
-    }
 }
