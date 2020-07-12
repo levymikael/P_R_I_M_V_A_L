@@ -20,11 +20,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.evalutel.primval_desktop.ActiviteView;
+import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.Ex.ActiviteViewDouble;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
-import com.evalutel.primval_desktop.EcrinDiamantView;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.Metrologue;
 import com.evalutel.primval_desktop.MyButtonBackToPreviousMenu;
@@ -79,11 +79,12 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     int mousePointerX, mousePointerY;
 
-    int largeurBille, largeurPlanche;
+    protected int largeurBille;
+    protected int largeurPlanche;
     int largeurBougie, largeurGateau;
     UneMain uneMain;
 
-    MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;
+    protected MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;
 
     MyDataBase db;
     Table tableTitre;

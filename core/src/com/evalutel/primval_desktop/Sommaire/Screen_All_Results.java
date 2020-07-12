@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop.onglets.chapitre1;
+package com.evalutel.primval_desktop.Sommaire;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;

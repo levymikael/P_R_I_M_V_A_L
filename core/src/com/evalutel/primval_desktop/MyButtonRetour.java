@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.onglets.chapitre1.Screen_All_Chapters;
-import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Sommaire_General;
+import com.evalutel.primval_desktop.Sommaire.Screen_All_Chapters;
+import com.evalutel.primval_desktop.Sommaire.Screen_Sommaire_General;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
 

@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop.onglets.chapitre1;
+package com.evalutel.primval_desktop.Ex;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
@@ -8,22 +8,27 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.General.MyConstants;
-import com.evalutel.primval_desktop.MrNotes;
-import com.evalutel.primval_desktop.MrTemps;
+import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -31,7 +36,7 @@ import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import java.util.ArrayList;
 
 
-public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, ApplicationListener
+public class Screen_Demos extends Game implements Screen, InputProcessor, ApplicationListener
 {
     private DatabaseDesktop dataBase;
     protected Stage stage;
@@ -44,77 +49,72 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
     private Viewport viewport;
 
-    Texture sacDebilles;
-
-    ListExercicesActiviteViewChap1 listExercicesActiviteViewChap1;
     ScreeenBackgroundImage fondEspaceParent;
-    ScreeenBackgroundImage fondSommaire;
-    MrNotes mrNotes;
-    MrTemps mrTemps;
 
-    protected ArrayList<MyDrawInterface> allDrawables;
-
+    protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
     MyButtonRetour myButtonRetour;
 
-    FreeTypeFontGenerator generator;
+
+    FreeTypeFontGenerator generatorFRHND;
+    FreeTypeFontGenerator generatorZAP;
+
+    BitmapFont bitmapFontZAP;
 
 
-    public Screen_Chapitre1(Game game, DatabaseDesktop dataBase)
+    public Screen_Demos(Game game, DatabaseDesktop dataBase)
     {
         this.game = game;
         this.dataBase = dataBase;
 
         stage = new Stage();
         batch = new SpriteBatch();
-        BitmapFont bitmapFont;
+        BitmapFont bitmapFontFRHND;
 
-        screenHeight = MyConstants.SCREENHEIGHT;
-        screenWidth = MyConstants.SCREENWIDTH;
+        generatorFRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterFRHND = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterFRHND.size = 50;
+        bitmapFontFRHND = generatorFRHND.generateFont(parameterFRHND);
+        generatorFRHND.dispose();
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = screenHeight / 50;
-        parameter.minFilter = Texture.TextureFilter.Linear;
-        parameter.magFilter = Texture.TextureFilter.Linear;
-        bitmapFont = generator.generateFont(parameter);
-        generator.dispose();
+        generatorZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterZAP = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterZAP.size = 40;
+        bitmapFontZAP = generatorZAP.generateFont(parameterZAP);
+        generatorZAP.dispose();
+
+        Label.LabelStyle labelStyleWhite = new Label.LabelStyle();
+        labelStyleWhite.font = bitmapFontFRHND;
+        labelStyleWhite.fontColor = Color.WHITE;
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
-        labelStyleBlue.font = bitmapFont;
-        labelStyleBlue.fontColor = new Color(Color.valueOf("004ec0"));
+        labelStyleBlue.font = bitmapFontFRHND;
+        labelStyleBlue.fontColor = Color.NAVY;
+
+
+        screenHeight = Gdx.graphics.getHeight();
+        screenWidth = Gdx.graphics.getWidth();
 
         allDrawables = new ArrayList<>();
 
         fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
 
-        fondSommaire = new ScreeenBackgroundImage("Images/Pages onglets/fond.jpg");
+//        fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
 
-        listExercicesActiviteViewChap1 = new ListExercicesActiviteViewChap1(stage, game, dataBase);
-
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase, "chapitres");
+        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase, "screen all chapters");
         myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
 
-        sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
-        sacDebilles.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        Label labelChap1Titre = new Label("Pratique des nombres de 1 à 9", labelStyleBlue);
-        labelChap1Titre.setFontScale(1.5f);
-        Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
+        Label labelChap1Titre = new Label("Vidéos", labelStyleWhite);
 
-        Table nomChapitre = new Table();
-
-        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25).height(MyConstants.SCREENWIDTH / 25).padRight(screenWidth / 150);
-        nomChapitre.add(labelChap1Titre).width((MyConstants.SCREENWIDTH / 5)).align(Align.left);
-        nomChapitre.setPosition(4.5f * screenWidth / 10, 7 * screenHeight / 10);
+        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
+        nomChapitre.setPosition(screenWidth / 2 - nomChapitre.getWidth() / 2, 9 * screenHeight / 10);
         stage.addActor(nomChapitre);
 
-        int numChapter = 1;
 
-        mrNotes = new MrNotes(stage, dataBase, numChapter);
-        mrTemps = new MrTemps(stage, dataBase, numChapter);
+        Table container = new Table();
 
-//        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 2 * screenWidth / 7, screenHeight / 14);
-//        myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);
+
+        stage.addActor(container);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -180,7 +180,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         batch.setTransformMatrix(new Matrix4());
 
         fondEspaceParent.myDraw(batch);
-        fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6, 0, 0);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -191,9 +190,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
             }
         }
 
-        int sacDeBillesWidth = screenWidth / 3;
-
-        batch.draw(sacDebilles, screenWidth / 2 - (sacDeBillesWidth / 2), 11 * screenHeight / 15, sacDeBillesWidth, sacDeBillesWidth * (305.0f / 521.0f));
 
         batch.end();
 
@@ -215,10 +211,9 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     @Override
     public void resize(int width, int height)
     {
-        stage.getViewport().update(width, height, true);
-        width = 2400;
-        height = 1350;
-
+//        stage.getViewport().update(width, height, true);
+//        width = 2400;
+//        height = 1350;
 
 //        viewport.update(width, height);
     }

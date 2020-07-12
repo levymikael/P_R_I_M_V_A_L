@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.MyConstants;
-import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Demos;
+import com.evalutel.primval_desktop.Ex.Screen_Demos;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
 

@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.onglets.chapitre2;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -14,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.LigneTableaux;
 import com.evalutel.primval_desktop.General.MyConstants;
+import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_3;
@@ -22,7 +22,7 @@ import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_5;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_6;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
-public class ListExercicesActiviteViewChap1 implements MyDrawInterface
+public class ListExercicesActiviteViewChap2 implements MyDrawInterface
 {
     public float screenWidth;
     private boolean isVisible = true;
@@ -31,7 +31,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
 
     DatabaseDesktop dataBase;
 
-    public ListExercicesActiviteViewChap1(Stage stage, final Game game, final DatabaseDesktop dataBase)
+    public ListExercicesActiviteViewChap2(Stage stage, final Game game, final DatabaseDesktop dataBase)
     {
         screenWidth = MyConstants.SCREENWIDTH;
         final int screenHeight = MyConstants.SCREENHEIGHT;
@@ -39,12 +39,11 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         this.game = game;
         this.dataBase = dataBase;
 
-        String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
-        String label2 = "Faire correspondre des billes à des oiseaux";
-        String label3 = "Écriture des chiffres 1 à 9";
-        String label4 = "Prononciation des chiffres 1 à 9";
-        String label5 = "Compter des oiseaux et taper leur nombre";
-        String label6 = "Un gâteau pour plusieurs anniversaires";
+        String label1 = "Addition dont le total est inférieur à 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total ";
+        String label5 = "Calcul mental";
 
         Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
         textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -56,6 +55,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         stage.addActor(container);
         container.setSize(screenWidth, 7 * screenHeight / 10);
         container.setPosition(0, 5 * screenHeight / 14 - container.getHeight() / 2);
+        int chapitre = 2;
 
         int lineHeight = screenHeight / 11;
         int buttonSize = lineHeight * 5 / 10;
@@ -64,31 +64,28 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
 
         MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
         MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
         MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
 
         Table table = new Table();
-        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
-        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
-        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4, dataBase);
-        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
-        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
+        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureExercices, "blue", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
         table.add(tableEx1).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
-        table.row().pad(0);
+        table.row();
         table.add(tableEx2).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
-        table.row().height(10);
+        table.row();
         table.add(tableEx3).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
         table.add(tableEx4).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
         table.add(tableEx5).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
-        table.row();
-        table.add(tableEx6).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
+
 
         table.align(Align.top);
         table.setHeight(MyConstants.SCREENHEIGHT / 2);
@@ -145,15 +142,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
                 System.out.println("I got clicked!5");
             }
         });
-        tableEx6.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!6");
-                game.setScreen(new ScreenEx1_6(game, dataBase));
-            }
-        });
+
     }
 
 

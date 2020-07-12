@@ -1,7 +1,6 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
-import com.evalutel.primval_desktop.onglets.chapitre1.ScreenOnglet;
 
 import java.util.TimerTask;
 

@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop.onglets.chapitre1;
+package com.evalutel.primval_desktop.Sommaire;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
@@ -38,6 +38,8 @@ import com.evalutel.primval_desktop.MyButtonDemos;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
+import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Chapitre1;
+import com.evalutel.primval_desktop.onglets.chapitre2.Screen_Chapitre2;
 
 import java.util.ArrayList;
 
@@ -318,7 +320,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table tableEx6 = BoutonChapitres.getLigne("Images/Pages onglets/06.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, /*null, 1,*/ dataBase);
 
         table.add(tableEx1);
-//        table.add(tableEx2);//.padLeft(MyConstants.SCREENWIDTH / 100);
+        table.add(tableEx2);//.padLeft(MyConstants.SCREENWIDTH / 100);
 //        table.add(tableEx3);//.padLeft(MyConstants.SCREENWIDTH / 100);
 //        table.row();
 //        table.add().height(MyConstants.SCREENWIDTH / 30);
@@ -345,7 +347,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!2");
-                game.setScreen(new Screen_Chapitre1(game, dataBase));
+                game.setScreen(new Screen_Chapitre2(game, dataBase));
             }
         });
         tableEx3.addListener(new ClickListener()

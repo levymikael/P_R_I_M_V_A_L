@@ -409,6 +409,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
                 }
                 failedAttempts++;
+
             }
         }
     }

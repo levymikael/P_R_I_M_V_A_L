@@ -5,7 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Sommaire_General;
+import com.evalutel.primval_desktop.Sommaire.Screen_Sommaire_General;
 
 public class GdxSplashScreenGame extends Game implements ApplicationListener
 {
