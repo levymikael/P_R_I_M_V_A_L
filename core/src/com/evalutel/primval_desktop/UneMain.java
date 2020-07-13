@@ -26,17 +26,17 @@ public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCor
         textureRegionMainClicked = new TextureRegion(imgAux2);
     }
 
-    public void moveTo(long animationDureemillis, int deplacementEnX, int deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext)
+    public void moveTo(long animationDureemillis, float deplacementEnX, float deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext)
     {
         imageUp();
 
-        int deplacemenNewY = (int) (deplacementEnY - animationHeight * 0.9f);
+        float deplacemenNewY = (deplacementEnY - animationHeight * 0.9f);
         //int deplacemenNewX = (int) (deplacementEnX - ecartY);
 
         animateImage(animationDureemillis, false, deplacementEnX, deplacemenNewY, taskEtape, delayNext, 1f / 6f);
     }
 
-    public void cliqueTo(long animationDureemillis, int deplacementEnX, int deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext)
+    public void cliqueTo(long animationDureemillis, float deplacementEnX, float deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext)
     {
         imageDown();
 
