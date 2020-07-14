@@ -96,6 +96,12 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         float heightEgal = widthEgal * (107f / 115f);
 
 
+        labelEmplacement1 = new Label("", labelStyleWhite);
+        labelEmplacement2 = new Label("", labelStyleWhite);
+        labelEmplacement3 = new Label("", labelStyleWhite);
+
+
+
         emplacement1.setBackground(new SpriteDrawable(new Sprite(emplacementTxture)));
         emplacement1.add(labelEmplacement1);
 
@@ -126,18 +132,18 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         stage.addActor(this);
     }
 
-    public void fillLabel(int labelNumber, String labelText)
+    public void fillLabel(int emplacementNumber, String labelText)
     {
-        switch (labelNumber)
+        switch (emplacementNumber)
         {
             case 1:
-                labelEmplacement1 = new Label(labelText, labelStyleWhite);
+                labelEmplacement1.setText(labelText);
                 break;
             case 2:
-                labelEmplacement2 = new Label(labelText, labelStyleWhite);
+                labelEmplacement2.setText(labelText);
                 break;
             case 3:
-                labelEmplacement3 = new Label(labelText, labelStyleWhite);
+                labelEmplacement3.setText(labelText);
                 break;
 
             default:

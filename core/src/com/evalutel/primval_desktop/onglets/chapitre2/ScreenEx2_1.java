@@ -3,6 +3,8 @@ package com.evalutel.primval_desktop.onglets.chapitre2;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.CalculetteView;
@@ -14,12 +16,12 @@ import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.SacDeBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
-import com.evalutel.primval_desktop.UneArdoise;
 import com.evalutel.primval_desktop.UneArdoise2;
 import com.evalutel.primval_desktop.UneBille;
+import com.evalutel.primval_desktop.UneMain;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.onglets.ScreenOnglet;
-import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
+import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 
 import java.util.ArrayList;
@@ -43,6 +45,11 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
     UneArdoise2 uneArdoise2;
     protected CalculetteView calculetteView;
     int posX, posY;
+
+    TextButton.TextButtonStyle styleTest;
+    Drawable drawableAux;
+
+    int cptbilleplanche1And2;
 
 
     public ScreenEx2_1(Game game, DatabaseDesktop dataBase, String ongletTitre)
@@ -188,11 +195,9 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
                     posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 4);
                 }
 
-
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
                 timer.schedule(nextEtape, 100);
                 cptOiseau++;
-
             }
             else
             {
@@ -291,13 +296,13 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            if (cptBille < 4)
-            {
 
+            if (cptBille < 3)
+            {
                 UneBille bille = billesList.get(cptBille);
+
                 float posXMain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
                 float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
-
 //                float posX = planche1.getPosition().x + (planche1.getWidth() / 2);
 //                float posY = planche1.getPosition().y + (planche1.getHeight() / 2);
 
@@ -310,11 +315,621 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             }
             else
             {
-                // reprendre la
+                uneMain.setVisible(true);
+
+                MyPoint buttonPosition = calculetteView.buttonPosition(4);
+
+                float posX = buttonPosition.x;
+                float posY = buttonPosition.y;
+
+                MyTimer.TaskEtape nextEtape = new ClickMainToCalculette(1_500, 1_000);
+
+                uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+            }
+        }
+    }
+//
+//    private class MoveMainToCalculette extends MyTimer.TaskEtape
+//    {
+//        private MoveMainToCalculette(long durMillis)
+//        {
+//            super(durMillis);
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//
+//        }
+//    }
+
+    private class ClickMainToCalculette extends MyTimer.TaskEtape
+    {
+        private ClickMainToCalculette(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+//            switch (4)
+//            {
+//                case 1:
+//                    styleTest = calculetteView.un_bouton.getStyle();
+//                    break;
+//                case 2:
+//                    styleTest = calculetteView.deux_bouton.getStyle();
+//                    break;
+//                case 3:
+//                    styleTest = calculetteView.trois_bouton.getStyle();
+//                    break;
+//                case 4:
+            styleTest = calculetteView.quatre_bouton.getStyle();
+//                    break;
+//                case 5:
+//                    styleTest = calculetteView.cinq_bouton.getStyle();
+//                    break;
+//                case 6:
+//                    styleTest = calculetteView.six_bouton.getStyle();
+//                    break;
+//                case 7:
+//                    styleTest = calculetteView.sept_bouton.getStyle();
+//                    break;
+//                case 8:
+//                    styleTest = calculetteView.huit_bouton.getStyle();
+//                    break;
+//
+//                case 9:
+//                    styleTest = calculetteView.neuf_bouton.getStyle();
+//                    break;
+//                default:
+//                    break;
+//            }
+
+            drawableAux = styleTest.up;
+            styleTest.up = styleTest.down;
+
+            MyPoint buttonPosition = calculetteView.buttonPosition(4);
+
+            float posX = buttonPosition.x;
+            float posY = buttonPosition.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainToValidate(500);
+
+            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+
+            calculetteView.textDisplay(4);
+        }
+    }
+
+    private class MoveMainToValidate extends MyTimer.TaskEtape
+    {
+        private MoveMainToValidate(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new ClickOnValidate(1_000, 1_000);
+
+            uneMain.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
+
+            styleTest.up = drawableAux;
+        }
+    }
+
+    private class ClickOnValidate extends MyTimer.TaskEtape
+    {
+        private ClickOnValidate(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainToReserve2(500, 0);
+
+            styleTest = calculetteView.validerBouton.getStyle();
+
+            drawableAux = styleTest.up;
+            styleTest.up = styleTest.down;
+
+            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+
+            calculetteView.textRemove();
+            uneArdoise2.fillLabel(1, "4");
+        }
+    }
+
+
+    private class MoveMainToReserve2 extends MyTimer.TaskEtape
+    {
+        private MoveMainToReserve2(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            if (cptBille >= 3)
+            {
+//                uneMain.setVisible(true);
+
+                styleTest.up = drawableAux;
+
+                float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+                float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
+
+                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve2(500);
+
+                uneMain.moveTo(durationMillis, posXmain, posYMain, nextEtape, 500);
             }
         }
     }
 
+    private class DisplayBilleReserve2 extends MyTimer.TaskEtape
+    {
+        private DisplayBilleReserve2(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            if (cptBille >= 3)
+            {
+                float posXMain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+                float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
+                float posX = posXMain;
+                float posY = posYMain;
+
+                UneBille bille = billesList.get(cptBille);
+                bille.setPositionCenter(posX, posY);
+                bille.setVisible(true);
+                bille.setActive(false);
+
+                MyTimer.TaskEtape nextEtape = new EtapeDragSecondBille(500);
+                timer.schedule(nextEtape, 500);
+                uneMain.imageDown();
+            }
+        }
+    }
+
+    private class EtapeDragSecondBille extends MyTimer.TaskEtape
+    {
+        private EtapeDragSecondBille(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            UneBille bille = billesList.get(cptBille);
+            bille.setVisible(true);
+            float posX = planche2.getPosition().x + (planche2.getWidth() / 2);
+            float posY = planche2.getPosition().y + (planche2.getHeight() / 2);
+
+            MyTimer.TaskEtape nextEtape = new EtapeAddSecondBille(1_500, 500);
+
+            metrologue.metrologuePlaySound("Sounds/Metrologue/Je saisis une bille du sac.mp3");
+
+            bille.animateImage(durationMillis, true, (posX - bille.getWidth() / 2), (posY - bille.getWidth() / 2), nextEtape, 1_000, 1f / 6f);
+
+            uneMain.cliqueTo(durationMillis, posX, posY, null, 500);
+        }
+    }
+
+
+    private class EtapeAddSecondBille extends MyTimer.TaskEtape
+    {
+        private EtapeAddSecondBille(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+
+            if (cptBille < 7)
+            {
+                UneBille bille = billesList.get(cptBille);
+
+                float posXMain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+                float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
+//                float posX = planche1.getPosition().x + (planche1.getWidth() / 2);
+//                float posY = planche1.getPosition().y + (planche1.getHeight() / 2);
+
+                planche2.addBilleAndOrganize(bille);
+                cptBille++;
+
+                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve2(500);
+
+                uneMain.moveTo(500, posXMain, posYMain, nextEtape, 500);
+            }
+            else
+            {
+                uneMain.setVisible(true);
+
+                MyPoint buttonPosition = calculetteView.buttonPosition(3);
+
+                float posX = buttonPosition.x;
+                float posY = buttonPosition.y;
+
+                MyTimer.TaskEtape nextEtape = new ClickMainToCalculette2(1_500, 1_000);
+
+                uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+            }
+        }
+    }
+//
+//    private class MoveMainToCalculette extends MyTimer.TaskEtape
+//    {
+//        private MoveMainToCalculette(long durMillis)
+//        {
+//            super(durMillis);
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//
+//        }
+//    }
+
+    private class ClickMainToCalculette2 extends MyTimer.TaskEtape
+    {
+        private ClickMainToCalculette2(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+//            switch (3)
+//            {
+//                case 1:
+//                    styleTest = calculetteView.un_bouton.getStyle();
+//                    break;
+//                case 2:
+//                    styleTest = calculetteView.deux_bouton.getStyle();
+//                    break;
+//                case 3:
+            styleTest = calculetteView.trois_bouton.getStyle();
+//                    break;
+//                case 4:
+//            styleTest = calculetteView.quatre_bouton.getStyle();
+//                    break;
+//                case 5:
+//                    styleTest = calculetteView.cinq_bouton.getStyle();
+//                    break;
+//                case 6:
+//                    styleTest = calculetteView.six_bouton.getStyle();
+//                    break;
+//                case 7:
+//                    styleTest = calculetteView.sept_bouton.getStyle();
+//                    break;
+//                case 8:
+//                    styleTest = calculetteView.huit_bouton.getStyle();
+//                    break;
+//
+//                case 9:
+//                    styleTest = calculetteView.neuf_bouton.getStyle();
+//                    break;
+//                default:
+//                    break;
+//            }
+
+            drawableAux = styleTest.up;
+            styleTest.up = styleTest.down;
+
+            MyPoint buttonPosition = calculetteView.buttonPosition(3);
+
+            float posX = buttonPosition.x;
+            float posY = buttonPosition.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainToValidate2(500);
+
+            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+
+            calculetteView.textDisplay(3);
+        }
+    }
+
+    private class MoveMainToValidate2 extends MyTimer.TaskEtape
+    {
+        private MoveMainToValidate2(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new ClickOnValidate2(1_000, 1_000);
+
+            uneMain.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
+
+            styleTest.up = drawableAux;
+        }
+    }
+
+    private class ClickOnValidate2 extends MyTimer.TaskEtape
+    {
+        private ClickOnValidate2(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveBilleFromPlanche1and2to3(500);
+
+            styleTest = calculetteView.validerBouton.getStyle();
+
+            drawableAux = styleTest.up;
+            styleTest.up = styleTest.down;
+
+            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+
+            calculetteView.textRemove();
+            uneArdoise2.fillLabel(2, "3");
+
+            cptbilleplanche1And2 = billesList.size() - 1;
+
+        }
+    }
+
+    private class MoveBilleFromPlanche1and2to3 extends MyTimer.TaskEtape
+    {
+        private MoveBilleFromPlanche1and2to3(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            if (cptbilleplanche1And2 != 0)
+            {
+                styleTest.up = drawableAux;
+
+                UneBille bille = billesList.get(cptbilleplanche1And2);
+
+                float posXBille = bille.currentPositionX + (bille.getWidth() / 2);
+                float posYBille = bille.currentPositionY + (bille.getWidth() / 2);
+
+                MyTimer.TaskEtape nextEtape = new EtapeDragThirdBille(500);
+
+                uneMain.moveTo(durationMillis, posXBille, posYBille, nextEtape, 1000);
+
+                cptbilleplanche1And2--;
+            }
+            else
+            {
+                timer.schedule(new ClickMainToCalculette3(1_000, 0), 500);
+            }
+
+        }
+    }
+
+    private class EtapeDragThirdBille extends MyTimer.TaskEtape
+    {
+        private EtapeDragThirdBille(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            UneBille bille = billesList.get(cptbilleplanche1And2);
+            bille.setVisible(true);
+            float posX = planche3.getPosition().x + (planche3.getWidth() / 2);
+            float posY = planche3.getPosition().y + (planche3.getHeight() / 2);
+
+            MyTimer.TaskEtape nextEtape = new MoveBilleFromPlanche1and2to3(1_500);
+
+            bille.animateImage(durationMillis, true, (posX - bille.getWidth() / 2), (posY - bille.getWidth() / 2), nextEtape, 1_000, 1f / 6f);
+
+            uneMain.cliqueTo(durationMillis, posX, posY, null, 500);
+
+            planche3.addBilleAndOrganize(bille);
+        }
+    }
+
+
+//    private class EtapeAddThirdBille extends MyTimer.TaskEtape
+//    {
+//        private EtapeAddThirdBille(long durMillis, long delay)
+//        {
+//            super(durMillis, delay);
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//
+//            if (cptBille < 7)
+//            {
+//                UneBille bille = billesList.get(cptBille);
+//
+//                float posXMain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+//                float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
+////                float posX = planche1.getPosition().x + (planche1.getWidth() / 2);
+////                float posY = planche1.getPosition().y + (planche1.getHeight() / 2);
+//
+//                planche2.addBilleAndOrganize(bille);
+//                cptBille++;
+//
+//                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve2(500);
+//
+//                uneMain.moveTo(500, posXMain, posYMain, nextEtape, 500);
+//            }
+//            else
+//            {
+//                uneMain.setVisible(true);
+//
+//                MyPoint buttonPosition = calculetteView.buttonPosition(4);
+//
+//                float posX = buttonPosition.x;
+//                float posY = buttonPosition.y;
+//
+//                MyTimer.TaskEtape nextEtape = new ClickMainToCalculette2(1_500, 1_000);
+//
+//                uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+//            }
+//        }
+//    }
+
+    private class ClickMainToCalculette3 extends MyTimer.TaskEtape
+    {
+        private ClickMainToCalculette3(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+//            switch (3)
+//            {
+//                case 1:
+//                    styleTest = calculetteView.un_bouton.getStyle();
+//                    break;
+//                case 2:
+//                    styleTest = calculetteView.deux_bouton.getStyle();
+//                    break;
+//                case 3:
+//            styleTest = calculetteView.trois_bouton.getStyle();
+//                    break;
+//                case 4:
+//            styleTest = calculetteView.quatre_bouton.getStyle();
+//                    break;
+//                case 5:
+//                    styleTest = calculetteView.cinq_bouton.getStyle();
+//                    break;
+//                case 6:
+//                    styleTest = calculetteView.six_bouton.getStyle();
+//                    break;
+//                case 7:
+            styleTest = calculetteView.sept_bouton.getStyle();
+//                    break;
+//                case 8:
+//                    styleTest = calculetteView.huit_bouton.getStyle();
+//                    break;
+//
+//                case 9:
+//                    styleTest = calculetteView.neuf_bouton.getStyle();
+//                    break;
+//                default:
+//                    break;
+//            }
+
+            drawableAux = styleTest.up;
+            styleTest.up = styleTest.down;
+
+            MyPoint buttonPosition = calculetteView.buttonPosition(7);
+
+            float posX = buttonPosition.x;
+            float posY = buttonPosition.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainToValidate3(500);
+
+            uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 1_000);
+
+            calculetteView.textDisplay(7);
+        }
+    }
+
+    private class MoveMainToValidate3 extends MyTimer.TaskEtape
+    {
+        private MoveMainToValidate3(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new ClickOnValidate3(1_000, 1_000);
+
+            uneMain.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
+
+            styleTest.up = drawableAux;
+        }
+    }
+
+    private class ClickOnValidate3 extends MyTimer.TaskEtape
+    {
+        private ClickOnValidate3(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveBilleFromPlanche1and2to3(500);
+
+            styleTest = calculetteView.validerBouton.getStyle();
+
+            drawableAux = styleTest.up;
+            styleTest.up = styleTest.down;
+
+            uneMain.cliqueTo(durationMillis, posX, posY, null, 1_000);
+
+            calculetteView.textRemove();
+            uneArdoise2.fillLabel(3, "7");
+
+
+        }
+    }
 
     private class LastOne extends MyTimer.TaskEtape
     {

@@ -109,7 +109,7 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
         nomChapitre.setPosition(4.5f * screenWidth / 10, 7 * screenHeight / 10);
         stage.addActor(nomChapitre);
 
-        int numChapter = 1;
+        int numChapter = 2;
 
         mrNotes = new MrNotes(stage, dataBase, numChapter);
         mrTemps = new MrTemps(stage, dataBase, numChapter);
