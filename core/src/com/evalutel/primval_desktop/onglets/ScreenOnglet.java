@@ -79,9 +79,9 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     protected int mousePointerX, mousePointerY;
 
-    protected int largeurBilleUnique, largeurBilleMultiple;
-    protected int largeurPlancheUnique, largeurPlancheMultiple;
-    protected int largeurBougie, largeurGateau;
+    protected float largeurBilleUnique, largeurBilleMultiple;
+    protected float largeurPlancheUnique, largeurPlancheMultiple;
+    protected float largeurBougie, largeurGateau;
     protected UneMain uneMain;
 
     protected MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;

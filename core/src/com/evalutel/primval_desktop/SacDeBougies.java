@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class SacDeBougies extends AnimationImageNew implements MyDrawInterface, MyTouchInterface, MyCorrectionAndPauseInterface
 {
-    public int largeurBille;
+    public float largeurBille;
     boolean isActive = true;
     ArrayList<UneBougie> arrrayBougies = new ArrayList<>();
 

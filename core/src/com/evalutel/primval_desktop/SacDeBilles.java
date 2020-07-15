@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class SacDeBilles extends AnimationImageNew implements MyDrawInterface, MyTouchInterface, MyCorrectionAndPauseInterface
 {
-    public int largeurBille;
+    public float largeurBille;
     boolean isActive = true;
     ArrayList<UneBille> arrrayBilles = new ArrayList<>();
 

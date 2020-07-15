@@ -17,17 +17,17 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
     int spaceBougies;
 
 
-    public UnGateauAnniversaire(int startPositionX, int startPositionY, int gateauWidth, int gateauHeight)
+    public UnGateauAnniversaire(float startPositionX, float startPositionY, float gateauWidth, float gateauHeight)
     {
-        super("Images/Onglet_1_6/gateau.png", startPositionX, startPositionY, (float) gateauWidth, gateauHeight);
+        super("Images/Onglet_1_6/gateau.png", startPositionX, startPositionY, gateauWidth, gateauHeight);
 
 
-        int startX = (int) animationWidth / 12;
-        int startY = startPositionY + (MyConstants.SCREENHEIGHT / 10);
+        float startX = animationWidth / 12;
+        float startY = startPositionY + (MyConstants.SCREENHEIGHT / 10);
 
         spaceBougies = (int) animationWidth / 50;
         float posX = 0f;
-        int posY = 0;
+        float posY = 0;
 
         for (int i = 0; i < 3; i++)
         {

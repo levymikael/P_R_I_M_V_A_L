@@ -16,7 +16,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
     int spaceBille;
 
 
-    public UnePlancheNew(float startPositionX, float startPositionY, int plancheWidth, int billeWidth)
+    public UnePlancheNew(float startPositionX, float startPositionY, float plancheWidth, float billeWidth)
     {
         super("Images/Badix/planche_9billes.png", startPositionX, startPositionY, (float) plancheWidth, plancheWidth);
 
@@ -28,8 +28,8 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
         {
             for (int j = 0; j < 3; j++)
             {
-                int posX = (startX + j * (spaceBille + billeWidth));
-                int posY = (startX + i * (spaceBille + billeWidth));
+                float posX = (startX + j * (spaceBille + billeWidth));
+                float posY = (startX + i * (spaceBille + billeWidth));
 
                 positionsBilles.add(new MyPoint(currentPositionX + posX, currentPositionY + posY));
             }
