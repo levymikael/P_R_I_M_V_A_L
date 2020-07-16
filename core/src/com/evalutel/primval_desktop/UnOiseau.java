@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class UnOiseau extends AnimationImageNew implements MyCorrectionAndPauseInterface
 {
-    public UnOiseau(int startPositionX, int startPositionY, float animationWidth, float animationHeight)
+    public UnOiseau(float startPositionX, float startPositionY, float animationWidth, float animationHeight)
     {
         super(getAnimationOiseau(), startPositionX, startPositionY, animationWidth, animationHeight);
 

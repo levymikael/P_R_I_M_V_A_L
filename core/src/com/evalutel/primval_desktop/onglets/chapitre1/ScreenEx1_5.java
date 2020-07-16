@@ -44,7 +44,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
     TextButton.TextButtonStyle styleTest;
 
-    int posX, posY;
+    float posX, posY;
 
     int[] numOiseauArray;
 
@@ -187,8 +187,10 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         {
             randNumOiseau = numOiseauArray[questionCourante];
 
+            MyTimer.TaskEtape nextEtape = new DisplayOiseaux(2000, 0);
+
             activiteView.setTextActivite("1. Place autant de billes que d'oiseaux que tu vois tape ce nombre au clavier puis valide");
-            metrologue.metrologuePlaySound("Sounds/onglet_1_5/metrologue - Instructions onglet 1_5.mp3", new DisplayOiseaux(1_000, 0));
+            metrologue.metrologuePlaySound("Sounds/onglet_1_5/metrologue - Instructions onglet 1_5.mp3", nextEtape);
         }
     }
 
@@ -212,7 +214,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                 if (cptOiseau > 5)
                 {
                     posY = 5 * MyConstants.SCREENHEIGHT / 11;
-                    posX = (2 * MyConstants.SCREENWIDTH / 9) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 3);
+                    posX = (2 * MyConstants.SCREENWIDTH / 9) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 3);
                 }
                 else
                 {
@@ -220,11 +222,11 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
                     if (cptOiseau < 3)
                     {
-                        posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+                        posX = (MyConstants.SCREENWIDTH / 6) +  (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                     else
                     {
-                        posX = (2 * MyConstants.SCREENWIDTH / 9) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+                        posX = (2 * MyConstants.SCREENWIDTH / 9) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                 }
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
@@ -251,10 +253,10 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
     private class InputClavier extends MyTimer.TaskEtape
     {
-        private InputClavier(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
+//        private InputClavier(long durMillis, long delay)
+//        {
+//            super(durMillis, delay);
+//        }
 
         private InputClavier(long durMillis)
         {
@@ -802,8 +804,9 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
         for (int i = 0; i < 9; i++)
         {
-            int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (float) ((MyConstants.SCREENWIDTH / 12) * (396f / 5f)), (float) (MyConstants.SCREENWIDTH / 12) * (5f / 396f));
+            float firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12) * (396.0f / 500.0f), (float) (MyConstants.SCREENWIDTH / 12) * (500.0f / 396.0f));
+
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
         }

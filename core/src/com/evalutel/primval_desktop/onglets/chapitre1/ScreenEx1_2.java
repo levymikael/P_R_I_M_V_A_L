@@ -1,6 +1,5 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;

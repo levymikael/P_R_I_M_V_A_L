@@ -22,7 +22,6 @@ import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.onglets.ScreenOnglet;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
-
 import java.util.ArrayList;
 
 
