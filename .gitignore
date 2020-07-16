@@ -4,6 +4,7 @@
 *.war
 *.ear
 hs_err_pid*
+database.db
 
 ## Robovm
 /ios/robovm-build/
@@ -30,7 +31,6 @@ www-test/
 *.iml
 /android/out/
 com_crashlytics_export_strings.xml
-/android/assets/database.db
 
 ## Eclipse
 
