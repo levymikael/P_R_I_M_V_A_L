@@ -73,7 +73,6 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
         Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
 
-
         table.add(tableEx1).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
         table.add(tableEx2).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
@@ -93,7 +92,6 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         scroll.layout();
 
         container.add(scroll).height(3 * screenHeight / 5).align(Align.top);
-
 
         tableEx1.addListener(new ClickListener()
         {

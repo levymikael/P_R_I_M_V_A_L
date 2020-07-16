@@ -157,7 +157,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
 
         float widthButton2 = screenWidth / 7;
-        float heightButton2 = widthButton2 * (44.0f / 178.0f);
+        float heightButton2 = widthButton2 * (44f / 178f);
         int paddingBetweenButtons = MyConstants.SCREENHEIGHT / 150;
 
         container.add(chaptersButton).padBottom(paddingBetweenButtons).align(Align.center).width(widthButton2).height(heightButton2);
@@ -307,9 +307,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);
         fondSommairee.myDraw2(batch, screenWidth, screenHeight, ((screenWidth / 5) - (screenWidth / 70)), 0);
 
-        float x = (int) (3 * screenWidth / 5) * (709.0f / 626.0f);
+        float x = (3 * screenWidth / 5) * (709f / 626f);
         float y = (3 * screenWidth / 5);
-        imgSommaire.myDraw2(batch, (int) x, (int) y, ((screenWidth / 4)), (int) ((screenHeight / 2) - (y / 2)));
+        imgSommaire.myDraw2(batch, x, y, ((screenWidth / 4)), ((screenHeight / 2) - (y / 2)));
 //        batch.draw(imgSommaire, 4 * screenWidth / 15, screenHeight / 5, 2 * screenWidth / 5, (((2 * screenWidth / 5) * 600) / 680));
 //        test.draw(batch);
 

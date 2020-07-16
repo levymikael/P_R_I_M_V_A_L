@@ -71,11 +71,9 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(planche1);
         allCorrigibles.add(planche1);
 
-        allPlanches = new ArrayList<>();
         allPlanches.add(planche1);
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
-//        consigneExercice = "Prononciation des chiffres 1 à 9";
 
         resultatExercice = new UnResultat("Primval", 1, 4, 0, ongletTitre, 9, 0, dateTest, 0, 0, 0, 123);
 
@@ -106,7 +104,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         displayArdoise();
 
-        resultatExercice = new UnResultat("Primval", 1, 4, 0, ongletTitre, 9, 0, dateTest, 0, 0, 0, 123);
+//        resultatExercice = new UnResultat("Primval", 1, 4, 0, ongletTitre, 9, 0, dateTest, 0, 0, 0, 123);
 
         timer.schedule(new PresentationOnglet(3000), 1000);
 

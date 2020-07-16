@@ -86,10 +86,10 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
         textFieldStyleTest.fontColor = fontColor;
         textFieldStyleTest.font = bitmapFont;
 
-        float heightTF = height / 5.0f;
+        float heightTF = height / 5f;
 
         textFieldTest = new TextField("", textFieldStyleTest);
-        textFieldTest.setBounds(positionX, positionY + height - heightTF, width * 1.0f, heightTF);
+        textFieldTest.setBounds(positionX, positionY + height - heightTF, width * 1f, heightTF);
         textFieldTest.setAlignment(Align.right);
 
         stage.addActor(textFieldTest);

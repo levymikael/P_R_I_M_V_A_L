@@ -60,7 +60,6 @@ public class ScreenEx1_2 extends ScreenOnglet
         allDrawables.add(planche1);
         allCorrigibles.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
-//        allPlanches = new ArrayList<>();
         allPlanches.add(planche1);
 
         for (int i = 0; i < 9; i++)
@@ -74,7 +73,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             myCorrectionAndPauseGeneral.addElements(bille);
             allCorrigibles.add(bille);
         }
-
 
 
         billesList = new ArrayList<>();

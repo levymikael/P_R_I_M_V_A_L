@@ -39,7 +39,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
         this.game = game;
         this.dataBase = dataBase;
 
-        final String label1 = "Addition dont le total est inférieur à 9";
+        final String label1 = "Addition dont le total ne dépasse pas 9";
         final String label2 = "Additionner les oiseaux sur les deux branches";
         final String label3 = "Total d'un lancer de 2 dés";
         final String label4 = "Utiliser la même couleur pour colorier les cases avec le même total ";
@@ -101,7 +101,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx2_1(game, dataBase,label1));
+                game.setScreen(new ScreenEx2_1(game, dataBase, label1));
                 System.out.println("I got clicked!2.1");
             }
         });
@@ -111,7 +111,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!2");
-                game.setScreen(new ScreenEx1_1(game, dataBase,label1));
+                game.setScreen(new ScreenEx1_1(game, dataBase, label1));
             }
         });
         tableEx3.addListener(new ClickListener()
@@ -120,7 +120,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!3");
-                game.setScreen(new ScreenEx1_1(game, dataBase,label1));
+                game.setScreen(new ScreenEx1_1(game, dataBase, label1));
 
             }
         });
@@ -129,7 +129,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_1(game, dataBase,label1));
+                game.setScreen(new ScreenEx1_1(game, dataBase, label1));
                 System.out.println("I got clicked!4");
             }
         });
@@ -138,7 +138,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_1(game, dataBase,label1));
+                game.setScreen(new ScreenEx1_1(game, dataBase, label1));
                 System.out.println("I got clicked!5");
             }
         });

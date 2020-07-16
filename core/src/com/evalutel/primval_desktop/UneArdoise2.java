@@ -53,22 +53,24 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         bitmapFont = generatorComic.generateFont(parameter);
         generatorComic.dispose();
 
-
         labelStyleWhite = new Label.LabelStyle();
         labelStyleWhite.font = bitmapFont;
         labelStyleWhite.fontColor = Color.WHITE;
 
-
-//        labelEmplacement2 = new Label("0", labelStyleWhite);
-//        labelEmplacement2 = new Label("0", labelStyleWhite);
-//        labelEmplacement3 = new Label("0", labelStyleWhite);
-
         Table emplacement1 = new Table();
+        Table line1 = new Table();
+
         Table emplacementPlus = new Table();
         Table emplacement2 = new Table();
+        Table line2 = new Table();
+
         Table emplacementTiret = new Table();
+        Table line3 = new Table();
+
         Table emplacementEgal = new Table();
         Table emplacement3 = new Table();
+        Table line4 = new Table();
+
 
         Texture plusTxture = new Texture(Gdx.files.internal("Images/Ardoise/ardoise_plus_new.png"));
         plusTxture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -83,45 +85,50 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         egalTxture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        float widthEmplacement = this.getWidth() * 0.4f;
-        float heightEmplacement = widthEmplacement * 134f / 192f;
+        float widthEmplacement = this.getWidth() * 0.5f;
+        float heightEmplacement = widthEmplacement * ((134f / 192f) * 0.8f);
 
         float widthTiret = this.getWidth() * 0.8f;
         float heightTiret = widthTiret * (20f / 564f);
 
-        float widthPlus = widthEmplacement / 2;
+        float widthPlus = widthEmplacement / 2f;
         float heightPlus = widthPlus * (120f / 127f);
 
-        float widthEgal = widthEmplacement / 2;
-        float heightEgal = widthEgal * (107f / 115f);
+        float widthEgal = widthPlus;
+        float heightEgal = widthPlus * (107f / 115f);
+
+        float interEmplacementPadding = MyConstants.SCREENHEIGHT / 70;
 
 
         labelEmplacement1 = new Label("", labelStyleWhite);
         labelEmplacement2 = new Label("", labelStyleWhite);
         labelEmplacement3 = new Label("", labelStyleWhite);
 
-
-
         emplacement1.setBackground(new SpriteDrawable(new Sprite(emplacementTxture)));
         emplacement1.add(labelEmplacement1);
 
-        this.add().width(widthPlus);
-        this.add(emplacement1).width(widthEmplacement).height(heightEmplacement);
+        line1.add().width(widthPlus);
+        line1.add(emplacement1).width(widthEmplacement).height(heightEmplacement).padLeft(interEmplacementPadding);
+        this.add(line1).padBottom(interEmplacementPadding);
         this.row();
         emplacementPlus.setBackground(new SpriteDrawable(new Sprite(plusTxture)));
         emplacement2.setBackground(new SpriteDrawable(new Sprite(emplacementTxture)));
         emplacement2.add(labelEmplacement2);
-        this.add(emplacementPlus).width(widthPlus).height(heightPlus);
-        this.add(emplacement2).width(widthEmplacement).height(heightEmplacement);
+        line2.add(emplacementPlus).width(widthPlus).height(heightPlus);
+        line2.add(emplacement2).width(widthEmplacement).height(heightEmplacement).padLeft(interEmplacementPadding);
+        this.add(line2).padBottom(interEmplacementPadding);
         this.row();
         emplacementTiret.setBackground(new SpriteDrawable(new Sprite(tiretTxture)));
-        this.add(emplacementTiret).width(widthTiret).height(heightTiret);
+        line3.add(emplacementTiret).width(widthTiret).height(heightTiret);
+        this.add(line3).padBottom(interEmplacementPadding);
+        ;
         this.row();
         emplacementEgal.setBackground(new SpriteDrawable(new Sprite(egalTxture)));
         emplacement3.setBackground(new SpriteDrawable(new Sprite(emplacementTxture)));
         emplacement3.add(labelEmplacement3);
-        this.add(emplacementEgal).width(widthEgal).height(heightEgal);
-        this.add(emplacement3).width(widthEmplacement).height(heightEmplacement);
+        line4.add(emplacementEgal).width(widthEgal).height(heightEgal);
+        line4.add(emplacement3).width(widthEmplacement).height(heightEmplacement).padLeft(interEmplacementPadding);
+        this.add(line4);
 
 
         if (isActive)
@@ -149,7 +156,6 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
             default:
                 break;
         }
-
     }
 
     public void setActive(boolean active)
