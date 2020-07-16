@@ -222,7 +222,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         startPausebutton.setPosition(MyConstants.SCREENWIDTH / 60, 5 * MyConstants.SCREENHEIGHT / 7);
         stage.addActor(startPausebutton);
 
-
         startPausebutton.addListener(new ClickListener()
         {
             public void clicked(InputEvent event, float x, float y)
@@ -251,7 +250,6 @@ public class ScreenOnglet implements Screen, InputProcessor
                 sprite.setSize(MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
 
                 startPausebutton.getStyle().imageUp = new SpriteDrawable(sprite);
-                ;//new TextureRegionDrawable(new Texture(pausePlayButtonPath));
                 PauseSingleton pauseSingleton = PauseSingleton.getInstance();
                 pauseSingleton.isPause = !pauseSingleton.isPause;
             }
@@ -260,6 +258,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         int posX = 6 * MyConstants.SCREENWIDTH / 7;
         int posY = MyConstants.SCREENHEIGHT / 2;
+
         uneMain = new UneMain(posX, posY, MyConstants.SCREENWIDTH / 6);
         uneMain.setVisible(false);
         myCorrectionAndPauseGeneral.addElements(uneMain);
@@ -274,12 +273,11 @@ public class ScreenOnglet implements Screen, InputProcessor
             ecrinDiamantView = new EcrinDiamantView(stage, (MyConstants.SCREENWIDTH / 30) * (168.0f / 59.0f), 9);
             ecrinDiamantView.updateText();
             allDrawables.add(ecrinDiamantView);
+            myCorrectionAndPauseGeneral.addElements(ecrinDiamantView);
         }
-
 
         metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
         myCorrectionAndPauseGeneral.addElements(metrologue);
-
 
  /*
         reserveBilles = new ReserveBilles(MyConstants.SCREENWIDTH - 300, MyConstants.SCREENHeight - 300, 200, 200);
@@ -357,7 +355,6 @@ public class ScreenOnglet implements Screen, InputProcessor
                 newItem.myDraw(batch);
             }
         }
-
 
         if (validusAnimated.isVisible())
         {
@@ -450,7 +447,7 @@ public class ScreenOnglet implements Screen, InputProcessor
             if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
             {
                 System.out.println("clickedOnReserve");
-                UneBille billeAdded = new UneBille(sacDeBilles.currentPositionX + (int) sacDeBilles.animationWidth / 2, sacDeBilles.currentPositionY + (int) sacDeBilles.animationHeight / 2, sacDeBilles.largeurBille);
+                UneBille billeAdded = new UneBille(sacDeBilles.currentPositionX +  sacDeBilles.animationWidth / 2, sacDeBilles.currentPositionY +  sacDeBilles.animationHeight / 2, sacDeBilles.largeurBille);
                 objectTouchedList.add(billeAdded);
                 allDrawables.add(billeAdded);
                 objectTouched = billeAdded;

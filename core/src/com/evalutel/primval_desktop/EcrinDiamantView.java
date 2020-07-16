@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.General.MyConstants;
 
 
-public class EcrinDiamantView implements MyDrawInterface
+public class EcrinDiamantView implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
     private Label currentLabel1;
     private Label currentLabel2;
@@ -139,11 +139,35 @@ public class EcrinDiamantView implements MyDrawInterface
     }
 
 
+    @Override
+    public void myCorrectionStart()
+    {
+
+    }
+
+    @Override
+    public void myCorrectionStop()
+    {
+
+    }
+
+    @Override
+    public void myPause()
+    {
+
+    }
+
     public void myResume()
     {
         if (music != null)
         {
             music.play();
         }
+    }
+
+    @Override
+    public boolean isPause()
+    {
+        return false;
     }
 }

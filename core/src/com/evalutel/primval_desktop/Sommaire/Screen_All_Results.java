@@ -109,7 +109,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         nomChapitre.setPosition(MyConstants.SCREENWIDTH / 2 - MyConstants.SCREENWIDTH / 12, 9 * MyConstants.SCREENHEIGHT / 10);
         stage.addActor(nomChapitre);
 
-        mrNotes = new MrNotes(stage, dataBase,0);
+        mrNotes = new MrNotes(stage, dataBase, 0);
         mrTemps = new MrTemps(stage, dataBase, 1);
 
         Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
@@ -156,8 +156,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String labelChapterTitle = "Pratique des nombres de 1 à 9";
         String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
         String label2 = "Faire correspondre des billes à des oiseaux";
-        String label3 = "Écriture des chiffres 1 à 9";
-        String label4 = "Prononciation des chiffres 1 à 9";
+        String label3 = "Écriture des chiffres de 1 à 9";
+        String label4 = "Prononciation des chiffres de 1 à 9";
         String label5 = "Compter des oiseaux et taper leur nombre";
         String label6 = "Un gâteau pour plusieurs anniversaires";
 

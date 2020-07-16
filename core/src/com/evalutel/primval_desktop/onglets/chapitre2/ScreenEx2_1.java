@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.StringBuilder;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.CalculetteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
@@ -27,16 +28,13 @@ import java.util.ArrayList;
 
 public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 {
-
     private ArrayList<UneBille> billesList;
     private ArrayList<UnOiseau> oiseauxList;
 
     private UnePlancheNew planche1, planche2, planche3;
     ScreeenBackgroundImage bgScreenEx1_1;
 
-
     int cptOiseau, cptBille = 0;
-
 
     DatabaseDesktop dataBase;
 
@@ -48,6 +46,8 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
     Drawable drawableAux;
 
     int cpt;
+
+    Label currentLabel;
 
     public ScreenEx2_1(Game game, DatabaseDesktop dataBase, String ongletTitre)
     {
@@ -406,7 +406,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             calculetteView.textRemove();
             uneArdoise2.fillLabel(1, "4");
 
-            activiteView.addTextActivite("4 +");
+            currentLabel = activiteView.addTextActivite("4 +");
         }
     }
 
@@ -609,7 +609,10 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             calculetteView.textRemove();
             uneArdoise2.fillLabel(2, "3");
 
-            activiteView.addTextActivite("3 =");
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "3 =  ");
+
+            currentLabel.setText(newStrBuilder);
 
         }
     }
@@ -731,7 +734,6 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-
             MyPoint buttonPosition = calculetteView.buttonPosition(7);
 
             float posX = buttonPosition.x;
@@ -739,14 +741,13 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new MoveMainToValidate3(500);
 
-            uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 500);
+            uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 0);
 
             calculetteView.textDisplay(7);
             styleTest = calculetteView.sept_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
-
         }
     }
 
@@ -797,13 +798,15 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-
             uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 1_000);
 
             calculetteView.textRemove();
             uneArdoise2.fillLabel(3, "7");
 
-            activiteView.addTextActivite(" 7");
+            StringBuilder ex = currentLabel.getText();
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "7 ");
+
+            currentLabel.setText(newStrBuilder);
         }
     }
 

@@ -37,8 +37,8 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
 
         final String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
         final String label2 = "Faire correspondre des billes à des oiseaux";
-        final String label3 = "Écriture des chiffres 1 à 9";
-        final String label4 = "Prononciation des chiffres 1 à 9";
+        final String label3 = "Écriture des chiffres de 1 à 9";
+        final String label4 = "Prononciation des chiffres de 1 à 9";
         final String label5 = "Compter des oiseaux et taper leur nombre";
         final String label6 = "Un gâteau pour plusieurs anniversaires";
 

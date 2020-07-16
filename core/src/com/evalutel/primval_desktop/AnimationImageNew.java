@@ -127,8 +127,8 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         long deltaTime = 20;
         long nbIterations = animationDureemillis / deltaTime;
 
-        float deltaX = (float) (deplacementEnX - currentPositionX) / (float) nbIterations;
-        float deltaY = (float) (deplacementEnY - currentPositionY) / (float) nbIterations;
+        float deltaX =  (deplacementEnX - currentPositionX) / (float) nbIterations;
+        float deltaY =  (deplacementEnY - currentPositionY) / (float) nbIterations;
 
 
         timer.schedule(new TaskMoveAnimation(currentPositionX, currentPositionY, deltaX, deltaY, deltaTime, taskEtape, delayNext), deltaTime);
@@ -197,8 +197,8 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
                 currentPositionFloatX += deltaX;
                 currentPositionFloatY += deltaY;
 
-                currentPositionX = (int) currentPositionFloatX;
-                currentPositionY = (int) currentPositionFloatY;
+                currentPositionX = currentPositionFloatX;
+                currentPositionY =  currentPositionFloatY;
 
                 double distanceCarre = Math.pow((double) (deplacementEnX - currentPositionX), 2.0) + Math.pow((double) (deplacementEnY - currentPositionY), 2.0);
                 double distanceStop = Math.pow((double) (deltaX), 2.0) + Math.pow((double) (deltaY), 2.0);
