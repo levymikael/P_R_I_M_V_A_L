@@ -205,9 +205,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
                 uneMain.moveTo(durationMillis, posXmain, posYmain, nextEtape, 1000);
 
-//                switch (cptOiseau)
-//                {
-//                    case 2:
                 if (cptOiseau == 3)
                 {
                     metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.9 - Maintenant ils sont 3 oiseaux.mp3");
