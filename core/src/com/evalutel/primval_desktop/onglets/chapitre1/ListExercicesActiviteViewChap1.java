@@ -82,8 +82,8 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         table.add(tableEx4).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
         table.add(tableEx5).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
-        table.row();
-        table.add(tableEx6).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
+//        table.row();
+//        table.add(tableEx6).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
 
         table.align(Align.top);
         table.setHeight(MyConstants.SCREENHEIGHT / 2);
