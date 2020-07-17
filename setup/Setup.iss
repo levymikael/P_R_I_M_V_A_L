@@ -31,7 +31,7 @@ Source: "Launcher\{#EXECUTABLE_NAME}"; DestDir: "{app}"; Flags: ignoreversion ov
 Source: "Prog\*"; DestDir: "{app}\{#APPLICATION_DIR}"; Flags: ignoreversion overwritereadonly
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Icons]
 Name: "{userdesktop}\{#APPLICATION_NAME}"; Filename: "{app}\{#EXECUTABLE_NAME}"; Tasks: desktopicon;
