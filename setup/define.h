@@ -8,10 +8,10 @@
 #define APPLICATION_DIR "Primval"
 #define COPYRIGHT "© Evalutel. All rights reserved"
 
-#define APPLICATION_VERSION "20.6.0"
-#define FILE_VERSION "20.6.0.0"
-#define RC_FILE_VERSION 20,6,0,0
-#define RC_STR_FILE_VERSION "20,6,0,0"
+#define APPLICATION_VERSION "1.0.0"
+#define FILE_VERSION "1.0.0.0"
+#define RC_FILE_VERSION 1,0,0,0
+#define RC_STR_FILE_VERSION "1,0,0,0"
 
 #define APPLICATION_NAME "Primval"
 #define PLATFORM "windows"
