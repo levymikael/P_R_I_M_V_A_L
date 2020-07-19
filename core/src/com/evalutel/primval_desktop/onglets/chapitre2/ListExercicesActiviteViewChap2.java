@@ -111,7 +111,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!2");
-                game.setScreen(new ScreenEx2_2(game, dataBase, label1));
+                game.setScreen(new ScreenEx2_2(game, dataBase, label2));
             }
         });
         tableEx3.addListener(new ClickListener()

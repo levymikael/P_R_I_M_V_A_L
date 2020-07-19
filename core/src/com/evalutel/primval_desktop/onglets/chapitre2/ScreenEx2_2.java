@@ -12,6 +12,7 @@ import com.evalutel.primval_desktop.CalculetteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
+import com.evalutel.primval_desktop.General.MyMath;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.MyTouchInterface;
 import com.evalutel.primval_desktop.SacDeBilles;
@@ -24,6 +25,7 @@ import com.evalutel.primval_desktop.onglets.ScreenOnglet;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
@@ -37,6 +39,8 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     int cptOiseau, cptBille = 0;
 
     DatabaseDesktop dataBase;
+    int[] numOiseauArray;
+    ArrayList<int[]> randOiseauxArray = new ArrayList<>();
 
     UneArdoise2 uneArdoise2;
     protected CalculetteView calculetteView;
@@ -48,6 +52,9 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     int cpt;
 
     Label currentLabel;
+
+    int numOiseauxBranche1, numOiseauxBranche2;
+
 
     public ScreenEx2_2(Game game, DatabaseDesktop dataBase, String ongletTitre)
     {
@@ -69,11 +76,11 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         allCorrigibles.add(sacDeBilles);
 
         planche1 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.9f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-//        planche2 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.2f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-//        planche3 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 0.5f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        planche2 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.2f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        planche3 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 0.5f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
         allPlanches.add(planche1);
-//        allPlanches.add(planche2);
-//        allPlanches.add(planche3);
+        allPlanches.add(planche2);
+        allPlanches.add(planche3);
 
         for (int i = 0; i < allPlanches.size(); i++)
         {
@@ -85,14 +92,19 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
 
-        activiteView = new ActiviteView(stage, xTableTitre, activiteWidth * 42 / 1626, activiteWidth, "enonce");
+        float posEnonceX = (MyConstants.SCREENWIDTH - activiteWidth) / 2f;
+        float posSolutionX = posEnonceX + activiteWidth / 2f;
+
+        activiteView = new ActiviteView(stage, posEnonceX, activiteWidth * 42 / 1626, activiteWidth / 2f, "activite");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
+        solutionView = new ActiviteView(stage, posSolutionX, activiteWidth * 42 / 1626, activiteWidth / 2f, "solution");
+        allDrawables.add(solutionView);
+        myCorrectionAndPauseGeneral.addElements(solutionView);
+
         exoConsigneLabel = new Label(ongletTitre, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
-//        highestMarkObtainedLabel = new Label("", labelStyle3);
-//        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
         tableTitre.add(exoNumLabel).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
         tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
@@ -101,6 +113,12 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         stage.addActor(tableTitre);
 
         billesList = autoFillPlanche();
+
+        oiseauxList = getNumberOiseauxArList();
+
+//        numOiseauArray = MyMath.genereTabAleatoire(9);
+
+        getRandOiseauxArray();
 
         resultatExercice = new UnResultat("Primval", 2, 2, 0, ongletTitre, 0, 0, dateTest, 0, 0, 0, 123);
 
@@ -149,16 +167,17 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            MyTimer.TaskEtape nextEtape = new DisplayOiseaux(2_000, 1_000);
+            MyTimer.TaskEtape nextEtape = new DisplayOiseauxBranche1(2_000, 1_000);
 
             metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet2_MaintenantOnVaCompteravecBadix.mp3", nextEtape);
+            activiteView.setTextActivite("Place sur la première planche autant de billes que d'oiseaux que tu vois sur la première branche, tape leur nombre au clavier puis valide");
         }
     }
 
 
-    private class DisplayOiseaux extends MyTimer.TaskEtape
+    private class DisplayOiseauxBranche1 extends MyTimer.TaskEtape
     {
-        private DisplayOiseaux(long durMillis, long delay)
+        private DisplayOiseauxBranche1(long durMillis, long delay)
         {
             super(durMillis);
         }
@@ -166,31 +185,31 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            DisplayOiseaux nextEtape = new DisplayOiseaux(0, 0);
+            DisplayOiseauxBranche1 nextEtape = new DisplayOiseauxBranche1(0, 0);
 
-            if (cptOiseau < 7)
-            {
+//            if (cptOiseau < 7)
+//            {
                 UnOiseau oiseau = oiseauxList.get(cptOiseau);
 
-                if (cptOiseau < 4)
-                {
+//                if (cptOiseau < 4)
+//                {
                     posY = 7 * MyConstants.SCREENHEIGHT / 10;
                     posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau);
-                }
-                else
-                {
-                    posY = 5 * MyConstants.SCREENHEIGHT / 11;
-                    posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 4);
-                }
+//                }
+//                else
+//                {
+//                    posY = 5 * MyConstants.SCREENHEIGHT / 11;
+//                    posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 4);
+//                }
 
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
                 timer.schedule(nextEtape, 100);
                 cptOiseau++;
-            }
-            else
-            {
-                timer.schedule(new MoveMainToReserve1(500, 0), 0);
-            }
+//            }
+//            else
+//            {
+//                timer.schedule(new MoveMainToReserve1(500, 0), 0);
+//            }
         }
     }
 
@@ -872,6 +891,33 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         return billesList;
     }
 
+    public int randOiseau1()
+    {
+        Random rand = new Random();
+        numOiseauxBranche1 = rand.nextInt(8) + 1;
+        return numOiseauxBranche1;
+    }
+
+
+    public int randOiseau2()
+    {
+        Random rand = new Random();
+        int numOiseauxBranche2 = rand.nextInt(9 - numOiseauxBranche1) + 1;
+
+        return numOiseauxBranche2;
+    }
+
+    public void getRandOiseauxArray()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            int [] oiseauxNumUpTo9 = {0,0};
+            oiseauxNumUpTo9[0] = randOiseau1();
+            oiseauxNumUpTo9[1] = randOiseau2();
+           randOiseauxArray.add(oiseauxNumUpTo9);
+        }
+    }
+
 
     public ArrayList getNumberOiseauxArList()
     {
@@ -880,7 +926,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         int firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
         int firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 9; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
             UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12) * (396.0f / 500.0f), (float) (MyConstants.SCREENWIDTH / 12) * (500.0f / 396.0f));
