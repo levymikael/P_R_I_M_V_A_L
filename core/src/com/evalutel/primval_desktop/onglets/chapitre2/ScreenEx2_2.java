@@ -117,7 +117,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         uneArdoise2.setActive(false);
         myCorrectionAndPauseGeneral.addElements(uneArdoise2);
 
-//        validusAnimated.setVisible(false);
+        metrologue.setVisible(false);
 
         timer.schedule(new PresentationMetrologue(3000), 1000);
     }

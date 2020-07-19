@@ -38,7 +38,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
 
         animation = new Animation(1f / 15f, (Object[]) animationFrames);
 
-        this.setPosition(MyConstants.SCREENWIDTH / 60,2 * MyConstants.SCREENHEIGHT / 5);
+        this.setPosition(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5);
     }
 
     public boolean contains(float currentPositionX, float currentPositionY)
@@ -66,8 +66,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
                 {
                     music.dispose();
                     music2.dispose();
-                }
-                catch (Exception e)
+                } catch (Exception e)
                 {
 
                 }
@@ -83,6 +82,19 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
         });
     }
 
+    @Override
+    public boolean isVisible()
+    {
+        return isVisible;
+    }
+
+    @Override
+    public void setVisible(boolean visible)
+    {
+        isVisible = visible;
+    }
+
+
     public void stopMusic()
     {
         music.stop();
@@ -93,19 +105,21 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
     @Override
     public void myDraw(Batch batch)
     {
-        elapsedTime += Gdx.graphics.getDeltaTime();
+        if (isVisible = true)
+        {
+            elapsedTime += Gdx.graphics.getDeltaTime();
 
-        if (isSpeaking)
-        {
-            TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, isSpeaking);
-            batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
-        }
-        else
-        {
-            batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+            if (isSpeaking)
+            {
+                TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, isSpeaking);
+                batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+            }
+            else
+            {
+                batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+            }
         }
     }
-
 
     private static ArrayList<String> getAnimationMetrologue()
     {

@@ -361,8 +361,10 @@ public class ScreenOnglet implements Screen, InputProcessor
             validusAnimated.myDraw(batch);
         }
 
-        metrologue.myDraw(batch);
-
+        if (metrologue.isVisible())
+        {
+            metrologue.myDraw(batch);
+        }
         batch.end();
 
         stage.act(delta);
