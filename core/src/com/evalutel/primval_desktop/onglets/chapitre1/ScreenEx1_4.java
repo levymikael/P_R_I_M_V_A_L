@@ -56,7 +56,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
     public ScreenEx1_4(Game game, DatabaseDesktop dataBase, String ongletTitre)
     {
-        super(game, dataBase, 1, 4, true);
+        super(game, dataBase, 1, 4, true,9);
 
         this.dataBase = dataBase;
 
@@ -69,7 +69,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlancheUnique / 2, MyConstants.SCREENHEIGHT / 10, largeurPlancheUnique, largeurBilleUnique);
         allDrawables.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
-        allCorrigibles.add(planche1);
+//        allCorrigibles.add(planche1);
 
         allPlanches.add(planche1);
 
@@ -582,7 +582,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
             planche1.addBilleAndOrganize(bille);
             bille.setVisible(true);
             myCorrectionAndPauseGeneral.addElements(bille);
-            allCorrigibles.add(bille);
+//            allCorrigibles.add(bille);
         }
     }
 

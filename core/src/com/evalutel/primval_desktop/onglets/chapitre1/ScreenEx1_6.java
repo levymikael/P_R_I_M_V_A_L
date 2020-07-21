@@ -66,7 +66,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
 
     public ScreenEx1_6(Game game, DatabaseDesktop dataBase, String ongletTitre)
     {
-        super(game, dataBase, 1, 6, true);
+        super(game, dataBase, 1, 6, true,9);
 
         this.dataBase = dataBase;
 
@@ -79,7 +79,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         sacDeBougies.setActive(false);
         allDrawables.add(sacDeBougies);
         myCorrectionAndPauseGeneral.addElements(sacDeBougies);
-        allCorrigibles.add(sacDeBougies);
+//        allCorrigibles.add(sacDeBougies);
 
         int gateauWidth = MyConstants.SCREENWIDTH / 2;
         int gateauHeight = (int) (gateauWidth * (266f / 462f));
@@ -88,7 +88,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         gateauAnniversaire.shouldReturnToReserve = true;
         allDrawables.add(gateauAnniversaire);
         myCorrectionAndPauseGeneral.addElements(gateauAnniversaire);
-        allCorrigibles.add(gateauAnniversaire);
+//        allCorrigibles.add(gateauAnniversaire);
 
         bougiesList = new ArrayList<>();
         for (int i = 0; i < 9; i++)
@@ -100,7 +100,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             objectTouchedList.add(bougie);
             bougie.setVisible(false);
             myCorrectionAndPauseGeneral.addElements(bougie);
-            allCorrigibles.add(bougie);
+//            allCorrigibles.add(bougie);
             bougiesList.add(bougie);
         }
 

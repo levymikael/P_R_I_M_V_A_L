@@ -43,7 +43,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
     public ScreenEx1_2(Game game, DatabaseDesktop dataBase, String ongletTitre)
     {
-        super(game, dataBase, 1, 2, true);
+        super(game, dataBase, 1, 2, true,9);
 
         this.dataBase = dataBase;
 
@@ -58,7 +58,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlancheUnique / 2, 0, largeurPlancheUnique, largeurBilleUnique);
         planche1.shouldReturnToReserve = true;
         allDrawables.add(planche1);
-        allCorrigibles.add(planche1);
+//        allCorrigibles.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
         allPlanches.add(planche1);
 
@@ -71,7 +71,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             objectTouchedList.add(bille);
             bille.setVisible(false);
             myCorrectionAndPauseGeneral.addElements(bille);
-            allCorrigibles.add(bille);
+//            allCorrigibles.add(bille);
         }
 
 

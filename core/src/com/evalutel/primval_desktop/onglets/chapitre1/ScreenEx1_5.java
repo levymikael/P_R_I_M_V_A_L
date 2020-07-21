@@ -64,7 +64,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
     public ScreenEx1_5(Game game, DatabaseDesktop dataBase, String ongletTitre)
     {
-        super(game, dataBase, 1, 5, true);
+        super(game, dataBase, 1, 5, true, 9);
 
         this.dataBase = dataBase;
 
@@ -77,13 +77,16 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         sacDeBilles.setActive(false);
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
-        allCorrigibles.add(sacDeBilles);
+//        allCorrigibles.add(sacDeBilles);
+
+        allPlanches = new ArrayList<>();
 
         planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlancheUnique / 2, 0, largeurPlancheUnique, largeurBilleUnique);
         planche1.shouldReturnToReserve = true;
         allDrawables.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
-        allCorrigibles.add(planche1);
+//        allCorrigibles.add(planche1);
+        allPlanches.add(planche1);
 
         for (int i = 0; i < 9; i++)
         {
@@ -94,11 +97,9 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             objectTouchedList.add(bille);
             bille.setVisible(false);
             myCorrectionAndPauseGeneral.addElements(bille);
-            allCorrigibles.add(bille);
+//            allCorrigibles.add(bille);
         }
 
-        allPlanches = new ArrayList<>();
-        allPlanches.add(planche1);
 
         billesList = new ArrayList<>();
 
@@ -222,7 +223,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
                     if (cptOiseau < 3)
                     {
-                        posX = (MyConstants.SCREENWIDTH / 6) +  (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+                        posX = (MyConstants.SCREENWIDTH / 6) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                     else
                     {

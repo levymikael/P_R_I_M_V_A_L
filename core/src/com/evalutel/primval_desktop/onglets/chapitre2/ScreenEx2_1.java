@@ -52,7 +52,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
     public ScreenEx2_1(Game game, DatabaseDesktop dataBase, String ongletTitre)
     {
-        super(game, dataBase, 2, 1, false);
+        super(game, dataBase, 2, 1, false,0);
 
         this.dataBase = dataBase;
 
@@ -67,7 +67,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         sacDeBilles.setActive(false);
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
-        allCorrigibles.add(sacDeBilles);
+//        allCorrigibles.add(sacDeBilles);
 
         planche1 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.9f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
         planche2 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.2f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
@@ -81,7 +81,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             UnePlancheNew unePlanche = allPlanches.get(i);
             allDrawables.add(unePlanche);
             myCorrectionAndPauseGeneral.addElements(unePlanche);
-            allCorrigibles.add(unePlanche);
+//            allCorrigibles.add(unePlanche);
         }
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();

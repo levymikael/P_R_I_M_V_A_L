@@ -36,9 +36,9 @@ public class EcrinDiamantView implements MyDrawInterface, MyCorrectionAndPauseIn
     BitmapFont bitmapFont;
     private boolean isVisible = true;
 
-    Skin ecrinSkin;
-    Cell<Label> cell;
-    Label label2;
+//    Skin ecrinSkin;
+//    Cell<Label> cell;
+//    Label label2;
     private int pointsMax;
 
     Music music;
@@ -56,7 +56,7 @@ public class EcrinDiamantView implements MyDrawInterface, MyCorrectionAndPauseIn
 
         FreeTypeFontGenerator FONT_COMICI = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = (int) MyConstants.SCREENWIDTH / 70;
+        parameter.size =  MyConstants.SCREENWIDTH / 70;
         bitmapFont = FONT_COMICI.generateFont(parameter);
         FONT_COMICI.dispose();
 
@@ -98,6 +98,7 @@ public class EcrinDiamantView implements MyDrawInterface, MyCorrectionAndPauseIn
         String str2 = "  /" + pierre + "/" + pointsMax;
         currentLabel1.setText(str2);
     }
+
 
     public void addDiamond(int nbDiamant)
     {

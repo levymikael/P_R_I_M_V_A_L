@@ -63,7 +63,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     boolean isInPause = false;
 
     protected ArrayList<MyDrawInterface> allDrawables;
-    protected ArrayList<MyCorrectionAndPauseInterface> allCorrigibles;
+//    protected ArrayList<MyCorrectionAndPauseInterface> allCorrigibles;
     protected ArrayList<MyTouchInterface> objectTouchedList;
 
     protected ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
@@ -100,7 +100,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected ActiviteView activiteView;
     protected ActiviteView solutionView;
 
-
     protected Label.LabelStyle labelStyleArial, labelStyleComic, labelStyle3;
 
     protected FreeTypeFontGenerator fontArial, fontComic;
@@ -110,7 +109,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected Label exoNumLabel, exoConsigneLabel, highestMarkObtainedLabel;
 
 
-    public ScreenOnglet(Game game, DatabaseDesktop dataBase, int chapitre, int onglet, boolean ecrin)
+    public ScreenOnglet(Game game, DatabaseDesktop dataBase, int chapitre, int onglet, boolean ecrin, int maxNotePossible)
     {
         batch = new SpriteBatch();
 
@@ -130,7 +129,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
 // Positionnement numero exercice:
         tableTitre.pack();
-        activiteWidth = (MyConstants.SCREENWIDTH / 4.0f) * 3.0f;
+        activiteWidth = (MyConstants.SCREENWIDTH / 4f) * 3f;
 
         heightTop = (activiteWidth * 42 / 1626) + 5;
         xTableTitre = (MyConstants.SCREENWIDTH / 2.0f - activiteWidth / 2.0f);
@@ -163,7 +162,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         labelStyle3.font = bitmapFontArial;
         labelStyle3.fontColor = Color.YELLOW;
 
-
         largeurBilleUnique = MyConstants.SCREENWIDTH / 15;
         largeurPlancheUnique = largeurBilleUnique * 4;
         largeurBilleMultiple = MyConstants.SCREENWIDTH / 25;
@@ -172,10 +170,9 @@ public class ScreenOnglet implements Screen, InputProcessor
         largeurBougie = MyConstants.SCREENWIDTH / 15;
         largeurGateau = largeurBougie * 4;
 
-
         objectTouchedList = new ArrayList<>();
         allDrawables = new ArrayList<>();
-        allCorrigibles = new ArrayList<>();
+//        allCorrigibles = new ArrayList<>();
 
         startTime = System.currentTimeMillis();
 
@@ -270,7 +267,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         if (ecrin)
         {
-            ecrinDiamantView = new EcrinDiamantView(stage, (MyConstants.SCREENWIDTH / 30) * (168.0f / 59.0f), 9);
+            ecrinDiamantView = new EcrinDiamantView(stage, (MyConstants.SCREENWIDTH / 30) * (168f / 59f), maxNotePossible);
             ecrinDiamantView.updateText();
             allDrawables.add(ecrinDiamantView);
             myCorrectionAndPauseGeneral.addElements(ecrinDiamantView);
@@ -342,8 +339,8 @@ public class ScreenOnglet implements Screen, InputProcessor
     @Override
     public void render(float delta)
     {
-        Gdx.gl.glClearColor(1, 1, 1, 1); // center
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//        Gdx.gl.glClearColor(1, 1, 1, 1); // center
+//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
 
