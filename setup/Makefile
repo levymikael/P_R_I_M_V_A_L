@@ -34,11 +34,14 @@ ${PROG_DIR}/${APP_NAME}.jar: ${APP_DIR}/desktop/build/libs/desktop-1.0.jar
 
 ${LAUNCHER_DIR}/${APP_NAME}.exe: ${LAUNCHER_DIR}/${APP_NAME}.xml
 	launch4jc ${LAUNCHER_DIR}/${APP_NAME}.xml
+	bin/signtool.exe sign /s my /t http://timestamp.verisign.com/scripts/timstamp.dll /v ${LAUNCHER_DIR}/${APP_NAME}.exe
 
 ${RELEASE_DIR}/${VERSION}/${SETUP_NAME}.exe: ${LAUNCHER_DIR}/${APP_NAME}.exe ${PROG_DIR}/${APP_NAME}.jar ${SETUP_DIR}/Setup.iss
 	mkdir -p ${RELEASE_DIR}/${VERSION}
 	iscc ${SETUP_DIR}/Setup.iss
+	bin/signtool.exe sign /s my /t http://timestamp.verisign.com/scripts/timstamp.dll /v ${RELEASE_DIR}/${VERSION}/${SETUP_NAME}.exe
 
 ${RELEASE_DIR}/${VERSION}/${UPDATE_NAME}.exe: ${LAUNCHER_DIR}/${APP_NAME}.exe ${PROG_DIR}/${APP_NAME}.jar ${SETUP_DIR}/Update.iss
 	mkdir -p ${RELEASE_DIR}/${VERSION}
 	iscc ${SETUP_DIR}/Update.iss
+	bin/signtool.exe sign /s my /t http://timestamp.verisign.com/scripts/timstamp.dll /v ${RELEASE_DIR}/${VERSION}/${UPDATE_NAME}.exe
