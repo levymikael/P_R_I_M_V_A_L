@@ -66,9 +66,9 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     BitmapFont bitmapFontZAP;
 
-    boolean chap1titleClicked = false;
+    boolean chap1titleClicked, chap2titleClicked = false;
 
-    Table chapter1Table, tableCollapsible;
+    Table chapter1Table, chapter2Table, tableCollapsible, tableCollapsible2;
 
 
     public Screen_All_Results(Game game, DatabaseDesktop dataBase)
@@ -139,19 +139,23 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table chapter2Table = chapter2Results();
         Table chapter3Table = chapter1Results();
 
-        container.debug();
-        table.add(chapter1Table).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19)).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40);
-        table.row();
-        table.add(chapter2Table).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40);
-        table.row();
-        table.add(chapter3Table).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40);
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
 
-        table.setWidth(MyConstants.SCREENWIDTH);
+
+        table.debug();
+        table.add(chapter1Table).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19)).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40).height(lineHeight);
+        table.row();
+        table.add(chapter2Table).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40).height(MyConstants.SCREENHEIGHT/4f);
+        ;
+//        table.row();
+//        table.add(chapter3Table).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40);
+
+//        table.setWidth(MyConstants.SCREENWIDTH);
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
 
-        container.add(scroll).height(heightContainer);
+        container.add(scroll).height(3*MyConstants.SCREENHEIGHT/4f).width(screenWidth);
 
         stage.addActor(container);
 
@@ -192,7 +196,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle = LigneTableauxResults.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);
+        Table tableChapTitle = LigneTableauxResults.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 0, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
@@ -202,20 +206,24 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
 
         tableCollapsible = new Table();
-        tableCollapsible.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        tableCollapsible.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
         tableCollapsible.row();
-        tableCollapsible.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        tableCollapsible.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
         tableCollapsible.row();
-        tableCollapsible.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        tableCollapsible.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
         tableCollapsible.row();
-        tableCollapsible.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        tableCollapsible.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
         tableCollapsible.row();
-        tableCollapsible.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        tableCollapsible.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
         tableCollapsible.row();
-        tableCollapsible.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        tableCollapsible.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
 
-        chapter1Table.add(tableChapTitle).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        chapter1Table.add(tableChapTitle).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
         chapter1Table.row();
+        chapter1Table.add(tableCollapsible).width(screenWidth).height(tableCollapsible.getHeight());
+        chapter1Table.row();
+
+
 //        table.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
 //        table.row();
 //        table.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
@@ -228,7 +236,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //        table.row();
 //        table.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
 
-        chapter1Table.align(Align.top);
+//        chapter1Table.align(Align.top);
 
         tableChapTitle.addListener(new ClickListener()
                                    {
@@ -268,15 +276,14 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     public Table chapter2Results()
     {
-        chapter1Table = new Table();
+        chapter2Table = new Table();
 
-        String labelChapterTitle = "Pratique des nombres de 1 à 9";
-        String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
-        String label2 = "Faire correspondre des billes à des oiseaux";
-        String label3 = "Écriture des chiffres de 1 à 9";
-        String label4 = "Prononciation des chiffres de 1 à 9";
-        String label5 = "Compter des oiseaux et taper leur nombre";
-        String label6 = "Un gâteau pour plusieurs anniversaires";
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
 
         Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
         textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -290,40 +297,41 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
         float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
-        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap2.png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle = LigneTableauxResults.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);
-        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
-        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
-        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4, dataBase);
-        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
-        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
+        Table tableChapTitle2 = LigneTableauxResults.getLigne(chapter_bouton, labelChapterTitle, null, "white", 2, 0, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", 2, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", 2, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", 2, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", 2, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", 2, 5, dataBase);
+//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
 
 
-        tableCollapsible = new Table();
-        tableCollapsible.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-        tableCollapsible.row();
-        tableCollapsible.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-        tableCollapsible.row();
-        tableCollapsible.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-        tableCollapsible.row();
-        tableCollapsible.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-        tableCollapsible.row();
-        tableCollapsible.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-        tableCollapsible.row();
-        tableCollapsible.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        tableCollapsible2 = new Table();
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
+        tableCollapsible2.row();
+//        tableCollapsible.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
 
-        chapter1Table.add(tableChapTitle).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-        chapter1Table.row();
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT/4);
 //        table.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
 //        table.row();
 //        table.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
@@ -336,17 +344,17 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //        table.row();
 //        table.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
 
-        chapter1Table.align(Align.top);
+//        chapter2Table.align(Align.top);
 
-        tableChapTitle.addListener(new ClickListener()
-                                   {
-                                       @Override
-                                       public void clicked(InputEvent event, float x, float y)
-                                       {
-                                           chap1titleClicked = !chap1titleClicked;
-                                           System.out.println("chap1titleClicked" + chap1titleClicked);
-                                       }
-                                   }
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap2titleClicked" + chap1titleClicked);
+                                        }
+                                    }
         );
 
 
@@ -371,7 +379,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //
 //        visTable.debug();
 
-        return chapter1Table;
+        return chapter2Table;
     }
 
     @Override
@@ -446,11 +454,20 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         }
         if (chap1titleClicked)
         {
-            chapter1Table.add(tableCollapsible);
+            chapter1Table.add(tableCollapsible)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT/4f)*/;
         }
         else
         {
-            chapter1Table.clearChildren();
+            tableCollapsible.clearChildren();
+        }
+
+        if (chap2titleClicked)
+        {
+            chapter2Table.add(tableCollapsible2)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT/4f)*/;
+        }
+        else
+        {
+            tableCollapsible2.clearChildren();
         }
 
         batch.end();

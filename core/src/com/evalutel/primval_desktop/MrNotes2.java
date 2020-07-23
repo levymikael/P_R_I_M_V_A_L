@@ -49,7 +49,7 @@ public class MrNotes2 implements MyDrawInterface
 
         if (screen == "general")
         {
-            newTotalNotes = totalNotes.substring(0, totalNotes.length() - 3) + "/3593";
+            newTotalNotes = totalNotes.substring(0, totalNotes.length() - 5) + "/3593";
         }
         else
         {
