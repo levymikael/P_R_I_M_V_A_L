@@ -200,15 +200,15 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             }
         });
 
-//        blueBorderTableResults.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                game.setScreen(new Screen_All_Results(game, dataBase));
-//                Gdx.app.log("Screen All results ", "clicked!");
-//            }
-//        });
+        resultsButton.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                game.setScreen(new Screen_All_Results(game, dataBase));
+                Gdx.app.log("Screen All results ", "clicked!");
+            }
+        });
 
 
         Texture escapeBtn = new Texture(Gdx.files.internal("Images/Quitter primaire.png"));

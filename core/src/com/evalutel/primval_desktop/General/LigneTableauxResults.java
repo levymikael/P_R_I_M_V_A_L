@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
+import com.evalutel.primval_desktop.MrNotes;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 
@@ -124,11 +125,13 @@ public class LigneTableauxResults
             labelStyleNotes.font = bitmapFontArial;
             labelStyleNotes.fontColor = Color.ORANGE;
 
-            int notePossiblePerChapter = db.getMaxNotePossiblePerChapter(chapitre, 0);
-            highestNote = db.getHighestNotePerChapter(chapitre);
-            int noteMaxPerChapter = db.getMaxNotePerChapter(chapitre, 0);
+            notes2Implement = db.getTotalNotePageForIdProfil(chapitre);
 
-            notes2Implement = highestNote + " / " + notePossiblePerChapter + " / " + noteMaxPerChapter;
+//            int notePossiblePerChapter = db.getMaxNotePossiblePerChapter(chapitre, 0);
+//            highestNote = db.getHighestNotePerChapter(chapitre);
+//            int noteMaxPerChapter = db.getMaxNotePerChapter(chapitre, 0);
+//
+////            notes2Implement = highestNote + " / " + notePossiblePerChapter + " / " + noteMaxPerChapter;
         }
 
         TextureRegionDrawable tableBG = new TextureRegionDrawable(new TextureRegion(new Texture(pixmapBg)));
