@@ -51,7 +51,14 @@ public class MrNotes implements MyDrawInterface
 
         db = new MyDataBase(dataBase);
 
+
+
         totalNotes = db.getTotalNotePageForIdProfil(chapitre);
+
+//        if (chapitre ==0)
+//        {
+//            totalNotes = totalNotes.substring(0,totalNotes.length()-)
+//        }
 
 
 // Configuration police

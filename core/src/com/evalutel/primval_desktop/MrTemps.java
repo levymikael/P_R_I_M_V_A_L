@@ -36,7 +36,7 @@ public class MrTemps implements MyDrawInterface
 
         db = new MyDataBase(dataBase);
 
-        long totalDuree = db.getTotalDureePageForIdProfil(chapitre);
+        long totalDuree = db.getTotalDureePageForIdProfilByChapter(chapitre);
 
         String duration = MillisToDuration(totalDuree);
 
@@ -87,11 +87,11 @@ public class MrTemps implements MyDrawInterface
         Pixmap greenBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.OLIVE);
 
         Table border = new Table();
-        border.pad(screenWidth / 1000);
+        border.pad(screenWidth / 1_000);
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(greenBorder))));
         border.add(temps);
 
-        container.add(mrTemps).height(screenHeight / 10).width((MyConstants.SCREENHEIGHT / 10) * (172.0f / 223.0f));
+        container.add(mrTemps).height(screenHeight / 10).width((MyConstants.SCREENHEIGHT / 10) * (172f / 223f));
         container.row();
         container.add(border);
 

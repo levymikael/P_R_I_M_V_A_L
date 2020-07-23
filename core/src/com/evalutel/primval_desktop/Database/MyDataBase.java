@@ -215,15 +215,22 @@ public class MyDataBase
             totalNoteMax.moveToNext();
             totalMaxNoteforIdProfil = totalNoteMax.getInt(1);
         }
+        String totalNotePageForIdProfil;
 
+        if (chapitreNumber !=0)
+        {
+             totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/" + totalMaxNoteforIdProfil;
+        }
+        else
+        {
 
-        String totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/" + totalMaxNoteforIdProfil;
-
+             totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/3596" ;
+        }
 
         return totalNotePageForIdProfil;
     }
 
-    public long getTotalDureePageForIdProfil(/*User idProfil,*/ int chapitre)
+    public long getTotalDureePageForIdProfilByChapter(/*User idProfil,*/ int chapitre)
     {
         long totalDureePageForIdProfil = 0;
 
@@ -240,6 +247,25 @@ public class MyDataBase
     }
 
     public long getTotalDureeAllForIdProfil()
+    {
+        long totalDureePageForIdProfil = 0;
+
+        String sqlQuery = "SELECT sum(duree) from RESULTAT";
+
+        DataBase.Result test = database.query(sqlQuery);
+
+        if (!test.isEmpty())
+        {
+            test.moveToNext();
+            totalDureePageForIdProfil = test.getInt(1);
+
+            int ok = 5;
+            ok++;
+        }
+        return totalDureePageForIdProfil;
+    }
+
+    public long getTotalNotesAllForIdProfil()
     {
         long totalDureePageForIdProfil = 0;
 

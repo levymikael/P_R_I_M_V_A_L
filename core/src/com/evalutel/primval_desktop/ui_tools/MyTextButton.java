@@ -97,9 +97,9 @@ public class MyTextButton extends TextButton implements MyDrawInterface, MyCorre
     public void myDraw(Batch batch)
     {
 
-        TextureRegion textureRegion = new TextureRegion(new Texture(backgroundImagePathUp));
-
-        batch.draw(textureRegion, 0, 0, getWidth(), getHeight());
+//        TextureRegion textureRegion = new TextureRegion(new Texture(backgroundImagePathUp));
+//
+//        batch.draw(textureRegion, 0, 0, getWidth(), getHeight());
 
     }
 

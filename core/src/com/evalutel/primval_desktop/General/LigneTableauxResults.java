@@ -7,18 +7,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 
-public class LigneTableaux2
+public class LigneTableauxResults
 {
     static MyDataBase db;
 
@@ -30,6 +28,8 @@ public class LigneTableaux2
 
     static long durationPerChapter, durationPerExercice = 0;
 
+    static BitmapFont bitmapFontArial;
+
 
     public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, DatabaseDesktop dataBase)
     {
@@ -40,11 +40,11 @@ public class LigneTableaux2
         int screenHeight = Gdx.graphics.getHeight();
 
         Pixmap pmRed = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmRed.setColor(new Color(235.0f / 50.0f, 44.0f / 255.0f, 35.0f / 255.0f, 1));
+        pmRed.setColor(new Color(235f / 50f, 44f / 255f, 35f / 255f, 1));
         pmRed.fill();
 
         Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmBlue.setColor(new Color(71.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1));
+        pmBlue.setColor(new Color(71f / 255f, 107f / 255f, 217f / 255f, 1));
         pmBlue.fill();
 
         Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
@@ -57,20 +57,20 @@ public class LigneTableaux2
 
         Pixmap pixmapBg = new Pixmap(1, 1, Pixmap.Format.RGB565);
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator fontArial = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = screenWidth / 90;
-        BitmapFont bitmapFont = generator.generateFont(parameter);
-        generator.dispose();
+        parameter.size = MyConstants.SCREENWIDTH / 70;
+        bitmapFontArial = fontArial.generateFont(parameter);
+        fontArial.dispose();
 
         Label.LabelStyle labelStyleOnglet = new Label.LabelStyle();
-        labelStyleOnglet.font = bitmapFont;
+        labelStyleOnglet.font = bitmapFontArial;
 
         db = new MyDataBase(dataBase);
 
         durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
 
-        durationPerChapter = db.getTotalDureePageForIdProfil(chapitre);
+        durationPerChapter = db.getTotalDureePageForIdProfilByChapter(chapitre);
 
         if (borderColor == "white")
         {
@@ -85,24 +85,24 @@ public class LigneTableaux2
 
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
         labelStyleDuration.fontColor = Color.OLIVE;
-        labelStyleDuration.font = bitmapFont;
+        labelStyleDuration.font = bitmapFontArial;
 
         Label labelDuration = new Label(duration, labelStyleDuration);
 
         Label exerciseTitleLabel = new Label(ongletTitre, labelStyleOnglet);
 
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
-        labelStyleNotes.font = bitmapFont;
+        labelStyleNotes.font = bitmapFontArial;
 
         if (borderColor == "red")
         {
-            labelStyleOnglet.fontColor = new Color(167.0f / 255.0f, 44.0f / 255.0f, 23.0f / 255.0f, 1);
+            labelStyleOnglet.fontColor = new Color(167f / 255f, 44f / 255f, 23f / 255f, 1);
             pixmapBg.setColor(Color.WHITE);
             pixmapBg.fill();
         }
         else if (borderColor == "blue")
         {
-            labelStyleOnglet.fontColor = new Color(72.0f / 255.0f, 107.0f / 255.0f, 217.0f / 255.0f, 1);
+            labelStyleOnglet.fontColor = new Color(72f / 255f, 107f / 255f, 217f / 255f, 1);
             pixmapBg.setColor(Color.WHITE);
             pixmapBg.fill();
 
@@ -121,7 +121,7 @@ public class LigneTableaux2
             pixmapBg.setColor(Color.ORANGE);
             pixmapBg.fill();
 
-            labelStyleNotes.font = bitmapFont;
+            labelStyleNotes.font = bitmapFontArial;
             labelStyleNotes.fontColor = Color.ORANGE;
 
             int notePossiblePerChapter = db.getMaxNotePossiblePerChapter(chapitre, 0);
@@ -145,35 +145,35 @@ public class LigneTableaux2
         noteTable.add(labelNotes).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 20);
         noteTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
-        table.add(new Image()).width(screenWidth / 40);
+        table.add().width(screenWidth / 40);
 
         table.add(button);
 
-        table.add(new Image()).width(screenWidth / 80);
+        table.add().width(screenWidth / 80);
 
         table.add(exerciseTitleLabel).width((float) (screenWidth * 0.55));
 
         if (texture != null)
         {
-            table.add(new Image()).width(screenWidth / 100);
+            table.add().width(screenWidth / 100);
 
             table.add(new Image(texture)).width(screenWidth / 80).height(screenWidth / 70);
         }
         else
         {
-            table.add(new Image()).width(screenWidth / 80);
+            table.add().width(screenWidth / 80);
 
-            table.add(new Image()).width(screenWidth / 100).height(screenWidth / 70);
+            table.add().width(screenWidth / 100).height(screenWidth / 70);
         }
 
         if (borderColor == "red")
         {
             durationTable.add(labelDuration).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 20);
 
-            table.add(new Image()).width(screenWidth / 15);
+            table.add().width(screenWidth / 15);
 
             table.add(durationTable).width(screenWidth / 12);
-            table.add(new Image()).width(2 * screenWidth / 10);
+            table.add().width(2 * screenWidth / 10);
         }
         else
         {
@@ -181,31 +181,38 @@ public class LigneTableaux2
             {
                 durationTable.add(labelDuration).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 20);
 
-                table.add(new Image()).width(screenWidth / 15);
+                table.add().width(screenWidth / 15);
 
                 table.add(durationTable).width(screenWidth / 12);
-                table.add(new Image()).width(screenWidth / 35);
+                table.add().width(screenWidth / 35);
 
                 table.add(noteTable);
-                table.add(new Image()).width(screenWidth / 50);
+//                table.add().width(screenWidth / 50);
             }
             else
             {
                 durationTable.add(labelDuration).height(screenHeight / 25).width(screenWidth / 10).padLeft(screenWidth / 40);
 
-                table.add(new Image()).width(screenWidth / 30);
+                table.add().width(screenWidth / 30);
                 labelDuration.setFontScale((float) 1.5);
 
                 table.add(durationTable).width(screenWidth / 10);
 
-                table.add(new Image()).width(screenWidth / 25);
+                table.add().width(screenWidth / 25);
                 labelNotes.setFontScale((float) 1.5);
                 table.add(noteTable).width(screenWidth / 10);
-                table.add(new Image()).width(screenWidth / 40);
+//                table.add().width(screenWidth / 40);
             }
         }
 
-        container.add(table).height(screenHeight / 20).width(screenWidth);
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight /10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 50;
+
+
+        container.add(table).height(screenHeight / 20).width(screenWidth).height(lineHeight);
 
         return container;
     }

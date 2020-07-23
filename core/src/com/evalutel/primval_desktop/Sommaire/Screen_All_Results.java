@@ -24,12 +24,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
-import com.evalutel.primval_desktop.General.LigneTableaux2;
+import com.evalutel.primval_desktop.General.LigneTableauxResults;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
 import com.evalutel.primval_desktop.MrNotes;
 import com.evalutel.primval_desktop.MrTemps;
-import com.evalutel.primval_desktop.MyButtonDemos;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -50,7 +49,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     private Viewport viewport;
 
-    ScreeenBackgroundImage fondEspaceParent;
+    ScreeenBackgroundImage bandeauHaut;
     ScreeenBackgroundImage fondSommaire;
     MrNotes mrNotes;
     MrTemps mrTemps;
@@ -61,6 +60,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     TextureRegionDrawable textureRegionDrawableBg;
     TextureRegionDrawable orangeBg;
 
+    public float screenWidth;
 
     BitmapFont bitmapFontZAP;
 
@@ -73,6 +73,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         stage = new Stage();
         batch = new SpriteBatch();
         BitmapFont bitmapFontFRHND;
+
+        screenWidth = MyConstants.SCREENWIDTH;
 
         FreeTypeFontGenerator FONT_FRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterFRHND = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -96,12 +98,16 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         allDrawables = new ArrayList<>();
 
-        fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
 
-        fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
+        allDrawables = new ArrayList<>();
+
+        bandeauHaut = new ScreeenBackgroundImage("Images/Pages Chapitres/Bandeau haut.jpg");
+
+        fondSommaire = new ScreeenBackgroundImage("Images/Backgrounds/web_hi_res_512.png");
 
         myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15, game, dataBase, "sommaire general");
         myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25, 5 * MyConstants.SCREENHEIGHT / 6 - myButtonRetour.getHeight() / 2);
+
 
         Label labelChap1Titre = new Label("Résultats obtenus", labelStyleWhite);
 
@@ -161,42 +167,52 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label5 = "Compter des oiseaux et taper leur nombre";
         String label6 = "Un gâteau pour plusieurs anniversaires";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/icon_cours.png"));
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
         textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/icon_exercice.png"));
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
         textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
-        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
-        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
-        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
-        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
-        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", MyConstants.SCREENWIDTH / 40, "font/FRHND521_0.TTF", MyConstants.SCREENHEIGHT / 50);
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
-        Table tableChapTitle = LigneTableaux2.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);
-        Table tableEx1 = LigneTableaux2.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
-        Table tableEx2 = LigneTableaux2.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx3 = LigneTableaux2.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
-        Table tableEx4 = LigneTableaux2.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4, dataBase);
-        Table tableEx5 = LigneTableaux2.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
-        Table tableEx6 = LigneTableaux2.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        table.add(tableChapTitle);
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle = LigneTableauxResults.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 1, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
+
+        table.add(tableChapTitle).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
         table.row();
-        table.add(tableEx1);
+        table.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
         table.row();
-        table.add(tableEx2);
+        table.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
         table.row();
-        table.add(tableEx3);
+        table.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
         table.row();
-        table.add(tableEx4);
+        table.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
         table.row();
-        table.add(tableEx5);
+        table.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
         table.row();
-        table.add(tableEx6);
+        table.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+
+        table.align(Align.top);
+
 
 //        VisUI.load();
 //
@@ -281,9 +297,9 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        fondEspaceParent.myDraw(batch);
-        fondSommaire.myDraw2(batch, MyConstants.SCREENWIDTH, 5 * MyConstants.SCREENHEIGHT / 6, 0, 0);
 
+        fondSommaire.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT, 0, 0);
+        bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6));
         for (int i = 0; i < allDrawables.size(); i++)
         {
             MyDrawInterface newItem = allDrawables.get(i);
@@ -293,11 +309,11 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
             }
         }
 
-
         batch.end();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
+
     }
 
     @Override
