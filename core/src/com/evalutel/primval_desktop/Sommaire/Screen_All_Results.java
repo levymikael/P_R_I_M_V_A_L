@@ -58,6 +58,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     private MrTemps mrTemps;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
+    ArrayList<Table> tableArrayList = new ArrayList<>();
+
     MyButtonRetour myButtonRetour;
 
     TextureRegionDrawable textureRegionDrawableBg;
@@ -69,8 +71,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     boolean chap1titleClicked, chap2titleClicked = false;
 
-    Table chapter1Table, chapter2Table, chapter3Table, chapter4Table, chapter5Table, chapter6Table, chapter7Table, chapter8Table, chapter9Table, chapter10Table, chapter11Table, chapter12Table, chapter13Table, chapter14Table, chapter15Table, chapter16Table, chapter17Table, chapter18Table, chapter19Table, chapter20Table, chapter21Table, chapter22Table, chapter23Table, chapter24Table, chapter25Table;
-    Table tableCollapsible1, tableCollapsible2, tableCollapsible3, tableCollapsible4, tableCollapsible5, tableCollapsible6, tableCollapsible7, tableCollapsible8, tableCollapsible9, tableCollapsible10, tableCollapsible11, tableCollapsible12, tableCollapsible13, tableCollapsible14, tableCollapsible15, tableCollapsible16, tableCollapsible17, tableCollapsible18, tableCollapsible19, tableCollapsible20, tableCollapsible21, tableCollapsible22, tableCollapsible23, tableCollapsible24, tableCollapsible25;
+    private Table chapter1Table, chapter2Table, chapter3Table, chapter4Table, chapter5Table, chapter6Table, chapter7Table, chapter8Table, chapter9Table, chapter10Table, chapter11Table, chapter12Table, chapter13Table, chapter14Table, chapter15Table, chapter16Table, chapter17Table, chapter18Table, chapter19Table, chapter20Table, chapter21Table, chapter22Table, chapter23Table, chapter24Table, chapter25Table;
+    private Table tableCollapsible1, tableCollapsible2, tableCollapsible3, tableCollapsible4, tableCollapsible5, tableCollapsible6, tableCollapsible7, tableCollapsible8, tableCollapsible9, tableCollapsible10, tableCollapsible11, tableCollapsible12, tableCollapsible13, tableCollapsible14, tableCollapsible15, tableCollapsible16, tableCollapsible17, tableCollapsible18, tableCollapsible19, tableCollapsible20, tableCollapsible21, tableCollapsible22, tableCollapsible23, tableCollapsible24, tableCollapsible25;
 
 
     float lineHeight = MyConstants.SCREENHEIGHT / 20;
@@ -147,7 +149,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         bgOrange.fill();
         orangeBg = new TextureRegionDrawable(new TextureRegion(new Texture(bgOrange)));
 
-        //tableau deroulant pour Evalutel motto et liste de chapitre
         Table container = new Table();
         Table table = new Table();
 
@@ -155,6 +156,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         float heightContainer = (positionButton);
         container.setSize(MyConstants.SCREENWIDTH, heightContainer - MyConstants.SCREENHEIGHT / 20);
         container.setPosition(0, 0);
+
 
         Table chapter1Table = chapter1Results();
         Table chapter2Table = chapter2Results();
@@ -182,66 +184,77 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table chapter24Table = chapter24Results();
         Table chapter25Table = chapter25Results();
 
+
         float lineHeight = MyConstants.SCREENHEIGHT / 17f;
+
+        for (int i = 0; i < 25; i++)
+        {
+            Table tableAux = tableArrayList.get(i);
+            table.add(tableAux).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible1.getHeight());
+            table.row();
+
+        }
 
 
 //        table.debug();
-        table.add(chapter1Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible1.getHeight()).align(Align.top);
-        table.row();
-        table.add(chapter2Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter3Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter4Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter5Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter6Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter7Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter8Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter9Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter10Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter11Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter12Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter13Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter14Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter15Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter16Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter17Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter18Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter19Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter20Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter21Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter22Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter23Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter24Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
-        table.add(chapter25Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
-        table.row();
+//        table.add(chapter1Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible1.getHeight());
+//        table.row();
+//        table.add(chapter2Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter3Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter4Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter5Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter6Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter7Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter8Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter9Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter10Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter11Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter12Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter13Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter14Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter15Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter16Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter17Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter18Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter19Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter20Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter21Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter22Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter23Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter24Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
+//        table.add(chapter25Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+//        table.row();
 
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
 
-        container.add(scroll).height(3 * MyConstants.SCREENHEIGHT / 4f).width(screenWidth).align(Align.top);
+        container.add(scroll).height(3 * MyConstants.SCREENHEIGHT / 4f).width(screenWidth);
+
+        container.debug();
 
         stage.addActor(container);
 
@@ -294,7 +307,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         chapter1Table.add(tableChapTitle).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
         chapter1Table.row();
-//        chapter1Table.add(tableCollapsible).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
         chapter1Table.add(tableCollapsible1).width(screenWidth).height(0);
         chapter1Table.row();
 
@@ -312,6 +324,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                    }
         );
 
+        tableArrayList.add(chapter1Table);
         return chapter1Table;
     }
 
@@ -376,6 +389,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                     }
         );
 
+        tableArrayList.add(chapter2Table);
         return chapter2Table;
     }
 
@@ -393,17 +407,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -451,6 +454,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                     }
         );
 
+        tableArrayList.add(chapter3Table);
         return chapter3Table;
     }
 
@@ -515,6 +519,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                     }
         );
 
+        tableArrayList.add(chapter4Table);
         return chapter4Table;
     }
 
@@ -579,6 +584,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                     }
         );
 
+        tableArrayList.add(chapter5Table);
         return chapter5Table;
     }
 
@@ -596,17 +602,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -654,14 +649,16 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                     }
         );
 
+
+        tableArrayList.add(chapter6Table);
         return chapter6Table;
     }
 
     public Table chapter7Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter7Table = new Table();
+        tableCollapsible7 = new Table();
+        int chapitre = 7;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -670,18 +667,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label3 = "Total d'un lancer de 2 dés";
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
-
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -692,7 +677,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle7 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -700,25 +685,25 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible7.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible7.row();
+        tableCollapsible7.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible7.row();
+        tableCollapsible7.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible7.row();
+        tableCollapsible7.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible7.row();
+        tableCollapsible7.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter7Table.add(tableChapTitle7).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter7Table.row();
+        chapter7Table.add(tableCollapsible7).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter7Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible7.setVisible(false);
 
 
-        tableChapTitle2.addListener(new ClickListener()
+        tableChapTitle7.addListener(new ClickListener()
                                     {
                                         @Override
                                         public void clicked(InputEvent event, float x, float y)
@@ -729,14 +714,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                     }
         );
 
-        return chapter2Table;
+        tableArrayList.add(chapter7Table);
+        return chapter7Table;
     }
 
     public Table chapter8Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter8Table = new Table();
+        tableCollapsible8 = new Table();
+        int chapitre = 8;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -746,17 +732,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -767,7 +742,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle8 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -775,25 +750,25 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible8.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible8.row();
+        tableCollapsible8.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible8.row();
+        tableCollapsible8.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible8.row();
+        tableCollapsible8.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible8.row();
+        tableCollapsible8.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter8Table.add(tableChapTitle8).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter8Table.row();
+        chapter8Table.add(tableCollapsible8).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter8Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible8.setVisible(false);
 
 
-        tableChapTitle2.addListener(new ClickListener()
+        tableChapTitle8.addListener(new ClickListener()
                                     {
                                         @Override
                                         public void clicked(InputEvent event, float x, float y)
@@ -804,14 +779,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                     }
         );
 
-        return chapter2Table;
+        tableArrayList.add(chapter8Table);
+        return chapter8Table;
     }
 
     public Table chapter9Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter9Table = new Table();
+        tableCollapsible9 = new Table();
+        int chapitre = 9;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -821,17 +797,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -842,7 +807,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle9 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -850,25 +815,25 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible9.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible9.row();
+        tableCollapsible9.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible9.row();
+        tableCollapsible9.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible9.row();
+        tableCollapsible9.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible9.row();
+        tableCollapsible9.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter9Table.add(tableChapTitle9).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter9Table.row();
+        chapter9Table.add(tableCollapsible9).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter9Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible9.setVisible(false);
 
 
-        tableChapTitle2.addListener(new ClickListener()
+        tableChapTitle9.addListener(new ClickListener()
                                     {
                                         @Override
                                         public void clicked(InputEvent event, float x, float y)
@@ -879,14 +844,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                     }
         );
 
-        return chapter2Table;
+        tableArrayList.add(chapter9Table);
+        return chapter9Table;
     }
 
     public Table chapter10Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter10Table = new Table();
+        tableCollapsible10 = new Table();
+        int chapitre = 10;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -896,17 +862,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -917,7 +872,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle10 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -925,43 +880,44 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible10.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible10.row();
+        tableCollapsible10.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible10.row();
+        tableCollapsible10.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible10.row();
+        tableCollapsible10.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible10.row();
+        tableCollapsible10.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter10Table.add(tableChapTitle10).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter10Table.row();
+        chapter10Table.add(tableCollapsible10).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter10Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible10.setVisible(false);
 
 
-        tableChapTitle2.addListener(new ClickListener()
-                                    {
-                                        @Override
-                                        public void clicked(InputEvent event, float x, float y)
-                                        {
-                                            chap2titleClicked = !chap2titleClicked;
-                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
-                                        }
-                                    }
+        tableChapTitle10.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
         );
 
-        return chapter2Table;
+        tableArrayList.add(chapter10Table);
+        return chapter10Table;
     }
 
     public Table chapter11Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter11Table = new Table();
+        tableCollapsible11 = new Table();
+        int chapitre = 11;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -971,17 +927,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -992,7 +937,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle11 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -1000,44 +945,44 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible11.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible11.row();
+        tableCollapsible11.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible11.row();
+        tableCollapsible11.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible11.row();
+        tableCollapsible11.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible11.row();
+        tableCollapsible11.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter11Table.add(tableChapTitle11).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter11Table.row();
+        chapter11Table.add(tableCollapsible11).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter11Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible11.setVisible(false);
 
-
-        tableChapTitle2.addListener(new ClickListener()
-                                    {
-                                        @Override
-                                        public void clicked(InputEvent event, float x, float y)
-                                        {
-                                            chap2titleClicked = !chap2titleClicked;
-                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
-                                        }
-                                    }
+        tableChapTitle11.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
         );
 
-        return chapter2Table;
+        tableArrayList.add(chapter11Table);
+        return chapter11Table;
     }
 
 
     public Table chapter12Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter12Table = new Table();
+        tableCollapsible12 = new Table();
+        int chapitre = 12;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -1046,18 +991,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label3 = "Total d'un lancer de 2 dés";
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
-
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1068,7 +1001,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle12 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -1076,43 +1009,44 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible12.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible12.row();
+        tableCollapsible12.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible12.row();
+        tableCollapsible12.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible12.row();
+        tableCollapsible12.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible12.row();
+        tableCollapsible12.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter12Table.add(tableChapTitle12).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter12Table.row();
+        chapter12Table.add(tableCollapsible12).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter12Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible12.setVisible(false);
 
 
-        tableChapTitle2.addListener(new ClickListener()
-                                    {
-                                        @Override
-                                        public void clicked(InputEvent event, float x, float y)
-                                        {
-                                            chap2titleClicked = !chap2titleClicked;
-                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
-                                        }
-                                    }
+        tableChapTitle12.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
         );
 
-        return chapter2Table;
+        tableArrayList.add(chapter12Table);
+        return chapter12Table;
     }
 
     public Table chapter13Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter13Table = new Table();
+        tableCollapsible13 = new Table();
+        int chapitre = 13;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -1121,18 +1055,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label3 = "Total d'un lancer de 2 dés";
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
-
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1143,7 +1065,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle13 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -1151,43 +1073,44 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible13.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible13.row();
+        tableCollapsible13.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible13.row();
+        tableCollapsible13.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible13.row();
+        tableCollapsible13.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible13.row();
+        tableCollapsible13.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter13Table.add(tableChapTitle13).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter13Table.row();
+        chapter13Table.add(tableCollapsible13).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter13Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible13.setVisible(false);
 
 
-        tableChapTitle2.addListener(new ClickListener()
-                                    {
-                                        @Override
-                                        public void clicked(InputEvent event, float x, float y)
-                                        {
-                                            chap2titleClicked = !chap2titleClicked;
-                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
-                                        }
-                                    }
+        tableChapTitle13.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
         );
 
-        return chapter2Table;
+        tableArrayList.add(chapter13Table);
+        return chapter13Table;
     }
 
     public Table chapter14Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter14Table = new Table();
+        tableCollapsible14 = new Table();
+        int chapitre = 14;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -1196,18 +1119,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label3 = "Total d'un lancer de 2 dés";
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
-
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1218,7 +1129,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle14 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -1226,43 +1137,43 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible14.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible14.row();
+        tableCollapsible14.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible14.row();
+        tableCollapsible14.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible14.row();
+        tableCollapsible14.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible14.row();
+        tableCollapsible14.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter14Table.add(tableChapTitle14).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter14Table.row();
+        chapter14Table.add(tableCollapsible14).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter14Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible14.setVisible(false);
 
 
-        tableChapTitle2.addListener(new ClickListener()
-                                    {
-                                        @Override
-                                        public void clicked(InputEvent event, float x, float y)
-                                        {
-                                            chap2titleClicked = !chap2titleClicked;
-                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
-                                        }
-                                    }
+        tableChapTitle14.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
         );
-
-        return chapter2Table;
+        tableArrayList.add(chapter14Table);
+        return chapter14Table;
     }
 
     public Table chapter15Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter15Table = new Table();
+        tableCollapsible15 = new Table();
+        int chapitre = 15;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -1272,17 +1183,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1293,7 +1193,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle15 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -1301,43 +1201,44 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible15.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible15.row();
+        tableCollapsible15.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible15.row();
+        tableCollapsible15.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible15.row();
+        tableCollapsible15.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible15.row();
+        tableCollapsible15.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter15Table.add(tableChapTitle15).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter15Table.row();
+        chapter15Table.add(tableCollapsible15).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter15Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible15.setVisible(false);
 
 
-        tableChapTitle2.addListener(new ClickListener()
-                                    {
-                                        @Override
-                                        public void clicked(InputEvent event, float x, float y)
-                                        {
-                                            chap2titleClicked = !chap2titleClicked;
-                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
-                                        }
-                                    }
+        tableChapTitle15.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
         );
 
-        return chapter2Table;
+        tableArrayList.add(chapter15Table);
+        return chapter15Table;
     }
 
     public Table chapter16Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter16Table = new Table();
+        tableCollapsible16 = new Table();
+        int chapitre = 16;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -1347,17 +1248,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1368,7 +1258,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle16 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -1376,43 +1266,44 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible16.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible16.row();
+        tableCollapsible16.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible16.row();
+        tableCollapsible16.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible16.row();
+        tableCollapsible16.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible16.row();
+        tableCollapsible16.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter16Table.add(tableChapTitle16).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter16Table.row();
+        chapter16Table.add(tableCollapsible16).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter16Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible16.setVisible(false);
 
 
-        tableChapTitle2.addListener(new ClickListener()
-                                    {
-                                        @Override
-                                        public void clicked(InputEvent event, float x, float y)
-                                        {
-                                            chap2titleClicked = !chap2titleClicked;
-                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
-                                        }
-                                    }
+        tableChapTitle16.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
         );
 
-        return chapter2Table;
+        tableArrayList.add(chapter16Table);
+        return chapter16Table;
     }
 
     public Table chapter17Results()
     {
-        chapter2Table = new Table();
-        tableCollapsible2 = new Table();
-        int chapitre = 2;
+        chapter17Table = new Table();
+        tableCollapsible17 = new Table();
+        int chapitre = 17;
 
 
         String labelChapterTitle = "Introduction de l'Addition";
@@ -1421,18 +1312,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label3 = "Total d'un lancer de 2 dés";
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
-
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1443,7 +1322,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle17 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -1451,36 +1330,37 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible17.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible17.row();
+        tableCollapsible17.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible17.row();
+        tableCollapsible17.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible17.row();
+        tableCollapsible17.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible17.row();
+        tableCollapsible17.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
-        chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
-        chapter2Table.row();
+        chapter17Table.add(tableChapTitle17).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter17Table.row();
+        chapter17Table.add(tableCollapsible17).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter17Table.row();
 
-        tableCollapsible2.setVisible(false);
+        tableCollapsible17.setVisible(false);
 
 
-        tableChapTitle2.addListener(new ClickListener()
-                                    {
-                                        @Override
-                                        public void clicked(InputEvent event, float x, float y)
-                                        {
-                                            chap2titleClicked = !chap2titleClicked;
-                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
-                                        }
-                                    }
+        tableChapTitle17.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
         );
 
-        return chapter2Table;
+        tableArrayList.add(chapter17Table);
+        return chapter17Table;
     }
 
     public Table chapter18Results()
@@ -1496,12 +1376,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label3 = "Total d'un lancer de 2 dés";
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
-
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
@@ -1550,6 +1424,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                      }
         );
 
+        tableArrayList.add(chapter18Table);
+
         return chapter18Table;
     }
 
@@ -1567,17 +1443,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1625,6 +1490,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                      }
         );
 
+        tableArrayList.add(chapter19Table);
+
         return chapter19Table;
     }
 
@@ -1643,17 +1510,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1701,6 +1557,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                      }
         );
 
+        tableArrayList.add(chapter20Table);
+
         return chapter20Table;
     }
 
@@ -1718,17 +1576,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1776,6 +1623,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                      }
         );
 
+        tableArrayList.add(chapter21Table);
         return chapter21Table;
     }
 
@@ -1794,17 +1642,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1852,6 +1689,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                      }
         );
 
+        tableArrayList.add(chapter22Table);
         return chapter22Table;
     }
 
@@ -1868,18 +1706,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label3 = "Total d'un lancer de 2 dés";
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
-
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -1927,6 +1753,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                      }
         );
 
+        tableArrayList.add(chapter23Table);
         return chapter23Table;
     }
 
@@ -1943,18 +1770,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label3 = "Total d'un lancer de 2 dés";
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
-
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -2002,6 +1817,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                      }
         );
 
+        tableArrayList.add(chapter24Table);
+
         return chapter24Table;
     }
 
@@ -2019,17 +1836,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -2077,6 +1883,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                      }
         );
 
+        tableArrayList.add(chapter25Table);
         return chapter25Table;
     }
 
