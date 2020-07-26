@@ -72,7 +72,7 @@ public class MrNotes implements MyDrawInterface
 
         Table container = new Table();
         stage.addActor(container);
-        container.setPosition(17 * screenWidth / 18, 21 * screenHeight / 25);
+        container.setPosition(16.5f * screenWidth / 18, 21.5f * screenHeight / 25f);
 
         int widthButton = 500;
         int heightButton = widthButton / 4;

@@ -17,7 +17,7 @@ import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 
-public class LigneTableauxResults
+public class LigneTableauxResultsChapitre
 {
     static MyDataBase db;
 
@@ -32,18 +32,19 @@ public class LigneTableauxResults
     static BitmapFont bitmapFontArial;
 
 
-    public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, DatabaseDesktop dataBase)
+    public static Table getLigne(MyTextButton button, String ongletTitre, /*Texture texture,*/ /*String borderColor,*/ int chapitre, /*int onglet,*/ DatabaseDesktop dataBase)
     {
         Table container = new Table();
         Table table = new Table();
         Table durationTable = new Table();
+        Table noteTable = new Table();
 
         int screenWidth = Gdx.graphics.getWidth();
         int screenHeight = Gdx.graphics.getHeight();
 
-        Pixmap pmRed = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmRed.setColor(MyConstants.redPrimval);
-        pmRed.fill();
+        Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
+        bgOrange.setColor(Color.ORANGE);
+        bgOrange.fill();
 
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmWhite.setColor(Color.WHITE);
@@ -51,7 +52,7 @@ public class LigneTableauxResults
 
         Pixmap pixmapBg = new Pixmap(1, 1, Pixmap.Format.RGB565);
 
-        int fontSize = MyConstants.SCREENWIDTH / 60;
+        float fontSize = 1.4f;
         float buttonPadding = MyConstants.SCREENWIDTH / 80f;
         int textureSize = MyConstants.SCREENWIDTH / 60;
 
@@ -64,59 +65,56 @@ public class LigneTableauxResults
         bitmapFontArial = fontArial.generateFont(parameter);
         fontArial.dispose();
 
-
-        db = new MyDataBase(dataBase);
-
-        durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
-
-        duration = MillisToDuration(durationPerExercice);
-
         Label.LabelStyle labelStyleOnglet = new Label.LabelStyle();
         labelStyleOnglet.font = bitmapFontArial;
-        labelStyleOnglet.fontColor = MyConstants.redPrimval;
-        pixmapBg.setColor(Color.WHITE);
-        pixmapBg.fill();
+        labelStyleOnglet.fontColor = Color.WHITE;
         Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
         labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4f);
 
+        db = new MyDataBase(dataBase);
+
+        durationPerChapter = db.getTotalDureePageForIdProfilByChapter(chapitre);
+
+        duration = MillisToDuration(durationPerChapter);
+        pixmapBg.setColor(Color.ORANGE);
 
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
         labelStyleDuration.fontColor = Color.OLIVE;
         labelStyleDuration.font = bitmapFontArial;
         Label labelDuration = new Label(duration, labelStyleDuration);
+        labelDuration.setFontScale(fontSize);
+        labelDuration.setWidth(MyConstants.SCREENWIDTH / 18f);
 
-        if (borderColor == "blue")
-        {
-            highestNote = db.getHighestNote(chapitre, onglet);
-            noteMaxPerExercice = db.getMaxNotePerExercice(chapitre, onglet, 0);
-            notePossiblePerExercice = db.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
-
-            notes2Implement = highestNote + " / " + notePossiblePerExercice + " / " + noteMaxPerExercice;
-
-        }
-        else
-        {
-            notes2Implement = "";
-        }
+        notes2Implement = db.getTotalNotePageForIdProfil(chapitre);
 
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
         labelStyleNotes.font = bitmapFontArial;
         labelStyleNotes.fontColor = Color.ORANGE;
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
-        labelNotes.setWidth(MyConstants.SCREENWIDTH / 4f);
+        labelDuration.setFontScale(fontSize);
+        labelNotes.setWidth(MyConstants.SCREENWIDTH / 18f);
 
-        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pixmapBg))));
 
-        table.add().width(screenWidth / 100f);
-        table.add(button).height(MyConstants.SCREENHEIGHT / 30f).width(MyConstants.SCREENHEIGHT / 30f);
+        pixmapBg.setColor(Color.ORANGE);
+        pixmapBg.fill();
+        TextureRegionDrawable tableBG = new TextureRegionDrawable(new TextureRegion(new Texture(pixmapBg)));
+        table.setBackground(tableBG);
+
+
+        durationTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
+        durationTable.add(labelDuration).height(screenHeight / 25f)/*.width(screenWidth / 10).padLeft(screenWidth / 40).align(Align.center)*/;
+
+        noteTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
+        noteTable.add(labelNotes).height(screenHeight / 25f)/*.width(screenWidth / 10f).padLeft(screenWidth / 20f).align(Align.center)*/;
+
+        table.add().width(screenWidth / 70f);
+        table.add(button).height(button.getHeight()).width(button.getWidth());
+        table.add().width(screenWidth / 70f);
+        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.6f));
         table.add().width(screenWidth / 80f);
-        table.add(labelOnglet).width((screenWidth * 0.61f));
-        table.add().width(screenWidth / 100f);
-        table.add(new Image(texture)).width(screenWidth / 70f).height(screenWidth / 70f);
-        table.add().width(screenWidth / 30f);
-        table.add(labelDuration).width(screenWidth / 12f);
-        table.add().width(0.7f * screenWidth / 10f);
-        table.add(labelNotes).width(screenWidth / 10f);
+        table.add(durationTable).width(screenWidth / 10);
+        table.add().width(screenWidth / 25);
+        table.add(noteTable).width(screenWidth / 10);
 
 
         float lineHeight = MyConstants.SCREENHEIGHT / 20;

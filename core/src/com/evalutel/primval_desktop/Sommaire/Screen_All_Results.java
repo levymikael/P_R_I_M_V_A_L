@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.General.LigneTableauxResultsChapitre;
 import com.evalutel.primval_desktop.General.LigneTableauxResults;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.TableauxTitreChapitre;
@@ -51,10 +52,10 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     private Viewport viewport;
 
-    ScreeenBackgroundImage bandeauHaut;
-    ScreeenBackgroundImage fondSommaire;
-    MrNotes mrNotes;
-    MrTemps mrTemps;
+    private ScreeenBackgroundImage bandeauHaut;
+    private ScreeenBackgroundImage fondSommaire;
+    private MrNotes mrNotes;
+    private MrTemps mrTemps;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
     MyButtonRetour myButtonRetour;
@@ -68,7 +69,16 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     boolean chap1titleClicked, chap2titleClicked = false;
 
-    Table chapter1Table, chapter2Table, tableCollapsible, tableCollapsible2;
+    Table chapter1Table, chapter2Table, chapter3Table, chapter4Table, chapter5Table, chapter6Table, chapter7Table, chapter8Table, chapter9Table, chapter10Table, chapter11Table, chapter12Table, chapter13Table, chapter14Table, chapter15Table, chapter16Table, chapter17Table, chapter18Table, chapter19Table, chapter20Table, chapter21Table, chapter22Table, chapter23Table, chapter24Table, chapter25Table;
+    Table tableCollapsible1, tableCollapsible2, tableCollapsible3, tableCollapsible4, tableCollapsible5, tableCollapsible6, tableCollapsible7, tableCollapsible8, tableCollapsible9, tableCollapsible10, tableCollapsible11, tableCollapsible12, tableCollapsible13, tableCollapsible14, tableCollapsible15, tableCollapsible16, tableCollapsible17, tableCollapsible18, tableCollapsible19, tableCollapsible20, tableCollapsible21, tableCollapsible22, tableCollapsible23, tableCollapsible24, tableCollapsible25;
+
+
+    float lineHeight = MyConstants.SCREENHEIGHT / 20;
+    float buttonSize = lineHeight / 10;
+    int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+    float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+    Texture textureCours, textureExercices;
 
 
     public Screen_All_Results(Game game, DatabaseDesktop dataBase)
@@ -85,12 +95,16 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         FreeTypeFontGenerator FONT_FRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterFRHND = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterFRHND.size = MyConstants.SCREENWIDTH / 40;
+        parameterFRHND.minFilter = Texture.TextureFilter.Linear;
+        parameterFRHND.magFilter = Texture.TextureFilter.Linear;
         bitmapFontFRHND = MyConstants.FONT_FRHND.generateFont(parameterFRHND);
         FONT_FRHND.dispose();
 
         FreeTypeFontGenerator FONT_ZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterZAP = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterZAP.size = MyConstants.SCREENWIDTH / 70;
+        parameterZAP.minFilter = Texture.TextureFilter.Linear;
+        parameterZAP.magFilter = Texture.TextureFilter.Linear;
         bitmapFontZAP = FONT_ZAP.generateFont(parameterZAP);
         FONT_ZAP.dispose();
 
@@ -118,8 +132,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         nomChapitre.setPosition(MyConstants.SCREENWIDTH / 2 - MyConstants.SCREENWIDTH / 12, 9 * MyConstants.SCREENHEIGHT / 10);
         stage.addActor(nomChapitre);
 
+        mrTemps = new MrTemps(stage, dataBase, 0);
         mrNotes = new MrNotes(stage, dataBase, 0);
-        mrTemps = new MrTemps(stage, dataBase, 1);
+
+        textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
 
         Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
         bgOrange.setColor(Color.rgb888(241, 160, 57));
@@ -137,25 +158,90 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         Table chapter1Table = chapter1Results();
         Table chapter2Table = chapter2Results();
-        Table chapter3Table = chapter1Results();
+        Table chapter3Table = chapter3Results();
+        Table chapter4Table = chapter4Results();
+        Table chapter5Table = chapter5Results();
+        Table chapter6Table = chapter6Results();
+        Table chapter7Table = chapter7Results();
+        Table chapter8Table = chapter8Results();
+        Table chapter9Table = chapter9Results();
+        Table chapter10Table = chapter10Results();
+        Table chapter11Table = chapter11Results();
+        Table chapter12Table = chapter12Results();
+        Table chapter13Table = chapter13Results();
+        Table chapter14Table = chapter14Results();
+        Table chapter15Table = chapter15Results();
+        Table chapter16Table = chapter16Results();
+        Table chapter17Table = chapter17Results();
+        Table chapter18Table = chapter18Results();
+        Table chapter19Table = chapter19Results();
+        Table chapter20Table = chapter20Results();
+        Table chapter21Table = chapter21Results();
+        Table chapter22Table = chapter22Results();
+        Table chapter23Table = chapter23Results();
+        Table chapter24Table = chapter24Results();
+        Table chapter25Table = chapter25Results();
 
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float lineHeight = MyConstants.SCREENHEIGHT / 17f;
 
 
-        table.debug();
-        table.add(chapter1Table).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19)).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40).height(lineHeight);
+//        table.debug();
+        table.add(chapter1Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible1.getHeight()).align(Align.top);
         table.row();
-        table.add(chapter2Table).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40).height(MyConstants.SCREENHEIGHT/4f);
-        ;
-//        table.row();
-//        table.add(chapter3Table).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 40);
+        table.add(chapter2Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter3Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter4Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter5Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter6Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter7Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter8Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter9Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter10Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter11Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter12Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter13Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter14Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter15Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter16Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter17Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter18Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter19Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter20Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter21Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter22Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter23Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter24Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
+        table.add(chapter25Table).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(tableCollapsible2.getHeight());
+        table.row();
 
-//        table.setWidth(MyConstants.SCREENWIDTH);
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
 
-        container.add(scroll).height(3*MyConstants.SCREENHEIGHT/4f).width(screenWidth);
+        container.add(scroll).height(3 * MyConstants.SCREENHEIGHT / 4f).width(screenWidth).align(Align.top);
 
         stage.addActor(container);
 
@@ -174,20 +260,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label5 = "Compter des oiseaux et taper leur nombre";
         String label6 = "Un gâteau pour plusieurs anniversaires";
 
-        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
-        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
-        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
-        float buttonSize = lineHeight / 10;
-        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap1.png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
-
         MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
@@ -196,7 +270,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle = LigneTableauxResults.getLigne(chapter_bouton, labelChapterTitle, null, "white", 1, 0, dataBase);
+        Table tableChapTitle = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, 1, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
@@ -205,38 +279,27 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx6 = LigneTableauxResults.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
 
 
-        tableCollapsible = new Table();
-        tableCollapsible.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
-        tableCollapsible.row();
-        tableCollapsible.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
-        tableCollapsible.row();
-        tableCollapsible.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
-        tableCollapsible.row();
-        tableCollapsible.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
-        tableCollapsible.row();
-        tableCollapsible.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
-        tableCollapsible.row();
-        tableCollapsible.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
+        tableCollapsible1 = new Table();
+        tableCollapsible1.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible1.row();
+        tableCollapsible1.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible1.row();
+        tableCollapsible1.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible1.row();
+        tableCollapsible1.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible1.row();
+        tableCollapsible1.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible1.row();
+        tableCollapsible1.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter1Table.add(tableChapTitle).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
+        chapter1Table.add(tableChapTitle).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
         chapter1Table.row();
-        chapter1Table.add(tableCollapsible).width(screenWidth).height(tableCollapsible.getHeight());
+//        chapter1Table.add(tableCollapsible).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter1Table.add(tableCollapsible1).width(screenWidth).height(0);
         chapter1Table.row();
 
+        tableCollapsible1.setVisible(false);
 
-//        table.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-//        table.row();
-//        table.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-//        table.row();
-//        table.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-//        table.row();
-//        table.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-//        table.row();
-//        table.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-//        table.row();
-//        table.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-
-//        chapter1Table.align(Align.top);
 
         tableChapTitle.addListener(new ClickListener()
                                    {
@@ -244,32 +307,10 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                        public void clicked(InputEvent event, float x, float y)
                                        {
                                            chap1titleClicked = !chap1titleClicked;
-                                           System.out.println("chap1titleClicked" + chap1titleClicked);
+                                           System.out.println("chap1titleClicked" + chap1titleClicked + " " + event);
                                        }
                                    }
         );
-
-
-//        VisUI.load();
-//
-//        VisTable visTable = new VisTable();
-//        collapsibleWidget = new CollapsibleWidget(visTable);
-//
-//        visTable.setPosition(0, 0);
-//        collapsibleWidget.setPosition(0, 0);
-//
-//        table.addListener(new ChangeListener()
-//        {
-//            @Override
-//            public void changed(ChangeEvent event, Actor actor)
-//            {
-//                collapsibleWidget.setCollapsed(!collapsibleWidget.isCollapsed());
-//                System.out.println("I got clicked!1");
-//
-//            }ll
-//        });
-//
-//        visTable.debug();
 
         return chapter1Table;
     }
@@ -277,6 +318,73 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     public Table chapter2Results()
     {
         chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter2Table;
+    }
+
+    public Table chapter3Results()
+    {
+        chapter3Table = new Table();
+        tableCollapsible3 = new Table();
+        int chapitre = 3;
+
 
         String labelChapterTitle = "Introduction de l'Addition";
         String label1 = "Addition dont le total ne dépasse pas 9";
@@ -297,54 +405,318 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
         float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
 
-        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap2.png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResults.getLigne(chapter_bouton, labelChapterTitle, null, "white", 2, 0, dataBase);
-        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", 2, 1, dataBase);
-        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", 2, 2, dataBase);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", 2, 3, dataBase);
-        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", 2, 4, dataBase);
-        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", 2, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
+        Table tableChapTitle3 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
 
 
+        tableCollapsible3.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible3.row();
+        tableCollapsible3.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible3.row();
+        tableCollapsible3.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible3.row();
+        tableCollapsible3.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible3.row();
+        tableCollapsible3.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter3Table.add(tableChapTitle3).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter3Table.row();
+        chapter3Table.add(tableCollapsible3).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter3Table.row();
+
+        tableCollapsible3.setVisible(false);
+
+
+        tableChapTitle3.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter3Table;
+    }
+
+    public Table chapter4Results()
+    {
+        chapter4Table = new Table();
+        tableCollapsible4 = new Table();
+        int chapitre = 4;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle4 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible4.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible4.row();
+        tableCollapsible4.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible4.row();
+        tableCollapsible4.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible4.row();
+        tableCollapsible4.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible4.row();
+        tableCollapsible4.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter4Table.add(tableChapTitle4).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter4Table.row();
+        chapter4Table.add(tableCollapsible4).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter4Table.row();
+
+        tableCollapsible4.setVisible(false);
+
+
+        tableChapTitle4.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter4Table;
+    }
+
+    public Table chapter5Results()
+    {
+        chapter5Table = new Table();
+        tableCollapsible5 = new Table();
+        int chapitre = 5;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle5 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible5.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible5.row();
+        tableCollapsible5.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible5.row();
+        tableCollapsible5.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible5.row();
+        tableCollapsible5.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible5.row();
+        tableCollapsible5.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter5Table.add(tableChapTitle5).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter5Table.row();
+        chapter5Table.add(tableCollapsible5).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter5Table.row();
+
+        tableCollapsible5.setVisible(false);
+
+
+        tableChapTitle5.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter5Table;
+    }
+
+    public Table chapter6Results()
+    {
+        chapter6Table = new Table();
+        tableCollapsible6 = new Table();
+        int chapitre = 6;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle6 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible6.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible6.row();
+        tableCollapsible6.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible6.row();
+        tableCollapsible6.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible6.row();
+        tableCollapsible6.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible6.row();
+        tableCollapsible6.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter6Table.add(tableChapTitle6).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter6Table.row();
+        chapter6Table.add(tableCollapsible6).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter6Table.row();
+
+        tableCollapsible6.setVisible(false);
+
+
+        tableChapTitle6.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter6Table;
+    }
+
+    public Table chapter7Results()
+    {
+        chapter2Table = new Table();
         tableCollapsible2 = new Table();
-        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
-        tableCollapsible2.row();
-        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(100);
-        tableCollapsible2.row();
-//        tableCollapsible.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        int chapitre = 2;
 
-        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
         chapter2Table.row();
-        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT/4);
-//        table.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-//        table.row();
-//        table.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-//        table.row();
-//        table.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-//        table.row();
-//        table.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-//        table.row();
-//        table.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
-//        table.row();
-//        table.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth);
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
 
-//        chapter2Table.align(Align.top);
+        tableCollapsible2.setVisible(false);
+
 
         tableChapTitle2.addListener(new ClickListener()
                                     {
@@ -352,34 +724,1360 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                         public void clicked(InputEvent event, float x, float y)
                                         {
                                             chap2titleClicked = !chap2titleClicked;
-                                            System.out.println("chap2titleClicked" + chap1titleClicked);
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
                                         }
                                     }
         );
 
+        return chapter2Table;
+    }
 
-//        VisUI.load();
-//
-//        VisTable visTable = new VisTable();
-//        collapsibleWidget = new CollapsibleWidget(visTable);
-//
-//        visTable.setPosition(0, 0);
-//        collapsibleWidget.setPosition(0, 0);
-//
-//        table.addListener(new ChangeListener()
-//        {
-//            @Override
-//            public void changed(ChangeEvent event, Actor actor)
-//            {
-//                collapsibleWidget.setCollapsed(!collapsibleWidget.isCollapsed());
-//                System.out.println("I got clicked!1");
-//
-//            }ll
-//        });
-//
-//        visTable.debug();
+    public Table chapter8Results()
+    {
+        chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
 
         return chapter2Table;
+    }
+
+    public Table chapter9Results()
+    {
+        chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter2Table;
+    }
+
+    public Table chapter10Results()
+    {
+        chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter2Table;
+    }
+
+    public Table chapter11Results()
+    {
+        chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter2Table;
+    }
+
+
+    public Table chapter12Results()
+    {
+        chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter2Table;
+    }
+
+    public Table chapter13Results()
+    {
+        chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter2Table;
+    }
+
+    public Table chapter14Results()
+    {
+        chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter2Table;
+    }
+
+    public Table chapter15Results()
+    {
+        chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter2Table;
+    }
+
+    public Table chapter16Results()
+    {
+        chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter2Table;
+    }
+
+    public Table chapter17Results()
+    {
+        chapter2Table = new Table();
+        tableCollapsible2 = new Table();
+        int chapitre = 2;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible2.row();
+        tableCollapsible2.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter2Table.add(tableChapTitle2).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter2Table.row();
+        chapter2Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter2Table.row();
+
+        tableCollapsible2.setVisible(false);
+
+
+        tableChapTitle2.addListener(new ClickListener()
+                                    {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y)
+                                        {
+                                            chap2titleClicked = !chap2titleClicked;
+                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                        }
+                                    }
+        );
+
+        return chapter2Table;
+    }
+
+    public Table chapter18Results()
+    {
+        chapter18Table = new Table();
+        tableCollapsible18 = new Table();
+        int chapitre = 18;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle18 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible18.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible18.row();
+        tableCollapsible18.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible18.row();
+        tableCollapsible18.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible18.row();
+        tableCollapsible18.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible18.row();
+        tableCollapsible18.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter18Table.add(tableChapTitle18).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter18Table.row();
+        chapter18Table.add(tableCollapsible18).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter18Table.row();
+
+        chapter18Table.setVisible(false);
+
+
+        tableChapTitle18.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
+        );
+
+        return chapter18Table;
+    }
+
+    public Table chapter19Results()
+    {
+        chapter19Table = new Table();
+        tableCollapsible19 = new Table();
+        int chapitre = 19;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle19 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible19.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible19.row();
+        tableCollapsible19.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible19.row();
+        tableCollapsible19.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible19.row();
+        tableCollapsible19.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible19.row();
+        tableCollapsible19.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter19Table.add(tableChapTitle19).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter19Table.row();
+        chapter19Table.add(tableCollapsible19).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter19Table.row();
+
+        tableCollapsible19.setVisible(false);
+
+
+        tableChapTitle19.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
+        );
+
+        return chapter19Table;
+    }
+
+
+    public Table chapter20Results()
+    {
+        chapter20Table = new Table();
+        tableCollapsible20 = new Table();
+        int chapitre = 20;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle20 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible20.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible20.row();
+        tableCollapsible20.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible20.row();
+        tableCollapsible20.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible20.row();
+        tableCollapsible20.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible20.row();
+        tableCollapsible20.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter20Table.add(tableChapTitle20).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter20Table.row();
+        chapter20Table.add(tableCollapsible20).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter20Table.row();
+
+        tableCollapsible20.setVisible(false);
+
+
+        tableChapTitle20.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
+        );
+
+        return chapter20Table;
+    }
+
+    public Table chapter21Results()
+    {
+        chapter21Table = new Table();
+        tableCollapsible21 = new Table();
+        int chapitre = 21;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle21 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible21.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible21.row();
+        tableCollapsible21.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible21.row();
+        tableCollapsible21.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible21.row();
+        tableCollapsible21.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible21.row();
+        tableCollapsible21.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter21Table.add(tableChapTitle21).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter21Table.row();
+        chapter21Table.add(tableCollapsible21).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter21Table.row();
+
+        tableCollapsible21.setVisible(false);
+
+
+        tableChapTitle21.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
+        );
+
+        return chapter21Table;
+    }
+
+
+    public Table chapter22Results()
+    {
+        chapter22Table = new Table();
+        tableCollapsible22 = new Table();
+        int chapitre = 22;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle22 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible22.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible22.row();
+        tableCollapsible22.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible22.row();
+        tableCollapsible22.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible22.row();
+        tableCollapsible22.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible22.row();
+        tableCollapsible22.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter22Table.add(tableChapTitle22).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter22Table.row();
+        chapter22Table.add(tableCollapsible2).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter22Table.row();
+
+        tableCollapsible22.setVisible(false);
+
+
+        tableChapTitle22.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
+        );
+
+        return chapter22Table;
+    }
+
+    public Table chapter23Results()
+    {
+        chapter23Table = new Table();
+        tableCollapsible23 = new Table();
+        int chapitre = 23;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle23 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible23.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible23.row();
+        tableCollapsible23.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible23.row();
+        tableCollapsible23.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible23.row();
+        tableCollapsible23.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible23.row();
+        tableCollapsible23.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter23Table.add(tableChapTitle23).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter23Table.row();
+        chapter23Table.add(tableCollapsible23).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter23Table.row();
+
+        tableCollapsible23.setVisible(false);
+
+
+        tableChapTitle23.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
+        );
+
+        return chapter23Table;
+    }
+
+    public Table chapter24Results()
+    {
+        chapter24Table = new Table();
+        tableCollapsible24 = new Table();
+        int chapitre = 24;
+
+
+        String labelChapterTitle = "Introduction de l'Addition";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle24 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible24.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible24.row();
+        tableCollapsible24.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible24.row();
+        tableCollapsible24.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible24.row();
+        tableCollapsible24.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible24.row();
+        tableCollapsible24.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter24Table.add(tableChapTitle24).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter24Table.row();
+        chapter24Table.add(tableCollapsible24).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter24Table.row();
+
+        tableCollapsible24.setVisible(false);
+
+
+        tableChapTitle24.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
+        );
+
+        return chapter24Table;
+    }
+
+    public Table chapter25Results()
+    {
+        chapter25Table = new Table();
+        tableCollapsible25 = new Table();
+        int chapitre = 25;
+
+
+        String labelChapterTitle = "La division, une nouvelle opération. Division en ligne et division posée. Partage du reste.";
+        String label1 = "Addition dont le total ne dépasse pas 9";
+        String label2 = "Additionner les oiseaux sur les deux branches";
+        String label3 = "Total d'un lancer de 2 dés";
+        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
+        String label5 = "Calcul mental";
+
+        Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
+        textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        Texture textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
+        textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float buttonSize = lineHeight / 10;
+        int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100;
+
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+        MyTextButton un_bouton = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton deux_bouton = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton trois_bouton = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+
+        Table tableChapTitle25 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+
+
+        tableCollapsible25.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible25.row();
+        tableCollapsible25.add(tableEx2).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible25.row();
+        tableCollapsible25.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible25.row();
+        tableCollapsible25.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible25.row();
+        tableCollapsible25.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        chapter25Table.add(tableChapTitle25).height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight);
+        chapter25Table.row();
+        chapter25Table.add(tableCollapsible25).width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f);
+        chapter25Table.row();
+
+        tableCollapsible25.setVisible(false);
+
+
+        tableChapTitle25.addListener(new ClickListener()
+                                     {
+                                         @Override
+                                         public void clicked(InputEvent event, float x, float y)
+                                         {
+                                             chap2titleClicked = !chap2titleClicked;
+                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                         }
+                                     }
+        );
+
+        return chapter25Table;
     }
 
     @Override
@@ -441,9 +2139,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-
         fondSommaire.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT, 0, 0);
-        bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6));
+        bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f));
         for (int i = 0; i < allDrawables.size(); i++)
         {
             MyDrawInterface newItem = allDrawables.get(i);
@@ -454,20 +2151,24 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         }
         if (chap1titleClicked)
         {
-            chapter1Table.add(tableCollapsible)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT/4f)*/;
+            tableCollapsible1.setVisible(true);
+            tableCollapsible1.setHeight(MyConstants.SCREENHEIGHT / 4f);
         }
         else
         {
-            tableCollapsible.clearChildren();
+            tableCollapsible1.setVisible(false);
+            tableCollapsible1.setHeight(0);
+
         }
 
         if (chap2titleClicked)
         {
-            chapter2Table.add(tableCollapsible2)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT/4f)*/;
+            tableCollapsible2.setVisible(true);
+
         }
         else
         {
-            tableCollapsible2.clearChildren();
+            tableCollapsible2.setVisible(false);
         }
 
         batch.end();

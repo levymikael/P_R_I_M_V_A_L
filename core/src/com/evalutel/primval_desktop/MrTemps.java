@@ -68,7 +68,7 @@ public class MrTemps implements MyDrawInterface
         textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
-        container.setPosition(13 * screenWidth / 16, 21 * screenHeight / 25);
+        container.setPosition(12.5f * screenWidth / 16, 21.5f * screenHeight / 25f);
 
         int widthButton = 500;
         int heightButton = widthButton / 4;

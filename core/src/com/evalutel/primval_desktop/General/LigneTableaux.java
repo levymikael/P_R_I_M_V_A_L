@@ -50,15 +50,19 @@ public class LigneTableaux
 
 
         FreeTypeFontGenerator generatorComicSansMSBold = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = fontSize;
-        BitmapFont bitmapFontComicSansMSBold = generatorComicSansMSBold.generateFont(parameter);
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterComicSansMSBold = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterComicSansMSBold.size = fontSize;
+        parameterComicSansMSBold.minFilter = Texture.TextureFilter.Linear;
+        parameterComicSansMSBold.magFilter = Texture.TextureFilter.Linear;
+        BitmapFont bitmapFontComicSansMSBold = generatorComicSansMSBold.generateFont(parameterComicSansMSBold);
         generatorComicSansMSBold.dispose();
 
         FreeTypeFontGenerator generatorArial = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterArial = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterArial.size = fontSize;
-        BitmapFont bitmapFontArial = generatorArial.generateFont(parameter);
+        parameterArial.minFilter = Texture.TextureFilter.Linear;
+        parameterArial.magFilter = Texture.TextureFilter.Linear;
+        BitmapFont bitmapFontArial = generatorArial.generateFont(parameterArial);
         generatorArial.dispose();
 
         Label.LabelStyle labelStyleOnglet = new Label.LabelStyle();
@@ -75,7 +79,7 @@ public class LigneTableaux
         labelStyleDuration.font = bitmapFontArial;
 
         Label labelDuration = new Label(duration, labelStyleDuration);
-        labelDuration.setWidth(MyConstants.SCREENWIDTH / 40);
+        labelDuration.setWidth(MyConstants.SCREENWIDTH / 40f);
 
         if (borderColor == "red")
         {
@@ -107,12 +111,12 @@ public class LigneTableaux
         labelStyleNotes.font = bitmapFontArial;
 
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
-        labelNotes.setWidth(MyConstants.SCREENWIDTH / 20);
+        labelNotes.setWidth(MyConstants.SCREENWIDTH / 20f);
 
         table.setWidth(MyConstants.SCREENWIDTH);
-        table.setHeight(MyConstants.SCREENHEIGHT / 13);
+        table.setHeight(MyConstants.SCREENHEIGHT / 13f);
 
-        labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4);
+        labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4f);
 
         table.add(button).height(button.getHeight()).width(button.getWidth()).padRight(buttonPadding).padLeft(buttonPadding);
         table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.68f));
@@ -122,15 +126,15 @@ public class LigneTableaux
         {
             table.add(new Image(texture)).width(textureSize).height(textureSize);
         }
-        table.add(labelDuration).width(MyConstants.SCREENWIDTH / 12).padRight(MyConstants.SCREENWIDTH / 17).padLeft(MyConstants.SCREENWIDTH / 50);
+        table.add(labelDuration).width(MyConstants.SCREENWIDTH / 12f).padRight(MyConstants.SCREENWIDTH / 17f).padLeft(MyConstants.SCREENWIDTH / 50);
 
         if (borderColor == "red")
         {
-            table.add().width(MyConstants.SCREENWIDTH / 12);
+            table.add().width(MyConstants.SCREENWIDTH / 12f);
         }
         else
         {
-            table.add(labelNotes).width(MyConstants.SCREENWIDTH / 12);
+            table.add(labelNotes).width(MyConstants.SCREENWIDTH / 12f);
         }
 
 
@@ -138,7 +142,7 @@ public class LigneTableaux
 
         container.add(borderTable1).width(MyConstants.SCREENWIDTH).height(2);
         container.row();
-        container.add(table).height(MyConstants.SCREENHEIGHT / 17);
+        container.add(table).height(MyConstants.SCREENHEIGHT / 17f);
         container.row();
         container.add(borderTable2).width(MyConstants.SCREENWIDTH).height(2);
 
