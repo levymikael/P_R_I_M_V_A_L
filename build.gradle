@@ -5,12 +5,15 @@ buildscript {
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
         jcenter()
         google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.3'
 
+        classpath "com.badlogicgames.gdx:gdx-ai:1.8.1"
 
     }
 }
@@ -61,6 +64,9 @@ project(":desktop") {
 
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
 
+        implementation "com.badlogicgames.gdx:gdx-ai:1.8.1"
+
+
 //        implementation "com.github.myrealitycoding:jpersis:1.0.0"
 
 //        implementation "de.longri.gdx-sqlite:gdx-sqlite-platform:$gdxSqliteVersion:natives-desktop"
@@ -106,6 +112,8 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"
 
+        implementation "com.badlogicgames.gdx:gdx-ai:1.8.1"
+
     }
 }
 
@@ -122,6 +130,8 @@ project(":core") {
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
 
         implementation "com.kotcrab.vis:vis-ui:$visuiVersion"
+        implementation "com.badlogicgames.gdx:gdx-ai:1.8.1"
+
 
 //        implementation "de.longri.gdx-sqlite:gdx-sqlite:$gdxSqliteVersion"
 //        implementation "sqlite-jdbc-3.7.2.jar"
