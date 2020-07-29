@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 public class MyConstants
 {
@@ -15,6 +16,29 @@ public class MyConstants
     public static FreeTypeFontGenerator FONT_ZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
     public static FreeTypeFontGenerator FONT_FRHND = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
     public static FreeTypeFontGenerator FONT_COMICI = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
+
+    private static float lineHeight = MyConstants.SCREENHEIGHT / 20f;
+    private static float buttonSize = lineHeight / 10f;
+    private static int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
+    private float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100f;
+
+    public static MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+
+    public static MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+    public static MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
     public static Color bluePrimval = new Color(Color.valueOf("004ec0"));

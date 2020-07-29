@@ -110,11 +110,10 @@ public class LigneTableauxResultsChapitre
         table.add().width(screenWidth / 70f);
         table.add(button).height(button.getHeight()).width(button.getWidth());
         table.add().width(screenWidth / 70f);
-        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.6f));
-        table.add().width(screenWidth / 80f);
-        table.add(durationTable).width(screenWidth / 10);
-        table.add().width(screenWidth / 25);
-        table.add(noteTable).width(screenWidth / 10);
+        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.6f)).padRight(screenWidth / 45f);
+        table.add(durationTable).width(screenWidth / 9f).padRight(screenWidth / 30f);
+//        table.add().width(screenWidth / 25);
+        table.add(noteTable).width(screenWidth / 8.5f);
 
 
         float lineHeight = MyConstants.SCREENHEIGHT / 20;
