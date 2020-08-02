@@ -50,7 +50,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     TextButton.TextButtonStyle styleTest;
     Drawable drawableAux;
 
-    int cptOiseau1, cptOiseau2, cptBille, oiseauxToDisplayBranche1, oiseauxToDisplayBranche2;
+    int cptOiseauTotal, cptOiseau1, cptOiseau2, cptBille, oiseauxToDisplayBranche1, oiseauxToDisplayBranche2;
     int cpt, failedAttempts;
     int numOiseauxBranche1, numOiseauxBranche2;
 
@@ -136,7 +136,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
         getRandOiseauxArray();
 
-        resultatExercice = new UnResultat("Primval", 2, 2, 0, ongletTitre, 0, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 2, 2, 0, ongletTitre, 15, 0, dateTest, 0, 0, 0, 123);
 
         calculetteView = new CalculetteView(stage, validusAnimated);
         allDrawables.add(calculetteView);
@@ -152,6 +152,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(uneArdoise2);
 
         metrologue.setVisible(false);
+
 
         timer.schedule(new PresentationMetrologue(3000), 1000);
     }
@@ -940,11 +941,16 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 //            }
 //            else
 //            {
-            timer.schedule(new EtapeInstructionPlanche2(500, 0), 0);
+            timer.schedule(new OiseauxOut(500, 0), 0);
 //            }
             questionCourante++;
 
             nbInput = null;
+
+            cptOiseauTotal = cptOiseau1 + cptOiseau2;
+
+            int ok = 5;
+            ok++;
         }
     }
 
@@ -1413,24 +1419,29 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            if (cptOiseau1 != 0)
+            if (cptOiseauTotal != 0)
             {
-                if (cptOiseau1 == 2)
+                if (cptOiseauTotal == cptOiseau1)
                 {
                     metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_TiensLesOiseauxSontPartisConbienYenAvaitIl.mp3");
                 }
-                UnOiseau oiseau = oiseauxList.get(cptOiseau1 - 1);
+
+
+                UnOiseau oiseau = oiseauxList.get(cptOiseauTotal - 1);
+
                 int posX = MyConstants.SCREENWIDTH * 2;
                 int posY = MyConstants.SCREENHEIGHT * 2;
 
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
-                timer.schedule(new OiseauxOut(250, 0), 100);
-                cptOiseau1--;
+                timer.schedule(new OiseauxOut(250, 0), 1_000);
+                cptOiseauTotal--;
             }
             else
             {
-//                timer.schedule(new MoveMainToPlanche1and2(1_000, 500), 0);
+                planche3.setVisible(true);
+                activiteView.addTextActivite("Deplace toutes les billes sur la planche Total. \n Tape ensuite sur le clavier le nopmbre de billes qui s'y trouvent puis valide.");
             }
+//        }
         }
     }
 

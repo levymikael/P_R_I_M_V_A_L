@@ -130,7 +130,7 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
 //            }
 //        });
 
-        int fontSizeButton = MyConstants.SCREENWIDTH / 60;
+        int fontSizeButton = MyConstants.SCREENWIDTH / 40;
 
         String emptyButtonInactivePath = "Images/calculetteKeys/vide_inactif.png";
         String emptyButtonActivePath = "Images/calculetteKeys/highlight/vide_actif.png";
