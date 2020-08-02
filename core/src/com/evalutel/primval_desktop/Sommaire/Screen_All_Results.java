@@ -92,8 +92,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     MyTextButton un_bouton_blue, deux_bouton_blue, trois_bouton_blue, quatre_bouton_blue, cinq_bouton_blue, six_bouton_blue, sept_bouton_blue, huit_bouton_blue;
 
 
-    private float lineHeight = MyConstants.SCREENHEIGHT / 20f;
-    private float buttonSize = lineHeight / 10f;
+    private float lineHeight = MyConstants.SCREENHEIGHT / 22f;
+    private float buttonSize = lineHeight / 11f;
     private int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
     private float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100f;
 
@@ -172,56 +172,34 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         float positionButton = myButtonRetour.getY();
         float heightContainer = (positionButton);
-        container.setSize(MyConstants.SCREENWIDTH, heightContainer - MyConstants.SCREENHEIGHT / 20);
+        container.setSize(MyConstants.SCREENWIDTH, heightContainer - MyConstants.SCREENHEIGHT / 10f);
         container.setPosition(0, 0);
-//
-//         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//
-//         MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-//         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-
-//
-//        Table chapter1Table = chapter1Results();
-//        Table chapter2Table = chapter2Results();
-        HorizontalGroup chapter1Table = chapter1Results(1);
-        HorizontalGroup chapter2Table = chapter2Results(2);
-        HorizontalGroup chapter3Table = chapter3Results(3);
-        HorizontalGroup chapter4Table = chapter4Results(4);
-        HorizontalGroup chapter5Table = chapter5Results(5);
-        HorizontalGroup chapter6Table = chapter6Results(6);
-        HorizontalGroup chapter7Table = chapter7Results(7);
-        HorizontalGroup chapter8Table = chapter8Results(8);
-        HorizontalGroup chapter9Table = chapter9Results(9);
-        HorizontalGroup chapter10Table = chapter10Results(10);
-        HorizontalGroup chapter11Table = chapter11Results(11);
-        HorizontalGroup chapter12Table = chapter12Results(12);
-        HorizontalGroup chapter13Table = chapter13Results(13);
-        HorizontalGroup chapter14Table = chapter14Results(14);
-        HorizontalGroup chapter15Table = chapter15Results(15);
-        HorizontalGroup chapter16Table = chapter16Results(16);
-        HorizontalGroup chapter17Table = chapter17Results(17);
-        HorizontalGroup chapter18Table = chapter18Results(18);
-        HorizontalGroup chapter19Table = chapter19Results(19);
-        HorizontalGroup chapter20Table = chapter20Results(20);
-        HorizontalGroup chapter21Table = chapter21Results(21);
-        HorizontalGroup chapter22Table = chapter22Results(22);
-        HorizontalGroup chapter23Table = chapter23Results(23);
-        HorizontalGroup chapter24Table = chapter24Results(24);
-        HorizontalGroup chapter25Table = chapter25Results(25);
+        HorizontalGroup chapter1Table = chapter1Results(1, 36);
+        HorizontalGroup chapter2Table = chapter2Results(2, 70);
+        HorizontalGroup chapter3Table = chapter3Results(3, 99);
+        HorizontalGroup chapter4Table = chapter4Results(4, 129);
+        HorizontalGroup chapter5Table = chapter5Results(5, 187);
+        HorizontalGroup chapter6Table = chapter6Results(6, 49);
+        HorizontalGroup chapter7Table = chapter7Results(7, 61);
+        HorizontalGroup chapter8Table = chapter8Results(8, 104);
+        HorizontalGroup chapter9Table = chapter9Results(9, 144);
+        HorizontalGroup chapter10Table = chapter10Results(10, 109);
+        HorizontalGroup chapter11Table = chapter11Results(11, 312);
+        HorizontalGroup chapter12Table = chapter12Results(12, 56);
+        HorizontalGroup chapter13Table = chapter13Results(13, 120);
+        HorizontalGroup chapter14Table = chapter14Results(14, 162);
+        HorizontalGroup chapter15Table = chapter15Results(15, 138);
+        HorizontalGroup chapter16Table = chapter16Results(16, 103);
+        HorizontalGroup chapter17Table = chapter17Results(17, 176);
+        HorizontalGroup chapter18Table = chapter18Results(18, 155);
+        HorizontalGroup chapter19Table = chapter19Results(19, 171);
+        HorizontalGroup chapter20Table = chapter20Results(20, 159);
+        HorizontalGroup chapter21Table = chapter21Results(21, 326);
+        HorizontalGroup chapter22Table = chapter22Results(22, 144);
+        HorizontalGroup chapter23Table = chapter23Results(23, 203);
+        HorizontalGroup chapter24Table = chapter24Results(24, 160);
+        HorizontalGroup chapter25Table = chapter25Results(25, 220);
 
 
         float lineHeight = MyConstants.SCREENHEIGHT / 17f;
@@ -315,7 +293,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Gdx.input.setInputProcessor(stage);
     }
 
-    public HorizontalGroup chapter1Results(int chapitre)
+    public HorizontalGroup chapter1Results(int chapitre, int noteMaxPossible)
     {
         chapter1Table = new HorizontalGroup();
         tableCollapsible1 = new Table();
@@ -349,7 +327,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        Table tableChapTitle = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, 1, dataBase);
+        Table tableChapTitle = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, 1, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", 1, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", 1, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", 1, 3, dataBase);
@@ -396,7 +374,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter1Table;
     }
 
-    public HorizontalGroup chapter2Results(int chapitre)
+    public HorizontalGroup chapter2Results(int chapitre, int noteMaxPossible)
     {
         chapter2Table = new HorizontalGroup();
         tableCollapsible2 = new Table();
@@ -412,25 +390,25 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -469,7 +447,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter2Table;
     }
 
-    public HorizontalGroup chapter3Results(int chapitre)
+    public HorizontalGroup chapter3Results(int chapitre, int noteMaxPossible)
     {
         chapter3Table = new HorizontalGroup();
         tableCollapsible3 = new Table();
@@ -507,7 +485,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle3 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle3 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -556,7 +534,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter3Table;
     }
 
-    public HorizontalGroup chapter4Results(int chapitre)
+    public HorizontalGroup chapter4Results(int chapitre, int noteMaxPossible)
     {
         chapter4Table = new HorizontalGroup();
         tableCollapsible4 = new Table();
@@ -591,7 +569,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle4 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle4 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -639,7 +617,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter4Table;
     }
 
-    public HorizontalGroup chapter5Results(int chapitre)
+    public HorizontalGroup chapter5Results(int chapitre, int noteMaxPossible)
     {
         chapter5Table = new HorizontalGroup();
         tableCollapsible5 = new Table();
@@ -675,7 +653,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        Table tableChapTitle5 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle5 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -724,48 +702,50 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter5Table;
     }
 
-    public HorizontalGroup chapter6Results(int chapitre)
+    public HorizontalGroup chapter6Results(int chapitre, int noteMaxPossible)
     {
         chapter6Table = new HorizontalGroup();
         tableCollapsible6 = new Table();
-//        int chapitre = 6;
 
-
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "Outils de la géométrie. Triangles. Points alignés.";
+        String label1 = "Le point, la règle, le crayon, le segment.";
+        String label2 = "Tracer les segments joignant 3 points pour construire un triangle ";
+        String label3 = "Mesurer la longueur d’un segment. ";
+        String label4 = "Mesurer les côtés d’un triangle présenté.";
+        String label5 = "Reproduire un triangle isocèle et  un triangle rectangle.";
+        String label6 = "Points alignés. Trouver et tracer 3 droites portant 3 points ou plus";
+        String label7 = "Activité libre";
 
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle6 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle6 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_red, label7, textureExercices, "blue", chapitre, 7, dataBase);
 
 
         tableCollapsible6.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
@@ -777,6 +757,10 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible6.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible6.row();
         tableCollapsible6.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible6.row();
+        tableCollapsible6.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible6.row();
+        tableCollapsible6.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
         tableCollapsible6.setHeight(collapsibleTableHeight);
 
@@ -803,18 +787,20 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter6Table;
     }
 
-    public HorizontalGroup chapter7Results(int chapitre)
+    public HorizontalGroup chapter7Results(int chapitre, int noteMaxPossible)
     {
         chapter7Table = new HorizontalGroup();
         tableCollapsible7 = new Table();
 
 
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "L’équerre et l’angle droit. Le rectangle et le carré.";
+        String label1 = "L'équerre, le tracé d'un angle droit";
+        String label2 = "Distance d’un point à une droite.";
+        String label3 = " Tracer et mesurer une hauteur d’un triangle ";
+        String label4 = "Un quadrilatère quelconque. Le rectangle, le carré. ";
+        String label5 = " Tracé d’un rectangle en se guidant du quadrillage. ";
+        String label6 = " Tracé d’un rectangle connaissant les longueurs des côtés ";
+        String label7 = " Tracés de carrés ";
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
@@ -822,29 +808,29 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle7 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle7 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-//        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
 
 
         tableCollapsible7.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
@@ -856,6 +842,10 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible7.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible7.row();
         tableCollapsible7.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible7.row();
+        tableCollapsible7.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible7.row();
+        tableCollapsible7.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
         tableCollapsible7.setHeight(collapsibleTableHeight);
 
@@ -881,46 +871,47 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter7Table;
     }
 
-    public HorizontalGroup chapter8Results(int chapitre)
+    public HorizontalGroup chapter8Results(int chapitre, int noteMaxPossible)
     {
         chapter8Table = new HorizontalGroup();
         tableCollapsible8 = new Table();
 
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "La centaine. La monnaie, acheter avec des youpies";
+        String label1 = "Introduction de la centaine";
+        String label2 = "Représenter sur Badix des nombres contenant des centaines ";
+        String label3 = " Additionner des nombres avec des centaines";
+        String label4 = "Une monnaie pour jouer à faire des achats : les youpies !";
+        String label5 = "Payer des montants ne comprenant que des dizaines ou des centaines";
+        String label6 = "Savoir faire l’appoint avec le moins de billets et de pièces";
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle8 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle8 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
-        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_red, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
 //        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
 
 
@@ -932,7 +923,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible8.row();
         tableCollapsible8.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible8.row();
-        tableCollapsible8.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible8.row();
+        tableCollapsible8.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
         tableCollapsible8.setHeight(collapsibleTableHeight);
 
@@ -959,47 +951,51 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter8Table;
     }
 
-    public HorizontalGroup chapter9Results(int chapitre)
+    public HorizontalGroup chapter9Results(int chapitre, int noteMaxPossible)
     {
         chapter9Table = new HorizontalGroup();
         tableCollapsible9 = new Table();
 
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "La soustraction sous deux formes. Calcul mental";
+        String label1 = "Introduction de la soustraction";
+        String label2 = "Soustractions sans retenues sur Badix et sur l’ardoise. ";
+        String label3 = "Faire une soustraction en rendant la monnaie ";
+        String label4 = "Soustractions en complétant  les unités puis les dizaines. ";
+        String label5 = " Effectuer des soustractions par calcul mental.";
+        String label6 = " La soustraction avec retenue  ";
+        String label7 = "Soustractions avec retenue sur Badix et sur l’ardoise";
+        String label8 = "Soustractions en complétant  les unités, les dizaines et les centaines ";
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle9 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle9 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-//        Table tableEx7 = LigneTableauxResults.getLigne(MyConstants.sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_red, label6, textureExercices, "blue", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx8 = LigneTableauxResults.getLigne(huit_bouton_blue, label8, textureExercices, "blue", chapitre, 8, dataBase);
 
 
         tableCollapsible9.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
@@ -1011,6 +1007,12 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible9.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible9.row();
         tableCollapsible9.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible9.row();
+        tableCollapsible9.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible9.row();
+        tableCollapsible9.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible9.row();
+        tableCollapsible9.add(tableEx8).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
         tableCollapsible9.setHeight(collapsibleTableHeight);
 
@@ -1029,7 +1031,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                         public void clicked(InputEvent event, float x, float y)
                                         {
                                             chap9titleClicked = !chap9titleClicked;
-                                            System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                            System.out.println("chap9titleClicked" + chap2titleClicked + " " + event);
                                         }
                                     }
         );
@@ -1038,49 +1040,53 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter9Table;
     }
 
-    public HorizontalGroup chapter10Results(int chapitre)
+    public HorizontalGroup chapter10Results(int chapitre, int noteMaxPossible)
     {
         chapter10Table = new HorizontalGroup();
         tableCollapsible10 = new Table();
 
 
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "Le compas, le cercle et le disque. Outils de translation";
+        String label1 = "Le compas sert à tracer un cercle et à mesurer des distances9";
+        String label2 = "Triangle rectangle et rectangle inscrits dans un cercle";
+        String label3 = "Tracé de deux cercles qui ne se coupent pas ";
+        String label4 = "Tracé et propriétés de deux cercles qui se coupent en deux points ";
+        String label5 = "Mesure d’une distance à l’aide du compas gradué. Outils de translation.";
+        String label6 = "Tracer un triangle et mesurer ses côtés au compas";
+        String label7 = "Dessiner un collier de perlesl";
+        String label8 = "Construire des parallèles à une droite passant par des points tracés";
 
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle10 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle10 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-//        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_red, label6, textureExercices, "blue", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx8 = LigneTableauxResults.getLigne(sept_bouton_blue, label8, textureExercices, "blue", chapitre, 8, dataBase);
 
 
         tableCollapsible10.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
@@ -1092,13 +1098,21 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible10.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible10.row();
         tableCollapsible10.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible10.row();
+        tableCollapsible10.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible10.row();
+        tableCollapsible10.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible10.row();
+        tableCollapsible10.add(tableEx8).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+
+        tableCollapsible10.setHeight(collapsibleTableHeight);
 
         chapter10Table.addActor(tableChapTitle10)/*/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
 //        chapter10Table.row();
         chapter10Table.addActor(tableCollapsible10)/*/*.width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f)*/;
 //        chapter10Table.row();
 
-        tableCollapsible10.setVisible(false);
+//        tableCollapsible10.setVisible(false);
 
 
         tableChapTitle10.addListener(new ClickListener()
@@ -1116,33 +1130,35 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter10Table;
     }
 
-    public HorizontalGroup chapter11Results(int chapitre)
+    public HorizontalGroup chapter11Results(int chapitre, int noteMaxPossible)
     {
         chapter11Table = new HorizontalGroup();
         tableCollapsible11 = new Table();
-//        int chapitre = 11;
 
 
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "Ranger dans l’ordre les entiers avec ou sans des sauts";
+        String label1 = "Comparaison de deux nombres entiers ";
+        String label2 = "Représenter deux nombres sur Badix et les comparer.";
+        String label3 = "Ranger des nombres du plus petit au plus grand";
+        String label4 = "Suite de nombres entiers qui se suivent de 1 en 1";
+        String label5 = "Suite de nombres entiers qui se suivent de 2 en 2";
+        String label6 = "Suite de nombres entiers qui se suivent de 10 en 10";
+        String label7 = "Suite de nombres entiers qui se suivent de 5 en 5";
+        String label8 = "Suite de nombres entiers qui se suivent de 3 en 3";
 
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
@@ -1152,14 +1168,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle11 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle11 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-//        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx8 = LigneTableauxResults.getLigne(huit_bouton_blue, label8, textureExercices, "blue", chapitre, 8, dataBase);
 
 
         tableCollapsible11.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
@@ -1171,8 +1188,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible11.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible11.row();
         tableCollapsible11.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible11.row();
+        tableCollapsible11.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible11.row();
+        tableCollapsible11.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible11.row();
+        tableCollapsible11.add(tableEx8).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        tableCollapsible1.setHeight(collapsibleTableHeight);
+
+        tableCollapsible11.setHeight(collapsibleTableHeight);
 
         chapter11Table.addActor(tableChapTitle11)/*/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
 //        chapter1Table.row();
@@ -1188,7 +1212,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                          public void clicked(InputEvent event, float x, float y)
                                          {
                                              chap11titleClicked = !chap11titleClicked;
-                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                             System.out.println("chap11titleClicked" + chap11titleClicked + " " + event);
                                          }
                                      }
         );
@@ -1198,46 +1222,44 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     }
 
 
-    public HorizontalGroup chapter12Results(int chapitre)
+    public HorizontalGroup chapter12Results(int chapitre, int noteMaxPossible)
     {
         chapter12Table = new HorizontalGroup();
         tableCollapsible12 = new Table();
 
-
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "Faire des achats à la boulangerie, payer et rendre la monnaie.";
+        String label1 = "Acheter du pain, un croissant ou un pain au chocolat.";
+        String label2 = "Acheter trois sandwichs pour le repas de midi.";
+        String label3 = "Acheter 2 friandises et rendre la monnaie sur 50 ";
+        String label4 = "Acheter 2 gâteaux et rendre la monnaie sur 500";
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle12 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
-        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
+        Table tableChapTitle12 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_blue, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
-        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
+//        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
 //        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
 //        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
 
@@ -1248,15 +1270,18 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible12.add(tableEx3).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible12.row();
         tableCollapsible12.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
-        tableCollapsible12.row();
-        tableCollapsible12.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+//        tableCollapsible12.row();
+//        tableCollapsible12.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter12Table.addActor(tableChapTitle12)/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
-//        chapter12Table.row();
-        chapter12Table.addActor(tableCollapsible12)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f)*/;
-//        chapter12Table.row();
+        tableCollapsible12.setHeight(collapsibleTableHeight);
 
-        tableCollapsible12.setVisible(false);
+        chapter12Table.addActor(tableChapTitle12)/*/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
+//        chapter1Table.row();
+        chapter12Table.addActor(tableCollapsible12)/*.width(screenWidth).height(0)*/;
+//        chapter1Table./*.width(screenWidth).height(0)*/;
+//        chapter1Table.row();
+//        tableCollapsible1.setVisible(false);
+        chapter12Table.wrap();
 
 
         tableChapTitle12.addListener(new ClickListener()
@@ -1264,8 +1289,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                          @Override
                                          public void clicked(InputEvent event, float x, float y)
                                          {
-                                             chap2titleClicked = !chap2titleClicked;
-                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                             chap12titleClicked = !chap12titleClicked;
+                                             System.out.println("chap12titleClicked" + chap12titleClicked + " " + event);
                                          }
                                      }
         );
@@ -1274,32 +1299,33 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter12Table;
     }
 
-    public HorizontalGroup chapter13Results(int chapitre)
+    public HorizontalGroup chapter13Results(int chapitre, int noteMaxPossible)
     {
         chapter13Table = new HorizontalGroup();
         tableCollapsible13 = new Table();
-//        int chapitre = 13;
 
-
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "La multiplication par 2. Le boulier. Nombres pairs et impairs.";
+        String label1 = "La multiplication : une addition répétée du même nombre. Le boulier";
+        String label2 = "Pratique de la table de multiplication par 2.";
+        String label3 = "Transformer une addition de nombres 2 en multiplication";
+        String label4 = "Compter les chaussettes dans des paires de chaussettes";
+        String label5 = "Christian veut acheter des macarons  pour lui et pour sa sœur Nathalie";
+        String label6 = "Calcul mental sur la table de multiplication par 2";
+        String label7 = " Sur la plage. Combien de traces de pas après des sauts sur le sable ?";
+        String label8 = "Reconnaître les nombres pairs et impairs entre 1 et 20";
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
@@ -1309,14 +1335,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle13 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle13 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-//        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx8 = LigneTableauxResults.getLigne(huit_bouton_blue, label8, textureExercices, "blue", chapitre, 8, dataBase);
 
 
         tableCollapsible13.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
@@ -1328,13 +1355,22 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible13.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible13.row();
         tableCollapsible13.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible13.row();
+        tableCollapsible13.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible13.row();
+        tableCollapsible13.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible13.row();
+        tableCollapsible13.add(tableEx8).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter13Table.addActor(tableChapTitle13)/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
-//        chapter13Table.row();
-        chapter13Table.addActor(tableCollapsible13)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f)*/;
-//        chapter13Table.row();
+        tableCollapsible13.setHeight(collapsibleTableHeight);
 
-        tableCollapsible13.setVisible(false);
+        chapter13Table.addActor(tableChapTitle13)/*/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
+//        chapter1Table.row();
+        chapter13Table.addActor(tableCollapsible13)/*.width(screenWidth).height(0)*/;
+//        chapter1Table./*.width(screenWidth).height(0)*/;
+//        chapter1Table.row();
+//        tableCollapsible1.setVisible(false);
+        chapter13Table.wrap();
 
 
         tableChapTitle13.addListener(new ClickListener()
@@ -1342,8 +1378,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                          @Override
                                          public void clicked(InputEvent event, float x, float y)
                                          {
-                                             chap2titleClicked = !chap2titleClicked;
-                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                             chap13titleClicked = !chap13titleClicked;
+                                             System.out.println("chap13titleClicked" + chap13titleClicked + " " + event);
                                          }
                                      }
         );
@@ -1352,49 +1388,51 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter13Table;
     }
 
-    public HorizontalGroup chapter14Results(int chapitre)
+    public HorizontalGroup chapter14Results(int chapitre, int noteMaxPossible)
     {
         chapter14Table = new HorizontalGroup();
         tableCollapsible14 = new Table();
-//        int chapitre = 14;
 
-
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "La table de multiplication par 3. Périmètre du triangle équilatéral.";
+        String label1 = "La multiplication par 3 sur le boulier";
+        String label2 = "Pratique de la table de multiplication par 3.";
+        String label3 = " Transformer une addition de nombres 3 en multiplication.";
+        String label4 = "Construction d’un triangle équilatéral. Calcul de son périmètre.";
+        String label5 = "Triangles équilatéraux emboités";
+        String label6 = "Calcul mental sur la table de multiplication par 3";
+        String label7 = "Combien de bougies dans des paquets de 3";
+        String label8 = "Utiliser la même couleur pour colorier les cases avec la même valeur.";
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle14 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle14 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
-        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_red, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-//        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx8 = LigneTableauxResults.getLigne(huit_bouton_blue, label8, textureExercices, "blue", chapitre, 8, dataBase);
 
         tableCollapsible14.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible14.row();
@@ -1405,13 +1443,22 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible14.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible14.row();
         tableCollapsible14.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible14.row();
+        tableCollapsible14.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible14.row();
+        tableCollapsible14.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible14.row();
+        tableCollapsible14.add(tableEx8).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter14Table.addActor(tableChapTitle14)/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
-//        chapter14Table.row();
-        chapter14Table.addActor(tableCollapsible14)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f)*/;
-//        chapter14Table.row();
+        tableCollapsible14.setHeight(collapsibleTableHeight);
 
-        tableCollapsible14.setVisible(false);
+        chapter14Table.addActor(tableChapTitle14)/*/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
+//        chapter1Table.row();
+        chapter14Table.addActor(tableCollapsible14)/*.width(screenWidth).height(0)*/;
+//        chapter1Table./*.width(screenWidth).height(0)*/;
+//        chapter1Table.row();
+//        tableCollapsible1.setVisible(false);
+        chapter14Table.wrap();
 
 
         tableChapTitle14.addListener(new ClickListener()
@@ -1428,49 +1475,50 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter14Table;
     }
 
-    public HorizontalGroup chapter15Results(int chapitre)
+    public HorizontalGroup chapter15Results(int chapitre, int noteMaxPossible)
     {
         chapter15Table = new HorizontalGroup();
         tableCollapsible15 = new Table();
-//        int chapitre = 15;
 
 
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "La table de multiplication par 4. Périmètre du carré. Associativité de la multiplication.";
+        String label1 = "La table de multiplication par 4. Périmètre du carré. Associativité de la multiplication.";
+        String label2 = " Pratique de la table de multiplication par 4.";
+        String label3 = "La multiplication est associative. Exemple de la multiplication par 4.";
+        String label4 = " Retrouver la table de multiplication par 4 en utilisant l’associativité.";
+        String label5 = "Construction du carré. Calcul de son périmètre.";
+        String label6 = "Construction et périmètres de carrés emboités";
+        String label7 = "Calcul mental sur la table de multiplication par 4";
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle15 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle15 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
-        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-//        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_red, label5, textureExercices, "blue", chapitre, 5, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
 
 
         tableCollapsible15.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
@@ -1482,14 +1530,21 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible15.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible15.row();
         tableCollapsible15.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible15.row();
+        tableCollapsible15.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible15.row();
+        tableCollapsible15.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter15Table.addActor(tableChapTitle15)/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
-//        chapter15Table.row();
-        chapter15Table.addActor(tableCollapsible15)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f)*/;
-//        chapter15Table.row();
 
-        tableCollapsible15.setVisible(false);
+        tableCollapsible15.setHeight(collapsibleTableHeight);
 
+        chapter15Table.addActor(tableChapTitle15)/*/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
+//        chapter1Table.row();
+        chapter15Table.addActor(tableCollapsible15)/*.width(screenWidth).height(0)*/;
+//        chapter1Table./*.width(screenWidth).height(0)*/;
+//        chapter1Table.row();
+//        tableCollapsible1.setVisible(false);
+        chapter15Table.wrap();
 
         tableChapTitle15.addListener(new ClickListener()
                                      {
@@ -1506,34 +1561,36 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter15Table;
     }
 
-    public HorizontalGroup chapter16Results(int chapitre)
+    public HorizontalGroup chapter16Results(int chapitre, int noteMaxPossible)
     {
         chapter16Table = new HorizontalGroup();
         tableCollapsible16 = new Table();
-//        int chapitre = 16;
 
 
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "La multiplication par 5. Commutativité de la multiplication. ";
+        String label1 = "La multiplication par 5 sur le boulier";
+        String label2 = "Pratique de la table de multiplication par 5.";
+        String label3 = "La multiplication est commutative. Exemple de la multiplication par 5";
+        String label4 = "Vérifier la commutativité sur 2 multiplications déjà rencontrés";
+        String label5 = "La commutativité permet de découvrir le résultat de nouvelles multiplications";
+        String label6 = " Calcul mental sur la table de multiplication par 5";
+        String label7 = "Christian et Nathalie collectionnent des étoiles de mer";
+        String label8 = "Acheter des gâteaux pour les invités\"";
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
@@ -1541,14 +1598,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle16 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle16 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-//        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx8 = LigneTableauxResults.getLigne(huit_bouton_blue, label8, textureExercices, "blue", chapitre, 8, dataBase);
 
 
         tableCollapsible16.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
@@ -1560,13 +1618,22 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible16.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible16.row();
         tableCollapsible16.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible16.row();
+        tableCollapsible16.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible16.row();
+        tableCollapsible16.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible16.row();
+        tableCollapsible16.add(tableEx8).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter16Table.addActor(tableChapTitle16)/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
-//        chapter16Table.row();
-        chapter16Table.addActor(tableCollapsible16)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f)*/;
-//        chapter16Table.row();
+        tableCollapsible16.setHeight(collapsibleTableHeight);
 
-        tableCollapsible16.setVisible(false);
+        chapter16Table.addActor(tableChapTitle16)/*/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
+//        chapter1Table.row();
+        chapter16Table.addActor(tableCollapsible16)/*.width(screenWidth).height(0)*/;
+//        chapter1Table./*.width(screenWidth).height(0)*/;
+//        chapter1Table.row();
+//        tableCollapsible1.setVisible(false);
+        chapter16Table.wrap();
 
 
         tableChapTitle16.addListener(new ClickListener()
@@ -1574,8 +1641,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                          @Override
                                          public void clicked(InputEvent event, float x, float y)
                                          {
-                                             chap2titleClicked = !chap2titleClicked;
-                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                             chap16titleClicked = !chap16titleClicked;
+                                             System.out.println("chap16titleClicked" + chap16titleClicked + " " + event);
                                          }
                                      }
         );
@@ -1584,49 +1651,51 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter16Table;
     }
 
-    public HorizontalGroup chapter17Results(int chapitre)
+    public HorizontalGroup chapter17Results(int chapitre, int noteMaxPossible)
     {
         chapter17Table = new HorizontalGroup();
         tableCollapsible17 = new Table();
-//        int chapitre = 17;
 
-
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "Le nombre 1000 et les multiples de 10. Les multiplications par 10, 100, 1000…";
+        String label1 = "Introduction du nombre 1000 et de ses multiples par 10";
+        String label2 = "Analyser le contenu en décades d’un nombre donné";
+        String label3 = "Addition de nombres faisant intervenir des unités de mille.";
+        String label4 = "Multiplication d’un nombre  par 10 et par un multiple de 10";
+        String label5 = "Multiplier  un nombre à 1 chiffre par un multiple de 10.";
+        String label6 = "Multiplication d’un nombre  par 100 et par un multiple de 100";
+        String label7 = "Savoir multiplier un nombre par des multiples de 100";
+        String label8 = "Recette d’une caissière d’un magasin de sport";
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle17 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle17 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
-        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "blue", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_red, label4, textureExercices, "red", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-//        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_red, label6, textureExercices, "red", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx8 = LigneTableauxResults.getLigne(huit_bouton_blue, label8, textureExercices, "blue", chapitre, 8, dataBase);
 
 
         tableCollapsible17.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
@@ -1638,13 +1707,22 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible17.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible17.row();
         tableCollapsible17.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible17.row();
+        tableCollapsible17.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible17.row();
+        tableCollapsible17.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible17.row();
+        tableCollapsible17.add(tableEx8).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter17Table.addActor(tableChapTitle17)/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
-//        chapter17Table.row();
-        chapter17Table.addActor(tableCollapsible17)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f)*/;
-//        chapter17Table.row();
+        tableCollapsible17.setHeight(collapsibleTableHeight);
 
-        tableCollapsible17.setVisible(false);
+        chapter17Table.addActor(tableChapTitle17)/*/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
+//        chapter1Table.row();
+        chapter17Table.addActor(tableCollapsible17)/*.width(screenWidth).height(0)*/;
+//        chapter1Table./*.width(screenWidth).height(0)*/;
+//        chapter1Table.row();
+//        tableCollapsible1.setVisible(false);
+        chapter17Table.wrap();
 
 
         tableChapTitle17.addListener(new ClickListener()
@@ -1652,8 +1730,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                          @Override
                                          public void clicked(InputEvent event, float x, float y)
                                          {
-                                             chap2titleClicked = !chap2titleClicked;
-                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                             chap17titleClicked = !chap17titleClicked;
+                                             System.out.println("chap17titleClicked" + chap17titleClicked + " " + event);
                                          }
                                      }
         );
@@ -1662,47 +1740,51 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter17Table;
     }
 
-    public HorizontalGroup chapter18Results(int chapitre)
+    public HorizontalGroup chapter18Results(int chapitre, int noteMaxPossible)
     {
         chapter18Table = new HorizontalGroup();
         tableCollapsible18 = new Table();
 
-        String labelChapterTitle = "Introduction de l'Addition";
-        String label1 = "Addition dont le total ne dépasse pas 9";
-        String label2 = "Additionner les oiseaux sur les deux branches";
-        String label3 = "Total d'un lancer de 2 dés";
-        String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
-        String label5 = "Calcul mental";
+        String labelChapterTitle = "La multiplication par 6. Distributivité de la multiplication.";
+        String label1 = "La multiplication par 6 sur le boulier";
+        String label2 = "Pratique de la table de multiplication par 6.";
+        String label3 = "La multiplication est  distributive sur l’addition. Applications.";
+        String label4 = "Effectuer une multiplication en utilisant la distributivité ";
+        String label5 = "Calcul mental sur la table de multiplication par 6";
+        String label6 = "Pentagone régulier inscrit dans un cercle.";
+        String label7 = "Construire un pentagone régulier. Périmètre du pentagone. ";
+        String label8 = "Utiliser la même couleur pour colorier les cases avec la même valeur.";
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle18 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle18 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
-//        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-//        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_red, label6, textureExercices, "red", chapitre, 6, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx8 = LigneTableauxResults.getLigne(huit_bouton_blue, label8, textureExercices, "blue", chapitre, 8, dataBase);
 
         tableCollapsible18.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible18.row();
@@ -1713,6 +1795,12 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible18.add(tableEx4).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible18.row();
         tableCollapsible18.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible18.row();
+        tableCollapsible18.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible18.row();
+        tableCollapsible18.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible18.row();
+        tableCollapsible18.add(tableEx8).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
         tableCollapsible18.setHeight(collapsibleTableHeight);
 
@@ -1740,7 +1828,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter18Table;
     }
 
-    public HorizontalGroup chapter19Results(int chapitre)
+    public HorizontalGroup chapter19Results(int chapitre, int noteMaxPossible)
     {
         chapter19Table = new HorizontalGroup();
         tableCollapsible19 = new Table();
@@ -1754,38 +1842,41 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label6 = "Calcul mental sur la table de multiplication par 8";
         String label7 = "La multiplication par 9 sur le boulier";
         String label8 = "Calcul mental sur la table de multiplication par 9";
+        String label9 = "Utiliser la même couleur pour colorier les cases avec la même valeur.";
 
 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton neuf_bouton_blue = new MyTextButton("9", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle19 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle19 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
-        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureExercices, "blue", chapitre, 3, dataBase);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_red, label4, textureCours, "red", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
         Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
-        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_blue, label7, textureExercices, "blue", chapitre, 7, dataBase);
-        Table tableEx8 = LigneTableauxResults.getLigne(huit_bouton_blue, label8, textureExercices, "blue", chapitre, 7, dataBase);
+        Table tableEx7 = LigneTableauxResults.getLigne(sept_bouton_red, label7, textureCours, "red", chapitre, 7, dataBase);
+        Table tableEx8 = LigneTableauxResults.getLigne(huit_bouton_blue, label8, textureExercices, "blue", chapitre, 8, dataBase);
+        Table tableEx9 = LigneTableauxResults.getLigne(neuf_bouton_blue, label9, textureExercices, "blue", chapitre, 9, dataBase);
 
 
         tableCollapsible19.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
@@ -1803,6 +1894,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible19.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible19.row();
         tableCollapsible19.add(tableEx8).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible19.row();
+        tableCollapsible19.add(tableEx9).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
         tableCollapsible19.setHeight(collapsibleTableHeight);
 
@@ -1820,7 +1913,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                          public void clicked(InputEvent event, float x, float y)
                                          {
                                              chap19titleClicked = !chap19titleClicked;
-                                             System.out.println("chap19titleClicked" + chap2titleClicked + " " + event);
+                                             System.out.println("chap19titleClicked" + chap19titleClicked + " " + event);
                                          }
                                      }
         );
@@ -1831,7 +1924,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     }
 
 
-    public HorizontalGroup chapter20Results(int chapitre)
+    public HorizontalGroup chapter20Results(int chapitre, int noteMaxPossible)
     {
         chapter20Table = new HorizontalGroup();
         tableCollapsible20 = new Table();
@@ -1849,28 +1942,28 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
 
         MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle20 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle20 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureExercices, "blue", chapitre, 3, dataBase);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, dataBase);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, dataBase);
         Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, dataBase);
@@ -1891,12 +1984,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible20.row();
         tableCollapsible20.add(tableEx7).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
 
-        chapter20Table.addActor(tableChapTitle20)/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
-//        chapter20Table.row();
-        chapter20Table.addActor(tableCollapsible20)/*.width(screenWidth).height(MyConstants.SCREENHEIGHT / 4f)*/;
-//        chapter20Table.row();
+        tableCollapsible20.setHeight(collapsibleTableHeight);
 
-        tableCollapsible20.setVisible(false);
+        chapter20Table.addActor(tableChapTitle20)/*/*.height(lineHeight).padBottom(-1 * paddingInterOnglets).width(screenWidth).height(lineHeight)*/;
+//        chapter1Table.row();
+        chapter20Table.addActor(tableCollapsible20)/*.width(screenWidth).height(0)*/;
+//        chapter1Table./*.width(screenWidth).height(0)*/;
+//        chapter1Table.row();
+//        tableCollapsible1.setVisible(false);
+        chapter20Table.wrap();
 
 
         tableChapTitle20.addListener(new ClickListener()
@@ -1904,8 +2000,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
                                          @Override
                                          public void clicked(InputEvent event, float x, float y)
                                          {
-                                             chap2titleClicked = !chap2titleClicked;
-                                             System.out.println("chap1titleClicked" + chap2titleClicked + " " + event);
+                                             chap20titleClicked = !chap20titleClicked;
+                                             System.out.println("chap20titleClicked" + chap20titleClicked + " " + event);
                                          }
                                      }
         );
@@ -1915,7 +2011,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter20Table;
     }
 
-    public HorizontalGroup chapter21Results(int chapitre)
+    public HorizontalGroup chapter21Results(int chapitre, int noteMaxPossible)
     {
         chapter21Table = new HorizontalGroup();
         tableCollapsible21 = new Table();
@@ -1952,7 +2048,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle21 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle21 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -2006,7 +2102,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     }
 
 
-    public HorizontalGroup chapter22Results(int chapitre)
+    public HorizontalGroup chapter22Results(int chapitre, int noteMaxPossible)
     {
         chapter22Table = new HorizontalGroup();
         tableCollapsible22 = new Table();
@@ -2041,7 +2137,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle22 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle22 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", 1, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", 1, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", 1, 3, dataBase);
@@ -2089,7 +2185,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter22Table;
     }
 
-    public HorizontalGroup chapter23Results(int chapitre)
+    public HorizontalGroup chapter23Results(int chapitre, int noteMaxPossible)
     {
         chapter23Table = new HorizontalGroup();
         tableCollapsible23 = new Table();
@@ -2126,7 +2222,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle23 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle23 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", chapitre, 3, dataBase);
@@ -2180,7 +2276,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter23Table;
     }
 
-    public HorizontalGroup chapter24Results(int chapitre)
+    public HorizontalGroup chapter24Results(int chapitre, int noteMaxPossible)
     {
         chapter24Table = new HorizontalGroup();
         tableCollapsible24 = new Table();
@@ -2214,7 +2310,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
-        Table tableChapTitle24 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle24 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", 1, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", 1, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", 1, 3, dataBase);
@@ -2266,7 +2362,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter24Table;
     }
 
-    public HorizontalGroup chapter25Results(int chapitre)
+    public HorizontalGroup chapter25Results(int chapitre, int noteMaxPossible)
     {
         chapter25Table = new HorizontalGroup();
         tableCollapsible25 = new Table();
@@ -2295,15 +2391,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
         MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//        MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
-        Table tableChapTitle25 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, dataBase);
+        Table tableChapTitle25 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, dataBase);
         Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", 1, 1, dataBase);
         Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", 1, 2, dataBase);
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", 1, 3, dataBase);

@@ -32,7 +32,7 @@ public class LigneTableauxResultsChapitre
     static BitmapFont bitmapFontArial;
 
 
-    public static Table getLigne(MyTextButton button, String ongletTitre, /*Texture texture,*/ /*String borderColor,*/ int chapitre, /*int onglet,*/ DatabaseDesktop dataBase)
+    public static Table getLigne(MyTextButton button, String ongletTitre, /*Texture texture,*/ /*String borderColor,*/ int chapitre, int totalNotesPossibles, DatabaseDesktop dataBase)
     {
         Table container = new Table();
         Table table = new Table();
@@ -87,13 +87,14 @@ public class LigneTableauxResultsChapitre
 
         notes2Implement = db.getTotalNotePageForIdProfil(chapitre);
 
+        String newTotalNotes = notes2Implement.substring(0, notes2Implement.length() - 1) + totalNotesPossibles;
+
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
         labelStyleNotes.font = bitmapFontArial;
         labelStyleNotes.fontColor = Color.ORANGE;
-        Label labelNotes = new Label(notes2Implement, labelStyleNotes);
+        Label labelNotes = new Label(newTotalNotes, labelStyleNotes);
         labelDuration.setFontScale(fontSize);
         labelNotes.setWidth(MyConstants.SCREENWIDTH / 18f);
-
 
         pixmapBg.setColor(Color.ORANGE);
         pixmapBg.fill();
@@ -110,9 +111,8 @@ public class LigneTableauxResultsChapitre
         table.add().width(screenWidth / 70f);
         table.add(button).height(button.getHeight()).width(button.getWidth());
         table.add().width(screenWidth / 70f);
-        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.6f)).padRight(screenWidth / 45f);
-        table.add(durationTable).width(screenWidth / 9f).padRight(screenWidth / 30f);
-//        table.add().width(screenWidth / 25);
+        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.6f)).padRight(screenWidth / 25f);
+        table.add(durationTable).width(screenWidth / 9f).padRight(screenWidth / 40f);
         table.add(noteTable).width(screenWidth / 8.5f);
 
 

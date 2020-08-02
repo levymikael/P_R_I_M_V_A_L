@@ -92,7 +92,6 @@ public class LigneTableauxResults
             notePossiblePerExercice = db.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
 
             notes2Implement = highestNote + " / " + notePossiblePerExercice + " / " + noteMaxPerExercice;
-
         }
         else
         {
@@ -107,16 +106,11 @@ public class LigneTableauxResults
 
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pixmapBg))));
 
-        table.add().width(screenWidth / 100f);
-        table.add(button).height(MyConstants.SCREENHEIGHT / 30f).width(MyConstants.SCREENHEIGHT / 30f);
-        table.add().width(screenWidth / 80f);
-        table.add(labelOnglet).width((screenWidth * 0.61f));
-        table.add().width(screenWidth / 100f);
-        table.add(new Image(texture)).width(screenWidth / 70f).height(screenWidth / 70f);
-        table.add().width(screenWidth / 30f);
-        table.add(labelDuration).width(screenWidth / 12f);
-        table.add().width(0.7f * screenWidth / 10f);
-        table.add(labelNotes).width(screenWidth / 10f);
+        table.add(button).height(MyConstants.SCREENHEIGHT / 30f).width(MyConstants.SCREENHEIGHT / 30f).padLeft(screenWidth / 50f).padRight(screenWidth / 80f);
+        table.add(labelOnglet).width((screenWidth * 0.61f)).padRight(screenWidth / 20f);
+        table.add(new Image(texture)).width(screenWidth / 70f).height(screenWidth / 70f).padRight(screenWidth / 30f);
+        table.add(labelDuration).width(screenWidth / 11f).padRight( screenWidth / 18f);
+        table.add(labelNotes).width(screenWidth / 8f);
 
 
         float lineHeight = MyConstants.SCREENHEIGHT / 20;
@@ -124,7 +118,7 @@ public class LigneTableauxResults
         int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
         float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 50;
 
-        container.add(table).height(MyConstants.SCREENHEIGHT / 20f).width(screenWidth);
+        container.add(table).height(MyConstants.SCREENHEIGHT / 21f).width(screenWidth);
 
 
         return container;
