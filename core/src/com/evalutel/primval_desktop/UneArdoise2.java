@@ -158,6 +158,13 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         }
     }
 
+    public void eraseAllLabels ()
+    {
+        labelEmplacement1.remove();
+        labelEmplacement2.remove();
+        labelEmplacement3.remove();
+    }
+
     public void setActive(boolean active)
     {
         isActive = active;

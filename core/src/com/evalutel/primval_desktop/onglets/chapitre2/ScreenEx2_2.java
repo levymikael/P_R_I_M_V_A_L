@@ -104,7 +104,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         float posEnonceX = (MyConstants.SCREENWIDTH - activiteWidth) / 2f;
         float posSolutionX = posEnonceX + activiteWidth / 2f;
 
-        activiteView = new ActiviteView(stage, posEnonceX, activiteWidth * 42 / 1626, activiteWidth / 2f, "activite");
+        activiteView = new ActiviteView(stage, posEnonceX, activiteWidth * 42 / 1626, activiteWidth / 2f, "enonce");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
@@ -670,7 +670,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             {
 //                if (questionCourante != 8)
 //                {
-                validusAnimated.goodAnswerPlaySound(new NextQuestion2(500));
+                validusAnimated.goodAnswerPlaySound(new NextQuestion2(1_000));
 //                }
 //                else
 //                {
@@ -911,7 +911,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneMain.setVisible(false);
-            nbInput = String.valueOf(numOiseauxBranche1);
+            nbInput = String.valueOf(numOiseauxBranche2);
             afterCorrection = true;
             timer.schedule(new NextQuestion2(500), 500);
             styleTest.up = drawableAux;
@@ -1439,12 +1439,366 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             else
             {
                 planche3.setVisible(true);
-                activiteView.addTextActivite("Deplace toutes les billes sur la planche Total. \n Tape ensuite sur le clavier le nopmbre de billes qui s'y trouvent puis valide.");
+                activiteView.addTextActivite("Deplace toutes les billes sur la planche Total. \nTape ensuite sur le clavier le nopmbre de billes qui s'y trouvent puis valide.");
+                timer.schedule(new InputClavier3(250), 1_000);
+
             }
 //        }
         }
     }
 
+
+    private class InputClavier3 extends MyTimer.TaskEtape
+    {
+//        private InputClavier(long durMillis, long delay)
+//        {
+//            super(durMillis, delay);
+//        }
+
+        private InputClavier3(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+
+            for (int i = 0; i < allPlanches.size(); i++)
+            {
+                UnePlancheNew planche = allPlanches.get(i);
+                planche.setAllBillesActive();
+            }
+//            sacDeBilles.setActive(true);
+            calculetteView.setActive(true);
+            validusAnimated.setActive(true);
+
+            validusAnimated.etapeCorrection = new PressValidate3(0);
+            calculetteView.etapeCorrection = new PressValidate3(0);
+
+
+        }
+    }
+
+
+    private class PressValidate3 extends MyTimer.TaskEtape
+    {
+        private PressValidate3(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            String txtTape = calculetteView.getInput();
+
+            int value = -1;
+
+            try
+            {
+                value = Integer.parseInt(txtTape);
+            } catch (Exception e)
+            {
+
+            }
+            if ((planche3.getNumberBilles() == (cptOiseau1 + cptOiseau2)) && (value == planche3.getNumberBilles()))
+            {
+//                if (questionCourante != 8)
+//                {
+                validusAnimated.goodAnswerPlaySound(new ResetScreen(1_000));
+//                }
+//                else
+//                {
+//                    timer.schedule(new Fin(1_000, 0), 500);
+//                    validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
+//                }
+                validusAnimated.isActive = false;
+                addDiamonds(1);
+                planche2.setAllBillesInactive();
+                uneArdoise2.fillLabel(3, Integer.toString(value));
+
+//                solutionView.addTextActivite(cptOiseau1 + " + "+ cptOiseau2 +" = " + (cptOiseau1 + cptOiseau2));
+
+            }
+            else
+            {
+                if (failedAttempts == 1)
+                {
+                    myCorrectionAndPauseGeneral.correctionStart();
+
+                    validusAnimated.isActive = false;
+                    calculetteView.setActive(false);
+                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification3(2_000));
+                    failedAttempts = 0;
+
+                    addPierres(1);
+                }
+                else if (planche3.getNumberBilles() == 0)
+                {
+                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+                }
+//                else if (planche2.getNumberBilles() < oiseauxToDisplayBranche2)
+//                {
+//                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus - Tu'es trompe manque des billes planche.mp3");
+//                }
+//                else if (planche2.getNumberBilles() > oiseauxToDisplayBranche2)
+//                {
+//                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
+//                }
+                else
+                {
+                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+                }
+                failedAttempts++;
+            }
+        }
+    }
+
+    private class EtapeRectification3 extends MyTimer.TaskEtape
+    {
+        private EtapeRectification3(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            timer.schedule(new AddBilles3(1_000), 1_000);
+        }
+    }
+
+
+    private class AddBilles3 extends MyTimer.TaskEtape
+    {
+        private AddBilles3(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            if (planche3.getNumberBilles() < (cptOiseau1 + cptOiseau2))
+            {
+                if (planche1.getNumberBilles() != 0)
+                {
+                    billeRectification = planche1.getLastBille();
+                }
+                else if (planche2.getNumberBilles() != 0)
+                {
+                    billeRectification = planche2.getLastBille();
+
+                }
+                planche3.addBilleAndOrganize(billeRectification);
+                timer.schedule(new EtapeRectification3(500), 500);
+            }
+//            else if (planche2.getNumberBilles() > oiseauxToDisplayBranche2)
+//            {
+//                billeRectification = planche2.getLastBille();
+//                planche2.removeBille(billeRectification);
+//                sacDeBilles.addBilleToReserve(billeRectification);
+//
+//                timer.schedule(new EtapeRectification2(500), 500);
+//            }
+            else if (planche3.getNumberBilles() == (cptOiseau1 + cptOiseau2))
+            {
+                timer.schedule(new MoveMainToCalculette3(1_000), 1_000);
+            }
+        }
+    }
+
+
+    private class MoveMainToCalculette3 extends MyTimer.TaskEtape
+    {
+        private MoveMainToCalculette3(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonPosition = calculetteView.buttonPosition((cptOiseau1 + cptOiseau2));
+
+            float posX = buttonPosition.x;
+            float posY = buttonPosition.y;
+
+            MyTimer.TaskEtape nextEtape = new ClickMainToCalculette3(1_500, 1_000);
+
+            uneMain.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
+        }
+    }
+
+    private class ClickMainToCalculette3 extends MyTimer.TaskEtape
+    {
+        private ClickMainToCalculette3(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            switch ((cptOiseau1 + cptOiseau2))
+            {
+                case 1:
+                    styleTest = calculetteView.un_bouton.getStyle();
+                    break;
+                case 2:
+                    styleTest = calculetteView.deux_bouton.getStyle();
+                    break;
+                case 3:
+                    styleTest = calculetteView.trois_bouton.getStyle();
+                    break;
+                case 4:
+                    styleTest = calculetteView.quatre_bouton.getStyle();
+                    break;
+                case 5:
+                    styleTest = calculetteView.cinq_bouton.getStyle();
+                    break;
+                case 6:
+                    styleTest = calculetteView.six_bouton.getStyle();
+                    break;
+                case 7:
+                    styleTest = calculetteView.sept_bouton.getStyle();
+                    break;
+                case 8:
+                    styleTest = calculetteView.huit_bouton.getStyle();
+                    break;
+                case 9:
+                    styleTest = calculetteView.neuf_bouton.getStyle();
+                    break;
+                default:
+                    break;
+            }
+
+            drawableAux = styleTest.up;
+            styleTest.up = styleTest.down;
+
+            MyPoint buttonPosition = calculetteView.buttonPosition((cptOiseau1 + cptOiseau2));
+
+            float posX = buttonPosition.x;
+            float posY = buttonPosition.y;
+
+            MyTimer.TaskEtape nextEtape = new MoveMainToValidate3(500);
+
+            uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 500);
+
+            calculetteView.textDisplay((cptOiseau1 + cptOiseau2));
+        }
+    }
+
+    private class MoveMainToValidate3 extends MyTimer.TaskEtape
+    {
+        private MoveMainToValidate3(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new ClickOnValidate3(1_000, 1_000);
+
+            uneMain.moveTo(durationMillis, posX, posY, nextEtape, 1500);
+
+            styleTest.up = drawableAux;
+        }
+    }
+
+    private class ClickOnValidate3 extends MyTimer.TaskEtape
+    {
+        private ClickOnValidate3(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(true);
+
+            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
+
+            float posX = buttonValidatePosition.x;
+            float posY = buttonValidatePosition.y;
+
+            MyTimer.TaskEtape nextEtape = new MainDisappear3(500);
+
+            styleTest = calculetteView.validerBouton.getStyle();
+
+            drawableAux = styleTest.up;
+            styleTest.up = styleTest.down;
+
+            uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 500);
+            uneArdoise2.fillLabel(3, Integer.toString((cptOiseau1 + cptOiseau2)));
+
+            calculetteView.textRemove();
+        }
+    }
+
+    private class MainDisappear3 extends MyTimer.TaskEtape
+    {
+        private MainDisappear3(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            uneMain.setVisible(false);
+            nbInput = String.valueOf((cptOiseau1 + cptOiseau2));
+            afterCorrection = true;
+            timer.schedule(new ResetScreen(1_000), 500);
+            styleTest.up = drawableAux;
+//            planche3.setAllBillesActive();
+            failedAttempts = 0;
+
+        }
+    }
+
+    private class ResetScreen extends MyTimer.TaskEtape
+    {
+        private ResetScreen(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            planche2.setVisible(false);
+            planche3.setVisible(false);
+
+
+            solutionView.addTextActivite(cptOiseau1 + " + " + cptOiseau2 + " = " + (cptOiseau1 + cptOiseau2));
+            cptOiseau1 = 0;
+            cptOiseau2 = 0;
+            cptOiseauTotal = 0;
+
+            uneArdoise2.eraseAllLabels();
+
+            for (int i = 0; i < (cptOiseau1 + cptOiseau2); i++)
+            {
+                UneBille bille = planche3.getLastBille();
+                sacDeBilles.addBilleToReserve(bille);
+            }
+
+            timer.schedule(new DisplayOiseauxBranche1(1_500, 0), 500);
+
+
+        }
+    }
 
 //    private class MoveMainToPlanche1and2 extends MyTimer.TaskEtape
 //    {
@@ -1804,12 +2158,13 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         boolean isReserveActif = sacDeBilles.isActive();
         if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
-            UneBille billeAdded = sacDeBilles.getBilleAndRemove();
-            billeAdded.setVisible(true);
-            objectTouched = billeAdded;
-            billeAdded.setActive(true);
-
-//
+            if (billesList.size() < 9)
+            {
+                UneBille billeAdded = sacDeBilles.getBilleAndRemove();
+                billeAdded.setVisible(true);
+                objectTouched = billeAdded;
+                billeAdded.setActive(true);
+            }
         }
 
         else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))

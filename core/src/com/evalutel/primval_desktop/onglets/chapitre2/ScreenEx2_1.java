@@ -806,7 +806,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            uneMain.setVisible(true);
+//            uneMain.setVisible(true);
 
             MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
