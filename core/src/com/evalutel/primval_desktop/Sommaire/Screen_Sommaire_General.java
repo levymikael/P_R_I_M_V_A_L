@@ -22,12 +22,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MrNotes2;
 import com.evalutel.primval_desktop.MrTemps;
 import com.evalutel.primval_desktop.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import java.util.Date;
 
 public class Screen_Sommaire_General extends Game implements Screen, InputProcessor, ApplicationListener
 {
-    private DatabaseDesktop dataBase;
+    //private DatabaseDesktop dataBase;
     protected Stage stage;
     int screenWidth;
     int screenHeight;
@@ -63,11 +63,10 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
     final String strDate;
 
-    public Screen_Sommaire_General(final Game game, final DatabaseDesktop dataBase)
+    public Screen_Sommaire_General(final Game game)
     {
-        this.game = game;
-        this.dataBase = dataBase;
 
+        this.game = game;
         Gdx.app.log("screenheight, screenWidth", screenHeight + "/" + screenWidth);
 
         stage = new Stage();
@@ -104,7 +103,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
         logoTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        mrNotes2 = new MrNotes2(stage, dataBase, screenWidth / 100, screenHeight / 2 - MyConstants.SCREENHEIGHT / 50, "general");
+        mrNotes2 = new MrNotes2(stage, screenWidth / 100, screenHeight / 2 - MyConstants.SCREENHEIGHT / 50, "general");
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);
@@ -185,7 +184,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new Screen_All_Chapters(game, dataBase));
+                game.setScreen(new Screen_All_Chapters(game));
                 Gdx.app.log("Screen All chapters ", "clicked!");
             }
         });
@@ -195,7 +194,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new Screen_All_Chapters(game, dataBase));
+                game.setScreen(new Screen_All_Chapters(game));
                 Gdx.app.log("Screen All chapters ", "clicked!");
             }
         });
@@ -205,7 +204,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new Screen_All_Results(game, dataBase));
+                game.setScreen(new Screen_All_Results(game));
                 Gdx.app.log("Screen All results ", "clicked!");
             }
         });

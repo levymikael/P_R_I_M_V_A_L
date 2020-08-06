@@ -18,6 +18,7 @@ import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Ex.User;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,12 +30,13 @@ public class MrTemps implements MyDrawInterface
 
     MyDataBase db;
 
-    public MrTemps(Stage stage, DatabaseDesktop dataBase, int chapitre)
+    public MrTemps(Stage stage, int chapitre)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
 
-        db = new MyDataBase(dataBase);
+        AppSingleton  appSingleton = AppSingleton.getInstance();
+        db = appSingleton.myDataBase;
 
         long totalDuree = db.getTotalDureePageForIdProfilByChapter(chapitre);
 

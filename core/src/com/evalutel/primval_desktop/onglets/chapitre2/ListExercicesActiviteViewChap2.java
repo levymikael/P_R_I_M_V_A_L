@@ -29,15 +29,13 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
 
     Game game;
 
-    DatabaseDesktop dataBase;
 
-    public ListExercicesActiviteViewChap2(Stage stage, final Game game, final DatabaseDesktop dataBase)
+    public ListExercicesActiviteViewChap2(Stage stage, final Game game)
     {
         screenWidth = MyConstants.SCREENWIDTH;
         final int screenHeight = MyConstants.SCREENHEIGHT;
 
         this.game = game;
-        this.dataBase = dataBase;
 
         final String label1 = "Addition dont le total ne dépasse pas 9";
         final String label2 = "Additionner les oiseaux sur les deux branches";
@@ -69,11 +67,11 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
 
         Table table = new Table();
-        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, dataBase);
-        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, dataBase);
-        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureExercices, "blue", chapitre, 3, dataBase);
-        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, dataBase);
-        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, dataBase);
+        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1);
+        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2);
+        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureExercices, "blue", chapitre, 3);
+        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4);
+        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5);
 
 
         table.add(tableEx1).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
@@ -101,7 +99,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx2_1(game, dataBase, label1));
+                game.setScreen(new ScreenEx2_1(game, label1));
                 System.out.println("I got clicked!2.1");
             }
         });
@@ -111,7 +109,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!2");
-                game.setScreen(new ScreenEx2_2(game, dataBase, label2));
+                game.setScreen(new ScreenEx2_2(game, label2));
             }
         });
         tableEx3.addListener(new ClickListener()
@@ -120,7 +118,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!3");
-                game.setScreen(new ScreenEx1_1(game, dataBase, label1));
+                game.setScreen(new ScreenEx1_1(game, label1));
 
             }
         });
@@ -129,7 +127,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_1(game, dataBase, label1));
+                game.setScreen(new ScreenEx1_1(game, label1));
                 System.out.println("I got clicked!4");
             }
         });
@@ -138,7 +136,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_1(game, dataBase, label1));
+                game.setScreen(new ScreenEx1_1(game, label1));
                 System.out.println("I got clicked!5");
             }
         });

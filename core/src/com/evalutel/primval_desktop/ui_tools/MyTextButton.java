@@ -33,6 +33,15 @@ public class MyTextButton extends TextButton implements MyDrawInterface, MyCorre
     }
 
 
+    public MyTextButton(String text, float size, TextButtonStyle style)
+    {
+        super(text, style);
+
+        this.setSize(size, size);
+//        this.setPosition(getWidth() / 2, getHeight() / 2);
+
+    }
+
     public MyTextButton(String text, String backgroundImagePathUp, float size, String font, int fontSize)
     {
         super(text, getStyle2(backgroundImagePathUp, font, fontSize));

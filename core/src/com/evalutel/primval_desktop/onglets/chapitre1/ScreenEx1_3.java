@@ -38,19 +38,16 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
     int cptOiseau, cptBille = 0;
 
-    DatabaseDesktop dataBase;
-
 //    String consigneExercice;
 
     Label currentLabel;
     Drawable drawableAux;
 
 
-    public ScreenEx1_3(Game game, DatabaseDesktop dataBase, String ongletTitre)
+    public ScreenEx1_3(Game game, String ongletTitre)
     {
-        super(game, dataBase, 1, 3, false,0);
+        super(game, 1, 3, false, 0);
 
-        this.dataBase = dataBase;
 
         bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);

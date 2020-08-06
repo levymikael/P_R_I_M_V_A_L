@@ -68,10 +68,10 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     BitmapFont bitmapFontZAP, bitmapFontArialBold, bitmapFontArial, bitmapFontFRHND;
 
 
-    public Screen_All_Chapters(Game game, DatabaseDesktop dataBase)
+    public Screen_All_Chapters(Game game/*Desktop dataBase*/)
     {
         this.game = game;
-        this.dataBase = dataBase;
+//        this.dataBase = dataBase;
 
         stage = new Stage();
         batch = new SpriteBatch();
@@ -127,10 +127,10 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         fondSommaire = new ScreeenBackgroundImage("Images/Backgrounds/web_hi_res_512.png");
 
-        myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15, game, dataBase, "sommaire general");
+        myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15, game, "sommaire general");
         myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25, 5 * MyConstants.SCREENHEIGHT / 6 - myButtonRetour.getHeight() / 2);
 
-//        myButtonDemo = new MyButtonDemos(stage, (float) MyConstants.SCREENWIDTH / 22.0f * (447.0f / 93.0f), (float) MyConstants.SCREENWIDTH / 22.0f, game, dataBase);
+//        myButtonDemo = new MyButtonDemos(stage, (float) MyConstants.SCREENWIDTH / 22.0f * (447.0f / 93.0f), (float) MyConstants.SCREENWIDTH / 22.0f, game);
 
         Texture chapter1Title = new Texture(Gdx.files.internal("Images/Pages Chapitres/titre Calcul et géométrie.png"));
         chapter1Title.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -147,8 +147,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         stage.addActor(allChaptersTitle);
 
-        mrNotes = new MrNotes2(stage, dataBase, 20.5f * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5, "all chapters");
-        mrTemps = new MrTemps2(stage, dataBase);
+        mrNotes = new MrNotes2(stage, 20.5f * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5, "all chapters");
+        mrTemps = new MrTemps2(stage);
 
 
         //tableau deroulant pour Evalutel motto et liste de chapitre
@@ -312,12 +312,12 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         String chapterLabel6 = "Outils de la géométrie. \n Triangle. Points alignés ";
 
         Table table = new Table();
-        Table tableEx1 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 01.jpg", "Images/IndicesChapitres/chap1.png", chapterLabel1, dataBase);
-        Table tableEx2 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 02.jpg", "Images/IndicesChapitres/chap2.png", chapterLabel2, dataBase);
-        Table tableEx3 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 03.jpg", "Images/IndicesChapitres/chap3.png", chapterLabel3, dataBase);
-        Table tableEx4 = BoutonChapitres.getLigne("Images/Pages onglets/04.png", "Images/IndicesChapitres/chap4.png", chapterLabel4, dataBase);
-        Table tableEx5 = BoutonChapitres.getLigne("Images/Pages onglets/05.png", "Images/IndicesChapitres/chap5.png", chapterLabel5, dataBase);
-        Table tableEx6 = BoutonChapitres.getLigne("Images/Pages onglets/06.png", "Images/IndicesChapitres/chap6.png", chapterLabel6, dataBase);
+        Table tableEx1 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 01.jpg", "Images/IndicesChapitres/chap1.png", chapterLabel1);
+        Table tableEx2 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 02.jpg", "Images/IndicesChapitres/chap2.png", chapterLabel2);
+        Table tableEx3 = BoutonChapitres.getLigne("Images/Pages Chapitres/chapitre 03.jpg", "Images/IndicesChapitres/chap3.png", chapterLabel3);
+        Table tableEx4 = BoutonChapitres.getLigne("Images/Pages onglets/04.png", "Images/IndicesChapitres/chap4.png", chapterLabel4);
+        Table tableEx5 = BoutonChapitres.getLigne("Images/Pages onglets/05.png", "Images/IndicesChapitres/chap5.png", chapterLabel5);
+        Table tableEx6 = BoutonChapitres.getLigne("Images/Pages onglets/06.png", "Images/IndicesChapitres/chap6.png", chapterLabel6);
 
         table.add(tableEx1);
         table.add(tableEx2);//.padLeft(MyConstants.SCREENWIDTH / 100);
@@ -337,7 +337,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new Screen_Chapitre1(game, dataBase));
+                game.setScreen(new Screen_Chapitre1(game));
                 System.out.println("I got clicked!1");
             }
         });
@@ -347,7 +347,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!2");
-                game.setScreen(new Screen_Chapitre2(game, dataBase));
+                game.setScreen(new Screen_Chapitre2(game));
             }
         });
         tableEx3.addListener(new ClickListener()
@@ -356,7 +356,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!3");
-                game.setScreen(new Screen_Chapitre1(game, dataBase));
+                game.setScreen(new Screen_Chapitre1(game));
             }
         });
         tableEx4.addListener(new ClickListener()

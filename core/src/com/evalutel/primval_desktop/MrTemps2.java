@@ -18,6 +18,7 @@ import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Ex.User;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,14 +28,14 @@ public class MrTemps2 implements MyDrawInterface
     private boolean isVisible = true;
     BitmapFont bitmapFont;
 
-    MyDataBase db;
 
-    public MrTemps2(Stage stage, DatabaseDesktop dataBase)
+    public MrTemps2(Stage stage)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
 
-        db = new MyDataBase(dataBase);
+        AppSingleton appSingleton = AppSingleton.getInstance();
+        MyDataBase db = appSingleton.myDataBase;
 
         long totalDuree = db.getTotalDureeAllForIdProfil();
 

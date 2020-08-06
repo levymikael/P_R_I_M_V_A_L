@@ -24,6 +24,7 @@ import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 public class MrNotes implements MyDrawInterface
@@ -34,7 +35,7 @@ public class MrNotes implements MyDrawInterface
 
     MyDataBase db;
 
-    public MrNotes(Stage stage, DatabaseDesktop dataBase, int chapitre)
+    public MrNotes(Stage stage, int chapitre)
     {
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
@@ -49,8 +50,8 @@ public class MrNotes implements MyDrawInterface
 
         String totalNotes;
 
-        db = new MyDataBase(dataBase);
-
+        AppSingleton appSingleton = AppSingleton.getInstance();
+        db = appSingleton.myDataBase;
 
 
         totalNotes = db.getTotalNotePageForIdProfil(chapitre);
@@ -64,7 +65,7 @@ public class MrNotes implements MyDrawInterface
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.ORANGE;
+        labelStyle.fontColor = Color.RED;
         Label labelNotes = new Label(totalNotes, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes1.png"));

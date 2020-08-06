@@ -34,7 +34,6 @@ import java.util.ArrayList;
 
 public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, ApplicationListener
 {
-    private DatabaseDesktop dataBase;
     protected Stage stage;
     int screenWidth;
     int screenHeight;
@@ -60,10 +59,9 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
     FreeTypeFontGenerator generator;
 
 
-    public Screen_Chapitre2(Game game, DatabaseDesktop dataBase)
+    public Screen_Chapitre2(Game game)
     {
         this.game = game;
-        this.dataBase = dataBase;
 
         stage = new Stage();
         batch = new SpriteBatch();
@@ -90,9 +88,9 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
         fondSommaire = new ScreeenBackgroundImage("Images/Pages onglets/fond.jpg");
 
-        listExercicesActiviteViewChap2 = new ListExercicesActiviteViewChap2(stage, game, dataBase);
+        listExercicesActiviteViewChap2 = new ListExercicesActiviteViewChap2(stage, game);
 
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase, "chapitres");
+        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, "chapitres");
         myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
 
         logoPageOnglet = new Texture(Gdx.files.internal("Images/Pages onglets/02.png"));
@@ -111,8 +109,8 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
         int numChapter = 2;
 
-        mrNotes = new MrNotes(stage, dataBase, numChapter);
-        mrTemps = new MrTemps(stage, dataBase, numChapter);
+        mrNotes = new MrNotes(stage, numChapter);
+        mrTemps = new MrTemps(stage, numChapter);
 
 //        MyButtonBuyAnotherChapter myButtonBuyAnotherChapter = new MyButtonBuyAnotherChapter(stage, 2 * screenWidth / 7, screenHeight / 14);
 //        myButtonBuyAnotherChapter.setPosition(7 * screenWidth / 10, screenHeight / 12);

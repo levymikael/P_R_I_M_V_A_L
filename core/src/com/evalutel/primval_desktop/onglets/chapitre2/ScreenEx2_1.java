@@ -50,9 +50,9 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
     Label currentLabel;
 
-    public ScreenEx2_1(Game game, DatabaseDesktop dataBase, String ongletTitre)
+    public ScreenEx2_1(Game game, String ongletTitre)
     {
-        super(game, dataBase, 2, 1, false,0);
+        super(game, 2, 1, false, 0);
 
         this.dataBase = dataBase;
 

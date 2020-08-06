@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.CalculetteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MyTimer;
@@ -21,6 +22,7 @@ import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.onglets.ScreenOnglet;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
@@ -37,8 +39,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
     ScreeenBackgroundImage bgScreenEx1_1;
 
-
-    DatabaseDesktop dataBase;
     int[] numOiseauArray;
 
     ArrayList<int[]> randOiseauxArray = new ArrayList<>();
@@ -61,11 +61,10 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     boolean afterCorrection, isAllActive, touchValidate = false;
 
 
-    public ScreenEx2_2(Game game, DatabaseDesktop dataBase, String ongletTitre)
+    public ScreenEx2_2(Game game, String ongletTitre)
     {
-        super(game, dataBase, 2, 2, true, 15);
+        super(game, 2, 2, true, 15);
 
-        this.dataBase = dataBase;
 
         bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);
@@ -111,6 +110,9 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         solutionView = new ActiviteView(stage, posSolutionX, activiteWidth * 42 / 1626, activiteWidth / 2f, "solution");
         allDrawables.add(solutionView);
         myCorrectionAndPauseGeneral.addElements(solutionView);
+
+        AppSingleton appSingleton = AppSingleton.getInstance();
+        MyDataBase db = appSingleton.myDataBase;
 
         int noteMax = db.getHighestNote(2, 2);
 
@@ -205,6 +207,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             DisplayOiseauxBranche1 nextEtape = new DisplayOiseauxBranche1(0, 0);
 
             oiseauxToDisplayBranche1 = randOiseauxArray.get(questionCourante)[0];
+            sacDeBilles.setActive(true);
 
             if (cptOiseau1 < oiseauxToDisplayBranche1)
             {
@@ -229,6 +232,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             {
                 timer.schedule(new InputClavier1(500), 0);
             }
+
         }
     }
 
@@ -1419,6 +1423,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
+            sacDeBilles.setActive(false);
             if (cptOiseauTotal != 0)
             {
                 if (cptOiseauTotal == cptOiseau1)
@@ -1782,20 +1787,23 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
 
             solutionView.addTextActivite(cptOiseau1 + " + " + cptOiseau2 + " = " + (cptOiseau1 + cptOiseau2));
-            cptOiseau1 = 0;
-            cptOiseau2 = 0;
-            cptOiseauTotal = 0;
+
 
             uneArdoise2.eraseAllLabels();
 
-            for (int i = 0; i < (cptOiseau1 + cptOiseau2); i++)
+            for (int i = 0; i < (planche3.getNumberBilles()); i++)
             {
-                UneBille bille = planche3.getLastBille();
+                UneBille bille = planche3.getBille(i);
                 sacDeBilles.addBilleToReserve(bille);
+//                bille.an
             }
-
+            cptOiseau1 = 0;
+            cptOiseau2 = 0;
+            cptOiseauTotal = 0;
             timer.schedule(new DisplayOiseauxBranche1(1_500, 0), 500);
 
+            sacDeBilles.setActive(true);
+            calculetteView.textRemove();
 
         }
     }

@@ -24,18 +24,16 @@ import com.evalutel.primval_desktop.Database.MyDataBase;
 
 public class BoutonChapitres implements Screen
 {
-    static MyDataBase db;
 
     static Sprite chap1;
 
     SpriteBatch batch;
 
-    public static Table getLigne(String sommaireChapImgPath, String chapterIndexPath, String ongletTitre, /*Texture texture, int chapitre,*/ DatabaseDesktop dataBase)
+    public static Table getLigne(String sommaireChapImgPath, String chapterIndexPath, String ongletTitre /*Texture texture, int chapitre,*//* DatabaseDesktop dataBase*/)
     {
         Table container = new Table();
         Table table = new Table();
 
-        db = new MyDataBase(dataBase);
 
         int screenWidth = Gdx.graphics.getWidth();
 //        int screenHeight = Gdx.graphics.getHeight();

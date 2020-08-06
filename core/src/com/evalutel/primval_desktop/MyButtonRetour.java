@@ -18,7 +18,7 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
     private boolean isActif;
 
 
-    public MyButtonRetour(Stage stage, float width, float height, final Game game, final DatabaseDesktop dataBase, String screenPrevious)
+    public MyButtonRetour(Stage stage, float width, float height, final Game game,  String screenPrevious)
     {
         super(stage, "Images/fleche_retour.png", width, height);
         setTouchable(Touchable.enabled);
@@ -32,7 +32,7 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
                             public void clicked(InputEvent event, float x, float y)
                             {
                                 Gdx.app.log("My button retour", "Sommaire general");
-                                game.setScreen(new Screen_Sommaire_General(game, dataBase));
+                                game.setScreen(new Screen_Sommaire_General(game));
                             }
                         }
             );
@@ -45,7 +45,7 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
                             public void clicked(InputEvent event, float x, float y)
                             {
                                 Gdx.app.log("My button retour", "Sommaire chapitres");
-                                game.setScreen(new Screen_All_Chapters(game, dataBase));
+                                game.setScreen(new Screen_All_Chapters(game));
                             }
                         }
             );
@@ -58,7 +58,7 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
                             public void clicked(InputEvent event, float x, float y)
                             {
                                 Gdx.app.log("My button retour", "Screen All Chapters");
-                                game.setScreen(new Screen_All_Chapters(game, dataBase));
+                                game.setScreen(new Screen_All_Chapters(game));
                             }
                         }
             );

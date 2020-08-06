@@ -31,7 +31,7 @@ public class GdxSplashScreenGame extends Game implements ApplicationListener
                     @Override
                     public void run()
                     {
-                        GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this, new DatabaseDesktop()));
+                        GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this/*, new DatabaseDesktop()*/));
                     }
                 }, 2.0f);
 
@@ -57,13 +57,13 @@ public class GdxSplashScreenGame extends Game implements ApplicationListener
                                         @Override
                                         public void run()
                                         {
-                                            GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this, new DatabaseDesktop()));
+                                            GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this/*, new DatabaseDesktop()*/));
                                         }
                                     }, (float) (GdxSplashScreenGame.SPLASH_MINIMUM_MILLIS - splash_elapsed_time) / 1000f);
                         }
                         else
                         {
-                            GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this, new DatabaseDesktop()));
+                            GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this/*, new DatabaseDesktop()*/));
                         }
                     }
                 });

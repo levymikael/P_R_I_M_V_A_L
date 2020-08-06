@@ -175,7 +175,7 @@ public class MyDataBase
         {
             sqlQueryNoteObtained = "SELECT sum(somme_points_obtenus) FROM(SELECT max(points_obtenus) as somme_points_obtenus from RESULTAT  GROUP by onglet)";
             sqlQueryNotePossible = "SELECT sum(somme_points_possibles) FROM(SELECT max(points_possibles) as somme_points_possibles from RESULTAT  GROUP by onglet)";
-            sqlQueryNoteMax = "SELECT sum(somme_points_max) FROM(SELECT max(points_max) as somme_points_max from RESULTAT  GROUP by onglet)";
+            sqlQueryNoteMax = "SELECT sum(somme_points_max) FROM(SELECT max(points_max) as somme_points_max from RESULTAT GROUP by onglet)";
         }
         else
         {
@@ -217,14 +217,14 @@ public class MyDataBase
         }
         String totalNotePageForIdProfil;
 
-        if (chapitreNumber !=0)
+        if (chapitreNumber != 0)
         {
-             totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/" + totalMaxNoteforIdProfil;
+            totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/" + totalMaxNoteforIdProfil;
         }
         else
         {
 
-             totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/3596" ;
+            totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/3596";
         }
 
         return totalNotePageForIdProfil;
@@ -233,9 +233,18 @@ public class MyDataBase
     public long getTotalDureePageForIdProfilByChapter(/*User idProfil,*/ int chapitre)
     {
         long totalDureePageForIdProfil = 0;
+        String sqlQuery = "";
 
-        String sqlQuery = "SELECT sum(duree) from RESULTAT WHERE chapitre = " + chapitre;
+        if (chapitre == 0)
+        {
 
+            sqlQuery = "SELECT sum(somme_duree) FROM(SELECT max(duree) as somme_duree from RESULTAT  GROUP by onglet)";
+
+        }
+        else
+        {
+            sqlQuery = "SELECT sum(duree) from RESULTAT WHERE chapitre = " + chapitre;
+        }
         DataBase.Result test = database.query(sqlQuery);
 
         if (!test.isEmpty())

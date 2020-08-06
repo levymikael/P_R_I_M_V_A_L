@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.MyMath;
@@ -17,6 +18,7 @@ import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.onglets.ScreenOnglet;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 
 import java.util.ArrayList;
 
@@ -41,9 +43,9 @@ public class ScreenEx1_2 extends ScreenOnglet
     boolean isInCorrection = false;
 
 
-    public ScreenEx1_2(Game game, DatabaseDesktop dataBase, String ongletTitre)
+    public ScreenEx1_2(Game game,  String ongletTitre)
     {
-        super(game, dataBase, 1, 2, true,9);
+        super(game, 1, 2, true,9);
 
         this.dataBase = dataBase;
 
@@ -80,6 +82,9 @@ public class ScreenEx1_2 extends ScreenOnglet
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
 
         resultatExercice = new UnResultat("Primval", 1, 2, 0, ongletTitre, 9, 0, dateTest, 0, 0, 0, 123);
+
+        AppSingleton appSingleton = AppSingleton.getInstance();
+        MyDataBase db = appSingleton.myDataBase;
 
         int noteMax = db.getHighestNote(1, 2);
 

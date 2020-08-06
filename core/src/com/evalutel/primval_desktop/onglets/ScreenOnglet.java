@@ -39,6 +39,7 @@ import com.evalutel.primval_desktop.UneMain;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Chapitre1;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 import com.evalutel.primval_desktop.ui_tools.PauseSingleton;
 
@@ -63,7 +64,7 @@ public class ScreenOnglet implements Screen, InputProcessor
     boolean isInPause = false;
 
     protected ArrayList<MyDrawInterface> allDrawables;
-//    protected ArrayList<MyCorrectionAndPauseInterface> allCorrigibles;
+    //    protected ArrayList<MyCorrectionAndPauseInterface> allCorrigibles;
     protected ArrayList<MyTouchInterface> objectTouchedList;
 
     protected ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
@@ -71,7 +72,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected long startTime, endTime, seconds, dateTest;
 
     private Game game;
-    protected DatabaseDesktop dataBase;
 
     protected ValidusAnimated validusAnimated;
 
@@ -86,7 +86,6 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     protected MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;
 
-    protected MyDataBase db;
     protected Table tableTitre;
 
     protected UnResultat resultatExercice;
@@ -107,18 +106,19 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected String numExercice;
 
     protected Label exoNumLabel, exoConsigneLabel, highestMarkObtainedLabel;
+//    private MyDataBase db;
 
 
-    public ScreenOnglet(Game game, DatabaseDesktop dataBase, int chapitre, int onglet, boolean ecrin, int maxNotePossible)
+    public ScreenOnglet(Game game, int chapitre, int onglet, boolean ecrin, int maxNotePossible)
     {
         batch = new SpriteBatch();
 
         stage = new Stage();
 
         this.game = game;
-        this.dataBase = dataBase;
 
-        db = new MyDataBase(dataBase);
+        AppSingleton appSingleton = AppSingleton.getInstance();
+        MyDataBase db = appSingleton.myDataBase;
 
         tableTitre = new Table();
 
@@ -180,7 +180,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0, 0);
 
-        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15, dataBase);
+        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
             @Override
@@ -205,10 +205,12 @@ public class ScreenOnglet implements Screen, InputProcessor
                 }
 
                 timer.cancel();
+                AppSingleton appSingleton = AppSingleton.getInstance();
+                MyDataBase db =  appSingleton.myDataBase;
 
-                ScreenOnglet.this.db.insertResultat(resultatExercice);
+                db.insertResultat(resultatExercice);
 
-                ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game, ScreenOnglet.this.dataBase));
+                ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game /*,ScreenOnglet.this.dataBase*/));
 
                 ScreenOnglet.this.dispose();
             }
@@ -446,7 +448,7 @@ public class ScreenOnglet implements Screen, InputProcessor
             if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
             {
                 System.out.println("clickedOnReserve");
-                UneBille billeAdded = new UneBille(sacDeBilles.currentPositionX +  sacDeBilles.animationWidth / 2, sacDeBilles.currentPositionY +  sacDeBilles.animationHeight / 2, sacDeBilles.largeurBille);
+                UneBille billeAdded = new UneBille(sacDeBilles.currentPositionX + sacDeBilles.animationWidth / 2, sacDeBilles.currentPositionY + sacDeBilles.animationHeight / 2, sacDeBilles.largeurBille);
                 objectTouchedList.add(billeAdded);
                 allDrawables.add(billeAdded);
                 objectTouched = billeAdded;

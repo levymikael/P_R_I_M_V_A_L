@@ -27,13 +27,12 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
 
     DatabaseDesktop dataBase;
 
-    public ListExercicesActiviteViewChap1(Stage stage, final Game game, final DatabaseDesktop dataBase)
+    public ListExercicesActiviteViewChap1(Stage stage, final Game game)
     {
         screenWidth = MyConstants.SCREENWIDTH;
         final int screenHeight = MyConstants.SCREENHEIGHT;
 
         this.game = game;
-        this.dataBase = dataBase;
 
         final String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
         final String label2 = "Faire correspondre des billes à des oiseaux";
@@ -66,12 +65,12 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
 
         Table table = new Table();
-        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, dataBase);
-        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2, dataBase);
-        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, dataBase);
-        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4, dataBase);
-        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, dataBase);
-        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, dataBase);
+        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1);
+        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", 1, 2);
+        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 3);
+        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4);
+        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5);
+        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6);
 
         table.add(tableEx1).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
@@ -98,7 +97,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_1(game, dataBase, label1));
+                game.setScreen(new ScreenEx1_1(game, label1));
                 System.out.println("I got clicked!1.1");
             }
         });
@@ -108,7 +107,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!1.2");
-                game.setScreen(new ScreenEx1_2(game, dataBase, label2));
+                game.setScreen(new ScreenEx1_2(game, label2));
             }
         });
         tableEx3.addListener(new ClickListener()
@@ -117,7 +116,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!1.3");
-                game.setScreen(new ScreenEx1_3(game, dataBase, label3));
+                game.setScreen(new ScreenEx1_3(game, label3));
 
             }
         });
@@ -126,7 +125,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_4(game, dataBase, label4));
+                game.setScreen(new ScreenEx1_4(game, label4));
                 System.out.println("I got clicked!1.4");
             }
         });
@@ -135,7 +134,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_5(game, dataBase, label5));
+                game.setScreen(new ScreenEx1_5(game, label5));
                 System.out.println("I got clicked!5");
             }
         });
@@ -145,7 +144,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!6");
-                game.setScreen(new ScreenEx1_6(game, dataBase, label6));
+                game.setScreen(new ScreenEx1_6(game, label6));
             }
         });
     }

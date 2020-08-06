@@ -15,17 +15,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 
 public class LigneTableaux
 {
-    static MyDataBase db;
 
     static String notes2Implement;
     static long durationPerExercice;
 
-    public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, DatabaseDesktop dataBase)
+    public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet)
     {
         Table container = new Table();
         Table table = new Table();
@@ -68,7 +68,8 @@ public class LigneTableaux
         Label.LabelStyle labelStyleOnglet = new Label.LabelStyle();
         labelStyleOnglet.font = bitmapFontComicSansMSBold;
 
-        db = new MyDataBase(dataBase);
+        AppSingleton appSingleton = AppSingleton.getInstance();
+        MyDataBase db = appSingleton.myDataBase;
 
         durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
 

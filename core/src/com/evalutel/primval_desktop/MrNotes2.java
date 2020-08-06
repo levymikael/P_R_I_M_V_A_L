@@ -18,6 +18,7 @@ import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 
 public class MrNotes2 implements MyDrawInterface
 {
@@ -27,7 +28,7 @@ public class MrNotes2 implements MyDrawInterface
 
     MyDataBase db;
 
-    public MrNotes2(Stage stage, DatabaseDesktop dataBase, float positionX, float positionY, String screen)
+    public MrNotes2(Stage stage, float positionX, float positionY, String screen)
     {
         screenWidth = MyConstants.SCREENWIDTH;
         final int screenHeight = MyConstants.SCREENHEIGHT;
@@ -42,9 +43,10 @@ public class MrNotes2 implements MyDrawInterface
 
         String totalNotes;
 
-        db = new MyDataBase(dataBase);
+        AppSingleton appSingleton = AppSingleton.getInstance();
 
-        totalNotes = db.getTotalNotePageForIdProfil(0);
+
+        totalNotes = appSingleton.myDataBase.getTotalNotePageForIdProfil(0);
         String newTotalNotes = "";
 
         if (screen == "general")

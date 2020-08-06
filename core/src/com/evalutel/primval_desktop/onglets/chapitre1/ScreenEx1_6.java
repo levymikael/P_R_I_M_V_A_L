@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.CalculetteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.MyMath;
@@ -21,6 +22,7 @@ import com.evalutel.primval_desktop.UnGateauAnniversaire;
 import com.evalutel.primval_desktop.UneBougie;
 import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.onglets.ScreenOnglet;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
@@ -56,7 +58,6 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
 
     boolean afterCorrection, isAllActive, displayPastille = false;
 
-    DatabaseDesktop dataBase;
 
     String nbInput;
 
@@ -64,11 +65,10 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
     Drawable drawableAux;
 
 
-    public ScreenEx1_6(Game game, DatabaseDesktop dataBase, String ongletTitre)
+    public ScreenEx1_6(Game game, String ongletTitre)
     {
-        super(game, dataBase, 1, 6, true,9);
+        super(game, 1, 6, true, 9);
 
-        this.dataBase = dataBase;
 
         bgScreenEx1_6 = new ScreeenBackgroundImage("Images/Onglet_1_6/anniversaire.jpg");
         allDrawables.add(bgScreenEx1_6);
@@ -121,6 +121,9 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         allDrawables.add(solutionView);
         myCorrectionAndPauseGeneral.addElements(solutionView);
 
+
+        AppSingleton appSingleton = AppSingleton.getInstance();
+        MyDataBase db = appSingleton.myDataBase;
 
         int noteMax = db.getHighestNote(1, 6);
 

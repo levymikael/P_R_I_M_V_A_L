@@ -100,7 +100,7 @@ public class Screen_Demos extends Game implements Screen, InputProcessor, Applic
 
 //        fondSommaire = new ScreeenBackgroundImage("Images/Sommaire/fond_onglets_new.jpg");
 
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, dataBase, "screen all chapters");
+        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, "screen all chapters");
         myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
 
 

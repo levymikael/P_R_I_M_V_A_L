@@ -37,13 +37,11 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
 //    ActiviteView activiteView;
 
-    DatabaseDesktop dataBase;
 
-    public ScreenEx1_1(Game game, DatabaseDesktop dataBase, String ongletTitre)
+    public ScreenEx1_1(Game game, String ongletTitre)
     {
-        super(game, dataBase, 1, 1, false,0);
+        super(game, 1, 1, false, 0);
 
-        this.dataBase = dataBase;
 
         bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);

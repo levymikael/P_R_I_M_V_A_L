@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 
@@ -29,10 +30,8 @@ public class LigneTableauxResultsChapitre
 
     static long durationPerChapter, durationPerExercice = 0;
 
-    static BitmapFont bitmapFontArial;
 
-
-    public static Table getLigne(MyTextButton button, String ongletTitre, /*Texture texture,*/ /*String borderColor,*/ int chapitre, int totalNotesPossibles, DatabaseDesktop dataBase)
+    public static Table getLigne(MyTextButton button, String ongletTitre, /*Texture texture,*/ /*String borderColor,*/ int chapitre, int totalNotesPossibles, BitmapFont bitmapFontArial)
     {
         Table container = new Table();
         Table table = new Table();
@@ -41,6 +40,7 @@ public class LigneTableauxResultsChapitre
 
         int screenWidth = Gdx.graphics.getWidth();
         int screenHeight = Gdx.graphics.getHeight();
+
 
         Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
         bgOrange.setColor(Color.ORANGE);
@@ -51,19 +51,14 @@ public class LigneTableauxResultsChapitre
         pmWhite.fill();
 
         Pixmap pixmapBg = new Pixmap(1, 1, Pixmap.Format.RGB565);
+        pixmapBg.setColor(Color.ORANGE);
+        pixmapBg.setColor(Color.ORANGE);
+        pixmapBg.fill();
 
-        float fontSize = 1.4f;
+        float fontSize = 1.6f;
         float buttonPadding = MyConstants.SCREENWIDTH / 80f;
         int textureSize = MyConstants.SCREENWIDTH / 60;
 
-
-        FreeTypeFontGenerator fontArial = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = MyConstants.SCREENWIDTH / 60;
-        parameter.minFilter = Texture.TextureFilter.Linear;
-        parameter.magFilter = Texture.TextureFilter.Linear;
-        bitmapFontArial = fontArial.generateFont(parameter);
-        fontArial.dispose();
 
         Label.LabelStyle labelStyleOnglet = new Label.LabelStyle();
         labelStyleOnglet.font = bitmapFontArial;
@@ -71,12 +66,15 @@ public class LigneTableauxResultsChapitre
         Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
         labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4f);
 
-        db = new MyDataBase(dataBase);
+        AppSingleton appSingleton = AppSingleton.getInstance();
+
+
+        db = appSingleton.myDataBase;
 
         durationPerChapter = db.getTotalDureePageForIdProfilByChapter(chapitre);
 
         duration = MillisToDuration(durationPerChapter);
-        pixmapBg.setColor(Color.ORANGE);
+
 
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
         labelStyleDuration.fontColor = Color.OLIVE;
@@ -87,20 +85,17 @@ public class LigneTableauxResultsChapitre
 
         notes2Implement = db.getTotalNotePageForIdProfil(chapitre);
 
-        String newTotalNotes = notes2Implement.substring(0, notes2Implement.length() - 1) + totalNotesPossibles;
+        String newTotalNotes = notes2Implement.substring(0, notes2Implement.length() - 2) + totalNotesPossibles;
 
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
         labelStyleNotes.font = bitmapFontArial;
-        labelStyleNotes.fontColor = Color.ORANGE;
+        labelStyleNotes.fontColor = Color.RED;
         Label labelNotes = new Label(newTotalNotes, labelStyleNotes);
-        labelDuration.setFontScale(fontSize);
+        labelNotes.setFontScale(fontSize);
         labelNotes.setWidth(MyConstants.SCREENWIDTH / 18f);
 
-        pixmapBg.setColor(Color.ORANGE);
-        pixmapBg.fill();
         TextureRegionDrawable tableBG = new TextureRegionDrawable(new TextureRegion(new Texture(pixmapBg)));
         table.setBackground(tableBG);
-
 
         durationTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
         durationTable.add(labelDuration).height(screenHeight / 25f)/*.width(screenWidth / 10).padLeft(screenWidth / 40).align(Align.center)*/;
@@ -108,12 +103,15 @@ public class LigneTableauxResultsChapitre
         noteTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
         noteTable.add(labelNotes).height(screenHeight / 25f)/*.width(screenWidth / 10f).padLeft(screenWidth / 20f).align(Align.center)*/;
 
-        table.add().width(screenWidth / 70f);
-        table.add(button).height(button.getHeight()).width(button.getWidth());
-        table.add().width(screenWidth / 70f);
-        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * 0.6f)).padRight(screenWidth / 25f);
+        Texture triangleDown = new Texture(Gdx.files.internal("Images/Sommaire/arrow.png"));
+        triangleDown.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        table.add(new Image(triangleDown)).height(button.getWidth() * 0.7f).width(button.getWidth() * 0.7f).padLeft(screenWidth / 60f).padTop(screenHeight / 100).padBottom(screenHeight / 100);
+        table.add(button).height(button.getHeight()).width(button.getWidth()).padLeft(screenWidth / 80f);
+        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * .6f)).padLeft(screenWidth / 50f)/*.padRight(screenWidth / 25f)*/;
         table.add(durationTable).width(screenWidth / 9f).padRight(screenWidth / 40f);
-        table.add(noteTable).width(screenWidth / 8.5f);
+        table.add(noteTable).width(screenWidth / 8.5f).padRight(screenWidth / 40f);
 
 
         float lineHeight = MyConstants.SCREENHEIGHT / 20;
