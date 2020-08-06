@@ -31,7 +31,7 @@ public class LigneTableauxResultsChapitre
     static long durationPerChapter, durationPerExercice = 0;
 
 
-    public static Table getLigne(MyTextButton button, String ongletTitre, /*Texture texture,*/ /*String borderColor,*/ int chapitre, int totalNotesPossibles, BitmapFont bitmapFontArial)
+    public static Table getLigne(MyTextButton button, String ongletTitre, /*Texture texture,*/ /*String borderColor,*/ int chapitre, int[] arrayBareme, BitmapFont bitmapFontArial)
     {
         Table container = new Table();
         Table table = new Table();
@@ -55,7 +55,7 @@ public class LigneTableauxResultsChapitre
         pixmapBg.setColor(Color.ORANGE);
         pixmapBg.fill();
 
-        float fontSize = 1.6f;
+        float fontSize = 1.4f;
         float buttonPadding = MyConstants.SCREENWIDTH / 80f;
         int textureSize = MyConstants.SCREENWIDTH / 60;
 
@@ -65,6 +65,7 @@ public class LigneTableauxResultsChapitre
         labelStyleOnglet.fontColor = Color.WHITE;
         Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
         labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4f);
+        labelOnglet.setFontScale(fontSize);
 
         AppSingleton appSingleton = AppSingleton.getInstance();
 
@@ -75,9 +76,8 @@ public class LigneTableauxResultsChapitre
 
         duration = MillisToDuration(durationPerChapter);
 
-
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
-        labelStyleDuration.fontColor = Color.OLIVE;
+        labelStyleDuration.fontColor = MyConstants.greenresultat;
         labelStyleDuration.font = bitmapFontArial;
         Label labelDuration = new Label(duration, labelStyleDuration);
         labelDuration.setFontScale(fontSize);
@@ -85,11 +85,18 @@ public class LigneTableauxResultsChapitre
 
         notes2Implement = db.getTotalNotePageForIdProfil(chapitre);
 
+        int totalNotesPossibles = 0;
+
+        for (int i = 0; i < arrayBareme.length; i++)
+        {
+            totalNotesPossibles += arrayBareme[i];
+        }
+
         String newTotalNotes = notes2Implement.substring(0, notes2Implement.length() - 2) + totalNotesPossibles;
 
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
         labelStyleNotes.font = bitmapFontArial;
-        labelStyleNotes.fontColor = Color.RED;
+        labelStyleNotes.fontColor = MyConstants.redresultat;
         Label labelNotes = new Label(newTotalNotes, labelStyleNotes);
         labelNotes.setFontScale(fontSize);
         labelNotes.setWidth(MyConstants.SCREENWIDTH / 18f);

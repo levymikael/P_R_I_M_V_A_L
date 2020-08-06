@@ -117,9 +117,13 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
 
         reorganiseBilles();
 
-
         return retour;
     }
+
+//    public ArrayList getAllBilles ()
+//    {
+//
+//    }
 
     public boolean addBille(UneBille uneBille)
     {

@@ -43,6 +43,36 @@ public class MyConstants
 
     public static Color bluePrimval = new Color(Color.valueOf("004ec0"));
     public static Color redPrimval = new Color(Color.valueOf("a40b00"));
+    public static Color redresultat = new Color(Color.valueOf("ff4700"));
+    public static Color greenresultat = new Color(Color.valueOf("2b8014 "));
+
+    public static int[] noteMaxChap1 = {9, 9, 9, 9};
+    public static int[] noteMaxChap2 = {15, 18, 27, 10};
+    public static int[] noteMaxChap3 = {25, 12, 10, 10, 32, 20};
+    public static int[] noteMaxChap4 = {10, 10, 10, 24, 45, 30};
+    public static int[] noteMaxChap5 = {36, 10, 34, 40, 40, 27};
+//    TODO: finir de remplir les baremes de notes
+    public static int[] noteMaxChap6 = {10, 20, 30, 40};
+    public static int[] noteMaxChap7 = {10, 20, 30, 40};
+    public static int[] noteMaxChap8 = {10, 20, 30, 40};
+    public static int[] noteMaxChap9 = {10, 20, 30, 40};
+    public static int[] noteMaxChap10 = {10, 20, 30, 40};
+    public static int[] noteMaxChap11 = {10, 20, 30, 40};
+    public static int[] noteMaxChap12 = {10, 20, 30, 40};
+    public static int[] noteMaxChap13 = {10, 20, 30, 40};
+    public static int[] noteMaxChap14 = {10, 20, 30, 40};
+    public static int[] noteMaxChap15 = {10, 20, 30, 40};
+    public static int[] noteMaxChap16 = {10, 20, 30, 40};
+    public static int[] noteMaxChap17 = {10, 20, 30, 40};
+    public static int[] noteMaxChap18 = {10, 20, 30, 40};
+    public static int[] noteMaxChap19 = {10, 20, 30, 40};
+    public static int[] noteMaxChap20 = {10, 20, 30, 40};
+    public static int[] noteMaxChap21 = {10, 20, 30, 40};
+    public static int[] noteMaxChap22 = {10, 20, 30, 40};
+    public static int[] noteMaxChap23 = {10, 20, 30, 40};
+    public static int[] noteMaxChap24 = {10, 20, 30, 40};
+    public static int[] noteMaxChap25 = {10, 20, 30, 40};
+    public static int[] noteMaxChap26 = {10, 20, 30, 40};
 
 
     public static String DATABASE_TIMESTAMP = "timestamp";

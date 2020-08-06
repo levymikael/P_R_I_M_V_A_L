@@ -81,7 +81,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     public float screenWidth;
 
-    BitmapFont bitmapFontZAP, bitmapFontFRHND, bitmapFontArial, bitmapFontArialBold;
+    BitmapFont bitmapFontZAP, bitmapFontFRHND, bitmapFontArial, bitmapFontArialBold, bitmapFontSegoe;
 
     int lastClicked = -1;
     float collapsibleTableHeight = MyConstants.SCREENHEIGHT / 8f;
@@ -133,6 +133,13 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         bitmapFontZAP = FONT_ZAP.generateFont(parameterZAP);
         FONT_ZAP.dispose();
 
+        FreeTypeFontGenerator FONT_Segoe = new FreeTypeFontGenerator(Gdx.files.internal("font/segoeUIsemibold.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterSegoe = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterSegoe.size = MyConstants.SCREENWIDTH / 70;
+        parameterSegoe.minFilter = Texture.TextureFilter.Linear;
+        parameterSegoe.magFilter = Texture.TextureFilter.Linear;
+        bitmapFontSegoe = FONT_Segoe.generateFont(parameterSegoe);
+        FONT_Segoe.dispose();
 
         FreeTypeFontGenerator FONT_ArialBold = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterArialBold = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -202,15 +209,26 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         fondSommaire = new ScreeenBackgroundImage("Images/Backgrounds/web_hi_res_512.png");
 
-        myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15f, MyConstants.SCREENWIDTH / 15f, game, "sommaire general");
-        myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25f, (5 * MyConstants.SCREENHEIGHT / 6f) - myButtonRetour.getHeight() / 2);
+        Texture resultatsObtenus = new Texture(Gdx.files.internal("Images/Sommaire/Texte résultats obtenus.png"));
+        resultatsObtenus.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        Label labelChap1Titre = new Label("Résultats obtenus", labelStyleWhite);
+        Table resultatsObtenusTitle = new Table();
 
-        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
-        nomChapitre.setPosition(MyConstants.SCREENWIDTH / 2 - MyConstants.SCREENWIDTH / 12, 9.2f * MyConstants.SCREENHEIGHT / 10);
-        stage.addActor(nomChapitre);
+        float chapterTitleWidth = MyConstants.SCREENWIDTH / 2.5f;
+        float chapterTitleHeight = chapterTitleWidth * (55f / 387f);
+
+        resultatsObtenusTitle.setBackground(new SpriteDrawable(new Sprite(resultatsObtenus)));
+        resultatsObtenusTitle.setSize(chapterTitleWidth, chapterTitleHeight);
+        resultatsObtenusTitle.setPosition(MyConstants.SCREENWIDTH / 2f - resultatsObtenusTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - ((MyConstants.SCREENWIDTH / 11f)));
+
+        stage.addActor(resultatsObtenusTitle);
+
+//        Label labelChap1Titre = new Label("Résultats obtenus", labelStyleWhite);
+//
+//        Table nomChapitre = TableauxTitreChapitre.getLigne(labelChap1Titre, null);
+//        nomChapitre.setPosition(MyConstants.SCREENWIDTH / 2 - MyConstants.SCREENWIDTH / 12, 9.2f * MyConstants.SCREENHEIGHT / 10);
+//        stage.addActor(nomChapitre);
 
         mrTemps = new MrTemps(stage, 0);
         mrNotes = new MrNotes(stage, 0);
@@ -230,14 +248,13 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table container = new Table();
         Table table = new Table();
 
-        float positionButton = myButtonRetour.getY();
-        float heightContainer = (positionButton);
-        container.setSize(MyConstants.SCREENWIDTH, heightContainer - MyConstants.SCREENHEIGHT / 10f);
-        container.setPosition(0, MyConstants.SCREENHEIGHT /15f);
+//        float positionButton = myButtonRetour.getY();
+//        float heightContainer = (positionButton);
+        container.setSize(MyConstants.SCREENWIDTH, 5 * MyConstants.SCREENHEIGHT / 7f);
+        container.setPosition(0, MyConstants.SCREENHEIGHT / 15f);
 
-        Table chapter1Table = chapter1Results(1, 36);
-        Table chapter2Table = chapter2Results(2, 70);
-
+        Table chapter1Table = chapter1Results(1, 36, MyConstants.noteMaxChap1);
+        Table chapter2Table = chapter2Results(2, 70, MyConstants.noteMaxChap2);
 
 //        HorizontalGroup chapter1Table = chapter1Results(1, 36);
 //        HorizontalGroup chapter2Table = chapter2Results(2, 70);
@@ -265,7 +282,6 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //        HorizontalGroup chapter24Table = chapter24Results(24, 160);
 //        HorizontalGroup chapter25Table = chapter25Results(25, 220);
 
-
         float lineHeight = MyConstants.SCREENHEIGHT / 17f;
 //
 //        for (int i = 0; i < tableArrayList.size(); i++)
@@ -285,15 +301,13 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
             table.add(tableAux).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(lineHeight * 4);
             table.row();
 
-//            arrayList2.add(tableAux);
-
         }
 
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
 
-        container.add(scroll).height(/*3.5f **/ 10000/* / 4f*/).width(screenWidth);
+        container.add(scroll).height(/*3.5f **/ 2_000/* / 4f*/).width(screenWidth);
 
         scroll.setPosition(0, 0);
 
@@ -302,10 +316,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         stage.addActor(container);
 
+
+        myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15f, MyConstants.SCREENWIDTH / 15f, game, "sommaire general");
+        myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25f, (5 * MyConstants.SCREENHEIGHT / 6f) - myButtonRetour.getHeight() / 2);
+
+
         Gdx.input.setInputProcessor(stage);
     }
 
-    public /*HorizontalGroup*/ Table chapter1Results(int chapitre, int noteMaxPossible)
+    public /*HorizontalGroup*/ Table chapter1Results(int chapitre, int noteMaxPossible, int[] arrayBaremeChapitre)
     {
 //        chapter1Table = new HorizontalGroup();
         Table chapter1Table = new Table();
@@ -319,7 +338,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label5 = "Compter des oiseaux et taper leur nombre";
         String label6 = "Un gâteau pour plusieurs anniversaires";
 
-        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/segoeUIsemibold.ttf", fontSizeOnglet);
         MyTextButton un_bouton_red = new MyTextButton("1", buttonSize, buttonStyleRed);
         MyTextButton trois_bouton_red = new MyTextButton("3", buttonSize, buttonStyleRed);
         MyTextButton deux_bouton_blue = new MyTextButton("2", buttonSize, buttonStyleBlue);
@@ -327,13 +346,13 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         MyTextButton cinq_bouton_blue = new MyTextButton("5", buttonSize, buttonStyleBlue);
         MyTextButton six_bouton_blue = new MyTextButton("6", buttonSize, buttonStyleBlue);
 
-        Table tableChapTitle1 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, bitmapFontArialBold);
-        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, bitmapFontArial);
-        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, bitmapFontArial);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", chapitre, 3, bitmapFontArial);
-        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, bitmapFontArial);
-        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, bitmapFontArial);
-        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, bitmapFontArial);
+        Table tableChapTitle1 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, arrayBaremeChapitre, bitmapFontSegoe);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, bitmapFontArial, arrayBaremeChapitre[0]);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, bitmapFontArial, arrayBaremeChapitre[0]);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", chapitre, 3, bitmapFontArial, arrayBaremeChapitre[0]);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, bitmapFontArial, arrayBaremeChapitre[1]);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, bitmapFontArial, arrayBaremeChapitre[2]);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, bitmapFontArial, arrayBaremeChapitre[3]);
 
         tableCollapsible1.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible1.row();
@@ -359,7 +378,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //        chapter1Table.addActor(tableChapTitle1);
         chapter1Table.add(tableChapTitle1).width(screenWidth).height(lineHeight /** 0.5f*/)/*.padBottom(-MyConstants.SCREENHEIGHT / 100)*/;
         chapter1Table.row();
-        chapter1Table.add(tableCollapsible1).width(screenWidth).height(lineHeight * 6f).padBottom(-2 * paddingInterOnglets);
+        chapter1Table.add(tableCollapsible1).width(screenWidth).height(lineHeight * 6f).padBottom(-4 * paddingInterOnglets);
 
 //        chapter1Table.grow();
 
@@ -380,7 +399,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         return chapter1Table;
     }
 
-    public /*HorizontalGroup*/Table chapter2Results(int chapitre, int noteMaxPossible)
+    public /*HorizontalGroup*/Table chapter2Results(int chapitre, int noteMaxPossible, int[] arrayBaremeChapitre)
     {
         Table chapter2Table = new Table();
 //        chapter2Table = new HorizontalGroup();
@@ -393,19 +412,19 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         String label4 = "Utiliser la même couleur pour colorier les cases avec le même total";
         String label5 = "Calcul mental";
 
-        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/FRHND521_0.TTF", fontSizeOnglet);
+        MyTextButton chapter_bouton = new MyTextButton("", "Images/IndicesChapitres/chap" + chapitre + ".png", lineHeight * 1.2f, "font/segoeUIsemibold.ttf", fontSizeOnglet);
         MyTextButton un_bouton_red = new MyTextButton("1", buttonSize, buttonStyleRed);
         MyTextButton deux_bouton_blue = new MyTextButton("2", buttonSize, buttonStyleBlue);
         MyTextButton trois_bouton_blue = new MyTextButton("3", buttonSize, buttonStyleBlue);
         MyTextButton quatre_bouton_blue = new MyTextButton("4", buttonSize, buttonStyleBlue);
         MyTextButton cinq_bouton_blue = new MyTextButton("5", buttonSize, buttonStyleBlue);
 
-        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, noteMaxPossible, bitmapFontArialBold);
-        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, bitmapFontArial);
-        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, bitmapFontArial);
-        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "red", chapitre, 3, bitmapFontArial);
-        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, bitmapFontArial);
-        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, bitmapFontArial);
+        Table tableChapTitle2 = LigneTableauxResultsChapitre.getLigne(chapter_bouton, labelChapterTitle, chapitre, arrayBaremeChapitre, bitmapFontSegoe);
+        Table tableEx1 = LigneTableauxResults.getLigne(un_bouton_red, label1, textureCours, "red", chapitre, 1, bitmapFontArial, arrayBaremeChapitre[0]);
+        Table tableEx2 = LigneTableauxResults.getLigne(deux_bouton_blue, label2, textureExercices, "blue", chapitre, 2, bitmapFontArial, arrayBaremeChapitre[0]);
+        Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_blue, label3, textureCours, "blue", chapitre, 3, bitmapFontArial, arrayBaremeChapitre[1]);
+        Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, bitmapFontArial, arrayBaremeChapitre[2]);
+        Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, bitmapFontArial, arrayBaremeChapitre[3]);
 
         tableCollapsible2.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight)/*.padTop(MyConstants.SCREENHEIGHT / 250f)*/;
         tableCollapsible2.row();

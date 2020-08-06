@@ -40,7 +40,7 @@ public class MrNotes implements MyDrawInterface
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/segoeUIsemibold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.minFilter = Texture.TextureFilter.Linear;
         parameter.magFilter = Texture.TextureFilter.Linear;
@@ -65,7 +65,7 @@ public class MrNotes implements MyDrawInterface
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.RED;
+        labelStyle.fontColor = MyConstants.redresultat;
         Label labelNotes = new Label(totalNotes, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes1.png"));

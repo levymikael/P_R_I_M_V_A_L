@@ -22,14 +22,14 @@ public class LigneTableauxResults
 
     static String duration = "";
 
-    static int highestNote, noteMaxPerExercice, notePossiblePerExercice;
+    static int highestNote, /*noteMaxPerExercice,*/ notePossiblePerExercice;
 
     static long durationPerChapter, durationPerExercice = 0;
 
 //    static BitmapFont bitmapFontArial;
 
 
-    public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, BitmapFont bitmapFontArial)
+    public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, BitmapFont bitmapFontArial, int noteMaxPerExercice)
     {
         Table container = new Table();
         Table table = new Table();
@@ -79,15 +79,16 @@ public class LigneTableauxResults
 
 
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
-        labelStyleDuration.fontColor = Color.OLIVE;
+        labelStyleDuration.fontColor = MyConstants.greenresultat;
         labelStyleDuration.font = bitmapFontArial;
         Label labelDuration = new Label(duration, labelStyleDuration);
 
         if (borderColor == "blue")
         {
             highestNote = appSingleton.myDataBase.getHighestNote(chapitre, onglet);
-            noteMaxPerExercice = appSingleton.myDataBase.getMaxNotePerExercice(chapitre, onglet, 0);
             notePossiblePerExercice = appSingleton.myDataBase.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
+//            noteMaxPerExercice = appSingleton.myDataBase.getMaxNotePerExercice(chapitre, onglet, 0);
+
 
             notes2Implement = highestNote + "/" + notePossiblePerExercice + "/" + noteMaxPerExercice;
         }
@@ -98,7 +99,7 @@ public class LigneTableauxResults
 
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
         labelStyleNotes.font = bitmapFontArial;
-        labelStyleNotes.fontColor = Color.RED;
+        labelStyleNotes.fontColor = MyConstants.redresultat;
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
         labelNotes.setWidth(MyConstants.SCREENWIDTH / 4f);
 

@@ -35,7 +35,7 @@ public class MrTemps implements MyDrawInterface
         screenWidth = Gdx.graphics.getWidth();
         final int screenHeight = Gdx.graphics.getHeight();
 
-        AppSingleton  appSingleton = AppSingleton.getInstance();
+        AppSingleton appSingleton = AppSingleton.getInstance();
         db = appSingleton.myDataBase;
 
         long totalDuree = db.getTotalDureePageForIdProfilByChapter(chapitre);
@@ -52,7 +52,7 @@ public class MrTemps implements MyDrawInterface
 
         String userName = user.getName();
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/segoeUIsemibold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.minFilter = Texture.TextureFilter.Nearest;
         parameter.magFilter = Texture.TextureFilter.MipMapLinearNearest;
@@ -63,7 +63,7 @@ public class MrTemps implements MyDrawInterface
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.OLIVE;
+        labelStyle.fontColor = MyConstants.greenresultat;
         Label labelTemps = new Label(duration, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_temps1.png"));

@@ -25,7 +25,7 @@ public class LigneTableaux
     static String notes2Implement;
     static long durationPerExercice;
 
-    public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet)
+    public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, int noteMaxPossible)
     {
         Table container = new Table();
         Table table = new Table();
@@ -97,15 +97,15 @@ public class LigneTableaux
 
         Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
 
-        int highestNote, noteMaxPerExercice, notePossiblePerExercice;
+        int highestNote, /*noteMaxPerExercice, */notePossiblePerExercice;
 
         highestNote = db.getHighestNote(chapitre, onglet);
 
-        noteMaxPerExercice = db.getMaxNotePerExercice(chapitre, onglet, 0);
-
         notePossiblePerExercice = db.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
 
-        notes2Implement = highestNote + "/" + notePossiblePerExercice + "/" + noteMaxPerExercice;
+//        noteMaxPerExercice = db.getMaxNotePerExercice(chapitre, onglet, 0);
+
+        notes2Implement = highestNote + "/" + notePossiblePerExercice + "/" + noteMaxPossible;
 
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
         labelStyleNotes.fontColor = Color.ORANGE;

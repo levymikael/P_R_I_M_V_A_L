@@ -2013,10 +2013,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             billeAdded.setVisible(false);
             myCorrectionAndPauseGeneral.addElements(billeAdded);
 
-
-//            billesList.add(billeAdded);
-
-
         }
         return billesList;
     }

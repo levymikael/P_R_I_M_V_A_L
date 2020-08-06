@@ -143,7 +143,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         allChaptersTitle.setBackground(new SpriteDrawable(new Sprite(chapter1Title)));
         allChaptersTitle.setSize(chapterTitleWidth, chapterTitleHeight);
-        allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2 - allChaptersTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - ((MyConstants.SCREENWIDTH / 11)));
+        allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2f - allChaptersTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - ((MyConstants.SCREENWIDTH / 11f)));
 
         stage.addActor(allChaptersTitle);
 

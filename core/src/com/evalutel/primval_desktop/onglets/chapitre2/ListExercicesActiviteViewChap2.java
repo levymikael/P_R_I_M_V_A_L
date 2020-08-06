@@ -67,11 +67,11 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
 
         Table table = new Table();
-        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1);
-        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2);
-        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureExercices, "blue", chapitre, 3);
-        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4);
-        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5);
+        Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", chapitre, 1, MyConstants.noteMaxChap2[0]);
+        Table tableEx2 = LigneTableaux.getLigne(deux_bouton, label2, textureExercices, "blue", chapitre, 2, MyConstants.noteMaxChap2[0]);
+        Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureExercices, "blue", chapitre, 3, MyConstants.noteMaxChap2[1]);
+        Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, MyConstants.noteMaxChap2[2]);
+        Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, MyConstants.noteMaxChap2[3]);
 
 
         table.add(tableEx1).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
