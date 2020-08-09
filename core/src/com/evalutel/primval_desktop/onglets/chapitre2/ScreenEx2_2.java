@@ -159,7 +159,8 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button)
+            {
                 game.setScreen(new Screen_Chapitre2(game));
 
 //                game.dispose();
@@ -187,44 +188,13 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 db.insertResultat(resultatExercice);
 
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
                 return true;
             }
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//
-//
-//                game.dispose();
-//                Gdx.app.log("button click", "click!");
-//
-//                endTime = System.currentTimeMillis();
-//                seconds = (endTime - startTime) / 1_000L;
-//
-//                resultatExercice.setDuree(seconds);
-//                resultatExercice.setDate(endTime);
-//
-//                if ((metrologue.isSpeaking) && (metrologue != null))
-//                {
-//                    metrologue.stopMusic();
-//                }
-//                else if ((validusAnimated.isSpeaking) && (validusAnimated != null))
-//                {
-//                    validusAnimated.stopMusic();
-//                }
-//
-//                timer.cancel();
-//                AppSingleton appSingleton = AppSingleton.getInstance();
-//                MyDataBase db = appSingleton.myDataBase;
-//
-//                db.insertResultat(resultatExercice);
-//
-//                ScreenEx2_2.this.dispose();
-//
-//                game.setScreen(new Screen_Chapitre2(ScreenEx2_2.this.game));
-//
-//            }
+
         });
 
 
@@ -1858,18 +1828,22 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
             solutionView.addTextActivite(cptOiseau1 + " + " + cptOiseau2 + " = " + (cptOiseau1 + cptOiseau2));
 
-            ArrayList billesList = new ArrayList<UneBille>();
-            billesList = planche3.getAllBilles();
+            planche3.removeAllBilles(sacDeBilles);
 
-            for (int i = 0; i < (planche3.getNumberBilles()); i++)
-            {
-                UneBille bille = (UneBille) billesList.get(i);
-                planche3.removeBille(bille);
-                sacDeBilles.addBilleToReserve(bille);
 
-                int ok = 5;
-                ok++;
-            }
+//            ArrayList billesList = new ArrayList<UneBille>();
+//            billesList = planche3.getAllBilles();
+
+
+//            for (int i = 0; i < (planche3.getNumberBilles()); i++)
+//            {
+//                UneBille bille = (UneBille) billesList.get(i);
+//                planche3.removeBille(bille);
+//                sacDeBilles.addBilleToReserve(bille);
+//
+//                int ok = 5;
+//                ok++;
+//            }
             cptOiseau1 = 0;
             cptOiseau2 = 0;
             cptOiseauTotal = 0;

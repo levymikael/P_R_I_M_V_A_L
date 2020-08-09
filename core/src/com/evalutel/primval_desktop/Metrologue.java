@@ -74,7 +74,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
                 music = null;
                 isSpeaking = false;
 
-                if ((nextEtape != null) && (myTimer != null))
+                if ((nextEtape != null) /*&& (myTimer != null)*/)
                 {
                     myTimer.schedule(nextEtape, nextEtape.delayN);
                 }

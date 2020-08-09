@@ -125,7 +125,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
         validusAnimated.setVisible(false);
 
-        timer.schedule(new PresentationMetrologue(3000), 1000);
+        timer.schedule(new PresentationMetrologue(3_000), 1_000);
 
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {

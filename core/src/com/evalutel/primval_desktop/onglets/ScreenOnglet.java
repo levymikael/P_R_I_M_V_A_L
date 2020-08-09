@@ -180,6 +180,9 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0, 0);
 
+        timer = new MyTimer();
+
+
         validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60, MyConstants.SCREENHEIGHT / 7, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
         myCorrectionAndPauseGeneral.addElements(validusAnimated);
 
@@ -191,10 +194,11 @@ public class ScreenOnglet implements Screen, InputProcessor
             myCorrectionAndPauseGeneral.addElements(ecrinDiamantView);
         }
 
+
         metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
         myCorrectionAndPauseGeneral.addElements(metrologue);
 
-        timer = new MyTimer();
+
 
 
         myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage,metrologue, validusAnimated, this, startTime, resultatExercice, timer);

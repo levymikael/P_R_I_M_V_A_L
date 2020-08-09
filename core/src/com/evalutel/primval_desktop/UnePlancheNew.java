@@ -3,6 +3,7 @@ package com.evalutel.primval_desktop;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
+import java.util.function.UnaryOperator;
 
 
 public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
@@ -161,6 +162,17 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
     public void removeBille(UneBille uneBille)
     {
         allBilles.remove(uneBille);
+    }
+
+    public void removeAllBilles(SacDeBilles sacDeBilles)
+    {
+        for (int i = 0; i < allBilles.size(); i++)
+        {
+            UneBille bille = allBilles.get(i);
+            sacDeBilles.addBilleToReserve(bille);
+
+        }
+        allBilles.clear();
     }
 
 
