@@ -213,6 +213,8 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
 //        ClickListener clickListenerTest = six_bouton.getClickListener();
 //        //styleTest.set
 //        clickListenerTest.setVisualPressed(true);
+
+
     }
 
     public String getInput()
@@ -280,7 +282,6 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
     {
         textFieldTest.setText(String.valueOf(buttonNumber));
 
-
     }
 
     public MyPoint calculetteValidateAndDisplay()
@@ -293,7 +294,6 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
     public void textRemove()
     {
         textFieldTest.setText("");
-
     }
 
     @Override

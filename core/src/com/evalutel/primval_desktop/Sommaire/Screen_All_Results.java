@@ -76,8 +76,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     MyButtonRetour myButtonRetour;
 
-    TextureRegionDrawable textureRegionDrawableBg;
-    TextureRegionDrawable orangeBg;
+//    TextureRegionDrawable textureRegionDrawableBg;
+//    TextureRegionDrawable orangeBg;
 
     public float screenWidth;
 
@@ -215,8 +215,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         Table resultatsObtenusTitle = new Table();
 
-        float chapterTitleWidth = MyConstants.SCREENWIDTH / 2.5f;
-        float chapterTitleHeight = chapterTitleWidth * (55f / 387f);
+        float chapterTitleWidth = MyConstants.SCREENWIDTH / 2.6f;
+        float chapterTitleHeight = chapterTitleWidth * (45f / 365f);
 
         resultatsObtenusTitle.setBackground(new SpriteDrawable(new Sprite(resultatsObtenus)));
         resultatsObtenusTitle.setSize(chapterTitleWidth, chapterTitleHeight);
@@ -239,19 +239,13 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         textureExercices = new Texture(Gdx.files.internal("Images/Pages onglets/Exercice-onglets.png"));
         textureExercices.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-
-        Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
-        bgOrange.setColor(Color.rgb888(241, 160, 57));
-        bgOrange.fill();
-        orangeBg = new TextureRegionDrawable(new TextureRegion(new Texture(bgOrange)));
-
-        Table container = new Table();
+//        Table container = new Table();
         Table table = new Table();
 
 //        float positionButton = myButtonRetour.getY();
 //        float heightContainer = (positionButton);
-        container.setSize(MyConstants.SCREENWIDTH, 5 * MyConstants.SCREENHEIGHT / 7f);
-        container.setPosition(0, MyConstants.SCREENHEIGHT / 15f);
+//        container.setSize(MyConstants.SCREENWIDTH, 5 * MyConstants.SCREENHEIGHT / 7f);
+//        container.setPosition(0, 150);
 
         Table chapter1Table = chapter1Results(1, 36, MyConstants.noteMaxChap1);
         Table chapter2Table = chapter2Results(2, 70, MyConstants.noteMaxChap2);
@@ -298,7 +292,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         {
 //            Table tableAux = tableArrayList.get(i);
             Table tableAux = arrayList2.get(i);
-            table.add(tableAux).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(lineHeight * 4);
+            table.add(tableAux).width(MyConstants.SCREENWIDTH).padBottom(lineHeight).height(lineHeight * 4).padTop(MyConstants.SCREENHEIGHT / 100f);
             table.row();
 
         }
@@ -306,20 +300,19 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
+        scroll.setSize(screenWidth, 2.5f * MyConstants.SCREENHEIGHT / 3f);
 
-        container.add(scroll).height(/*3.5f **/ 2_000/* / 4f*/).width(screenWidth);
+//        container.add(scroll).height(2.5f * MyConstants.SCREENHEIGHT / 3f).width(screenWidth).padTop(90f);
 
         scroll.setPosition(0, 0);
+        scroll.debug();
 
+//        container.debug();
 
-        container.debug();
-
-        stage.addActor(container);
-
+        stage.addActor(scroll);
 
         myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15f, MyConstants.SCREENWIDTH / 15f, game, "sommaire general");
         myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25f, (5 * MyConstants.SCREENHEIGHT / 6f) - myButtonRetour.getHeight() / 2);
-
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -364,7 +357,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible1.row();
         tableCollapsible1.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible1.row();
-        tableCollapsible1.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
+        tableCollapsible1.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight).padBottom(MyConstants.SCREENHEIGHT/60f);
 
         tableCollapsible1.setHeight(collapsibleTableHeight);
 
@@ -376,9 +369,9 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //
 
 //        chapter1Table.addActor(tableChapTitle1);
-        chapter1Table.add(tableChapTitle1).width(screenWidth).height(lineHeight /** 0.5f*/)/*.padBottom(-MyConstants.SCREENHEIGHT / 100)*/;
+        chapter1Table.add(tableChapTitle1).width(screenWidth).height(lineHeight /** 0.5f*/).padTop(100f);
         chapter1Table.row();
-        chapter1Table.add(tableCollapsible1).width(screenWidth).height(lineHeight * 6f).padBottom(-4 * paddingInterOnglets);
+        chapter1Table.add(tableCollapsible1).width(screenWidth).height(lineHeight * 6f).padBottom(-15 * paddingInterOnglets);
 
 //        chapter1Table.grow();
 

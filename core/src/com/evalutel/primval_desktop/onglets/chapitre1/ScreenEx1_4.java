@@ -1,6 +1,7 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -34,7 +35,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 {
     private ArrayList<UneBille> billesList;
     ArrayList<UneArdoise> ardoiseList = new ArrayList<>();
-    private ArrayList<UnePlancheNew> allPlanches;
+    //private ArrayList<UnePlancheNew> allPlanches;
 
     protected CalculetteView calculetteView;
 
@@ -56,7 +57,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
     boolean afterCorrection = false;
     Texture ardoiseBgInactive;
 
-    public ScreenEx1_4(Game game, String ongletTitre)
+    public ScreenEx1_4(final Game game, String ongletTitre)
     {
         super(game, 1, 4, true, 9);
 
@@ -110,13 +111,53 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         displayArdoise();
 
-//        resultatExercice = new UnResultat("Primval", 1, 4, 0, ongletTitre, 9, 0, dateTest, 0, 0, 0, 123);
+        billesList = new ArrayList<>();
+
+        uneMain.setPosition(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 3f);
+
+        myButtonBackToPreviousMenu.addListener(new ClickListener()
+        {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button)
+            {
+                game.setScreen(new Screen_Chapitre1(game));
+
+//                game.dispose();
+                Gdx.app.log("button click", "click!");
+
+                endTime = System.currentTimeMillis();
+                seconds = (endTime - startTime) / 1_000L;
+
+                resultatExercice.setDuree(seconds);
+                resultatExercice.setDate(endTime);
+
+                if ((metrologue.isSpeaking) && (metrologue != null))
+                {
+                    metrologue.stopMusic();
+                }
+                else if ((validusAnimated.isSpeaking) && (validusAnimated != null))
+                {
+                    validusAnimated.stopMusic();
+                }
+
+                timer.cancel();
+                AppSingleton appSingleton = AppSingleton.getInstance();
+                MyDataBase db = appSingleton.myDataBase;
+
+                db.insertResultat(resultatExercice);
+
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
+                return true;
+            }
+        });
 
         timer.schedule(new PresentationOnglet(3000), 1000);
 
-        billesList = new ArrayList<>();
 
-        uneMain.setPosition(MyConstants.SCREENWIDTH / 2, MyConstants.SCREENHEIGHT / 3);
     }
 
     private class PresentationOnglet extends MyTimer.TaskEtape
@@ -506,10 +547,10 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
     private class Fin extends MyTimer.TaskEtape
     {
-        private Fin(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
+//        private Fin(long durMillis, long delay)
+//        {
+//            super(durMillis, delay);
+//        }
 
         private Fin(long durMillis)
         {

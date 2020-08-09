@@ -1,9 +1,12 @@
 package com.evalutel.primval_desktop.onglets.chapitre2;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
@@ -22,6 +25,7 @@ import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.onglets.ScreenOnglet;
+import com.evalutel.primval_desktop.onglets.chapitre1.Screen_Chapitre1;
 import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
@@ -61,7 +65,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     boolean afterCorrection, isAllActive, touchValidate = false;
 
 
-    public ScreenEx2_2(Game game, String ongletTitre)
+    public ScreenEx2_2(final Game game, String ongletTitre)
     {
         super(game, 2, 2, true, 15);
 
@@ -133,9 +137,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
         oiseauxList = getNumberOiseauxArList();
 
-
-//        numOiseauArray = MyMath.genereTabAleatoire(9);
-
         getRandOiseauxArray();
 
         resultatExercice = new UnResultat("Primval", 2, 2, 0, ongletTitre, 15, 0, dateTest, 0, 0, 0, 123);
@@ -154,6 +155,77 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(uneArdoise2);
 
         metrologue.setVisible(false);
+
+        myButtonBackToPreviousMenu.addListener(new ClickListener()
+        {
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new Screen_Chapitre2(game));
+
+//                game.dispose();
+                Gdx.app.log("button click", "click!");
+
+                endTime = System.currentTimeMillis();
+                seconds = (endTime - startTime) / 1_000L;
+
+                resultatExercice.setDuree(seconds);
+                resultatExercice.setDate(endTime);
+
+                if ((metrologue.isSpeaking) && (metrologue != null))
+                {
+                    metrologue.stopMusic();
+                }
+                else if ((validusAnimated.isSpeaking) && (validusAnimated != null))
+                {
+                    validusAnimated.stopMusic();
+                }
+
+                timer.cancel();
+                AppSingleton appSingleton = AppSingleton.getInstance();
+                MyDataBase db = appSingleton.myDataBase;
+
+                db.insertResultat(resultatExercice);
+
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//
+//
+//                game.dispose();
+//                Gdx.app.log("button click", "click!");
+//
+//                endTime = System.currentTimeMillis();
+//                seconds = (endTime - startTime) / 1_000L;
+//
+//                resultatExercice.setDuree(seconds);
+//                resultatExercice.setDate(endTime);
+//
+//                if ((metrologue.isSpeaking) && (metrologue != null))
+//                {
+//                    metrologue.stopMusic();
+//                }
+//                else if ((validusAnimated.isSpeaking) && (validusAnimated != null))
+//                {
+//                    validusAnimated.stopMusic();
+//                }
+//
+//                timer.cancel();
+//                AppSingleton appSingleton = AppSingleton.getInstance();
+//                MyDataBase db = appSingleton.myDataBase;
+//
+//                db.insertResultat(resultatExercice);
+//
+//                ScreenEx2_2.this.dispose();
+//
+//                game.setScreen(new Screen_Chapitre2(ScreenEx2_2.this.game));
+//
+//            }
+        });
 
 
         timer.schedule(new PresentationMetrologue(3000), 1000);
@@ -510,7 +582,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             calculetteView.textRemove();
 
             uneArdoise2.fillLabel(1, Integer.toString(oiseauxToDisplayBranche1));
-
         }
     }
 
@@ -1785,17 +1856,19 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             planche2.setVisible(false);
             planche3.setVisible(false);
 
-
             solutionView.addTextActivite(cptOiseau1 + " + " + cptOiseau2 + " = " + (cptOiseau1 + cptOiseau2));
 
-
-            uneArdoise2.eraseAllLabels();
+            ArrayList billesList = new ArrayList<UneBille>();
+            billesList = planche3.getAllBilles();
 
             for (int i = 0; i < (planche3.getNumberBilles()); i++)
             {
-                UneBille bille = planche3.getBille(i);
+                UneBille bille = (UneBille) billesList.get(i);
+                planche3.removeBille(bille);
                 sacDeBilles.addBilleToReserve(bille);
-//                bille.an
+
+                int ok = 5;
+                ok++;
             }
             cptOiseau1 = 0;
             cptOiseau2 = 0;

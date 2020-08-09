@@ -21,26 +21,23 @@ public class UneBougie extends AnimationImageNew implements MyTouchInterface, My
     boolean isActive = true;
 
 
-
-
     public UneBougie(float startPositionX, float startPositionY, float animationHeight)
     {
-        super("Images/Onglet_1_6/bougie_bleu.png", startPositionX, startPositionY, animationHeight, animationHeight);
-
-//        addSprites();
+        super("Images/Onglet_1_6/bougie_bleu.png", startPositionX, startPositionY, animationHeight, animationHeight * 120f / 90f);
     }
 
-//    private void addSprites()
-//    {
-//        Array<TextureAtlas.AtlasRegion> regions = textureAtlas.getRegions();
-//
-//        for (TextureAtlas.AtlasRegion region : regions)
-//        {
-//            Sprite sprite = textureAtlas.createSprite(region.name);
-//
-//            sprites.put(region.name, sprite);
-//        }
-//    }
+    private static ArrayList<String> getAnimationBougiee()
+    {
+        ArrayList<String> imgOiseauPaths = new ArrayList<>();
+
+        for (int i = 0; i < 6; i++)
+        {
+            String imgaux = "Images/oiseau/oiseau1_1_00000" + i + ".png";
+            imgOiseauPaths.add(imgaux);
+        }
+
+        return imgOiseauPaths;
+    }
 
 
     @Override

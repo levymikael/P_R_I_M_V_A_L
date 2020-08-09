@@ -224,7 +224,7 @@ public class MyDataBase
         else
         {
 
-            totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/3596";
+            totalNotePageForIdProfil = totalObtainedNoteforIdProfil + "/" + totalPossibleNoteforIdProfil + "/3593";
         }
 
         return totalNotePageForIdProfil;

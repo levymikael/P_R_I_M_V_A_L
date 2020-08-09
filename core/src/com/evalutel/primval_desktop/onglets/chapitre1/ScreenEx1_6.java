@@ -1,11 +1,14 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
@@ -65,7 +68,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
     Drawable drawableAux;
 
 
-    public ScreenEx1_6(Game game, String ongletTitre)
+    public ScreenEx1_6(final Game game, String ongletTitre)
     {
         super(game, 1, 6, true, 9);
 
@@ -73,7 +76,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         bgScreenEx1_6 = new ScreeenBackgroundImage("Images/Onglet_1_6/anniversaire.jpg");
         allDrawables.add(bgScreenEx1_6);
 
-        sacDeBougies = new SacDeBougies(5.3f * MyConstants.SCREENWIDTH / 6f, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBougie * 1.5), (float) (largeurBougie * 1.5));
+        sacDeBougies = new SacDeBougies(5.3f * MyConstants.SCREENWIDTH / 6f, 9 * MyConstants.SCREENHEIGHT / 11f, (largeurBougie * 1.5f), (largeurBougie * 1.5f));
         sacDeBougies.largeurBille = largeurBilleUnique;
         sacDeBougies.isActive();
         sacDeBougies.setActive(false);
@@ -81,10 +84,10 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(sacDeBougies);
 //        allCorrigibles.add(sacDeBougies);
 
-        int gateauWidth = MyConstants.SCREENWIDTH / 2;
-        int gateauHeight = (int) (gateauWidth * (266f / 462f));
+        float gateauWidth = MyConstants.SCREENWIDTH / 2f;
+        float gateauHeight = (gateauWidth * (266f / 462f));
 
-        gateauAnniversaire = new UnGateauAnniversaire(3 * MyConstants.SCREENWIDTH / 10 - largeurGateau / 10, MyConstants.SCREENHEIGHT / 20, gateauWidth, gateauHeight);
+        gateauAnniversaire = new UnGateauAnniversaire(3 * MyConstants.SCREENWIDTH / 10f - largeurGateau / 10, MyConstants.SCREENHEIGHT / 17f, gateauWidth, gateauHeight);
         gateauAnniversaire.shouldReturnToReserve = true;
         allDrawables.add(gateauAnniversaire);
         myCorrectionAndPauseGeneral.addElements(gateauAnniversaire);
@@ -93,7 +96,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         bougiesList = new ArrayList<>();
         for (int i = 0; i < 9; i++)
         {
-            UneBougie bougie = new UneBougie(sacDeBougies.currentPositionX, sacDeBougies.currentPositionY, sacDeBougies.largeurBille);
+            UneBougie bougie = new UneBougie(sacDeBougies.currentPositionX, sacDeBougies.currentPositionY, sacDeBougies.largeurBille * 1.3f);
 
             sacDeBougies.addBougieToReserve(bougie);
             allDrawables.add(bougie);
@@ -113,11 +116,11 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         float posEnonceX = (MyConstants.SCREENWIDTH - activiteWidth) / 2f;
         float posSolutionX = posEnonceX + activiteWidth / 2f;
 
-        activiteView = new ActiviteView(stage, posEnonceX, activiteWidth * 42 / 1626, activiteWidth / 2f, "activite");
+        activiteView = new ActiviteView(stage, posEnonceX, activiteWidth * 42f / 1626f, activiteWidth / 2f, "activite");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 
-        solutionView = new ActiviteView(stage, posSolutionX, activiteWidth * 42 / 1626, activiteWidth / 2f, "solution");
+        solutionView = new ActiviteView(stage, posSolutionX, activiteWidth * 42f / 1626f, activiteWidth / 2f, "solution");
         allDrawables.add(solutionView);
         myCorrectionAndPauseGeneral.addElements(solutionView);
 
@@ -135,9 +138,9 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
 
-        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
-        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25f).padLeft(MyConstants.SCREENWIDTH / 46f);
+        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9f);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22f);
 
         stage.addActor(tableTitre);
 
@@ -150,9 +153,50 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
 
         numPastilleArray = MyMath.genereTabAleatoire(9);
 
-        resultatExercice = new UnResultat("Primval", 1, 6, 0, ongletTitre, 9, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 1, 6, 0, ongletTitre, MyConstants.noteMaxChap1[3], 0, dateTest, 0, 0, 0, 123);
 
-        uneMain.setPosition(MyConstants.SCREENWIDTH / 2, MyConstants.SCREENHEIGHT / 3);
+        uneMain.setPosition(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 3f);
+
+
+        myButtonBackToPreviousMenu.addListener(new ClickListener()
+        {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button)
+            {
+                game.setScreen(new Screen_Chapitre1(game));
+
+//                game.dispose();
+                Gdx.app.log("button click", "click!");
+
+                endTime = System.currentTimeMillis();
+                seconds = (endTime - startTime) / 1_000L;
+
+                resultatExercice.setDuree(seconds);
+                resultatExercice.setDate(endTime);
+
+                if ((metrologue.isSpeaking) && (metrologue != null))
+                {
+                    metrologue.stopMusic();
+                }
+                else if ((validusAnimated.isSpeaking) && (validusAnimated != null))
+                {
+                    validusAnimated.stopMusic();
+                }
+
+                timer.cancel();
+                AppSingleton appSingleton = AppSingleton.getInstance();
+                MyDataBase db = appSingleton.myDataBase;
+
+                db.insertResultat(resultatExercice);
+
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
+                return true;
+            }
+        });
 
         timer.schedule(new PresentationOnglet(3_000), 1_000);
     }
@@ -229,10 +273,10 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
 
     private class BirthdayKiDPicDisplay extends MyTimer.TaskEtape
     {
-        private BirthdayKiDPicDisplay(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
+//        private BirthdayKiDPicDisplay(long durMillis, long delay)
+//        {
+//            super(durMillis, delay);
+//        }
 
         private BirthdayKiDPicDisplay(long durMillis)
         {
@@ -252,7 +296,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
                 displayPastille = true;
             }
 
-            MyTimer.TaskEtape nextEtape = new InputClavier(500);
+            MyTimer.TaskEtape nextEtape = new InputClavier(1_000);
 
 
             switch (randNumPastille)
@@ -306,6 +350,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
                     break;
             }
 
+            sacDeBougies.setActive(false);
 
         }
     }
@@ -328,6 +373,8 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         {
             calculetteView.setActive(true);
             validusAnimated.setActive(true);
+            sacDeBougies.setActive(true);
+
 
             activiteView.addTextActivite("Tape avec ton doigt sur la boite de bougies. Une bougie se posera sur le gâteau. Tape sur le clavier le nombre de bougies que tu as placé puis Valide. Tape sur une bougie sur le gâteau si tu veux la retirer");
             if (questionCourante == 0)
@@ -378,6 +425,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
                 validusAnimated.isActive = false;
                 addDiamonds(1);
                 gateauAnniversaire.setAllBougiesActive();
+                failedAttempts = 0;
             }
             else
             {
@@ -767,7 +815,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         {
 
             UneBougie bougie = gateauAnniversaire.getLastBougie();
-            if (bougie != null)
+            if (bougie != null && gateauAnniversaire.isActive())
             {
                 gateauAnniversaire.removeBougie(bougie);
                 gateauAnniversaire.reorganiseBougies();

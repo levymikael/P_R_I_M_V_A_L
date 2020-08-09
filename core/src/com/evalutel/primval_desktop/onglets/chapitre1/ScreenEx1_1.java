@@ -1,11 +1,15 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
+import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MyTimer;
@@ -16,6 +20,8 @@ import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.onglets.ScreenOnglet;
+import com.evalutel.primval_desktop.onglets.chapitre2.Screen_Chapitre2;
+import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 
 import java.util.ArrayList;
 
@@ -38,7 +44,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 //    ActiviteView activiteView;
 
 
-    public ScreenEx1_1(Game game, String ongletTitre)
+    public ScreenEx1_1(final Game game, String ongletTitre)
     {
         super(game, 1, 1, false, 0);
 
@@ -86,6 +92,47 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         billesList = autoFillPlanche();
 
         resultatExercice = new UnResultat("Primval", 1, 1, 0, ongletTitre, 0, 0, dateTest, 0, 0, 0, 123);
+
+
+        myButtonBackToPreviousMenu.addListener(new ClickListener()
+        {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button)
+            {
+                game.setScreen(new Screen_Chapitre1(game));
+
+//                game.dispose();
+                Gdx.app.log("button click", "click!");
+
+                endTime = System.currentTimeMillis();
+                seconds = (endTime - startTime) / 1_000L;
+
+                resultatExercice.setDuree(seconds);
+                resultatExercice.setDate(endTime);
+
+                if ((metrologue.isSpeaking) && (metrologue != null))
+                {
+                    metrologue.stopMusic();
+                }
+                else if ((validusAnimated.isSpeaking) && (validusAnimated != null))
+                {
+                    validusAnimated.stopMusic();
+                }
+
+                timer.cancel();
+                AppSingleton appSingleton = AppSingleton.getInstance();
+                MyDataBase db = appSingleton.myDataBase;
+
+                db.insertResultat(resultatExercice);
+
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
+                return true;
+            }
+        });
 
         timer.schedule(new PresentationMetrologue(3000), 1000);
     }

@@ -350,39 +350,39 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
                 game.setScreen(new Screen_Chapitre2(game));
             }
         });
-        tableEx3.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!3");
-                game.setScreen(new Screen_Chapitre1(game));
-            }
-        });
-        tableEx4.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!4");
-            }
-        });
-        tableEx5.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!5");
-            }
-        });
-        tableEx6.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!6");
-            }
-        });
+//        tableEx3.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!3");
+//                game.setScreen(new Screen_Chapitre1(game));
+//            }
+//        });
+//        tableEx4.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!4");
+//            }
+//        });
+//        tableEx5.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!5");
+//            }
+//        });
+//        tableEx6.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!6");
+//            }
+//        });
 
         return table;
     }

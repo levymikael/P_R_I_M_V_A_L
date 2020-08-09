@@ -6,7 +6,7 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 import java.util.ArrayList;
 
 
-public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
+public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface, MyTouchInterface
 {
     public boolean shouldReturnToReserve = false;
     private ArrayList<MyPoint> positionsBougies = new ArrayList<>();
@@ -14,20 +14,18 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
     boolean isActive = true;
 
 
-    int spaceBougies;
+    float spaceBougies;
 
 
     public UnGateauAnniversaire(float startPositionX, float startPositionY, float gateauWidth, float gateauHeight)
     {
         super("Images/Onglet_1_6/gateau.png", startPositionX, startPositionY, gateauWidth, gateauHeight);
 
+        float startX = startPositionX + (MyConstants.SCREENWIDTH / 12f);
+        float startY = startPositionY + (MyConstants.SCREENHEIGHT / 6f);
 
-        float startX = animationWidth / 12;
-        float startY = startPositionY + (MyConstants.SCREENHEIGHT / 10);
-
-        spaceBougies = (int) animationWidth / 50;
-        float posX = 0f;
-        float posY = 0;
+        spaceBougies = animationWidth / 60f;
+        float posX = 0, posY = 0;
 
         for (int i = 0; i < 3; i++)
         {
@@ -35,17 +33,23 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
             {
                 if (i == 2)
                 {
-                    posX = (startX + j * (spaceBougies + gateauWidth / 6f));
-                    posY = (startY + i * (spaceBougies + gateauHeight / 5));
+                    posX = startX + (j * (spaceBougies + gateauWidth / 5f) + MyConstants.SCREENWIDTH / 30f + MyConstants.SCREENWIDTH / 30f);
+                    posY = startY + (MyConstants.SCREENHEIGHT / 11f) + (MyConstants.SCREENHEIGHT / 17f);
                 }
-                else
+                else if (i == 1)
                 {
-                    posX = (startX + j * (spaceBougies + gateauWidth / 4.5f));
-                    posY = (startY + i * (spaceBougies + gateauHeight / 5));
+                    posX = startX + (j * (spaceBougies + gateauWidth / 5f) + MyConstants.SCREENWIDTH / 30f);
+                    posY = startY + (MyConstants.SCREENHEIGHT / 11f);
                 }
-                positionsBougies.add(new MyPoint(currentPositionX + posX, currentPositionY + posY));
+                else if (i == 0)
+                {
+                    posX = (startX + (j * (spaceBougies + gateauWidth / 5f)));
+                    posY = (startY);
+                }
+                System.out.println("posX = " + posX + "i: " + i + " j: " + j);
+                System.out.println("posY = " + posY + "i: " + i + " j: " + j);
+                positionsBougies.add(new MyPoint(/*currentPositionX +*/ posX, /*currentPositionY +*/ posY));
             }
-            startX += startX + spaceBougies;
         }
     }
 
@@ -166,6 +170,29 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
         }
     }
 
+    @Override
+    public boolean isTouched(float x, float y)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isDragable()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isActive()
+    {
+        return isActive;
+    }
+
+    public void setActive(boolean active)
+    {
+        isActive = active;
+    }
+
     public void removeBougie(UneBougie uneBougie)
     {
         allBougies.remove(uneBougie);
@@ -186,24 +213,25 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
     @Override
     public void myPause()
     {
-
+        this.isActive = false;
     }
 
     @Override
     public void myResume()
     {
-
+        this.isActive = true;
     }
 
 
     @Override
     public void myCorrectionStart()
     {
+        this.setActive(false);
     }
 
     @Override
     public void myCorrectionStop()
     {
-
+        this.setActive(true);
     }
 }

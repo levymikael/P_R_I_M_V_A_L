@@ -65,6 +65,7 @@ public class MrTemps implements MyDrawInterface
         labelStyle.font = bitmapFont;
         labelStyle.fontColor = MyConstants.greenresultat;
         Label labelTemps = new Label(duration, labelStyle);
+//        labelTemps.setFontScale(1.25f);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_temps1.png"));
         textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -86,14 +87,14 @@ public class MrTemps implements MyDrawInterface
         temps.add(labelTemps).height(screenHeight / 30).padLeft(screenWidth / 60).padRight(screenWidth / 60);
         temps.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
-        Pixmap greenBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.OLIVE);
+        Pixmap greenBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, MyConstants.greenresultat);
 
         Table border = new Table();
-        border.pad(screenWidth / 1_000);
+        border.pad(screenWidth / 900f);
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(greenBorder))));
         border.add(temps);
 
-        container.add(mrTemps).height(screenHeight / 10).width((MyConstants.SCREENHEIGHT / 10) * (172f / 223f));
+        container.add(mrTemps).height(screenHeight / 10f).width((MyConstants.SCREENHEIGHT / 10f) * (172f / 223f));
         container.row();
         container.add(border);
 

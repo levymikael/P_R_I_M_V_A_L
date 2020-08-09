@@ -71,7 +71,7 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     protected long startTime, endTime, seconds, dateTest;
 
-    private Game game;
+    protected Game game;
 
     protected ValidusAnimated validusAnimated;
 
@@ -180,41 +180,58 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         resultatExercice = new UnResultat("", chapitre, onglet, 0, "", 0, 0, 0, 0, 0, 0, 0);
 
-        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
-        myButtonBackToPreviousMenu.addListener(new ClickListener()
+        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60, MyConstants.SCREENHEIGHT / 7, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
+        myCorrectionAndPauseGeneral.addElements(validusAnimated);
+
+        if (ecrin)
         {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
+            ecrinDiamantView = new EcrinDiamantView(stage, (MyConstants.SCREENWIDTH / 30) * (168f / 59f), maxNotePossible);
+            ecrinDiamantView.updateText();
+            allDrawables.add(ecrinDiamantView);
+            myCorrectionAndPauseGeneral.addElements(ecrinDiamantView);
+        }
+
+        metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
+        myCorrectionAndPauseGeneral.addElements(metrologue);
+
+        timer = new MyTimer();
+
+
+        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage,metrologue, validusAnimated, this, startTime, resultatExercice, timer);
+//        myButtonBackToPreviousMenu.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
 //                ScreenOnglet.this.game.dispose();
-                Gdx.app.log("button click", "click!");
-
-                endTime = System.currentTimeMillis();
-                seconds = (endTime - startTime) / 1_000L;
-
-                resultatExercice.setDuree(seconds);
-                resultatExercice.setDate(endTime);
-
-                if ((metrologue.isSpeaking))
-                {
-                    metrologue.stopMusic();
-                }
-                else if ((validusAnimated.isSpeaking))
-                {
-                    validusAnimated.stopMusic();
-                }
-
-                timer.cancel();
-                AppSingleton appSingleton = AppSingleton.getInstance();
-                MyDataBase db =  appSingleton.myDataBase;
-
-                db.insertResultat(resultatExercice);
-
-                ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game /*,ScreenOnglet.this.dataBase*/));
-
-                ScreenOnglet.this.dispose();
-            }
-        });
+//                Gdx.app.log("button click", "click!");
+//
+//                endTime = System.currentTimeMillis();
+//                seconds = (endTime - startTime) / 1_000L;
+//
+//                resultatExercice.setDuree(seconds);
+//                resultatExercice.setDate(endTime);
+//
+//                if ((metrologue.isSpeaking))
+//                {
+//                    metrologue.stopMusic();
+//                }
+//                else if ((validusAnimated.isSpeaking))
+//                {
+//                    validusAnimated.stopMusic();
+//                }
+//
+//                timer.cancel();
+//                AppSingleton appSingleton = AppSingleton.getInstance();
+//                MyDataBase db = appSingleton.myDataBase;
+//
+//                db.insertResultat(resultatExercice);
+//
+//                ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game));
+//
+//                ScreenOnglet.this.dispose();
+//            }
+//        });
         allDrawables.add(myButtonBackToPreviousMenu);
 
         startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
@@ -262,21 +279,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         uneMain.setVisible(false);
         myCorrectionAndPauseGeneral.addElements(uneMain);
 
-        timer = new MyTimer();
 
-        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60, MyConstants.SCREENHEIGHT / 7, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
-        myCorrectionAndPauseGeneral.addElements(validusAnimated);
-
-        if (ecrin)
-        {
-            ecrinDiamantView = new EcrinDiamantView(stage, (MyConstants.SCREENWIDTH / 30) * (168f / 59f), maxNotePossible);
-            ecrinDiamantView.updateText();
-            allDrawables.add(ecrinDiamantView);
-            myCorrectionAndPauseGeneral.addElements(ecrinDiamantView);
-        }
-
-        metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
-        myCorrectionAndPauseGeneral.addElements(metrologue);
 
  /*
         reserveBilles = new ReserveBilles(MyConstants.SCREENWIDTH - 300, MyConstants.SCREENHeight - 300, 200, 200);
@@ -398,13 +401,14 @@ public class ScreenOnglet implements Screen, InputProcessor
     @Override
     public void hide()
     {
-        this.dispose();
+//        this.dispose();
     }
 
 
     @Override
     public void dispose()
     {
+        stage.dispose();
     }
 
     @Override

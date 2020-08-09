@@ -120,10 +120,11 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
         return retour;
     }
 
-//    public ArrayList getAllBilles ()
-//    {
-//
-//    }
+    public ArrayList getAllBilles()
+    {
+        return allBilles;
+
+    }
 
     public boolean addBille(UneBille uneBille)
     {

@@ -45,6 +45,11 @@ public class SacDeBilles extends AnimationImageNew implements MyDrawInterface, M
         bille.sacDeBilles = this;
     }
 
+    public int getReservesNumber()
+    {
+        return arrrayBilles.size();
+    }
+
     @Override
     public boolean isDragable()
     {

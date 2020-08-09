@@ -41,21 +41,15 @@ public class LigneTableauxResultsChapitre
         int screenWidth = Gdx.graphics.getWidth();
         int screenHeight = Gdx.graphics.getHeight();
 
-
-        Pixmap bgOrange = new Pixmap(1, 1, Pixmap.Format.RGB565);
-        bgOrange.setColor(Color.ORANGE);
-        bgOrange.fill();
-
         Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pmWhite.setColor(Color.WHITE);
         pmWhite.fill();
 
-        Pixmap pixmapBg = new Pixmap(1, 1, Pixmap.Format.RGB565);
-        pixmapBg.setColor(Color.ORANGE);
-        pixmapBg.setColor(Color.ORANGE);
-        pixmapBg.fill();
+//        Pixmap pixmapBg = new Pixmap(1, 1, Pixmap.Format.RGB565);
+//        pixmapBg.setColor(Color.ORANGE);
+//        pixmapBg.fill();
 
-        float fontSize = 1.4f;
+        float fontSize = 1.15f;
         float buttonPadding = MyConstants.SCREENWIDTH / 80f;
         int textureSize = MyConstants.SCREENWIDTH / 60;
 
@@ -101,7 +95,10 @@ public class LigneTableauxResultsChapitre
         labelNotes.setFontScale(fontSize);
         labelNotes.setWidth(MyConstants.SCREENWIDTH / 18f);
 
-        TextureRegionDrawable tableBG = new TextureRegionDrawable(new TextureRegion(new Texture(pixmapBg)));
+        Texture orangeBG = new Texture(Gdx.files.internal("Images/Sommaire/Bandeau orange.png"));
+        orangeBG.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        TextureRegionDrawable tableBG = new TextureRegionDrawable(new TextureRegion(orangeBG));
         table.setBackground(tableBG);
 
         durationTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
@@ -111,6 +108,7 @@ public class LigneTableauxResultsChapitre
         noteTable.add(labelNotes).height(screenHeight / 25f)/*.width(screenWidth / 10f).padLeft(screenWidth / 20f).align(Align.center)*/;
 
         Texture triangleDown = new Texture(Gdx.files.internal("Images/Sommaire/arrow.png"));
+//        Texture triangleDown = new Texture(Gdx.files.internal("Images/Sommaire/Flêche actif.png"));
         triangleDown.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 

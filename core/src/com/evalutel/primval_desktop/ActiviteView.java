@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -44,6 +45,8 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
     Label lastLabel, label1;
 
     Sprite flechSprite = new Sprite(new Texture(Gdx.files.internal("Images/EnonceUIElements/black_right_pointing_pointer.png")));
+
+    Texture fleche = new Texture(Gdx.files.internal("Images/EnonceUIElements/black_right_pointing_pointer.png"));
 
     boolean isPaused;
 
@@ -264,25 +267,26 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         lastLabel.setColor(new Color(71f / 255f, 107f / 255f, 217f / 255f, 1));
 
-
-
         if (lastPointerTable != null)
         {
             lastPointerTable.remove();
         }
 
-        flechSprite.setSize(MyConstants.SCREENWIDTH / 30, 40);
+        flechSprite.setSize(MyConstants.SCREENWIDTH / 30f, MyConstants.SCREENWIDTH / 30f);
 
         SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
 
         lastPointerTable = new Table();
 
+
         if (activiteType == "activite")
         {
-            lastPointerTable.setBackground(flecheSpriteDrawable);
+//            lastPointerTable.setBackground(flecheSpriteDrawable);
+            lastPointerTable.add(new Image(fleche));
         }
 
-        table4.add(lastPointerTable).width(MyConstants.SCREENWIDTH / 60).align(Align.top).padLeft(MyConstants.SCREENWIDTH / 70).padRight(MyConstants.SCREENWIDTH / 100);
+
+        table4.add(lastPointerTable).top().center().height(MyConstants.SCREENHEIGHT / 50f).width(MyConstants.SCREENWIDTH / 100f).align(Align.top).padRight(MyConstants.SCREENWIDTH/100f).padTop(MyConstants.SCREENHEIGHT/200f);
 
 //        if (activiteType == "enonce" || activiteType == "activite")
 //        {
@@ -291,7 +295,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 //
 //        }
 
-        table4.add(label3).width(widthEnonce - ((MyConstants.SCREENWIDTH / 25) + (MyConstants.SCREENWIDTH / 110))).padRight(MyConstants.SCREENWIDTH / 120)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
+        table4.add(label3).width(widthEnonce - ((MyConstants.SCREENWIDTH / 25f) + (MyConstants.SCREENWIDTH / 110f))).padRight(MyConstants.SCREENWIDTH / 120f)/*.padTop(MyConstants.SCREENHEIGHT / 80).padBottom(MyConstants.SCREENHEIGHT / 200)*/;
 
 //        if (cptInstructions == 0)
 //        {

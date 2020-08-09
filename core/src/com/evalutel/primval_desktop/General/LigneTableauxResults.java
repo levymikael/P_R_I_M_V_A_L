@@ -22,7 +22,8 @@ public class LigneTableauxResults
 
     static String duration = "";
 
-    static int highestNote, /*noteMaxPerExercice,*/ notePossiblePerExercice;
+    static int highestNote, /*noteMaxPerExercice,*/
+            notePossiblePerExercice;
 
     static long durationPerChapter, durationPerExercice = 0;
 
@@ -38,22 +39,10 @@ public class LigneTableauxResults
         int screenWidth = Gdx.graphics.getWidth();
         int screenHeight = Gdx.graphics.getHeight();
 
-        Pixmap pmRed = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmRed.setColor(MyConstants.redPrimval);
-        pmRed.fill();
 
-        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmWhite.setColor(Color.WHITE);
-        pmWhite.fill();
-
-        Pixmap pixmapBg = new Pixmap(1, 1, Pixmap.Format.RGB565);
-        pixmapBg.setColor(Color.WHITE);
-        pixmapBg.fill();
-
-
-        int fontSize = MyConstants.SCREENWIDTH / 60;
-        float buttonPadding = MyConstants.SCREENWIDTH / 80f;
-        int textureSize = MyConstants.SCREENWIDTH / 60;
+        float fontSize = 1f;
+//        float buttonPadding = MyConstants.SCREENWIDTH / 80f;
+//        int textureSize = MyConstants.SCREENWIDTH / 60;
 
 
         AppSingleton appSingleton = AppSingleton.getInstance();
@@ -71,24 +60,25 @@ public class LigneTableauxResults
         else if (borderColor == "blue")
         {
             labelStyleOnglet.fontColor = MyConstants.bluePrimval;
-
         }
 
         Label labelOnglet = new Label(ongletTitre, labelStyleOnglet);
         labelOnglet.setWidth(MyConstants.SCREENWIDTH / 4f);
+        labelOnglet.setFontScale(fontSize);
 
 
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
         labelStyleDuration.fontColor = MyConstants.greenresultat;
         labelStyleDuration.font = bitmapFontArial;
         Label labelDuration = new Label(duration, labelStyleDuration);
+        labelDuration.setFontScale(fontSize);
+
 
         if (borderColor == "blue")
         {
             highestNote = appSingleton.myDataBase.getHighestNote(chapitre, onglet);
             notePossiblePerExercice = appSingleton.myDataBase.getMaxNotePossiblePerExercice(chapitre, onglet, 0);
 //            noteMaxPerExercice = appSingleton.myDataBase.getMaxNotePerExercice(chapitre, onglet, 0);
-
 
             notes2Implement = highestNote + "/" + notePossiblePerExercice + "/" + noteMaxPerExercice;
         }
@@ -102,6 +92,8 @@ public class LigneTableauxResults
         labelStyleNotes.fontColor = MyConstants.redresultat;
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);
         labelNotes.setWidth(MyConstants.SCREENWIDTH / 4f);
+        labelNotes.setFontScale(fontSize);
+
 
 //        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pixmapBg))));
 
@@ -118,7 +110,6 @@ public class LigneTableauxResults
         float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 50;
 
         container.add(table).height(MyConstants.SCREENHEIGHT / 21f).width(screenWidth);
-
 
         return container;
     }

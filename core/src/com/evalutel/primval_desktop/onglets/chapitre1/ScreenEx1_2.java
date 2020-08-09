@@ -1,7 +1,10 @@
 package com.evalutel.primval_desktop.onglets.chapitre1;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
@@ -43,7 +46,7 @@ public class ScreenEx1_2 extends ScreenOnglet
     boolean isInCorrection = false;
 
 
-    public ScreenEx1_2(Game game,  String ongletTitre)
+    public ScreenEx1_2(final Game game, String ongletTitre)
     {
         super(game, 1, 2, true,9);
 
@@ -109,6 +112,47 @@ public class ScreenEx1_2 extends ScreenOnglet
         getNumberOiseauxArList();
 
         numOiseauArray = MyMath.genereTabAleatoire(9);
+
+
+        myButtonBackToPreviousMenu.addListener(new ClickListener()
+        {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button)
+            {
+                game.setScreen(new Screen_Chapitre1(game));
+
+//                game.dispose();
+                Gdx.app.log("button click", "click!");
+
+                endTime = System.currentTimeMillis();
+                seconds = (endTime - startTime) / 1_000L;
+
+                resultatExercice.setDuree(seconds);
+                resultatExercice.setDate(endTime);
+
+                if ((metrologue.isSpeaking) && (metrologue != null))
+                {
+                    metrologue.stopMusic();
+                }
+                else if ((validusAnimated.isSpeaking) && (validusAnimated != null))
+                {
+                    validusAnimated.stopMusic();
+                }
+
+                timer.cancel();
+                AppSingleton appSingleton = AppSingleton.getInstance();
+                MyDataBase db = appSingleton.myDataBase;
+
+                db.insertResultat(resultatExercice);
+
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
+                return true;
+            }
+        });
 
         timer.schedule(new PresentationExercice(2000), 100);
     }

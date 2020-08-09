@@ -89,14 +89,14 @@ public class MrNotes implements MyDrawInterface
         notes.add(labelNotes).height(screenHeight / 30).padLeft(screenWidth / 60).padRight(screenWidth / 60);
         notes.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
-        Pixmap orangeBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.ORANGE);
+        Pixmap orangeBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, MyConstants.redresultat);
 
         Table border = new Table();
-        border.pad(screenWidth / 1000);
+        border.pad(screenWidth / 900f);
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
         border.add(notes);
 
-        container.add(mrNotes).height(screenHeight / 10).width((MyConstants.SCREENHEIGHT / 10) * (172f / 223f));
+        container.add(mrNotes).height(screenHeight / 10f).width((MyConstants.SCREENHEIGHT / 10f) * (172f / 223f));
         container.row();
         container.add(border);
     }
