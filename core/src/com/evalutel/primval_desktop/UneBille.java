@@ -102,12 +102,12 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     public void touchUp(ArrayList<UnePlancheNew> planches)
     {
         boolean isAddedToPlanche = false;
-        if (this.isActive)
+        if (this.isActive )
         {
             for (int i = 0; i < planches.size(); i++)
             {
                 UnePlancheNew plancheAux = planches.get(i);
-                if (plancheAux.isInRect(this))
+                if (plancheAux.isInRect(this) && plancheAux.isVisible && plancheAux.isActive)
                 {
                     isAddedToPlanche = true;
                     plancheAux.addBilleAndOrganize(this);
@@ -117,7 +117,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
 
             if (!isAddedToPlanche)
             {
-                if (this.plancheNew != null)
+                if (this.plancheNew != null && this.plancheNew.isActive)
                 {
                     if (this.plancheNew.shouldReturnToReserve)
                     {
@@ -165,7 +165,6 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     {
         super.myResume();
     }
-
 
 
     @Override

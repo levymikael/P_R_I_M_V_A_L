@@ -153,12 +153,18 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
                 labelEmplacement3.setText(labelText);
                 break;
 
+            case 0:
+                labelEmplacement1.setText(labelText);
+                labelEmplacement2.setText(labelText);
+                labelEmplacement3.setText(labelText);
+
+
             default:
                 break;
         }
     }
 
-    public void eraseAllLabels ()
+    public void eraseAllLabels()
     {
         labelEmplacement1.remove();
         labelEmplacement2.remove();

@@ -77,7 +77,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
         sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBilleUnique * 1.5), (float) (largeurBilleUnique * 1.5));
         sacDeBilles.largeurBille = largeurBilleMultiple;
-        sacDeBilles.isActive();
+//        sacDeBilles.isActive();
         sacDeBilles.setActive(false);
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
@@ -90,6 +90,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         allPlanches.add(planche2);
         allPlanches.add(planche3);
 
+
         for (int i = 0; i < allPlanches.size(); i++)
         {
             UnePlancheNew unePlanche = allPlanches.get(i);
@@ -101,6 +102,8 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
         planche2.setVisible(false);
         planche3.setVisible(false);
+        planche2.setActive(false);
+        planche3.setActive(false);
 
         numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
 
@@ -292,6 +295,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             sacDeBilles.setActive(true);
 
             calculetteView.setActive(true);
+
             validusAnimated.setActive(true);
 
             validusAnimated.etapeCorrection = new PressValidate1(0);
@@ -725,6 +729,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 validusAnimated.isActive = false;
                 addDiamonds(1);
                 planche2.setAllBillesInactive();
+                planche2.setActive(false);
                 uneArdoise2.fillLabel(2, Integer.toString(value));
             }
             else
@@ -999,460 +1004,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         }
     }
 
-//    private class EtapeInstructionPlanche2 extends MyTimer.TaskEtape
-//    {
-//        private EtapeInstructionPlanche2(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            MyTimer.TaskEtape nextEtape = new DisplayOiseauxBranche2(2_000, 1_000);
-//
-//            metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet2_MaintenantOnVaCompteravecBadix.mp3", nextEtape);
-//            activiteView.addTextActivite("Place sur la deuxième planche autant de billes que d'oiseaux que tu vois sur la seconde branche, tape leur nombre au clavier puis valide");
-//        }
-//    }
-
-
-//    private class MoveMainToReserve1 extends MyTimer.TaskEtape
-//    {
-//        private MoveMainToReserve1(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            if (cptBille < 4)
-//            {
-//                uneMain.setVisible(true);
-//
-//                float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
-//                float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
-//
-//                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve1(500);
-//
-//                if (cptBille == 0)
-//                {
-//                    metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeVois4OiseauxSurLaPremiere.mp3", nextEtape);
-//                    uneMain.moveTo(durationMillis, posXmain, posYMain, null, 500);
-//                }
-//                else
-//                {
-//                    uneMain.moveTo(durationMillis, posXmain, posYMain, nextEtape, 500);
-//                }
-//            }
-//        }
-//    }
-//
-//    private class DisplayBilleReserve1 extends MyTimer.TaskEtape
-//    {
-//        private DisplayBilleReserve1(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            if (cptBille < 4)
-//            {
-//                float posXMain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
-//                float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
-//
-//                UneBille bille = billesList.get(cptBille);
-//                bille.setPositionCenter(posXMain, posYMain);
-//                bille.setVisible(true);
-////                bille.setActive(false);
-//
-//                MyTimer.TaskEtape nextEtape = new EtapeDragFirstBille(500);
-//                if (cptBille == 0)
-//                {
-//                    metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeDeplace1a1.mp3");
-//                    timer.schedule(nextEtape, 0);
-//
-//                }
-//                else
-//                {
-//                    timer.schedule(nextEtape, 0);
-//                }
-//                uneMain.imageDown();
-//            }
-//        }
-//    }
-//
-//    private class EtapeDragFirstBille extends MyTimer.TaskEtape
-//    {
-//        private EtapeDragFirstBille(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            UneBille bille = billesList.get(cptBille);
-//            bille.setVisible(true);
-//            float posX = planche1.getPosition().x + (planche1.getWidth() / 2);
-//            float posY = planche1.getPosition().y + (planche1.getHeight() / 2);
-//
-//            MyTimer.TaskEtape nextEtape = new EtapeAddFirstBille(1_500, 500);
-//
-//
-//            bille.animateImage(durationMillis, true, (posX - bille.getWidth() / 2), (posY - bille.getWidth() / 2), nextEtape, 1_000, 1f / 6f);
-//
-//            uneMain.cliqueTo(durationMillis, posX, posY, null, 500);
-//        }
-//    }
-//
-//
-//    private class EtapeAddFirstBille extends MyTimer.TaskEtape
-//    {
-//        private EtapeAddFirstBille(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            if (cptBille < 3)
-//            {
-//                UneBille bille = billesList.get(cptBille);
-//
-//                float posXMain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
-//                float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
-//
-//                planche1.addBilleAndOrganize(bille);
-//
-//                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve1(500);
-//
-//                uneMain.moveTo(500, posXMain, posYMain, nextEtape, 500);
-//            }
-//            else
-//            {
-//                uneMain.setVisible(true);
-//
-//                UneBille bille = billesList.get(cptBille);
-//
-//                planche1.addBilleAndOrganize(bille);
-//
-//                MyPoint buttonPosition = calculetteView.buttonPosition(4);
-//
-//                float posX = buttonPosition.x;
-//                float posY = buttonPosition.y;
-//
-//                MyTimer.TaskEtape nextEtape = new ClickMainToCalculette(1_500, 1_000);
-//
-//                metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeTape4AuClavier.mp3", nextEtape);
-//
-//                uneMain.moveTo(durationMillis, posX, posY, null, 500);
-//            }
-//            cptBille++;
-//        }
-//    }
-//
-//    private class ClickMainToCalculette extends MyTimer.TaskEtape
-//    {
-//        private ClickMainToCalculette(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            styleTest = calculetteView.quatre_bouton.getStyle();
-//
-//            drawableAux = styleTest.up;
-//            styleTest.up = styleTest.down;
-//
-//            MyPoint buttonPosition = calculetteView.buttonPosition(4);
-//
-//            float posX = buttonPosition.x;
-//            float posY = buttonPosition.y;
-//
-//            MyTimer.TaskEtape nextEtape = new MoveMainToValidate(500);
-//
-//            uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 500);
-//
-//            calculetteView.textDisplay(4);
-//        }
-//    }
-//
-//    private class MoveMainToValidate extends MyTimer.TaskEtape
-//    {
-//        private MoveMainToValidate(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
-//
-//            float posX = buttonValidatePosition.x;
-//            float posY = buttonValidatePosition.y;
-//
-//            MyTimer.TaskEtape nextEtape = new ClickOnValidate(1_000, 1_000);
-//
-//            metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_PuisJeValide.mp3", nextEtape);
-//
-//            uneMain.moveTo(durationMillis, posX, posY, null, 1_000);
-//
-//            styleTest.up = drawableAux;
-//        }
-//    }
-//
-//    private class ClickOnValidate extends MyTimer.TaskEtape
-//    {
-//        private ClickOnValidate(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            uneMain.setVisible(true);
-//
-//            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
-//
-//            float posX = buttonValidatePosition.x;
-//            float posY = buttonValidatePosition.y;
-//
-//            MyTimer.TaskEtape nextEtape = new MoveMainToReserve2(500, 0);
-//
-//            metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeVois3OiseauxSurLaSeconde.mp3");
-//
-//            styleTest = calculetteView.validerBouton.getStyle();
-//
-//            drawableAux = styleTest.up;
-//            styleTest.up = styleTest.down;
-//
-//            uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 1_000);
-//
-//            calculetteView.textRemove();
-//            uneArdoise2.fillLabel(1, "4");
-//
-//            currentLabel = activiteView.addTextActivite("4 +");
-//        }
-//    }
-//
-//
-//    private class MoveMainToReserve2 extends MyTimer.TaskEtape
-//    {
-//        private MoveMainToReserve2(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            if (cptBille >= 3 && cptBille < 5)
-//            {
-//                styleTest.up = drawableAux;
-//
-//                float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
-//                float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
-//
-//                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve2(500);
-//
-//                uneMain.moveTo(durationMillis, posXmain, posYMain, nextEtape, 500);
-//            }
-//        }
-//    }
-//
-//    private class DisplayBilleReserve2 extends MyTimer.TaskEtape
-//    {
-//        private DisplayBilleReserve2(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            if (cptBille <= 6)
-//            {
-//                float posXMain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
-//                float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
-//                float posX = posXMain;
-//                float posY = posYMain;
-//
-//                UneBille bille = billesList.get(cptBille);
-//                bille.setPositionCenter(posX, posY);
-//
-//                MyTimer.TaskEtape nextEtape = new EtapeDragSecondBille(500);
-//                timer.schedule(nextEtape, 500);
-//                uneMain.imageDown();
-//            }
-//        }
-//    }
-//
-//    private class EtapeDragSecondBille extends MyTimer.TaskEtape
-//    {
-//        private EtapeDragSecondBille(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            UneBille bille = billesList.get(cptBille);
-//            bille.setVisible(true);
-//            float posX = planche2.getPosition().x + (planche2.getWidth() / 2);
-//            float posY = planche2.getPosition().y + (planche2.getHeight() / 2);
-//
-//            MyTimer.TaskEtape nextEtape = new EtapeAddSecondBille(1_500, 500);
-//
-//            bille.animateImage(durationMillis, true, (posX - bille.getWidth() / 2), (posY - bille.getWidth() / 2), nextEtape, 1_000, 1f / 6f);
-//
-//            uneMain.cliqueTo(durationMillis, posX, posY, null, 500);
-//        }
-//    }
-//
-//
-//    private class EtapeAddSecondBille extends MyTimer.TaskEtape
-//    {
-//        private EtapeAddSecondBille(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            if (cptBille <= 5)
-//            {
-//                UneBille bille = billesList.get(cptBille);
-//
-//                float posXMain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
-//                float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
-//
-//                planche2.addBilleAndOrganize(bille);
-//                cptBille++;
-//
-//                MyTimer.TaskEtape nextEtape = new DisplayBilleReserve2(500);
-//
-//                uneMain.moveTo(500, posXMain, posYMain, nextEtape, 500);
-//            }
-//            else if (cptBille == 6)
-//            {
-//                UneBille bille = billesList.get(cptBille);
-//                planche2.addBilleAndOrganize(bille);
-//
-//                cptBille++;
-//
-//                MyPoint buttonPosition = calculetteView.buttonPosition(3);
-//
-//                float posX = buttonPosition.x;
-//                float posY = buttonPosition.y;
-//
-//                MyTimer.TaskEtape nextEtape = new ClickMainToCalculette2(1_500, 1_000);
-//
-//                uneMain.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
-//            }
-//        }
-//    }
-//
-//
-//    private class ClickMainToCalculette2 extends MyTimer.TaskEtape
-//    {
-//        private ClickMainToCalculette2(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            styleTest = calculetteView.trois_bouton.getStyle();
-//
-//            drawableAux = styleTest.up;
-//            styleTest.up = styleTest.down;
-//
-//            MyPoint buttonPosition = calculetteView.buttonPosition(3);
-//
-//            float posX = buttonPosition.x;
-//            float posY = buttonPosition.y;
-//
-//            MyTimer.TaskEtape nextEtape = new MoveMainToValidate2(500);
-//
-//            metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeTape3AuClavier.mp3");
-//
-//            uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 1_000);
-//
-//            calculetteView.textDisplay(3);
-//        }
-//    }
-//
-//    private class MoveMainToValidate2 extends MyTimer.TaskEtape
-//    {
-//        private MoveMainToValidate2(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
-//
-//            float posX = buttonValidatePosition.x;
-//            float posY = buttonValidatePosition.y;
-//
-//            MyTimer.TaskEtape nextEtape = new ClickOnValidate2(1_000, 1_000);
-//
-//            uneMain.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
-//
-//            styleTest.up = drawableAux;
-//        }
-//    }
-//
-//    private class ClickOnValidate2 extends MyTimer.TaskEtape
-//    {
-//        private ClickOnValidate2(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            uneMain.setVisible(true);
-//
-//            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
-//
-//            float posX = buttonValidatePosition.x;
-//            float posY = buttonValidatePosition.y;
-//
-//            MyTimer.TaskEtape nextEtape = new OiseauxOut(500, 0);
-//
-//            styleTest = calculetteView.validerBouton.getStyle();
-//
-//            drawableAux = styleTest.up;
-//            styleTest.up = styleTest.down;
-//
-//            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
-//
-//            calculetteView.textRemove();
-//            uneArdoise2.fillLabel(2, "3");
-//
-//            StringBuilder ex = currentLabel.getText();
-//            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "3 =  ");
-//
-//            currentLabel.setText(newStrBuilder);
-//
-//        }
-//    }
 
     private class OiseauxOut extends MyTimer.TaskEtape
     {
@@ -1831,19 +1382,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             planche3.removeAllBilles(sacDeBilles);
 
 
-//            ArrayList billesList = new ArrayList<UneBille>();
-//            billesList = planche3.getAllBilles();
-
-
-//            for (int i = 0; i < (planche3.getNumberBilles()); i++)
-//            {
-//                UneBille bille = (UneBille) billesList.get(i);
-//                planche3.removeBille(bille);
-//                sacDeBilles.addBilleToReserve(bille);
-//
-//                int ok = 5;
-//                ok++;
-//            }
             cptOiseau1 = 0;
             cptOiseau2 = 0;
             cptOiseauTotal = 0;
@@ -1852,176 +1390,15 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             sacDeBilles.setActive(true);
             calculetteView.textRemove();
 
+            uneArdoise2.fillLabel(0,"");
+
+
+            int ok = 5;
+            ok++;
+
         }
     }
 
-//    private class MoveMainToPlanche1and2 extends MyTimer.TaskEtape
-//    {
-//        private MoveMainToPlanche1and2(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            if (cpt < 7)
-//            {
-//                styleTest.up = drawableAux;
-//
-//                float Xbille1 = billesList.get(cpt).currentPositionX + largeurBilleMultiple / 2;
-//                float Ybille1 = billesList.get(cpt).currentPositionY /*+ largeurBilleMultiple / 2*/;
-//
-//                MyTimer.TaskEtape nextEtape = new ClickOnBille1(500);
-//
-//                uneMain.moveTo(durationMillis, Xbille1, Ybille1, nextEtape, 500);
-//                if (cpt == 1)
-//                {
-//                    metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeDeplaceToutesLesBilles.mp3");
-//                }
-//            }
-//            else
-//            {
-//                timer.schedule(new ClickMainToCalculette3(1_000, 500), 0);
-//            }
-//        }
-//    }
-//
-//
-//    private class ClickOnBille1 extends MyTimer.TaskEtape
-//    {
-//        private ClickOnBille1(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            UneBille bille = billesList.get(cpt);
-//            float posX = planche3.getPosition().x + (planche3.getWidth() / 2);
-//            float posY = planche3.getPosition().y + (planche3.getHeight() / 2);
-//
-//            MyTimer.TaskEtape nextEtape = new EtapeDragBille1(500, 0);
-//            uneMain.imageDown();
-//
-//            bille.animateImage(durationMillis, true, posX, posY, nextEtape, 1_000, 1f / 6f);
-//
-//            uneMain.moveTo(durationMillis, posX, posY, null, 500);
-//        }
-//    }
-//
-//
-//    private class EtapeDragBille1 extends MyTimer.TaskEtape
-//    {
-//        private EtapeDragBille1(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            UneBille bille = billesList.get(cpt);
-//            MyTimer.TaskEtape nextEtape = new MoveMainToPlanche1and2(1_000, 0);
-//            planche3.addBilleAndOrganize(bille);
-//
-//            uneMain.imageUp();
-//
-//            timer.schedule(nextEtape, 1_000);
-//
-//            cpt++;
-//
-//        }
-//    }
-//
-//    private class ClickMainToCalculette3 extends MyTimer.TaskEtape
-//    {
-//        private ClickMainToCalculette3(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            MyPoint buttonPosition = calculetteView.buttonPosition(7);
-//
-//            float posX = buttonPosition.x;
-//            float posY = buttonPosition.y;
-//
-//            MyTimer.TaskEtape nextEtape = new MoveMainToValidate3(500);
-//
-//            uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 0);
-//
-//            calculetteView.textDisplay(7);
-//            styleTest = calculetteView.sept_bouton.getStyle();
-//
-//            drawableAux = styleTest.up;
-//            styleTest.up = styleTest.down;
-//
-//            metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeTapeLeNombreDeBilles.mp3");
-//        }
-//    }
-
-//    private class MoveMainToValidate3 extends MyTimer.TaskEtape
-//    {
-//        private MoveMainToValidate3(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
-//
-//            float posX = buttonValidatePosition.x;
-//            float posY = buttonValidatePosition.y;
-//
-//            MyTimer.TaskEtape nextEtape = new ClickOnValidate3(1_000, 1_000);
-//
-//            uneMain.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
-//
-//            styleTest.up = drawableAux;
-//        }
-//    }
-
-//    private class ClickOnValidate3 extends MyTimer.TaskEtape
-//    {
-//        private ClickOnValidate3(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            uneMain.setVisible(true);
-//
-//            MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
-//
-//            float posX = buttonValidatePosition.x;
-//            float posY = buttonValidatePosition.y;
-//
-//            MyTimer.TaskEtape nextEtape = new Fin(500, 0);
-//
-//            styleTest = calculetteView.validerBouton.getStyle();
-//
-//            drawableAux = styleTest.up;
-//            styleTest.up = styleTest.down;
-//
-//            uneMain.cliqueTo(durationMillis, posX, posY, nextEtape, 1_000);
-//
-//            calculetteView.textRemove();
-//            uneArdoise2.fillLabel(3, "7");
-//
-//            StringBuilder ex = currentLabel.getText();
-//            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "7 ");
-//
-//            currentLabel.setText(newStrBuilder);
-//        }
-//    }
 
     private class Fin extends MyTimer.TaskEtape
     {
@@ -2206,10 +1583,13 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
-        boolean isReserveActif = sacDeBilles.isActive();
+//        boolean isReserveActif = sacDeBilles.isActive();
         if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
-            if (billesList.size() < 9)
+            int ok = 5;
+            ok++;
+//            if (billesList.size() <= 9)
+            if (planche1.getNumberBilles() + planche2.getNumberBilles() + planche3.getNumberBilles() <= 9)
             {
                 UneBille billeAdded = sacDeBilles.getBilleAndRemove();
                 billeAdded.setVisible(true);
@@ -2217,6 +1597,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 billeAdded.setActive(true);
             }
         }
+
 
         else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))
         {
@@ -2271,8 +1652,13 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             if (objectTouched instanceof UneBille)
             {
                 UneBille billeAux = (UneBille) objectTouched;
+
+                int ok = 5;
+                ok++;
+
                 billeAux.touchUp(allPlanches);
                 billesList.add(billeAux);
+
             }
             else if (objectTouched instanceof ValidusAnimated)
             {

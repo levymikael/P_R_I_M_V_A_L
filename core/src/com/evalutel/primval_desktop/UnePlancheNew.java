@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.function.UnaryOperator;
 
 
-public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
+public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface, MyTouchInterface
 {
     public boolean shouldReturnToReserve = false;
     private ArrayList<MyPoint> positionsBilles = new ArrayList<>();
@@ -114,11 +114,15 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
 
     public boolean addBilleAndOrganize(UneBille uneBille)
     {
-        boolean retour = addBille(uneBille);
+        boolean retour = false;
+        if (this.isActive && this.isVisible)
+        {
+             retour = addBille(uneBille);
 
-        reorganiseBilles();
+            reorganiseBilles();
+        }
+            return retour;
 
-        return retour;
     }
 
     public ArrayList getAllBilles()
@@ -133,7 +137,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
 
         int nbBillesPresents = allBilles.size();
 
-        if (nbBillesPresents < 9)
+        if ((nbBillesPresents < 9) && (this.isVisible) && (this.isActive))
         {
             retour = true;
             MyPoint ptAux = positionsBilles.get(nbBillesPresents);
@@ -187,6 +191,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
     }
 
 
+
     @Override
     public void myPause()
     {
@@ -207,6 +212,30 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
 
     @Override
     public void myCorrectionStop()
+    {
+
+    }
+
+    @Override
+    public boolean isTouched(float x, float y)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isDragable()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isActive()
+    {
+        return false;
+    }
+
+    @Override
+    public void setActive(boolean active)
     {
 
     }

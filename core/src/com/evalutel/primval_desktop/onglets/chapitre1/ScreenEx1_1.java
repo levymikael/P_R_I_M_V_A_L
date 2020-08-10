@@ -290,7 +290,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 //                activiteView.addTextActivite("Je saisis une bille du sac et je la dépose sur le plateau ");
                 metrologue.metrologuePlaySound("Sounds/Metrologue/Je saisis une bille du sac.mp3");
 
-                bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), nextEtape, 2500, 1f / 6f);
+                bille.animateImage(durationMillis, true, (posX - bille.getWidth() / 2f),  (posY - bille.getWidth() / 2f), nextEtape, 2500, 1f / 6f);
 
                 uneMain.cliqueTo(durationMillis, posX, posY, null, 2000);
             }

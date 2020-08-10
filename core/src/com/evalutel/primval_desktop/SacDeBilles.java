@@ -32,9 +32,13 @@ public class SacDeBilles extends AnimationImageNew implements MyDrawInterface, M
 
     public UneBille getBilleAndRemove()
     {
-        UneBille retour = arrrayBilles.get(arrrayBilles.size() - 1);
-        arrrayBilles.remove(retour);
+        UneBille retour = null;
+        if (this.isActive)
+        {
+             retour = arrrayBilles.get(arrrayBilles.size() - 1);
+            arrrayBilles.remove(retour);
 
+        }
         return retour;
     }
 
