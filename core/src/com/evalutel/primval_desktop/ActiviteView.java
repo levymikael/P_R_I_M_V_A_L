@@ -18,6 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.General.MyConstants;
+import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 
 
 public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterface

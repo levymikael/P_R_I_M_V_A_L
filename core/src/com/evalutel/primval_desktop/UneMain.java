@@ -3,6 +3,8 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 
 public class UneMain extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {

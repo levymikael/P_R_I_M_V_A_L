@@ -13,7 +13,7 @@ import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.MyMath;
 import com.evalutel.primval_desktop.MyTimer;
-import com.evalutel.primval_desktop.MyTouchInterface;
+import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
 import com.evalutel.primval_desktop.SacDeBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;

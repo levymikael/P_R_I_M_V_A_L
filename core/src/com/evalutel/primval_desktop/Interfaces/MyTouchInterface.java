@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.Interfaces;
 
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 

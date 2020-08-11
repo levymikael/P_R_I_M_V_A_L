@@ -20,12 +20,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MrNotes;
 import com.evalutel.primval_desktop.MrTemps;
 import com.evalutel.primval_desktop.MyButtonRetour;
-import com.evalutel.primval_desktop.MyDrawInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 
 import java.util.ArrayList;

@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
+import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
 
 import java.util.ArrayList;
 
@@ -12,6 +15,7 @@ public class SacDeBilles extends AnimationImageNew implements MyDrawInterface, M
 {
     public float largeurBille;
     boolean isActive = true;
+    boolean isCorrected = false;
     ArrayList<UneBille> arrrayBilles = new ArrayList<>();
 
     public SacDeBilles(int startPositionX, int startpositionY, float animationWidth, float animationHeight)
@@ -33,11 +37,10 @@ public class SacDeBilles extends AnimationImageNew implements MyDrawInterface, M
     public UneBille getBilleAndRemove()
     {
         UneBille retour = null;
-        if (this.isActive)
+        if ((this.isActive) && (arrrayBilles.size() != 0) || isCorrected)
         {
-             retour = arrrayBilles.get(arrrayBilles.size() - 1);
+            retour = arrrayBilles.get(arrrayBilles.size() - 1);
             arrrayBilles.remove(retour);
-
         }
         return retour;
     }
@@ -103,11 +106,16 @@ public class SacDeBilles extends AnimationImageNew implements MyDrawInterface, M
     public void myCorrectionStart()
     {
         this.setActive(false);
+        isCorrected = true;
+
     }
 
     @Override
     public void myCorrectionStop()
     {
         this.setActive(true);
+        isCorrected = false;
+
+
     }
 }

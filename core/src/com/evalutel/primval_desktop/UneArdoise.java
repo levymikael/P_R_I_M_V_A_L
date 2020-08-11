@@ -7,16 +7,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.evalutel.primval_desktop.General.MyConstants;
-import com.evalutel.primval_desktop.ui_tools.MyPoint;
+import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 
 public class UneArdoise extends Table implements MyCorrectionAndPauseInterface, MyDrawInterface
 {

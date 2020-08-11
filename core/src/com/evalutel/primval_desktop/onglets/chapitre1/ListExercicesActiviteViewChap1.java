@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -14,7 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.LigneTableaux;
 import com.evalutel.primval_desktop.General.MyConstants;
-import com.evalutel.primval_desktop.MyDrawInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 

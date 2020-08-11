@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
+import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
 
 import java.util.ArrayList;
 

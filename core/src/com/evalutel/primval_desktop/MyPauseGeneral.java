@@ -1,10 +1,12 @@
 package com.evalutel.primval_desktop;
 
+import com.evalutel.primval_desktop.Interfaces.MyPauseInterface;
+
 import java.util.ArrayList;
 
 public class MyPauseGeneral
 {
-    protected ArrayList<MyPauseInterface> allPauseables = new ArrayList<>();
+    protected ArrayList<com.evalutel.primval_desktop.Interfaces.MyPauseInterface> allPauseables = new ArrayList<>();
 
     public MyPauseGeneral()
     {
@@ -20,7 +22,7 @@ public class MyPauseGeneral
     {
         for (int i = 0; i < allPauseables.size(); i++)
         {
-            MyPauseInterface myPauseInterfaceObject = allPauseables.get(i);
+            com.evalutel.primval_desktop.Interfaces.MyPauseInterface myPauseInterfaceObject = allPauseables.get(i);
             myPauseInterfaceObject.myPause();
 
 //            myPauseInterfaceObject.setActive(false);
@@ -31,7 +33,7 @@ public class MyPauseGeneral
     {
         for (int i = 0; i < allPauseables.size(); i++)
         {
-            MyPauseInterface myPauseInterfaceObject = allPauseables.get(i);
+            com.evalutel.primval_desktop.Interfaces.MyPauseInterface myPauseInterfaceObject = allPauseables.get(i);
             myPauseInterfaceObject.myResume();
 
 //            myPauseInterfaceObject.setActive(false);

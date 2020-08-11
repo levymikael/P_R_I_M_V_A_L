@@ -1,5 +1,7 @@
 package com.evalutel.primval_desktop;
 
+import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
+
 import java.util.ArrayList;
 
 public class MyCorrectionAndPauseGeneral
@@ -10,7 +12,7 @@ public class MyCorrectionAndPauseGeneral
     {
     }
 
-    public void addElements(MyCorrectionAndPauseInterface myCorrectionAndPauseInterface)
+    public void addElements(com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface myCorrectionAndPauseInterface)
     {
         allCorrigibles.add(myCorrectionAndPauseInterface);
     }
@@ -19,7 +21,7 @@ public class MyCorrectionAndPauseGeneral
     {
         for (int i = 0; i < allCorrigibles.size(); i++)
         {
-            MyCorrectionAndPauseInterface myCorrectionAndPauseInterfaceObject = allCorrigibles.get(i);
+            com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface myCorrectionAndPauseInterfaceObject = allCorrigibles.get(i);
             myCorrectionAndPauseInterfaceObject.myCorrectionStart();
         }
     }
@@ -28,7 +30,7 @@ public class MyCorrectionAndPauseGeneral
     {
         for (int i = 0; i < allCorrigibles.size(); i++)
         {
-            MyCorrectionAndPauseInterface myCorrectionAndPauseInterfaceObject = allCorrigibles.get(i);
+            com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface myCorrectionAndPauseInterfaceObject = allCorrigibles.get(i);
             myCorrectionAndPauseInterfaceObject.myCorrectionStop();
         }
     }
@@ -37,7 +39,7 @@ public class MyCorrectionAndPauseGeneral
     {
         for (int i = 0; i < allCorrigibles.size(); i++)
         {
-            MyCorrectionAndPauseInterface myCorrectionAndPauseInterfaceObject = allCorrigibles.get(i);
+            com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface myCorrectionAndPauseInterfaceObject = allCorrigibles.get(i);
             myCorrectionAndPauseInterfaceObject.myPause();
 
 //            myPauseInterfaceObject.setActive(false);
@@ -48,7 +50,7 @@ public class MyCorrectionAndPauseGeneral
     {
         for (int i = 0; i < allCorrigibles.size(); i++)
         {
-            MyCorrectionAndPauseInterface myCorrectionAndPauseInterfaceObject = allCorrigibles.get(i);
+            com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface myCorrectionAndPauseInterfaceObject = allCorrigibles.get(i);
             myCorrectionAndPauseInterfaceObject.myResume();
 //            myPauseInterfaceObject.setActive(false);
         }

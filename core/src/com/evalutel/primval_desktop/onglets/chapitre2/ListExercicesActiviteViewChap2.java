@@ -10,16 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.LigneTableaux;
 import com.evalutel.primval_desktop.General.MyConstants;
-import com.evalutel.primval_desktop.MyDrawInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_1;
-import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_2;
-import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_3;
-import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_4;
-import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_5;
-import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_6;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 public class ListExercicesActiviteViewChap2 implements MyDrawInterface

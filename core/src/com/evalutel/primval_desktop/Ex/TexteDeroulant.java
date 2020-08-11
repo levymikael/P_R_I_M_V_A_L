@@ -1,19 +1,10 @@
 package com.evalutel.primval_desktop.Ex;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.evalutel.primval_desktop.AnimationImageNew;
-import com.evalutel.primval_desktop.MyDrawInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import static com.badlogic.gdx.math.Rectangle.tmp;
 
 public class TexteDeroulant extends AnimationImageNew implements MyDrawInterface
 {

@@ -8,13 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.utils.ObjectMap;
-import com.evalutel.primval_desktop.MyDrawInterface;
-
-import java.util.ArrayList;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 
 public class MyImageButton extends ImageButton implements MyDrawInterface
 {

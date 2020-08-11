@@ -17,7 +17,7 @@
 //import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 //import com.badlogic.gdx.utils.Align;
 //import com.badlogic.gdx.utils.SnapshotArray;
-//import com.evalutel.primval_desktop.MyDrawInterface;
+//import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 //
 //import java.util.ArrayList;
 //import java.util.TimerTask;

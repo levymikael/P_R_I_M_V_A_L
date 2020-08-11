@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.Interfaces;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 

@@ -1,6 +1,7 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
 
 import java.util.ArrayList;
 

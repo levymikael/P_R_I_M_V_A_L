@@ -15,6 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.evalutel.primval_desktop.General.MyConstants;
+import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 
 public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface, MyDrawInterface
 {
@@ -153,10 +155,10 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
                 labelEmplacement3.setText(labelText);
                 break;
 
-            case 0:
-                labelEmplacement1.setText(labelText);
-                labelEmplacement2.setText(labelText);
-                labelEmplacement3.setText(labelText);
+//            case 0:
+//                labelEmplacement1.setText(labelText);
+//                labelEmplacement2.setText(labelText);
+//                labelEmplacement3.setText(labelText);
 
 
             default:
@@ -166,9 +168,9 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
 
     public void eraseAllLabels()
     {
-        labelEmplacement1.remove();
-        labelEmplacement2.remove();
-        labelEmplacement3.remove();
+        labelEmplacement1.setText("");
+        labelEmplacement2.setText("");
+        labelEmplacement3.setText("");
     }
 
     public void setActive(boolean active)

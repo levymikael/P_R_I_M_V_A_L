@@ -1,8 +1,10 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
+import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
+import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,7 +104,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
     public void touchUp(ArrayList<UnePlancheNew> planches)
     {
         boolean isAddedToPlanche = false;
-        if (this.isActive )
+        if (this.isActive)
         {
             for (int i = 0; i < planches.size(); i++)
             {

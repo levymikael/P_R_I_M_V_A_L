@@ -1,4 +1,4 @@
-package com.evalutel.primval_desktop;
+package com.evalutel.primval_desktop.Interfaces;
 
 public interface MyCorrectionAndPauseInterface
 {
@@ -11,5 +11,6 @@ public interface MyCorrectionAndPauseInterface
     void myResume();
 
     boolean isPause();
+
 
 }

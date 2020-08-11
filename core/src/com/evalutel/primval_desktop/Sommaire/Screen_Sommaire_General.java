@@ -25,9 +25,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MrNotes2;
 import com.evalutel.primval_desktop.MrTemps;
-import com.evalutel.primval_desktop.MyDrawInterface;
+import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
-import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
