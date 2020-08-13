@@ -260,7 +260,6 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             {
                 timer.schedule(new BirthdayKiDPicDisplay(1_000), 0);
             }
-
         }
     }
 

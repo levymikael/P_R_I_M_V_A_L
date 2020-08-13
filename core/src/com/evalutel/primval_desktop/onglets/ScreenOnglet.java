@@ -459,7 +459,6 @@ public class ScreenOnglet implements Screen, InputProcessor
 //            firstPositionX = mousePointerX;
 //            firstPositionY = mousePointerY;
             }
-
             else /*si bille part de la planche*/
             {
                 for (int i = 0; i < objectTouchedList.size(); i++)

@@ -3,20 +3,23 @@ package com.evalutel.primval_desktop.onglets.chapitre2;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.CalculetteView;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
+import com.evalutel.primval_desktop.Dices;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MyTimer;
-import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
-import com.evalutel.primval_desktop.SacDeBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
 import com.evalutel.primval_desktop.UneArdoise2;
@@ -29,9 +32,11 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
-public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
+public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 {
     private ArrayList<UneBille> billesList;
     private ArrayList<UnOiseau> oiseauxList;
@@ -41,7 +46,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
     int[] numOiseauArray;
 
-    private ArrayList<int[]> randOiseauxArray = new ArrayList<>();
+    private ArrayList<int[]> randomDicesArray = new ArrayList<>();
 
     private UneArdoise2 uneArdoise2;
     private CalculetteView calculetteView;
@@ -50,57 +55,58 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     TextButton.TextButtonStyle styleTest;
     Drawable drawableAux;
 
-    private int cptOiseauTotal, cptOiseau1, cptOiseau2, /*cptBille,*/
-            oiseauxToDisplayBranche1, oiseauxToDisplayBranche2;
-    private int brancheRenewal, failedAttempts;
-    private int numOiseauxBranche1, numOiseauxBranche2;
+    private int cptOiseauTotal, cptOiseau1, cptOiseau2, oiseauxToDisplayBranche1, oiseauxToDisplayBranche2;
+    private int /*brancheRenewal,*/ failedAttempts;
+    private int diceNumber1;
 
+    Texture emptyDices;
 
     Label currentLabel;
+
+    Dices dice1, dice2;
 
     String nbInput;
     boolean afterCorrection, isAllActive, touchValidate = false;
 
 
-    public ScreenEx2_2(final Game game, String ongletTitre)
+    public ScreenEx2_3(final Game game, String ongletTitre)
     {
-        super(game, 2, 2, true, 15);
+        super(game, 2, 3, true, 18);
 
-
-        ScreeenBackgroundImage bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
+        ScreeenBackgroundImage bgScreenEx1_1 = new ScreeenBackgroundImage("Images/onglet2_3/des_fond.jpg");
         allDrawables.add(bgScreenEx1_1);
 
-        oiseauxList = getNumberOiseauxArList();
+//        oiseauxList = getNumberOiseauxArList();
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBilleUnique * 1.5), (float) (largeurBilleUnique * 1.5));
-        sacDeBilles.largeurBille = largeurBilleMultiple;
-//        sacDeBilles.isActive();
-        sacDeBilles.setActive(false);
-        allDrawables.add(sacDeBilles);
-        myCorrectionAndPauseGeneral.addElements(sacDeBilles);
-//        allCorrigibles.add(sacDeBilles);
+//        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBilleUnique * 1.5), (float) (largeurBilleUnique * 1.5));
+//        sacDeBilles.largeurBille = largeurBilleMultiple;
+////        sacDeBilles.isActive();
+//        sacDeBilles.setActive(false);
+//        allDrawables.add(sacDeBilles);
+//        myCorrectionAndPauseGeneral.addElements(sacDeBilles);
+////        allCorrigibles.add(sacDeBilles);
+//
+//        planche1 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.9f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+//        planche2 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.2f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+//        planche3 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 0.5f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+//        allPlanches.add(planche1);
+//        allPlanches.add(planche2);
+//        allPlanches.add(planche3);
 
-        planche1 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.9f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-        planche2 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.2f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-        planche3 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 0.5f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-        allPlanches.add(planche1);
-        allPlanches.add(planche2);
-        allPlanches.add(planche3);
-
-
-        for (int i = 0; i < allPlanches.size(); i++)
-        {
-            UnePlancheNew unePlanche = allPlanches.get(i);
-            allDrawables.add(unePlanche);
-            unePlanche.shouldReturnToReserve = true;
-            myCorrectionAndPauseGeneral.addElements(unePlanche);
-//            allCorrigibles.add(unePlanche);
-        }
-
-        planche2.setVisible(false);
-        planche3.setVisible(false);
-        planche2.setActive(false);
-        planche3.setActive(false);
+//
+//        for (int i = 0; i < allPlanches.size(); i++)
+//        {
+//            UnePlancheNew unePlanche = allPlanches.get(i);
+//            allDrawables.add(unePlanche);
+//            unePlanche.shouldReturnToReserve = true;
+//            myCorrectionAndPauseGeneral.addElements(unePlanche);
+////            allCorrigibles.add(unePlanche);
+//        }
+//
+//        planche2.setVisible(false);
+//        planche3.setVisible(false);
+//        planche2.setActive(false);
+//        planche3.setActive(false);
 
         numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
 
@@ -120,7 +126,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
         int noteMax = db.getHighestNote(2, 2);
 
-        String noteMaxObtenue = noteMax + "/15";
+        String noteMaxObtenue = noteMax + "/18";
 
         exoConsigneLabel = new Label(ongletTitre, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
@@ -133,20 +139,20 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
         stage.addActor(tableTitre);
 
-        billesList = autoFillPlanche();
+//        billesList = autoFillPlanche();
 
-        oiseauxList = getNumberOiseauxArList();
+//        oiseauxList = getNumberOiseauxArList();
+//
+        getRandDesArray();
 
-        getRandOiseauxArray();
-
-        resultatExercice = new UnResultat("Primval", 2, 2, 0, ongletTitre, 15, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 2, 3, 0, ongletTitre, 15, 0, dateTest, 0, 0, 0, 123);
 
         calculetteView = new CalculetteView(stage, validusAnimated);
         allDrawables.add(calculetteView);
         calculetteView.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
-        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24) + (2 * MyConstants.SCREENWIDTH / 100) + (3 * MyConstants.SCREENWIDTH / 200);
+        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24f) + (2 * MyConstants.SCREENWIDTH / 100f) + (3 * MyConstants.SCREENWIDTH / 200f);
         float posYArdoise2 = 0.3f * MyConstants.SCREENWIDTH;
 
         uneArdoise2 = new UneArdoise2(stage, "", 3.95f * MyConstants.SCREENWIDTH / 5, posYArdoise2, buttonSize);
@@ -154,7 +160,53 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         uneArdoise2.setActive(false);
         myCorrectionAndPauseGeneral.addElements(uneArdoise2);
 
-        metrologue.setVisible(false);
+        float diceWidth = MyConstants.SCREENWIDTH / 7f;
+        float diceHeight = diceWidth * (263f / 314f);
+        float dicePlusHeight = diceWidth * (152f / 186f);
+
+        Texture diceTexture1 = new Texture(Gdx.files.internal("Images/onglet2_3/des_vide.png"));
+        diceTexture1.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Table emptyDice1 = new Table();
+        emptyDice1.setBackground(new SpriteDrawable(new Sprite(diceTexture1)));
+        emptyDice1.setSize(diceWidth, diceHeight);
+        emptyDice1.setPosition(MyConstants.SCREENWIDTH / 4f, 2 * MyConstants.SCREENHEIGHT / 3f);
+
+        Texture diceTexturePlus = new Texture(Gdx.files.internal("Images/onglet2_3/des_plus.png"));
+        diceTexturePlus.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Table plusDice = new Table();
+        plusDice.setBackground(new SpriteDrawable(new Sprite(diceTexturePlus)));
+        plusDice.setSize(diceWidth / 2, dicePlusHeight / 2);
+        plusDice.setPosition(emptyDice1.getX() + emptyDice1.getWidth() + 10, 2 * MyConstants.SCREENHEIGHT / 3f + 10);
+
+
+        Texture diceTexture2 = new Texture(Gdx.files.internal("Images/onglet2_3/des_vide.png"));
+        diceTexture2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Table emptyDice2 = new Table();
+        emptyDice2.setBackground(new SpriteDrawable(new Sprite(diceTexture2)));
+        emptyDice2.setSize(diceWidth, diceHeight);
+        emptyDice2.setPosition(plusDice.getX() + (diceWidth / 3), 2 * MyConstants.SCREENHEIGHT / 3f);
+
+        int ok = 5;
+        ok++;
+
+
+        dice1 = new Dices(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 2f, emptyDice1.getWidth(), emptyDice1.getHeight());
+
+        dice1.setPosition(emptyDice1.getX(), emptyDice1.getY() - 300);
+        dice2 = new Dices(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 2f, emptyDice2.getWidth(), emptyDice2.getHeight());
+        dice2.setPosition(MyConstants.SCREENWIDTH / 2f + 100, MyConstants.SCREENHEIGHT / 2f);
+        dice1.setVisible(false);
+        dice2.setVisible(false);
+
+//        dice1.animateImage(0, true, 0, 0, null, 0, 1f / 6f);
+        allDrawables.add(dice1);
+        allDrawables.add(dice2);
+
+
+        stage.addActor(emptyDice1);
+        stage.addActor(plusDice);
+        stage.addActor(emptyDice2);
+
 
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
@@ -210,9 +262,12 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            MyTimer.TaskEtape nextEtape = new EtapeInstructionPlanche1(3_000, 0);
+    int dicevalue1 = dice1.getLastDicevalue();
+    int dicevalue2 = dice2.getLastDicevalue();
 
-            metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_titreOnglet.mp3", nextEtape);
+    int ok = 5;
+    ok ++;
+
         }
     }
 
@@ -245,13 +300,13 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         {
             DisplayOiseauxBranche1 nextEtape = new DisplayOiseauxBranche1(0, 0);
 
-            oiseauxToDisplayBranche1 = randOiseauxArray.get(brancheRenewal)[0];
+//            oiseauxToDisplayBranche1 = randOiseauxArray.get(brancheRenewal)[0];
             sacDeBilles.setActive(true);
             activiteView.setTextActivite("Place sur la première planche autant de billes que d'oiseaux que tu vois sur la première branche, tape leur nombre au clavier puis valide");
 
             if (cptOiseau1 < oiseauxToDisplayBranche1)
             {
-                if ((cptOiseau1 == 1) && (brancheRenewal == 0))
+                if ((cptOiseau1 == 1) /*&& (brancheRenewal == 0)*/)
                 {
                     metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_PlaceSurLaPremiereBranche.mp3");
                 }
@@ -572,7 +627,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneMain.setVisible(false);
-            nbInput = String.valueOf(numOiseauxBranche1);
+            nbInput = String.valueOf(diceNumber1);
             afterCorrection = true;
             timer.schedule(new NextQuestion(500), 500);
             styleTest.up = drawableAux;
@@ -633,7 +688,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         {
             DisplayOiseauxBranche2 nextEtape = new DisplayOiseauxBranche2(0, 0);
 
-            oiseauxToDisplayBranche2 = randOiseauxArray.get(brancheRenewal)[1];
+//            oiseauxToDisplayBranche2 = randOiseauxArray.get(brancheRenewal)[1];
 
             planche2.setVisible(true);
 
@@ -941,7 +996,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneMain.setVisible(false);
-            nbInput = String.valueOf(numOiseauxBranche2);
+//            nbInput = String.valueOf(numOiseauxBranche2);
             afterCorrection = true;
             timer.schedule(new NextQuestion2(500), 500);
             styleTest.up = drawableAux;
@@ -1020,9 +1075,8 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
                 metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_DeplaceToutesLesBillesSurLaPlancheTotal.mp3", new InputClavier3(/*(250),*/ 1_000));
                 activiteView.addTextActivite("Deplace toutes les billes sur la planche Total. \nTape ensuite sur le clavier le nopmbre de billes qui s'y trouvent puis valide.");
-//                timer.schedule();
 
-                brancheRenewal++;
+//                brancheRenewal++;
             }
         }
     }
@@ -1539,72 +1593,70 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         }
     }
 
+//
+//    public ArrayList<UneBille> autoFillPlanche()
+//    {
+//        float firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
+//        float firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
+//
+//        billesList = new ArrayList<>();
+//
+//        for (int i = 0; i < oiseauxList.size(); i++)
+//        {
+//            UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, largeurBilleMultiple);
+//            sacDeBilles.addBilleToReserve(billeAdded);
+//            allDrawables.add(billeAdded);
+//            objectTouchedList.add(billeAdded);
+//            billeAdded.setVisible(false);
+//            myCorrectionAndPauseGeneral.addElements(billeAdded);
+//
+//        }
+//        return billesList;
+//    }
 
-    public ArrayList<UneBille> autoFillPlanche()
-    {
-        float firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
-        float firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
-
-        billesList = new ArrayList<>();
-
-        for (int i = 0; i < oiseauxList.size(); i++)
-        {
-            UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, largeurBilleMultiple);
-            sacDeBilles.addBilleToReserve(billeAdded);
-            allDrawables.add(billeAdded);
-            objectTouchedList.add(billeAdded);
-            billeAdded.setVisible(false);
-            myCorrectionAndPauseGeneral.addElements(billeAdded);
-
-        }
-        return billesList;
-    }
-
-    public int randOiseau1()
-    {
-        Random rand = new Random();
-        numOiseauxBranche1 = rand.nextInt(6) + 1;
-        return numOiseauxBranche1;
-    }
-
-
-    public int randOiseau2()
+    public int randomDice1()
     {
         Random rand = new Random();
-        int numOiseauxBranche2 = rand.nextInt(6 - numOiseauxBranche1) + 1;
-
-        return numOiseauxBranche2;
+        diceNumber1 = rand.nextInt(5) + 1;
+        return diceNumber1;
     }
 
-    public void getRandOiseauxArray()
+    public int randomDice2()
     {
-        for (int i = 0; i < 5; i++)
+        Random rand = new Random();
+        int diceNumber2 = rand.nextInt(6 - diceNumber1) + 1;
+        return diceNumber2;
+    }
+
+    public void getRandDesArray()
+    {
+        for (int i = 0; i < 6; i++)
         {
-            int[] oiseauxNumUpTo9 = {0, 0};
-            oiseauxNumUpTo9[0] = randOiseau1();
-            oiseauxNumUpTo9[1] = randOiseau2();
-            randOiseauxArray.add(oiseauxNumUpTo9);
+            int[] dicesNumUpTo9 = {0, 0};
+            dicesNumUpTo9[0] = randomDice1();
+            dicesNumUpTo9[1] = randomDice2();
+            randomDicesArray.add(dicesNumUpTo9);
         }
     }
 
-
-    public ArrayList getNumberOiseauxArList()
-    {
-        oiseauxList = new ArrayList<>();
-
-        int firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
-        int firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
-
-        for (int i = 0; i < 9; i++)
-        {
-            int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 15) * (396.0f / 500.0f), (float) (MyConstants.SCREENWIDTH / 15) * (500.0f / 396.0f));
-            allDrawables.add(unOiseau);
-            oiseauxList.add(unOiseau);
-            myCorrectionAndPauseGeneral.addElements(unOiseau);
-        }
-        return oiseauxList;
-    }
+//
+//    public ArrayList getNumberOiseauxArList()
+//    {
+//        oiseauxList = new ArrayList<>();
+//
+//        int firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
+//        int firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
+//
+//        for (int i = 0; i < 9; i++)
+//        {
+//            int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
+//            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 15) * (396.0f / 500.0f), (float) (MyConstants.SCREENWIDTH / 15) * (500.0f / 396.0f));
+//            allDrawables.add(unOiseau);
+//            oiseauxList.add(unOiseau);
+//            myCorrectionAndPauseGeneral.addElements(unOiseau);
+//        }
+//        return oiseauxList;
+//    }
 
 
 //    @Override
@@ -1702,48 +1754,52 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
+        dice1.isTouched(mousePointerX, mousePointerY);
+        dice2.isTouched(mousePointerX, mousePointerY);
+
+
 //        boolean isReserveActif = sacDeBilles.isActive();
-        if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
-        {
-            int ok = 5;
-            ok++;
-//            if (billesList.size() <= 9)
-            if ((planche1.getNumberBilles() + planche2.getNumberBilles() + planche3.getNumberBilles() <= 9) || (billesList.size() <= 9))
-            {
-                UneBille billeAdded = sacDeBilles.getBilleAndRemove();
-                if (billeAdded != null)
-                {
-                    billeAdded.setVisible(true);
-                    objectTouched = billeAdded;
-                    billeAdded.setActive(true);
-                }
-            }
-        }
-        else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))
-        {
-            objectTouched = validusAnimated;
-        }
-        else /*si bille part de la planche*/
-        {
-            for (int i = 0; i < objectTouchedList.size(); i++)
-            {
-                MyTouchInterface objetAux = objectTouchedList.get(i);
-
-                if (objetAux.isTouched(screenX, reversedScreenY) && objetAux.isActive())
-                {
-                    objectTouched = objetAux;
-                    firstPositionX = mousePointerX;
-                    firstPositionY = mousePointerY;
-
-                    if (objectTouched instanceof UneBille)
-                    {
-                        UneBille billeAux = (UneBille) objectTouched;
-                        billeAux.touchDown();
-                        break;
-                    }
-                }
-            }
-        }
+//        if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
+//        {
+//            int ok = 5;
+//            ok++;
+////            if (billesList.size() <= 9)
+//            if ((planche1.getNumberBilles() + planche2.getNumberBilles() + planche3.getNumberBilles() <= 9) || (billesList.size() <= 9))
+//            {
+//                UneBille billeAdded = sacDeBilles.getBilleAndRemove();
+//                if (billeAdded != null)
+//                {
+//                    billeAdded.setVisible(true);
+//                    objectTouched = billeAdded;
+//                    billeAdded.setActive(true);
+//                }
+//            }
+//        }
+//        else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))
+//        {
+//            objectTouched = validusAnimated;
+//        }
+//        else /*si bille part de la planche*/
+//        {
+//            for (int i = 0; i < objectTouchedList.size(); i++)
+//            {
+//                MyTouchInterface objetAux = objectTouchedList.get(i);
+//
+//                if (objetAux.isTouched(screenX, reversedScreenY) && objetAux.isActive())
+//                {
+//                    objectTouched = objetAux;
+//                    firstPositionX = mousePointerX;
+//                    firstPositionY = mousePointerY;
+//
+//                    if (objectTouched instanceof UneBille)
+//                    {
+//                        UneBille billeAux = (UneBille) objectTouched;
+//                        billeAux.touchDown();
+//                        break;
+//                    }
+//                }
+//            }
+//        }
         return true;
     }
 

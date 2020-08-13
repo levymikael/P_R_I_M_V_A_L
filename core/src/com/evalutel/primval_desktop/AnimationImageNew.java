@@ -18,8 +18,8 @@ import java.util.HashMap;
 
 public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
-    protected TextureRegion[] animationFrames;
-    protected Animation animation;
+    protected TextureRegion[] animationFrames,animationFrames2 ;
+    protected Animation animation, animation2;
     MyTimer timer = new MyTimer();
 
 
@@ -74,6 +74,7 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         }
 
         animation = new Animation(1f / 6f, (Object[]) animationFrames);
+
     }
 
     public AnimationImageNew(String oneImagePath, float startPositionX, float startPositionY, float animationWidth, float animationHeight)
@@ -81,6 +82,73 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         this(arrayFromImage(oneImagePath), startPositionX, startPositionY, animationWidth, animationHeight);
     }
 
+    public AnimationImageNew(ArrayList<String> imagesPaths, ArrayList<String> imagesPaths2 , float startPositionX, float startPositionY, float animationWidth, float animationHeight)
+    {
+        this.animationHeight = animationHeight;
+        this.animationWidth = animationWidth;
+        this.currentPositionX = startPositionX;
+        this.currentPositionY = startPositionY;
+
+        int framesToAnimateQuantity1;
+        int framesToAnimateQuantity2;
+
+        if (imagesPaths.size() == 0)
+        {
+            framesToAnimateQuantity1 = 1;
+            Gdx.app.log("Methode animation", "imagesPath size = 0" + this);
+        }
+        else
+        {
+            framesToAnimateQuantity1 = imagesPaths.size();
+            Gdx.app.log("Methode animation", Integer.toString(framesToAnimateQuantity1) + this);
+        }
+
+        if (imagesPaths2.size() == 0)
+        {
+            framesToAnimateQuantity2 = 1;
+            Gdx.app.log("Methode animation", "imagesPath size = 0" + this);
+        }
+        else
+        {
+            framesToAnimateQuantity2 = imagesPaths2.size();
+            Gdx.app.log("Methode animation", Integer.toString(framesToAnimateQuantity2) + this);
+        }
+
+        animationFrames = new TextureRegion[framesToAnimateQuantity1];
+        animationFrames2 = new TextureRegion[framesToAnimateQuantity2];
+
+        screenWidth = Gdx.graphics.getWidth();
+        screenHeight = Gdx.graphics.getHeight();
+
+
+        for (int i = 0; i < framesToAnimateQuantity1; i++)
+        {
+            String pathAux = imagesPaths.get(i);
+
+            Texture imgAux = new Texture(pathAux);
+            imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+            TextureRegion textureRegionAux = new TextureRegion(imgAux);
+            animationFrames[i] = textureRegionAux;
+        }
+
+        animation = new Animation(1f / 6f, (Object[]) animationFrames);
+
+        for (int i = 0; i < framesToAnimateQuantity2; i++)
+        {
+            String pathAux = imagesPaths2.get(i);
+
+            Texture imgAux = new Texture(pathAux);
+            imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+            TextureRegion textureRegionAux = new TextureRegion(imgAux);
+            animationFrames2[i] = textureRegionAux;
+        }
+
+        animation2 = new Animation(1f / 6f, (Object[]) animationFrames2);
+    }
+
+    // refaire une methode avec 2 array
     public void changeImage(TextureRegion textureRegion)
     {
         //animationFrames = new TextureRegion[1];
@@ -97,7 +165,7 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
     public void setPositionCenter(float x, float y)
     {
         currentPositionX = x - (animationWidth / 2f);
-        currentPositionY = y -  (animationHeight / 2f);
+        currentPositionY = y - (animationHeight / 2f);
     }
 
 
@@ -129,11 +197,13 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         long deltaTime = 20;
         long nbIterations = animationDureemillis / deltaTime;
 
-        float deltaX =  (deplacementEnX - currentPositionX) / (float) nbIterations;
-        float deltaY =  (deplacementEnY - currentPositionY) / (float) nbIterations;
-
+        float deltaX = (deplacementEnX - currentPositionX) / (float) nbIterations;
+        float deltaY = (deplacementEnY - currentPositionY) / (float) nbIterations;
 
         timer.schedule(new TaskMoveAnimation(currentPositionX, currentPositionY, deltaX, deltaY, deltaTime, taskEtape, delayNext), deltaTime);
+
+        int ok = 5;
+        ok++;
     }
 
 
@@ -200,7 +270,7 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
                 currentPositionFloatY += deltaY;
 
                 currentPositionX = currentPositionFloatX;
-                currentPositionY =  currentPositionFloatY;
+                currentPositionY = currentPositionFloatY;
 
                 double distanceCarre = Math.pow((double) (deplacementEnX - currentPositionX), 2.0) + Math.pow((double) (deplacementEnY - currentPositionY), 2.0);
                 double distanceStop = Math.pow((double) (deltaX), 2.0) + Math.pow((double) (deltaY), 2.0);
@@ -245,17 +315,20 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         elapsedTime += Gdx.graphics.getDeltaTime();
         TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, animationContinue);
         batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
+
+//        TextureRegion textureRegion2 = (TextureRegion) animation2.getKeyFrame(elapsedTime, animationContinue);
+//        batch.draw(textureRegion2, currentPositionX, currentPositionY - 100, animationWidth, animationHeight);
     }
 
 
-    private void drawSprite(String name, float x, float y, SpriteBatch batch)
-    {
-        Sprite sprite = sprites.get(name);
-
-        sprite.setPosition(x, y);
-
-        sprite.draw(batch);
-    }
+//    private void drawSprite(String name, float x, float y, SpriteBatch batch)
+//    {
+//        Sprite sprite = sprites.get(name);
+//
+//        sprite.setPosition(x, y);
+//
+//        sprite.draw(batch);
+//    }
 
 
     private static ArrayList<String> arrayFromImage(String image)

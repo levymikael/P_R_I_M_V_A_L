@@ -46,7 +46,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
     {
         super(game, 1, 1, false, 0);
 
-
         bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);
 
@@ -91,7 +90,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
         resultatExercice = new UnResultat("Primval", 1, 1, 0, ongletTitre, 0, 0, dateTest, 0, 0, 0, 123);
 
-
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
             @Override
@@ -122,7 +120,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
                 MyDataBase db = appSingleton.myDataBase;
 
                 db.insertResultat(resultatExercice);
-
             }
 
             @Override
@@ -260,8 +257,8 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             bille.setVisible(true);
             bille.setActive(false);
 
-            MyTimer.TaskEtape nextEtape = new EtapeDragFirstBille(1000);
-            timer.schedule(nextEtape, 1000);
+            MyTimer.TaskEtape nextEtape = new EtapeDragFirstBille(1_000);
+            timer.schedule(nextEtape, 1_000);
             uneMain.imageDown();
         }
     }
@@ -285,10 +282,9 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             if (cptBille == 0)
             {
-//                activiteView.addTextActivite("Je saisis une bille du sac et je la dépose sur le plateau ");
                 metrologue.metrologuePlaySound("Sounds/Metrologue/Je saisis une bille du sac.mp3");
 
-                bille.animateImage(durationMillis, true, (posX - bille.getWidth() / 2f),  (posY - bille.getWidth() / 2f), nextEtape, 2500, 1f / 6f);
+                bille.animateImage(durationMillis, true, (posX - bille.getWidth() / 2f), (posY - bille.getWidth() / 2f), nextEtape, 2500, 1f / 6f);
 
                 uneMain.cliqueTo(durationMillis, posX, posY, null, 2000);
             }

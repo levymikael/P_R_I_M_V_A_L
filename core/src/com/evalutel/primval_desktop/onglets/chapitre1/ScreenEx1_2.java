@@ -33,7 +33,7 @@ public class ScreenEx1_2 extends ScreenOnglet
     int failedAttempts;
     private ArrayList<UneBille> billesList;
     private ArrayList<UnOiseau> oiseauxList;
-//    private ArrayList<UnePlancheNew> allPlanches;
+    //    private ArrayList<UnePlancheNew> allPlanches;
     private UneBille billeRectification;
     private UnePlancheNew planche1;
     private int randNumOiseau;
@@ -48,7 +48,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
     public ScreenEx1_2(final Game game, String ongletTitre)
     {
-        super(game, 1, 2, true,9);
+        super(game, 1, 2, true, 9);
 
         this.dataBase = dataBase;
 
@@ -185,9 +185,12 @@ public class ScreenEx1_2 extends ScreenOnglet
         if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
             UneBille billeAdded = sacDeBilles.getBilleAndRemove();
-            billeAdded.setVisible(true);
-            objectTouched = billeAdded;
-            billeAdded.setActive(true);
+            if (billeAdded != null)
+            {
+                billeAdded.setVisible(true);
+                objectTouched = billeAdded;
+                billeAdded.setActive(true);
+            }
 
         }
         else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))

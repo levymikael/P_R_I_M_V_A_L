@@ -39,10 +39,8 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         this.setPosition(posX, posY);
         this.setSize(ardoiseSize, ardoiseSize * 1.3f);
 
-
         ardoiseBgActive = new Texture("Images/Ardoise/ardoise_fond.png");
         ardoiseBgActive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
 
         ardoiseBgInactive = new Texture("Images/Ardoise/ardoise_fond.png");
         ardoiseBgInactive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -73,7 +71,6 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         Table emplacement3 = new Table();
         Table line4 = new Table();
 
-
         Texture plusTxture = new Texture(Gdx.files.internal("Images/Ardoise/ardoise_plus_new.png"));
         plusTxture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
@@ -85,7 +82,6 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
 
         Texture egalTxture = new Texture(Gdx.files.internal("Images/Ardoise/ardoise_egal_new.png"));
         egalTxture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
 
         float widthEmplacement = this.getWidth() * 0.5f;
         float heightEmplacement = widthEmplacement * ((134f / 192f) * 0.8f);
@@ -154,12 +150,6 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
             case 3:
                 labelEmplacement3.setText(labelText);
                 break;
-
-//            case 0:
-//                labelEmplacement1.setText(labelText);
-//                labelEmplacement2.setText(labelText);
-//                labelEmplacement3.setText(labelText);
-
 
             default:
                 break;

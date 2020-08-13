@@ -67,25 +67,24 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
         Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", chapitre, 4, MyConstants.noteMaxChap2[2]);
         Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", chapitre, 5, MyConstants.noteMaxChap2[3]);
 
-
         table.add(tableEx1).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
         table.add(tableEx2).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
-//        table.add(tableEx3).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
-//        table.row();
+        table.add(tableEx3).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
+        table.row();
 //        table.add(tableEx4).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
 //        table.row();
 //        table.add(tableEx5).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
 
 
         table.align(Align.top);
-        table.setHeight(MyConstants.SCREENHEIGHT / 2);
+        table.setHeight(MyConstants.SCREENHEIGHT / 2f);
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
 
-        container.add(scroll).height(3 * screenHeight / 5).align(Align.top);
+        container.add(scroll).height(3 * screenHeight / 5f).align(Align.top);
 
 
         tableEx1.addListener(new ClickListener()
@@ -112,7 +111,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!3");
-                game.setScreen(new ScreenEx1_1(game, label1));
+                game.setScreen(new ScreenEx2_3(game, label3));
 
             }
         });
@@ -134,7 +133,6 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
                 System.out.println("I got clicked!5");
             }
         });
-
     }
 
 

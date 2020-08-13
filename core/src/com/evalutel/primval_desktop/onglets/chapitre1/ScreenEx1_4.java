@@ -73,7 +73,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         allDrawables.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
 //        allCorrigibles.add(planche1);
-
         allPlanches.add(planche1);
 
         String numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
@@ -95,12 +94,11 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         exoNumLabel = new Label(numExercice, labelStyleArial);
         exoConsigneLabel = new Label(ongletTitre, labelStyleComic);
         highestMarkObtainedLabel = new Label(noteMaxObtenue, labelStyle3);
-        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
+        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46f);
 
-
-        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
-        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25f).padLeft(MyConstants.SCREENWIDTH / 46f);
+        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9f);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22f);
 
         stage.addActor(tableTitre);
 
@@ -145,7 +143,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
                 MyDataBase db = appSingleton.myDataBase;
 
                 db.insertResultat(resultatExercice);
-
             }
 
             @Override
@@ -156,8 +153,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         });
 
         timer.schedule(new PresentationOnglet(3000), 1000);
-
-
     }
 
     private class PresentationOnglet extends MyTimer.TaskEtape
@@ -244,11 +239,9 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
                     break;
                 case 8:
                     audioPath = "Sounds/Onglet1_4/huit.mp3";
-
                     break;
                 case 9:
                     audioPath = "Sounds/Onglet1_4/neuf.mp3";
-
                     break;
             }
             metrologue.metrologuePlaySound(audioPath, nextEtape);
@@ -262,20 +255,19 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
             super(durMillis, delay);
         }
 
-        private InstructionPart3(long durMillis)
-        {
-            super(durMillis);
-        }
+//        private InstructionPart3(long durMillis)
+//        {
+//            super(durMillis);
+//        }
 
         @Override
         public void run()
         {
-            metrologue.metrologuePlaySound("Sounds/Onglet1_4/Tape le chiffre au clavier et valide.mp3", null);
+            metrologue.metrologuePlaySound("Sounds/Onglet1_4/Tape le chiffre au clavier et valide.mp3");
             activiteView.addTextActivite("2. Tape le chiffre au clavier et valide");
             calculetteView.setActive(true);
 
             calculetteView.etapeCorrection = new PressValidate(500);
-
         }
     }
 
@@ -309,11 +301,10 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
                 validusAnimated.isActive = false;
                 calculetteView.setActive(false);
 
-                if (questionCourante != 8)
-                {
+//                if (questionCourante != 8)
+//                {
                     validusAnimated.goodAnswerPlaySound(new NextQuestion(500));
-//                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - C'est bien continue.mp3", new NextQuestion(500));
-                }
+//                }
             }
             else
             {
@@ -412,7 +403,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
                 case 8:
                     styleTest = calculetteView.huit_bouton.getStyle();
                     break;
-
                 case 9:
                     styleTest = calculetteView.neuf_bouton.getStyle();
                     break;
@@ -469,8 +459,6 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            uneMain.setVisible(true);
-
             MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;

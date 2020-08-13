@@ -64,7 +64,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
     Drawable drawableAux;
 
 
-    public ScreenEx1_5(final Game game,  String ongletTitre)
+    public ScreenEx1_5(final Game game, String ongletTitre)
     {
         super(game, 1, 5, true, 9);
 
@@ -421,14 +421,18 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                 if (questionCourante != 8)
                 {
                     validusAnimated.goodAnswerPlaySound(new EtapeNextQuestion(500, 0));
+                    addDiamonds(1);
+
                 }
                 else
                 {
                     timer.schedule(new Fin(1_000, 0), 500);
                     validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
+                    addDiamonds(1);
+
                 }
                 validusAnimated.isActive = false;
-                addDiamonds(1);
+//                addDiamonds(1);
                 planche1.setAllBillesActive();
             }
             else
@@ -767,11 +771,16 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
         if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
-            UneBille billeAdded = sacDeBilles.getBilleAndRemove();
-            billeAdded.setVisible(true);
-            objectTouched = billeAdded;
-            billeAdded.setActive(true);
-
+            if ((billesList.size() <= 9)|| planche1.getNumberBilles()<=9)
+            {
+                UneBille billeAdded = sacDeBilles.getBilleAndRemove();
+                if (billeAdded != null)
+                {
+                    billeAdded.setVisible(true);
+                    objectTouched = billeAdded;
+                    billeAdded.setActive(true);
+                }
+            }
         }
         else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))
         {
