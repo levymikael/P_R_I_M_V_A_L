@@ -9,6 +9,9 @@ RELEASE_DIR = ${SETUP_DIR}/Release
 SETUP_NAME = ${PREFIX}Setup${APP_NAME}
 UPDATE_NAME = ${PREFIX}Update${APP_NAME}
 
+clean:
+	rm ${APP_DIR}/desktop/build/libs/desktop-1.0.jar
+
 build: ${APP_DIR}/desktop/build/libs/desktop-1.0.jar
 prog: ${PROG_DIR}/${APP_NAME}.jar
 launcher: ${LAUNCHER_DIR}/${APP_NAME}.exe
