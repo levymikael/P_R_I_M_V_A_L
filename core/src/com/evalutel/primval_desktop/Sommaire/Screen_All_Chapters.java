@@ -320,8 +320,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         table.add(tableEx1);
         table.add(tableEx2);//.padLeft(MyConstants.SCREENWIDTH / 100);
-//        table.add(tableEx3);//.padLeft(MyConstants.SCREENWIDTH / 100);
-//        table.row();
+        table.add(tableEx3);//.padLeft(MyConstants.SCREENWIDTH / 100);
+        table.row();
 //        table.add().height(MyConstants.SCREENWIDTH / 30);
 //        table.row();
 //        table.add(tableEx4).width(MyConstants.SCREENWIDTH / 4).height(MyConstants.SCREENHEIGHT / 4).align(Align.center);
@@ -340,15 +340,15 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
                 System.out.println("I got clicked!1");
             }
         });
-        tableEx2.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!2");
-                game.setScreen(new Screen_Chapitre2(game));
-            }
-        });
+//        tableEx2.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!2");
+//                game.setScreen(new Screen_Chapitre2(game));
+//            }
+//        });
 //        tableEx3.addListener(new ClickListener()
 //        {
 //            @Override

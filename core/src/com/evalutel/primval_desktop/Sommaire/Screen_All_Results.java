@@ -291,7 +291,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //        container.add(scroll).height(2.5f * MyConstants.SCREENHEIGHT / 3f).width(screenWidth).padTop(90f);
 
         scroll.setPosition(0, 0);
-        scroll.debug();
+//        scroll.debug();
 
 //        container.debug();
 

@@ -178,7 +178,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         plusDice.setSize(diceWidth / 2, dicePlusHeight / 2);
         plusDice.setPosition(emptyDice1.getX() + emptyDice1.getWidth() + 10, 2 * MyConstants.SCREENHEIGHT / 3f + 10);
 
-
         Texture diceTexture2 = new Texture(Gdx.files.internal("Images/onglet2_3/des_vide.png"));
         diceTexture2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Table emptyDice2 = new Table();
@@ -193,14 +192,14 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         dice1 = new Dices(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 2f, emptyDice1.getWidth(), emptyDice1.getHeight());
 
         dice1.setPosition(emptyDice1.getX(), emptyDice1.getY() - 300);
-        dice2 = new Dices(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 2f, emptyDice2.getWidth(), emptyDice2.getHeight());
-        dice2.setPosition(MyConstants.SCREENWIDTH / 2f + 100, MyConstants.SCREENHEIGHT / 2f);
+//        dice2 = new Dices(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 2f, emptyDice2.getWidth(), emptyDice2.getHeight());
+//        dice2.setPosition(MyConstants.SCREENWIDTH / 2f + 100, MyConstants.SCREENHEIGHT / 2f);
         dice1.setVisible(false);
-        dice2.setVisible(false);
+//        dice2.setVisible(false);
 
 //        dice1.animateImage(0, true, 0, 0, null, 0, 1f / 6f);
         allDrawables.add(dice1);
-        allDrawables.add(dice2);
+//        allDrawables.add(dice2);
 
 
         stage.addActor(emptyDice1);
@@ -251,6 +250,13 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         timer.schedule(new PresentationMetrologue(3_000), 1_000);
     }
 
+//    public int getLastDice1value(int diceNumber)
+//    {
+//        int diceValue = 0;
+//
+//        return
+//    }
+
 
     private class PresentationMetrologue extends MyTimer.TaskEtape
     {
@@ -262,11 +268,11 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-    int dicevalue1 = dice1.getLastDicevalue();
-    int dicevalue2 = dice2.getLastDicevalue();
+            int dicevalue1 = dice1.getLastDicevalue();
+//            int dicevalue2 = dice2.getLastDicevalue();
 
-    int ok = 5;
-    ok ++;
+            int ok = 5;
+            ok++;
 
         }
     }
@@ -1755,7 +1761,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         mousePointerY = reversedScreenY;
 
         dice1.isTouched(mousePointerX, mousePointerY);
-        dice2.isTouched(mousePointerX, mousePointerY);
+//        dice2.isTouched(mousePointerX, mousePointerY);
 
 
 //        boolean isReserveActif = sacDeBilles.isActive();

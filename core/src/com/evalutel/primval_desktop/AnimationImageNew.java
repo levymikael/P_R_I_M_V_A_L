@@ -18,8 +18,8 @@ import java.util.HashMap;
 
 public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
-    protected TextureRegion[] animationFrames,animationFrames2 ;
-    protected Animation animation, animation2;
+    protected TextureRegion[] animationFrames, animationFrames2, animationFrames3, animationFrames4;
+    protected Animation animation, animation2, animation3, animation4;
     MyTimer timer = new MyTimer();
 
 
@@ -32,9 +32,9 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
 
     protected boolean isVisible = true;
     protected boolean isPaused = false;
+    protected boolean isActive = false;
 
-    final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
-
+//    final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 
     public AnimationImageNew(ArrayList<String> imagesPaths, float startPositionX, float startPositionY, float animationWidth, float animationHeight)
     {
@@ -82,7 +82,9 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         this(arrayFromImage(oneImagePath), startPositionX, startPositionY, animationWidth, animationHeight);
     }
 
-    public AnimationImageNew(ArrayList<String> imagesPaths, ArrayList<String> imagesPaths2 , float startPositionX, float startPositionY, float animationWidth, float animationHeight)
+
+    //Methodes pour 2 dés
+    public AnimationImageNew(ArrayList<String> imagesPaths, ArrayList<String> imagesPaths2, ArrayList<String> imagesPaths3, ArrayList<String> imagesPaths4, float startPositionX, float startPositionY, float animationWidth, float animationHeight)
     {
         this.animationHeight = animationHeight;
         this.animationWidth = animationWidth;
@@ -91,6 +93,8 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
 
         int framesToAnimateQuantity1;
         int framesToAnimateQuantity2;
+        int framesToAnimateQuantity3;
+        int framesToAnimateQuantity4;
 
         if (imagesPaths.size() == 0)
         {
@@ -114,8 +118,32 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
             Gdx.app.log("Methode animation", Integer.toString(framesToAnimateQuantity2) + this);
         }
 
+        if (imagesPaths3.size() == 0)
+        {
+            framesToAnimateQuantity3 = 1;
+            Gdx.app.log("Methode animation", "imagesPath size = 0" + this);
+        }
+        else
+        {
+            framesToAnimateQuantity3 = imagesPaths3.size();
+            Gdx.app.log("Methode animation", Integer.toString(framesToAnimateQuantity3) + this);
+        }
+
+        if (imagesPaths4.size() == 0)
+        {
+            framesToAnimateQuantity4 = 1;
+            Gdx.app.log("Methode animation", "imagesPath size = 0" + this);
+        }
+        else
+        {
+            framesToAnimateQuantity4 = imagesPaths4.size();
+            Gdx.app.log("Methode animation", Integer.toString(framesToAnimateQuantity4) + this);
+        }
+
         animationFrames = new TextureRegion[framesToAnimateQuantity1];
         animationFrames2 = new TextureRegion[framesToAnimateQuantity2];
+        animationFrames3 = new TextureRegion[framesToAnimateQuantity3];
+        animationFrames4 = new TextureRegion[framesToAnimateQuantity4];
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
@@ -146,6 +174,33 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         }
 
         animation2 = new Animation(1f / 6f, (Object[]) animationFrames2);
+
+        for (int i = 0; i < framesToAnimateQuantity3; i++)
+        {
+            String pathAux = imagesPaths3.get(i);
+
+            Texture imgAux = new Texture(pathAux);
+            imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+            TextureRegion textureRegionAux = new TextureRegion(imgAux);
+            animationFrames3[i] = textureRegionAux;
+        }
+
+        animation3 = new Animation(1f / 6f, (Object[]) animationFrames3);
+
+        for (int i = 0; i < framesToAnimateQuantity4; i++)
+        {
+            String pathAux = imagesPaths4.get(i);
+
+            Texture imgAux = new Texture(pathAux);
+            imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+            TextureRegion textureRegionAux = new TextureRegion(imgAux);
+            animationFrames4[i] = textureRegionAux;
+        }
+
+        animation4 = new Animation(1f / 6f, (Object[]) animationFrames4);
+
     }
 
     // refaire une methode avec 2 array
@@ -319,17 +374,6 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
 //        TextureRegion textureRegion2 = (TextureRegion) animation2.getKeyFrame(elapsedTime, animationContinue);
 //        batch.draw(textureRegion2, currentPositionX, currentPositionY - 100, animationWidth, animationHeight);
     }
-
-
-//    private void drawSprite(String name, float x, float y, SpriteBatch batch)
-//    {
-//        Sprite sprite = sprites.get(name);
-//
-//        sprite.setPosition(x, y);
-//
-//        sprite.draw(batch);
-//    }
-
 
     private static ArrayList<String> arrayFromImage(String image)
     {

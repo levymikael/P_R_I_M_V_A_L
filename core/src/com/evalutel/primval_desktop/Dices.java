@@ -1,17 +1,23 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.General.MyMath;
 import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
 import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
+import com.evalutel.primval_desktop.Sommaire.Screen_All_Chapters;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.addListener;
 
 public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInterface, MyTouchInterface
 {
@@ -22,80 +28,13 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
 
     public Dices(float dicePositionX, float dicePositionY, float animationWidth, float animationHeight)
     {
-        super(getAnimationDiceNumber(), getAnimationDiceAnimals(), dicePositionX, dicePositionY, animationWidth, animationHeight);
+        super(getAnimationDiceNumber(), getAnimationDiceAnimals(), getAnimationDiceNumber(), getAnimationDiceAnimals(), dicePositionX, dicePositionY, animationWidth, animationHeight);
 
         animation = new Animation(1f / 6f, (Object[]) animationFrames);
 
-
         this.setPosition(dicePositionX, dicePositionY);
-
-
-//        setTouchable(Touchable.enabled);
-//
-//        setWidth(200);
-//        setHeight(450);
-//
-//        addListener(new DragListener()
-//        {
-//            @Override
-//            public void dragStart(InputEvent event, float x, float y, int pointer) {
-//                super.dragStart(event, x, y, pointer);
-//
-//                firstX = x;
-//                firstY = y;
-//
-//                currentX = getX();
-//                currentY = getY();
-//
-//                posX =  currentX;
-//                posY =  currentY;
-//            }
-//
-//            @Override
-//            public void drag(InputEvent event, float x, float y, int pointer) {
-//                super.drag(event, x, y, pointer);
-//
-//                //moveBy(x-firstX, y - firstY);
-//
-//                moveBy(x - getWidth() / 2, y - getHeight() / 2);
-//
-//                //posX =  x;
-//                //posY =  y;
-//
-//                posX = getX();
-//                posY = getY();
-//
-//            }
-//
-//            @Override
-//            public void dragStop(InputEvent event, float x, float y, int pointer) {
-//                super.dragStop(event, x, y, pointer);
-//
-//                //moveBy(x-firstX, y - firstY);
-//
-//                setX(posX);
-//                setY(posY);
-//            }
-//        });
-
-
     }
 
-//    public int randDice1()
-//    {
-//        Random rand = new Random();
-//        diceValue1 = rand.nextInt(6) + 1;
-//        return diceValue1;
-//    }
-//
-//
-//    public int randDice2()
-//    {
-//        Random rand = new Random();
-//        int diceValue2 = rand.nextInt(6 - diceValue1) + 1;
-//
-//        return diceValue2;
-//    }
 
     private static ArrayList<String> getAnimationDiceNumber()
     {
@@ -105,21 +44,6 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
 
         array = MyMath.melangeTab(array);
 
-
-//        Object[] faceAndIndex1 = {"1", 1};
-//        Object[] faceAndIndex2 = {"2", 2};
-//        Object[] faceAndIndex3 = {"3", 3};
-//        Object[] faceAndIndex4 = {"4", 4};
-//        Object[] faceAndIndex5 = {"5", 5};
-//        Object[] faceAndIndex6 = {"6", 6};
-//
-//        arrayListNumber = new ArrayList<Object>();
-//        arrayListNumber.add(faceAndIndex1);
-//        arrayListNumber.add(faceAndIndex2);
-//        arrayListNumber.add(faceAndIndex3);
-//        arrayListNumber.add(faceAndIndex4);
-//        arrayListNumber.add(faceAndIndex5);
-//        arrayListNumber.add(faceAndIndex6);
 
         for (int i = 0; i < array.length; i++)
         {
@@ -177,6 +101,17 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
             batch.draw(textureRegion2, currentPositionX, currentPositionY, animationWidth, animationHeight);
         }
 
+        if (animation3 != null)
+        {
+            TextureRegion textureRegion3 = (TextureRegion) animation3.getKeyFrame(elapsedTime, animationContinue);
+            batch.draw(textureRegion3, currentPositionX + 100, currentPositionY, animationWidth, animationHeight);
+        }
+
+        if (animation4 != null)
+        {
+            TextureRegion textureRegion4 = (TextureRegion) animation4.getKeyFrame(elapsedTime, animationContinue);
+            batch.draw(textureRegion4, currentPositionX + 100, currentPositionY, animationWidth, animationHeight);
+        }
     }
 
 
@@ -200,6 +135,10 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
             isVisible = true;
         }
 
+        final Music music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/son_des.mp3"));
+        music.play();
+
+
         Timer timerDice = new Timer();
 
 
@@ -211,6 +150,16 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
                 animationContinue = false;
 //                dice2.animationContinue = false;
                 Gdx.app.log("fin Timer", "");
+
+                music.stop();
+                music.setOnCompletionListener(new Music.OnCompletionListener()
+                {
+                    @Override
+                    public void onCompletion(Music music)
+                    {
+                        music.dispose();
+                    }
+                });
 
             }
         }, 3_000);
@@ -232,24 +181,15 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
     @Override
     public boolean isActive()
     {
-        return false;
+        return isActive;
     }
 
     @Override
     public void setActive(boolean active)
     {
+        isActive = active;
 
     }
 
-//    @Override
-//    public void myPause()
-//    {
-//
-//    }
-//
-//    @Override
-//    public void myResume()
-//    {
-//
-//    }
+
 }

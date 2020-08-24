@@ -54,6 +54,8 @@ public class AnimationImage extends Actor implements InputProcessor
         setPosition(startPositionX, startPositionY);
         setWidth(animationWidth);
         setHeight(animationHeight);
+
+
     }
 
 //Veiller a ce que les images a animer possedent la meme nomenclature
