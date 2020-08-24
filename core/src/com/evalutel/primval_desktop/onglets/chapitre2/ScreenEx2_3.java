@@ -621,6 +621,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
             metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_PlaceSurLaDeuxiemePlancheAutantDebIlles.mp3", nextEtape);
             activiteView.addTextActivite("Tape au clavier le nombre de points sur le deuxième dé puis valide.");
+
         }
     }
 
