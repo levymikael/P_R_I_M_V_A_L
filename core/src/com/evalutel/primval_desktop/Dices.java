@@ -24,15 +24,19 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
 
     static ArrayList arrayListNumber, arrayListAnimal;
 
-    static int lastDiceValue;
+    static int lastDiceValue, lastDiceValue2;
 
-    public Dices(float dicePositionX, float dicePositionY, float animationWidth, float animationHeight)
+    float dice2positionX;
+
+    public Dices(float dicePositionX, float dicePositionY, float animationWidth, float animationHeight, float dice2positionX)
     {
-        super(getAnimationDiceNumber(), getAnimationDiceAnimals(), getAnimationDiceNumber(), getAnimationDiceAnimals(), dicePositionX, dicePositionY, animationWidth, animationHeight);
+        super(getAnimationDiceNumber(), getAnimationDiceAnimals(), getAnimationDice2Number(), getAnimationDiceAnimals(), dicePositionX, dicePositionY, animationWidth, animationHeight);
 
         animation = new Animation(1f / 6f, (Object[]) animationFrames);
 
         this.setPosition(dicePositionX, dicePositionY);
+
+        this.dice2positionX = dice2positionX;
     }
 
 
@@ -55,9 +59,33 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         return imgDicesPaths;
     }
 
+    private static ArrayList<String> getAnimationDice2Number()
+    {
+        ArrayList<String> imgDicesPaths = new ArrayList<>();
+
+        int[] array = {1, 2, 3, 4, 5, 6};
+
+        array = MyMath.melangeTab(array);
+
+
+        for (int i = 0; i < array.length; i++)
+        {
+            String imgaux = "Images/onglet2_3/des_0" + array[i] + ".png";
+            imgDicesPaths.add(imgaux);
+            lastDiceValue2 = array[i];
+        }
+
+        return imgDicesPaths;
+    }
+
     public int getLastDicevalue()
     {
         return lastDiceValue;
+    }
+
+    public int getLastDice2value()
+    {
+        return lastDiceValue2;
     }
 
 
@@ -104,13 +132,13 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         if (animation3 != null)
         {
             TextureRegion textureRegion3 = (TextureRegion) animation3.getKeyFrame(elapsedTime, animationContinue);
-            batch.draw(textureRegion3, currentPositionX + 100, currentPositionY, animationWidth, animationHeight);
+            batch.draw(textureRegion3, currentPositionX + animationWidth + 10, currentPositionY, animationWidth, animationHeight);
         }
 
         if (animation4 != null)
         {
             TextureRegion textureRegion4 = (TextureRegion) animation4.getKeyFrame(elapsedTime, animationContinue);
-            batch.draw(textureRegion4, currentPositionX + 100, currentPositionY, animationWidth, animationHeight);
+            batch.draw(textureRegion4, dice2positionX, currentPositionY, animationWidth, animationHeight);
         }
     }
 
@@ -141,7 +169,6 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
 
         Timer timerDice = new Timer();
 
-
         timerDice.schedule(new TimerTask()
         {
             @Override
@@ -160,14 +187,10 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
                         music.dispose();
                     }
                 });
-
             }
         }, 3_000);
 
-//        if (animationContinue)
-//        {
-//            animationContinue = false;
-//        }
+
         System.out.println("dé touche");
         return false;
     }

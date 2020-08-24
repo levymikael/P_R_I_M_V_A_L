@@ -63,7 +63,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
     Label currentLabel;
 
-    Dices dice1, dice2;
+    Dices dice1;
 
     String nbInput;
     boolean afterCorrection, isAllActive, touchValidate = false;
@@ -139,10 +139,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
         stage.addActor(tableTitre);
 
-//        billesList = autoFillPlanche();
 
-//        oiseauxList = getNumberOiseauxArList();
-//
         getRandDesArray();
 
         resultatExercice = new UnResultat("Primval", 2, 3, 0, ongletTitre, 15, 0, dateTest, 0, 0, 0, 123);
@@ -188,24 +185,19 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         int ok = 5;
         ok++;
 
+        float dice2positionX = emptyDice2.getX();
 
-        dice1 = new Dices(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 2f, emptyDice1.getWidth(), emptyDice1.getHeight());
+        dice1 = new Dices(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 2f, emptyDice1.getWidth(), emptyDice1.getHeight(), dice2positionX);
 
         dice1.setPosition(emptyDice1.getX(), emptyDice1.getY() - 300);
-//        dice2 = new Dices(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 2f, emptyDice2.getWidth(), emptyDice2.getHeight());
-//        dice2.setPosition(MyConstants.SCREENWIDTH / 2f + 100, MyConstants.SCREENHEIGHT / 2f);
         dice1.setVisible(false);
-//        dice2.setVisible(false);
+        dice1.setActive(false);
 
-//        dice1.animateImage(0, true, 0, 0, null, 0, 1f / 6f);
         allDrawables.add(dice1);
-//        allDrawables.add(dice2);
-
 
         stage.addActor(emptyDice1);
         stage.addActor(plusDice);
         stage.addActor(emptyDice2);
-
 
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
@@ -250,13 +242,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         timer.schedule(new PresentationMetrologue(3_000), 1_000);
     }
 
-//    public int getLastDice1value(int diceNumber)
-//    {
-//        int diceValue = 0;
-//
-//        return
-//    }
-
 
     private class PresentationMetrologue extends MyTimer.TaskEtape
     {
@@ -268,18 +253,45 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
+            activiteView.addTextActivite("Touche les dés pour les faire tourner");
+
             int dicevalue1 = dice1.getLastDicevalue();
-//            int dicevalue2 = dice2.getLastDicevalue();
+
+            int diceValue2 = dice1.getLastDice2value();
 
             int ok = 5;
             ok++;
 
+            timer.schedule(new DiceStep(1_500), 0);
         }
     }
 
-    private class EtapeInstructionPlanche1 extends MyTimer.TaskEtape
+    private class DiceStep extends MyTimer.TaskEtape
     {
-        private EtapeInstructionPlanche1(long durMillis, long delay)
+        private DiceStep(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            dice1.setActive(true);
+
+            int dicevalue1 = dice1.getLastDicevalue();
+
+            int diceValue2 = dice1.getLastDice2value();
+
+            int ok = 5;
+            ok++;
+
+            timer.schedule(new EtapeInstructionArdoise1(3_000, 500), 0);
+        }
+    }
+
+    private class EtapeInstructionArdoise1 extends MyTimer.TaskEtape
+    {
+        private EtapeInstructionArdoise1(long durMillis, long delay)
         {
             super(durMillis, delay);
         }
@@ -287,79 +299,14 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            MyTimer.TaskEtape nextEtape = new DisplayOiseauxBranche1(2_000, 1_000);
-
-            metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_desoiseauxSePosentSurLaBranche.mp3", nextEtape);
-        }
-    }
-
-
-    private class DisplayOiseauxBranche1 extends MyTimer.TaskEtape
-    {
-        private DisplayOiseauxBranche1(long durMillis, long delay)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            DisplayOiseauxBranche1 nextEtape = new DisplayOiseauxBranche1(0, 0);
-
-//            oiseauxToDisplayBranche1 = randOiseauxArray.get(brancheRenewal)[0];
-            sacDeBilles.setActive(true);
-            activiteView.setTextActivite("Place sur la première planche autant de billes que d'oiseaux que tu vois sur la première branche, tape leur nombre au clavier puis valide");
-
-            if (cptOiseau1 < oiseauxToDisplayBranche1)
-            {
-                if ((cptOiseau1 == 1) /*&& (brancheRenewal == 0)*/)
-                {
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_PlaceSurLaPremiereBranche.mp3");
-                }
-                UnOiseau oiseau = oiseauxList.get(cptOiseau1);
-
-
-                posY = 7 * MyConstants.SCREENHEIGHT / 10;
-                posX = (MyConstants.SCREENWIDTH / 7) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau1);
-
-
-                oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
-                timer.schedule(nextEtape, 100);
-                cptOiseau1++;
-            }
-            else
-            {
-                timer.schedule(new InputClavier1(500), 0);
-            }
-
-        }
-    }
-
-    private class InputClavier1 extends MyTimer.TaskEtape
-    {
-
-        private InputClavier1(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            sacDeBilles.setActive(true);
-
+            activiteView.addTextActivite("Tape au clavier le nombre de points sur le premier dé puis valide.");
             calculetteView.setActive(true);
-
-            validusAnimated.setActive(true);
-
-            planche1.shouldReturnToReserve = true;
-            planche2.shouldReturnToReserve = true;
-            planche3.shouldReturnToReserve = true;
 
             validusAnimated.etapeCorrection = new PressValidate1(0);
             calculetteView.etapeCorrection = new PressValidate1(0);
         }
     }
+
 
     private class PressValidate1 extends MyTimer.TaskEtape
     {
@@ -382,7 +329,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             {
 
             }
-            if ((planche1.getNumberBilles() == oiseauxToDisplayBranche1) && (value == planche1.getNumberBilles()))
+            if ((value == dice1.getLastDicevalue())/* && (value == planche1.getNumberBilles())*/)
             {
 //                if (questionCourante != 8)
 //                {
@@ -395,11 +342,9 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 //                }
                 validusAnimated.isActive = false;
                 addDiamonds(1);
-                planche1.setAllBillesInactive();
-                planche1.setActive(false);
+
                 uneArdoise2.fillLabel(1, Integer.toString(value));
                 questionCourante++;
-
             }
             else
             {
@@ -432,7 +377,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
                 }
                 failedAttempts++;
-
             }
         }
     }
@@ -655,18 +599,17 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         {
             calculetteView.textRemove();
 
-            isAllActive = true;
 
-            timer.schedule(new EtapeInstructionPlanche2(500, 0), 0);
+            timer.schedule(new EtapeInstructionDice2(500, 0), 0);
 
 
             nbInput = null;
         }
     }
 
-    private class EtapeInstructionPlanche2 extends MyTimer.TaskEtape
+    private class EtapeInstructionDice2 extends MyTimer.TaskEtape
     {
-        private EtapeInstructionPlanche2(long durMillis, long delay)
+        private EtapeInstructionDice2(long durMillis, long delay)
         {
             super(durMillis, delay);
         }
@@ -674,48 +617,10 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            MyTimer.TaskEtape nextEtape = new DisplayOiseauxBranche2(2_000, 1_000);
+            MyTimer.TaskEtape nextEtape = new InputClavier2(2_000);
 
             metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_PlaceSurLaDeuxiemePlancheAutantDebIlles.mp3", nextEtape);
-            activiteView.addTextActivite("Place sur la deuxième planche autant de billes que d'oiseaux que tu vois sur la seconde branche, tape leur nombre au clavier puis valide");
-        }
-    }
-
-
-    private class DisplayOiseauxBranche2 extends MyTimer.TaskEtape
-    {
-        private DisplayOiseauxBranche2(long durMillis, long delay)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            DisplayOiseauxBranche2 nextEtape = new DisplayOiseauxBranche2(0, 0);
-
-//            oiseauxToDisplayBranche2 = randOiseauxArray.get(brancheRenewal)[1];
-
-            planche2.setVisible(true);
-
-            if ((cptOiseau2 < oiseauxToDisplayBranche2)/* && ((oiseauxToDisplayBranche1 + oiseauxToDisplayBranche2) <= 9)*/)
-            {
-                if (cptOiseau2 + cptOiseau1 <= 9)
-                {
-                    UnOiseau oiseau = oiseauxList.get(cptOiseau1 + cptOiseau2);
-                    posX = (MyConstants.SCREENWIDTH / 7f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (/*cptOiseau -*/ cptOiseau2);
-
-                    posY = 5 * MyConstants.SCREENHEIGHT / 11f;
-
-                    oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
-                    timer.schedule(nextEtape, 100);
-                    cptOiseau2++;
-                }
-            }
-            else
-            {
-                timer.schedule(new InputClavier2(500), 0);
-            }
+            activiteView.addTextActivite("Tape au clavier le nombre de points sur le deuxième dé puis valide.");
         }
     }
 
@@ -730,7 +635,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            sacDeBilles.setActive(true);
+//            sacDeBilles.setActive(true);
             calculetteView.setActive(true);
             validusAnimated.setActive(true);
 
@@ -760,14 +665,13 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             {
 
             }
-            if ((planche2.getNumberBilles() == oiseauxToDisplayBranche2) && (value == planche2.getNumberBilles()))
+            if ((value == dice1.getLastDice2value()))
             {
                 validusAnimated.goodAnswerPlaySound(new NextQuestion2(1_000));
 
                 validusAnimated.isActive = false;
                 addDiamonds(1);
-                planche2.setAllBillesInactive();
-                planche2.setActive(false);
+
                 uneArdoise2.fillLabel(2, Integer.toString(value));
                 questionCourante++;
             }
@@ -836,18 +740,16 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             {
                 billeRectification = sacDeBilles.getBilleAndRemove();
                 billeRectification.setVisible(true);
-                planche2.addBilleAndOrganize(billeRectification);
                 timer.schedule(new EtapeRectification2(500), 500);
             }
             else if (planche2.getNumberBilles() > oiseauxToDisplayBranche2)
             {
                 billeRectification = planche2.getLastBille();
                 planche2.removeBille(billeRectification);
-                sacDeBilles.addBilleToReserve(billeRectification);
 
                 timer.schedule(new EtapeRectification2(500), 500);
             }
-            else if (planche2.getNumberBilles() == oiseauxToDisplayBranche2)
+            else if (dice1.getLastDice2value() == oiseauxToDisplayBranche2)
             {
                 timer.schedule(new MoveMainToCalculette2(1_000), 1_000);
             }
@@ -888,7 +790,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            switch (oiseauxToDisplayBranche2)
+            switch (dice1.getLastDice2value())
             {
                 case 1:
                     styleTest = calculetteView.un_bouton.getStyle();
@@ -1032,7 +934,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 //            }
 //            else
 //            {
-            timer.schedule(new OiseauxOut(500, 0), 0);
+            timer.schedule(new InputClavier3(500), 0);
 //            }
 
             nbInput = null;
@@ -1045,55 +947,8 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
     }
 
 
-    private class OiseauxOut extends MyTimer.TaskEtape
-    {
-        private OiseauxOut(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            sacDeBilles.setActive(false);
-            planche1.shouldReturnToReserve = false;
-            planche2.shouldReturnToReserve = false;
-            planche3.shouldReturnToReserve = false;
-            if (cptOiseauTotal != 0)
-            {
-                if (cptOiseauTotal == cptOiseau1)
-                {
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_LesOiseauxSenvolent.mp3");
-                }
-
-                UnOiseau oiseau = oiseauxList.get(cptOiseauTotal - 1);
-
-                int posX = MyConstants.SCREENWIDTH * 2;
-                int posY = MyConstants.SCREENHEIGHT * 2;
-
-                oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
-                timer.schedule(new OiseauxOut(250, 0), 750);
-                cptOiseauTotal--;
-            }
-            else
-            {
-                planche3.setVisible(true);
-
-                metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_DeplaceToutesLesBillesSurLaPlancheTotal.mp3", new InputClavier3(/*(250),*/ 1_000));
-                activiteView.addTextActivite("Deplace toutes les billes sur la planche Total. \nTape ensuite sur le clavier le nopmbre de billes qui s'y trouvent puis valide.");
-
-//                brancheRenewal++;
-            }
-        }
-    }
-
-
     private class InputClavier3 extends MyTimer.TaskEtape
     {
-//        private InputClavier(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
 
         private InputClavier3(long durMillis)
         {
@@ -1109,14 +964,11 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
                 UnePlancheNew planche = allPlanches.get(i);
                 planche.setAllBillesActive();
             }
-//            sacDeBilles.setActive(true);
             calculetteView.setActive(true);
             validusAnimated.setActive(true);
 
             validusAnimated.etapeCorrection = new PressValidate3(0);
             calculetteView.etapeCorrection = new PressValidate3(0);
-
-
         }
     }
 
@@ -1405,7 +1257,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             afterCorrection = true;
             timer.schedule(new ResetScreen(1_000), 500);
             styleTest.up = drawableAux;
-//            planche3.setAllBillesActive();
             failedAttempts = 0;
 
         }
@@ -1421,13 +1272,9 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            planche2.setVisible(false);
-            planche3.setVisible(false);
 
             solutionView.addTextActivite(cptOiseau1 + " + " + cptOiseau2 + " = " + (cptOiseau1 + cptOiseau2));
-            metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_JAnnonceLAddition.mp3", new Annonce1(1_000));
-
-            planche3.removeAllBilles(sacDeBilles);
+            metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_JAnnonceLAddition.mp3", null);
 
             sacDeBilles.setActive(true);
             calculetteView.textRemove();
@@ -1435,148 +1282,147 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             uneArdoise2.eraseAllLabels();
         }
     }
+//
+//    private class Annonce1 extends MyTimer.TaskEtape
+//    {
+//        private Annonce1(long durMillis)
+//        {
+//            super(durMillis);
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//            MyTimer.TaskEtape nextEtape = new Annonce2(1_500, 500);
+//            switch (cptOiseau1)
+//            {
+//                case 1:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/UnPlus.mp3", nextEtape);
+//                    break;
+//                case 2:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/DeuxPlus.mp3", nextEtape);
+//                    break;
+//                case 3:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/TroisPlus.mp3", nextEtape);
+//                    break;
+//                case 4:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/QuatrePlus.mp3", nextEtape);
+//                    break;
+//                case 5:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/CinqPlus.mp3", nextEtape);
+//                    break;
+//                case 6:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/SixPlus.mp3", nextEtape);
+//                    break;
+//                case 7:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/SeptPlus.mp3", nextEtape);
+//                    break;
+//                case 8:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/HuitPlus.mp3", nextEtape);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//    }
 
-    private class Annonce1 extends MyTimer.TaskEtape
-    {
-        private Annonce1(long durMillis)
-        {
-            super(durMillis);
-        }
 
-        @Override
-        public void run()
-        {
-            MyTimer.TaskEtape nextEtape = new Annonce2(1_500, 500);
-            switch (cptOiseau1)
-            {
-                case 1:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/UnPlus.mp3", nextEtape);
-                    break;
-                case 2:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/DeuxPlus.mp3", nextEtape);
-                    break;
-                case 3:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/TroisPlus.mp3", nextEtape);
-                    break;
-                case 4:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/QuatrePlus.mp3", nextEtape);
-                    break;
-                case 5:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/CinqPlus.mp3", nextEtape);
-                    break;
-                case 6:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/SixPlus.mp3", nextEtape);
-                    break;
-                case 7:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/SeptPlus.mp3", nextEtape);
-                    break;
-                case 8:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/HuitPlus.mp3", nextEtape);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+//    private class Annonce2 extends MyTimer.TaskEtape
+//    {
+//        private Annonce2(long durMillis, long delay)
+//        {
+//            super(durMillis, delay);
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//            MyTimer.TaskEtape nextEtape = new AnnonceTotal(1_500, 500);
+//            switch (cptOiseau2)
+//            {
+//                case 1:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/UnEgal.mp3", nextEtape);
+//                    break;
+//                case 2:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/DeuxEgal.mp3", nextEtape);
+//                    break;
+//                case 3:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/TroisEgal.mp3", nextEtape);
+//                    break;
+//                case 4:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/QuatreEgal.mp3", nextEtape);
+//                    break;
+//                case 5:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/CinqEgal.mp3", nextEtape);
+//                    break;
+//                case 6:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/SixEgal.mp3", nextEtape);
+//                    break;
+//                case 7:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/SeptEgal.mp3", nextEtape);
+//                    break;
+//                case 8:
+//                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/HuitEgal.mp3", nextEtape);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//    }
 
-
-    private class Annonce2 extends MyTimer.TaskEtape
-    {
-        private Annonce2(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            MyTimer.TaskEtape nextEtape = new AnnonceTotal(1_500, 500);
-            switch (cptOiseau2)
-            {
-                case 1:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/UnEgal.mp3", nextEtape);
-                    break;
-                case 2:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/DeuxEgal.mp3", nextEtape);
-                    break;
-                case 3:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/TroisEgal.mp3", nextEtape);
-                    break;
-                case 4:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/QuatreEgal.mp3", nextEtape);
-
-                    break;
-                case 5:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/CinqEgal.mp3", nextEtape);
-                    break;
-                case 6:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/SixEgal.mp3", nextEtape);
-                    break;
-                case 7:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/SeptEgal.mp3", nextEtape);
-                    break;
-                case 8:
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/HuitEgal.mp3", nextEtape);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    private class AnnonceTotal extends MyTimer.TaskEtape
-    {
-        private AnnonceTotal(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-            if (questionCourante != 15)
-            {
-                MyTimer.TaskEtape nextEtape = new EtapeInstructionPlanche1(1_500, 500);
-                switch (cptOiseau1 + cptOiseau2)
-                {
-                    case 2:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/deux.mp3", nextEtape);
-                        break;
-                    case 3:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/trois.mp3", nextEtape);
-                        break;
-                    case 4:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/quatre.mp3", nextEtape);
-                        break;
-                    case 5:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/cinq.mp3", nextEtape);
-                        break;
-                    case 6:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/six.mp3", nextEtape);
-                        break;
-                    case 7:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/sept.mp3", nextEtape);
-                        break;
-                    case 8:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/huit.mp3", nextEtape);
-                        break;
-                    case 9:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/neuf.mp3", nextEtape);
-                        break;
-                    default:
-                        break;
-                }
-
-                cptOiseau1 = 0;
-                cptOiseau2 = 0;
-                cptOiseauTotal = 0;
-            }
-            else if (questionCourante == 15)
-            {
-                timer.schedule(new Fin(2000, 500), 0);
-            }
-        }
-    }
+//    private class AnnonceTotal extends MyTimer.TaskEtape
+//    {
+//        private AnnonceTotal(long durMillis, long delay)
+//        {
+//            super(durMillis, delay);
+//        }
+//
+//        @Override
+//        public void run()
+//        {
+//            if (questionCourante != 15)
+//            {
+//                MyTimer.TaskEtape nextEtape = new EtapeInstructionPlanche1(1_500, 500);
+//                switch (cptOiseau1 + cptOiseau2)
+//                {
+//                    case 2:
+//                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/deux.mp3", nextEtape);
+//                        break;
+//                    case 3:
+//                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/trois.mp3", nextEtape);
+//                        break;
+//                    case 4:
+//                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/quatre.mp3", nextEtape);
+//                        break;
+//                    case 5:
+//                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/cinq.mp3", nextEtape);
+//                        break;
+//                    case 6:
+//                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/six.mp3", nextEtape);
+//                        break;
+//                    case 7:
+//                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/sept.mp3", nextEtape);
+//                        break;
+//                    case 8:
+//                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/huit.mp3", nextEtape);
+//                        break;
+//                    case 9:
+//                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/neuf.mp3", nextEtape);
+//                        break;
+//                    default:
+//                        break;
+//                }
+//
+//                cptOiseau1 = 0;
+//                cptOiseau2 = 0;
+//                cptOiseauTotal = 0;
+//            }
+//            else if (questionCourante == 15)
+//            {
+//                timer.schedule(new Fin(2000, 500), 0);
+//            }
+//        }
+//    }
 
 
     private class Fin extends MyTimer.TaskEtape
@@ -1760,9 +1606,11 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
-        dice1.isTouched(mousePointerX, mousePointerY);
-//        dice2.isTouched(mousePointerX, mousePointerY);
+        if (dice1.isActive())
+        {
 
+            dice1.isTouched(mousePointerX, mousePointerY);
+        }
 
 //        boolean isReserveActif = sacDeBilles.isActive();
 //        if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
