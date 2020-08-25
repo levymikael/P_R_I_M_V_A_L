@@ -371,8 +371,6 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
         TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, animationContinue);
         batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
 
-//        TextureRegion textureRegion2 = (TextureRegion) animation2.getKeyFrame(elapsedTime, animationContinue);
-//        batch.draw(textureRegion2, currentPositionX, currentPositionY - 100, animationWidth, animationHeight);
     }
 
     private static ArrayList<String> arrayFromImage(String image)

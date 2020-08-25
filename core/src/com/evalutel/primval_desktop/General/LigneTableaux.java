@@ -76,7 +76,7 @@ public class LigneTableaux
         String duration = MillisToDuration(durationPerExercice);
 
         Label.LabelStyle labelStyleDuration = new Label.LabelStyle();
-        labelStyleDuration.fontColor = Color.OLIVE;
+        labelStyleDuration.fontColor = MyConstants.greenresultat;
         labelStyleDuration.font = bitmapFontArial;
 
         Label labelDuration = new Label(duration, labelStyleDuration);
@@ -108,7 +108,7 @@ public class LigneTableaux
         notes2Implement = highestNote + "/" + notePossiblePerExercice + "/" + noteMaxPossible;
 
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
-        labelStyleNotes.fontColor = Color.ORANGE;
+        labelStyleNotes.fontColor = MyConstants.redresultat;
         labelStyleNotes.font = bitmapFontArial;
 
         Label labelNotes = new Label(notes2Implement, labelStyleNotes);

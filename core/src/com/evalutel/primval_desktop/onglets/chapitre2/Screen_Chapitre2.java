@@ -45,7 +45,7 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
     Texture logoPageOnglet;
 
     ListExercicesActiviteViewChap2 listExercicesActiviteViewChap2;
-    ScreeenBackgroundImage fondEspaceParent;
+    ScreeenBackgroundImage bandeauHaut;
     ScreeenBackgroundImage fondSommaire;
     MrNotes mrNotes;
     MrTemps mrTemps;
@@ -82,14 +82,14 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
         allDrawables = new ArrayList<>();
 
-        fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
+        bandeauHaut = new ScreeenBackgroundImage("Images/Pages Chapitres/Bandeau haut.jpg");
 
         fondSommaire = new ScreeenBackgroundImage("Images/Pages onglets/fond.jpg");
 
         listExercicesActiviteViewChap2 = new ListExercicesActiviteViewChap2(stage, game);
 
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, "chapitres");
-        myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
+        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15f, screenWidth / 15f, game, "chapitres");
+        myButtonRetour.setPosition(screenWidth / 25f, 5 * screenHeight / 6f - myButtonRetour.getHeight() / 2);
 
         logoPageOnglet = new Texture(Gdx.files.internal("Images/Pages onglets/02.png"));
         logoPageOnglet.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -100,9 +100,9 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
         Table nomChapitre = new Table();
 
-        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25).height(MyConstants.SCREENWIDTH / 25).padRight(screenWidth / 150);
-        nomChapitre.add(labelChap1Titre).width((MyConstants.SCREENWIDTH / 5)).align(Align.left);
-        nomChapitre.setPosition(4.5f * screenWidth / 10, 7 * screenHeight / 10);
+        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25f).height(MyConstants.SCREENWIDTH / 25f).padRight(screenWidth / 150f);
+        nomChapitre.add(labelChap1Titre).width((MyConstants.SCREENWIDTH / 5f)).align(Align.left);
+        nomChapitre.setPosition(4.5f * screenWidth / 10, 7 * screenHeight / 10f);
         stage.addActor(nomChapitre);
 
         int numChapter = 2;
@@ -176,8 +176,8 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        fondEspaceParent.myDraw(batch);
-        fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6, 0, 0);
+        bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f));
+        fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6f, 0, 0);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -188,9 +188,9 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
             }
         }
 
-        int logoPageOngletWidth = screenWidth / 4;
+        float logoPageOngletWidth = screenWidth / 3f;
 
-        batch.draw(logoPageOnglet, screenWidth / 2 - (logoPageOngletWidth / 2), (9 * screenHeight / 15), logoPageOngletWidth, logoPageOngletWidth * (335f / 308f));
+        batch.draw(logoPageOnglet, screenWidth / 2f - (logoPageOngletWidth / 2f), (9f * screenHeight / 15f), logoPageOngletWidth, logoPageOngletWidth * (308f / 335f));
 
         batch.end();
 
@@ -215,9 +215,6 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
         stage.getViewport().update(width, height, true);
         width = 2400;
         height = 1350;
-
-
-//        viewport.update(width, height);
     }
 
     @Override

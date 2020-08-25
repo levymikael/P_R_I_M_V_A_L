@@ -14,8 +14,8 @@ import com.evalutel.primval_desktop.CalculetteView;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
-import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
+import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.SacDeBilles;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UnOiseau;
@@ -53,7 +53,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     private int cptOiseauTotal, cptOiseau1, cptOiseau2, /*cptBille,*/
             oiseauxToDisplayBranche1, oiseauxToDisplayBranche2;
     private int brancheRenewal, failedAttempts;
-    private int numOiseauxBranche1, numOiseauxBranche2;
+
 
 
     Label currentLabel;
@@ -196,7 +196,11 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         });
 
 
-        timer.schedule(new PresentationMetrologue(3_000), 1_000);
+        //timer.schedule(new PresentationMetrologue(3_000), 1_000);
+
+        cptOiseau1 = 5;
+        cptOiseau2 = 2;
+        metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_JAnnonceLAddition.mp3", new Annonce1(1_000));
     }
 
 
@@ -571,6 +575,8 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
+            int numOiseauxBranche1 = randOiseauxArray.get(questionCourante)[0];
+
             uneMain.setVisible(false);
             nbInput = String.valueOf(numOiseauxBranche1);
             afterCorrection = true;
@@ -940,6 +946,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
+            int numOiseauxBranche2 = randOiseauxArray.get(questionCourante)[1];
             uneMain.setVisible(false);
             nbInput = String.valueOf(numOiseauxBranche2);
             afterCorrection = true;
@@ -1386,7 +1393,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            MyTimer.TaskEtape nextEtape = new Annonce2(1_500, 500);
+            MyTimer.TaskEtape nextEtape = new Annonce2(1_500, 0);
             switch (cptOiseau1)
             {
                 case 1:
@@ -1430,7 +1437,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            MyTimer.TaskEtape nextEtape = new AnnonceTotal(1_500, 500);
+            MyTimer.TaskEtape nextEtape = new AnnonceTotal(1_500, 0);
             switch (cptOiseau2)
             {
                 case 1:
@@ -1563,17 +1570,16 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     public int randOiseau1()
     {
         Random rand = new Random();
-        numOiseauxBranche1 = rand.nextInt(6) + 1;
-        return numOiseauxBranche1;
+
+        return rand.nextInt(5) + 1;
     }
 
 
-    public int randOiseau2()
+    public int randOiseau2(int nbOiseau1)
     {
         Random rand = new Random();
-        int numOiseauxBranche2 = rand.nextInt(6 - numOiseauxBranche1) + 1;
 
-        return numOiseauxBranche2;
+        return nbOiseau1 + rand.nextInt(9 - nbOiseau1);
     }
 
     public void getRandOiseauxArray()
@@ -1581,8 +1587,10 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         for (int i = 0; i < 5; i++)
         {
             int[] oiseauxNumUpTo9 = {0, 0};
+            int nbOiseau1 = randOiseau1();
+
             oiseauxNumUpTo9[0] = randOiseau1();
-            oiseauxNumUpTo9[1] = randOiseau2();
+            oiseauxNumUpTo9[1] = randOiseau2(nbOiseau1);
             randOiseauxArray.add(oiseauxNumUpTo9);
         }
     }

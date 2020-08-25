@@ -39,7 +39,7 @@ public class DesktopLauncher
         int screenWidth = config.width;
 
         screenHeight /= 1.1f;
-        screenWidth /= 1.1f;
+        screenWidth /= 0.8f;
 
 
         System.out.print("screenheight, screenWidth" + screenHeight + "/" + screenWidth);

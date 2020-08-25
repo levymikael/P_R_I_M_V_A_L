@@ -78,6 +78,8 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
 
                 if ((nextEtape != null) /*&& (myTimer != null)*/)
                 {
+                    long delayTest = nextEtape.delayN;
+
                     myTimer.schedule(nextEtape, nextEtape.delayN);
                 }
             }

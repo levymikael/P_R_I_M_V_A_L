@@ -2,22 +2,17 @@ package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.evalutel.primval_desktop.General.MyMath;
 import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
 import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
-import com.evalutel.primval_desktop.Sommaire.Screen_All_Chapters;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.addListener;
 
 public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInterface, MyTouchInterface
 {
@@ -27,6 +22,8 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
     static int lastDiceValue, lastDiceValue2;
 
     float dice2positionX;
+    TextureRegion textureEmptyDice, texturePlusDice;
+    boolean isClicked = false;
 
     public Dices(float dicePositionX, float dicePositionY, float animationWidth, float animationHeight, float dice2positionX)
     {
@@ -37,6 +34,16 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         this.setPosition(dicePositionX, dicePositionY);
 
         this.dice2positionX = dice2positionX;
+
+
+        Texture diceTexture1 = new Texture(Gdx.files.internal("Images/onglet2_3/des_vide.png"));
+        diceTexture1.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        textureEmptyDice = new TextureRegion(diceTexture1);
+
+
+        Texture diceTexturePlus = new Texture(Gdx.files.internal("Images/onglet2_3/des_plus.png"));
+        diceTexturePlus.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        texturePlusDice = new TextureRegion(diceTexturePlus);
     }
 
 
@@ -78,7 +85,7 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         return imgDicesPaths;
     }
 
-    public int getLastDicevalue()
+    public int getLastDice1value()
     {
         return lastDiceValue;
     }
@@ -116,28 +123,38 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         return this.currentPositionX <= currentPositionX && this.currentPositionX + this.animationWidth >= currentPositionX && this.currentPositionY <= currentPositionY && this.currentPositionY + this.animationHeight >= currentPositionY;
     }
 
+
     @Override
     public void myDraw(Batch batch)
     {
+        batch.draw(textureEmptyDice, currentPositionX, currentPositionY, animationWidth, animationHeight);
+        batch.draw(texturePlusDice, currentPositionX + animationWidth, currentPositionY, animationWidth / 2, (animationHeight / 2) * (152f / 186f));
+        batch.draw(textureEmptyDice, dice2positionX, currentPositionY, animationWidth, animationHeight);
+
         elapsedTime += Gdx.graphics.getDeltaTime();
         TextureRegion textureRegion1 = (TextureRegion) animation.getKeyFrame(elapsedTime, animationContinue);
-        batch.draw(textureRegion1, currentPositionX, currentPositionY, animationWidth, animationHeight);
+        TextureRegion textureRegion2 = (TextureRegion) animation2.getKeyFrame(elapsedTime, animationContinue);
+        TextureRegion textureRegion3 = (TextureRegion) animation3.getKeyFrame(elapsedTime, animationContinue);
+        TextureRegion textureRegion4 = (TextureRegion) animation4.getKeyFrame(elapsedTime, animationContinue);
 
-        if (animation2 != null)
+
+        if (isClicked == true)
         {
-            TextureRegion textureRegion2 = (TextureRegion) animation2.getKeyFrame(elapsedTime, animationContinue);
+            batch.draw(textureRegion1, currentPositionX, currentPositionY, animationWidth, animationHeight);
+        }
+
+        if ((animation2 != null) && (isClicked == true))
+        {
             batch.draw(textureRegion2, currentPositionX, currentPositionY, animationWidth, animationHeight);
         }
 
-        if (animation3 != null)
+        if ((animation3 != null) && (isClicked == true))
         {
-            TextureRegion textureRegion3 = (TextureRegion) animation3.getKeyFrame(elapsedTime, animationContinue);
-            batch.draw(textureRegion3, currentPositionX + animationWidth + 10, currentPositionY, animationWidth, animationHeight);
+            batch.draw(textureRegion3, dice2positionX, currentPositionY, animationWidth, animationHeight);
         }
 
-        if (animation4 != null)
+        if ((animation4 != null) && (isClicked == true))
         {
-            TextureRegion textureRegion4 = (TextureRegion) animation4.getKeyFrame(elapsedTime, animationContinue);
             batch.draw(textureRegion4, dice2positionX, currentPositionY, animationWidth, animationHeight);
         }
     }
@@ -158,14 +175,14 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
     @Override
     public boolean isTouched(float x, float y)
     {
-        if (!isVisible)
+
+        if (isClicked == false)
         {
-            isVisible = true;
+            isClicked = true;
         }
 
         final Music music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/son_des.mp3"));
         music.play();
-
 
         Timer timerDice = new Timer();
 

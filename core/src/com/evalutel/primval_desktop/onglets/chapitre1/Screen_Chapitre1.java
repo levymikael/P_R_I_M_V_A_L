@@ -46,7 +46,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     Texture sacDebilles;
 
     ListExercicesActiviteViewChap1 listExercicesActiviteViewChap1;
-    ScreeenBackgroundImage fondEspaceParent;
+    ScreeenBackgroundImage bandeauHaut;
     ScreeenBackgroundImage fondSommaire;
     MrNotes mrNotes;
     MrTemps mrTemps;
@@ -84,7 +84,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         allDrawables = new ArrayList<>();
 
-        fondEspaceParent = new ScreeenBackgroundImage("Images/fond_espaceparent.jpg");
+        bandeauHaut = new ScreeenBackgroundImage("Images/Pages Chapitres/Bandeau haut.jpg");
+
 
         fondSommaire = new ScreeenBackgroundImage("Images/Pages onglets/fond.jpg");
 
@@ -178,7 +179,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        fondEspaceParent.myDraw(batch);
+        bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6));
         fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6, 0, 0);
 
         for (int i = 0; i < allDrawables.size(); i++)
@@ -192,7 +193,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         int sacDeBillesWidth = screenWidth / 3;
 
-        batch.draw(sacDebilles, screenWidth / 2 - (sacDeBillesWidth / 2), 11 * screenHeight / 15, sacDeBillesWidth, sacDeBillesWidth * (305.0f / 521.0f));
+        batch.draw(sacDebilles, screenWidth / 2 - (sacDeBillesWidth / 2), (11 * screenHeight / 15), sacDeBillesWidth, sacDeBillesWidth * (305f / 521f));
 
         batch.end();
 
