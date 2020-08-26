@@ -14,6 +14,7 @@ public class DesktopLauncher
 
         //config.width = 2048;
         //config.height = 1536;
+
         config.useHDPI = true;
 
 //		config.resizable = false;
@@ -39,7 +40,7 @@ public class DesktopLauncher
         int screenWidth = config.width;
 
         screenHeight /= 1.1f;
-        screenWidth /= 0.8f;
+        screenWidth /= 1.1f;
 
 
         System.out.print("screenheight, screenWidth" + screenHeight + "/" + screenWidth);
@@ -48,19 +49,24 @@ public class DesktopLauncher
 
         float currentRatio = (float) screenWidth / (float) screenHeight;
 
+        /*
         if (currentRatio > ratioTest)
         {
             screenWidth = (int) (screenHeight * 1024.0f / 768.0f);
             config.width = screenWidth;
             config.height = screenHeight;
         }
+*/
+
+        config.width = screenWidth;
+        config.height = screenHeight;
 
         config.forceExit = true;
 
         config.fullscreen = false;
 
         config.resizable = false;
-        config.samples = 4;
+        config.samples = 3;
         config.vSyncEnabled = true;
 
 //		config.fullscreen = true;

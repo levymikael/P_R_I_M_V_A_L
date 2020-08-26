@@ -2538,8 +2538,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        fondSommaire.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT, 0, 0);
-        bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f));
+        fondSommaire.myDraw2(batch, 0, 0, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT);
+        bandeauHaut.myDraw2(batch, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f), MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
         for (int i = 0; i < allDrawables.size(); i++)
         {
             MyDrawInterface newItem = allDrawables.get(i);

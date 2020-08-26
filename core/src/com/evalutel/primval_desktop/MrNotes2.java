@@ -58,14 +58,14 @@ public class MrNotes2 implements MyDrawInterface
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.ORANGE;
+        labelStyle.fontColor = MyConstants.redresultat;
         Label labelNotes = new Label(newTotalNotes, labelStyle);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes.png"));
         textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
-        container.setSize(screenWidth / 6, screenHeight / 14);
+        container.setSize(screenWidth / 6f, screenHeight / 14f);
         container.setPosition(positionX, positionY);
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));

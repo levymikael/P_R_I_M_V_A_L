@@ -7,7 +7,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MrNotes;
@@ -43,7 +41,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
     private Viewport viewport;
 
-    Texture sacDebilles;
+    Texture logoChapitre;
 
     ListExercicesActiviteViewChap1 listExercicesActiviteViewChap1;
     ScreeenBackgroundImage bandeauHaut;
@@ -61,51 +59,56 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     public Screen_Chapitre1(Game game)
     {
         this.game = game;
-//        this.dataBase = dataBase;
-
         stage = new Stage();
         batch = new SpriteBatch();
-        BitmapFont bitmapFont;
 
         screenHeight = MyConstants.SCREENHEIGHT;
         screenWidth = MyConstants.SCREENWIDTH;
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = screenHeight / 50;
-        parameter.minFilter = Texture.TextureFilter.Linear;
-        parameter.magFilter = Texture.TextureFilter.Linear;
-        bitmapFont = generator.generateFont(parameter);
-        generator.dispose();
+
+        int fontSize = MyConstants.SCREENWIDTH / 55;
+
+
+        FreeTypeFontGenerator generatorComicSansMSBold = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterComicSansMSBold = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterComicSansMSBold.size = fontSize;
+        parameterComicSansMSBold.minFilter = Texture.TextureFilter.Linear;
+        parameterComicSansMSBold.magFilter = Texture.TextureFilter.Linear;
+        BitmapFont bitmapFontComicSansMSBold = generatorComicSansMSBold.generateFont(parameterComicSansMSBold);
+        generatorComicSansMSBold.dispose();
+
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
-        labelStyleBlue.font = bitmapFont;
-        labelStyleBlue.fontColor = new Color(Color.valueOf("004ec0"));
+        labelStyleBlue.font = bitmapFontComicSansMSBold;
+        labelStyleBlue.fontColor = MyConstants.bluePrimval;
 
         allDrawables = new ArrayList<>();
 
         bandeauHaut = new ScreeenBackgroundImage("Images/Pages Chapitres/Bandeau haut.jpg");
 
-
         fondSommaire = new ScreeenBackgroundImage("Images/Pages onglets/fond.jpg");
 
         listExercicesActiviteViewChap1 = new ListExercicesActiviteViewChap1(stage, game);
 
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15, screenWidth / 15, game, "chapitres");
-        myButtonRetour.setPosition(screenWidth / 25, 5 * screenHeight / 6 - myButtonRetour.getHeight() / 2);
+        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15f, screenWidth / 15f, game, "chapitres");
+        myButtonRetour.setPosition(screenWidth / 25f, 5 * screenHeight / 6f - myButtonRetour.getHeight() / 2f);
 
-        sacDebilles = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
-        sacDebilles.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        logoChapitre = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
+        logoChapitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Label labelChap1Titre = new Label("Pratique des nombres de 1 à 9", labelStyleBlue);
-        labelChap1Titre.setFontScale(1.5f);
+//        labelChap1Titre.setFontScale(1.5f);
         Texture textureNumber1 = new Texture(Gdx.files.internal("Images/chap1.png"));
 
         Table nomChapitre = new Table();
 
-        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25).height(MyConstants.SCREENWIDTH / 25).padRight(screenWidth / 150);
-        nomChapitre.add(labelChap1Titre).width((MyConstants.SCREENWIDTH / 5)).align(Align.left);
-        nomChapitre.setPosition(4.5f * screenWidth / 10, 7 * screenHeight / 10);
+        float nomChapitreWidth = MyConstants.SCREENWIDTH / 5f;
+
+
+        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25f).height(MyConstants.SCREENWIDTH / 25f).padRight(screenWidth / 150f);
+        nomChapitre.add(labelChap1Titre).width(MyConstants.SCREENWIDTH / 4f).align(Align.left);
+        nomChapitre.setWidth(nomChapitreWidth);
+        nomChapitre.setPosition(screenWidth / 2f - (nomChapitreWidth / 2), 7 * screenHeight / 10f);
         stage.addActor(nomChapitre);
 
         int numChapter = 1;
@@ -179,8 +182,8 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        bandeauHaut.myDraw2(batch, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6));
-        fondSommaire.myDraw2(batch, screenWidth, 5 * screenHeight / 6, 0, 0);
+        bandeauHaut.myDraw2(batch, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f), MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
+        fondSommaire.myDraw2(batch, 0, 0, screenWidth, 5.05f * screenHeight / 6);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -191,9 +194,9 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
             }
         }
 
-        int sacDeBillesWidth = screenWidth / 3;
+        float logoChapitreWidth = screenWidth / 3.8f;
 
-        batch.draw(sacDebilles, screenWidth / 2 - (sacDeBillesWidth / 2), (11 * screenHeight / 15), sacDeBillesWidth, sacDeBillesWidth * (305f / 521f));
+        batch.draw(logoChapitre, screenWidth / 2f - (logoChapitreWidth / 2f), (10.5f * screenHeight / 15f), logoChapitreWidth, logoChapitreWidth * (305f / 521f));
 
         batch.end();
 
@@ -204,23 +207,13 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     @Override
     public void create()
     {
-        camera = new PerspectiveCamera();
-        viewport = new FitViewport(800, 480, camera);
+
     }
 
-    private void setScreen()
-    {
-    }
 
     @Override
     public void resize(int width, int height)
     {
-        stage.getViewport().update(width, height, true);
-        width = 2400;
-        height = 1350;
-
-
-//        viewport.update(width, height);
     }
 
     @Override

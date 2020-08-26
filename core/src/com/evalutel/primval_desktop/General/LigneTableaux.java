@@ -22,8 +22,8 @@ import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 public class LigneTableaux
 {
 
-    static String notes2Implement;
-    static long durationPerExercice;
+    private static String notes2Implement;
+    private static long durationPerExercice;
 
     public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, int noteMaxPossible)
     {
@@ -127,7 +127,7 @@ public class LigneTableaux
         {
             table.add(new Image(texture)).width(textureSize).height(textureSize);
         }
-        table.add(labelDuration).width(MyConstants.SCREENWIDTH / 12f).padRight(MyConstants.SCREENWIDTH / 17f).padLeft(MyConstants.SCREENWIDTH / 50);
+        table.add(labelDuration).width(MyConstants.SCREENWIDTH / 12f).padRight(MyConstants.SCREENWIDTH / 17f).padLeft(MyConstants.SCREENWIDTH / 50f);
 
         if (borderColor == "red")
         {
@@ -143,7 +143,7 @@ public class LigneTableaux
 
         container.add(borderTable1).width(MyConstants.SCREENWIDTH).height(2);
         container.row();
-        container.add(table).height(MyConstants.SCREENHEIGHT / 17f);
+        container.add(table).height(MyConstants.SCREENHEIGHT / 17f).width(MyConstants.SCREENWIDTH);
         container.row();
         container.add(borderTable2).width(MyConstants.SCREENWIDTH).height(2);
 

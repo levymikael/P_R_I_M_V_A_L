@@ -7,7 +7,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -34,7 +33,6 @@ import java.util.Date;
 
 public class Screen_Sommaire_General extends Game implements Screen, InputProcessor, ApplicationListener
 {
-    //private DatabaseDesktop dataBase;
     protected Stage stage;
     int screenWidth;
     int screenHeight;
@@ -54,8 +52,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
 
-//    Table chapitresOnglet;
-
     FreeTypeFontGenerator generator;
 
     Texture logoTitre;
@@ -64,7 +60,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
     public Screen_Sommaire_General(final Game game)
     {
-
         this.game = game;
         Gdx.app.log("screenheight, screenWidth", screenHeight + "/" + screenWidth);
 
@@ -77,7 +72,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = screenHeight / 40;
+        parameter.size = screenHeight / 35;
         parameter.minFilter = Texture.TextureFilter.Linear;
         parameter.magFilter = Texture.TextureFilter.Linear;
         bitmapFont = generator.generateFont(parameter);
@@ -85,7 +80,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFont;
-        labelStyleBlue.fontColor = new Color(Color.valueOf("0165a4"));
+        labelStyleBlue.fontColor = MyConstants.bluePrimval2;
 
         Label.LabelStyle labelStyleRed = new Label.LabelStyle();
         labelStyleRed.font = bitmapFont;
@@ -102,7 +97,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
         logoTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        mrNotes2 = new MrNotes2(stage, screenWidth / 100, screenHeight / 2 - MyConstants.SCREENHEIGHT / 50, "general");
+        mrNotes2 = new MrNotes2(stage, screenWidth / 100f, screenHeight / 2f - MyConstants.SCREENHEIGHT / 50f, "general");
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);
@@ -110,9 +105,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Label labelPresentation = new Label("Présentation", labelStyleBlue);
 
         Table container = new Table();
-        container.setPosition(screenWidth / 50, 2 * screenHeight / 13);
-        container.setWidth(screenWidth / 7);
-        container.setHeight(screenHeight / 6);
+        container.setPosition(screenWidth / 50f, 2 * screenHeight / 13f);
+        container.setWidth(screenWidth / 7f);
+        container.setHeight(screenHeight / 6f);
 
 
         Table avatarPic = new Table();
@@ -120,9 +115,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         avatarTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         avatarPic.setBackground(new SpriteDrawable(new Sprite(avatarTexture)));
-        avatarPic.setWidth(screenWidth / 7);
-        avatarPic.setHeight(screenHeight / 5);
-        avatarPic.setPosition(screenWidth / 50, 6 * screenHeight / 10);
+        avatarPic.setWidth(screenWidth / 7f);
+        avatarPic.setHeight(screenHeight / 5f);
+        avatarPic.setPosition(screenWidth / 50f, 6 * screenHeight / 10f);
 
         int paddingButtonBorders = MyConstants.SCREENWIDTH / 500;
 
@@ -133,28 +128,28 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         chaptersButton.pad(paddingButtonBorders);
         chaptersButton.setBackground(new SpriteDrawable(new Sprite(txtureCellulePrimaire)));
         chaptersButton.add(labelChapitres);
-        chaptersButton.setWidth(MyConstants.SCREENHEIGHT / 100);
+        chaptersButton.setWidth(MyConstants.SCREENHEIGHT / 100f);
 
         Table resultsButton = new Table();
         resultsButton.pad(paddingButtonBorders);
         resultsButton.setBackground(new SpriteDrawable(new Sprite(txtureCellulePrimaire)));
         resultsButton.add(labelResultats);
-        resultsButton.setWidth(MyConstants.SCREENHEIGHT / 100);
+        resultsButton.setWidth(MyConstants.SCREENHEIGHT / 100f);
 
         Table espaceParentsButton = new Table();
         espaceParentsButton.pad(paddingButtonBorders);
         espaceParentsButton.setBackground(new SpriteDrawable(new Sprite(txtureCellulePrimaire)));
         espaceParentsButton.add(labelEspaceParents);
-        espaceParentsButton.setWidth(MyConstants.SCREENHEIGHT / 100);
+        espaceParentsButton.setWidth(MyConstants.SCREENHEIGHT / 100f);
 
         Table presentationButton = new Table();
         presentationButton.pad(paddingButtonBorders);
         presentationButton.setBackground(new SpriteDrawable(new Sprite(txtureCellulePrimaire)));
         presentationButton.add(labelPresentation);
-        presentationButton.setWidth(MyConstants.SCREENHEIGHT / 100);
+        presentationButton.setWidth(MyConstants.SCREENHEIGHT / 100f);
 
 
-        float widthButton2 = screenWidth / 7;
+        float widthButton2 = screenWidth / 7f;
         float heightButton2 = widthButton2 * (44f / 178f);
         int paddingBetweenButtons = MyConstants.SCREENHEIGHT / 150;
 
@@ -168,8 +163,8 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
 
         Table summaryImgTable = new Table();
         summaryImgTable.setTouchable(Touchable.enabled);
-        summaryImgTable.setSize(4 * screenWidth / 5, MyConstants.SCREENHEIGHT);
-        summaryImgTable.setPosition(screenWidth / 5, 0);
+        summaryImgTable.setSize(4 * screenWidth / 5f, MyConstants.SCREENHEIGHT);
+        summaryImgTable.setPosition(screenWidth / 5f, 0);
         summaryImgTable.setTouchable(Touchable.enabled);
 
 
@@ -302,15 +297,12 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         }
         batch.begin();
 
-        fondSommaire.myDraw2(batch, screenWidth / 5, screenHeight, 0, 0);
-        fondSommairee.myDraw2(batch, screenWidth, screenHeight, ((screenWidth / 5) - (screenWidth / 70)), 0);
+        fondSommaire.myDraw2(batch, 0, 0, screenWidth / 5f, screenHeight);
+        fondSommairee.myDraw2(batch, ((screenWidth / 5f) - (screenWidth / 70f)), 0, screenWidth, screenHeight);
 
-        float x = (3 * screenWidth / 5) * (709f / 626f);
-        float y = (3 * screenWidth / 5);
-        imgSommaire.myDraw2(batch, x, y, ((screenWidth / 4)), ((screenHeight / 2) - (y / 2)));
-//        batch.draw(imgSommaire, 4 * screenWidth / 15, screenHeight / 5, 2 * screenWidth / 5, (((2 * screenWidth / 5) * 600) / 680));
-//        test.draw(batch);
-
+        float logoWidth = ((3 * screenWidth / 5f));
+        float logoHeight = logoWidth * (626f / 709f);
+        imgSommaire.myDraw2(batch, ((screenWidth / 3.5f)), ((screenHeight / 2f) - (logoHeight / 2)), logoWidth, logoHeight);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -321,9 +313,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             }
         }
 
-        float logoHeight = screenHeight / 8;
+        float titleHeight = screenHeight / 8f;
 
-        batch.draw(logoTitre, screenWidth / 40, screenHeight - logoHeight - screenHeight / 50.0f, screenWidth / 8, logoHeight);
+        batch.draw(logoTitre, screenWidth / 40f, screenHeight - (titleHeight + screenHeight / 45f), screenWidth / 8f, titleHeight);
 
         batch.end();
 
@@ -334,30 +326,8 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     @Override
     public void create()
     {
-        //camera = new PerspectiveCamera();
-        //viewport = new FitViewport(800, 480, camera);
-
-//        stage = new Stage(new StretchViewport(width, height));
-
     }
 
-    private void setScreen()
-    {
-    }
-
-
-    /*
-    @Override
-    public void resize(int width, int height)
-    {
-        //stage.getViewport().update(width, height, true);
-//        width = 2400;
-//        height = 1350;
-//        viewport.update(width, height);
-
-
-    }
-*/
     @Override
     public void pause()
     {

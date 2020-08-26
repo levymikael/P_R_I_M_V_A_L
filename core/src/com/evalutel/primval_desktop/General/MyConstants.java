@@ -22,26 +22,27 @@ public class MyConstants
     private static int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
     private float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 100f;
 
-    public static MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-
-    public static MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
-    public static MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton un_bouton_red = new MyTextButton("1", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton deux_bouton_red = new MyTextButton("2", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton trois_bouton_red = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton quatre_bouton_red = new MyTextButton("4", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton cinq_bouton_red = new MyTextButton("5", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton six_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton sept_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton huit_bouton_red = new MyTextButton("6", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//
+//    public static MyTextButton un_bouton_blue = new MyTextButton("1", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton deux_bouton_blue = new MyTextButton("2", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton trois_bouton_blue = new MyTextButton("3", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton quatre_bouton_blue = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton cinq_bouton_blue = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton six_bouton_blue = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton sept_bouton_blue = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
+//    public static MyTextButton huit_bouton_blue = new MyTextButton("8", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSizeOnglet);
 
 
     public static Color bluePrimval = new Color(Color.valueOf("004ec0"));
+    public static Color bluePrimval2 = new Color(Color.valueOf("0165a4"));
     public static Color redPrimval = new Color(Color.valueOf("a40b00"));
     public static Color redresultat = new Color(Color.valueOf("ff4700"));
     public static Color greenresultat = new Color(Color.valueOf("2b8014 "));
@@ -51,7 +52,7 @@ public class MyConstants
     public static int[] noteMaxChap3 = {25, 12, 10, 10, 32, 20};
     public static int[] noteMaxChap4 = {10, 10, 10, 24, 45, 30};
     public static int[] noteMaxChap5 = {36, 10, 34, 40, 40, 27};
-//    TODO: finir de remplir les baremes de notes
+    //    TODO: finir de remplir les baremes de notes
     public static int[] noteMaxChap6 = {10, 20, 30, 40};
     public static int[] noteMaxChap7 = {10, 20, 30, 40};
     public static int[] noteMaxChap8 = {10, 20, 30, 40};

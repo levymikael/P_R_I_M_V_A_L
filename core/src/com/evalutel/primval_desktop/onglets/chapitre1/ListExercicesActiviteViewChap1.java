@@ -84,7 +84,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         table.add(tableEx6).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
 
         table.align(Align.top);
-        table.setHeight(MyConstants.SCREENHEIGHT / 2);
+        table.setHeight(MyConstants.SCREENHEIGHT / 2f);
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();

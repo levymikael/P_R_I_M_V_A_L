@@ -43,7 +43,7 @@ public class ScreeenBackgroundImage extends TextureRegion implements MyDrawInter
         batch.draw(texture, 0, 0, screenWidth, screenHeight);
     }
 
-    public void myDraw2(Batch batch, float width, float height, float x, float y)
+    public void myDraw2(Batch batch, float x, float y, float width, float height)
     {
         batch.draw(texture, x, y, width, height);
     }

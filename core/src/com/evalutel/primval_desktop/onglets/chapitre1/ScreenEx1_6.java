@@ -116,7 +116,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         float posEnonceX = (MyConstants.SCREENWIDTH - activiteWidth) / 2f;
         float posSolutionX = posEnonceX + activiteWidth / 2f;
 
-        activiteView = new ActiviteView(stage, posEnonceX, activiteWidth * 42f / 1626f, activiteWidth / 2f, "activite");
+        activiteView = new ActiviteView(stage, posEnonceX, activiteWidth * 42f / 1626f, activiteWidth / 2f, "enonce");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
 

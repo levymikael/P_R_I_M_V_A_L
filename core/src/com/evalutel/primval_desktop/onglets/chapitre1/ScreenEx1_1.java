@@ -697,7 +697,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 3500);
 
-//            activiteView.addTextActivite("Mince, je crois que je me suis trompé, je clique sur Mademoiselle Validus pour savoir si c'est juste.");
             metrologue.metrologuePlaySound("Sounds/Metrologue/Mince je crois que.mp3");
         }
     }
