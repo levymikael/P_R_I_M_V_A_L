@@ -24,7 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -170,7 +169,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table evalutelMotto = evalutelMotto();
 
 
-
         Label labelChapterTitle = new Label("Chapitres", labelStyleBlueFRHND);
         labelChapterTitle.setFontScale(2.5f);
         Table chapterTitle = new Table();
@@ -243,13 +241,13 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         int paddingCoteEvalutelMotto = MyConstants.SCREENHEIGHT / 50;
 
         int leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80;
-//        ninePatch = new NinePatch(new Texture(Gdx.files.internal("Images/cellule Primaire.9.png")));
-TextureAtlas test = new TextureAtlas("Images/cellule Primaire.9.png");
 
+
+        // TODO : check 9-patch to avoid anti-aliasing
+        ninePatch = new NinePatch(new Texture(Gdx.files.internal("Images/cellule Primaire.9.png")));
 
         Table evalutelMotto = new Table();
         evalutelMotto.setBackground((textureRegionDrawableBg));
-        evalutelMotto.setBackground((Drawable) test);
 
         evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails).align(Align.center);
         evalutelMotto.padTop(paddingCoteEvalutelMotto).padRight(paddingCoteEvalutelMotto);
@@ -464,6 +462,7 @@ TextureAtlas test = new TextureAtlas("Images/cellule Primaire.9.png");
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
+        batch.draw(ninePatch, 100, 100);
 
         fondSommaire.myDraw2(batch, 0, 0, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT);
         bandeauHaut.myDraw2(batch, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f), MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
