@@ -28,7 +28,7 @@ public class UneArdoise extends Table implements MyCorrectionAndPauseInterface, 
 
     public float currentPositionX, currentPositionY;
 
-    public UneArdoise(Stage stage, final String number, int posX, int posY, int ardoiseSize)
+    public UneArdoise(Stage stage, final String number, float posX, float posY, float ardoiseSize)
     {
         this.number = number;
         this.setPosition(posX, posY);
@@ -37,7 +37,6 @@ public class UneArdoise extends Table implements MyCorrectionAndPauseInterface, 
         ardoiseBgActive = new Texture("Images/Ardoise/ardoise_fond.png");
         ardoiseBgActive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-
         ardoiseBgInactive = new Texture("Images/Ardoise/ardoise_fond.png");
         ardoiseBgInactive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
@@ -45,7 +44,9 @@ public class UneArdoise extends Table implements MyCorrectionAndPauseInterface, 
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = MyConstants.SCREENHEIGHT / 40;
+        parameter.size = MyConstants.SCREENHEIGHT / 30;
+        parameter.minFilter = Texture.TextureFilter.Linear;
+        parameter.magFilter = Texture.TextureFilter.Linear;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 

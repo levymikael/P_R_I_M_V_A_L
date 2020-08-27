@@ -11,8 +11,10 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
@@ -22,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -63,6 +66,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     MyButtonDemos myButtonDemo;
 
     TextureRegionDrawable textureRegionDrawableBg;
+    NinePatch ninePatch;
+
 
     BitmapFont bitmapFontZAP, bitmapFontArialBold, bitmapFontArial, bitmapFontFRHND;
 
@@ -84,7 +89,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         parameterFRHND.magFilter = Texture.TextureFilter.Linear;
         bitmapFontFRHND = generatorFONT_FRHND.generateFont(parameterFRHND);
         generatorFONT_FRHND.dispose();
-
 
 
         FreeTypeFontGenerator FONT_ZAP = new FreeTypeFontGenerator(Gdx.files.internal("font/Zapf Humanist 601 BT.ttf"));
@@ -110,7 +114,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         parameterArial.magFilter = Texture.TextureFilter.Linear;
         bitmapFontArial = arial.generateFont(parameterArial);
         arial.dispose();
-
 
         Label.LabelStyle labelStyleWhite = new Label.LabelStyle();
         labelStyleWhite.font = bitmapFontFRHND;
@@ -147,7 +150,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         allChaptersTitle.setBackground(new SpriteDrawable(new Sprite(chapter1Title)));
         allChaptersTitle.setSize(chapterTitleWidth, chapterTitleHeight);
-        allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2f - allChaptersTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - ((MyConstants.SCREENWIDTH / 13f)));
+        allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2f - allChaptersTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - (chapterTitleHeight * 1.3f));
 
         stage.addActor(allChaptersTitle);
 
@@ -166,6 +169,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Table evalutelMotto = evalutelMotto();
 
+
+
         Label labelChapterTitle = new Label("Chapitres", labelStyleBlueFRHND);
         labelChapterTitle.setFontScale(2.5f);
         Table chapterTitle = new Table();
@@ -175,7 +180,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Table chaptersListView = chaptersListView();
 
-        table.add(evalutelMotto).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19f)).align(Align.center).padTop(MyConstants.SCREENWIDTH / 90f);
+        table.add(evalutelMotto).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19f)).align(Align.center).padTop(MyConstants.SCREENWIDTH / 80f);
         table.row();
         table.add(chapterTitle).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 60f);
         table.row();
@@ -238,9 +243,13 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         int paddingCoteEvalutelMotto = MyConstants.SCREENHEIGHT / 50;
 
         int leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80;
+//        ninePatch = new NinePatch(new Texture(Gdx.files.internal("Images/cellule Primaire.9.png")));
+TextureAtlas test = new TextureAtlas("Images/cellule Primaire.9.png");
+
 
         Table evalutelMotto = new Table();
         evalutelMotto.setBackground((textureRegionDrawableBg));
+        evalutelMotto.setBackground((Drawable) test);
 
         evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails).align(Align.center);
         evalutelMotto.padTop(paddingCoteEvalutelMotto).padRight(paddingCoteEvalutelMotto);
@@ -454,6 +463,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     {
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
+
 
         fondSommaire.myDraw2(batch, 0, 0, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT);
         bandeauHaut.myDraw2(batch, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f), MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);

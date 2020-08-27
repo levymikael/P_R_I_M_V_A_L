@@ -36,7 +36,6 @@ public class MyTextButton extends TextButton implements MyDrawInterface, MyCorre
         super(text, style);
 
         this.setSize(size, size);
-//        this.setPosition(getWidth() / 2, getHeight() / 2);
 
     }
 
@@ -45,7 +44,6 @@ public class MyTextButton extends TextButton implements MyDrawInterface, MyCorre
         super(text, getStyle2(backgroundImagePathUp, font, fontSize));
 
         this.setSize(size, size);
-//        this.setPosition(getWidth() / 2, getHeight() / 2);
     }
 
     private static TextButtonStyle getStyle(String imagePathUp, String imagePathDown, String fontPath, int fontSize)
@@ -55,6 +53,8 @@ public class MyTextButton extends TextButton implements MyDrawInterface, MyCorre
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = fontSize;
+        parameter.minFilter = Texture.TextureFilter.Linear;
+        parameter.magFilter = Texture.TextureFilter.Linear;
         BitmapFont bitmapFont = generator.generateFont(parameter); // font size 12 pixels
         generator.dispose();
 

@@ -156,6 +156,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         FreeTypeFontGenerator generatorRed = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterRed = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterRed.size = fontSizeButton;
+        parameterRed.minFilter = Texture.TextureFilter.Linear;
+        parameterRed.magFilter = Texture.TextureFilter.Linear;
         BitmapFont bitmapFontRed = generatorRed.generateFont(parameter); // font size 12 pixels
         generatorRed.dispose();
 
@@ -175,6 +177,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         FreeTypeFontGenerator generatorBlue = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterBlue = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterBlue.size = fontSizeButton;
+        parameterBlue.minFilter = Texture.TextureFilter.Linear;
+        parameterBlue.magFilter = Texture.TextureFilter.Linear;
         BitmapFont bitmapFontBlue = generatorBlue.generateFont(parameter); // font size 12 pixels
         generatorBlue.dispose();
 
@@ -201,12 +205,14 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         Table resultatsObtenusTitle = new Table();
 
-        float chapterTitleWidth = MyConstants.SCREENWIDTH / 2.6f;
+        float chapterTitleWidth =MyConstants.SCREENWIDTH / 2.5f;
         float chapterTitleHeight = chapterTitleWidth * (45f / 365f);
 
         resultatsObtenusTitle.setBackground(new SpriteDrawable(new Sprite(resultatsObtenus)));
         resultatsObtenusTitle.setSize(chapterTitleWidth, chapterTitleHeight);
-        resultatsObtenusTitle.setPosition(MyConstants.SCREENWIDTH / 2f - resultatsObtenusTitle.getWidth() / 2, MyConstants.SCREENHEIGHT - ((MyConstants.SCREENWIDTH / 11f)));
+        resultatsObtenusTitle.setPosition(MyConstants.SCREENWIDTH / 2f - chapterTitleWidth / 2, MyConstants.SCREENHEIGHT - (chapterTitleHeight*1.3f));
+
+
 
         stage.addActor(resultatsObtenusTitle);
 

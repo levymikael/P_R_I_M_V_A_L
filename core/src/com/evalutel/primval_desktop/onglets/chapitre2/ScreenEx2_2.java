@@ -55,7 +55,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     private int brancheRenewal, failedAttempts;
 
 
-
     Label currentLabel;
 
     String nbInput;
@@ -80,9 +79,11 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
 //        allCorrigibles.add(sacDeBilles);
 
-        planche1 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.9f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-        planche2 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.2f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-        planche3 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 0.5f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        float allPlanchesStartPositionX = 1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2;
+
+        planche1 = new UnePlancheNew(allPlanchesStartPositionX, 1.9f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        planche2 = new UnePlancheNew(allPlanchesStartPositionX, 1.2f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        planche3 = new UnePlancheNew(allPlanchesStartPositionX, 0.5f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
         allPlanches.add(planche1);
         allPlanches.add(planche2);
         allPlanches.add(planche3);
@@ -146,13 +147,14 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         calculetteView.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
-        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24) + (2 * MyConstants.SCREENWIDTH / 100) + (3 * MyConstants.SCREENWIDTH / 200);
-        float posYArdoise2 = 0.3f * MyConstants.SCREENWIDTH;
+        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24f) + (2 * MyConstants.SCREENWIDTH / 100f) + (3 * MyConstants.SCREENWIDTH / 200f);
+        float posYArdoise2 = calculetteView.getCalculetteTopY();
 
-        uneArdoise2 = new UneArdoise2(stage, "", 3.95f * MyConstants.SCREENWIDTH / 5, posYArdoise2, buttonSize);
+        uneArdoise2 = new UneArdoise2(stage, "", 3.95f * MyConstants.SCREENWIDTH / 5f, posYArdoise2, buttonSize);
         allDrawables.add(uneArdoise2);
         uneArdoise2.setActive(false);
         myCorrectionAndPauseGeneral.addElements(uneArdoise2);
+
 
         metrologue.setVisible(false);
 
@@ -196,11 +198,11 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         });
 
 
-        //timer.schedule(new PresentationMetrologue(3_000), 1_000);
+        timer.schedule(new PresentationMetrologue(3_000), 1_000);
 
-        cptOiseau1 = 5;
-        cptOiseau2 = 2;
-        metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_JAnnonceLAddition.mp3", new Annonce1(1_000));
+//        cptOiseau1 = 5;
+//        cptOiseau2 = 2;
+//        metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_JAnnonceLAddition.mp3", new Annonce1(1_000));
     }
 
 
@@ -262,8 +264,8 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 UnOiseau oiseau = oiseauxList.get(cptOiseau1);
 
 
-                posY = 7 * MyConstants.SCREENHEIGHT / 10;
-                posX = (MyConstants.SCREENWIDTH / 7) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau1);
+                posY = 7 * MyConstants.SCREENHEIGHT / 10f;
+                posX = (MyConstants.SCREENWIDTH / 7f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau1);
 
 
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
@@ -1105,10 +1107,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 planche2.setAllBillesInactive();
                 uneArdoise2.fillLabel(3, Integer.toString(value));
                 questionCourante++;
-
-
-//                solutionView.addTextActivite(cptOiseau1 + " + "+ cptOiseau2 +" = " + (cptOiseau1 + cptOiseau2));
-
             }
             else
             {
@@ -1606,7 +1604,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         for (int i = 0; i < 9; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 15) * (396.0f / 500.0f), (float) (MyConstants.SCREENWIDTH / 15) * (500.0f / 396.0f));
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12f) * (396f / 500f), MyConstants.SCREENWIDTH / 12f);
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
             myCorrectionAndPauseGeneral.addElements(unOiseau);
@@ -1713,8 +1711,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 //        boolean isReserveActif = sacDeBilles.isActive();
         if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
-            int ok = 5;
-            ok++;
 //            if (billesList.size() <= 9)
             if ((planche1.getNumberBilles() + planche2.getNumberBilles() + planche3.getNumberBilles() <= 9) || (billesList.size() <= 9))
             {

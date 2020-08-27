@@ -158,12 +158,12 @@ public class ScreenOnglet implements Screen, InputProcessor
         labelStyle3.font = bitmapFontArial;
         labelStyle3.fontColor = Color.YELLOW;
 
-        largeurBilleUnique = MyConstants.SCREENWIDTH / 15;
+        largeurBilleUnique = MyConstants.SCREENWIDTH / 17f;
         largeurPlancheUnique = largeurBilleUnique * 4;
-        largeurBilleMultiple = MyConstants.SCREENWIDTH / 25;
+        largeurBilleMultiple = MyConstants.SCREENWIDTH / 28f;
         largeurPlancheMultiple = largeurBilleMultiple * 4;
 
-        largeurBougie = MyConstants.SCREENWIDTH / 15;
+        largeurBougie = MyConstants.SCREENWIDTH / 15f;
         largeurGateau = largeurBougie * 4;
 
         objectTouchedList = new ArrayList<>();
@@ -195,9 +195,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         myCorrectionAndPauseGeneral.addElements(metrologue);
 
 
-
-
-        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage,metrologue, validusAnimated, this, startTime, resultatExercice, timer);
+        myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, metrologue, validusAnimated, this, startTime, resultatExercice, timer);
 //        myButtonBackToPreviousMenu.addListener(new ClickListener()
 //        {
 //            @Override

@@ -24,13 +24,13 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
     private final BitmapFont bitmapFont;
     public String number;
 
-    Texture ardoiseBgActive, ardoiseBgInactive;
+    private Texture ardoiseBgActive, ardoiseBgInactive;
 
-    boolean isActive = true;
+    private boolean isActive = true;
 
     public float currentPositionX, currentPositionY;
 
-    Label labelEmplacement1, labelEmplacement2, labelEmplacement3;
+    private Label labelEmplacement1, labelEmplacement2, labelEmplacement3;
     Label.LabelStyle labelStyleWhite;
 
     public UneArdoise2(Stage stage, final String number, float posX, float posY, float ardoiseSize)
@@ -49,7 +49,9 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
 
         generatorComic = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = MyConstants.SCREENHEIGHT / 40;
+        parameter.size = MyConstants.SCREENHEIGHT / 30;
+        parameter.minFilter = Texture.TextureFilter.Linear;
+        parameter.magFilter = Texture.TextureFilter.Linear;
         bitmapFont = generatorComic.generateFont(parameter);
         generatorComic.dispose();
 
@@ -119,7 +121,7 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         emplacementTiret.setBackground(new SpriteDrawable(new Sprite(tiretTxture)));
         line3.add(emplacementTiret).width(widthTiret).height(heightTiret);
         this.add(line3).padBottom(interEmplacementPadding);
-        ;
+
         this.row();
         emplacementEgal.setBackground(new SpriteDrawable(new Sprite(egalTxture)));
         emplacement3.setBackground(new SpriteDrawable(new Sprite(emplacementTxture)));
@@ -174,10 +176,10 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         return isActive;
     }
 
-    public int ardoiseClicked(int number)
-    {
-        return number;
-    }
+//    public int ardoiseClicked(int number)
+//    {
+//        return number;
+//    }
 
     @Override
     public void myCorrectionStart()

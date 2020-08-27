@@ -45,10 +45,10 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
     UneArdoise2 uneArdoise2;
     protected CalculetteView calculetteView;
-    int posX, posY;
+    private int posX, posY;
 
     TextButton.TextButtonStyle styleTest;
-    Drawable drawableAux;
+    private Drawable drawableAux;
 
     int cpt;
 
@@ -67,15 +67,17 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
         sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBilleUnique * 1.5), (float) (largeurBilleUnique * 1.5));
         sacDeBilles.largeurBille = largeurBilleUnique;
-        sacDeBilles.isActive();
+//        sacDeBilles.isActive();
         sacDeBilles.setActive(false);
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
 //        allCorrigibles.add(sacDeBilles);
 
-        planche1 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.9f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-        planche2 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 1.2f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-        planche3 = new UnePlancheNew(1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2, 0.5f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        float allPlanchesStartPositionX = 1.8f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2;
+
+        planche1 = new UnePlancheNew(allPlanchesStartPositionX, 1.9f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        planche2 = new UnePlancheNew(allPlanchesStartPositionX, 1.1f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        planche3 = new UnePlancheNew(allPlanchesStartPositionX, 0.3f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
         allPlanches.add(planche1);
         allPlanches.add(planche2);
         allPlanches.add(planche3);
@@ -99,9 +101,9 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 //        highestMarkObtainedLabel = new Label("", labelStyle3);
 //        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
-        tableTitre.add(exoNumLabel).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
-        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(exoNumLabel).width(MyConstants.SCREENWIDTH / 25f).padLeft(MyConstants.SCREENWIDTH / 46f);
+        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9f);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22f);
 
         stage.addActor(tableTitre);
 
@@ -114,10 +116,11 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         calculetteView.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
-        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24) + (2 * MyConstants.SCREENWIDTH / 100) + (3 * MyConstants.SCREENWIDTH / 200);
-        float posYArdoise2 = 0.3f * MyConstants.SCREENWIDTH;
+//        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24f) + (2 * MyConstants.SCREENWIDTH / 100f) + (3 * MyConstants.SCREENWIDTH / 200f);
+        float buttonSize = MyConstants.SCREENWIDTH/7f;
+        float posYArdoise2 = calculetteView.getCalculetteTopY();
 
-        uneArdoise2 = new UneArdoise2(stage, "", 3.95f * MyConstants.SCREENWIDTH / 5, posYArdoise2, buttonSize);
+        uneArdoise2 = new UneArdoise2(stage, "", 3.95f * MyConstants.SCREENWIDTH / 5f, posYArdoise2, buttonSize);
         allDrawables.add(uneArdoise2);
         uneArdoise2.setActive(false);
         myCorrectionAndPauseGeneral.addElements(uneArdoise2);
@@ -129,38 +132,41 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-            game.setScreen(new Screen_Chapitre2(game));
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button)
+            {
+                game.setScreen(new Screen_Chapitre2(game));
 
 //                game.dispose();
-            Gdx.app.log("button click", "click!");
+                Gdx.app.log("button click", "click!");
 
-            endTime = System.currentTimeMillis();
-            seconds = (endTime - startTime) / 1_000L;
+                endTime = System.currentTimeMillis();
+                seconds = (endTime - startTime) / 1_000L;
 
-            resultatExercice.setDuree(seconds);
-            resultatExercice.setDate(endTime);
+                resultatExercice.setDuree(seconds);
+                resultatExercice.setDate(endTime);
 
-            if ((metrologue.isSpeaking) && (metrologue != null))
-            {
-                metrologue.stopMusic();
+                if ((metrologue.isSpeaking) && (metrologue != null))
+                {
+                    metrologue.stopMusic();
+                }
+                else if ((validusAnimated.isSpeaking) && (validusAnimated != null))
+                {
+                    validusAnimated.stopMusic();
+                }
+
+                timer.cancel();
+                AppSingleton appSingleton = AppSingleton.getInstance();
+                MyDataBase db = appSingleton.myDataBase;
+
+                db.insertResultat(resultatExercice);
+
             }
-            else if ((validusAnimated.isSpeaking) && (validusAnimated != null))
-            {
-                validusAnimated.stopMusic();
-            }
 
-            timer.cancel();
-            AppSingleton appSingleton = AppSingleton.getInstance();
-            MyDataBase db = appSingleton.myDataBase;
-
-            db.insertResultat(resultatExercice);
-
-        }
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-            return true;
-        }
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
+                return true;
+            }
 //            @Override
 //            public void clicked(InputEvent event, float x, float y)
 //            {
@@ -976,7 +982,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         for (int i = 0; i < 7; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12) * (396.0f / 500.0f), (float) (MyConstants.SCREENWIDTH / 12) * (500.0f / 396.0f));
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12f) * (396f / 500f),  MyConstants.SCREENWIDTH / 12f);
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
             myCorrectionAndPauseGeneral.addElements(unOiseau);

@@ -69,7 +69,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         bgScreenEx1_1 = new ScreeenBackgroundImage("Images/FondsSequence/" + getBgImageRandom());
         allDrawables.add(bgScreenEx1_1);
 
-        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlancheUnique / 2, MyConstants.SCREENHEIGHT / 10, largeurPlancheUnique, largeurBilleUnique);
+        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2f - largeurPlancheUnique / 2, MyConstants.SCREENHEIGHT / 15f, largeurPlancheUnique, largeurBilleUnique);
         allDrawables.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
 //        allCorrigibles.add(planche1);
@@ -303,7 +303,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
 //                if (questionCourante != 8)
 //                {
-                    validusAnimated.goodAnswerPlaySound(new NextQuestion(500));
+                validusAnimated.goodAnswerPlaySound(new NextQuestion(500));
 //                }
             }
             else
@@ -561,19 +561,19 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
     public void displayArdoise()
     {
-        int firstPositionArdoiseX = MyConstants.SCREENWIDTH / 4;
-        int firstPositionArdoiseY = 2 * MyConstants.SCREENHEIGHT / 3;
+        float firstPositionArdoiseX = MyConstants.SCREENWIDTH / 4f;
+        float firstPositionArdoiseY = 2 * MyConstants.SCREENHEIGHT / 3f;
 
         int buttonSize = MyConstants.SCREENWIDTH / 15;
 
         for (int i = 0; i < 9; i++)
         {
-            int firstPositionArdoiseXNew = firstPositionArdoiseX + (i * (MyConstants.SCREENWIDTH / 9));
+            float firstPositionArdoiseXNew = firstPositionArdoiseX + (i * (MyConstants.SCREENWIDTH / 9f));
 
             if (i > 4)
             {
-                firstPositionArdoiseY = 5 * MyConstants.SCREENHEIGHT / 9;
-                firstPositionArdoiseXNew = (firstPositionArdoiseX + MyConstants.SCREENWIDTH / 20) + ((i - 5) * (MyConstants.SCREENWIDTH / 9));
+                firstPositionArdoiseY = 4.8f * MyConstants.SCREENHEIGHT / 9f;
+                firstPositionArdoiseXNew = (firstPositionArdoiseX + MyConstants.SCREENWIDTH / 18f) + ((i - 5) * (MyConstants.SCREENWIDTH / 9f));
             }
             final UneArdoise uneArdoise = new UneArdoise(stage, String.valueOf(i + 1), firstPositionArdoiseXNew, firstPositionArdoiseY, buttonSize);
             uneArdoise.setPosition(firstPositionArdoiseXNew, firstPositionArdoiseY);
