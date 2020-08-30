@@ -29,8 +29,8 @@ public class CalculetteView extends Actor {
 
     public float posX;
     public float posY;
-    float posXinCalc = posX + 160.0f;
-    float posYinCalc = posY + 220.0f;
+    float posXinCalc = posX + 160f;
+    float posYinCalc = posY + 220f;
 
     TextureRegion textureRegionFond, additionBouton, divisionBouton, effacerBouton, egalBouton, multiplicationBouton, parenthese1Bouton, parenthese2Bouton, soustractionBouton, validerBouton, virguleBouton;
 
@@ -78,7 +78,7 @@ public class CalculetteView extends Actor {
         textFieldStyleTest.font = bitmapFont;
         
 
-        float heightTF = height/5.0f;
+        float heightTF = height/5f;
 
         textFieldTest = new TextField("", textFieldStyleTest);
         //textFieldTest.setColor(Color.GREEN);

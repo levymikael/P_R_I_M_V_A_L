@@ -65,7 +65,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
         oiseauxList = getNumberOiseauxArList();
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBilleUnique * 1.5), (float) (largeurBilleUnique * 1.5));
+        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60f, 9 * MyConstants.SCREENHEIGHT / 11f, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
         sacDeBilles.largeurBille = largeurBilleUnique;
 //        sacDeBilles.isActive();
         sacDeBilles.setActive(false);
@@ -117,7 +117,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
 //        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24f) + (2 * MyConstants.SCREENWIDTH / 100f) + (3 * MyConstants.SCREENWIDTH / 200f);
-        float buttonSize = MyConstants.SCREENWIDTH/7f;
+        float buttonSize = MyConstants.SCREENWIDTH / 7f;
         float posYArdoise2 = calculetteView.getCalculetteTopY();
 
         uneArdoise2 = new UneArdoise2(stage, "", 3.95f * MyConstants.SCREENWIDTH / 5f, posYArdoise2, buttonSize);
@@ -982,7 +982,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         for (int i = 0; i < 7; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12f) * (396f / 500f),  MyConstants.SCREENWIDTH / 12f);
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12f) * (396f / 500f), MyConstants.SCREENWIDTH / 12f);
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
             myCorrectionAndPauseGeneral.addElements(unOiseau);

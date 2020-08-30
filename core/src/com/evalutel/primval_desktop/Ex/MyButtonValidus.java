@@ -71,7 +71,7 @@ public class MyButtonValidus extends MyImageButton implements MyDrawInterface
     {
 
         Sound sound = Gdx.audio.newSound(Gdx.files.internal(audioPath));
-        sound.play(1.0f);
+        sound.play(1f);
 
 
 

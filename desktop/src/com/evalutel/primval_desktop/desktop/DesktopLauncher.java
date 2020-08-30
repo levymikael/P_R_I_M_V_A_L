@@ -45,7 +45,7 @@ public class DesktopLauncher
 
         System.out.print("screenheight, screenWidth" + screenHeight + "/" + screenWidth);
 
-        float ratioTest = 1024.0f / 768.0f;
+        float ratioTest = 1024f / 768f;
 
         float currentRatio = (float) screenWidth / (float) screenHeight;
 

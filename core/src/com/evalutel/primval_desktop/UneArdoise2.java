@@ -37,7 +37,7 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
     {
         this.number = number;
         this.setPosition(posX, posY);
-        this.setSize(ardoiseSize, ardoiseSize * 1.3f);
+        this.setSize(ardoiseSize, ardoiseSize * 1.2f);
 
         ardoiseBgActive = new Texture("Images/Ardoise/ardoise_fond.png");
         ardoiseBgActive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -97,7 +97,7 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         float widthEgal = widthPlus;
         float heightEgal = widthPlus * (107f / 115f);
 
-        float interEmplacementPadding = MyConstants.SCREENHEIGHT / 70;
+        float interEmplacementPadding = MyConstants.SCREENHEIGHT / 70f;
 
 
         labelEmplacement1 = new Label("", labelStyleWhite);

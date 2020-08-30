@@ -891,7 +891,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         for (int i = 0; i < 3; i++)
         {
             int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (float) ((MyConstants.SCREENWIDTH / 12) * (396.0f / 500.0f)), (float) (MyConstants.SCREENWIDTH / 12) * (500.0f / 396.0f));
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, ((MyConstants.SCREENWIDTH / 12f) * (396f / 500f)), (MyConstants.SCREENWIDTH / 12f) * (500f / 396f));
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
         }

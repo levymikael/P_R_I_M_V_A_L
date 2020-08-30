@@ -72,7 +72,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBilleUnique * 1.5), (float) (largeurBilleUnique * 1.5));
+        sacDeBilles = new SacDeBilles(53f * MyConstants.SCREENWIDTH / 60f, 9 * MyConstants.SCREENHEIGHT / 11f, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
         sacDeBilles.largeurBille = largeurBilleUnique;
         sacDeBilles.isActive();
         sacDeBilles.setActive(false);
@@ -82,7 +82,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
         allPlanches = new ArrayList<>();
 
-        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2 - largeurPlancheUnique / 2, 0, largeurPlancheUnique, largeurBilleUnique);
+        planche1 = new UnePlancheNew(MyConstants.SCREENWIDTH / 2f - largeurPlancheUnique / 2, 0, largeurPlancheUnique, largeurBilleUnique);
         planche1.shouldReturnToReserve = true;
         allDrawables.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
@@ -771,7 +771,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
         if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
-            if ((billesList.size() <= 9)|| planche1.getNumberBilles()<=9)
+            if ((billesList.size() <= 9) || planche1.getNumberBilles() <= 9)
             {
                 UneBille billeAdded = sacDeBilles.getBilleAndRemove();
                 if (billeAdded != null)
@@ -860,7 +860,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         for (int i = 0; i < 9; i++)
         {
             float firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12) * (396.0f / 500.0f), (float) (MyConstants.SCREENWIDTH / 12) * (500.0f / 396.0f));
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12f) * (396f / 500f), (MyConstants.SCREENWIDTH / 12f) * (500f / 396f));
 
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);

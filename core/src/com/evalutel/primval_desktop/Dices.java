@@ -1,5 +1,6 @@
 package com.evalutel.primval_desktop;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,6 +12,7 @@ import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
 import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,10 +21,14 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
 
     static ArrayList arrayListNumber, arrayListAnimal;
 
+    private ArrayList<int[]> randDicesArray = new ArrayList<>();
+
+
     static int lastDiceValue, lastDiceValue2;
+    int questionCourante;
 
     float dice2positionX;
-    TextureRegion textureEmptyDice, texturePlusDice;
+    TextureRegion textureEmptyDice, texturePlusDice, textureNumberDice1, textureNumberDice2;
     boolean isClicked = false;
 
     public Dices(float dicePositionX, float dicePositionY, float animationWidth, float animationHeight, float dice2positionX)
@@ -44,6 +50,13 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         Texture diceTexturePlus = new Texture(Gdx.files.internal("Images/onglet2_3/des_plus.png"));
         diceTexturePlus.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         texturePlusDice = new TextureRegion(diceTexturePlus);
+
+        getRandDicesArray();
+    }
+
+    public void getQuestionCourante(int questionCourante)
+    {
+        questionCourante = questionCourante;
     }
 
 
@@ -66,6 +79,34 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         return imgDicesPaths;
     }
 
+    public int randDice1()
+    {
+        Random rand = new Random();
+
+        return rand.nextInt(5) + 1;
+    }
+
+
+    public int randDice2(int nbDice1)
+    {
+        Random rand = new Random();
+
+        return nbDice1 + rand.nextInt(6 - nbDice1);
+    }
+
+    public void getRandDicesArray()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            int[] diceNumUpTo6 = {0, 0};
+            int nbOiseau1 = randDice1();
+
+            diceNumUpTo6[0] = randDice1();
+            diceNumUpTo6[1] = randDice2(nbOiseau1);
+            randDicesArray.add(diceNumUpTo6);
+        }
+    }
+
     private static ArrayList<String> getAnimationDice2Number()
     {
         ArrayList<String> imgDicesPaths = new ArrayList<>();
@@ -85,14 +126,23 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         return imgDicesPaths;
     }
 
-    public int getLastDice1value()
+    public int getLastDice1value(/*int questionCourante*/)
     {
-        return lastDiceValue;
+        return randDicesArray.get(questionCourante)[0];
     }
 
-    public int getLastDice2value()
+    public int getLastDice2value(/*int questionCourante*/)
     {
-        return lastDiceValue2;
+        return randDicesArray.get(questionCourante)[1];
+    }
+
+    public void displayNumberDiceFace()
+    {
+        String dice1NumberFace = "Images/onglet2_3/des_0" + getLastDice1value() + ".png";
+        textureNumberDice1 = new TextureRegion(new Texture(dice1NumberFace));
+
+        String dice2NumberFace = "Images/onglet2_3/des_0" + getLastDice2value() + ".png";
+        textureNumberDice2 = new TextureRegion(new Texture(dice2NumberFace));
     }
 
 
@@ -132,28 +182,28 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         batch.draw(textureEmptyDice, dice2positionX, currentPositionY, animationWidth, animationHeight);
 
         elapsedTime += Gdx.graphics.getDeltaTime();
-        TextureRegion textureRegion1 = (TextureRegion) animation.getKeyFrame(elapsedTime, animationContinue);
+        textureNumberDice1 = (TextureRegion) animation.getKeyFrame(elapsedTime, animationContinue);
         TextureRegion textureRegion2 = (TextureRegion) animation2.getKeyFrame(elapsedTime, animationContinue);
-        TextureRegion textureRegion3 = (TextureRegion) animation3.getKeyFrame(elapsedTime, animationContinue);
+        textureNumberDice2 = (TextureRegion) animation3.getKeyFrame(elapsedTime, animationContinue);
         TextureRegion textureRegion4 = (TextureRegion) animation4.getKeyFrame(elapsedTime, animationContinue);
 
 
-        if (isClicked == true)
+        if (isClicked)
         {
-            batch.draw(textureRegion1, currentPositionX, currentPositionY, animationWidth, animationHeight);
+            batch.draw(textureNumberDice1, currentPositionX, currentPositionY, animationWidth, animationHeight);
         }
 
-        if ((animation2 != null) && (isClicked == true))
+        if ((animation2 != null) && (isClicked))
         {
             batch.draw(textureRegion2, currentPositionX, currentPositionY, animationWidth, animationHeight);
         }
 
-        if ((animation3 != null) && (isClicked == true))
+        if ((animation3 != null) && (isClicked))
         {
-            batch.draw(textureRegion3, dice2positionX, currentPositionY, animationWidth, animationHeight);
+            batch.draw(textureNumberDice2, dice2positionX, currentPositionY, animationWidth, animationHeight);
         }
 
-        if ((animation4 != null) && (isClicked == true))
+        if ((animation4 != null) && (isClicked))
         {
             batch.draw(textureRegion4, dice2positionX, currentPositionY, animationWidth, animationHeight);
         }
@@ -176,7 +226,7 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
     public boolean isTouched(float x, float y)
     {
 
-        if (isClicked == false)
+        if (!isClicked)
         {
             isClicked = true;
         }
@@ -191,8 +241,23 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
             @Override
             public void run()
             {
-                animationContinue = false;
-//                dice2.animationContinue = false;
+                if (animationContinue)
+                {
+                    animationContinue = false;
+                    int ok = 5;
+                    ok++;
+                }
+                else
+                {
+                    animationContinue = true;
+                }
+
+                getLastDice1value();
+                getLastDice2value();
+
+//                displayNumberDiceFace();
+                isClicked = false;
+
                 Gdx.app.log("fin Timer", "");
 
                 music.stop();
@@ -228,7 +293,6 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
     public void setActive(boolean active)
     {
         isActive = active;
-
     }
 
 

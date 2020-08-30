@@ -18,7 +18,7 @@ public class SacDeBilles extends AnimationImageNew implements MyDrawInterface, M
     boolean isCorrected = false;
     ArrayList<UneBille> arrrayBilles = new ArrayList<>();
 
-    public SacDeBilles(int startPositionX, int startpositionY, float animationWidth, float animationHeight)
+    public SacDeBilles(float startPositionX, float startpositionY, float animationWidth, float animationHeight)
     {
         super("Images/éléments_outils/sac_de_billes.png", startPositionX, startpositionY, animationWidth, animationHeight);
     }

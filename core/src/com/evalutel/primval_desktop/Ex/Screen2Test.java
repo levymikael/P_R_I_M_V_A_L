@@ -102,8 +102,8 @@ public class Screen2Test implements Screen {
 
         //batch.draw(textureRegion, 120, 70, 80, 80);
 
-        float positionX = elapsedTime*20.0f;
-        float positionY = elapsedTime*20.0f;
+        float positionX = elapsedTime*20f;
+        float positionY = elapsedTime*20f;
 
         batch.draw(textureRegion, positionX, positionY, 100, 100);
 //        myTextButtonTest.draw(batch, 1);

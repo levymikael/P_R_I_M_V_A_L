@@ -71,7 +71,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
         oiseauxList = getNumberOiseauxArList();
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (float) (largeurBilleUnique * 1.5), (float) (largeurBilleUnique * 1.5));
+        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
         sacDeBilles.largeurBille = largeurBilleMultiple;
 //        sacDeBilles.isActive();
         sacDeBilles.setActive(false);
@@ -1064,8 +1064,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
             validusAnimated.etapeCorrection = new PressValidate3(0);
             calculetteView.etapeCorrection = new PressValidate3(0);
-
-
         }
     }
 

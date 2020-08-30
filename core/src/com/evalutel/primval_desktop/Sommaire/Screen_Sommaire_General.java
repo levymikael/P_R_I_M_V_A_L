@@ -211,7 +211,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         quit.setTouchable(Touchable.enabled);
         quit.setBackground(new SpriteDrawable(new Sprite(escapeBtn)));
         quit.setSize(screenWidth / 20, screenWidth / 20);
-        quit.setPosition(screenWidth - (float) (quit.getWidth() * 1.5), screenHeight - (float) (quit.getWidth() * 1.5));
+        quit.setPosition(screenWidth - (quit.getWidth() * 1.5f), screenHeight - (quit.getWidth() * 1.5f));
 
         stage.addActor(quit);
 

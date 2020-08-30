@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -66,6 +67,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
     TextureRegionDrawable textureRegionDrawableBg;
     NinePatch ninePatch;
+    NinePatchDrawable ninePatchDrawable;
 
 
     BitmapFont bitmapFontZAP, bitmapFontArialBold, bitmapFontArial, bitmapFontFRHND;
@@ -245,6 +247,12 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         // TODO : check 9-patch to avoid anti-aliasing
         ninePatch = new NinePatch(new Texture(Gdx.files.internal("Images/cellule Primaire.9.png")));
+
+         ninePatchDrawable= new NinePatchDrawable(ninePatch);
+
+
+
+
 
         Table evalutelMotto = new Table();
         evalutelMotto.setBackground((textureRegionDrawableBg));
@@ -462,8 +470,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        batch.draw(ninePatch, 100, 100);
-
         fondSommaire.myDraw2(batch, 0, 0, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT);
         bandeauHaut.myDraw2(batch, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f), MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
         for (int i = 0; i < allDrawables.size(); i++)
@@ -474,6 +480,9 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
                 newItem.myDraw(batch);
             }
         }
+
+
+        ninePatch.draw(batch, 10, 100, 50, 200);
 
         batch.end();
 

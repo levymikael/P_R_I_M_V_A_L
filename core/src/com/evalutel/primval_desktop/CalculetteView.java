@@ -31,7 +31,7 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
     public MyTimer.TaskEtape etapeCorrection;
     //    public float posX;
 //    public float posY;
-    private float positionX, positionY;
+    public float positionX, positionY;
 
     private TextureRegion textureRegionFond;
 
@@ -66,7 +66,7 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
         this.positionX = MyConstants.SCREENWIDTH - width - (MyConstants.SCREENWIDTH / 200f);
         this.positionY = MyConstants.SCREENWIDTH / 200f;
 
-        skin = new Skin();
+//        skin = new Skin();
 
         this.stage = stage;
 
@@ -89,7 +89,6 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
 
         textFieldStyleTest = new TextField.TextFieldStyle();
         textFieldStyleTest.fontColor = new Color(Color.BLACK);
-        ;
         textFieldStyleTest.font = bitmapFont;
 
         float heightTF = height / 5f;
@@ -183,7 +182,7 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
 
     public float getCalculetteTopY()
     {
-        return this.height;
+        return textureRegionFond.getRegionHeight() + this.positionY;
     }
 
     public String getInput()

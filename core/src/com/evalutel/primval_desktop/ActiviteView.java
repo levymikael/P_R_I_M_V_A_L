@@ -37,7 +37,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     int cptInstructions;
 
-    Sprite sprite2, sprite3, spriteEnonceText, spriteSolutionText;
+//    Sprite sprite2, sprite3, spriteEnonceText, spriteSolutionText;
     BitmapFont bitmapFontArial, bitmapFontComic;
     private boolean isVisible = true;
     private Texture textureMilieuEnonce;
@@ -90,7 +90,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         stage.addActor(table);
 
-        float paddingHeightTableMilieu = MyConstants.SCREENHEIGHT / 200;
+        float paddingHeightTableMilieu = MyConstants.SCREENHEIGHT / 200f;
 
         paddingTableMilieu.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
         paddingTableMilieu2.setBackground(new SpriteDrawable(new Sprite(textureMilieuEnonce)));
@@ -128,7 +128,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         heightBackGroundImage = widthCote * 29f / 28f;
 
         heightTop = positionY;
-
 
         float widthCentre = 300f;
 
@@ -255,7 +254,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFontArial;
-        labelStyleBlue.fontColor = new Color(71f / 255f, 107f / 255f, 217f / 255f, 1);
+        labelStyleBlue.fontColor = MyConstants.bluePrimval;
 
         if (cptInstructions != 0)
         {
@@ -267,7 +266,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         lastLabel = label3;
 
-        lastLabel.setColor(new Color(71f / 255f, 107f / 255f, 217f / 255f, 1));
+        lastLabel.setColor(MyConstants.bluePrimval);
 
         if (lastPointerTable != null)
         {
@@ -288,7 +287,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         }
 
 
-        table4.add(lastPointerTable).top().center().height(MyConstants.SCREENHEIGHT / 50f).width(MyConstants.SCREENWIDTH / 100f).align(Align.top).padRight(MyConstants.SCREENWIDTH/100f).padTop(MyConstants.SCREENHEIGHT/200f);
+        table4.add(lastPointerTable).top().center().height(MyConstants.SCREENHEIGHT / 50f).width(MyConstants.SCREENWIDTH / 100f).align(Align.top).padRight(MyConstants.SCREENWIDTH / 100f).padTop(MyConstants.SCREENHEIGHT / 200f);
 
 //        if (activiteType == "enonce" || activiteType == "activite")
 //        {
@@ -328,7 +327,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         cptInstructions++;
 
-        float labelHeight = label3.getHeight() + MyConstants.SCREENHEIGHT / 100;
+        float labelHeight = label3.getHeight() + MyConstants.SCREENHEIGHT / 100f;
 
         topYTablePosition = MyConstants.SCREENHEIGHT - table.getHeight() - heightTop;
 

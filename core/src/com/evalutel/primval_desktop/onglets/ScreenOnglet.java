@@ -127,8 +127,8 @@ public class ScreenOnglet implements Screen, InputProcessor
         tableTitre.pack();
         activiteWidth = (MyConstants.SCREENWIDTH / 4f) * 3f;
 
-        heightTop = (activiteWidth * 42 / 1626) + 5;
-        xTableTitre = (MyConstants.SCREENWIDTH / 2.0f - activiteWidth / 2.0f);
+        heightTop = (activiteWidth * 42f / 1626f) + 5;
+        xTableTitre = (MyConstants.SCREENWIDTH / 2f - activiteWidth / 2f);
         tableTitre.setPosition(xTableTitre /*+ MyConstants.SCREENWIDTH / 200*/, MyConstants.SCREENHEIGHT - heightTop);
 
         tableTitre.setWidth(activiteWidth);

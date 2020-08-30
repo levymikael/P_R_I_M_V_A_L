@@ -51,7 +51,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
     private int /*brancheRenewal,*/ failedAttempts;
     private int diceNumber1;
 
-    Texture emptyDices;
 
     Label currentLabel;
 
@@ -110,20 +109,21 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         calculetteView.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
-        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24f) + (2 * MyConstants.SCREENWIDTH / 100f) + (3 * MyConstants.SCREENWIDTH / 200f);
-        float posYArdoise2 = 0.3f * MyConstants.SCREENWIDTH;
+//        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24f) + (2 * MyConstants.SCREENWIDTH / 100f) + (3 * MyConstants.SCREENWIDTH / 200f);
+        float buttonSize = MyConstants.SCREENWIDTH / 5f;
+        float posYArdoise2 = calculetteView.getCalculetteTopY() + MyConstants.SCREENHEIGHT / 15f;
 
-        uneArdoise2 = new UneArdoise2(stage, "", 3.95f * MyConstants.SCREENWIDTH / 5, posYArdoise2, buttonSize);
+
+        int ok = 5;
+        ok++;
+
+        uneArdoise2 = new UneArdoise2(stage, "", calculetteView.positionX, posYArdoise2, buttonSize);
         allDrawables.add(uneArdoise2);
         uneArdoise2.setActive(false);
         myCorrectionAndPauseGeneral.addElements(uneArdoise2);
 
         float diceWidth = MyConstants.SCREENWIDTH / 7f;
         float diceHeight = diceWidth * (263f / 314f);
-//        float dicePlusHeight = diceWidth * (152f / 186f);
-
-        int ok = 5;
-        ok++;
 
 
         float dice2positionX = MyConstants.SCREENWIDTH / 4f + (diceWidth * 1.3f);
@@ -895,7 +895,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             try
             {
                 value = Integer.parseInt(txtTape);
-            } catch (Exception e)
+            } catch (Exception ignored)
             {
 
             }
@@ -1260,7 +1260,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            if (questionCourante != 15)
+            if (questionCourante != 18)
             {
                 MyTimer.TaskEtape nextEtape = new ResetScreen(1_500);
                 switch (dice1.getLastDice1value() + dice1.getLastDice2value())
@@ -1379,8 +1379,9 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
         if (dice1.isActive() && (dice1.contains(mousePointerX, mousePointerY)))
         {
-
+            dice1.getQuestionCourante(questionCourante);
             dice1.isTouched(mousePointerX, mousePointerY);
+            dice1.displayNumberDiceFace();
         }
 
         return true;

@@ -22,7 +22,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
 
     public UnePlancheNew(float startPositionX, float startPositionY, float plancheWidth, float billeWidth)
     {
-        super("Images/Badix/planche_9billes.png", startPositionX, startPositionY, (float) plancheWidth, plancheWidth);
+        super("Images/Badix/planche_9billes.png", startPositionX, startPositionY, plancheWidth, plancheWidth);
 
         int startX = (int) animationWidth / 12;
 

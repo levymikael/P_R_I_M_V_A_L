@@ -34,7 +34,7 @@ public class EcrinDiamantView implements MyDrawInterface, MyCorrectionAndPauseIn
     BitmapFont bitmapFont;
     private boolean isVisible = true;
 
-//    Skin ecrinSkin;
+    //    Skin ecrinSkin;
 //    Cell<Label> cell;
 //    Label label2;
     private int pointsMax;
@@ -54,7 +54,7 @@ public class EcrinDiamantView implements MyDrawInterface, MyCorrectionAndPauseIn
 
         FreeTypeFontGenerator FONT_COMICI = new FreeTypeFontGenerator(Gdx.files.internal("font/comici.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size =  MyConstants.SCREENWIDTH / 70;
+        parameter.size = MyConstants.SCREENWIDTH / 70;
         bitmapFont = FONT_COMICI.generateFont(parameter);
         FONT_COMICI.dispose();
 
@@ -73,19 +73,19 @@ public class EcrinDiamantView implements MyDrawInterface, MyCorrectionAndPauseIn
 // Creation cellule tableau pour numero d'exerice:
         tableTitre = new Table();
         tableTitre.setBackground(new SpriteDrawable(new Sprite(ecrinDiamantTexture)));
-        tableTitre.setSize((float) MyConstants.SCREENHEIGHT / 20, (float) MyConstants.SCREENHEIGHT / 25);
+        tableTitre.setSize(MyConstants.SCREENHEIGHT / 20f, MyConstants.SCREENHEIGHT / 25f);
 
 // Positionnement numero exercice:
-        tableTitre.add(currentLabel2).align(Align.right).width(MyConstants.SCREENWIDTH / 40).padLeft(MyConstants.SCREENWIDTH / 120);
-        tableTitre.add(currentLabel1).width(widthEcrin - MyConstants.SCREENWIDTH / 120).height(MyConstants.SCREENHEIGHT / 11).padLeft(MyConstants.SCREENWIDTH / 50);
+        tableTitre.add(currentLabel2).align(Align.right).width(MyConstants.SCREENWIDTH / 40f).padLeft(MyConstants.SCREENWIDTH / 120f);
+        tableTitre.add(currentLabel1).width(widthEcrin - MyConstants.SCREENWIDTH / 120f).height(MyConstants.SCREENHEIGHT / 11f).padLeft(MyConstants.SCREENWIDTH / 50f);
 
         stage.addActor(tableTitre);
 
 // Positionnement du tableau sur ecran:
 
         tableTitre.pack();
-        tableTitre.setPosition(MyConstants.SCREENWIDTH / 60, MyConstants.SCREENHEIGHT / 20);
-        tableTitre.setSize(MyConstants.SCREENWIDTH / 7, (MyConstants.SCREENWIDTH / 7) * (59.0f / 168.0f));
+        tableTitre.setPosition(MyConstants.SCREENWIDTH / 60f, MyConstants.SCREENHEIGHT / 20f);
+        tableTitre.setSize(MyConstants.SCREENWIDTH / 7f, (MyConstants.SCREENWIDTH / 7f) * (59f / 168f));
     }
 
     public void updateText()

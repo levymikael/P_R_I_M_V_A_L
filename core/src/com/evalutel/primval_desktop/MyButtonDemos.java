@@ -22,8 +22,8 @@ public class MyButtonDemos extends MyImageButton implements MyDrawInterface
         super(stage, "Images/button_demonstration.png", width, height);
 
 
-        float posY = (float) (5.0f * MyConstants.SCREENHEIGHT / 6.0f - this.getHeight() / 2.0f);
-        float posX = (float) (4.0f * MyConstants.SCREENWIDTH / 25.0f);
+        float posY = (5f * MyConstants.SCREENHEIGHT / 6f - this.getHeight() / 2f);
+        float posX = (4f * MyConstants.SCREENWIDTH / 25f);
         this.setPosition(posX, posY);
 
         setTouchable(Touchable.enabled);
