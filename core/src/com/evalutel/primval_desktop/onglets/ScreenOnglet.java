@@ -31,8 +31,9 @@ import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
 import com.evalutel.primval_desktop.SacDeBilles;
 import com.evalutel.primval_desktop.SacDeBougies;
+import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UneBille;
-import com.evalutel.primval_desktop.UneMain;
+import com.evalutel.primval_desktop.UneSouris;
 import com.evalutel.primval_desktop.UnePlancheNew;
 import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.ui_tools.AppSingleton;
@@ -77,8 +78,8 @@ public class ScreenOnglet implements Screen, InputProcessor
 
     protected float largeurBilleUnique, largeurBilleMultiple;
     protected float largeurPlancheUnique, largeurPlancheMultiple;
-    protected float largeurBougie, largeurGateau;
-    protected UneMain uneMain;
+
+    protected UneSouris uneSouris;
 
     protected MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;
 
@@ -102,6 +103,10 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected String numExercice;
 
     protected Label exoNumLabel, exoConsigneLabel, highestMarkObtainedLabel;
+
+    protected ScreeenBackgroundImage backgroundScreen;
+    protected float largeurFond;
+    protected float hauteurFond;
 //    private MyDataBase db;
 
 
@@ -163,8 +168,6 @@ public class ScreenOnglet implements Screen, InputProcessor
         largeurBilleMultiple = MyConstants.SCREENWIDTH / 28f;
         largeurPlancheMultiple = largeurBilleMultiple * 4;
 
-        largeurBougie = MyConstants.SCREENWIDTH / 15f;
-        largeurGateau = largeurBougie * 4;
 
         objectTouchedList = new ArrayList<>();
         allDrawables = new ArrayList<>();
@@ -273,33 +276,9 @@ public class ScreenOnglet implements Screen, InputProcessor
         int posX = 6 * MyConstants.SCREENWIDTH / 7;
         int posY = MyConstants.SCREENHEIGHT / 2;
 
-        uneMain = new UneMain(posX, posY, MyConstants.SCREENWIDTH / 6);
-        uneMain.setVisible(false);
-        myCorrectionAndPauseGeneral.addElements(uneMain);
-
-
-
- /*
-        reserveBilles = new ReserveBilles(MyConstants.SCREENWIDTH - 300, MyConstants.SCREENHeight - 300, 200, 200);
-        allDrawables.add(reserveBilles);
-
-        largeurBille = 100;
-        int largeurPlanche = largeurBille * 4;
-
-        planche1 = new UnePlancheNew(1000, 200, largeurPlanche, largeurBille);
-        planche2 = new UnePlancheNew(1400, 200, largeurPlanche, largeurBille);
-        planche3 = new UnePlancheNew(1800, 200, largeurPlanche, largeurBille);
-
-        allPlanches.add(planche1);
-        allPlanches.add(planche2);
-        allPlanches.add(planche3);
-
-        planche1.shouldReturnToReserve = false;
-        allDrawables.add(planche1);
-        planche2.shouldReturnToReserve = false;
-        allDrawables.add(planche2);
-        planche3.shouldReturnToReserve = true;
-        allDrawables.add(planche3);*/
+        uneSouris = new UneSouris(posX, posY, MyConstants.SCREENWIDTH / 9f);
+        uneSouris.setVisible(false);
+        myCorrectionAndPauseGeneral.addElements(uneSouris);
     }
 
 
@@ -347,6 +326,33 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         batch.begin();
 
+        //backgroundScreen.myDraw(batch);
+
+        //1024 640
+
+        if (backgroundScreen != null)
+        {
+            float largeurFondNew = MyConstants.SCREENWIDTH;
+            float hauteurFondNew = largeurFondNew * hauteurFond / largeurFond;
+
+            float positionFondX = 0;
+            float positionFondY = -(hauteurFondNew - MyConstants.SCREENHEIGHT) / 2f;
+
+            if ((float) MyConstants.SCREENWIDTH / (float) MyConstants.SCREENHEIGHT < largeurFond / hauteurFond)
+            {
+                hauteurFondNew = MyConstants.SCREENHEIGHT;
+                largeurFondNew = hauteurFondNew * largeurFond / hauteurFond;
+
+
+                positionFondY = 0;
+                positionFondX = -(largeurFondNew - MyConstants.SCREENWIDTH) / 2f;
+            }
+
+
+            backgroundScreen.myDraw2(batch, positionFondX, positionFondY, largeurFondNew, hauteurFondNew);
+        }
+
+
         for (int i = 0; i < allDrawables.size(); i++)
         {
             MyDrawInterface newItem = allDrawables.get(i);
@@ -372,9 +378,9 @@ public class ScreenOnglet implements Screen, InputProcessor
 
 
         batch.begin();
-        if (uneMain.isVisible())
+        if (uneSouris.isVisible())
         {
-            uneMain.myDraw(batch);
+            uneSouris.myDraw(batch);
         }
 
         batch.end();
@@ -399,7 +405,6 @@ public class ScreenOnglet implements Screen, InputProcessor
     @Override
     public void hide()
     {
-//        this.dispose();
     }
 
 

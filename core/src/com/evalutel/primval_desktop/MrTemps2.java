@@ -60,7 +60,7 @@ public class MrTemps2 implements MyDrawInterface
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.OLIVE;
+        labelStyle.fontColor = MyConstants.mrTempsFontColor;
         Label labelTemps = new Label(duration, labelStyle);
 
         Texture textureMrTemps = new Texture(Gdx.files.internal("Images/mr_temps.png"));

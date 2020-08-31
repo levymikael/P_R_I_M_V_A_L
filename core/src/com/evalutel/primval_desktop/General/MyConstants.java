@@ -45,9 +45,11 @@ public class MyConstants
     public static Color bluePrimval2 = new Color(Color.valueOf("0165a4"));
     public static Color redPrimval = new Color(Color.valueOf("a40b00"));
     public static Color redresultat = new Color(Color.valueOf("ff4700"));
+    public static Color mrNotesFontColor = new Color(Color.valueOf("fe4800"));
+    public static Color mrTempsFontColor = new Color(Color.valueOf("009a28"));
     public static Color greenresultat = new Color(Color.valueOf("2b8014 "));
 
-    public static int[] noteMaxChap1 = {9, 9, 9, 9};
+    public static int[] noteMaxChap1 = {9, 9, 9, 18, 9};
     public static int[] noteMaxChap2 = {15, 18, 27, 10};
     public static int[] noteMaxChap3 = {25, 12, 10, 10, 32, 20};
     public static int[] noteMaxChap4 = {10, 10, 10, 24, 45, 30};

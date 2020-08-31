@@ -45,8 +45,8 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
 
         Table container = new Table();
         stage.addActor(container);
-        container.setSize(screenWidth, 7 * screenHeight / 10);
-        container.setPosition(0, 5 * screenHeight / 14 - container.getHeight() / 2);
+        container.setSize(screenWidth, 7 * screenHeight / 10f);
+        container.setPosition(0, 4 * screenHeight / 14f - container.getHeight() / 2);
         int chapitre = 2;
 
         int lineHeight = screenHeight / 11;

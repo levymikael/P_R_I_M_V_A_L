@@ -3,7 +3,7 @@ package com.evalutel.primval_desktop;
 public class RectificationCalculette
 {
 
-    public RectificationCalculette(UneMain uneMain, CalculetteView calculette, int nb)
+    public RectificationCalculette(UneSouris uneSouris, CalculetteView calculette, int nb)
     {
 
     }

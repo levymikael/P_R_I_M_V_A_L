@@ -10,7 +10,7 @@ import com.evalutel.primval_desktop.Sommaire.Screen_Sommaire_General;
 public class GdxSplashScreenGame extends Game implements ApplicationListener
 {
 
-    private static long SPLASH_MINIMUM_MILLIS = 2000L;
+    private static long SPLASH_MINIMUM_MILLIS = 2_000L;
 
     public GdxSplashScreenGame()
     {
@@ -33,7 +33,7 @@ public class GdxSplashScreenGame extends Game implements ApplicationListener
                     {
                         GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this/*, new DatabaseDesktop()*/));
                     }
-                }, 2.0f);
+                }, 2f);
 
         final long splash_start_time = System.currentTimeMillis();
         new Thread(new Runnable()
@@ -59,7 +59,7 @@ public class GdxSplashScreenGame extends Game implements ApplicationListener
                                         {
                                             GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this/*, new DatabaseDesktop()*/));
                                         }
-                                    }, (float) (GdxSplashScreenGame.SPLASH_MINIMUM_MILLIS - splash_elapsed_time) / 1000f);
+                                    }, (float) (GdxSplashScreenGame.SPLASH_MINIMUM_MILLIS - splash_elapsed_time) / 1_000f);
                         }
                         else
                         {

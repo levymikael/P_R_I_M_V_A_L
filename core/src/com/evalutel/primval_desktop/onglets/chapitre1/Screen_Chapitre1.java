@@ -66,12 +66,12 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         screenWidth = MyConstants.SCREENWIDTH;
 
 
-        int fontSize = MyConstants.SCREENWIDTH / 55;
+        float fontSize = MyConstants.SCREENWIDTH / 55f;
 
 
         FreeTypeFontGenerator generatorComicSansMSBold = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterComicSansMSBold = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterComicSansMSBold.size = fontSize;
+        parameterComicSansMSBold.size = (int) fontSize;
         parameterComicSansMSBold.minFilter = Texture.TextureFilter.Linear;
         parameterComicSansMSBold.magFilter = Texture.TextureFilter.Linear;
         BitmapFont bitmapFontComicSansMSBold = generatorComicSansMSBold.generateFont(parameterComicSansMSBold);
@@ -108,7 +108,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25f).height(MyConstants.SCREENWIDTH / 25f).padRight(screenWidth / 150f);
         nomChapitre.add(labelChap1Titre).width(MyConstants.SCREENWIDTH / 4f).align(Align.left);
         nomChapitre.setWidth(nomChapitreWidth);
-        nomChapitre.setPosition(screenWidth / 2f - (nomChapitreWidth / 2), 7 * screenHeight / 10f);
+        nomChapitre.setPosition(screenWidth / 2f - (nomChapitreWidth / 2), 4f * screenHeight / 6f);
         stage.addActor(nomChapitre);
 
         int numChapter = 1;
@@ -182,8 +182,11 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        bandeauHaut.myDraw2(batch, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f), MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
-        fondSommaire.myDraw2(batch, 0, 0, screenWidth, 5.05f * screenHeight / 6);
+        float bandeauHautY = (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f);
+
+        fondSommaire.myDraw2(batch, 0, 0, MyConstants.SCREENWIDTH, 5.05f * screenHeight / 6f);
+
+        bandeauHaut.myDraw2(batch, 0, bandeauHautY, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -196,7 +199,11 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         float logoChapitreWidth = screenWidth / 3.8f;
 
-        batch.draw(logoChapitre, screenWidth / 2f - (logoChapitreWidth / 2f), (10.5f * screenHeight / 15f), logoChapitreWidth, logoChapitreWidth * (305f / 521f));
+        float logoChapitreHeight = logoChapitreWidth * (305f / 521f);
+
+        float positionYLogoChapitre = bandeauHautY - (logoChapitreHeight / 2f);
+
+        batch.draw(logoChapitre, screenWidth / 2f - (logoChapitreWidth / 2f), positionYLogoChapitre, logoChapitreWidth, logoChapitreHeight);
 
         batch.end();
 
@@ -237,6 +244,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     @Override
     public void dispose()
     {
-
+        stage.dispose();
     }
 }

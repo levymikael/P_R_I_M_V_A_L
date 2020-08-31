@@ -349,6 +349,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     @Override
     public void dispose()
     {
+        stage.dispose();
 
     }
 }

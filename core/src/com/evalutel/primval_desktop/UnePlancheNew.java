@@ -184,9 +184,9 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
     }
 
 
-    public void removeMain(UneMain uneMain)
+    public void removeMain(UneSouris uneSouris)
     {
-        allBilles.remove(uneMain);
+        allBilles.remove(uneSouris);
     }
 
     public int getNumberBilles()

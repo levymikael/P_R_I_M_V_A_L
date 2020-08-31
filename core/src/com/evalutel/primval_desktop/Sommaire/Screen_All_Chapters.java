@@ -155,7 +155,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         stage.addActor(allChaptersTitle);
 
-        mrNotes = new MrNotes2(stage, 20.5f * MyConstants.SCREENWIDTH / 25, 4 * MyConstants.SCREENHEIGHT / 5f, "all chapters");
+        mrNotes = new MrNotes2(stage, 20.5f * MyConstants.SCREENWIDTH / 25f, 4 * MyConstants.SCREENHEIGHT / 5f, "all chapters");
         mrTemps = new MrTemps2(stage);
 
 
@@ -163,8 +163,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table container = new Table();
         Table table = new Table();
 
-        float positionButton = myButtonRetour.getY();
-        float heightContainer = (positionButton);
+        float heightContainer = (myButtonRetour.getY());
         container.setSize(MyConstants.SCREENWIDTH, heightContainer);
         container.setPosition(0, 0);
 
@@ -249,9 +248,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         ninePatch = new NinePatch(new Texture(Gdx.files.internal("Images/cellule Primaire.9.png")));
 
          ninePatchDrawable= new NinePatchDrawable(ninePatch);
-
-
-
 
 
         Table evalutelMotto = new Table();
@@ -527,6 +523,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     @Override
     public void dispose()
     {
+        stage.dispose();
 
     }
 }

@@ -1,6 +1,5 @@
 package com.evalutel.primval_desktop;
 
-import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
 import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
@@ -17,39 +16,47 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
     boolean isActive = true;
 
 
-    float spaceBougies;
 
-
-    public UnGateauAnniversaire(float startPositionX, float startPositionY, float gateauWidth, float gateauHeight)
+    public UnGateauAnniversaire(float startPositionX, float startPositionY, float gateauWidth, float gateauHeight, float widthBougie)
     {
         super("Images/Onglet_1_6/gateau.png", startPositionX, startPositionY, gateauWidth, gateauHeight);
 
-        float startX = startPositionX + (MyConstants.SCREENWIDTH / 12f);
-        float startY = startPositionY + (MyConstants.SCREENHEIGHT / 6f);
+        float startX = startPositionX + gateauWidth/6.0f;
+        float startY = startPositionY + gateauHeight/2.5f;
 
-        spaceBougies = animationWidth / 60f;
+        float spaceBougiesX = gateauWidth / 10f;
+        float spaceBougiesY = 0;
+        float decalageX = gateauWidth / 12.0f;
+
+        float heightBougie = widthBougie*120.0f/90.0f;
+
         float posX = 0, posY = 0;
 
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
+
+                posX = startX + (float)(j) * (spaceBougiesX + widthBougie) + (float)(i) * decalageX;
+                posY = startY + (float)(i) * (spaceBougiesY + heightBougie);
+
+                /*
                 if (i == 2)
                 {
                     posX = startX + (j * (spaceBougies + gateauWidth / 5f) + MyConstants.SCREENWIDTH / 30f + MyConstants.SCREENWIDTH / 30f);
-                    posY = startY + (MyConstants.SCREENHEIGHT / 11f) + (MyConstants.SCREENHEIGHT / 17f);
+                    posY = startY + (MyConstants.SCREENHEIGHT / 10f) + (MyConstants.SCREENHEIGHT / 16f);
                 }
                 else if (i == 1)
                 {
                     posX = startX + (j * (spaceBougies + gateauWidth / 5f) + MyConstants.SCREENWIDTH / 30f);
-                    posY = startY + (MyConstants.SCREENHEIGHT / 11f);
+                    posY = startY + (MyConstants.SCREENHEIGHT / 10f);
                 }
                 else if (i == 0)
                 {
                     posX = (startX + (j * (spaceBougies + gateauWidth / 5f)));
                     posY = (startY);
-                }
-                System.out.println("posX = " + posX + "i: " + i + " j: " + j);
+                }*/
+                //System.out.println("posX = " + posX + "i: " + i + " j: " + j);
                 System.out.println("posY = " + posY + "i: " + i + " j: " + j);
                 positionsBougies.add(new MyPoint(/*currentPositionX +*/ posX, /*currentPositionY +*/ posY));
             }
@@ -137,7 +144,6 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
 
         reorganiseBougies();
 
-
         return retour;
     }
 
@@ -202,9 +208,9 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
     }
 
 
-    public void removeMain(UneMain uneMain)
+    public void removeMain(UneSouris uneSouris)
     {
-        allBougies.remove(uneMain);
+        allBougies.remove(uneSouris);
     }
 
     public int getNumberBougies()

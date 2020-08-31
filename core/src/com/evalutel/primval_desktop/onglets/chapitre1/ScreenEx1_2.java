@@ -54,6 +54,9 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         bgScreenEx1_2 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_2);
+        /*backgroundScreen = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
+        largeurFond = 1024.0f;
+        hauteurFond = 640.0f;*/
 
         sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
         sacDeBilles.largeurBille = largeurBilleUnique;
@@ -416,8 +419,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                     validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", nextEtape);
 
                     addPierres(1);
-
-//                    timer.schedule(new EtapeRectification1(1000), 500);
                 }
                 else
                 {
@@ -446,12 +447,12 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             if (planche1.getNumberBilles() < randNumOiseau)
             {
-                uneMain.setVisible(true);
+                uneSouris.setVisible(true);
                 timer.schedule(new MoveMainToReserve1(500), 500);
             }
             else if (planche1.getNumberBilles() > randNumOiseau)
             {
-                uneMain.setVisible(true);
+                uneSouris.setVisible(true);
                 timer.schedule(new MoveMainBackToPlanche(500), 500);
             }
             else
@@ -462,7 +463,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                 sacDeBilles.setActive(true);
 
                 timer.schedule(new EtapeNextQuestion(500), 500);
-                uneMain.setVisible(false);
+                uneSouris.setVisible(false);
             }
         }
     }
@@ -477,14 +478,13 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            uneMain.setVisible(true);
+            uneSouris.setVisible(true);
 
-            float posXmain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
-            float posYf = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
-            int posY = (int) posYf;
+            float posXsouris = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
+            float posYsouris = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
 
             MyTimer.TaskEtape nextEtape = new DisplayBilleReserve(500);
-            uneMain.moveTo(durationMillis, (int) posXmain, posY, nextEtape, 500);
+            uneSouris.moveTo(durationMillis, posXsouris, posYsouris, nextEtape, 500);
         }
     }
 
@@ -509,7 +509,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
             MyTimer.TaskEtape nextEtape = new EtapeDragBille(500);
             timer.schedule(nextEtape, 500);
-            uneMain.imageDown();
+            uneSouris.imageDown();
         }
     }
 
@@ -528,7 +528,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
             MyTimer.TaskEtape nextEtape = new EtapeAddBille(500);
             billeRectification.animateImage(durationMillis, true, (int) (posX - billeRectification.getWidth() / 2), (int) (posY - billeRectification.getWidth() / 2), nextEtape, 1000, 1f / 6f);
-            uneMain.cliqueTo(durationMillis, posX, posY, null, 0);
+            uneSouris.cliqueTo(durationMillis, posX, posY, null, 0);
         }
     }
 
@@ -544,7 +544,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             planche1.addBilleAndOrganize(billeRectification);
 
-            uneMain.imageUp();
+            uneSouris.imageUp();
 
             timer.schedule(new EtapeRectification1(1000), 500);
         }
@@ -562,14 +562,14 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             billeRectification = planche1.getLastBille();
             planche1.removeBille(billeRectification);
-            uneMain.setVisible(true);
+            uneSouris.setVisible(true);
 
             float posX = billeRectification.getPosition().x + (int) (billeRectification.animationWidth / 2);
             float posY = billeRectification.getPosition().y + (int) (billeRectification.animationWidth / 2);
 
             MyTimer.TaskEtape nextEtape = new MoveBilleOutOfPlanche(500);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 500);
+            uneSouris.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 500);
         }
     }
 
@@ -586,7 +586,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             int posX = (int) (planche1.currentPositionX + planche1.getWidth()) + MyConstants.SCREENWIDTH / 20;
             int posY = (int) (planche1.currentPositionY + (planche1.getHeight() / 2));
 
-            uneMain.cliqueTo(durationMillis, posX, posY, null, 500);
+            uneSouris.cliqueTo(durationMillis, posX, posY, null, 500);
 
             MyTimer.TaskEtape nextEtape = new LastOne(500);
             billeRectification.animateImage(durationMillis, true, (int) (posX - billeRectification.getWidth() / 2), (int) (posY - billeRectification.getWidth() / 2), nextEtape, 1000, 1f / 6f);
@@ -609,7 +609,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             sacDeBilles.addBilleToReserve(billeRectification);
 
             MyTimer.TaskEtape nextEtape = new EtapeRectification1(500);
-            uneMain.moveTo(50, posX, posY, nextEtape, 500);
+            uneSouris.moveTo(50, posX, posY, nextEtape, 500);
 
         }
     }

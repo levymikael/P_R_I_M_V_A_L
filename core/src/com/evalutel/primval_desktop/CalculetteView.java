@@ -66,7 +66,6 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
         this.positionX = MyConstants.SCREENWIDTH - width - (MyConstants.SCREENWIDTH / 200f);
         this.positionY = MyConstants.SCREENWIDTH / 200f;
 
-//        skin = new Skin();
 
         this.stage = stage;
 
@@ -202,44 +201,44 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
         switch (buttonNumber)
         {
             case 0:
-                buttonPosition.x = (int) (zero_bouton.getX() + zero_bouton.getWidth() / 3);
-                buttonPosition.y = (int) (zero_bouton.getY() + zero_bouton.getHeight() / 3);
+                buttonPosition.x = (zero_bouton.getX() + zero_bouton.getWidth() / 2);
+                buttonPosition.y =  (zero_bouton.getY() + zero_bouton.getHeight() / 2);
                 break;
             case 1:
-                buttonPosition.x = (int) (un_bouton.getX() + un_bouton.getWidth() / 3);
-                buttonPosition.y = (int) (un_bouton.getY() + un_bouton.getHeight() / 3);
+                buttonPosition.x =  (un_bouton.getX() + un_bouton.getWidth() / 2);
+                buttonPosition.y =  (un_bouton.getY() + un_bouton.getHeight() / 2);
                 break;
             case 2:
-                buttonPosition.x = (int) (deux_bouton.getX() + deux_bouton.getWidth() / 3);
-                buttonPosition.y = (int) (deux_bouton.getY() + deux_bouton.getHeight() / 3);
+                buttonPosition.x =  (deux_bouton.getX() + deux_bouton.getWidth() / 2);
+                buttonPosition.y =  (deux_bouton.getY() + deux_bouton.getHeight() / 2);
                 break;
             case 3:
-                buttonPosition.x = (int) (trois_bouton.getX() + trois_bouton.getWidth() / 3);
-                buttonPosition.y = (int) (trois_bouton.getY() + trois_bouton.getHeight() / 3);
+                buttonPosition.x =  (trois_bouton.getX() + trois_bouton.getWidth() / 2);
+                buttonPosition.y =  (trois_bouton.getY() + trois_bouton.getHeight() / 2);
                 break;
             case 4:
-                buttonPosition.x = (int) (quatre_bouton.getX() + quatre_bouton.getWidth() / 3);
-                buttonPosition.y = (int) (quatre_bouton.getY() + quatre_bouton.getHeight() / 3);
+                buttonPosition.x =  (quatre_bouton.getX() + quatre_bouton.getWidth() / 2);
+                buttonPosition.y =  (quatre_bouton.getY() + quatre_bouton.getHeight() / 2);
                 break;
             case 5:
-                buttonPosition.x = (int) (cinq_bouton.getX() + cinq_bouton.getWidth() / 3);
-                buttonPosition.y = (int) (cinq_bouton.getY() + cinq_bouton.getHeight() / 3);
+                buttonPosition.x =  (cinq_bouton.getX() + cinq_bouton.getWidth() / 2);
+                buttonPosition.y =  (cinq_bouton.getY() + cinq_bouton.getHeight() / 2);
                 break;
             case 6:
-                buttonPosition.x = (int) (six_bouton.getX() + six_bouton.getWidth() / 3);
-                buttonPosition.y = (int) (six_bouton.getY() + six_bouton.getHeight() / 3);
+                buttonPosition.x =  (six_bouton.getX() + six_bouton.getWidth() / 2);
+                buttonPosition.y =  (six_bouton.getY() + six_bouton.getHeight() / 2);
                 break;
             case 7:
-                buttonPosition.x = (int) (sept_bouton.getX() + sept_bouton.getWidth() / 3);
-                buttonPosition.y = (int) (sept_bouton.getY() + sept_bouton.getHeight() / 3);
+                buttonPosition.x =  (sept_bouton.getX() + sept_bouton.getWidth() / 2);
+                buttonPosition.y =  (sept_bouton.getY() + sept_bouton.getHeight() / 2);
                 break;
             case 8:
-                buttonPosition.x = (int) (huit_bouton.getX() + huit_bouton.getWidth() / 3);
-                buttonPosition.y = (int) (huit_bouton.getY() + huit_bouton.getHeight() / 3);
+                buttonPosition.x =  (huit_bouton.getX() + huit_bouton.getWidth() / 2);
+                buttonPosition.y =  (huit_bouton.getY() + huit_bouton.getHeight() / 2);
                 break;
             case 9:
-                buttonPosition.x = (int) (neuf_bouton.getX() + neuf_bouton.getWidth() / 3);
-                buttonPosition.y = (int) (neuf_bouton.getY() + neuf_bouton.getHeight() / 3);
+                buttonPosition.x =  (neuf_bouton.getX() + neuf_bouton.getWidth() / 2);
+                buttonPosition.y =  (neuf_bouton.getY() + neuf_bouton.getHeight() / 2);
                 break;
         }
 
@@ -253,7 +252,7 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
 
     public MyPoint calculetteValidateAndDisplay()
     {
-        return new MyPoint((int) (validerBouton.getX() + validerBouton.getWidth() / 3), (int) (validerBouton.getY() + validerBouton.getHeight() / 3));
+        return new MyPoint((validerBouton.getX() + validerBouton.getWidth() / 2), (validerBouton.getY() + validerBouton.getHeight() / 2));
     }
 
     public void textRemove()

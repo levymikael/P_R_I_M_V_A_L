@@ -26,18 +26,18 @@ public class UneBougie extends AnimationImageNew implements MyTouchInterface, My
         super("Images/Onglet_1_6/bougie_bleu.png", startPositionX, startPositionY, animationHeight, animationHeight * 120f / 90f);
     }
 
-    private static ArrayList<String> getAnimationBougiee()
-    {
-        ArrayList<String> imgOiseauPaths = new ArrayList<>();
-
-        for (int i = 0; i < 6; i++)
-        {
-            String imgaux = "Images/oiseau/oiseau1_1_00000" + i + ".png";
-            imgOiseauPaths.add(imgaux);
-        }
-
-        return imgOiseauPaths;
-    }
+//    private static ArrayList<String> getAnimationBougiee()
+//    {
+//        ArrayList<String> imgOiseauPaths = new ArrayList<>();
+//
+//        for (int i = 0; i < 6; i++)
+//        {
+//            String imgaux = "Images/oiseau/oiseau1_1_00000" + i + ".png";
+//            imgOiseauPaths.add(imgaux);
+//        }
+//
+//        return imgOiseauPaths;
+//    }
 
 
     @Override
@@ -75,17 +75,17 @@ public class UneBougie extends AnimationImageNew implements MyTouchInterface, My
         return true;
     }
 
-    private static String getImageRandom()
-    {
-        Random rand = new Random();
-
-        String billeFolder = "Images/Badix/Billes/";
-        int billeFolderSize = 17;
-        int rand_int = rand.nextInt(billeFolderSize);
-        String rand_bille = billeFolder + "bille" + rand_int + ".png";
-
-        return rand_bille;
-    }
+//    private static String getImageRandom()
+//    {
+//        Random rand = new Random();
+//
+//        String billeFolder = "Images/Badix/Billes/";
+//        int billeFolderSize = 17;
+//        int rand_int = rand.nextInt(billeFolderSize);
+//        String rand_bille = billeFolder + "bille" + rand_int + ".png";
+//
+//        return rand_bille;
+//    }
 
     public void touchDown()
     {

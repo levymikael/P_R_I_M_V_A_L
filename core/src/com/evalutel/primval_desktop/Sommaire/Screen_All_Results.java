@@ -2880,6 +2880,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     @Override
     public void dispose()
     {
+        stage.dispose();
 
     }
 }

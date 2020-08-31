@@ -153,7 +153,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 //            }
 //        });
 
-        uneMain.setPosition(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 3f);
+        uneSouris.setPosition(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 3f);
 
 
         myButtonBackToPreviousMenu.addListener(new ClickListener()
@@ -527,7 +527,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            uneMain.setVisible(true);
+            uneSouris.setVisible(true);
 
             MyPoint buttonPosition = calculetteView.buttonPosition(randNumOiseau);
 
@@ -536,7 +536,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new ClickMainToCalculette(1_500, 1_000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+            uneSouris.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
         }
     }
 
@@ -594,7 +594,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new MoveMainToValidate(500);
 
-            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+            uneSouris.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
 
             calculetteView.textDisplay(randNumOiseau);
         }
@@ -617,7 +617,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new ClickOnValidate(1_000, 1_000);
 
-            uneMain.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+            uneSouris.moveTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
 
             styleTest.up = drawableAux;
         }
@@ -633,7 +633,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            uneMain.setVisible(true);
+            uneSouris.setVisible(true);
 
             MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
@@ -647,7 +647,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+            uneSouris.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
 
             calculetteView.textRemove();
 
@@ -664,7 +664,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            uneMain.setVisible(false);
+            uneSouris.setVisible(false);
             nbInput = String.valueOf(randNumOiseau);
             afterCorrection = true;
             timer.schedule(new NextQuestion(500), 500);

@@ -27,7 +27,29 @@ public class SplashScreen implements Screen
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(ttrSplash, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        float largeurFond = 1024f;
+        float hauteurFond = 768f;
+
+        //backgroundScreen = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
+        float largeurFondNew = Gdx.graphics.getWidth();
+        float hauteurFondNew = largeurFondNew * hauteurFond / largeurFond;
+
+        float positionFondX = 0;
+        float positionFondY = -(hauteurFondNew - Gdx.graphics.getHeight()) / 2f;
+
+        if ((float) Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight() < largeurFond / hauteurFond)
+        {
+            hauteurFondNew = Gdx.graphics.getHeight();
+            largeurFondNew = hauteurFondNew * largeurFond / hauteurFond;
+
+
+            positionFondY = 0;
+            positionFondX = -(largeurFondNew - Gdx.graphics.getWidth()) / 2f;
+        }
+
+
+        batch.draw(ttrSplash, positionFondX, positionFondY, largeurFondNew, hauteurFondNew);
         batch.end();
     }
 

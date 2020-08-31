@@ -50,7 +50,7 @@ public class MrTemps implements MyDrawInterface
 
         user.setProfil(2);
 
-        String userName = user.getName();
+//        String userName = user.getName();
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/segoeUIsemibold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -71,7 +71,9 @@ public class MrTemps implements MyDrawInterface
         textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
-        container.setPosition(12.5f * screenWidth / 16, 21.5f * screenHeight / 25f);
+        container.setPosition(13.5f * screenWidth / 16, 21f * screenHeight / 25f);
+//        container.setPosition(17f * screenWidth / 18, 21f * screenHeight / 25f);
+
 
         int widthButton = 500;
         int heightButton = widthButton / 4;

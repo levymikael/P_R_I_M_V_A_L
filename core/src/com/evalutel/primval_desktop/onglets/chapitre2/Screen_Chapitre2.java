@@ -91,7 +91,7 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
         myButtonRetour = new MyButtonRetour(stage, screenWidth / 15f, screenWidth / 15f, game, "chapitres");
         myButtonRetour.setPosition(screenWidth / 25f, 5 * screenHeight / 6f - myButtonRetour.getHeight() / 2);
 
-        logoChapitre = new Texture(Gdx.files.internal("Images/Pages onglets/02.png"));
+        logoChapitre = new Texture(Gdx.files.internal("Images/Pages onglets/chapitre_circle_2.png"));
         logoChapitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Label labelChap1Titre = new Label("Introduction de l'addition", labelStyleBlue);
@@ -105,7 +105,7 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
         nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25f).height(MyConstants.SCREENWIDTH / 25f).padRight(screenWidth / 150f);
         nomChapitre.add(labelChap1Titre).width(MyConstants.SCREENWIDTH / 4f).align(Align.left);
         nomChapitre.setWidth(nomChapitreWidth);
-        nomChapitre.setPosition(1 * screenWidth / 2f - (nomChapitreWidth / 2), 7 * screenHeight / 10f);
+        nomChapitre.setPosition(screenWidth / 2f - (nomChapitreWidth / 2), 4f * screenHeight / 6f);
         stage.addActor(nomChapitre);
 
         int numChapter = 2;
@@ -177,8 +177,10 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        bandeauHaut.myDraw2(batch, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f), MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
+        float bandeauHautY = (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f);
         fondSommaire.myDraw2(batch, 0, 0, screenWidth, 5.05f * screenHeight / 6f);
+
+        bandeauHaut.myDraw2(batch, 0, bandeauHautY, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
 
         for (int i = 0; i < allDrawables.size(); i++)
         {
@@ -189,9 +191,11 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
             }
         }
 
-        float logoChapitreWidth = screenWidth / 4f;
+        float logoChapitreWidth = screenWidth / 3.8f;
 
-        batch.draw(logoChapitre, screenWidth / 2f - (logoChapitreWidth / 2f), (8.8f * screenHeight / 15f), logoChapitreWidth, logoChapitreWidth * (305f / 308));
+        float logoChapitreHeight = logoChapitreWidth * (305f / 521f);
+
+        batch.draw(logoChapitre, screenWidth / 2f - (logoChapitreWidth / 2f), bandeauHautY - (logoChapitreHeight / 2f), logoChapitreWidth, logoChapitreHeight);
 
         batch.end();
 
@@ -231,6 +235,7 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
     @Override
     public void dispose()
     {
+        stage.dispose();
 
     }
 }

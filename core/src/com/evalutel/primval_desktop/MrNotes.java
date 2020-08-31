@@ -65,7 +65,7 @@ public class MrNotes implements MyDrawInterface
 
         Table container = new Table();
         stage.addActor(container);
-        container.setPosition(16.5f * screenWidth / 18, 21.5f * screenHeight / 25f);
+        container.setPosition(17f * screenWidth / 18, 21f * screenHeight / 25f);
 
         int widthButton = 500;
         int heightButton = widthButton / 4;
@@ -78,7 +78,7 @@ public class MrNotes implements MyDrawInterface
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
 
         Table notes = new Table();
-        notes.add(labelNotes).height(screenHeight / 30).padLeft(screenWidth / 60).padRight(screenWidth / 60);
+        notes.add(labelNotes).height(screenHeight / 30f).padLeft(screenWidth / 60f).padRight(screenWidth / 60f);
         notes.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Pixmap orangeBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, MyConstants.redresultat);
