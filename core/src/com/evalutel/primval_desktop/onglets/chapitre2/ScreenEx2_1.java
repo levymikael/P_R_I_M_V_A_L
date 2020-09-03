@@ -67,7 +67,6 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
         sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60f, 9 * MyConstants.SCREENHEIGHT / 11f, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
         sacDeBilles.largeurBille = largeurBilleUnique;
-//        sacDeBilles.isActive();
         sacDeBilles.setActive(false);
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
@@ -116,14 +115,14 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         calculetteView.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
-        float buttonSize = MyConstants.SCREENWIDTH / 5f;
+        float ardoise2Size = MyConstants.SCREENWIDTH / 6.5f;
         float posYArdoise2 = calculetteView.getCalculetteTopY() + MyConstants.SCREENHEIGHT / 15f;
 
-
-        uneArdoise2 = new UneArdoise2(stage, "", calculetteView.positionX, posYArdoise2, buttonSize);
+        uneArdoise2 = new UneArdoise2(stage, "", calculetteView.positionX, posYArdoise2, ardoise2Size);
         allDrawables.add(uneArdoise2);
         uneArdoise2.setActive(false);
         myCorrectionAndPauseGeneral.addElements(uneArdoise2);
+
 
         validusAnimated.setVisible(false);
 
@@ -454,7 +453,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         {
             MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
-            float posX = buttonValidatePosition.x ;
+            float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
 
             MyTimer.TaskEtape nextEtape = new ClickOnValidate(1_000, 1_000);

@@ -26,13 +26,15 @@ public class AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseI
     public float elapsedTime, animationVitesse, animationHeight, animationWidth;
 
     public float currentPositionX, currentPositionY, deplacementEnX, deplacementEnY;
-    public boolean animationContinue = true;
+    public boolean animationContinue = false;
     protected int screenWidth;
     protected int screenHeight;
 
     protected boolean isVisible = true;
     protected boolean isPaused = false;
     protected boolean isActive = false;
+
+
 
 //    final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 

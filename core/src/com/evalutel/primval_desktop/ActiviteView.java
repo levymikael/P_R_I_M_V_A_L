@@ -37,7 +37,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     int cptInstructions;
 
-//    Sprite sprite2, sprite3, spriteEnonceText, spriteSolutionText;
+    //    Sprite sprite2, sprite3, spriteEnonceText, spriteSolutionText;
     BitmapFont bitmapFontArial, bitmapFontComic;
     private boolean isVisible = true;
     private Texture textureMilieuEnonce;
@@ -124,14 +124,14 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         textFieldEnonce = new TextField("", textFieldStyleEnonce);
 
 // Insertion texte.png dans tableau avec une imageBG.png:
-        float widthCote = MyConstants.SCREENWIDTH / 40f;
+        float widthCote = MyConstants.SCREENWIDTH / 38f;
         heightBackGroundImage = widthCote * 29f / 28f;
 
         heightTop = positionY;
 
-        float widthCentre = 300f;
+        float widthCentre = 310f;
 
-        float widthVierge = (widthEnonce - 2 * widthCote - widthCentre) / 2f;
+        float widthVierge = (widthEnonce - (2 * widthCote) - widthCentre) / 2f;
 
         //heightBackGroundImage = widthEnonce * 31 / 809;
         float heightImageEnonce = heightBackGroundImage * 2f / 3f;
@@ -170,9 +170,8 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         tableBandeauBasCentreEnonce.add(textFieldEnonce).height(heightImageEnonce).width(widthImageEnonce);
 
-
         tableBandeauBas.add(tableBandeauBasGauche).width(widthCote).height(heightBackGroundImage);
-        tableBandeauBas.add(tableBandeauBasCentreVierge).width(widthVierge).height(heightBackGroundImage);
+        tableBandeauBas.add(tableBandeauBasCentreVierge).width(widthVierge).height(heightBackGroundImage).fillX();
         tableBandeauBas.add(tableBandeauBasCentreEnonce).width(widthCentre).height(heightBackGroundImage);
         tableBandeauBas.add(tableBandeauBasCentreVierge2).width(widthVierge).height(heightBackGroundImage);
         tableBandeauBas.add(tableBandeauBasDroite).width(widthCote).height(heightBackGroundImage);
@@ -180,7 +179,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         table.add(tableBandeauBas).width(widthEnonce).height(heightBackGroundImage);
 
         table.row();
-
 
 // Positionnement du tableau sur ecran:
         table.pack();

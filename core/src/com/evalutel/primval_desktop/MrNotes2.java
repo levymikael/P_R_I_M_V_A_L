@@ -1,7 +1,6 @@
 package com.evalutel.primval_desktop;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 import com.evalutel.primval_desktop.ui_tools.AppSingleton;
@@ -21,9 +19,8 @@ public class MrNotes2 implements MyDrawInterface
 {
     public float screenWidth;
     private boolean isVisible = true;
-    BitmapFont bitmapFont;
 
-    MyDataBase db;
+//    MyDataBase db;
 
     public MrNotes2(Stage stage, float positionX, float positionY, String screen)
     {
@@ -32,10 +29,10 @@ public class MrNotes2 implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.minFilter = Texture.TextureFilter.Nearest;
-        parameter.magFilter = Texture.TextureFilter.MipMapLinearNearest;
+        parameter.minFilter = Texture.TextureFilter.Linear;
+        parameter.magFilter = Texture.TextureFilter.Linear;
         parameter.size = (int) screenWidth / 65;
-        bitmapFont = generator.generateFont(parameter);
+        BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
         String totalNotes;
@@ -44,9 +41,9 @@ public class MrNotes2 implements MyDrawInterface
 
 
         totalNotes = appSingleton.myDataBase.getTotalNotePageForIdProfil(0);
-        String newTotalNotes = "";
+        String newTotalNotes;
 
-        if (screen == "general")
+        if (screen.equals("general"))
         {
             newTotalNotes = totalNotes.substring(0, totalNotes.length() - 5) + "/3593";
         }
@@ -69,13 +66,13 @@ public class MrNotes2 implements MyDrawInterface
         container.setPosition(positionX, positionY);
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
-        if (screen == "general")
+        if (screen.equals("general"))
         {
-            container.add(labelNotes).padLeft(screenWidth / 20).padTop(MyConstants.SCREENHEIGHT / 160).expand().fill();
+            container.add(labelNotes).padLeft(screenWidth / 20).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
         }
         else
         {
-            container.add(labelNotes).padLeft(screenWidth / 15).padTop(MyConstants.SCREENHEIGHT / 160).expand().fill();
+            container.add(labelNotes).padLeft(screenWidth / 15).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
         }
 
         stage.addActor(container);

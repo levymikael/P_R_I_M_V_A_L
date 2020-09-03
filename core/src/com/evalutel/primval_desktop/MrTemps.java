@@ -54,8 +54,8 @@ public class MrTemps implements MyDrawInterface
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/segoeUIsemibold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.minFilter = Texture.TextureFilter.Nearest;
-        parameter.magFilter = Texture.TextureFilter.MipMapLinearNearest;
+        parameter.minFilter = Texture.TextureFilter.Linear;
+        parameter.magFilter = Texture.TextureFilter.Linear;
         parameter.size = screenHeight / 40;
         bitmapFont = generator.generateFont(parameter);
         generator.dispose();
@@ -71,8 +71,7 @@ public class MrTemps implements MyDrawInterface
         textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
-        container.setPosition(13.5f * screenWidth / 16, 21f * screenHeight / 25f);
-//        container.setPosition(17f * screenWidth / 18, 21f * screenHeight / 25f);
+        container.setPosition(13.2f * screenWidth / 16, 21f * screenHeight / 25f);
 
 
         int widthButton = 500;

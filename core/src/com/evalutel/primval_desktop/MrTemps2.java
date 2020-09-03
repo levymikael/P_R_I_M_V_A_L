@@ -24,7 +24,6 @@ public class MrTemps2 implements MyDrawInterface
 {
     public float screenWidth;
     private boolean isVisible = true;
-    BitmapFont bitmapFont;
 
 
     public MrTemps2(Stage stage)
@@ -47,14 +46,14 @@ public class MrTemps2 implements MyDrawInterface
 
         user.setProfil(2);
 
-        String userName = user.getName();
+//        String userName = user.getName();
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.minFilter = Texture.TextureFilter.Linear;
         parameter.magFilter = Texture.TextureFilter.Linear;
         parameter.size = (int) screenWidth / 70;
-        bitmapFont = generator.generateFont(parameter);
+        BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
 // Configuration police
@@ -67,14 +66,11 @@ public class MrTemps2 implements MyDrawInterface
         textureMrTemps.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
-        container.setSize(screenWidth / 8, screenHeight / 14);
-        container.setPosition(17 * screenWidth / 25, 4 * screenHeight / 5);
+        container.setSize(screenWidth / 8, screenHeight / 14f);
+        container.setPosition(17 * screenWidth / 25f, 4 * screenHeight / 5f);
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrTemps))));
-        container.add(labelTemps).padLeft(screenWidth / 20).padTop(MyConstants.SCREENHEIGHT / 160).expand().fill();
-
-//        container.add(labelTemps).expandX().width(MyConstants.SCREENWIDTH/200).padTop(MyConstants.SCREENHEIGHT/150);
-
+        container.add(labelTemps).padLeft(screenWidth / 20).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
 
         stage.addActor(container);
     }

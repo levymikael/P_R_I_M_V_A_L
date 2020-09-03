@@ -1,6 +1,5 @@
 package com.evalutel.primval_desktop;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,18 +17,18 @@ import java.util.TimerTask;
 
 public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInterface, MyTouchInterface
 {
-
     static ArrayList arrayListNumber, arrayListAnimal;
 
     private ArrayList<int[]> randDicesArray = new ArrayList<>();
+    private TextureRegion[] allImagesDes = new TextureRegion[6];
 
-
-    static int lastDiceValue, lastDiceValue2;
-    int questionCourante;
+    private int currentChiffreDes1, currentChiffreDes2;
 
     float dice2positionX;
     TextureRegion textureEmptyDice, texturePlusDice, textureNumberDice1, textureNumberDice2;
     boolean isClicked = false;
+    boolean isAnimating = false;
+    public int questionCourante = 0;
 
     public Dices(float dicePositionX, float dicePositionY, float animationWidth, float animationHeight, float dice2positionX)
     {
@@ -51,12 +50,20 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         diceTexturePlus.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         texturePlusDice = new TextureRegion(diceTexturePlus);
 
-        getRandDicesArray();
-    }
+        for (int i = 0; i < 6; i++)
+        {
+            String imgName = "Images/onglet2_3/des_0" + String.valueOf(i+1) + ".png";
 
-    public void getQuestionCourante(int questionCourante)
-    {
-        questionCourante = questionCourante;
+            Texture imgAux = new Texture(imgName);
+            imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+            TextureRegion textureRegionAux = new TextureRegion(imgAux);
+            allImagesDes[i] = textureRegionAux;
+
+        }
+
+
+        getRandDicesArray();
     }
 
 
@@ -73,7 +80,6 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         {
             String imgaux = "Images/onglet2_3/des_0" + array[i] + ".png";
             imgDicesPaths.add(imgaux);
-            lastDiceValue = array[i];
         }
 
         return imgDicesPaths;
@@ -99,10 +105,10 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         for (int i = 0; i < 5; i++)
         {
             int[] diceNumUpTo6 = {0, 0};
-            int nbOiseau1 = randDice1();
+            int randDice1 = randDice1();
 
             diceNumUpTo6[0] = randDice1();
-            diceNumUpTo6[1] = randDice2(nbOiseau1);
+            diceNumUpTo6[1] = randDice2(randDice1);
             randDicesArray.add(diceNumUpTo6);
         }
     }
@@ -116,11 +122,10 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         array = MyMath.melangeTab(array);
 
 
-        for (int i = 0; i < array.length; i++)
+        for (int value : array)
         {
-            String imgaux = "Images/onglet2_3/des_0" + array[i] + ".png";
+            String imgaux = "Images/onglet2_3/des_0" + value + ".png";
             imgDicesPaths.add(imgaux);
-            lastDiceValue2 = array[i];
         }
 
         return imgDicesPaths;
@@ -181,17 +186,39 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         batch.draw(texturePlusDice, currentPositionX + animationWidth, currentPositionY, animationWidth / 2, (animationHeight / 2) * (152f / 186f));
         batch.draw(textureEmptyDice, dice2positionX, currentPositionY, animationWidth, animationHeight);
 
-        elapsedTime += Gdx.graphics.getDeltaTime();
-        textureNumberDice1 = (TextureRegion) animation.getKeyFrame(elapsedTime, animationContinue);
-        TextureRegion textureRegion2 = (TextureRegion) animation2.getKeyFrame(elapsedTime, animationContinue);
-        textureNumberDice2 = (TextureRegion) animation3.getKeyFrame(elapsedTime, animationContinue);
-        TextureRegion textureRegion4 = (TextureRegion) animation4.getKeyFrame(elapsedTime, animationContinue);
 
 
-        if (isClicked)
+
+//        if (isClicked)
+//        {
+//            batch.draw(textureNumberDice1, currentPositionX, currentPositionY, animationWidth, animationHeight);
+//        }
+
+        if(isAnimating)
         {
+            elapsedTime += Gdx.graphics.getDeltaTime();
+            textureNumberDice1 = (TextureRegion) animation.getKeyFrame(elapsedTime, isAnimating);
+            textureNumberDice2 = (TextureRegion) animation3.getKeyFrame(elapsedTime, isAnimating);
+
             batch.draw(textureNumberDice1, currentPositionX, currentPositionY, animationWidth, animationHeight);
+            batch.draw(textureNumberDice2, dice2positionX, currentPositionY, animationWidth, animationHeight);
         }
+        else
+        {
+            if(currentChiffreDes1 > 0)
+            {
+                TextureRegion textureRegionDe1 = allImagesDes[currentChiffreDes1-1];
+                TextureRegion textureRegionDe2 = allImagesDes[currentChiffreDes2-1];
+
+                batch.draw(textureRegionDe1, currentPositionX, currentPositionY, animationWidth, animationHeight);
+                batch.draw(textureRegionDe2, dice2positionX, currentPositionY, animationWidth, animationHeight);
+            }
+
+        }
+
+        /*
+
+
 
         if ((animation2 != null) && (isClicked))
         {
@@ -200,13 +227,13 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
 
         if ((animation3 != null) && (isClicked))
         {
-            batch.draw(textureNumberDice2, dice2positionX, currentPositionY, animationWidth, animationHeight);
+
         }
 
         if ((animation4 != null) && (isClicked))
         {
             batch.draw(textureRegion4, dice2positionX, currentPositionY, animationWidth, animationHeight);
-        }
+        }*/
     }
 
 
@@ -225,56 +252,69 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
     @Override
     public boolean isTouched(float x, float y)
     {
+//        if ( ! isClicked)
+//        {
+//            isClicked = true;
+//        }
 
-        if (!isClicked)
+        if(isAnimating)
         {
-            isClicked = true;
+            return false;
+        }
+        else
+        {
+            isAnimating = true;
+            currentChiffreDes1 = randDicesArray.get(questionCourante)[0];
+            currentChiffreDes2 = randDicesArray.get(questionCourante)[1];
+
+            final Music music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/son_des.mp3"));
+            music.play();
+
+            Timer timerDice = new Timer();
+
+            timerDice.schedule(new TimerTask()
+            {
+                @Override
+                public void run()
+                {
+                    isAnimating = false;
+                    /*
+                    if (animationContinue)
+                    {
+                        animationContinue = false;
+                    }
+                    else
+                    {
+                        animationContinue = true;
+                    }*/
+
+//                getLastDice1value();
+//                getLastDice2value();
+
+                    //displayNumberDiceFace();
+
+                    isClicked = false;
+
+                    Gdx.app.log("fin Timer", "");
+
+                    music.stop();
+                    music.setOnCompletionListener(new Music.OnCompletionListener()
+                    {
+                        @Override
+                        public void onCompletion(Music music)
+                        {
+                            music.dispose();
+                        }
+                    });
+                }
+            }, 3_000);
+
+
+            System.out.println("dé touche");
+            return false;
         }
 
-        final Music music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/son_des.mp3"));
-        music.play();
 
-        Timer timerDice = new Timer();
-
-        timerDice.schedule(new TimerTask()
-        {
-            @Override
-            public void run()
-            {
-                if (animationContinue)
-                {
-                    animationContinue = false;
-                    int ok = 5;
-                    ok++;
-                }
-                else
-                {
-                    animationContinue = true;
-                }
-
-                getLastDice1value();
-                getLastDice2value();
-
-//                displayNumberDiceFace();
-                isClicked = false;
-
-                Gdx.app.log("fin Timer", "");
-
-                music.stop();
-                music.setOnCompletionListener(new Music.OnCompletionListener()
-                {
-                    @Override
-                    public void onCompletion(Music music)
-                    {
-                        music.dispose();
-                    }
-                });
-            }
-        }, 3_000);
-
-
-        System.out.println("dé touche");
-        return false;
     }
 
     @Override

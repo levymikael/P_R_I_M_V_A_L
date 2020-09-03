@@ -57,7 +57,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
     public ScreenEx2_3(final Game game, String ongletTitre)
     {
-        super(game, 2, 3, true, 18);
+        super(game, 2, 3, true, MyConstants.noteMaxChap2[1]);
 
         ScreeenBackgroundImage bgScreenEx1_1 = new ScreeenBackgroundImage("Images/onglet2_3/des_fond.jpg");
         allDrawables.add(bgScreenEx1_1);
@@ -81,7 +81,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
         int noteMax = db.getHighestNote(2, 3);
 
-        String noteMaxObtenue = noteMax + "/18";
+        String noteMaxObtenue = noteMax + "/24";
 
         exoConsigneLabel = new Label(ongletTitre, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
@@ -97,22 +97,22 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
         getRandDesArray();
 
-        resultatExercice = new UnResultat("Primval", 2, 3, 0, ongletTitre, 15, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 2, 3, 0, ongletTitre, 24, 0, dateTest, 0, 0, 0, 123);
 
-        calculetteView = new CalculetteView(stage, validusAnimated);
+        float widthCalculette = MyConstants.SCREENWIDTH/5.0f;
+        float hauteurCalculette = widthCalculette*362.0f/355.0f;
+        float positionCalculetteX = MyConstants.SCREENWIDTH - widthCalculette - (MyConstants.SCREENWIDTH / 200f);
+        float positionCalculetteY = MyConstants.SCREENWIDTH / 200f;
+
+        calculetteView = new CalculetteView(stage, validusAnimated, positionCalculetteX, positionCalculetteY, widthCalculette, hauteurCalculette);
         allDrawables.add(calculetteView);
         calculetteView.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
-//        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24f) + (2 * MyConstants.SCREENWIDTH / 100f) + (3 * MyConstants.SCREENWIDTH / 200f);
-        float buttonSize = MyConstants.SCREENWIDTH / 5f;
-        float posYArdoise2 = calculetteView.getCalculetteTopY() + MyConstants.SCREENHEIGHT / 15f;
+        float ardoise2Size = MyConstants.SCREENWIDTH / 6.5f;
+        float posYArdoise2 = positionCalculetteY + hauteurCalculette + MyConstants.SCREENHEIGHT / 50f;
 
-
-        int ok = 5;
-        ok++;
-
-        uneArdoise2 = new UneArdoise2(stage, "", calculetteView.positionX, posYArdoise2, buttonSize);
+        uneArdoise2 = new UneArdoise2(stage, "", calculetteView.positionX, posYArdoise2, ardoise2Size);
         allDrawables.add(uneArdoise2);
         uneArdoise2.setActive(false);
         myCorrectionAndPauseGeneral.addElements(uneArdoise2);
@@ -125,12 +125,9 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
         dice1 = new Dices(MyConstants.SCREENWIDTH / 4f, MyConstants.SCREENHEIGHT / 2f, diceWidth, diceHeight, dice2positionX);
 
-//        dice1.setPosition(emptyDice1.getX(), emptyDice1.getY() - 300);
-        //dice1.setVisible(false);
         dice1.setActive(false);
 
         allDrawables.add(dice1);
-
 
         myButtonBackToPreviousMenu.addListener(new ClickListener()
         {
@@ -139,7 +136,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             {
                 game.setScreen(new Screen_Chapitre2(game));
 
-//                game.dispose();
                 Gdx.app.log("button click", "click!");
 
                 endTime = System.currentTimeMillis();
@@ -217,6 +213,8 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
             int ok = 5;
             ok++;
+
+            dice1.questionCourante = questionCourante;
 
             timer.schedule(new EtapeInstructionArdoise1(3_000, 500), 0);
         }
@@ -1374,9 +1372,9 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
         if (dice1.isActive() && (dice1.contains(mousePointerX, mousePointerY)))
         {
-            dice1.getQuestionCourante(questionCourante);
+
             dice1.isTouched(mousePointerX, mousePointerY);
-            dice1.displayNumberDiceFace();
+            //dice1.displayNumberDiceFace();
         }
 
         return true;

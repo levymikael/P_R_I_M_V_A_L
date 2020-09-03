@@ -85,7 +85,7 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         Texture egalTxture = new Texture(Gdx.files.internal("Images/Ardoise/ardoise_egal_new.png"));
         egalTxture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        float widthEmplacement = this.getWidth() * 0.5f;
+        float widthEmplacement = this.getWidth() * 0.45f;
         float heightEmplacement = widthEmplacement * ((134f / 192f) * 0.8f);
 
         float widthTiret = this.getWidth() * 0.8f;

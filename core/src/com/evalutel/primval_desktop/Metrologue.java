@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Metrologue extends AnimationImageNew implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
     public boolean isActif;
-    public boolean isSpeaking;
+    public boolean isSpeaking, isSpeakingNew;
     private MyTimer myTimer;
 
     protected boolean isPaused = true;
@@ -40,7 +40,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
 
         animation = new Animation(1f / 15f, (Object[]) animationFrames);
 
-        this.setPosition(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5);
+        this.setPosition(MyConstants.SCREENWIDTH / 60f, 2 * MyConstants.SCREENHEIGHT / 5f);
     }
 
     public boolean contains(float currentPositionX, float currentPositionY)
@@ -118,7 +118,11 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
                 TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(elapsedTime, isSpeaking);
                 batch.draw(textureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
             }
-            else
+     /*       else if (!isSpeakingNew)
+            {
+                batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth / 2, animationHeight / 2);
+            }
+            else if (!isSpeaking)*/
             {
                 batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
             }
@@ -162,7 +166,6 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
 
             Gdx.app.log("SONG", Float.toString(music.getPosition()));
         }
-
 
         if (isSpeaking)
         {

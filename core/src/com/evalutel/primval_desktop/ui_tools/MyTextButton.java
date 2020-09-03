@@ -14,10 +14,9 @@ import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 public class MyTextButton extends TextButton implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
 
-    static int screenHeight = Gdx.graphics.getHeight();
+//    static int screenHeight = Gdx.graphics.getHeight();
 
-    protected boolean isPaused = false;
-    String backgroundImagePathUp;
+    private boolean isPaused = false;
 
 
     public MyTextButton(String text, String backgroundImagePathUp, String backgroundImagePathDown, float size, String font, int fontSize)
@@ -27,7 +26,6 @@ public class MyTextButton extends TextButton implements MyDrawInterface, MyCorre
         this.setSize(size, size);
 //        this.setPosition(getWidth() / 2, getHeight() / 2);
 
-        this.backgroundImagePathUp = backgroundImagePathUp;
     }
 
 
@@ -63,16 +61,12 @@ public class MyTextButton extends TextButton implements MyDrawInterface, MyCorre
         Texture textureUp = new Texture(Gdx.files.internal(imagePathUp));
         textureUp.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        SpriteDrawable spriteDrawableUp = new SpriteDrawable(new Sprite(textureUp));
-
-        buttonStyle.up = spriteDrawableUp;
+        buttonStyle.up = new SpriteDrawable(new Sprite(textureUp));
 
         Texture textureDown = new Texture(Gdx.files.internal(imagePathDown));
         textureDown.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        SpriteDrawable spriteDrawableDown = new SpriteDrawable(new Sprite(textureDown));
-
-        buttonStyle.down = spriteDrawableDown;
+        buttonStyle.down = new SpriteDrawable(new Sprite(textureDown));
 
         return buttonStyle;
     }
@@ -92,9 +86,7 @@ public class MyTextButton extends TextButton implements MyDrawInterface, MyCorre
         Texture textureUp = new Texture(Gdx.files.internal(imagePathUp));
         textureUp.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        SpriteDrawable spriteDrawableUp = new SpriteDrawable(new Sprite(textureUp));
-
-        buttonStyle.up = spriteDrawableUp;
+        buttonStyle.up = new SpriteDrawable(new Sprite(textureUp));
 
         return buttonStyle;
     }

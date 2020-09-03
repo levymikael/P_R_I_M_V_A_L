@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Matrix4;
@@ -24,19 +23,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.General.BoutonChapitres;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
 import com.evalutel.primval_desktop.MrNotes2;
 import com.evalutel.primval_desktop.MrTemps2;
-import com.evalutel.primval_desktop.MyButtonDemos;
 import com.evalutel.primval_desktop.MyButtonRetour;
 import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
@@ -54,23 +50,18 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     private SpriteBatch batch;
     private Game game;
 
-    private Camera camera;
-
-    ScreeenBackgroundImage bandeauHaut;
-    ScreeenBackgroundImage fondSommaire;
-    MrNotes2 mrNotes;
-    MrTemps2 mrTemps;
+    private ScreeenBackgroundImage bandeauHaut, fondSommaire;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
-    MyButtonRetour myButtonRetour;
-    MyButtonDemos myButtonDemo;
+    private MyButtonRetour myButtonRetour;
+//    MyButtonDemos myButtonDemo;
 
-    TextureRegionDrawable textureRegionDrawableBg;
-    NinePatch ninePatch;
-    NinePatchDrawable ninePatchDrawable;
+    private TextureRegionDrawable textureRegionDrawableBg;
+//    NinePatch ninePatch;
+//    NinePatchDrawable ninePatchDrawable;
 
 
-    BitmapFont bitmapFontZAP, bitmapFontArialBold, bitmapFontArial, bitmapFontFRHND;
+    private BitmapFont bitmapFontZAP, bitmapFontArialBold, bitmapFontArial, bitmapFontFRHND;
 
 
     public Screen_All_Chapters(Game game)
@@ -126,7 +117,6 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Label.LabelStyle labelStyleBlueFRHND = new Label.LabelStyle();
         labelStyleBlueFRHND.font = bitmapFontFRHND;
-
         labelStyleBlueFRHND.fontColor = new Color((Color.valueOf("004ec0")));
 
         allDrawables = new ArrayList<>();
@@ -155,8 +145,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         stage.addActor(allChaptersTitle);
 
-        mrNotes = new MrNotes2(stage, 20.5f * MyConstants.SCREENWIDTH / 25f, 4 * MyConstants.SCREENHEIGHT / 5f, "all chapters");
-        mrTemps = new MrTemps2(stage);
+        MrNotes2 mrNotes = new MrNotes2(stage, 20.5f * MyConstants.SCREENWIDTH / 25f, 4 * MyConstants.SCREENHEIGHT / 5f, "all chapters");
+        MrTemps2 mrTemps = new MrTemps2(stage);
 
 
         //tableau deroulant pour Evalutel motto et liste de chapitre
@@ -175,7 +165,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table chapterTitle = new Table();
         chapterTitle.add(labelChapterTitle);
 
-        chapterTitle.padTop(MyConstants.SCREENHEIGHT / 40f);
+        chapterTitle.padTop(MyConstants.SCREENHEIGHT / 50f);
 
         Table chaptersListView = chaptersListView();
 
@@ -213,16 +203,15 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         labelStyleBlueZap.fontColor = MyConstants.bluePrimval;
 
         Label labelMottoTitle = new Label("Primval développé par Evalutel, propose un programe complet de Math et de géométrie pour le Primaire basé sur notre devise:", labelStyleBlueArialBold);
-        labelMottoTitle.setFontScale(1f);
 
         int widthButton = 1000;
         int heightButton = widthButton / 5;
         int cornerRadius = heightButton / 20;
 
-        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, Color.WHITE);
-        Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
-        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, MyConstants.bluePrimval);
-
+//        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, Color.WHITE);
+//        Pixmap lightBlueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, new Color(234f / 255f, 241f / 255f, 250f / 255f, 1));
+//        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, MyConstants.bluePrimval);
+//
 
         Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
         bgPixmap.setColor(Color.rgb888(234, 241, 250));
@@ -232,28 +221,32 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         pmBlue.setColor(Color.NAVY);
         pmBlue.fill();
 
-        textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(blueRoundedBackground2)));
+        Pixmap pmWhite = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pmWhite.setColor(Color.WHITE);
+        pmWhite.fill();
 
-        int paddingMottoDetailsBorder = MyConstants.SCREENWIDTH / 1000;
-        float heightlabelTitle = MyConstants.SCREENHEIGHT / 25f;
-        int tableWidth = MyConstants.SCREENWIDTH / 4;
+//        textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(lightBlueRoundedBackground2)));
+
+        float paddingMottoDetailsBorder = /*MyConstants.SCREENWIDTH / 1000f*/2;
+        float heightlabelTitle = 100;
+        float tableWidth = MyConstants.SCREENWIDTH / 4f;
         float heightTable = MyConstants.SCREENHEIGHT / 5.5f;
-        int paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 70;
-        int paddingCoteEvalutelMotto = MyConstants.SCREENHEIGHT / 50;
+        float paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 70f;
+        float paddingCoteEvalutelMotto = MyConstants.SCREENHEIGHT / 50f;
 
-        int leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80;
+        float leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80f;
 
 
         // TODO : check 9-patch to avoid anti-aliasing
-        ninePatch = new NinePatch(new Texture(Gdx.files.internal("Images/cellule Primaire.9.png")));
-
-         ninePatchDrawable= new NinePatchDrawable(ninePatch);
+//        ninePatch = new NinePatch(new Texture(Gdx.files.internal("Images/cellule Primaire.9.png")));
+//
+//        ninePatchDrawable = new NinePatchDrawable(ninePatch);
 
 
         Table evalutelMotto = new Table();
-        evalutelMotto.setBackground((textureRegionDrawableBg));
+        evalutelMotto.setBackground( new TextureRegionDrawable(new TextureRegion(new Texture(bgPixmap))));
 
-        evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails).align(Align.center);
+        evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails).align(Align.center).height(heightlabelTitle);
         evalutelMotto.padTop(paddingCoteEvalutelMotto).padRight(paddingCoteEvalutelMotto);
         evalutelMotto.row();
 
@@ -265,16 +258,18 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Label labelManipulerText = new Label("Des objets interactifs et ludiques sont conçus pour permettre à l'enfant de comprendre la numération , les opérations arithmétiques et les notions de base de géométrie.", labelStyleBlueArial);
         labelManipulerText.setWrap(true);
 
-
-        manipulerTable.add(labelManipulerTitle).prefHeight(heightlabelTitle).padBottom(-MyConstants.SCREENHEIGHT / 70f);
+        manipulerTable.add(labelManipulerTitle).height(heightlabelTitle).padBottom(-MyConstants.SCREENHEIGHT / 70f);
         manipulerTable.row();
-        manipulerTable.add(labelManipulerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 40f).align(Align.top);
-        manipulerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
-
-        Table borderManipuler = new Table();
-        borderManipuler.pad(paddingMottoDetailsBorder);
-        borderManipuler.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        borderManipuler.add(manipulerTable);
+        //manipulerTable.add(labelManipulerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 40f).align(Align.top);
+        manipulerTable.add(labelManipulerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 40f).align(Align.top).fillY();
+//        manipulerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+        manipulerTable.setBackground( new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
+//
+//        Table borderManipuler = new Table();
+//        borderManipuler.pad(paddingMottoDetailsBorder);
+//        borderManipuler.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+//        borderManipuler.add(manipulerTable).fillY();
+//        borderManipuler.pad(2);
 
 
         Table apprendreTable = new Table();
@@ -284,39 +279,51 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         apprendreTable.add(labelApprendreTitle).prefHeight(heightlabelTitle);
         apprendreTable.row();
-        apprendreTable.add(labelApprendreText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 100f);
-        apprendreTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+        //apprendreTable.add(labelApprendreText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 100f);
+        apprendreTable.add(labelApprendreText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 100f);
+//        apprendreTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+        apprendreTable.setBackground( new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
-        Table borderApprendre = new Table();
-        borderApprendre.pad(paddingMottoDetailsBorder);
-        borderApprendre.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        borderApprendre.add(apprendreTable);
+
+//        Table borderApprendre = new Table();
+//        borderApprendre.pad(paddingMottoDetailsBorder);
+//        borderApprendre.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+//        borderApprendre.add(apprendreTable);
 
         Table evaluerTable = new Table();
         Label labelEvaluerTitle = new Label("EVALUER", labelStyleBlueArialBold);
-        Label labelEvaluerText = new Label("Tous les exercices/problèmes sont notés. L'enfant peut toujours améliorer sa note en refaisant l'exercice. Un tableau récapitule les sujets abordés complètement ou partiellement, les temps passés et les résultats obtenus.", labelStyleBlueArial);
+        Label labelEvaluerText = new Label("Tous les exercices/problèmes sont notés. L'enfant peut toujours améliorer sa note en refaisant l'exercice. Un tableau récapitule les sujets abordés complètement ou partiellement, les temps passés et les résultats obtenus.       ", labelStyleBlueArial);
         labelEvaluerText.setWrap(true);
 
-        evaluerTable.add(labelEvaluerTitle).prefHeight(heightlabelTitle).padBottom(-MyConstants.SCREENHEIGHT / 70f);
+        evaluerTable.add(labelEvaluerTitle).height(heightlabelTitle)/*.padBottom(-MyConstants.SCREENHEIGHT / 70f)*/;
         evaluerTable.row();
-        evaluerTable.add(labelEvaluerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 75f);
-        evaluerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+        //evaluerTable.add(labelEvaluerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer).align(Align.top)/*.padBottom(MyConstants.SCREENHEIGHT / 100f)*/;
+        evaluerTable.add(labelEvaluerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).padRight(paddingManipulerApprendreEvaluer).align(Align.top)/*.padBottom(MyConstants.SCREENHEIGHT / 100f)*/;
+//        evaluerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
+        evaluerTable.setBackground( new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
 
+        evaluerTable.row();
+        //evaluerTable.add().height(MyConstants.SCREENHEIGHT / 100f);
 
-        Table borderEvaluer = new Table();
-        borderEvaluer.pad(paddingMottoDetailsBorder);
-        borderEvaluer.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        borderEvaluer.add(evaluerTable);
+//        Table borderEvaluer = new Table();
+//        borderEvaluer.pad(paddingMottoDetailsBorder);
+//        borderEvaluer.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+//        borderEvaluer.add(evaluerTable);
 
-        evalutelMottoDetails.add(borderManipuler).padLeft(leftPaddingBorderEvalutelDetails).padBottom(MyConstants.SCREENHEIGHT / 100f);
-        evalutelMottoDetails.add(borderApprendre).padLeft(leftPaddingBorderEvalutelDetails).padBottom(MyConstants.SCREENHEIGHT / 100f);
-        evalutelMottoDetails.add(borderEvaluer).padLeft(leftPaddingBorderEvalutelDetails).padBottom(MyConstants.SCREENHEIGHT / 100f);
+//        evalutelMottoDetails.add(borderManipuler).padLeft(leftPaddingBorderEvalutelDetails).padBottom(MyConstants.SCREENHEIGHT / 100f).fillY();
+//        evalutelMottoDetails.add(borderApprendre).padLeft(leftPaddingBorderEvalutelDetails).padBottom(MyConstants.SCREENHEIGHT / 100f).fillY();
+//        evalutelMottoDetails.add(borderEvaluer).padLeft(leftPaddingBorderEvalutelDetails).padBottom(MyConstants.SCREENHEIGHT / 100f).fillY();  evalutelMottoDetails.add(borderManipuler).padLeft(leftPaddingBorderEvalutelDetails).padBottom(MyConstants.SCREENHEIGHT / 100f).fillY();
+        evalutelMottoDetails.add(manipulerTable).padLeft(leftPaddingBorderEvalutelDetails).padBottom(MyConstants.SCREENHEIGHT / 100f).fillY();
+        evalutelMottoDetails.add(apprendreTable).padLeft(leftPaddingBorderEvalutelDetails).padBottom(MyConstants.SCREENHEIGHT / 100f).fillY();
+        evalutelMottoDetails.add(evaluerTable).padLeft(leftPaddingBorderEvalutelDetails).padBottom(MyConstants.SCREENHEIGHT / 100f).fillY();
         evalutelMotto.add(evalutelMottoDetails).center();
 
         Table border = new Table();
         border.pad(2);
-        border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        border.add(evalutelMotto).height(MyConstants.SCREENHEIGHT / 3.2f);
+//        border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
+//        border.setBackground( new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
+
+        border.add(evalutelMotto);//.height(MyConstants.SCREENHEIGHT / 3.2f);
 
         return border;
     }
@@ -467,7 +474,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         batch.setTransformMatrix(new Matrix4());
 
         fondSommaire.myDraw2(batch, 0, 0, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT);
-        bandeauHaut.myDraw2(batch, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f), MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
+        bandeauHaut.myDraw2(batch, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f), stage.getWidth(), MyConstants.SCREENHEIGHT / 6f);
         for (int i = 0; i < allDrawables.size(); i++)
         {
             MyDrawInterface newItem = allDrawables.get(i);
@@ -478,7 +485,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         }
 
 
-        ninePatch.draw(batch, 10, 100, 50, 200);
+//        ninePatch.draw(batch, 10, 100, 50, 200);
 
         batch.end();
 
@@ -489,8 +496,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     @Override
     public void create()
     {
-        camera = new PerspectiveCamera();
-        Viewport viewport = new FitViewport(800, 480, camera);
+        Camera camera = new PerspectiveCamera();
+//        Viewport viewport = new FitViewport(800, 480, camera);
     }
 //
 //    private void setScreen()
@@ -524,6 +531,5 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     public void dispose()
     {
         stage.dispose();
-
     }
 }

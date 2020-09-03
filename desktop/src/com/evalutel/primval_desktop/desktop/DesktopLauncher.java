@@ -1,7 +1,6 @@
 package com.evalutel.primval_desktop.desktop;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.evalutel.primval_desktop.GdxSplashScreenGame;
@@ -40,7 +39,7 @@ public class DesktopLauncher
         int screenWidth = config.width;
 
         screenHeight /= 1.1f;
-        screenWidth /= 1.1f;
+        screenWidth /= 1.7f;
 
 
         System.out.print("screenheight, screenWidth" + screenHeight + "/" + screenWidth);

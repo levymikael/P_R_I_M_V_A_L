@@ -23,7 +23,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MrNotes2;
-import com.evalutel.primval_desktop.MrTemps;
 import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 
@@ -34,33 +33,25 @@ import java.util.Date;
 public class Screen_Sommaire_General extends Game implements Screen, InputProcessor, ApplicationListener
 {
     protected Stage stage;
-    int screenWidth;
-    int screenHeight;
+    private int screenWidth, screenHeight;
     private SpriteBatch batch;
-    private Game game;
 
-    private Camera camera;
+//    private Camera camera;
+//
+//    private Viewport viewport;
 
-    private Viewport viewport;
+    private ScreeenBackgroundImage fondSommairee, fondSommaire, imgSommaire;
 
-    ScreeenBackgroundImage fondSommairee;
-    ScreeenBackgroundImage fondSommaire;
-    ScreeenBackgroundImage imgSommaire;
+    //    MrTemps mrTemps;
 
-    MrNotes2 mrNotes2;
-    MrTemps mrTemps;
+    protected ArrayList<MyDrawInterface> allDrawables;
 
-    protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
+    private Texture logoTitre;
 
-    FreeTypeFontGenerator generator;
-
-    Texture logoTitre;
-
-    final String strDate;
+    private final String strDate;
 
     public Screen_Sommaire_General(final Game game)
     {
-        this.game = game;
         Gdx.app.log("screenheight, screenWidth", screenHeight + "/" + screenWidth);
 
         stage = new Stage();
@@ -70,9 +61,9 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         screenHeight = Gdx.graphics.getHeight();
         screenWidth = Gdx.graphics.getWidth();
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/FRHND521_0.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = screenHeight / 35;
+        parameter.size = screenWidth / 55;
         parameter.minFilter = Texture.TextureFilter.Linear;
         parameter.magFilter = Texture.TextureFilter.Linear;
         bitmapFont = generator.generateFont(parameter);
@@ -97,7 +88,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
         logoTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        mrNotes2 = new MrNotes2(stage, screenWidth / 100f, screenHeight / 2f - MyConstants.SCREENHEIGHT / 50f, "general");
+        MrNotes2 mrNotes2 = new MrNotes2(stage, screenWidth / 100f, screenHeight / 2f - MyConstants.SCREENHEIGHT / 50f, "general");
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);
@@ -109,15 +100,18 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         container.setWidth(screenWidth / 7f);
         container.setHeight(screenHeight / 6f);
 
-
+        float bandeauGaucheWidth = screenWidth / 5f;
         Table avatarPic = new Table();
         Texture avatarTexture = new Texture(Gdx.files.internal("Images/avatar_1.png"));
         avatarTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+        float avatarWidth = 0.8f * bandeauGaucheWidth;
+        float avatarHeight = avatarWidth * (450f / 476f);
+
+
         avatarPic.setBackground(new SpriteDrawable(new Sprite(avatarTexture)));
-        avatarPic.setWidth(screenWidth / 7f);
-        avatarPic.setHeight(screenHeight / 5f);
-        avatarPic.setPosition(screenWidth / 50f, 6 * screenHeight / 10f);
+        avatarPic.setSize(avatarWidth, avatarHeight);
+        avatarPic.setPosition((bandeauGaucheWidth / 2) - (avatarWidth / 2), 6 * screenHeight / 10f);
 
         int paddingButtonBorders = MyConstants.SCREENWIDTH / 500;
 
@@ -210,7 +204,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Table quit = new Table();
         quit.setTouchable(Touchable.enabled);
         quit.setBackground(new SpriteDrawable(new Sprite(escapeBtn)));
-        quit.setSize(screenWidth / 20, screenWidth / 20);
+        quit.setSize(screenWidth / 20f, screenWidth / 20f);
         quit.setPosition(screenWidth - (quit.getWidth() * 1.5f), screenHeight - (quit.getWidth() * 1.5f));
 
         stage.addActor(quit);
@@ -350,6 +344,5 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     public void dispose()
     {
         stage.dispose();
-
     }
 }

@@ -73,7 +73,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
         sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
         sacDeBilles.largeurBille = largeurBilleMultiple;
-//        sacDeBilles.isActive();
         sacDeBilles.setActive(false);
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
@@ -147,10 +146,10 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         calculetteView.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
-        float buttonSize = (4 * MyConstants.SCREENWIDTH / 24f) + (2 * MyConstants.SCREENWIDTH / 100f) + (3 * MyConstants.SCREENWIDTH / 200f);
-        float posYArdoise2 = calculetteView.getCalculetteTopY();
+        float ardoise2Size = MyConstants.SCREENWIDTH / 6.5f;
+        float posYArdoise2 = calculetteView.getCalculetteTopY() + MyConstants.SCREENHEIGHT / 15f;
 
-        uneArdoise2 = new UneArdoise2(stage, "", 3.95f * MyConstants.SCREENWIDTH / 5f, posYArdoise2, buttonSize);
+        uneArdoise2 = new UneArdoise2(stage, "", calculetteView.positionX, posYArdoise2, ardoise2Size);
         allDrawables.add(uneArdoise2);
         uneArdoise2.setActive(false);
         myCorrectionAndPauseGeneral.addElements(uneArdoise2);
@@ -263,7 +262,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 }
                 UnOiseau oiseau = oiseauxList.get(cptOiseau1);
 
-
                 posY = 7 * MyConstants.SCREENHEIGHT / 10f;
                 posX = (MyConstants.SCREENWIDTH / 7f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau1);
 
@@ -276,7 +274,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             {
                 timer.schedule(new InputClavier1(500), 0);
             }
-
         }
     }
 
@@ -292,9 +289,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             sacDeBilles.setActive(true);
-
             calculetteView.setActive(true);
-
             validusAnimated.setActive(true);
 
             planche1.shouldReturnToReserve = true;

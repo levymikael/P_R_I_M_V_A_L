@@ -15,53 +15,53 @@ import com.evalutel.primval_desktop.ui_tools.MyImageButton;
 
 public class MyButtonRetour extends MyImageButton implements MyDrawInterface
 {
-    private boolean isActif;
+//    private boolean isActif;
 
 
-    public MyButtonRetour(Stage stage, float width, float height, final Game game,  String screenPrevious)
+    public MyButtonRetour(Stage stage, float width, float height, final Game game, String previousScreen)
     {
         super(stage, "Images/fleche_retour.png", width, height);
         setTouchable(Touchable.enabled);
 
 
-        if (screenPrevious == "sommaire general")
+        switch (previousScreen)
         {
-            addListener(new ClickListener()
-                        {
-                            @Override
-                            public void clicked(InputEvent event, float x, float y)
+            case "sommaire general":
+                addListener(new ClickListener()
                             {
-                                Gdx.app.log("My button retour", "Sommaire general");
-                                game.setScreen(new Screen_Sommaire_General(game));
+                                @Override
+                                public void clicked(InputEvent event, float x, float y)
+                                {
+                                    Gdx.app.log("My button retour", "Sommaire general");
+                                    game.setScreen(new Screen_Sommaire_General(game));
+                                }
                             }
-                        }
-            );
-        }
-        else if (screenPrevious == "chapitres")
-        {
-            addListener(new ClickListener()
-                        {
-                            @Override
-                            public void clicked(InputEvent event, float x, float y)
+                );
+                break;
+            case "chapitres":
+                addListener(new ClickListener()
                             {
-                                Gdx.app.log("My button retour", "Sommaire chapitres");
-                                game.setScreen(new Screen_All_Chapters(game));
+                                @Override
+                                public void clicked(InputEvent event, float x, float y)
+                                {
+                                    Gdx.app.log("My button retour", "Sommaire chapitres");
+                                    game.setScreen(new Screen_All_Chapters(game));
+                                }
                             }
-                        }
-            );
-        }
-        else if (screenPrevious == "screen all chapters")
-        {
-            addListener(new ClickListener()
-                        {
-                            @Override
-                            public void clicked(InputEvent event, float x, float y)
+                );
+                break;
+            case "screen all chapters":
+                addListener(new ClickListener()
                             {
-                                Gdx.app.log("My button retour", "Screen All Chapters");
-                                game.setScreen(new Screen_All_Chapters(game));
+                                @Override
+                                public void clicked(InputEvent event, float x, float y)
+                                {
+                                    Gdx.app.log("My button retour", "Screen All Chapters");
+                                    game.setScreen(new Screen_All_Chapters(game));
+                                }
                             }
-                        }
-            );
+                );
+                break;
         }
     }
 
