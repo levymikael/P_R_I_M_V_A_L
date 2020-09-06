@@ -64,7 +64,7 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
 
         buttonSize = width / 5.5f;
         paddingAux1 = width / 30.0f;
-        paddingAux1 = width / 60.0f;
+        paddingAux2 = width / 60.0f;
         //buttonSize = MyConstants.SCREENWIDTH / 25f;
 //        paddingAux1 = MyConstants.SCREENWIDTH / 80f;
 //        paddingAux2 = MyConstants.SCREENWIDTH / 130f;

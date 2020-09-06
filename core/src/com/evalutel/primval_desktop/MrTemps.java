@@ -26,9 +26,6 @@ public class MrTemps implements MyDrawInterface
 {
     public float screenWidth;
     private boolean isVisible = true;
-    BitmapFont bitmapFont;
-
-    MyDataBase db;
 
     public MrTemps(Stage stage, int chapitre)
     {
@@ -36,7 +33,7 @@ public class MrTemps implements MyDrawInterface
         final int screenHeight = Gdx.graphics.getHeight();
 
         AppSingleton appSingleton = AppSingleton.getInstance();
-        db = appSingleton.myDataBase;
+        MyDataBase db = appSingleton.myDataBase;
 
         long totalDuree = db.getTotalDureePageForIdProfilByChapter(chapitre);
 
@@ -46,7 +43,7 @@ public class MrTemps implements MyDrawInterface
         //user.setIdProfil(39);
         user.setName("userTest");
 
-        Profil profilTest = new Profil(2, "prenomTest", "nomTest", 6, "CP", 1);
+        Profil profilTest = new Profil(2, "nomTest", "prenomTest", 6, "CP", 1);
 
         user.setProfil(2);
 
@@ -57,7 +54,7 @@ public class MrTemps implements MyDrawInterface
         parameter.minFilter = Texture.TextureFilter.Linear;
         parameter.magFilter = Texture.TextureFilter.Linear;
         parameter.size = screenHeight / 40;
-        bitmapFont = generator.generateFont(parameter);
+        BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
 // Configuration police
@@ -65,37 +62,39 @@ public class MrTemps implements MyDrawInterface
         labelStyle.font = bitmapFont;
         labelStyle.fontColor = MyConstants.greenresultat;
         Label labelTemps = new Label(duration, labelStyle);
-//        labelTemps.setFontScale(1.25f);
+
+        float itemWidth = MyConstants.SCREENWIDTH / 15f;
+        float itemHeight = itemWidth * (223f / 172f);
 
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_temps1.png"));
         textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table container = new Table();
-        container.setPosition(13.2f * screenWidth / 16, 21f * screenHeight / 25f);
+        Table mrTemps = new Table();
+        Table temps = new Table();
+        Table border = new Table();
 
+        container.setPosition(MyConstants.SCREENWIDTH - itemWidth * 3f, 21f * screenHeight / 25f);
 
         int widthButton = 500;
         int heightButton = widthButton / 4;
         int cornerRadius = heightButton / 4;
 
-
-        Table mrTemps = new Table();
         mrTemps.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
 
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
 
-        Table temps = new Table();
-        temps.add(labelTemps).height(screenHeight / 30).padLeft(screenWidth / 60).padRight(screenWidth / 60);
+        temps.add(labelTemps).height(itemHeight / 4f).padLeft(screenWidth / 60f).padRight(screenWidth / 60f);
         temps.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Pixmap greenBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, MyConstants.greenresultat);
 
-        Table border = new Table();
+
         border.pad(screenWidth / 900f);
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(greenBorder))));
         border.add(temps);
 
-        container.add(mrTemps).height(screenHeight / 10f).width((MyConstants.SCREENHEIGHT / 10f) * (172f / 223f));
+        container.add(mrTemps).height(itemHeight).width(itemWidth);
         container.row();
         container.add(border);
 
@@ -108,7 +107,6 @@ public class MrTemps implements MyDrawInterface
         String hms = String.format("%02dh%02dmn", TimeUnit.SECONDS.toHours(seconds),
                 TimeUnit.SECONDS.toMinutes(seconds) - TimeUnit.HOURS.toMinutes(TimeUnit.SECONDS.toHours(seconds)));
         System.out.println(hms);
-
 
         return hms;
     }

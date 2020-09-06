@@ -23,9 +23,7 @@ public class MrNotes implements MyDrawInterface
 {
     public float screenWidth;
     private boolean isVisible = true;
-    BitmapFont bitmapFont;
 
-    MyDataBase db;
 
     public MrNotes(Stage stage, int chapitre)
     {
@@ -37,22 +35,16 @@ public class MrNotes implements MyDrawInterface
         parameter.minFilter = Texture.TextureFilter.Linear;
         parameter.magFilter = Texture.TextureFilter.Linear;
         parameter.size = screenHeight / 40;
-        bitmapFont = generator.generateFont(parameter);
+        BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 
         String totalNotes;
 
         AppSingleton appSingleton = AppSingleton.getInstance();
-        db = appSingleton.myDataBase;
+        MyDataBase db = appSingleton.myDataBase;
 
 
         totalNotes = db.getTotalNotePageForIdProfil(chapitre);
-
-//        if (chapitre ==0)
-//        {
-//            totalNotes = totalNotes.substring(0,totalNotes.length()-)
-//        }
-
 
 // Configuration police
         Label.LabelStyle labelStyle = new Label.LabelStyle();
@@ -60,37 +52,43 @@ public class MrNotes implements MyDrawInterface
         labelStyle.fontColor = MyConstants.redresultat;
         Label labelNotes = new Label(totalNotes, labelStyle);
 
+        float itemWidth = MyConstants.SCREENWIDTH / 15f;
+        float itemHeight = itemWidth * (223f / 172f);
+
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes1.png"));
         textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
         Table container = new Table();
-        stage.addActor(container);
-        container.setPosition(17f * screenWidth / 18, 21f * screenHeight / 25f);
+        Table mrNotes = new Table();
+        Table notes = new Table();
+        Table border = new Table();
+
+
+        container.setPosition(MyConstants.SCREENWIDTH - itemWidth /** .7f*/, 21f * screenHeight / 25f);
 
         int widthButton = 500;
         int heightButton = widthButton / 4;
         int cornerRadius = heightButton / 4;
 
-        Table mrNotes = new Table();
 
         mrNotes.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
-
+        mrNotes.setSize(itemWidth, itemHeight);
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
 
-        Table notes = new Table();
-        notes.add(labelNotes).height(screenHeight / 30f).padLeft(screenWidth / 60f).padRight(screenWidth / 60f);
+        notes.add(labelNotes).height(itemHeight / 4f).padLeft(screenWidth / 60f).padRight(screenWidth / 60f);
         notes.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
 
         Pixmap orangeBorder = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, MyConstants.redresultat);
 
-        Table border = new Table();
         border.pad(screenWidth / 900f);
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
         border.add(notes);
 
-        container.add(mrNotes).height(screenHeight / 10f).width((MyConstants.SCREENHEIGHT / 10f) * (172f / 223f));
+        container.add(mrNotes).height(itemHeight).width(itemWidth);
         container.row();
         container.add(border);
+
+        stage.addActor(container);
+
     }
 
 

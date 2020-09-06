@@ -52,7 +52,8 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
     Dices dice1;
 
     String nbInput;
-    boolean afterCorrection, isAllActive, touchValidate = false;
+    private boolean isAllActive;
+    private boolean touchValidate = false;
 
 
     public ScreenEx2_3(final Game game, String ongletTitre)
@@ -509,7 +510,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         {
             uneSouris.setVisible(false);
             nbInput = String.valueOf(diceNumber1);
-            afterCorrection = true;
             timer.schedule(new NextQuestion(500), 500);
             styleTest.up = drawableAux;
             failedAttempts = 0;
@@ -804,7 +804,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         {
             uneSouris.setVisible(false);
 //            nbInput = String.valueOf(numOiseauxBranche2);
-            afterCorrection = true;
             timer.schedule(new NextQuestion2(500), 500);
             styleTest.up = drawableAux;
             failedAttempts = 0;
@@ -1147,7 +1146,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         {
             uneSouris.setVisible(false);
             nbInput = String.valueOf(diceTotal);
-            afterCorrection = true;
             timer.schedule(new Annonce1(1_000), 500);
             styleTest.up = drawableAux;
             failedAttempts = 0;

@@ -55,28 +55,12 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
     public Screen_Chapitre2(Game game)
     {
-
         stage = new Stage();
         batch = new SpriteBatch();
 
         screenHeight = MyConstants.SCREENHEIGHT;
         screenWidth = MyConstants.SCREENWIDTH;
 
-
-        float fontSize = MyConstants.SCREENWIDTH / 55f;
-
-
-        FreeTypeFontGenerator generatorComicSansMSBold = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameterComicSansMSBold = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterComicSansMSBold.size = (int) fontSize;
-        parameterComicSansMSBold.minFilter = Texture.TextureFilter.Linear;
-        parameterComicSansMSBold.magFilter = Texture.TextureFilter.Linear;
-        BitmapFont bitmapFontComicSansMSBold = generatorComicSansMSBold.generateFont(parameterComicSansMSBold);
-        generatorComicSansMSBold.dispose();
-
-        Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
-        labelStyleBlue.font = bitmapFontComicSansMSBold;
-        labelStyleBlue.fontColor = MyConstants.bluePrimval;
 
         allDrawables = new ArrayList<>();
 
@@ -92,14 +76,11 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
         logoChapitre = new Texture(Gdx.files.internal("Images/Pages onglets/chapitre_circle_2.png"));
         logoChapitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        Label labelChap1Titre = new Label("Introduction de l'addition", labelStyleBlue);
-//        labelChap1Titre.setFontScale(1.5f);
-        Texture textureNumber1 = new Texture(Gdx.files.internal("Images/IndicesChapitres/chap2.png"));
 
         Table nomChapitre = new Table();
 
 
-        logoChapitreWidth = screenHeight / 3.8f;
+        logoChapitreWidth =screenWidth /3f;
         float nomChapitreWidth = logoChapitreWidth * 2f;
 
         logoChapitreHeight = logoChapitreWidth * (305f / 521f);
@@ -108,10 +89,30 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
         float titleChapterHeight = MyConstants.SCREENWIDTH / 25f;
 
-        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25f).height(titleChapterHeight).padRight(screenWidth / 150f);
-        nomChapitre.add(labelChap1Titre).width(MyConstants.SCREENWIDTH / 4f).align(Align.left);
+        float fontSize = logoChapitreWidth / 12f;
+
+        FreeTypeFontGenerator generatorComicSansMSBold = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameterComicSansMSBold = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameterComicSansMSBold.size = (int) fontSize;
+        parameterComicSansMSBold.minFilter = Texture.TextureFilter.Linear;
+        parameterComicSansMSBold.magFilter = Texture.TextureFilter.Linear;
+        BitmapFont bitmapFontComicSansMSBold = generatorComicSansMSBold.generateFont(parameterComicSansMSBold);
+        generatorComicSansMSBold.dispose();
+
+        Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
+        labelStyleBlue.font = bitmapFontComicSansMSBold;
+        labelStyleBlue.fontColor = MyConstants.bluePrimval;
+
+        Label labelChap2Titre = new Label("Introduction de l'addition", labelStyleBlue);
+        Texture textureNumber2 = new Texture(Gdx.files.internal("Images/IndicesChapitres/chap2.png"));
+        textureNumber2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        labelChap2Titre.setSize(logoChapitreWidth * 2.5f, logoChapitreHeight / 4f);
+
+
+        nomChapitre.add(new Image(textureNumber2)).width(MyConstants.SCREENWIDTH / 25f).height(titleChapterHeight).padRight(screenWidth / 150f);
+        nomChapitre.add(labelChap2Titre).width(MyConstants.SCREENWIDTH / 4f).align(Align.left);
         nomChapitre.setWidth(nomChapitreWidth);
-        nomChapitre.setPosition(screenWidth / 2f - (nomChapitreWidth / 2f), positionYLogoChapitre - (titleChapterHeight));
+        nomChapitre.setPosition(screenWidth / 2f - (labelChap2Titre.getWidth() / 2.2f), positionYLogoChapitre - (titleChapterHeight*.5f));
         stage.addActor(nomChapitre);
 
         int numChapter = 2;
@@ -196,12 +197,6 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
                 newItem.myDraw(batch);
             }
         }
-
-        float logoChapitreWidth = screenWidth / 3.8f;
-
-        float logoChapitreHeight = logoChapitreWidth * (305f / 521f);
-
-        float positionYLogoChapitre = bandeauHautY - (logoChapitreHeight / 2f);
 
         batch.draw(logoChapitre, screenWidth / 2f - (logoChapitreWidth / 2f), positionYLogoChapitre, logoChapitreWidth, logoChapitreHeight);
 
