@@ -31,33 +31,30 @@ import java.util.ArrayList;
 public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, ApplicationListener
 {
     protected Stage stage;
-    int screenWidth;
-    int screenHeight;
+    private float screenWidth, screenHeight, logoChapitreWidth, logoChapitreHeight, bandeauHautY, positionYLogoChapitre;
+
     private SpriteBatch batch;
-    private Game game;
+//    private Game game;
+//
+//    private Camera camera;
+//
+//    private Viewport viewport;
 
-    private Camera camera;
+    private Texture logoChapitre;
 
-    private Viewport viewport;
-
-    Texture logoChapitre;
-
-    ListExercicesActiviteViewChap2 listExercicesActiviteViewChap2;
-    ScreeenBackgroundImage bandeauHaut;
-    ScreeenBackgroundImage fondSommaire;
+    private ScreeenBackgroundImage bandeauHaut, fondSommaire;
     MrNotes mrNotes;
     MrTemps mrTemps;
 
     protected ArrayList<MyDrawInterface> allDrawables;
 
-    MyButtonRetour myButtonRetour;
+    private MyButtonRetour myButtonRetour;
 
     FreeTypeFontGenerator generator;
 
 
     public Screen_Chapitre2(Game game)
     {
-        this.game = game;
 
         stage = new Stage();
         batch = new SpriteBatch();
@@ -65,12 +62,13 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
         screenHeight = MyConstants.SCREENHEIGHT;
         screenWidth = MyConstants.SCREENWIDTH;
 
-        int fontSize = MyConstants.SCREENWIDTH / 55;
+
+        float fontSize = MyConstants.SCREENWIDTH / 55f;
 
 
         FreeTypeFontGenerator generatorComicSansMSBold = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterComicSansMSBold = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameterComicSansMSBold.size = fontSize;
+        parameterComicSansMSBold.size = (int) fontSize;
         parameterComicSansMSBold.minFilter = Texture.TextureFilter.Linear;
         parameterComicSansMSBold.magFilter = Texture.TextureFilter.Linear;
         BitmapFont bitmapFontComicSansMSBold = generatorComicSansMSBold.generateFont(parameterComicSansMSBold);
@@ -86,7 +84,7 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
         fondSommaire = new ScreeenBackgroundImage("Images/Pages onglets/fond.jpg");
 
-        listExercicesActiviteViewChap2 = new ListExercicesActiviteViewChap2(stage, game);
+        ListExercicesActiviteViewChap2 listExercicesActiviteViewChap2 = new ListExercicesActiviteViewChap2(stage, game);
 
         myButtonRetour = new MyButtonRetour(stage, screenWidth / 15f, screenWidth / 15f, game, "chapitres");
         myButtonRetour.setPosition(screenWidth / 25f, 5 * screenHeight / 6f - myButtonRetour.getHeight() / 2);
@@ -100,12 +98,20 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
         Table nomChapitre = new Table();
 
-        float nomChapitreWidth = MyConstants.SCREENWIDTH / 5f;
 
-        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25f).height(MyConstants.SCREENWIDTH / 25f).padRight(screenWidth / 150f);
+        logoChapitreWidth = screenHeight / 3.8f;
+        float nomChapitreWidth = logoChapitreWidth * 2f;
+
+        logoChapitreHeight = logoChapitreWidth * (305f / 521f);
+        bandeauHautY = (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f);
+        positionYLogoChapitre = bandeauHautY - (logoChapitreHeight / 2f);
+
+        float titleChapterHeight = MyConstants.SCREENWIDTH / 25f;
+
+        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25f).height(titleChapterHeight).padRight(screenWidth / 150f);
         nomChapitre.add(labelChap1Titre).width(MyConstants.SCREENWIDTH / 4f).align(Align.left);
         nomChapitre.setWidth(nomChapitreWidth);
-        nomChapitre.setPosition(screenWidth / 2f - (nomChapitreWidth / 2), 4f * screenHeight / 6f);
+        nomChapitre.setPosition(screenWidth / 2f - (nomChapitreWidth / 2f), positionYLogoChapitre - (titleChapterHeight));
         stage.addActor(nomChapitre);
 
         int numChapter = 2;
@@ -177,8 +183,8 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
         batch.begin();
         batch.setTransformMatrix(new Matrix4());
 
-        float bandeauHautY = (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f);
-        fondSommaire.myDraw2(batch, 0, 0, screenWidth, 5.05f * screenHeight / 6f);
+
+        fondSommaire.myDraw2(batch, 0, 0, MyConstants.SCREENWIDTH, 5.05f * screenHeight / 6f);
 
         bandeauHaut.myDraw2(batch, 0, bandeauHautY, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
 
@@ -195,7 +201,9 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
         float logoChapitreHeight = logoChapitreWidth * (305f / 521f);
 
-        batch.draw(logoChapitre, screenWidth / 2f - (logoChapitreWidth / 2f), bandeauHautY - (logoChapitreHeight / 2f), logoChapitreWidth, logoChapitreHeight);
+        float positionYLogoChapitre = bandeauHautY - (logoChapitreHeight / 2f);
+
+        batch.draw(logoChapitre, screenWidth / 2f - (logoChapitreWidth / 2f), positionYLogoChapitre, logoChapitreWidth, logoChapitreHeight);
 
         batch.end();
 

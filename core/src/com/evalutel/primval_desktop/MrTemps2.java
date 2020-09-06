@@ -65,12 +65,18 @@ public class MrTemps2 implements MyDrawInterface
         Texture textureMrTemps = new Texture(Gdx.files.internal("Images/mr_temps.png"));
         textureMrTemps.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+        float logoWidth = screenWidth / 9.2f;
+        float logoHeight = logoWidth * (120f / 285f);
+        float positionXNew = MyConstants.SCREENWIDTH - (logoWidth * 2.8f);
+
         Table container = new Table();
-        container.setSize(screenWidth / 8, screenHeight / 14f);
-        container.setPosition(17 * screenWidth / 25f, 4 * screenHeight / 5f);
+        container.setSize(logoWidth, logoHeight);
+        container.setPosition(positionXNew, 4 * screenHeight / 5f);
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrTemps))));
-        container.add(labelTemps).padLeft(screenWidth / 20).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
+        container.add(labelTemps).padLeft(logoWidth / 3f).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
+
+        container.debug();
 
         stage.addActor(container);
     }

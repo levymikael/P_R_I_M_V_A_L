@@ -145,7 +145,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         stage.addActor(allChaptersTitle);
 
-        MrNotes2 mrNotes = new MrNotes2(stage, 20.5f * MyConstants.SCREENWIDTH / 25f, 4 * MyConstants.SCREENHEIGHT / 5f, "all chapters");
+        MrNotes2 mrNotes = new MrNotes2(stage, 22.5f * MyConstants.SCREENWIDTH / 25f, 4 * MyConstants.SCREENHEIGHT / 5f, "all chapters");
         MrTemps2 mrTemps = new MrTemps2(stage);
 
 

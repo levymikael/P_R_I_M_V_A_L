@@ -88,7 +88,6 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         logoTitre = new Texture(Gdx.files.internal("Images/Sommaire/titre_sommaire.png"));
         logoTitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        MrNotes2 mrNotes2 = new MrNotes2(stage, screenWidth / 100f, screenHeight / 2f - MyConstants.SCREENHEIGHT / 50f, "general");
 
         Label labelChapitres = new Label("Chapitres", labelStyleBlue);
         Label labelResultats = new Label("Résultats", labelStyleBlue);
@@ -105,13 +104,16 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Texture avatarTexture = new Texture(Gdx.files.internal("Images/avatar_1.png"));
         avatarTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        float avatarWidth = 0.8f * bandeauGaucheWidth;
+
+        MrNotes2 mrNotes2 = new MrNotes2(stage, bandeauGaucheWidth/2.2f, screenHeight / 2f - MyConstants.SCREENHEIGHT / 50f, "general");
+
+        float avatarWidth = 0.7f * bandeauGaucheWidth;
         float avatarHeight = avatarWidth * (450f / 476f);
 
 
         avatarPic.setBackground(new SpriteDrawable(new Sprite(avatarTexture)));
         avatarPic.setSize(avatarWidth, avatarHeight);
-        avatarPic.setPosition((bandeauGaucheWidth / 2) - (avatarWidth / 2), 6 * screenHeight / 10f);
+        avatarPic.setPosition((bandeauGaucheWidth / 2f) - (avatarWidth / 2f), 6 * screenHeight / 10f);
 
         int paddingButtonBorders = MyConstants.SCREENWIDTH / 500;
 

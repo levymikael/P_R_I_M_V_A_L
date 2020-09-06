@@ -20,8 +20,6 @@ public class MrNotes2 implements MyDrawInterface
     public float screenWidth;
     private boolean isVisible = true;
 
-//    MyDataBase db;
-
     public MrNotes2(Stage stage, float positionX, float positionY, String screen)
     {
         screenWidth = MyConstants.SCREENWIDTH;
@@ -38,6 +36,7 @@ public class MrNotes2 implements MyDrawInterface
         String totalNotes;
 
         AppSingleton appSingleton = AppSingleton.getInstance();
+
 
 
         totalNotes = appSingleton.myDataBase.getTotalNotePageForIdProfil(0);
@@ -61,20 +60,26 @@ public class MrNotes2 implements MyDrawInterface
         Texture textureMrNotes = new Texture(Gdx.files.internal("Images/mr_notes.png"));
         textureMrNotes.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+        float logoWidth = screenWidth / 7f;
+        float logoHeight = logoWidth * (120f / 380f);
+        float positionXNew = positionX - (logoWidth / 2f);
+
+
         Table container = new Table();
-        container.setSize(screenWidth / 6f, screenHeight / 14f);
-        container.setPosition(positionX, positionY);
+        container.setSize(logoWidth, logoHeight);
+        container.setPosition(positionXNew, positionY);
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
         if (screen.equals("general"))
         {
-            container.add(labelNotes).padLeft(screenWidth / 20).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
+            container.add(labelNotes).padLeft(logoWidth/3f).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
         }
         else
         {
-            container.add(labelNotes).padLeft(screenWidth / 15).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
+            container.add(labelNotes).padLeft(logoWidth/3f).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
         }
 
+        container.debug();
         stage.addActor(container);
     }
 
