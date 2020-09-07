@@ -53,11 +53,11 @@ public class LigneTableauxResults
 
         Label.LabelStyle labelStyleOnglet = new Label.LabelStyle();
         labelStyleOnglet.font = bitmapFontArial;
-        if (borderColor == "red")
+        if (borderColor.equals("red"))
         {
             labelStyleOnglet.fontColor = MyConstants.redPrimval;
         }
-        else if (borderColor == "blue")
+        else if (borderColor.equals("blue"))
         {
             labelStyleOnglet.fontColor = MyConstants.bluePrimval;
         }
@@ -97,17 +97,17 @@ public class LigneTableauxResults
 
 //        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pixmapBg))));
 
-        table.add(button).height(MyConstants.SCREENHEIGHT / 30f).width(MyConstants.SCREENHEIGHT / 30f).padLeft(screenWidth / 19f).padRight(screenWidth / 80f);
-        table.add(labelOnglet).width((screenWidth * 0.58f)).padRight(screenWidth / 20f);
+        table.add(button).height(MyConstants.SCREENHEIGHT / 30f).width(MyConstants.SCREENHEIGHT / 30f).padLeft(screenWidth / 25f).padRight(screenWidth / 80f);
+        table.add(labelOnglet).width((screenWidth * 0.62f)).padRight(screenWidth / 20f);
         table.add(new Image(texture)).width(screenWidth / 70f).height(screenWidth / 70f).padRight(screenWidth / 60f);
         table.add(labelDuration).width(screenWidth / 11f).padRight(screenWidth / 18f).padLeft(screenWidth / 90f);
         table.add(labelNotes).width(screenWidth / 8f);
 
 
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float lineHeight = MyConstants.SCREENHEIGHT / 20f;
         float buttonSize = lineHeight / 10;
         int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 50;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 50f;
 
         container.add(table).height(MyConstants.SCREENHEIGHT / 21f).width(screenWidth);
 

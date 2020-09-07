@@ -23,7 +23,7 @@ public class UneBougie extends AnimationImageNew implements MyTouchInterface, My
 
     public UneBougie(float startPositionX, float startPositionY, float animationHeight)
     {
-        super("Images/Onglet_1_6/bougie_bleu.png", startPositionX, startPositionY, animationHeight, animationHeight * 120f / 90f);
+        super("Images/Onglet_1_7/bougie_bleu.png", startPositionX, startPositionY, animationHeight, animationHeight * 120f / 90f);
     }
 
 //    private static ArrayList<String> getAnimationBougiee()

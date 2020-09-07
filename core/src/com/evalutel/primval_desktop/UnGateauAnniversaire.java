@@ -19,7 +19,7 @@ public class UnGateauAnniversaire extends AnimationImageNew implements MyDrawInt
 
     public UnGateauAnniversaire(float startPositionX, float startPositionY, float gateauWidth, float gateauHeight, float widthBougie)
     {
-        super("Images/Onglet_1_6/gateau.png", startPositionX, startPositionY, gateauWidth, gateauHeight);
+        super("Images/Onglet_1_7/gateau.png", startPositionX, startPositionY, gateauWidth, gateauHeight);
 
         float startX = startPositionX + gateauWidth/6.0f;
         float startY = startPositionY + gateauHeight/2.5f;

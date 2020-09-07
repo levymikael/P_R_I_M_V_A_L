@@ -17,15 +17,17 @@ import java.util.TimerTask;
 
 public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInterface, MyTouchInterface
 {
-    static ArrayList arrayListNumber, arrayListAnimal;
+    private static ArrayList arrayListNumber, arrayListAnimal;
 
     private ArrayList<int[]> randDicesArray = new ArrayList<>();
     private TextureRegion[] allImagesDes = new TextureRegion[6];
+    private TextureRegion[] allImagesAnimal = new TextureRegion[7];
 
     private int currentChiffreDes1, currentChiffreDes2;
 
+
     float dice2positionX;
-    TextureRegion textureEmptyDice, texturePlusDice, textureNumberDice1, textureNumberDice2;
+    TextureRegion textureEmptyDice, texturePlusDice, textureNumberDice1, textureNumberDice2, textureNumberDiceAnimal1, textureNumberDiceAnimal2;
     boolean isClicked = false;
     boolean isAnimating = false;
     public int questionCourante = 0;
@@ -45,21 +47,33 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         diceTexture1.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         textureEmptyDice = new TextureRegion(diceTexture1);
 
+        String[] animalsArray = {"baleine", "dauphin", "dinosaure", "elephant", "lion", "papillon", "tortue"};
+
 
         Texture diceTexturePlus = new Texture(Gdx.files.internal("Images/onglet2_3/des_plus.png"));
         diceTexturePlus.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         texturePlusDice = new TextureRegion(diceTexturePlus);
 
+        for (int i = 0; i < 7; i++)
+        {
+            String imgName = "Images/onglet2_3/des_" + animalsArray[i] + ".png";
+
+            Texture imgAux = new Texture(imgName);
+            imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+            TextureRegion textureRegionAux = new TextureRegion(imgAux);
+            allImagesAnimal[i] = textureRegionAux;
+        }
+
         for (int i = 0; i < 6; i++)
         {
-            String imgName = "Images/onglet2_3/des_0" + String.valueOf(i+1) + ".png";
+            String imgName = "Images/onglet2_3/des_0" + (i + 1) + ".png";
 
             Texture imgAux = new Texture(imgName);
             imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
             TextureRegion textureRegionAux = new TextureRegion(imgAux);
             allImagesDes[i] = textureRegionAux;
-
         }
 
 
@@ -141,14 +155,14 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         return randDicesArray.get(questionCourante)[1];
     }
 
-    public void displayNumberDiceFace()
-    {
-        String dice1NumberFace = "Images/onglet2_3/des_0" + getLastDice1value() + ".png";
-        textureNumberDice1 = new TextureRegion(new Texture(dice1NumberFace));
-
-        String dice2NumberFace = "Images/onglet2_3/des_0" + getLastDice2value() + ".png";
-        textureNumberDice2 = new TextureRegion(new Texture(dice2NumberFace));
-    }
+//    public void displayNumberDiceFace()
+//    {
+//        String dice1NumberFace = "Images/onglet2_3/des_0" + getLastDice1value() + ".png";
+//        textureNumberDice1 = new TextureRegion(new Texture(dice1NumberFace));
+//
+//        String dice2NumberFace = "Images/onglet2_3/des_0" + getLastDice2value() + ".png";
+//        textureNumberDice2 = new TextureRegion(new Texture(dice2NumberFace));
+//    }
 
 
     private static ArrayList<String> getAnimationDiceAnimals()
@@ -187,53 +201,39 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         batch.draw(textureEmptyDice, dice2positionX, currentPositionY, animationWidth, animationHeight);
 
 
-
-
 //        if (isClicked)
 //        {
 //            batch.draw(textureNumberDice1, currentPositionX, currentPositionY, animationWidth, animationHeight);
 //        }
 
-        if(isAnimating)
+        if (isAnimating)
         {
             elapsedTime += Gdx.graphics.getDeltaTime();
             textureNumberDice1 = (TextureRegion) animation.getKeyFrame(elapsedTime, isAnimating);
             textureNumberDice2 = (TextureRegion) animation3.getKeyFrame(elapsedTime, isAnimating);
+            textureNumberDiceAnimal1 = (TextureRegion) animation2.getKeyFrame(elapsedTime, isAnimating);
+            textureNumberDiceAnimal2 = (TextureRegion) animation4.getKeyFrame(elapsedTime, isAnimating);
 
             batch.draw(textureNumberDice1, currentPositionX, currentPositionY, animationWidth, animationHeight);
             batch.draw(textureNumberDice2, dice2positionX, currentPositionY, animationWidth, animationHeight);
+            batch.draw(textureNumberDiceAnimal1, currentPositionX, currentPositionY, animationWidth, animationHeight);
+            batch.draw(textureNumberDiceAnimal2, dice2positionX, currentPositionY, animationWidth, animationHeight);
         }
         else
         {
-            if(currentChiffreDes1 > 0)
+            if (currentChiffreDes1 > 0)
             {
-                TextureRegion textureRegionDe1 = allImagesDes[currentChiffreDes1-1];
-                TextureRegion textureRegionDe2 = allImagesDes[currentChiffreDes2-1];
+                TextureRegion textureRegionDe1 = allImagesDes[currentChiffreDes1 - 1];
+                TextureRegion textureRegionDe2 = allImagesDes[currentChiffreDes2 - 1];
+                TextureRegion textureRegionDeAnimal1 = allImagesAnimal[currentChiffreDes1 - 1];
+                TextureRegion textureRegionDeAnimal2 = allImagesAnimal[currentChiffreDes2 - 1];
 
                 batch.draw(textureRegionDe1, currentPositionX, currentPositionY, animationWidth, animationHeight);
                 batch.draw(textureRegionDe2, dice2positionX, currentPositionY, animationWidth, animationHeight);
+                batch.draw(textureRegionDeAnimal1, currentPositionX, currentPositionY, animationWidth, animationHeight);
+                batch.draw(textureRegionDeAnimal2, dice2positionX, currentPositionY, animationWidth, animationHeight);
             }
-
         }
-
-        /*
-
-
-
-        if ((animation2 != null) && (isClicked))
-        {
-            batch.draw(textureRegion2, currentPositionX, currentPositionY, animationWidth, animationHeight);
-        }
-
-        if ((animation3 != null) && (isClicked))
-        {
-
-        }
-
-        if ((animation4 != null) && (isClicked))
-        {
-            batch.draw(textureRegion4, dice2positionX, currentPositionY, animationWidth, animationHeight);
-        }*/
     }
 
 
@@ -252,12 +252,8 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
     @Override
     public boolean isTouched(float x, float y)
     {
-//        if ( ! isClicked)
-//        {
-//            isClicked = true;
-//        }
 
-        if(isAnimating)
+        if (isAnimating)
         {
             return false;
         }
@@ -278,20 +274,6 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
                 public void run()
                 {
                     isAnimating = false;
-                    /*
-                    if (animationContinue)
-                    {
-                        animationContinue = false;
-                    }
-                    else
-                    {
-                        animationContinue = true;
-                    }*/
-
-//                getLastDice1value();
-//                getLastDice2value();
-
-                    //displayNumberDiceFace();
 
                     isClicked = false;
 
@@ -313,7 +295,6 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
             System.out.println("dé touche");
             return false;
         }
-
 
     }
 

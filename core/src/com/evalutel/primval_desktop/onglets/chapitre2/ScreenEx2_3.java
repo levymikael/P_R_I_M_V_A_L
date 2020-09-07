@@ -18,22 +18,17 @@ import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UneArdoise2;
-//import com.evalutel.primval_desktop.UneBille;
 import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.onglets.ScreenOnglet;
 import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
 public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 {
-
-    int[] numOiseauArray;
-
-    private ArrayList<int[]> randomDicesArray = new ArrayList<>();
+//    private ArrayList<int[]> randomDicesArray = new ArrayList<>();
 
     private UneArdoise2 uneArdoise2;
     private CalculetteView calculetteView;
@@ -43,16 +38,15 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
     Drawable drawableAux;
 
     private int diceTotal /*, cptOiseau1, cptOiseau2, oiseauxToDisplayBranche1, oiseauxToDisplayBranche2*/;
-    private int /*brancheRenewal,*/ failedAttempts;
+    private int failedAttempts;
     private int diceNumber1;
-
 
     Label currentLabel;
 
-    Dices dice1;
+    private Dices dice1;
 
-    String nbInput;
-    private boolean isAllActive;
+    private String nbInput;
+//    private boolean isAllActive;
     private boolean touchValidate = false;
 
 
@@ -96,12 +90,14 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         stage.addActor(tableTitre);
 
 
-        getRandDesArray();
+//        getRandDesArray();
 
         resultatExercice = new UnResultat("Primval", 2, 3, 0, ongletTitre, 24, 0, dateTest, 0, 0, 0, 123);
 
-        float widthCalculette = MyConstants.SCREENWIDTH/5.0f;
-        float hauteurCalculette = widthCalculette*362.0f/355.0f;
+
+//        float widthCalculette = validusAnimated.getWidth() * 1.2f;
+        float widthCalculette = MyConstants.SCREENWIDTH / 6.5f;
+        float hauteurCalculette = (widthCalculette * 362f / 355f) * 1.2f;
         float positionCalculetteX = MyConstants.SCREENWIDTH - widthCalculette - (MyConstants.SCREENWIDTH / 200f);
         float positionCalculetteY = MyConstants.SCREENWIDTH / 200f;
 
@@ -125,7 +121,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         float dice2positionX = MyConstants.SCREENWIDTH / 4f + (diceWidth * 1.3f);
 
         dice1 = new Dices(MyConstants.SCREENWIDTH / 4f, MyConstants.SCREENHEIGHT / 2f, diceWidth, diceHeight, dice2positionX);
-
         dice1.setActive(false);
 
         allDrawables.add(dice1);
@@ -189,10 +184,10 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 //
 //            int diceValue2 = dice1.getLastDice2value();
 
-            int ok = 5;
-            ok++;
+//            int ok = 5;
+//            ok++;
 
-            timer.schedule(new DiceStep(1_500), 0);
+            timer.schedule(new DiceStep(5_000), 0);
         }
     }
 
@@ -212,8 +207,8 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 //
 //            int diceValue2 = dice1.getLastDice2value();
 
-            int ok = 5;
-            ok++;
+//            int ok = 5;
+//            ok++;
 
             dice1.questionCourante = questionCourante;
 
@@ -257,7 +252,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             try
             {
                 value = Integer.parseInt(txtTape);
-            } catch (Exception e)
+            } catch (Exception ignored)
             {
 
             }
@@ -591,7 +586,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             try
             {
                 value = Integer.parseInt(txtTape);
-            } catch (Exception e)
+            } catch (Exception ignored)
             {
 
             }
@@ -823,23 +818,18 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         {
             calculetteView.textRemove();
 
-            isAllActive = true;
-//
-//            if (questionCourante == 15)
-//            {
-//                timer.schedule(new Fin(500, 0), 500);
-//            }
-//            else
-//            {
+//            isAllActive = true;
+
             timer.schedule(new InputClavier3(500), 0);
-//            }
+
+            activiteView.addTextActivite("Tape au clavier le total des points sur les deux dés puis valide.");
 
             nbInput = null;
 
             diceTotal = dice1.getLastDice1value() + dice1.getLastDice2value();
 
-            int ok = 5;
-            ok++;
+//            int ok = 5;
+//            ok++;
         }
     }
 
@@ -1349,16 +1339,16 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         return diceNumber2;
     }
 
-    public void getRandDesArray()
-    {
-        for (int i = 0; i < 6; i++)
-        {
-            int[] dicesNumUpTo9 = {0, 0};
-            dicesNumUpTo9[0] = randomDice1();
-            dicesNumUpTo9[1] = randomDice2();
-            randomDicesArray.add(dicesNumUpTo9);
-        }
-    }
+//    public void getRandDesArray()
+//    {
+//        for (int i = 0; i < 6; i++)
+//        {
+//            int[] dicesNumUpTo9 = {0, 0};
+//            dicesNumUpTo9[0] = randomDice1();
+//            dicesNumUpTo9[1] = randomDice2();
+//            randomDicesArray.add(dicesNumUpTo9);
+//        }
+//    }
 
 
     @Override
@@ -1372,6 +1362,8 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         {
 
             dice1.isTouched(mousePointerX, mousePointerY);
+
+            dice1.setActive(false);
             //dice1.displayNumberDiceFace();
         }
 

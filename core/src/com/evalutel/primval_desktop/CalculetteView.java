@@ -33,17 +33,16 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
 //    public float posY;
     public float positionX, positionY;
 
-    private TextureRegion textureRegionFond;
+    public TextureRegion textureRegionFond;
 
     public MyTextButton additionBouton, soustractionBouton, multiplicationBouton, egalBouton, effacerBouton, validerBouton, zero_bouton, un_bouton, deux_bouton, trois_bouton, quatre_bouton, cinq_bouton, six_bouton, sept_bouton, huit_bouton, neuf_bouton;
 
     private TextField textFieldTest;
     private Skin skin;
-    private Stage stage;
+    //    private Stage stage;
     private TextField.TextFieldStyle textFieldStyleTest;
 
 
-    private String calculetteInput;
     private ArrayList<MyTextButton> arrayListButtons = new ArrayList<>();
     protected boolean isVisible = true;
     protected boolean isActive = true;
@@ -63,22 +62,12 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
         this.positionY = positionY;
 
         buttonSize = width / 5.5f;
-        paddingAux1 = width / 30.0f;
-        paddingAux2 = width / 60.0f;
-        //buttonSize = MyConstants.SCREENWIDTH / 25f;
-//        paddingAux1 = MyConstants.SCREENWIDTH / 80f;
-//        paddingAux2 = MyConstants.SCREENWIDTH / 130f;
+        paddingAux1 = width / 35.0f;
+        paddingAux2 = width / 35.0f;
+
         int fontSizeButton = (int) (buttonSize / 1.7f);
 
-
-//        this.width = (4 * buttonSize) + (1.9f * paddingAux1) + (3 * paddingAux2) + MyConstants.SCREENWIDTH / 80f;
-//        this.height = (5 * buttonSize) + (2.5f * paddingAux1) + (2.5f * paddingAux2);
-//
-//        this.positionX = MyConstants.SCREENWIDTH - width - (MyConstants.SCREENWIDTH / 200f);
-//        this.positionY = MyConstants.SCREENWIDTH / 200f;
-
-
-        this.stage = stage;
+//        this.stage = stage;
 
         String emptyButtonInactivePath = "Images/calculetteKeys/vide_inactif.png";
         String emptyButtonActivePath = "Images/calculetteKeys/highlight/vide_actif.png";
@@ -207,7 +196,7 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
         this.positionY = MyConstants.SCREENWIDTH / 200f;
 
 
-        this.stage = stage;
+//        this.stage = stage;
 
         String emptyButtonInactivePath = "Images/calculetteKeys/vide_inactif.png";
         String emptyButtonActivePath = "Images/calculetteKeys/highlight/vide_actif.png";
@@ -329,11 +318,11 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
         return textFieldTest.getText();
     }
 
-    public void screenDeletion()
-    {
-        textFieldTest.clear();
-
-    }
+//    public void screenDeletion()
+//    {
+//        textFieldTest.clear();
+//
+//    }
 
     public MyPoint buttonPosition(int buttonNumber)
     {
@@ -500,6 +489,7 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
 
             String exText = textFieldTest.getText();
 
+            String calculetteInput;
             if (string.equals("effacer"))
             {
                 if (exText.length() > 0)
@@ -546,7 +536,7 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
             {
                 MyTextButton buttonAux = arrayListButtons.get(cpt);
                 buttonAux.setSize(buttonSize, buttonSize);
-                buttonAux.setPosition(paddingAux1 + positionX + (paddingAux2 + buttonSize) * i, positionY + paddingAux1 + (paddingAux2 + buttonSize) * j);
+                buttonAux.setPosition((paddingAux1 * 1.5f) + positionX + (paddingAux2 * 2 + buttonSize) * i, (paddingAux1 * 2.5f) + positionY + ((paddingAux2 * 1.5f) + buttonSize) * j);
                 buttonAux.draw(batch, 1.0f);
                 buttonAux.getStyle().fontColor = Color.BLACK;
                 cpt++;

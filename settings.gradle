@@ -1,2 +1,2 @@
-include ':lib'
+include ':lib', ':desktop-1.0'
 include 'desktop', 'android', 'core'

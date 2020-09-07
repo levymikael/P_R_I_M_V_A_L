@@ -25,7 +25,6 @@ public class DesktopLauncher
 
         config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
         //If I want to test windowed
-        boolean fullscreen = true;
         /*if (!fullscreen)
         {
             config.fullscreen = true;
@@ -35,8 +34,8 @@ public class DesktopLauncher
 
         //config.fullscreen = true;
 
-        int screenHeight = config.height;
-        int screenWidth = config.width;
+        float screenHeight = config.height;
+        float screenWidth = config.width;
 
         screenHeight /= 1.1f;
         screenWidth /= 1.1f;
@@ -44,9 +43,9 @@ public class DesktopLauncher
 
         System.out.print("screenheight, screenWidth" + screenHeight + "/" + screenWidth);
 
-        float ratioTest = 1024f / 768f;
+//        float ratioTest = 1024f / 768f;
 
-        float currentRatio = (float) screenWidth / (float) screenHeight;
+//        float currentRatio =  screenWidth / screenHeight;
 
         /*
         if (currentRatio > ratioTest)
@@ -57,8 +56,8 @@ public class DesktopLauncher
         }
 */
 
-        config.width = screenWidth;
-        config.height = screenHeight;
+        config.width = (int) screenWidth;
+        config.height = (int) screenHeight;
 
         config.forceExit = true;
 

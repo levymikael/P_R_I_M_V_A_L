@@ -67,16 +67,37 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     public float screenWidth;
 
-    BitmapFont bitmapFontZAP, bitmapFontFRHND, bitmapFontArial, bitmapFontArialBold, bitmapFontSegoe;
+    private BitmapFont bitmapFontZAP, bitmapFontFRHND, bitmapFontArial, bitmapFontArialBold, bitmapFontSegoe;
 
     int lastClicked = -1;
-    float collapsibleTableHeight = MyConstants.SCREENHEIGHT / 8f;
+    private float collapsibleTableHeight = MyConstants.SCREENHEIGHT / 8f;
 
     private boolean chap1titleClicked, chap2titleClicked, chap3titleClicked, chap4titleClicked, chap5titleClicked, chap6titleClicked, chap7titleClicked, chap8titleClicked, chap9titleClicked, chap10titleClicked, chap11titleClicked, chap12titleClicked, chap13titleClicked, chap14titleClicked, chap15titleClicked, chap16titleClicked, chap17titleClicked, chap18titleClicked, chap19titleClicked, chap20titleClicked, chap21titleClicked, chap22titleClicked, chap23titleClicked, chap24titleClicked, chap25titleClicked = false;
 
-    //    private Table chapter1Table, chapter2Table, chapter3Table, chapter4Table, chapter5Table, chapter6Table, chapter7Table, chapter8Table, chapter9Table, chapter10Table, chapter11Table, chapter12Table, chapter13Table, chapter14Table, chapter15Table, chapter16Table, chapter17Table, chapter18Table, chapter19Table, chapter20Table, chapter21Table, chapter22Table, chapter23Table, chapter24Table, chapter25Table;
-//    private HorizontalGroup chapter1Table, chapter2Table, chapter3Table, chapter4Table, chapter5Table, chapter6Table, chapter7Table, chapter8Table, chapter9Table, chapter10Table, chapter11Table, chapter12Table, chapter13Table, chapter14Table, chapter15Table, chapter16Table, chapter17Table, chapter18Table, chapter19Table, chapter20Table, chapter21Table, chapter22Table, chapter23Table, chapter24Table, chapter25Table;
-    private Table tableCollapsible1, tableCollapsible2, tableCollapsible3, tableCollapsible4, tableCollapsible5, tableCollapsible6, tableCollapsible7, tableCollapsible8, tableCollapsible9, tableCollapsible10, tableCollapsible11, tableCollapsible12, tableCollapsible13, tableCollapsible14, tableCollapsible15, tableCollapsible16, tableCollapsible17, tableCollapsible18, tableCollapsible19, tableCollapsible20, tableCollapsible21, tableCollapsible22, tableCollapsible23, tableCollapsible24, tableCollapsible25;
+    private Table tableCollapsible2;
+    private Table tableCollapsible3;
+    private Table tableCollapsible4;
+    private Table tableCollapsible5;
+    private Table tableCollapsible6;
+    private Table tableCollapsible7;
+    private Table tableCollapsible8;
+    private Table tableCollapsible9;
+    private Table tableCollapsible10;
+    private Table tableCollapsible11;
+    private Table tableCollapsible12;
+    private Table tableCollapsible13;
+    private Table tableCollapsible14;
+    private Table tableCollapsible15;
+    private Table tableCollapsible16;
+    private Table tableCollapsible17;
+    private Table tableCollapsible18;
+    private Table tableCollapsible19;
+    private Table tableCollapsible20;
+    private Table tableCollapsible21;
+    private Table tableCollapsible22;
+    private Table tableCollapsible23;
+    private Table tableCollapsible24;
+    private Table tableCollapsible25;
 //    private VerticalGroup tableCollapsible1, tableCollapsible2, tableCollapsible3, tableCollapsible4, tableCollapsible5, tableCollapsible6, tableCollapsible7, tableCollapsible8, tableCollapsible9, tableCollapsible10, tableCollapsible11, tableCollapsible12, tableCollapsible13, tableCollapsible14, tableCollapsible15, tableCollapsible16, tableCollapsible17, tableCollapsible18, tableCollapsible19, tableCollapsible20, tableCollapsible21, tableCollapsible22, tableCollapsible23, tableCollapsible24, tableCollapsible25;
 
 //    MyTextButton un_bouton_red, deux_bouton_red, trois_bouton_red, quatre_bouton_red, cinq_bouton_red, six_bouton_red, sept_bouton_red, huit_bouton_red;
@@ -292,7 +313,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
-        scroll.setSize(screenWidth, 2.5f * MyConstants.SCREENHEIGHT / 3f);
+        scroll.setSize(screenWidth, 2.4f * MyConstants.SCREENHEIGHT / 3f);
 
 //        container.add(scroll).height(2.5f * MyConstants.SCREENHEIGHT / 3f).width(screenWidth).padTop(90f);
 
@@ -313,7 +334,9 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     {
 //        chapter1Table = new HorizontalGroup();
         Table chapter1Table = new Table();
-        tableCollapsible1 = new Table();
+        //    private Table chapter1Table, chapter2Table, chapter3Table, chapter4Table, chapter5Table, chapter6Table, chapter7Table, chapter8Table, chapter9Table, chapter10Table, chapter11Table, chapter12Table, chapter13Table, chapter14Table, chapter15Table, chapter16Table, chapter17Table, chapter18Table, chapter19Table, chapter20Table, chapter21Table, chapter22Table, chapter23Table, chapter24Table, chapter25Table;
+        //    private HorizontalGroup chapter1Table, chapter2Table, chapter3Table, chapter4Table, chapter5Table, chapter6Table, chapter7Table, chapter8Table, chapter9Table, chapter10Table, chapter11Table, chapter12Table, chapter13Table, chapter14Table, chapter15Table, chapter16Table, chapter17Table, chapter18Table, chapter19Table, chapter20Table, chapter21Table, chapter22Table, chapter23Table, chapter24Table, chapter25Table;
+        Table tableCollapsible1 = new Table();
 
         String labelChapterTitle = "Pratique des nombres de 1 à 9";
         String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";

@@ -38,8 +38,8 @@ public class BoutonChapitres implements Screen
         int screenWidth = Gdx.graphics.getWidth();
 //        int screenHeight = Gdx.graphics.getHeight();
 
-        float chapterButtonWidth = 19 * MyConstants.SCREENWIDTH / 60;
-        float chapterButtonHeight = chapterButtonWidth * (308.0f / 335.0f);
+        float chapterButtonWidth = 19 * MyConstants.SCREENWIDTH / 60f;
+        float chapterButtonHeight = chapterButtonWidth * (308f / 335f);
 
         float padGen = chapterButtonWidth / 8.0f;
         float widthIndice = chapterButtonWidth / 7.0f;

@@ -112,14 +112,14 @@ public class LigneTableauxResultsChapitre
         triangleDown.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        table.add(new Image(triangleDown)).height(button.getWidth() * 0.7f).width(button.getWidth() * 0.7f).padLeft(screenWidth / 60f).padTop(screenHeight / 100).padBottom(screenHeight / 100);
+        table.add(new Image(triangleDown)).height(button.getWidth() * 0.7f).width(button.getWidth() * 0.5f).padLeft(screenWidth / 50f).padTop(screenHeight / 100).padBottom(screenHeight / 100);
         table.add(button).height(button.getHeight()).width(button.getWidth()).padLeft(screenWidth / 80f);
-        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * .6f)).padLeft(screenWidth / 50f)/*.padRight(screenWidth / 25f)*/;
+        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * .65f)).padLeft(screenWidth / 45f)/*.padRight(screenWidth / 25f)*/;
         table.add(durationTable).width(screenWidth / 9f).padRight(screenWidth / 40f);
         table.add(noteTable).width(screenWidth / 8.5f).padRight(screenWidth / 40f);
 
 
-        float lineHeight = MyConstants.SCREENHEIGHT / 20;
+        float lineHeight = MyConstants.SCREENHEIGHT / 20f;
         float buttonSize = lineHeight / 10;
         int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
         float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 50;

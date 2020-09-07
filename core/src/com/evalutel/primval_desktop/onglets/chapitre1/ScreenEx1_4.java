@@ -102,9 +102,14 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
 
         stage.addActor(tableTitre);
 
-        calculetteView = new CalculetteView(stage, validusAnimated);
-        calculetteView.setActive(false);
+        float widthCalculette = MyConstants.SCREENWIDTH / 6.5f;
+        float hauteurCalculette = (widthCalculette * 362f / 355f) * 1.2f;
+        float positionCalculetteX = MyConstants.SCREENWIDTH - widthCalculette - (MyConstants.SCREENWIDTH / 200f);
+        float positionCalculetteY = MyConstants.SCREENWIDTH / 200f;
+
+        calculetteView = new CalculetteView(stage, validusAnimated, positionCalculetteX, positionCalculetteY, widthCalculette, hauteurCalculette);
         allDrawables.add(calculetteView);
+        calculetteView.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
         displayArdoise();
