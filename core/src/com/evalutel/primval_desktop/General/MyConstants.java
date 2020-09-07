@@ -50,7 +50,7 @@ public class MyConstants
     public static Color greenresultat = new Color(Color.valueOf("2b8014 "));
 
     public static int[] noteMaxChap1 = {9, 9, 9, 18, 9};
-    public static int[] noteMaxChap2 = {15, 24, 27, 10};
+    public static int[] noteMaxChap2 = {15, 18, 27, 10};
     public static int[] noteMaxChap3 = {25, 12, 10, 10, 32, 20};
     public static int[] noteMaxChap4 = {10, 10, 10, 24, 45, 30};
     public static int[] noteMaxChap5 = {36, 10, 34, 40, 40, 27};

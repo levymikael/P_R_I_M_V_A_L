@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.evalutel.primval_desktop.General.MyMath;
 import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
 import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
@@ -17,7 +18,7 @@ import java.util.TimerTask;
 
 public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInterface, MyTouchInterface
 {
-    private static ArrayList arrayListNumber, arrayListAnimal;
+    private static ArrayList arrayListNumber;
 
     private ArrayList<int[]> randDicesArray = new ArrayList<>();
     private TextureRegion[] allImagesDes = new TextureRegion[6];
@@ -26,11 +27,12 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
     private int currentChiffreDes1, currentChiffreDes2;
 
 
-    float dice2positionX;
-    TextureRegion textureEmptyDice, texturePlusDice, textureNumberDice1, textureNumberDice2, textureNumberDiceAnimal1, textureNumberDiceAnimal2;
-    boolean isClicked = false;
-    boolean isAnimating = false;
-    public int questionCourante = 0;
+    private float dice2positionX;
+    private TextureRegion textureEmptyDice;
+    private TextureRegion texturePlusDice;
+    private boolean isClicked = false;
+    private boolean isAnimating = false;
+    public int diceRenewal = 0;
 
     public Dices(float dicePositionX, float dicePositionY, float animationWidth, float animationHeight, float dice2positionX)
     {
@@ -99,29 +101,32 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         return imgDicesPaths;
     }
 
-    public int randDice1()
-    {
-        Random rand = new Random();
-
-        return rand.nextInt(5) + 1;
-    }
+//    public int randDice1()
+//    {
+////        Random rand = new Random();
+//
+////        return rand.nextInt(6) + 1;
+//        return MathUtils.random(1, 6);
+//    }
 
 
     public int randDice2(int nbDice1)
     {
-        Random rand = new Random();
+//        Random rand = new Random();
 
-        return nbDice1 + rand.nextInt(6 - nbDice1);
+//        return nbDice1 + rand.nextInt(7 - nbDice1);
+        return /*nbDice1 -*/ MathUtils.random(1, Math.min(6,9-nbDice1));
+
     }
 
     public void getRandDicesArray()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             int[] diceNumUpTo6 = {0, 0};
-            int randDice1 = randDice1();
+            int randDice1 = MathUtils.random(1, 6);
 
-            diceNumUpTo6[0] = randDice1();
+            diceNumUpTo6[0] = randDice1;
             diceNumUpTo6[1] = randDice2(randDice1);
             randDicesArray.add(diceNumUpTo6);
         }
@@ -147,12 +152,12 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
 
     public int getLastDice1value(/*int questionCourante*/)
     {
-        return randDicesArray.get(questionCourante)[0];
+        return randDicesArray.get(diceRenewal)[0];
     }
 
     public int getLastDice2value(/*int questionCourante*/)
     {
-        return randDicesArray.get(questionCourante)[1];
+        return randDicesArray.get(diceRenewal)[1];
     }
 
 //    public void displayNumberDiceFace()
@@ -169,7 +174,7 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
     {
         ArrayList<String> imgDicesPaths = new ArrayList<>();
 
-        arrayListAnimal = new ArrayList<String>();
+        ArrayList arrayListAnimal = new ArrayList<String>();
         arrayListAnimal.add("baleine");
         arrayListAnimal.add("dauphin");
         arrayListAnimal.add("dinosaure");
@@ -201,18 +206,13 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         batch.draw(textureEmptyDice, dice2positionX, currentPositionY, animationWidth, animationHeight);
 
 
-//        if (isClicked)
-//        {
-//            batch.draw(textureNumberDice1, currentPositionX, currentPositionY, animationWidth, animationHeight);
-//        }
-
         if (isAnimating)
         {
             elapsedTime += Gdx.graphics.getDeltaTime();
-            textureNumberDice1 = (TextureRegion) animation.getKeyFrame(elapsedTime, isAnimating);
-            textureNumberDice2 = (TextureRegion) animation3.getKeyFrame(elapsedTime, isAnimating);
-            textureNumberDiceAnimal1 = (TextureRegion) animation2.getKeyFrame(elapsedTime, isAnimating);
-            textureNumberDiceAnimal2 = (TextureRegion) animation4.getKeyFrame(elapsedTime, isAnimating);
+            TextureRegion textureNumberDice1 = (TextureRegion) animation.getKeyFrame(elapsedTime, isAnimating);
+            TextureRegion textureNumberDice2 = (TextureRegion) animation3.getKeyFrame(elapsedTime, isAnimating);
+            TextureRegion textureNumberDiceAnimal1 = (TextureRegion) animation2.getKeyFrame(elapsedTime, isAnimating);
+            TextureRegion textureNumberDiceAnimal2 = (TextureRegion) animation4.getKeyFrame(elapsedTime, isAnimating);
 
             batch.draw(textureNumberDice1, currentPositionX, currentPositionY, animationWidth, animationHeight);
             batch.draw(textureNumberDice2, dice2positionX, currentPositionY, animationWidth, animationHeight);
@@ -260,8 +260,8 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         else
         {
             isAnimating = true;
-            currentChiffreDes1 = randDicesArray.get(questionCourante)[0];
-            currentChiffreDes2 = randDicesArray.get(questionCourante)[1];
+            currentChiffreDes1 = randDicesArray.get(diceRenewal)[0];
+            currentChiffreDes2 = randDicesArray.get(diceRenewal)[1];
 
             final Music music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/son_des.mp3"));
             music.play();

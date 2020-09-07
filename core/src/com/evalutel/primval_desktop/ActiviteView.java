@@ -24,35 +24,32 @@ import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 
 public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterface
 {
-    private Table table, tableTitre;
-    private Table tableMilieu, tableMilieuSolution, table4, table5;
-    private float heightTop;
-    float topYTablePosition, heightBackGroundImage;
+    private Table table;
+    private Table tableMilieu;
+    private Table table5;
+    private float heightTop, topYTablePosition, heightBackGroundImage;
 
     private float firstY, currentY, widthEnonce;
 
-    Texture textureTextEnonce;
+    private Texture textureTextEnonce, textureMilieuEnonce;
 
-    TextField textFieldEnonce;
-
-    int cptInstructions;
+    private int cptInstructions;
 
     //    Sprite sprite2, sprite3, spriteEnonceText, spriteSolutionText;
-    BitmapFont bitmapFontArial, bitmapFontComic;
+    private BitmapFont bitmapFontArial, bitmapFontComic;
     private boolean isVisible = true;
-    private Texture textureMilieuEnonce;
 
-    String activiteType;
+    private String activiteType;
 
-    Label lastLabel, label1;
+    private Label lastLabel, label1;
 
-    Sprite flechSprite = new Sprite(new Texture(Gdx.files.internal("Images/EnonceUIElements/black_right_pointing_pointer.png")));
+    private Sprite flechSprite = new Sprite(new Texture(Gdx.files.internal("Images/EnonceUIElements/black_right_pointing_pointer.png")));
 
-    Texture fleche = new Texture(Gdx.files.internal("Images/EnonceUIElements/black_right_pointing_pointer.png"));
+    private Texture fleche = new Texture(Gdx.files.internal("Images/EnonceUIElements/black_right_pointing_pointer.png"));
 
-    boolean isPaused;
+    private boolean isPaused;
 
-    Table lastPointerTable;
+    private Table lastPointerTable;
 
     public ActiviteView(Stage stage, float positionX, float positionY, float width, String activiteType)
     {
@@ -78,7 +75,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         table = new Table();
         tableMilieu = new Table();
-        tableMilieuSolution = new Table();
+        Table tableMilieuSolution = new Table();
         Table paddingTableMilieu = new Table();
         Table paddingTableMilieu2 = new Table();
         Table tableBandeauBas = new Table();
@@ -121,7 +118,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         TextField.TextFieldStyle textFieldStyleEnonce = new TextField.TextFieldStyle();
         textFieldStyleEnonce.font = bitmapFontArial;
         textFieldStyleEnonce.background = new SpriteDrawable(new Sprite(textureTextEnonce));
-        textFieldEnonce = new TextField("", textFieldStyleEnonce);
+        TextField textFieldEnonce = new TextField("", textFieldStyleEnonce);
 
 // Insertion texte.png dans tableau avec une imageBG.png:
         float widthCote = MyConstants.SCREENWIDTH / 38f;
@@ -141,13 +138,13 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         String txtureGauchePath = "";
         String txtureCentrePath = "";
 
-        if (activiteType == "activite" || activiteType == "enonce")
+        if (activiteType.equals("activite") || activiteType.equals("enonce"))
         {
             txtureDroitePath = "Images/Enoncé-solution/droit bleu.png";
             txtureGauchePath = "Images/Enoncé-solution/gauche bleu.png";
             txtureCentrePath = "Images/Enoncé-solution/centre bleu.png";
         }
-        else if (activiteType == "solution")
+        else if (activiteType.equals("solution"))
         {
             txtureDroitePath = "Images/Enoncé-solution/droit vert.png";
             txtureGauchePath = "Images/Enoncé-solution/gauche vert.png";
@@ -183,7 +180,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 // Positionnement du tableau sur ecran:
         table.pack();
         final float tableHeight = table.getHeight();
-        float temptableHeight = tableHeight;
 
         topYTablePosition = MyConstants.SCREENHEIGHT - tableHeight - heightTop + (paddingTableMilieu.getHeight() * 2);
 
@@ -239,12 +235,13 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
     {
         emptyActivite();
 
+
         return addTextActivite(string);
     }
 
     public Label addTextActivite(String string)
     {
-        table4 = new Table();
+        Table table4 = new Table();
 
         Label.LabelStyle labelStyleBlack = new Label.LabelStyle();
         labelStyleBlack.font = bitmapFontArial;
@@ -300,6 +297,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 //        {
 //            flechSprite.setSize(MyConstants.SCREENWIDTH / 30, 40);
 //
+
 //            SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
 //
 //            Table pointerTable = new Table();
@@ -322,6 +320,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         tableMilieu.row();
 
         table.pack();
+
 
         cptInstructions++;
 
@@ -347,6 +346,8 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     public void emptyActivite()
     {
+        tableMilieu.clearChildren();
+
         tableMilieu.clear();
     }
 

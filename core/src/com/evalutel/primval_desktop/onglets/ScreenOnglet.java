@@ -276,7 +276,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         int posX = 6 * MyConstants.SCREENWIDTH / 7;
         int posY = MyConstants.SCREENHEIGHT / 2;
 
-        uneSouris = new UneSouris(posX, posY, MyConstants.SCREENWIDTH / 9f);
+        uneSouris = new UneSouris(posX, posY, validusAnimated.getWidth());
         uneSouris.setVisible(false);
         myCorrectionAndPauseGeneral.addElements(uneSouris);
     }
@@ -347,7 +347,6 @@ public class ScreenOnglet implements Screen, InputProcessor
                 positionFondY = 0;
                 positionFondX = -(largeurFondNew - MyConstants.SCREENWIDTH) / 2f;
             }
-
 
             backgroundScreen.myDraw2(batch, positionFondX, positionFondY, largeurFondNew, hauteurFondNew);
         }

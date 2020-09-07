@@ -226,13 +226,12 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         Table resultatsObtenusTitle = new Table();
 
-        float chapterTitleWidth =MyConstants.SCREENWIDTH / 2.5f;
+        float chapterTitleWidth = MyConstants.SCREENWIDTH / 2.5f;
         float chapterTitleHeight = chapterTitleWidth * (45f / 365f);
 
         resultatsObtenusTitle.setBackground(new SpriteDrawable(new Sprite(resultatsObtenus)));
         resultatsObtenusTitle.setSize(chapterTitleWidth, chapterTitleHeight);
-        resultatsObtenusTitle.setPosition(MyConstants.SCREENWIDTH / 2f - chapterTitleWidth / 2, MyConstants.SCREENHEIGHT - (chapterTitleHeight*1.3f));
-
+        resultatsObtenusTitle.setPosition(MyConstants.SCREENWIDTH / 2f - chapterTitleWidth / 2, MyConstants.SCREENHEIGHT - (chapterTitleHeight * 1.3f));
 
 
         stage.addActor(resultatsObtenusTitle);
@@ -372,7 +371,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         tableCollapsible1.row();
         tableCollapsible1.add(tableEx5).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible1.row();
-        tableCollapsible1.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight).padBottom(MyConstants.SCREENHEIGHT/60f);
+        tableCollapsible1.add(tableEx6).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight).padBottom(MyConstants.SCREENHEIGHT / 60f);
 
         tableCollapsible1.setHeight(collapsibleTableHeight);
 
@@ -2904,6 +2903,5 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     public void dispose()
     {
         stage.dispose();
-
     }
 }

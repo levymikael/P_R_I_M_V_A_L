@@ -23,8 +23,6 @@ import com.evalutel.primval_desktop.onglets.ScreenOnglet;
 import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
-import java.util.Random;
-
 
 public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 {
@@ -37,16 +35,14 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
     TextButton.TextButtonStyle styleTest;
     Drawable drawableAux;
 
-    private int diceTotal /*, cptOiseau1, cptOiseau2, oiseauxToDisplayBranche1, oiseauxToDisplayBranche2*/;
-    private int failedAttempts;
-    private int diceNumber1;
+    private int diceTotal, failedAttempts, diceRenewal;
 
     Label currentLabel;
 
     private Dices dice1;
 
     private String nbInput;
-//    private boolean isAllActive;
+    //    private boolean isAllActive;
     private boolean touchValidate = false;
 
 
@@ -56,7 +52,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
         ScreeenBackgroundImage bgScreenEx1_1 = new ScreeenBackgroundImage("Images/onglet2_3/des_fond.jpg");
         allDrawables.add(bgScreenEx1_1);
-
 
         numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
 
@@ -76,7 +71,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
         int noteMax = db.getHighestNote(2, 3);
 
-        String noteMaxObtenue = noteMax + "/24";
+        String noteMaxObtenue = noteMax + "/18";
 
         exoConsigneLabel = new Label(ongletTitre, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
@@ -92,7 +87,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
 //        getRandDesArray();
 
-        resultatExercice = new UnResultat("Primval", 2, 3, 0, ongletTitre, 24, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 2, 3, 0, ongletTitre, 18, 0, dateTest, 0, 0, 0, 123);
 
 
 //        float widthCalculette = validusAnimated.getWidth() * 1.2f;
@@ -178,16 +173,19 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            activiteView.addTextActivite("Touche les dés pour les faire tourner");
+            if (diceRenewal == 0)
+            {
+                activiteView.addTextActivite("Touche les dés pour les faire tourner");
+            }
+            else
+            {
+                activiteView.setTextActivite("Touche les dés pour les faire tourner");
 
-//            int dicevalue1 = dice1.getLastDice1value();
-//
-//            int diceValue2 = dice1.getLastDice2value();
+            }
 
-//            int ok = 5;
-//            ok++;
+            dice1.setActive(true);
+            dice1.diceRenewal = diceRenewal;
 
-            timer.schedule(new DiceStep(5_000), 0);
         }
     }
 
@@ -201,16 +199,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            dice1.setActive(true);
-
-//            int dicevalue1 = dice1.getLastDice1value();
-//
-//            int diceValue2 = dice1.getLastDice2value();
-
-//            int ok = 5;
-//            ok++;
-
-            dice1.questionCourante = questionCourante;
 
             timer.schedule(new EtapeInstructionArdoise1(3_000, 500), 0);
         }
@@ -258,15 +246,9 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             }
             if ((value == dice1.getLastDice1value())/* && (value == planche1.getNumberBilles())*/)
             {
-//                if (questionCourante != 8)
-//                {
+
                 validusAnimated.goodAnswerPlaySound(new NextQuestion(500));
-//                }
-//                else
-//                {
-//                    timer.schedule(new Fin(1_000, 0), 500);
-//                    validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
-//                }
+
                 validusAnimated.isActive = false;
                 addDiamonds(1);
 
@@ -321,39 +303,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             timer.schedule(new MoveMainToCalculette(1_000), 1_000);
         }
     }
-
-
-//    private class AddBilles1 extends MyTimer.TaskEtape
-//    {
-//        private AddBilles1(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            if (planche1.getNumberBilles() < oiseauxToDisplayBranche1)
-//            {
-//                billeRectification = sacDeBilles.getBilleAndRemove();
-//                billeRectification.setVisible(true);
-//                planche1.addBilleAndOrganize(billeRectification);
-//                timer.schedule(new EtapeRectification(500), 500);
-//            }
-//            else if (planche1.getNumberBilles() > oiseauxToDisplayBranche1)
-//            {
-//                billeRectification = planche1.getLastBille();
-//                planche1.removeBille(billeRectification);
-//                sacDeBilles.addBilleToReserve(billeRectification);
-//
-//                timer.schedule(new EtapeRectification(500), 500);
-//            }
-//            else if (planche1.getNumberBilles() == oiseauxToDisplayBranche1)
-//            {
-//                timer.schedule(new MoveMainToCalculette(1_000), 1_000);
-//            }
-//        }
-//    }
 
 
     private class MoveMainToCalculette extends MyTimer.TaskEtape
@@ -504,7 +453,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneSouris.setVisible(false);
-            nbInput = String.valueOf(diceNumber1);
+            nbInput = String.valueOf(dice1.getLastDice1value());
             timer.schedule(new NextQuestion(500), 500);
             styleTest.up = drawableAux;
             failedAttempts = 0;
@@ -818,7 +767,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         {
             calculetteView.textRemove();
 
-//            isAllActive = true;
 
             timer.schedule(new InputClavier3(500), 0);
 
@@ -828,8 +776,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
             diceTotal = dice1.getLastDice1value() + dice1.getLastDice2value();
 
-//            int ok = 5;
-//            ok++;
         }
     }
 
@@ -896,6 +842,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
                 addDiamonds(1);
                 uneArdoise2.fillLabel(3, Integer.toString(value));
                 questionCourante++;
+                diceRenewal++;
             }
             else
             {
@@ -946,46 +893,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             timer.schedule(new MoveMainToCalculette3(1_000), 1_000);
         }
     }
-
-//
-//    private class AddBilles3 extends MyTimer.TaskEtape
-//    {
-//        private AddBilles3(long durMillis)
-//        {
-//            super(durMillis);
-//        }
-//
-//        @Override
-//        public void run()
-//        {
-//            if (valu < (cptOiseau1 + cptOiseau2))
-//            {
-//                if (planche1.getNumberBilles() != 0)
-//                {
-//                    billeRectification = planche1.getLastBille();
-//                }
-//                else if (planche2.getNumberBilles() != 0)
-//                {
-//                    billeRectification = planche2.getLastBille();
-//
-//                }
-//                planche3.addBilleAndOrganize(billeRectification);
-//                timer.schedule(new EtapeRectification3(500), 500);
-//            }
-////            else if (planche2.getNumberBilles() > oiseauxToDisplayBranche2)
-////            {
-////                billeRectification = planche2.getLastBille();
-////                planche2.removeBille(billeRectification);
-////                sacDeBilles.addBilleToReserve(billeRectification);
-////
-////                timer.schedule(new EtapeRectification2(500), 500);
-////            }
-//            else if (planche3.getNumberBilles() == (cptOiseau1 + cptOiseau2))
-//            {
-//                timer.schedule(new MoveMainToCalculette3(1_000), 1_000);
-//            }
-//        }
-//    }
 
 
     private class MoveMainToCalculette3 extends MyTimer.TaskEtape
@@ -1143,6 +1050,30 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         }
     }
 
+
+    private class ResetScreen extends MyTimer.TaskEtape
+    {
+        private ResetScreen(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            MyTimer.TaskEtape nextEtape = new Annonce1(1_500);
+
+
+            solutionView.addTextActivite(dice1.getLastDice1value() + " + " + dice1.getLastDice2value() + " = " + diceTotal);
+            metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_JAnnonceLAddition.mp3", nextEtape);
+
+            calculetteView.textRemove();
+
+            uneArdoise2.eraseAllLabels();
+        }
+    }
+
+
     private class Annonce1 extends MyTimer.TaskEtape
     {
         private Annonce1(long durMillis)
@@ -1243,7 +1174,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         {
             if (questionCourante != 18)
             {
-                MyTimer.TaskEtape nextEtape = new ResetScreen(1_500);
+                MyTimer.TaskEtape nextEtape = new PresentationMetrologue(1_500);
                 switch (dice1.getLastDice1value() + dice1.getLastDice2value())
                 {
                     case 2:
@@ -1283,27 +1214,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
     }
 
 
-    private class ResetScreen extends MyTimer.TaskEtape
-    {
-        private ResetScreen(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-
-            solutionView.addTextActivite(dice1.getLastDice1value() + " + " + dice1.getLastDice2value() + " = " + diceTotal);
-            metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_JAnnonceLAddition.mp3", null);
-
-            calculetteView.textRemove();
-
-            uneArdoise2.eraseAllLabels();
-        }
-    }
-
-
     private class Fin extends MyTimer.TaskEtape
     {
         private Fin(long durMillis, long delay)
@@ -1325,19 +1235,19 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
     }
 
 
-    public int randomDice1()
-    {
-        Random rand = new Random();
-        diceNumber1 = rand.nextInt(5) + 1;
-        return diceNumber1;
-    }
+//    public int randomDice1()
+//    {
+//        Random rand = new Random();
+//        diceNumber1 = rand.nextInt(5) + 1;
+//        return diceNumber1;
+//    }
 
-    public int randomDice2()
-    {
-        Random rand = new Random();
-        int diceNumber2 = rand.nextInt(6 - diceNumber1) + 1;
-        return diceNumber2;
-    }
+//    public int randomDice2()
+//    {
+//        Random rand = new Random();
+//        int diceNumber2 = rand.nextInt(6 - diceNumber1) + 1;
+//        return diceNumber2;
+//    }
 
 //    public void getRandDesArray()
 //    {
@@ -1365,6 +1275,9 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
             dice1.setActive(false);
             //dice1.displayNumberDiceFace();
+
+            timer.schedule(new DiceStep(5_000), 0);
+
         }
 
         return true;
