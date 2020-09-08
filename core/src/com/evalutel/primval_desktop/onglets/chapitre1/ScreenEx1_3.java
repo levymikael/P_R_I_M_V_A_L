@@ -48,7 +48,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
     Drawable drawableAux;
 
 
-    public ScreenEx1_3(final Game game, String ongletTitre)
+    ScreenEx1_3(final Game game, String ongletTitre)
     {
         super(game, 1, 3, false, 0);
 
@@ -93,7 +93,13 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
         stage.addActor(tableTitre);
 
-        calculetteView = new CalculetteView(stage, validusAnimated);
+
+        float widthCalculette = MyConstants.SCREENWIDTH / 6.5f;
+        float hauteurCalculette = (widthCalculette * 362f / 355f) * 1.2f;
+        float positionCalculetteX = MyConstants.SCREENWIDTH - widthCalculette - (MyConstants.SCREENWIDTH / 200f);
+        float positionCalculetteY = MyConstants.SCREENWIDTH / 200f;
+
+        calculetteView = new CalculetteView(stage, validusAnimated, positionCalculetteX, positionCalculetteY, widthCalculette, hauteurCalculette);
         allDrawables.add(calculetteView);
         calculetteView.setActive(false);
         myCorrectionAndPauseGeneral.addElements(calculetteView);
@@ -109,7 +115,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             {
                 game.setScreen(new Screen_Chapitre1(game));
 
-//                game.dispose();
                 Gdx.app.log("button click", "click!");
 
                 endTime = System.currentTimeMillis();
@@ -132,7 +137,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
                 MyDataBase db = appSingleton.myDataBase;
 
                 db.insertResultat(resultatExercice);
-
             }
 
             @Override
@@ -158,7 +162,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             uneSouris.imageDown();
 
-            MyTimer.TaskEtape nextEtape = new OnVaContinuer(3000, 2_000);
+            MyTimer.TaskEtape nextEtape = new OnVaContinuer(3_000, 2_000);
 
             metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.0 - Ecriture des chiffres de 1 a 9.mp3", nextEtape);
         }
@@ -193,7 +197,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             UnOiseau oiseau = oiseauxList.get(cptOiseau);
             myCorrectionAndPauseGeneral.addElements(oiseau);
 
-            int posY = 7 * MyConstants.SCREENHEIGHT / 10;
+            float posY = 7 * MyConstants.SCREENHEIGHT / 10f;
             int posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
 
             if (cptOiseau == 0)

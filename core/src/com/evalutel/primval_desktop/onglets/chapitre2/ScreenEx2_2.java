@@ -3,6 +3,7 @@ package com.evalutel.primval_desktop.onglets.chapitre2;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -61,10 +62,9 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     boolean afterCorrection, isAllActive, touchValidate = false;
 
 
-    public ScreenEx2_2(final Game game, String ongletTitre)
+    ScreenEx2_2(final Game game, String ongletTitre)
     {
         super(game, 2, 2, true, 15);
-
 
         ScreeenBackgroundImage bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);
@@ -254,7 +254,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            DisplayOiseauxBranche1 nextEtape = new DisplayOiseauxBranche1(0, 0);
+            MyTimer.TaskEtape nextEtape = new DisplayOiseauxBranche1(0, 0);
 
             oiseauxToDisplayBranche1 = randOiseauxArray.get(brancheRenewal)[0];
             sacDeBilles.setActive(true);
@@ -269,7 +269,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 UnOiseau oiseau = oiseauxList.get(cptOiseau1);
 
                 posY = 7 * MyConstants.SCREENHEIGHT / 10f;
-                posX = (MyConstants.SCREENWIDTH / 7f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau1);
+                posX = (MyConstants.SCREENWIDTH / 7f) + ((oiseau.animationWidth + oiseau.animationWidth / 15) * (cptOiseau1));
 
 
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
@@ -330,21 +330,12 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             }
             if ((planche1.getNumberBilles() == oiseauxToDisplayBranche1) && (value == planche1.getNumberBilles()))
             {
-//                if (questionCourante != 8)
-//                {
                 validusAnimated.goodAnswerPlaySound(new NextQuestion(500));
-//                }
-//                else
-//                {
-//                    timer.schedule(new Fin(1_000, 0), 500);
-//                    validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
-//                }
                 validusAnimated.isActive = false;
                 addDiamonds(1);
                 planche1.setAllBillesInactive();
                 planche1.setActive(false);
                 uneArdoise2.fillLabel(1, Integer.toString(value));
-                questionCourante++;
 
             }
             else
@@ -359,7 +350,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                     failedAttempts = 0;
 
                     addPierres(1);
-                    questionCourante++;
+
                 }
                 else if (planche1.getNumberBilles() == 0)
                 {
@@ -648,7 +639,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
             if ((cptOiseau2 < oiseauxToDisplayBranche2)/* && ((oiseauxToDisplayBranche1 + oiseauxToDisplayBranche2) <= 9)*/)
             {
-                if (cptOiseau2 + cptOiseau1 <= 9)
+                if (cptOiseau2 + cptOiseau1 < 9)
                 {
                     UnOiseau oiseau = oiseauxList.get(cptOiseau1 + cptOiseau2);
                     posX = (MyConstants.SCREENWIDTH / 7f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (/*cptOiseau -*/ cptOiseau2);
@@ -717,7 +708,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 planche2.setAllBillesInactive();
                 planche2.setActive(false);
                 uneArdoise2.fillLabel(2, Integer.toString(value));
-                questionCourante++;
             }
             else
             {
@@ -731,7 +721,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                     failedAttempts = 0;
 
                     addPierres(1);
-                    questionCourante++;
 
                 }
                 else if (planche2.getNumberBilles() == 0)
@@ -974,22 +963,13 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             calculetteView.textRemove();
 
             isAllActive = true;
-//
-//            if (questionCourante == 15)
-//            {
-//                timer.schedule(new Fin(500, 0), 500);
-//            }
-//            else
-//            {
+
             timer.schedule(new OiseauxOut(500, 0), 0);
-//            }
 
             nbInput = null;
 
             cptOiseauTotal = cptOiseau1 + cptOiseau2;
 
-            int ok = 5;
-            ok++;
         }
     }
 
@@ -1029,8 +1009,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 planche3.setVisible(true);
 
                 metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_DeplaceToutesLesBillesSurLaPlancheTotal.mp3", new InputClavier3(/*(250),*/ 1_000));
-                activiteView.addTextActivite("Deplace toutes les billes sur la planche Total. \nTape ensuite sur le clavier le nopmbre de billes qui s'y trouvent puis valide.");
-//                timer.schedule();
+                activiteView.addTextActivite("Déplace toutes les billes sur la planche Total. \nTape ensuite sur le clavier le nombre de billes qui s'y trouvent puis valide.");
 
                 brancheRenewal++;
             }
@@ -1040,11 +1019,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
     private class InputClavier3 extends MyTimer.TaskEtape
     {
-//        private InputClavier(long durMillis, long delay)
-//        {
-//            super(durMillis, delay);
-//        }
-
         private InputClavier3(long durMillis)
         {
             super(durMillis);
@@ -1092,15 +1066,8 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             }
             if ((planche3.getNumberBilles() == (cptOiseau1 + cptOiseau2)) && (value == planche3.getNumberBilles()))
             {
-//                if (questionCourante != 8)
-//                {
                 validusAnimated.goodAnswerPlaySound(new ResetScreen(1_000));
-//                }
-//                else
-//                {
-//                    timer.schedule(new Fin(1_000, 0), 500);
-//                    validusAnimated.validusPlaySound("Sounds/Validus/Youpi tu as gagne.mp3");
-//                }
+
                 validusAnimated.isActive = false;
                 addDiamonds(1);
                 planche2.setAllBillesInactive();
@@ -1170,17 +1137,21 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         {
             if (planche3.getNumberBilles() < (cptOiseau1 + cptOiseau2))
             {
+
                 if (planche1.getNumberBilles() != 0)
                 {
                     billeRectification = planche1.getLastBille();
+                    planche1.removeBille(billeRectification);
                 }
                 else if (planche2.getNumberBilles() != 0)
                 {
                     billeRectification = planche2.getLastBille();
+                    planche2.removeBille(billeRectification);
+
 
                 }
                 planche3.addBilleAndOrganize(billeRectification);
-                timer.schedule(new EtapeRectification3(500), 500);
+                timer.schedule(new AddBilles3(500), 500);
             }
 //            else if (planche2.getNumberBilles() > oiseauxToDisplayBranche2)
 //            {
@@ -1297,7 +1268,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new ClickOnValidate3(1_000, 1_000);
 
-            uneSouris.moveTo(durationMillis, posX, posY, nextEtape, 1500);
+            uneSouris.moveTo(durationMillis, posX, posY, nextEtape, 1_500);
 
             styleTest.up = drawableAux;
         }
@@ -1478,48 +1449,66 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            if (questionCourante != 15)
-            {
-                MyTimer.TaskEtape nextEtape = new EtapeInstructionPlanche1(1_500, 500);
-                switch (cptOiseau1 + cptOiseau2)
-                {
-                    case 2:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/deux.mp3", nextEtape);
-                        break;
-                    case 3:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/trois.mp3", nextEtape);
-                        break;
-                    case 4:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/quatre.mp3", nextEtape);
-                        break;
-                    case 5:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/cinq.mp3", nextEtape);
-                        break;
-                    case 6:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/six.mp3", nextEtape);
-                        break;
-                    case 7:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/sept.mp3", nextEtape);
-                        break;
-                    case 8:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/huit.mp3", nextEtape);
-                        break;
-                    case 9:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/neuf.mp3", nextEtape);
-                        break;
-                    default:
-                        break;
-                }
 
-                cptOiseau1 = 0;
-                cptOiseau2 = 0;
-                cptOiseauTotal = 0;
-            }
-            else if (questionCourante == 15)
+            MyTimer.TaskEtape nextEtape = new EtapeIntermediaire(1_500, 500);
+            switch (cptOiseau1 + cptOiseau2)
             {
-                timer.schedule(new Fin(2000, 500), 0);
+                case 2:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/deux.mp3", nextEtape);
+                    break;
+                case 3:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/trois.mp3", nextEtape);
+                    break;
+                case 4:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/quatre.mp3", nextEtape);
+                    break;
+                case 5:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/cinq.mp3", nextEtape);
+                    break;
+                case 6:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/six.mp3", nextEtape);
+                    break;
+                case 7:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/sept.mp3", nextEtape);
+                    break;
+                case 8:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/huit.mp3", nextEtape);
+                    break;
+                case 9:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/neuf.mp3", nextEtape);
+                    break;
+                default:
+                    break;
+            }
+
+            cptOiseau1 = 0;
+            cptOiseau2 = 0;
+            cptOiseauTotal = 0;
+
+        }
+    }
+
+    private class EtapeIntermediaire extends MyTimer.TaskEtape
+    {
+        private EtapeIntermediaire(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            if (questionCourante == 15)
+            {
+                timer.schedule(new Fin(2_000, 0), 0);
+            }
+            else
+            {
+                timer.schedule(new EtapeInstructionPlanche1(1_500, 0), 0);
+
             }
         }
+
     }
 
 
@@ -1564,46 +1553,40 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         return billesList;
     }
 
-    public int randOiseau1()
-    {
-        Random rand = new Random();
-
-        return rand.nextInt(5) + 1;
-    }
-
 
     public int randOiseau2(int nbOiseau1)
     {
-        Random rand = new Random();
-
-        return nbOiseau1 + rand.nextInt(9 - nbOiseau1);
+        return MathUtils.random(1, Math.min(1, 9 - nbOiseau1));
     }
 
-    public void getRandOiseauxArray()
+    private void getRandOiseauxArray()
     {
         for (int i = 0; i < 5; i++)
         {
             int[] oiseauxNumUpTo9 = {0, 0};
-            int nbOiseau1 = randOiseau1();
+            int nbOiseau1 = MathUtils.random(1, 8);
 
-            oiseauxNumUpTo9[0] = randOiseau1();
+            oiseauxNumUpTo9[0] = nbOiseau1;
             oiseauxNumUpTo9[1] = randOiseau2(nbOiseau1);
             randOiseauxArray.add(oiseauxNumUpTo9);
+
         }
     }
 
 
-    public ArrayList getNumberOiseauxArList()
+    private ArrayList getNumberOiseauxArList()
     {
         oiseauxList = new ArrayList<>();
 
         int firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
         int firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
+        float oiseauWidth = MyConstants.SCREENWIDTH / 18f;
+        float oiseauHeight = oiseauWidth * (500f / 396f);
 
         for (int i = 0; i < 9; i++)
         {
-            int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12f) * (396f / 500f), MyConstants.SCREENWIDTH / 12f);
+            float firstPositionOiseauXNew = firstPositionOiseauX + (i * MyConstants.SCREENWIDTH / 70f);
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, oiseauWidth, oiseauHeight);
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
             myCorrectionAndPauseGeneral.addElements(unOiseau);
@@ -1611,94 +1594,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         return oiseauxList;
     }
 
-
-//    @Override
-//    public boolean touchDown(int screenX, int screenY, int pointer, int button)
-//    {
-//        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
-//        mousePointerX = screenX;
-//        mousePointerY = reversedScreenY;
-//
-//        if (reserveBilles.contains(screenX, reversedScreenY)) /*si bille part de la reserve*/
-//        {
-//            System.out.println("clickedOnContainer");
-//            UneMain uneMainAdded = new UneMain("Images/EnonceUIElements/doigt_new.png",reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille, reserveBilles.largeurBille);
-//            objectTouchedList.add(uneMainAdded);
-//            allDrawables.add(uneMainAdded);
-//            objectTouched = uneMainAdded;
-////            firstPositionX = mousePointerX;
-////            firstPositionY = mousePointerY;
-//        } else /*si bille part de la planche*/
-//        {
-//            for (int i = 0; i < objectTouchedList.size(); i++)
-//            {
-//                MyTouchInterface objetAux = objectTouchedList.get(i);
-//
-//                if (objetAux.isTouched(screenX, reversedScreenY))
-//                {
-//                    objectTouched = objetAux;
-//                    firstPositionX = objectTouched.getPositionBille().x;
-//                    firstPositionY = objectTouched.getPositionBille().y;
-//
-//                    if (objectTouched instanceof UneMain)
-//                    {
-//                        UneMain uneMainAux = (UneMain) objectTouched;
-//                        uneMainAux.touchDown();
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean touchDragged(int screenX, int screenY, int pointer)
-//    {
-//        if (objectTouched != null)
-//        {
-//            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (MyConstants.SCREENHEIGHT - screenY - objectTouched.getHeight() / 2));
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean TouchUp(int screenX, int screenY, int pointer, int button)
-//    {
-//        if (objectTouched != null)
-//        {
-//            if (objectTouched instanceof UneMain)
-//            {
-//                UneMain mainAux = (UneMain) objectTouched;
-//                mainAux.TouchUp(planche1, screenX, MyConstants.SCREENHEIGHT - screenY);
-////
-////                else /*si bille pas deposee dans planche*/
-////                    {
-////                    objectTouched.setPosition(firstPositionX, firstPositionY);
-////                    if (billeAux.plancheNew != null) {
-////                        if (billeAux.plancheNew.shouldReturnToReserve)
-////                        {
-////                            billeAux.setPosition(100000, 100000);
-////                            allDrawables.remove(billeAux);
-////                            billeAux.plancheNew = null;
-////                        }
-////                        else {
-////                            planche1.addBilleAndOrganize(billeAux);
-////                            planche2.addBilleAndOrganize(billeAux);
-////                            planche3.addBilleAndOrganize(billeAux);
-////                        }
-////                    } else {
-////                        allDrawables.remove(billeAux);
-////                        billeAux.setPosition(100000, 100000);
-////                    }
-////                }
-//            }
-//
-//        }
-//        objectTouched = null;
-//        return false;
-//    }
-//
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)

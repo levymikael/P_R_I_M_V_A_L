@@ -26,14 +26,12 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 {
-//    private ArrayList<int[]> randomDicesArray = new ArrayList<>();
-
     private UneArdoise2 uneArdoise2;
     private CalculetteView calculetteView;
-    private float posX, posY;
+//    private float posX, posY;
 
     TextButton.TextButtonStyle styleTest;
-    Drawable drawableAux;
+    private Drawable drawableAux;
 
     private int diceTotal, failedAttempts, diceRenewal;
 
@@ -42,11 +40,11 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
     private Dices dice1;
 
     private String nbInput;
-    //    private boolean isAllActive;
+//    //    private boolean isAllActive;
     private boolean touchValidate = false;
 
 
-    public ScreenEx2_3(final Game game, String ongletTitre)
+    ScreenEx2_3(final Game game, String ongletTitre)
     {
         super(game, 2, 3, true, MyConstants.noteMaxChap2[1]);
 
@@ -246,7 +244,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             }
             if ((value == dice1.getLastDice1value())/* && (value == planche1.getNumberBilles())*/)
             {
-
                 validusAnimated.goodAnswerPlaySound(new NextQuestion(500));
 
                 validusAnimated.isActive = false;
@@ -1172,45 +1169,63 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            if (questionCourante != 18)
+            MyTimer.TaskEtape nextEtape = new EtapeIntermediaire(1_500, 500);
+            switch (dice1.getLastDice1value() + dice1.getLastDice2value())
             {
-                MyTimer.TaskEtape nextEtape = new PresentationMetrologue(1_500);
-                switch (dice1.getLastDice1value() + dice1.getLastDice2value())
-                {
-                    case 2:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/deux.mp3", nextEtape);
-                        break;
-                    case 3:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/trois.mp3", nextEtape);
-                        break;
-                    case 4:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/quatre.mp3", nextEtape);
-                        break;
-                    case 5:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/cinq.mp3", nextEtape);
-                        break;
-                    case 6:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/six.mp3", nextEtape);
-                        break;
-                    case 7:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/sept.mp3", nextEtape);
-                        break;
-                    case 8:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/huit.mp3", nextEtape);
-                        break;
-                    case 9:
-                        metrologue.metrologuePlaySound("Sounds/Onglet1_4/neuf.mp3", nextEtape);
-                        break;
-                    default:
-                        break;
-                }
+                case 2:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/deux.mp3", nextEtape);
+                    break;
+                case 3:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/trois.mp3", nextEtape);
+                    break;
+                case 4:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/quatre.mp3", nextEtape);
+                    break;
+                case 5:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/cinq.mp3", nextEtape);
+                    break;
+                case 6:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/six.mp3", nextEtape);
+                    break;
+                case 7:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/sept.mp3", nextEtape);
+                    break;
+                case 8:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/huit.mp3", nextEtape);
+                    break;
+                case 9:
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_4/neuf.mp3", nextEtape);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+    }
+
+
+    private class EtapeIntermediaire extends MyTimer.TaskEtape
+    {
+        private EtapeIntermediaire(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            if (questionCourante == 18)
+            {
+                timer.schedule(new Fin(2_000, 0), 0);
+            }
+            else
+            {
+                timer.schedule(new PresentationMetrologue(1_500), 0);
 
             }
-            else if (questionCourante == 15)
-            {
-                timer.schedule(new /*ScreenEx2_2.*/Fin(2000, 500), 0);
-            }
         }
+
     }
 
 
@@ -1235,32 +1250,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
     }
 
 
-//    public int randomDice1()
-//    {
-//        Random rand = new Random();
-//        diceNumber1 = rand.nextInt(5) + 1;
-//        return diceNumber1;
-//    }
-
-//    public int randomDice2()
-//    {
-//        Random rand = new Random();
-//        int diceNumber2 = rand.nextInt(6 - diceNumber1) + 1;
-//        return diceNumber2;
-//    }
-
-//    public void getRandDesArray()
-//    {
-//        for (int i = 0; i < 6; i++)
-//        {
-//            int[] dicesNumUpTo9 = {0, 0};
-//            dicesNumUpTo9[0] = randomDice1();
-//            dicesNumUpTo9[1] = randomDice2();
-//            randomDicesArray.add(dicesNumUpTo9);
-//        }
-//    }
-
-
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
@@ -1274,7 +1263,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             dice1.isTouched(mousePointerX, mousePointerY);
 
             dice1.setActive(false);
-            //dice1.displayNumberDiceFace();
 
             timer.schedule(new DiceStep(5_000), 0);
 
@@ -1303,14 +1291,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
         if ((objectTouched != null) && (objectTouched.isActive()))
         {
-           /* if (objectTouched instanceof UneBille)
-            {
-                UneBille billeAux = (UneBille) objectTouched;
-
-                billeAux.touchUp(allPlanches);
-                billesList.add(billeAux);
-            }
-            else*/
             if (objectTouched instanceof ValidusAnimated)
             {
                 if (validusAnimated.contains(mousePointerX, mousePointerY))

@@ -79,6 +79,7 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
         if (allBilles.size() > 0)
         {
             return allBilles.get(allBilles.size() - 1);
+
         }
         else
         {

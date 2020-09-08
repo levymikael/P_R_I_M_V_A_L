@@ -182,12 +182,12 @@ public class ScreenOnglet implements Screen, InputProcessor
         timer = new MyTimer();
 
 
-        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60, MyConstants.SCREENHEIGHT / 7, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
+        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60f, MyConstants.SCREENHEIGHT / 7f, MyConstants.SCREENHEIGHT / 5f, MyConstants.SCREENHEIGHT / 5f, timer);
         myCorrectionAndPauseGeneral.addElements(validusAnimated);
 
         if (ecrin)
         {
-            ecrinDiamantView = new EcrinDiamantView(stage, (MyConstants.SCREENWIDTH / 30) * (168f / 59f), maxNotePossible);
+            ecrinDiamantView = new EcrinDiamantView(stage, (MyConstants.SCREENWIDTH / 30f) * (168f / 59f), maxNotePossible);
             ecrinDiamantView.updateText();
             allDrawables.add(ecrinDiamantView);
             myCorrectionAndPauseGeneral.addElements(ecrinDiamantView);
@@ -236,7 +236,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         allDrawables.add(myButtonBackToPreviousMenu);
 
         startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
-        startPausebutton.setPosition(MyConstants.SCREENWIDTH / 60, 5 * MyConstants.SCREENHEIGHT / 7);
+        startPausebutton.setPosition(MyConstants.SCREENWIDTH / 60f, 5 * MyConstants.SCREENHEIGHT / 7f);
         stage.addActor(startPausebutton);
 
         startPausebutton.addListener(new ClickListener()
@@ -264,7 +264,7 @@ public class ScreenOnglet implements Screen, InputProcessor
                 texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
                 Sprite sprite = new Sprite(texture);
-                sprite.setSize(MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
+                sprite.setSize(MyConstants.SCREENWIDTH / 15f, MyConstants.SCREENWIDTH / 15f);
 
                 startPausebutton.getStyle().imageUp = new SpriteDrawable(sprite);
                 PauseSingleton pauseSingleton = PauseSingleton.getInstance();

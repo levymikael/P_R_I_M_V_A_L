@@ -28,9 +28,7 @@ import java.util.ArrayList;
 
 public class ScreenEx1_2 extends ScreenOnglet
 {
-    ScreeenBackgroundImage bgScreenEx1_2;
-    int posX, posY;
-    int failedAttempts;
+    private int posX, posY, failedAttempts;
     private ArrayList<UneBille> billesList;
     private ArrayList<UnOiseau> oiseauxList;
     //    private ArrayList<UnePlancheNew> allPlanches;
@@ -39,26 +37,20 @@ public class ScreenEx1_2 extends ScreenOnglet
     private int randNumOiseau;
     private int cptOiseau;
 
-    int[] numOiseauArray;
-
-    DatabaseDesktop dataBase;
+    private int[] numOiseauArray;
 
     boolean isInCorrection = false;
 
 
-    public ScreenEx1_2(final Game game, String ongletTitre)
+    ScreenEx1_2(final Game game, String ongletTitre)
     {
         super(game, 1, 2, true, 9);
 
-        this.dataBase = dataBase;
-
-        bgScreenEx1_2 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
+        ScreeenBackgroundImage bgScreenEx1_2 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_2);
-        /*backgroundScreen = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
-        largeurFond = 1024.0f;
-        hauteurFond = 640.0f;*/
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
+
+        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60f, 9 * MyConstants.SCREENHEIGHT / 11f, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
         sacDeBilles.largeurBille = largeurBilleUnique;
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
@@ -103,12 +95,12 @@ public class ScreenEx1_2 extends ScreenOnglet
         exoConsigneLabel = new Label(ongletTitre, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
         highestMarkObtainedLabel = new Label(noteMaxObtenue, labelStyle3);
-        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
+        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46f);
 
 
-        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
-        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25f).padLeft(MyConstants.SCREENWIDTH / 46f);
+        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9f);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22f);
 
         stage.addActor(tableTitre);
 
@@ -124,7 +116,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             {
                 game.setScreen(new Screen_Chapitre1(game));
 
-//                game.dispose();
                 Gdx.app.log("button click", "click!");
 
                 endTime = System.currentTimeMillis();
@@ -147,7 +138,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                 MyDataBase db = appSingleton.myDataBase;
 
                 db.insertResultat(resultatExercice);
-
             }
 
             @Override
@@ -161,21 +151,20 @@ public class ScreenEx1_2 extends ScreenOnglet
     }
 
 
-    public ArrayList getNumberOiseauxArList()
+    private void getNumberOiseauxArList()
     {
-        int firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
-        int firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
+        float firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
+        float firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
         oiseauxList = new ArrayList<>();
         for (int i = 0; i < 9; i++)
         {
-            int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
+            float firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
             UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, ((MyConstants.SCREENWIDTH / 12f) * (396f / 500f)), (MyConstants.SCREENWIDTH / 12f) * (500f / 396f));
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
 
             myCorrectionAndPauseGeneral.addElements(unOiseau);
         }
-        return oiseauxList;
     }
 
     @Override
@@ -215,8 +204,7 @@ public class ScreenEx1_2 extends ScreenOnglet
                     if (objectTouched instanceof UneBille)
                     {
                         UneBille billeAux = (UneBille) objectTouched;
-                        //reserveBilles.isActive();
-                        //reserveBilles.setActive(true);
+
                         billeAux.touchDown();
                         break;
                     }
@@ -275,7 +263,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             activiteView.addTextActivite("Place autant de billes que d'oiseaux que tu vois et demande à Mademoiselle Validus si c'est juste pour avoir un diamant.");
 
-            MyTimer.TaskEtape nextEtape = new EtapeInstruction(2000, 0);
+            MyTimer.TaskEtape nextEtape = new EtapeInstruction(2_000, 0);
 
             metrologue.metrologuePlaySound("Sounds/Metrologue/Place autant de billes.mp3", nextEtape);
 
@@ -295,7 +283,7 @@ public class ScreenEx1_2 extends ScreenOnglet
         {
             randNumOiseau = numOiseauArray[questionCourante];
 
-            timer.schedule(new DisplayOiseaux(1000), 0);
+            timer.schedule(new DisplayOiseaux(1_000), 0);
         }
     }
 
@@ -523,8 +511,8 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            int posX = MyConstants.SCREENWIDTH / 2;
-            int posY = (int) planche1.getHeight() / 2;
+            float posX = MyConstants.SCREENWIDTH / 2f;
+            float posY = planche1.getHeight() / 2f;
 
             MyTimer.TaskEtape nextEtape = new EtapeAddBille(500);
             billeRectification.animateImage(durationMillis, true, (int) (posX - billeRectification.getWidth() / 2), (int) (posY - billeRectification.getWidth() / 2), nextEtape, 1000, 1f / 6f);
@@ -603,8 +591,8 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            int posX = (int) (planche1.currentPositionX + planche1.getWidth()) + MyConstants.SCREENWIDTH / 20;
-            int posY = (int) (planche1.currentPositionY + (planche1.getHeight() / 2));
+            float posX = (planche1.currentPositionX + planche1.getWidth()) + MyConstants.SCREENWIDTH / 20f;
+            float posY = (planche1.currentPositionY + (planche1.getHeight() / 2));
 
             sacDeBilles.addBilleToReserve(billeRectification);
 

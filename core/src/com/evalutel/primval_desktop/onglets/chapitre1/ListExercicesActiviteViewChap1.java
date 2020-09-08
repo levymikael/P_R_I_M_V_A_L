@@ -38,7 +38,7 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         final String label3 = "Écriture des chiffres de 1 à 9";
         final String label4 = "Prononciation des chiffres de 1 à 9";
         final String label5 = "Faire correspondre des billes à des oiseaux et taper leur nombre";
-        final String label6 = "Dire le nombre d'oiseaux que je vois";
+//        final String label6 = "Dire le nombre d'oiseaux que je vois";
         final String label7 = "Un gâteau pour plusieurs anniversaires";
 
         Texture textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
@@ -62,8 +62,8 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         MyTextButton trois_bouton = new MyTextButton("3", "Images/red_circle.png", "Images/red_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
         MyTextButton quatre_bouton = new MyTextButton("4", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
         MyTextButton cinq_bouton = new MyTextButton("5", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
-        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
-        MyTextButton sept_bouton = new MyTextButton("7", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
+//        MyTextButton six_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
+        MyTextButton sept_bouton = new MyTextButton("6", "Images/blue_circle.png", "Images/blue_circle.png", buttonSize, "font/FRHND521_0.TTF", fontSize);
 
         Table table = new Table();
         Table tableEx1 = LigneTableaux.getLigne(un_bouton, label1, textureCours, "red", 1, 1, MyConstants.noteMaxChap1[0]);
@@ -71,8 +71,8 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         Table tableEx3 = LigneTableaux.getLigne(trois_bouton, label3, textureCours, "red", 1, 3, MyConstants.noteMaxChap1[0]);
         Table tableEx4 = LigneTableaux.getLigne(quatre_bouton, label4, textureExercices, "blue", 1, 4, MyConstants.noteMaxChap1[1]);
         Table tableEx5 = LigneTableaux.getLigne(cinq_bouton, label5, textureExercices, "blue", 1, 5, MyConstants.noteMaxChap1[2]);
-        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, MyConstants.noteMaxChap1[3]);
-        Table tableEx7 = LigneTableaux.getLigne(sept_bouton, label7, textureExercices, "blue", 1, 7, MyConstants.noteMaxChap1[4]);
+//        Table tableEx6 = LigneTableaux.getLigne(six_bouton, label6, textureExercices, "blue", 1, 6, MyConstants.noteMaxChap1[3]);
+        Table tableEx7 = LigneTableaux.getLigne(sept_bouton, label7, textureExercices, "blue", 1, 6, MyConstants.noteMaxChap1[4]);
 
         table.add(tableEx1).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
@@ -84,8 +84,8 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
         table.row();
         table.add(tableEx5).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
-        table.add(tableEx6).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
-        table.row();
+//        table.add(tableEx6).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
+//        table.row();
         table.add(tableEx7).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
 
         table.align(Align.top);
@@ -142,22 +142,22 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
                 System.out.println("I got clicked!5");
             }
         });
-        tableEx6.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                System.out.println("I got clicked!6");
-//                game.setScreen(new ScreenEx1_6(game, label6));
-            }
-        });
+//        tableEx6.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                System.out.println("I got clicked!6");
+////                game.setScreen(new ScreenEx1_6(game, label6));
+//            }
+//        });
         tableEx7.addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
                 System.out.println("I got clicked!7");
-                game.setScreen(new ScreenEx1_7(game, label7));
+                game.setScreen(new ScreenEx1_6(game, label7));
             }
         });
     }

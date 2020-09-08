@@ -30,7 +30,7 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 import java.util.ArrayList;
 
 
-public class ScreenEx1_7 extends ScreenOnglet implements InputProcessor
+public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
 {
     private ArrayList<UneBougie> bougiesList;
     private ArrayList<Texture> pastilleList;
@@ -67,9 +67,9 @@ public class ScreenEx1_7 extends ScreenOnglet implements InputProcessor
     Drawable drawableAux;
 
 
-    public ScreenEx1_7(final Game game, String ongletTitre)
+     ScreenEx1_6(final Game game, String ongletTitre)
     {
-        super(game, 1, 7, true, 9);
+        super(game, 1, 6, true, 9);
 
 
         float largeurBougie = MyConstants.SCREENWIDTH / 18f;

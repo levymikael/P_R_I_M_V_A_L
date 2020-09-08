@@ -101,21 +101,11 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         return imgDicesPaths;
     }
 
-//    public int randDice1()
-//    {
-////        Random rand = new Random();
-//
-////        return rand.nextInt(6) + 1;
-//        return MathUtils.random(1, 6);
-//    }
-
 
     public int randDice2(int nbDice1)
     {
-//        Random rand = new Random();
 
-//        return nbDice1 + rand.nextInt(7 - nbDice1);
-        return /*nbDice1 -*/ MathUtils.random(1, Math.min(6,9-nbDice1));
+        return MathUtils.random(1, Math.min(6, 9 - nbDice1));
 
     }
 

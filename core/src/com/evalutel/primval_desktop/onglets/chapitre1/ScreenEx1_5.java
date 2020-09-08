@@ -36,45 +36,34 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
     private ArrayList<UnOiseau> oiseauxList;
     private ArrayList<UnePlancheNew> allPlanches;
 
-    private UneBille billeRectification;
-
-    protected CalculetteView calculetteView;
+    private CalculetteView calculetteView;
 
     private UnePlancheNew planche1;
-    ScreeenBackgroundImage bgScreenEx1_1;
 
-    int cptOiseau, cptBille = 0;
+    private int cptOiseau, cptBille = 0;
     private int randNumOiseau;
 
-    TextButton.TextButtonStyle styleTest;
+    private TextButton.TextButtonStyle styleTest;
 
-    float posX, posY;
+    private int[] numOiseauArray;
 
-    int[] numOiseauArray;
+    private int failedAttempts, currrentBillesNumber = 0;
 
-    int failedAttempts, currrentBillesNumber = 0;
+    private String nbInput;
 
-    boolean isInCorrection = false;
-
-    boolean afterCorrection, isAllActive, touchValidate = false;
-
-    String nbInput;
-
-    Label currentLabel;
-    Drawable drawableAux;
+    private Drawable drawableAux;
 
 
-    public ScreenEx1_5(final Game game, String ongletTitre)
+    ScreenEx1_5(final Game game, String ongletTitre)
     {
         super(game, 1, 5, true, 9);
 
 
-        bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
+        ScreeenBackgroundImage bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);
 
         sacDeBilles = new SacDeBilles(53f * MyConstants.SCREENWIDTH / 60f, 9 * MyConstants.SCREENHEIGHT / 11f, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
         sacDeBilles.largeurBille = largeurBilleUnique;
-        sacDeBilles.isActive();
         sacDeBilles.setActive(false);
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
@@ -134,9 +123,9 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
 
-        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
-        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25f).padLeft(MyConstants.SCREENWIDTH / 46f);
+        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9f);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22f);
 
         stage.addActor(tableTitre);
 
@@ -146,18 +135,6 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
         resultatExercice = new UnResultat("Primval", 1, 5, 0, ongletTitre, 9, 0, dateTest, 0, 0, 0, 123);
 
-//        calculetteViewTest.validerBouton.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                if (calculetteViewTest.isActive())
-//                {
-//                    Gdx.app.log("", "button validate pressed");
-//                    timer.schedule(new PressValidate(0), 0);
-//                }
-//            }
-//        });
 
         uneSouris.setPosition(MyConstants.SCREENWIDTH / 2f, MyConstants.SCREENHEIGHT / 3f);
 
@@ -169,7 +146,6 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             {
                 game.setScreen(new Screen_Chapitre1(game));
 
-//                game.dispose();
                 Gdx.app.log("button click", "click!");
 
                 endTime = System.currentTimeMillis();
@@ -263,22 +239,24 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             {
                 UnOiseau oiseau = oiseauxList.get(cptOiseau);
 
+                float posX;
+                float posY;
                 if (cptOiseau > 5)
                 {
-                    posY = 5 * MyConstants.SCREENHEIGHT / 11;
-                    posX = (2 * MyConstants.SCREENWIDTH / 9) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 3);
+                    posY = 5 * MyConstants.SCREENHEIGHT / 11f;
+                    posX = (2 * MyConstants.SCREENWIDTH / 9f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 3);
                 }
                 else
                 {
-                    posY = 7 * MyConstants.SCREENHEIGHT / 10;
+                    posY = 7 * MyConstants.SCREENHEIGHT / 10f;
 
                     if (cptOiseau < 3)
                     {
-                        posX = (MyConstants.SCREENWIDTH / 6) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+                        posX = (MyConstants.SCREENWIDTH / 6f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                     else
                     {
-                        posX = (2 * MyConstants.SCREENWIDTH / 9) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+                        posX = (2 * MyConstants.SCREENWIDTH / 9f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                 }
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
@@ -500,6 +478,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
+            UneBille billeRectification;
             if (planche1.getNumberBilles() < randNumOiseau)
             {
                 billeRectification = sacDeBilles.getBilleAndRemove();
@@ -672,7 +651,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         {
             uneSouris.setVisible(false);
             nbInput = String.valueOf(randNumOiseau);
-            afterCorrection = true;
+            boolean afterCorrection = true;
             timer.schedule(new NextQuestion(500), 500);
             styleTest.up = drawableAux;
             planche1.setAllBillesActive();
@@ -693,7 +672,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         {
             calculetteView.textRemove();
 
-            isAllActive = true;
+            boolean isAllActive = true;
 
             if (questionCourante == 8)
             {

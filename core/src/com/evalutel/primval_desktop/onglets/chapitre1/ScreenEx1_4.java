@@ -57,7 +57,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
     boolean afterCorrection = false;
     Texture ardoiseBgInactive;
 
-    public ScreenEx1_4(final Game game, String ongletTitre)
+     ScreenEx1_4(final Game game, String ongletTitre)
     {
         super(game, 1, 4, true, 9);
 
