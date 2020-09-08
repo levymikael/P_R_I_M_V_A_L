@@ -12,7 +12,6 @@ import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
 import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -140,12 +139,12 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         return imgDicesPaths;
     }
 
-    public int getLastDice1value(/*int questionCourante*/)
+    public int getLastDice1value()
     {
         return randDicesArray.get(diceRenewal)[0];
     }
 
-    public int getLastDice2value(/*int questionCourante*/)
+    public int getLastDice2value()
     {
         return randDicesArray.get(diceRenewal)[1];
     }
@@ -182,9 +181,17 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
         return imgDicesPaths;
     }
 
-    public boolean contains(float currentPositionX, float currentPositionY)
+    public boolean contains(float positionXToCheck, float positionYToCheck)
     {
-        return this.currentPositionX <= currentPositionX && this.currentPositionX + this.animationWidth >= currentPositionX && this.currentPositionY <= currentPositionY && this.currentPositionY + this.animationHeight >= currentPositionY;
+
+
+        float diceClickableAreaX = this.currentPositionX + animationWidth + dice2positionX + animationWidth;
+        float diceClickableAreaY = this.currentPositionY + animationHeight;
+
+        return ((this.currentPositionX <= positionXToCheck && diceClickableAreaX >= positionXToCheck) && (this.currentPositionY <= positionYToCheck && diceClickableAreaY >= positionYToCheck));
+
+
+//        return this.currentPositionX <= positionXToCheck && this.currentPositionX + this.animationWidth >= positionXToCheck && this.currentPositionY <= positionYToCheck && this.currentPositionY + this.animationHeight >= positionYToCheck;
     }
 
 
@@ -242,7 +249,6 @@ public class Dices extends AnimationImageNew implements MyCorrectionAndPauseInte
     @Override
     public boolean isTouched(float x, float y)
     {
-
         if (isAnimating)
         {
             return false;

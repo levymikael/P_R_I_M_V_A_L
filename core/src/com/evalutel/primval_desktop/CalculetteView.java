@@ -75,7 +75,7 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
 
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(comicSansMsPath));
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = MyConstants.SCREENWIDTH / 60;
         parameter.padLeft = 20;
         parameter.padRight = MyConstants.SCREENWIDTH / 80;

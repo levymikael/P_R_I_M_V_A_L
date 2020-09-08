@@ -22,11 +22,10 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
     public float screenWidth;
     private boolean isVisible = true;
 
-    Game game;
+    private Game game;
 
-    DatabaseDesktop dataBase;
 
-    public ListExercicesActiviteViewChap1(Stage stage, final Game game)
+     ListExercicesActiviteViewChap1(Stage stage, final Game game)
     {
         screenWidth = MyConstants.SCREENWIDTH;
         final int screenHeight = MyConstants.SCREENHEIGHT;

@@ -79,7 +79,7 @@ public class MrNotes2 implements MyDrawInterface
             container.add(labelNotes).padLeft(logoWidth/3f).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
         }
 
-        container.debug();
+//        container.debug();
         stage.addActor(container);
     }
 

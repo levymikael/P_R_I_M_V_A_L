@@ -76,7 +76,7 @@ public class MrTemps2 implements MyDrawInterface
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrTemps))));
         container.add(labelTemps).padLeft(logoWidth / 3f).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
 
-        container.debug();
+//        container.debug();
 
         stage.addActor(container);
     }
