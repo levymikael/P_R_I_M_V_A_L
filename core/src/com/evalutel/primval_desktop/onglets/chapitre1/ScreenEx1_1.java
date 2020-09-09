@@ -32,21 +32,17 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
     private ArrayList<UnePlancheNew> allPlanches;
 
     private UnePlancheNew planche1;
-    ScreeenBackgroundImage bgScreenEx1_1;
 
-//    boolean isVisible = true;
-//    boolean isActive = false;
 
-    int cptOiseau, cptBille = 0;
+    private int cptOiseau, cptBille = 0;
 
-//    ActiviteView activiteView;
 
 
     public ScreenEx1_1(final Game game, String ongletTitre)
     {
         super(game, 1, 1, false, 0);
 
-        bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
+        ScreeenBackgroundImage bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);
 
         oiseauxList = getNumberOiseauxArList();
@@ -80,9 +76,9 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         highestMarkObtainedLabel = new Label("", labelStyle3);
         highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
-        tableTitre.add(exoNumLabel)/*.align(Align.center).*/.width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
-        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(exoNumLabel)/*.align(Align.center).*/.width(MyConstants.SCREENWIDTH / 25f).padLeft(MyConstants.SCREENWIDTH / 46f);
+        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9f);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22f);
 
         stage.addActor(tableTitre);
 
@@ -835,16 +831,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             float posX = validusAnimated.getPosition().x + validusAnimated.getWidth() / 2;
             float posY = validusAnimated.getPosition().y + validusAnimated.getHeight() / 2;
 
-            if /*(billesList.size() == 4)
-            {
-                activiteView.addTextActivite("Validus: Non, non tu t'es trompé.");
-                validusAnimated.validusPlaySound("Sounds/Validus/non non tu tes trompe.mp3");
-
-                MyTimer.TaskEtape nextEtape = new MoveMainBackToPlanche(1000);
-
-                uneMain.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1000);
-            }
-            else if*/ (billesList.size() == 3)
+            if (billesList.size() == 3)
             {
                 MyTimer.TaskEtape nextEtape = new FinOnglet(1000, 1500);
                 uneSouris.cliqueTo(durationMillis, (int) posX, (int) posY, null, 1000);
@@ -855,7 +842,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
     }
 
 
-    public ArrayList<UneBille> autoFillPlanche()
+    private ArrayList<UneBille> autoFillPlanche()
     {
         float firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
         float firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
@@ -871,13 +858,12 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             billeAdded.setVisible(false);
 
             myCorrectionAndPauseGeneral.addElements(billeAdded);
-
         }
         return billesList;
     }
 
 
-    public ArrayList getNumberOiseauxArList()
+    private ArrayList getNumberOiseauxArList()
     {
         oiseauxList = new ArrayList<>();
 
@@ -895,94 +881,6 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
     }
 
 
-//    @Override
-//    public boolean touchDown(int screenX, int screenY, int pointer, int button)
-//    {
-//        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
-//        mousePointerX = screenX;
-//        mousePointerY = reversedScreenY;
-//
-//        if (reserveBilles.contains(screenX, reversedScreenY)) /*si bille part de la reserve*/
-//        {
-//            System.out.println("clickedOnContainer");
-//            UneMain uneMainAdded = new UneMain("Images/EnonceUIElements/doigt_new.png",reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille, reserveBilles.largeurBille);
-//            objectTouchedList.add(uneMainAdded);
-//            allDrawables.add(uneMainAdded);
-//            objectTouched = uneMainAdded;
-////            firstPositionX = mousePointerX;
-////            firstPositionY = mousePointerY;
-//        } else /*si bille part de la planche*/
-//        {
-//            for (int i = 0; i < objectTouchedList.size(); i++)
-//            {
-//                MyTouchInterface objetAux = objectTouchedList.get(i);
-//
-//                if (objetAux.isTouched(screenX, reversedScreenY))
-//                {
-//                    objectTouched = objetAux;
-//                    firstPositionX = objectTouched.getPositionBille().x;
-//                    firstPositionY = objectTouched.getPositionBille().y;
-//
-//                    if (objectTouched instanceof UneMain)
-//                    {
-//                        UneMain uneMainAux = (UneMain) objectTouched;
-//                        uneMainAux.touchDown();
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean touchDragged(int screenX, int screenY, int pointer)
-//    {
-//        if (objectTouched != null)
-//        {
-//            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (MyConstants.SCREENHEIGHT - screenY - objectTouched.getHeight() / 2));
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean TouchUp(int screenX, int screenY, int pointer, int button)
-//    {
-//        if (objectTouched != null)
-//        {
-//            if (objectTouched instanceof UneMain)
-//            {
-//                UneMain mainAux = (UneMain) objectTouched;
-//                mainAux.TouchUp(planche1, screenX, MyConstants.SCREENHEIGHT - screenY);
-////
-////                else /*si bille pas deposee dans planche*/
-////                    {
-////                    objectTouched.setPosition(firstPositionX, firstPositionY);
-////                    if (billeAux.plancheNew != null) {
-////                        if (billeAux.plancheNew.shouldReturnToReserve)
-////                        {
-////                            billeAux.setPosition(100000, 100000);
-////                            allDrawables.remove(billeAux);
-////                            billeAux.plancheNew = null;
-////                        }
-////                        else {
-////                            planche1.addBilleAndOrganize(billeAux);
-////                            planche2.addBilleAndOrganize(billeAux);
-////                            planche3.addBilleAndOrganize(billeAux);
-////                        }
-////                    } else {
-////                        allDrawables.remove(billeAux);
-////                        billeAux.setPosition(100000, 100000);
-////                    }
-////                }
-//            }
-//
-//        }
-//        objectTouched = null;
-//        return false;
-//    }
-//
-
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
@@ -993,7 +891,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         boolean isReserveActif = sacDeBilles.isActive();
         if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
-            UneBille billeAdded = new UneBille(sacDeBilles.currentPositionX + (int) sacDeBilles.animationWidth / 2, sacDeBilles.currentPositionY + (int) sacDeBilles.animationHeight / 2, sacDeBilles.largeurBille);
+            UneBille billeAdded = new UneBille(sacDeBilles.currentPositionX + sacDeBilles.animationWidth / 2, sacDeBilles.currentPositionY + sacDeBilles.animationHeight / 2, sacDeBilles.largeurBille);
             objectTouchedList.add(billeAdded);
             allDrawables.add(billeAdded);
             objectTouched = billeAdded;

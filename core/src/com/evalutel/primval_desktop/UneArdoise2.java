@@ -37,7 +37,9 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
     {
         this.number = number;
         this.setPosition(posX, posY);
-        this.setSize(ardoiseSize, ardoiseSize * 1.2f);
+
+        float ardoiseHeight = ardoiseSize * 1.2f;
+        this.setSize(ardoiseSize, ardoiseHeight);
 
         ardoiseBgActive = new Texture("Images/Ardoise/ardoise_fond.png");
         ardoiseBgActive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -85,10 +87,10 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         Texture egalTxture = new Texture(Gdx.files.internal("Images/Ardoise/ardoise_egal_new.png"));
         egalTxture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        float widthEmplacement = this.getWidth() * 0.45f;
+        float widthEmplacement = this.getWidth() * .45f;
         float heightEmplacement = widthEmplacement * ((134f / 192f) * 0.8f);
 
-        float widthTiret = this.getWidth() * 0.8f;
+        float widthTiret = this.getWidth() * .8f;
         float heightTiret = widthTiret * (20f / 564f);
 
         float widthPlus = widthEmplacement / 2f;
@@ -97,7 +99,7 @@ public class UneArdoise2 extends Table implements MyCorrectionAndPauseInterface,
         float widthEgal = widthPlus;
         float heightEgal = widthPlus * (107f / 115f);
 
-        float interEmplacementPadding = MyConstants.SCREENHEIGHT / 70f;
+        float interEmplacementPadding = ardoiseHeight / 20f;
 
 
         labelEmplacement1 = new Label("", labelStyleWhite);

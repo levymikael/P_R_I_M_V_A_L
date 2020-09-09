@@ -52,13 +52,11 @@ public class ScreenOnglet implements Screen, InputProcessor
     protected SpriteBatch batch;
     protected Stage stage;
 
-    protected MyImageButton startPausebutton;
+    private MyImageButton startPausebutton;
     boolean isVisible = true;
     protected MyTimer timer;
 
-    protected BitmapFont bitmapFontArial, bitmapFontComic;
-
-    boolean isInPause = false;
+    private boolean isInPause = false;
 
     protected ArrayList<MyDrawInterface> allDrawables;
     //    protected ArrayList<MyCorrectionAndPauseInterface> allCorrigibles;
@@ -142,13 +140,13 @@ public class ScreenOnglet implements Screen, InputProcessor
         fontArial = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = MyConstants.SCREENWIDTH / 70;
-        bitmapFontArial = fontArial.generateFont(parameter);
+        BitmapFont bitmapFontArial = fontArial.generateFont(parameter);
         fontArial.dispose();
 
         fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterComic = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterComic.size = MyConstants.SCREENWIDTH / 80;
-        bitmapFontComic = fontComic.generateFont(parameter);
+        BitmapFont bitmapFontComic = fontComic.generateFont(parameter);
         fontComic.dispose();
 
         labelStyleComic = new Label.LabelStyle();
@@ -181,61 +179,13 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         timer = new MyTimer();
 
-
-        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60f, MyConstants.SCREENHEIGHT / 7f, MyConstants.SCREENHEIGHT / 5f, MyConstants.SCREENHEIGHT / 5f, timer);
-        myCorrectionAndPauseGeneral.addElements(validusAnimated);
-
-        if (ecrin)
-        {
-            ecrinDiamantView = new EcrinDiamantView(stage, (MyConstants.SCREENWIDTH / 30f) * (168f / 59f), maxNotePossible);
-            ecrinDiamantView.updateText();
-            allDrawables.add(ecrinDiamantView);
-            myCorrectionAndPauseGeneral.addElements(ecrinDiamantView);
-        }
-
-
-        metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, MyConstants.SCREENHEIGHT / 5, timer);
-        myCorrectionAndPauseGeneral.addElements(metrologue);
-
-
         myButtonBackToPreviousMenu = new MyButtonBackToPreviousMenu(game, stage, metrologue, validusAnimated, this, startTime, resultatExercice, timer);
-//        myButtonBackToPreviousMenu.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                ScreenOnglet.this.game.dispose();
-//                Gdx.app.log("button click", "click!");
-//
-//                endTime = System.currentTimeMillis();
-//                seconds = (endTime - startTime) / 1_000L;
-//
-//                resultatExercice.setDuree(seconds);
-//                resultatExercice.setDate(endTime);
-//
-//                if ((metrologue.isSpeaking))
-//                {
-//                    metrologue.stopMusic();
-//                }
-//                else if ((validusAnimated.isSpeaking))
-//                {
-//                    validusAnimated.stopMusic();
-//                }
-//
-//                timer.cancel();
-//                AppSingleton appSingleton = AppSingleton.getInstance();
-//                MyDataBase db = appSingleton.myDataBase;
-//
-//                db.insertResultat(resultatExercice);
-//
-//                ScreenOnglet.this.game.setScreen(new Screen_Chapitre1(ScreenOnglet.this.game));
-//
-//                ScreenOnglet.this.dispose();
-//            }
-//        });
+
         allDrawables.add(myButtonBackToPreviousMenu);
 
-        startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png", MyConstants.SCREENWIDTH / 15, MyConstants.SCREENWIDTH / 15);
+        float leftSideBtn = MyConstants.SCREENWIDTH / 15f;
+
+        startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png",leftSideBtn , leftSideBtn);
         startPausebutton.setPosition(MyConstants.SCREENWIDTH / 60f, 5 * MyConstants.SCREENHEIGHT / 7f);
         stage.addActor(startPausebutton);
 
@@ -271,6 +221,20 @@ public class ScreenOnglet implements Screen, InputProcessor
                 pauseSingleton.isPause = !pauseSingleton.isPause;
             }
         });
+
+        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60f, MyConstants.SCREENHEIGHT / 7f, leftSideBtn*2, leftSideBtn*2f, timer);
+        myCorrectionAndPauseGeneral.addElements(validusAnimated);
+
+        metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, leftSideBtn*2, leftSideBtn*2, timer);
+        myCorrectionAndPauseGeneral.addElements(metrologue);
+
+        if (ecrin)
+        {
+            ecrinDiamantView = new EcrinDiamantView(stage, (MyConstants.SCREENWIDTH / 30f) * (168f / 59f), maxNotePossible);
+            ecrinDiamantView.updateText();
+            allDrawables.add(ecrinDiamantView);
+            myCorrectionAndPauseGeneral.addElements(ecrinDiamantView);
+        }
 
 
         int posX = 6 * MyConstants.SCREENWIDTH / 7;

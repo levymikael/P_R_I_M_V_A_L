@@ -39,9 +39,8 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
     private UnePlancheNew planche1, planche2, planche3;
     ScreeenBackgroundImage bgScreenEx1_1;
 
-    int cptOiseau, cptBille = 0;
+    private int cptOiseau, cptBille = 0;
 
-    DatabaseDesktop dataBase;
 
     UneArdoise2 uneArdoise2;
     protected CalculetteView calculetteView;
@@ -50,15 +49,14 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
     TextButton.TextButtonStyle styleTest;
     private Drawable drawableAux;
 
-    int cpt;
+    private int cpt;
 
-    Label currentLabel;
+    private Label currentLabel;
 
     public ScreenEx2_1(final Game game, String ongletTitre)
     {
         super(game, 2, 1, false, 0);
 
-        this.dataBase = dataBase;
 
         bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);
@@ -97,8 +95,6 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
         exoConsigneLabel = new Label(ongletTitre, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
-//        highestMarkObtainedLabel = new Label("", labelStyle3);
-//        highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
         tableTitre.add(exoNumLabel).width(MyConstants.SCREENWIDTH / 25f).padLeft(MyConstants.SCREENWIDTH / 46f);
         tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9f);
@@ -122,7 +118,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
         float ardoise2Size = MyConstants.SCREENWIDTH / 6.5f;
-        float posYArdoise2 = calculetteView.getCalculetteTopY() + MyConstants.SCREENHEIGHT / 15f;
+        float posYArdoise2 = MyConstants.SCREENHEIGHT / 2f - ((ardoise2Size * 1.2f) / 2);
 
         uneArdoise2 = new UneArdoise2(stage, "", calculetteView.positionX, posYArdoise2, ardoise2Size);
         allDrawables.add(uneArdoise2);
@@ -172,40 +168,6 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             {
                 return true;
             }
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//
-//
-//                game.dispose();
-//                Gdx.app.log("button click", "click!");
-//
-//                endTime = System.currentTimeMillis();
-//                seconds = (endTime - startTime) / 1_000L;
-//
-//                resultatExercice.setDuree(seconds);
-//                resultatExercice.setDate(endTime);
-//
-//                if ((metrologue.isSpeaking) && (metrologue != null))
-//                {
-//                    metrologue.stopMusic();
-//                }
-//                else if ((validusAnimated.isSpeaking) && (validusAnimated != null))
-//                {
-//                    validusAnimated.stopMusic();
-//                }
-//
-//                timer.cancel();
-//                AppSingleton appSingleton = AppSingleton.getInstance();
-//                MyDataBase db = appSingleton.myDataBase;
-//
-//                db.insertResultat(resultatExercice);
-//
-//                ScreenEx2_2.this.dispose();
-//
-//                game.setScreen(new Screen_Chapitre2(ScreenEx2_2.this.game));
-//
-//            }
         });
     }
 
@@ -220,7 +182,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            MyTimer.TaskEtape nextEtape = new VoiciLaRegleDuJeu(3000, 0);
+            MyTimer.TaskEtape nextEtape = new VoiciLaRegleDuJeu(3_000, 1_000);
 
             metrologue.metrologuePlaySound("Sounds/Onglet_2_1/Metrologue - Instructions onglet 2_1.mp3", nextEtape);
         }
@@ -276,7 +238,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             }
             else
             {
-                timer.schedule(new MoveMainToReserve1(500, 0), 0);
+                timer.schedule(new MoveMainToReserve1(1_500, 1_500), 1_000);
             }
         }
     }
@@ -489,7 +451,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
 
-            MyTimer.TaskEtape nextEtape = new MoveMainToReserve2(500, 0);
+            MyTimer.TaskEtape nextEtape = new MoveMainToReserve2(500, 1_000);
 
             metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeVois3OiseauxSurLaSeconde.mp3");
 
@@ -546,11 +508,9 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             {
                 float posXMain = sacDeBilles.currentPositionX + sacDeBilles.getWidth() / 2;
                 float posYMain = sacDeBilles.currentPositionY + sacDeBilles.getHeight() / 2;
-                float posX = posXMain;
-                float posY = posYMain;
 
                 UneBille bille = billesList.get(cptBille);
-                bille.setPositionCenter(posX, posY);
+                bille.setPositionCenter(posXMain, posYMain);
 
                 MyTimer.TaskEtape nextEtape = new EtapeDragSecondBille(500);
                 timer.schedule(nextEtape, 500);
@@ -697,20 +657,20 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
 
-            MyTimer.TaskEtape nextEtape = new OiseauxOut(500, 0);
+            MyTimer.TaskEtape nextEtape = new OiseauxOut(500, 2_500);
 
             styleTest = calculetteView.validerBouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
 
-            uneSouris.cliqueTo(durationMillis, (int) posX, (int) posY, nextEtape, 1_000);
+            uneSouris.cliqueTo(durationMillis, posX, posY, nextEtape, 1_000);
 
             calculetteView.textRemove();
             uneArdoise2.fillLabel(2, "3");
 
             StringBuilder ex = currentLabel.getText();
-            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "3 =  ");
+            StringBuilder newStrBuilder = new StringBuilder(ex.toString() + " 3 =  ");
 
             currentLabel.setText(newStrBuilder);
 
@@ -743,7 +703,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             }
             else
             {
-                timer.schedule(new MoveMainToPlanche1and2(1_000, 500), 0);
+                timer.schedule(new MoveMainToPlanche1and2(3_000, 2_500), 2_000);
             }
         }
     }
@@ -763,7 +723,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             {
                 styleTest.up = drawableAux;
 
-                float Xbille1 = billesList.get(cpt).currentPositionX + largeurBilleMultiple / 2;
+                float Xbille1 = billesList.get(cpt).currentPositionX + largeurBilleUnique / 2;
                 float Ybille1 = billesList.get(cpt).currentPositionY /*+ largeurBilleMultiple / 2*/;
 
                 MyTimer.TaskEtape nextEtape = new ClickOnBille1(500);
@@ -825,7 +785,6 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             timer.schedule(nextEtape, 1_000);
 
             cpt++;
-
         }
     }
 
@@ -930,7 +889,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new Fin(500, 0);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_onglet6_J'Annonceleresultat.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_onglet6_JAnnonceleresultat.mp3", nextEtape);
         }
     }
 
@@ -976,17 +935,20 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
     }
 
 
-    public ArrayList getNumberOiseauxArList()
+    private ArrayList getNumberOiseauxArList()
     {
         oiseauxList = new ArrayList<>();
 
-        int firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
-        int firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
+        float firstPositionOiseauX = MyConstants.SCREENWIDTH + 200;
+        float firstPositionOiseauY = MyConstants.SCREENHEIGHT + 200;
+
+        float oiseauHeight = MyConstants.SCREENWIDTH / 12f;
+        float oiseauWidth = oiseauHeight * (396f / 500f);
 
         for (int i = 0; i < 7; i++)
         {
-            int firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
-            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, (MyConstants.SCREENWIDTH / 12f) * (396f / 500f), MyConstants.SCREENWIDTH / 12f);
+            float firstPositionOiseauXNew = firstPositionOiseauX + (i * 250);
+            UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, oiseauWidth, oiseauHeight);
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
             myCorrectionAndPauseGeneral.addElements(unOiseau);

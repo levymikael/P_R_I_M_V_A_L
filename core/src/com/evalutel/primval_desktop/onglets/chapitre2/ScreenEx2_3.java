@@ -85,7 +85,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         resultatExercice = new UnResultat("Primval", 2, 3, 0, ongletTitre, 18, 0, dateTest, 0, 0, 0, 123);
 
 
-//        float widthCalculette = validusAnimated.getWidth() * 1.2f;
         float widthCalculette = MyConstants.SCREENWIDTH / 6.5f;
         float hauteurCalculette = (widthCalculette * 362f / 355f) * 1.2f;
         float positionCalculetteX = MyConstants.SCREENWIDTH - widthCalculette - (MyConstants.SCREENWIDTH / 200f);
@@ -97,7 +96,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         myCorrectionAndPauseGeneral.addElements(calculetteView);
 
         float ardoise2Size = MyConstants.SCREENWIDTH / 6.5f;
-        float posYArdoise2 = positionCalculetteY + hauteurCalculette + MyConstants.SCREENHEIGHT / 50f;
+        float posYArdoise2 = MyConstants.SCREENHEIGHT / 2f - ((ardoise2Size * 1.2f) / 2);
 
         uneArdoise2 = new UneArdoise2(stage, "", calculetteView.positionX, posYArdoise2, ardoise2Size);
         allDrawables.add(uneArdoise2);

@@ -48,7 +48,7 @@ public class BoutonChapitres implements Screen
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/comic_sans_ms.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = screenWidth / 70;
+        parameter.size = screenWidth / 60;
         BitmapFont bitmapFont = generator.generateFont(parameter);
         generator.dispose();
 

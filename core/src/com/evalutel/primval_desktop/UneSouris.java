@@ -14,9 +14,8 @@ public class UneSouris extends AnimationImageNew implements MyDrawInterface, MyC
 
     public UneSouris(int startPositionX, int startPositionY, float animationWidth)
     {
-        super("Images/EnonceUIElements/doigt_neww.png", startPositionX, startPositionY, animationWidth, animationWidth);
+        super("Images/EnonceUIElements/Curseur souris inactif.png", startPositionX, startPositionY, animationWidth, animationWidth);
         imageWidthInit = animationWidth;
-
 
         Texture imgAux = new Texture("Images/EnonceUIElements/Curseur souris inactif.png");
         imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -32,8 +31,8 @@ public class UneSouris extends AnimationImageNew implements MyDrawInterface, MyC
     {
         imageUp();
 
-        float deplacemenNewY = (deplacementEnY - (animationHeight * .8f));
-        float deplacemenNewX = (deplacementEnX - (animationWidth * .4f));
+        float deplacemenNewY = (deplacementEnY - (animationHeight /** .8f*/));
+        float deplacemenNewX = (deplacementEnX/* - (animationWidth * .4f)*/);
 
         animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext, 1f / 6f);
     }
@@ -42,8 +41,8 @@ public class UneSouris extends AnimationImageNew implements MyDrawInterface, MyC
     {
         imageDown();
 
-        float deplacemenNewY = ((deplacementEnY) - (animationHeight * 0.9f));
-        float deplacemenNewX = (deplacementEnX - (animationWidth * .4f));
+        float deplacemenNewY = ((deplacementEnY) - (animationHeight * .8f));
+        float deplacemenNewX = (deplacementEnX - (animationWidth * .2f));
 
 
         animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext, 1f / 6f);

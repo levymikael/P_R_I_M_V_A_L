@@ -31,7 +31,7 @@ public class LigneTableauxResultsChapitre
     static long durationPerChapter, durationPerExercice = 0;
 
 
-    public static Table getLigne(MyTextButton button, String ongletTitre, /*Texture texture,*/ /*String borderColor,*/ int chapitre, int[] arrayBareme, BitmapFont bitmapFontArial)
+    public static Table getLigne(MyTextButton button, String ongletTitre, int chapitre, int[] arrayBareme, BitmapFont bitmapFontArial)
     {
         Table container = new Table();
         Table table = new Table();
@@ -107,22 +107,22 @@ public class LigneTableauxResultsChapitre
         noteTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
         noteTable.add(labelNotes).height(screenHeight / 25f)/*.width(screenWidth / 10f).padLeft(screenWidth / 20f).align(Align.center)*/;
 
-        Texture triangleDown = new Texture(Gdx.files.internal("Images/Sommaire/arrow.png"));
-//        Texture triangleDown = new Texture(Gdx.files.internal("Images/Sommaire/Flêche actif.png"));
+        Texture triangleDown = new Texture(Gdx.files.internal("Images/Sommaire/sort_down.png"));
         triangleDown.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+float labelWidth = screenWidth / 9f;
 
-        table.add(new Image(triangleDown)).height(button.getWidth() * 0.7f).width(button.getWidth() * 0.5f).padLeft(screenWidth / 50f).padTop(screenHeight / 100).padBottom(screenHeight / 100);
+        table.add(new Image(triangleDown)).height(button.getWidth()).width(button.getWidth()).padLeft(screenWidth / 75f).padTop(screenHeight / 100f).padBottom(screenHeight / 100f);
         table.add(button).height(button.getHeight()).width(button.getWidth()).padLeft(screenWidth / 80f);
-        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * .65f)).padLeft(screenWidth / 45f)/*.padRight(screenWidth / 25f)*/;
-        table.add(durationTable).width(screenWidth / 9f).padRight(screenWidth / 40f);
-        table.add(noteTable).width(screenWidth / 8.5f).padRight(screenWidth / 40f);
+        table.add(labelOnglet).width((MyConstants.SCREENWIDTH * .62f)).padLeft(screenWidth / 45f)/*.padRight(screenWidth / 25f)*/;
+        table.add(durationTable).width(labelWidth).padRight(screenWidth / 40f);
+        table.add(noteTable).width(labelWidth).padRight(screenWidth / 40f);
 
 
         float lineHeight = MyConstants.SCREENHEIGHT / 20f;
         float buttonSize = lineHeight / 10;
         int fontSizeOnglet = MyConstants.SCREENHEIGHT / 60;
-        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 50;
+        float paddingInterOnglets = -MyConstants.SCREENHEIGHT / 50f;
 
         container.add(table).height(MyConstants.SCREENHEIGHT / 20f).width(screenWidth);
 
@@ -131,7 +131,7 @@ public class LigneTableauxResultsChapitre
     }
 
 
-    public static String MillisToDuration(long seconds)
+    private static String MillisToDuration(long seconds)
     {
         int sec = (int) seconds % 60;
         int min = (((int) seconds) / 60) % 60;

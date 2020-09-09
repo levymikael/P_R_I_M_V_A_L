@@ -74,7 +74,7 @@ public class MrTemps implements MyDrawInterface
         Table temps = new Table();
         Table border = new Table();
 
-        container.setPosition(MyConstants.SCREENWIDTH - itemWidth * 3f, 21f * screenHeight / 25f);
+        container.setPosition(MyConstants.SCREENWIDTH - itemWidth * 3.1f, 21f * screenHeight / 25f);
 
         int widthButton = 500;
         int heightButton = widthButton / 4;

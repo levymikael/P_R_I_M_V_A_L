@@ -40,7 +40,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
     private UnePlancheNew planche1;
 
-    private int cptOiseau, cptBille = 0;
+    private int cptOiseau = 0;
     private int randNumOiseau;
 
     private TextButton.TextButtonStyle styleTest;
@@ -218,7 +218,15 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new DisplayOiseaux(2000, 0);
 
             activiteView.setTextActivite("1. Place autant de billes que d'oiseaux que tu vois tape ce nombre au clavier puis valide");
-            metrologue.metrologuePlaySound("Sounds/onglet_1_5/metrologue - Instructions onglet 1_5.mp3", nextEtape);
+
+            if (questionCourante == 0)
+            {
+                metrologue.metrologuePlaySound("Sounds/onglet_1_5/metrologue - Instructions onglet 1_5.mp3", nextEtape);
+            }
+            else
+            {
+                timer.schedule(new DisplayOiseaux(2000, 0), 0);
+            }
         }
     }
 
@@ -396,7 +404,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             try
             {
                 value = Integer.parseInt(txtTape);
-            } catch (Exception e)
+            } catch (Exception ignored)
             {
 
             }
@@ -429,6 +437,8 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                     calculetteView.setActive(false);
                     validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2_000));
                     failedAttempts = 0;
+                    planche1.setAllBillesInactive();
+
 
                     addPierres(1);
                 }
@@ -651,7 +661,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         {
             uneSouris.setVisible(false);
             nbInput = String.valueOf(randNumOiseau);
-            boolean afterCorrection = true;
+//            boolean afterCorrection = true;
             timer.schedule(new NextQuestion(500), 500);
             styleTest.up = drawableAux;
             planche1.setAllBillesActive();
@@ -672,7 +682,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         {
             calculetteView.textRemove();
 
-            boolean isAllActive = true;
+//            boolean isAllActive = true;
 
             if (questionCourante == 8)
             {

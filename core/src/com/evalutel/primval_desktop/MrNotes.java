@@ -85,7 +85,7 @@ public class MrNotes implements MyDrawInterface
 
         container.add(mrNotes).height(itemHeight).width(itemWidth);
         container.row();
-        container.add(border);
+        container.add(border).padRight(screenWidth / 50f);
 
         stage.addActor(container);
 

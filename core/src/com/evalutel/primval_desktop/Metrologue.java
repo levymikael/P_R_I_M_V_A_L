@@ -23,12 +23,12 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
     protected boolean isPaused = true;
     private TextureRegion defaultTextureRegion;
 
-    Music music;
+    private Music music;
 
-    static String directory = System.getProperty("user.dir");
+    private static String directory = System.getProperty("user.dir");
     static FileHandle fh = Gdx.files.absolute(directory + "/Images/Metrologue");
 
-    public Metrologue(int startPositionX, int startpositionY, int animationWidth, int animationHeight, MyTimer timer)
+    public Metrologue(float startPositionX, float startpositionY, float animationWidth, float animationHeight, MyTimer timer)
     {
         super(getAnimationMetrologue(), startPositionX, startpositionY, animationWidth, animationHeight);
 

@@ -48,11 +48,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
     protected long startTime, endTime, seconds, dateTest;
 
-
-    private ScreeenBackgroundImage bandeauHaut;
-    private ScreeenBackgroundImage fondSommaire;
-    private MrNotes mrNotes;
-    private MrTemps mrTemps;
+    private ScreeenBackgroundImage bandeauHaut, fondSommaire;
 
     protected ArrayList<MyDrawInterface> allDrawables = new ArrayList<>();
     //    ArrayList<Table> tableArrayList = new ArrayList<>();
@@ -60,12 +56,12 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //    ArrayList<HorizontalGroup> arrayList2 = new ArrayList<>();
     ArrayList<Table> arrayList2 = new ArrayList<>();
 
-    MyButtonRetour myButtonRetour;
+    private MyButtonRetour myButtonRetour;
 
 //    TextureRegionDrawable textureRegionDrawableBg;
 //    TextureRegionDrawable orangeBg;
 
-    public float screenWidth;
+    private float screenWidth, bandeauHautY;
 
     private BitmapFont bitmapFontZAP, bitmapFontFRHND, bitmapFontArial, bitmapFontArialBold, bitmapFontSegoe;
 
@@ -115,7 +111,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
     TextButton.TextButtonStyle buttonStyleRed, buttonStyleBlue;
 
 
-    public Screen_All_Results(Game game)
+    Screen_All_Results(Game game)
     {
         this.game = game;
 
@@ -187,9 +183,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Texture textureUpRed = new Texture(Gdx.files.internal("Images/red_circle.png"));
         textureUpRed.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        SpriteDrawable spriteDrawableUp = new SpriteDrawable(new Sprite(textureUpRed));
-
-        buttonStyleRed.up = spriteDrawableUp;
+        buttonStyleRed.up = new SpriteDrawable(new Sprite(textureUpRed));
 
         /*--------------------------------------buttonStyleBlue---------------------------------------*/
 
@@ -208,15 +202,15 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Texture textureUpBlue = new Texture(Gdx.files.internal("Images/blue_circle.png"));
         textureUpBlue.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        SpriteDrawable spriteDrawableUpBlue = new SpriteDrawable(new Sprite(textureUpBlue));
-
-        buttonStyleBlue.up = spriteDrawableUpBlue;
+        buttonStyleBlue.up = new SpriteDrawable(new Sprite(textureUpBlue));
 
         /*-------------------------------------------------------------------------------------------*/
 
         allDrawables = new ArrayList<>();
 
         bandeauHaut = new ScreeenBackgroundImage("Images/Pages Chapitres/Bandeau haut.jpg");
+
+        bandeauHautY = (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f);
 
         fondSommaire = new ScreeenBackgroundImage("Images/Backgrounds/web_hi_res_512.png");
 
@@ -229,9 +223,11 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         float chapterTitleWidth = MyConstants.SCREENWIDTH / 2.5f;
         float chapterTitleHeight = chapterTitleWidth * (45f / 365f);
 
+        float chapterTitleYPosition = bandeauHautY + ((MyConstants.SCREENHEIGHT - bandeauHautY) / 2f) - (chapterTitleHeight / 2);
+
         resultatsObtenusTitle.setBackground(new SpriteDrawable(new Sprite(resultatsObtenus)));
         resultatsObtenusTitle.setSize(chapterTitleWidth, chapterTitleHeight);
-        resultatsObtenusTitle.setPosition(MyConstants.SCREENWIDTH / 2f - chapterTitleWidth / 2, MyConstants.SCREENHEIGHT - (chapterTitleHeight * 1.3f));
+        resultatsObtenusTitle.setPosition(MyConstants.SCREENWIDTH / 2f - chapterTitleWidth / 2, chapterTitleYPosition);
 
 
         stage.addActor(resultatsObtenusTitle);
@@ -242,8 +238,8 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 //        nomChapitre.setPosition(MyConstants.SCREENWIDTH / 2 - MyConstants.SCREENWIDTH / 12, 9.2f * MyConstants.SCREENHEIGHT / 10);
 //        stage.addActor(nomChapitre);
 
-        mrTemps = new MrTemps(stage, 0);
-        mrNotes = new MrNotes(stage, 0);
+        MrTemps mrTemps = new MrTemps(stage, 0);
+        MrNotes mrNotes = new MrNotes(stage, 0);
 
         textureCours = new Texture(Gdx.files.internal("Images/Pages onglets/Cours - onglets.png"));
         textureCours.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -2567,7 +2563,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         batch.setTransformMatrix(new Matrix4());
 
         fondSommaire.myDraw2(batch, 0, 0, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT);
-        bandeauHaut.myDraw2(batch, 0, (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f), MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
+        bandeauHaut.myDraw2(batch, 0, bandeauHautY, MyConstants.SCREENWIDTH, MyConstants.SCREENHEIGHT / 6f);
         for (int i = 0; i < allDrawables.size(); i++)
         {
             MyDrawInterface newItem = allDrawables.get(i);

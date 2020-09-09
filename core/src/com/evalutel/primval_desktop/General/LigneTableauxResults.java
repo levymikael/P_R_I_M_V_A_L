@@ -98,7 +98,7 @@ public class LigneTableauxResults
 //        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pixmapBg))));
 
         table.add(button).height(MyConstants.SCREENHEIGHT / 30f).width(MyConstants.SCREENHEIGHT / 30f).padLeft(screenWidth / 25f).padRight(screenWidth / 80f);
-        table.add(labelOnglet).width((screenWidth * 0.62f)).padRight(screenWidth / 20f);
+        table.add(labelOnglet).width((screenWidth * 0.62f)).padRight(screenWidth / 18f);
         table.add(new Image(texture)).width(screenWidth / 70f).height(screenWidth / 70f).padRight(screenWidth / 60f);
         table.add(labelDuration).width(screenWidth / 11f).padRight(screenWidth / 18f).padLeft(screenWidth / 90f);
         table.add(labelNotes).width(screenWidth / 8f);

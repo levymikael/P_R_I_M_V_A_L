@@ -163,19 +163,21 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Table evalutelMotto = evalutelMotto();
 
+        Texture chapitresLogo = new Texture(Gdx.files.internal("Images/Sommaire/Chapitres.png"));
+        chapitresLogo.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        Label labelChapterTitle = new Label("Chapitres", labelStyleBlueFRHND);
-        labelChapterTitle.setFontScale(2.5f);
-        Table chapterTitle = new Table();
-        chapterTitle.add(labelChapterTitle);
+        Table chapterLogo = new Table();
+        chapterLogo.setBackground(new SpriteDrawable(new Sprite(chapitresLogo)));
 
-        chapterTitle.padTop(MyConstants.SCREENHEIGHT / 50f);
+
+        float chapterLogoWidth = MyConstants.SCREENWIDTH / 6f;
+        float chapterLogoHeight = chapterLogoWidth * 41f / 161f;
 
         Table chaptersListView = chaptersListView();
 
-        table.add(evalutelMotto).width(MyConstants.SCREENWIDTH - (MyConstants.SCREENWIDTH / 19f)).align(Align.center).padTop(MyConstants.SCREENWIDTH / 80f);
+        table.add(evalutelMotto).width(MyConstants.SCREENWIDTH).align(Align.center).padTop(MyConstants.SCREENHEIGHT / 50f);
         table.row();
-        table.add(chapterTitle).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 60f);
+        table.add(chapterLogo).width(chapterLogoWidth).height(chapterLogoHeight).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 60f).padTop(MyConstants.SCREENHEIGHT / 50f);
         table.row();
         table.add(chaptersListView).width(MyConstants.SCREENWIDTH).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 20f);
 
@@ -232,7 +234,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 //        textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(lightBlueRoundedBackground2)));
 
         float paddingMottoDetailsBorder = /*MyConstants.SCREENWIDTH / 1000f*/2;
-        float heightlabelTitle = 100;
+        float heightlabelTitle = MyConstants.SCREENHEIGHT / 20f;
         float tableWidth = MyConstants.SCREENWIDTH / 4f;
         float heightTable = MyConstants.SCREENHEIGHT / 5.5f;
         float paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 70f;
@@ -259,11 +261,13 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         Table manipulerTable = new Table();
         Label labelManipulerTitle = new Label("MANIPULER", labelStyleBlueArialBold);
+        labelManipulerTitle.setAlignment(Align.top);
         Label labelManipulerText = new Label("Des objets interactifs et ludiques sont conçus pour permettre à l'enfant de comprendre la numération , les opérations arithmétiques et les notions de base de géométrie.", labelStyleBlueArial);
         labelManipulerText.setWrap(true);
 
         manipulerTable.add(labelManipulerTitle).height(heightlabelTitle).padBottom(-MyConstants.SCREENHEIGHT / 70f);
         manipulerTable.row();
+        manipulerTable.debug();
         //manipulerTable.add(labelManipulerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 40f).align(Align.top);
         manipulerTable.add(labelManipulerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 40f).align(Align.top).fillY();
 //        manipulerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
