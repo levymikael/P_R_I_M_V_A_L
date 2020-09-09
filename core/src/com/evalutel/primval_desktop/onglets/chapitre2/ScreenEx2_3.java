@@ -167,19 +167,17 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            MyTimer.TaskEtape nextEtape = new DiceStep(3_000);
+            MyTimer.TaskEtape nextEtape = new DiceStep(3_000, 1_500);
 
             metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Total dun lancer de 2 des.mp3", nextEtape);
-
-
         }
     }
 
     private class DiceStep extends MyTimer.TaskEtape
     {
-        private DiceStep(long durMillis)
+        private DiceStep(long durMillis, long delay)
         {
-            super(durMillis);
+            super(durMillis, delay);
         }
 
         @Override
@@ -197,9 +195,9 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             dice1.setActive(true);
             dice1.diceRenewal = diceRenewal;
 
-            MyTimer.TaskEtape nextEtape = new EtapeInstructionArdoise1(3_000, 500);
+//            MyTimer.TaskEtape nextEtape = new EtapeInstructionArdoise1(3_000, 500);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Touche les des pour les faire tourner.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Touche les des pour les faire tourner.mp3");
 
 
         }
@@ -1172,9 +1170,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
                 default:
                     break;
             }
-
         }
-
     }
 
 
@@ -1195,7 +1191,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             }
             else
             {
-                timer.schedule(new PresentationMetrologue(1_500), 0);
+                timer.schedule(new DiceStep(3_500, 1_500), 0);
             }
         }
     }
@@ -1235,7 +1231,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
             dice1.setActive(false);
 
-            timer.schedule(new DiceStep(5_000), 0);
+            timer.schedule(new EtapeInstructionArdoise1(4_000, 2_000), 0);
         }
         return true;
     }
