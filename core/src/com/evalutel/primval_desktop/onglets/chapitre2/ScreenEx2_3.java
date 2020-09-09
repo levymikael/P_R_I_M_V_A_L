@@ -167,17 +167,10 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            if (diceRenewal == 0)
-            {
-                activiteView.addTextActivite("Touche les dés pour les faire tourner");
-            }
-            else
-            {
-                activiteView.setTextActivite("Touche les dés pour les faire tourner");
-            }
+            MyTimer.TaskEtape nextEtape = new DiceStep(3_000);
 
-            dice1.setActive(true);
-            dice1.diceRenewal = diceRenewal;
+            metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Total dun lancer de 2 des.mp3", nextEtape);
+
 
         }
     }
@@ -192,7 +185,23 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            timer.schedule(new EtapeInstructionArdoise1(3_000, 500), 0);
+            if (diceRenewal == 0)
+            {
+                activiteView.addTextActivite("Touche les dés pour les faire tourner");
+            }
+            else
+            {
+                activiteView.setTextActivite("Touche les dés pour les faire tourner");
+            }
+
+            dice1.setActive(true);
+            dice1.diceRenewal = diceRenewal;
+
+            MyTimer.TaskEtape nextEtape = new EtapeInstructionArdoise1(3_000, 500);
+
+            metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Touche les des pour les faire tourner.mp3", nextEtape);
+
+
         }
     }
 
@@ -207,6 +216,8 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             activiteView.addTextActivite("Tape au clavier le nombre de points sur le premier dé puis valide.");
+            metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Tape clavier premier de.mp3");
+
             calculetteView.setActive(true);
 
             validusAnimated.etapeCorrection = new PressValidate1(0);
@@ -262,14 +273,14 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
                 {
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
                 }
-                else if (value < dice1.getLastDice1value())
-                {
-                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus - Tu'es trompe manque des billes planche.mp3");
-                }
-                else if (value > dice1.getLastDice1value())
-                {
-                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
-                }
+//                else if (value < dice1.getLastDice1value())
+//                {
+//                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus - Tu'es trompe manque des billes planche.mp3");
+//                }
+//                else if (value > dice1.getLastDice1value())
+//                {
+//                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
+//                }
                 else
                 {
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
@@ -480,7 +491,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         {
             MyTimer.TaskEtape nextEtape = new InputClavier2(2_000);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_PlaceSurLaDeuxiemePlancheAutantDebIlles.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Tape clavier deuxieme de.mp3", nextEtape);
             activiteView.addTextActivite("Tape au clavier le nombre de points sur le deuxième dé puis valide.");
         }
     }
@@ -552,14 +563,14 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
                 {
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
                 }
-                else if (value < dice1.getLastDice2value())
-                {
-                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus - Tu'es trompe manque des billes planche.mp3");
-                }
-                else if (value > dice1.getLastDice2value())
-                {
-                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
-                }
+//                else if (value < dice1.getLastDice2value())
+//                {
+//                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus - Tu'es trompe manque des billes planche.mp3");
+//                }
+//                else if (value > dice1.getLastDice2value())
+//                {
+//                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
+//                }
                 else
                 {
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
@@ -731,7 +742,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             uneSouris.setVisible(false);
-//            nbInput = String.valueOf(numOiseauxBranche2);
             timer.schedule(new NextQuestion2(500), 500);
             styleTest.up = drawableAux;
             failedAttempts = 0;
@@ -751,10 +761,12 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         {
             calculetteView.textRemove();
 
-            timer.schedule(new InputClavier3(500), 0);
+
+            MyTimer.TaskEtape nextEtape = new InputClavier3(500);
+
 
             activiteView.addTextActivite("Tape au clavier le total des points sur les deux dés puis valide.");
-
+            metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Tape clavier total deux des.mp3", nextEtape);
             nbInput = null;
 
             diceTotal = dice1.getLastDice1value() + dice1.getLastDice2value();
@@ -828,10 +840,10 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
                     addPierres(1);
                     questionCourante++;
                 }
-                else if (value == -1)
-                {
-                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
-                }
+//                else if (value == -1)
+//                {
+//                    validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
+//                }
                 else
                 {
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
@@ -1007,7 +1019,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             timer.schedule(new ResetScreen(1_000), 500);
             styleTest.up = drawableAux;
             failedAttempts = 0;
-
         }
     }
 
@@ -1023,7 +1034,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             MyTimer.TaskEtape nextEtape = new Annonce1(1_500);
-
 
             solutionView.addTextActivite(dice1.getLastDice1value() + " + " + dice1.getLastDice2value() + " = " + diceTotal);
             metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_JAnnonceLAddition.mp3", nextEtape);
@@ -1103,7 +1113,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
                     break;
                 case 4:
                     metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/QuatreEgal.mp3", nextEtape);
-
                     break;
                 case 5:
                     metrologue.metrologuePlaySound("Sounds/Onglet2_2/Annonce_Resultat_Audio/CinqEgal.mp3", nextEtape);
@@ -1187,7 +1196,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             else
             {
                 timer.schedule(new PresentationMetrologue(1_500), 0);
-
             }
         }
     }
@@ -1228,9 +1236,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             dice1.setActive(false);
 
             timer.schedule(new DiceStep(5_000), 0);
-
         }
-
         return true;
     }
 
