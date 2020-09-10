@@ -434,10 +434,14 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
 
                     validusAnimated.isActive = false;
                     calculetteView.setActive(false);
-                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2_000));
+                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(1_000));
                     failedAttempts = 0;
 
                     addPierres(1);
+
+                    uneSouris.setVisible(true);
+                    uneSouris.imageUp();
+
                 }
                 else if (gateauAnniversaire.getNumberBougies() == 0)
                 {
@@ -471,6 +475,26 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
+            if (gateauAnniversaire.getNumberBougies() < randNumPastille)
+            {
+                MyTimer.TaskEtape nextEtape = new EtapeRectification(1_000);
+
+                float sacDeBougiesX = sacDeBougies.currentPositionX + sacDeBougies.getWidth() / 2;
+                float sacDeBougiesY = sacDeBougies.currentPositionY + sacDeBougies.getHeight() / 2;
+
+                uneSouris.cliqueTo(durationMillis, sacDeBougiesX, sacDeBougiesY, nextEtape, 1_000);
+            }
+            else if (gateauAnniversaire.getNumberBougies() > randNumPastille)
+            {
+
+                MyTimer.TaskEtape nextEtape = new EtapeRectification(1_000);
+
+                float gateauAnniversaireeX = gateauAnniversaire.currentPositionX + gateauAnniversaire.getWidth() / 2;
+                float gateauAnniversaireeY = gateauAnniversaire.currentPositionY + gateauAnniversaire.getHeight() / 2;
+
+                uneSouris.cliqueTo(durationMillis, gateauAnniversaireeX, gateauAnniversaireeY, nextEtape, 2_000);
+            }
+
             timer.schedule(new AddBougies(1_000), 1_000);
         }
     }
@@ -491,15 +515,12 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
                 bougieRectification = sacDeBougies.getBougieAndRemove();
                 bougieRectification.setVisible(true);
                 gateauAnniversaire.addBougieAndOrganize(bougieRectification);
-                timer.schedule(new EtapeRectification(500), 500);
             }
             else if (gateauAnniversaire.getNumberBougies() > randNumPastille)
             {
                 bougieRectification = gateauAnniversaire.getLastBougie();
                 gateauAnniversaire.removeBougie(bougieRectification);
                 sacDeBougies.addBougieToReserve(bougieRectification);
-
-                timer.schedule(new EtapeRectification(500), 500);
             }
             else if (gateauAnniversaire.getNumberBougies() == randNumPastille)
             {
@@ -857,7 +878,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            String solutionNumber = Integer.toString(questionCourante ) + ". ";
+            String solutionNumber = Integer.toString(questionCourante) + ". ";
             switch (randNumPastille)
             {
                 case 1:
