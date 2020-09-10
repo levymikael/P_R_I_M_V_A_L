@@ -67,7 +67,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
     Drawable drawableAux;
 
 
-     ScreenEx1_6(final Game game, String ongletTitre)
+    ScreenEx1_6(final Game game, String ongletTitre)
     {
         super(game, 1, 6, true, 9);
 
@@ -236,7 +236,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new EtapeInstruction(2_000, 1_000);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_onglet6_Ungateaupourplusieursanniversaires.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_onglet6_Ungateaupourplusieursanniversaires.mp3", nextEtape);
         }
     }
 
@@ -258,7 +258,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             if (questionCourante == 0)
             {
                 activiteView.setTextActivite("La famille Dubonheur est réunie pour fêter l'anniversaire de tous les cousins et cousines");
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_onglet6_lafamilleDubonheur.mp3", new BirthdayKiDPicDisplay(1_000));
+                metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_onglet6_lafamilleDubonheur.mp3", new BirthdayKiDPicDisplay(1_000));
             }
             else
             {
@@ -306,54 +306,54 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             {
                 case 1:
                     activiteView.setTextActivite("Lucas ne marche pas encore, et il accourt à 4 pattes pour souffler sa 1ère bougie. Lucas a 1 an");
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_onglet6_LucasNeMarchePasEncore.mp3", nextEtape);
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_onglet6_LucasNeMarchePasEncore.mp3", nextEtape);
                     break;
 
                 case 2:
                     activiteView.setTextActivite("Emma est fière car cette année elle va souffler ses 2 bougies comme une grande. L'année dernière elle avait eu du mal avec la 1ère. Emma a 2 ans");
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_Onglet6_EmmaEstFierecarcetteannee.mp3", nextEtape);
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_Onglet6_EmmaEstFierecarcetteannee.mp3", nextEtape);
                     break;
 
                 case 3:
                     activiteView.setTextActivite("Arthur est très ému, car tout le monde le regarde, mais il souffle vaillamment ses 3 bougies. Arthur a 3 ans");
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_onglet6_Arthuresttresemu.mp3", nextEtape);
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_onglet6_Arthuresttresemu.mp3", nextEtape);
                     break;
 
                 case 4:
                     activiteView.setTextActivite("Lina est turbulente, après avoir renversé la tasse de sa cousine, elle se dirige vers son gâteau et ses 4 bougies, Lina a 4 ans");
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_Onglet6_LinaestTurbulente.mp3", nextEtape);
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_Onglet6_LinaestTurbulente.mp3", nextEtape);
                     break;
 
                 case 5:
                     activiteView.setTextActivite("Héloïse dit à sa poupée qu'elle est maintenant une grande fille de 5 ans. Héloïse a 5 ans");
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_onglet6_Heloiseditasapoupee.mp3", nextEtape);
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_onglet6_Heloiseditasapoupee.mp3", nextEtape);
                     break;
 
                 case 6:
                     activiteView.setTextActivite("Théo est fier, car à 6 ans il va bientôt aller à la grande école. Théo a 6 ans");
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_Onglet6_Theoestfiercara6ans.mp3", nextEtape);
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_Onglet6_Theoestfiercara6ans.mp3", nextEtape);
                     break;
 
                 case 7:
                     activiteView.setTextActivite("Zoé pose son petit chat dans son panier afin de pouvoir souffler tranquillement ses 7 bougies. Zoé a 7 ans");
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_Onglet6_Zoeposesonpetitchat.mp3", nextEtape);
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_Onglet6_Zoeposesonpetitchat.mp3", nextEtape);
                     break;
 
                 case 8:
                     activiteView.setTextActivite("Hugo est bagarreur, après un croche-pied à son petit frère, il avance pour souffler ses 8 bougies. Hugo a 8 ans");
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_Onglet6_Hugoestbagarreur.mp3", nextEtape);
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_Onglet6_Hugoestbagarreur.mp3", nextEtape);
                     break;
 
                 case 9:
                     activiteView.setTextActivite("Chloé est très inquiète, elle se demande si elle va pouvoir souffler ses 9 bougies d'un seul coup. Chloé a 9 ans");
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_7/chap1_onglet6_ChloeEstTresInquiete.mp3", nextEtape);
+                    metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_onglet6_ChloeEstTresInquiete.mp3", nextEtape);
                     break;
 
                 default:
                     break;
             }
 
-            sacDeBougies.setActive(false);
+//            sacDeBougies.setActive(false);
         }
     }
 
@@ -380,7 +380,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
             activiteView.addTextActivite("Tape avec ton doigt sur la boite de bougies. Une bougie se posera sur le gâteau. Tape sur le clavier le nombre de bougies que tu as placé puis Valide. Tape sur une bougie sur le gâteau si tu veux la retirer");
             if (questionCourante == 0)
             {
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_7/Chap1_onglet6_Tapeavectondoigt.mp3");
+                metrologue.metrologuePlaySound("Sounds/Onglet_1_6/Chap1_onglet6_Tapeavectondoigt.mp3");
             }
 
             validusAnimated.etapeCorrection = new PressValidate(0);
@@ -445,11 +445,11 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
                 }
                 else if (gateauAnniversaire.getNumberBougies() < randNumPastille)
                 {
-                    validusAnimated.validusPlaySound("Sounds/Onglet_1_7/Chap1_ong6_Tutestrompecliquesurlaboitepourajouterdesbougies.mp3");
+                    validusAnimated.validusPlaySound("Sounds/Onglet_1_6/Chap1_ong6_Tutestrompecliquesurlaboitepourajouterdesbougies.mp3");
                 }
                 else if (gateauAnniversaire.getNumberBougies() > randNumPastille)
                 {
-                    validusAnimated.validusPlaySound("Sounds/Onglet_1_7/Chap1_Onglet6_tutestrompe,cliquesurlegateaupourenleverdesbougies.mp3");
+                    validusAnimated.validusPlaySound("Sounds/Onglet_1_6/Chap1_Onglet6_tutestrompe,cliquesurlegateaupourenleverdesbougies.mp3");
                 }
                 else
                 {
@@ -857,34 +857,35 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
+            String solutionNumber = Integer.toString(questionCourante ) + ". ";
             switch (randNumPastille)
             {
                 case 1:
-                    solutionView.addTextActivite("Lucas a 1 an");
+                    solutionView.addTextActivite(solutionNumber + "Lucas a 1 an");
                     break;
                 case 2:
-                    solutionView.addTextActivite("Emma a 2 ans");
+                    solutionView.addTextActivite(solutionNumber + "Emma a 2 ans");
                     break;
                 case 3:
-                    solutionView.addTextActivite("Arthur a 3 ans");
+                    solutionView.addTextActivite(solutionNumber + "Arthur a 3 ans");
                     break;
                 case 4:
-                    solutionView.addTextActivite("Lina a 4 ans");
+                    solutionView.addTextActivite(solutionNumber + "Lina a 4 ans");
                     break;
                 case 5:
-                    solutionView.addTextActivite("Héloise a 5 ans");
+                    solutionView.addTextActivite(solutionNumber + "Héloise a 5 ans");
                     break;
                 case 6:
-                    solutionView.addTextActivite("Théo a 6 ans");
+                    solutionView.addTextActivite(solutionNumber + "Théo a 6 ans");
                     break;
                 case 7:
-                    solutionView.addTextActivite("Zoé a 7 ans");
+                    solutionView.addTextActivite(solutionNumber + "Zoé a 7 ans");
                     break;
                 case 8:
-                    solutionView.addTextActivite("Hugo a 8 ans");
+                    solutionView.addTextActivite(solutionNumber + "Hugo a 8 ans");
                     break;
                 case 9:
-                    solutionView.addTextActivite("Chloé a 9 ans");
+                    solutionView.addTextActivite(solutionNumber + "Chloé a 9 ans");
                     break;
                 default:
                     break;

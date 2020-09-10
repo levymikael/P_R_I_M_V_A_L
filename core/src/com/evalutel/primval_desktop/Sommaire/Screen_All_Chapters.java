@@ -247,7 +247,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         evalutelMotto.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(bgPixmap))));
 
         evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails).align(Align.center).height(heightlabelTitle);
-        evalutelMotto.padTop(paddingCoteEvalutelMotto).padRight(paddingCoteEvalutelMotto);
+        evalutelMotto.padTop(paddingCoteEvalutelMotto);
         evalutelMotto.row();
 
         Table evalutelMottoDetails = new Table();
@@ -270,12 +270,12 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table borderManipuler = new Table();
         borderManipuler.pad(paddingMottoDetailsBorder);
 
-        Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmBlue.setColor(MyConstants.bluePrimval2);
-        pmBlue.fill();
+        Pixmap pmBlueBorder = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pmBlueBorder.setColor(MyConstants.bluePrimval2);
+        pmBlueBorder.fill();
 
-        borderManipuler.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
-        borderManipuler.add(manipulerTable).fillY();
+        borderManipuler.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlueBorder))));
+        borderManipuler.add(manipulerTable);
         borderManipuler.pad(2);
 
 
@@ -328,7 +328,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Table border = new Table();
         border.pad(2);
 //        border.setBackground(new SpriteDrawable(new Sprite(new Texture(blueRoundedBackground))));
-        border.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
+        border.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlueBorder))));
 
         border.add(evalutelMotto);
 
