@@ -22,18 +22,14 @@ public class ListExercicesActiviteViewChap1 implements MyDrawInterface
     public float screenWidth;
     private boolean isVisible = true;
 
-    private Game game;
 
-
-     ListExercicesActiviteViewChap1(Stage stage, final Game game)
+    ListExercicesActiviteViewChap1(Stage stage, final Game game)
     {
         screenWidth = MyConstants.SCREENWIDTH;
         final int screenHeight = MyConstants.SCREENHEIGHT;
 
-        this.game = game;
-
         final String label1 = "Les nombres de 1 à 9. Badix, Métrologue et Validus";
-        final String label2 = "Faire correspondre des billes à des oiseaux";
+        final String label2 = "Faire correspondre des billes à des oiseaux, de 1 à 9";
         final String label3 = "Écriture des chiffres de 1 à 9";
         final String label4 = "Prononciation des chiffres de 1 à 9";
         final String label5 = "Faire correspondre des billes à des oiseaux et taper leur nombre";

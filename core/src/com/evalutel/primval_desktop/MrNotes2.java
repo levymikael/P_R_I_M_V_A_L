@@ -67,19 +67,23 @@ public class MrNotes2 implements MyDrawInterface
 
         Table container = new Table();
         container.setSize(logoWidth, logoHeight);
-        container.setPosition(positionXNew, positionY);
+
+
 
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
         if (screen.equals("general"))
         {
             container.add(labelNotes).padLeft(logoWidth/3f).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
+            container.setPosition(positionXNew, positionY);
+
         }
         else
         {
             container.add(labelNotes).padLeft(logoWidth/3f).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
+            container.setPosition(MyConstants.SCREENWIDTH*.98f-logoWidth, positionY);
+
         }
 
-//        container.debug();
         stage.addActor(container);
     }
 

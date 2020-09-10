@@ -160,7 +160,6 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
                 MyDataBase db = appSingleton.myDataBase;
 
                 db.insertResultat(resultatExercice);
-
             }
 
             @Override
@@ -703,11 +702,29 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             }
             else
             {
-                timer.schedule(new MoveMainToPlanche1and2(3_000, 2_500), 2_000);
+                timer.schedule(new MovingBillestoBoard3(3_000, 2_500), 3_500);
             }
         }
     }
 
+    private class MovingBillestoBoard3 extends MyTimer.TaskEtape
+    {
+        private MovingBillestoBoard3(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+
+            MyTimer.TaskEtape nextEtape = new MoveMainToPlanche1and2(1_500, 1_500);
+
+
+            metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeDeplaceToutesLesBilles.mp3", nextEtape);
+
+        }
+    }
 
     private class MoveMainToPlanche1and2 extends MyTimer.TaskEtape
     {
@@ -723,20 +740,17 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             {
                 styleTest.up = drawableAux;
 
-                float Xbille1 = billesList.get(cpt).currentPositionX + largeurBilleUnique / 2;
-                float Ybille1 = billesList.get(cpt).currentPositionY /*+ largeurBilleMultiple / 2*/;
+                float Xbille1 = billesList.get(cpt).currentPositionX + (largeurBilleMultiple / 2);
+                float Ybille1 = billesList.get(cpt).currentPositionY + (largeurBilleMultiple / 2);
 
                 MyTimer.TaskEtape nextEtape = new ClickOnBille1(500);
 
-                uneSouris.moveTo(durationMillis, Xbille1, Ybille1, nextEtape, 500);
-                if (cpt == 1)
-                {
-                    metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeDeplaceToutesLesBilles.mp3");
-                }
+                uneSouris.cliqueTo(durationMillis, Xbille1, Ybille1, nextEtape, 500);
+
             }
             else
             {
-                timer.schedule(new ClickMainToCalculette3(1_000, 500), 0);
+                timer.schedule(new MoveMaintoButton7(1_000, 2_000), 0);
             }
         }
     }
@@ -753,15 +767,17 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         public void run()
         {
             UneBille bille = billesList.get(cpt);
-            float posX = planche3.getPosition().x + (planche3.getWidth() / 2);
-            float posY = planche3.getPosition().y + (planche3.getHeight() / 2);
+            float posXMilieuPlanche = planche3.getPosition().x + (planche3.getWidth() / 2);
+            float posYMilieuPlanche = planche3.getPosition().y + (planche3.getHeight() / 2);
+            float posXMilieuPlancheBille = planche3.getPosition().x + (planche3.getWidth() / 2) - (largeurBilleMultiple / 2);
+            float posYMilieuPlancheBille = planche3.getPosition().y + (planche3.getHeight() / 2) - (largeurBilleMultiple / 2);
 
             MyTimer.TaskEtape nextEtape = new EtapeDragBille1(500, 0);
-            uneSouris.imageDown();
+//            uneSouris.imageDown();
 
-            bille.animateImage(durationMillis, true, posX, posY, nextEtape, 1_000, 1f / 6f);
+            bille.animateImage(durationMillis, true, posXMilieuPlancheBille, posYMilieuPlancheBille, nextEtape, 1_000, 1f / 6f);
 
-            uneSouris.moveTo(durationMillis, posX, posY, null, 500);
+            uneSouris.moveTo(durationMillis, posXMilieuPlanche, posYMilieuPlanche, null, 500);
         }
     }
 
@@ -780,11 +796,34 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new MoveMainToPlanche1and2(1_000, 0);
             planche3.addBilleAndOrganize(bille);
 
-            uneSouris.imageUp();
+//            uneSouris.imageUp();
 
             timer.schedule(nextEtape, 1_000);
 
             cpt++;
+        }
+    }
+
+    private class MoveMaintoButton7 extends MyTimer.TaskEtape
+    {
+        private MoveMaintoButton7(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            MyPoint buttonPosition = calculetteView.buttonPosition(7);
+
+            float posX = buttonPosition.x;
+            float posY = buttonPosition.y;
+
+            MyTimer.TaskEtape nextEtape = new ClickMainToCalculette3(1_000, 1_500);
+
+            uneSouris.moveTo(durationMillis, posX, posY, nextEtape, 0);
+
+            metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeTapeLeNombreDeBilles.mp3");
         }
     }
 
@@ -798,22 +837,17 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-            MyPoint buttonPosition = calculetteView.buttonPosition(7);
+//            MyPoint buttonPosition = calculetteView.buttonPosition(7);
 
-            float posX = buttonPosition.x;
-            float posY = buttonPosition.y;
+            timer.schedule(new MoveMainToValidate3(1_000), 2_500);
 
-            MyTimer.TaskEtape nextEtape = new MoveMainToValidate3(500);
-
-            uneSouris.cliqueTo(durationMillis, posX, posY, nextEtape, 0);
-
+            uneSouris.imageDown();
             calculetteView.textDisplay(7);
+
             styleTest = calculetteView.sept_bouton.getStyle();
 
             drawableAux = styleTest.up;
             styleTest.up = styleTest.down;
-
-            metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeTapeLeNombreDeBilles.mp3");
         }
     }
 
@@ -827,16 +861,19 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
+
+
             MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
 
-            MyTimer.TaskEtape nextEtape = new ClickOnValidate3(1_000, 1_000);
+            MyTimer.TaskEtape nextEtape = new ClickOnValidate3(1_000, 2_000);
 
             uneSouris.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
 
             styleTest.up = drawableAux;
+
         }
     }
 
@@ -850,19 +887,14 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-//            uneMain.setVisible(true);
 
             MyPoint buttonValidatePosition = calculetteView.calculetteValidateAndDisplay();
 
             float posX = buttonValidatePosition.x;
             float posY = buttonValidatePosition.y;
 
-            MyTimer.TaskEtape nextEtape = new AnnonceResultat(500, 0);
+            MyTimer.TaskEtape nextEtape = new AnnonceResultat(1_500, 0);
 
-            styleTest = calculetteView.validerBouton.getStyle();
-
-            drawableAux = styleTest.up;
-            styleTest.up = styleTest.down;
 
             uneSouris.cliqueTo(durationMillis, posX, posY, nextEtape, 1_000);
 
@@ -873,6 +905,11 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             StringBuilder newStrBuilder = new StringBuilder(ex.toString() + "7 ");
 
             currentLabel.setText(newStrBuilder);
+
+            styleTest = calculetteView.validerBouton.getStyle();
+
+            drawableAux = styleTest.up;
+            styleTest.up = styleTest.down;
         }
     }
 
@@ -886,7 +923,6 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-
             MyTimer.TaskEtape nextEtape = new Fin(500, 0);
 
             metrologue.metrologuePlaySound("Sounds/Onglet_1_6/chap1_onglet6_JAnnonceleresultat.mp3", nextEtape);

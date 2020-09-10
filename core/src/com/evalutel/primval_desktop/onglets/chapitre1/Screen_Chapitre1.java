@@ -27,7 +27,6 @@ import java.util.ArrayList;
 
 public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, ApplicationListener
 {
-    //    private DatabaseDesktop dataBase;
     protected Stage stage;
     private float screenWidth, screenHeight, logoChapitreWidth, logoChapitreHeight, bandeauHautY, positionYLogoChapitre;
     private SpriteBatch batch;

@@ -1230,7 +1230,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 
             dice1.setActive(false);
 
-            timer.schedule(new EtapeInstructionArdoise1(4_000, 2_000), 0);
+            timer.schedule(new EtapeInstructionArdoise1(4_000, 2_000), 3_000);
         }
         return true;
     }

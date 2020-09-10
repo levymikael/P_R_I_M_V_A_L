@@ -73,8 +73,8 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
         table.row();
         table.add(tableEx3).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
-        table.add(tableEx4).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
-        table.row();
+//        table.add(tableEx4).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
+//        table.row();
 //        table.add(tableEx5).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
 
 
@@ -115,15 +115,15 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
 
             }
         });
-        tableEx4.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                game.setScreen(new ScreenEx2_4(game, label4));
-                System.out.println("I got clicked!4");
-            }
-        });
+//        tableEx4.addListener(new ClickListener()
+//        {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y)
+//            {
+//                game.setScreen(new ScreenEx2_4(game, label4));
+//                System.out.println("I got clicked!4");
+//            }
+//        });
         tableEx5.addListener(new ClickListener()
         {
             @Override

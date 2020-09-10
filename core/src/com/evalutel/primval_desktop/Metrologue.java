@@ -123,6 +123,7 @@ public class Metrologue extends AnimationImageNew implements MyDrawInterface, My
                 batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth / 2, animationHeight / 2);
             }
             else if (!isSpeaking)*/
+            else
             {
                 batch.draw(defaultTextureRegion, currentPositionX, currentPositionY, animationWidth, animationHeight);
             }

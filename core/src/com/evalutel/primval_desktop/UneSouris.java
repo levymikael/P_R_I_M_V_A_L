@@ -14,15 +14,14 @@ public class UneSouris extends AnimationImageNew implements MyDrawInterface, MyC
 
     public UneSouris(int startPositionX, int startPositionY, float animationWidth)
     {
-        super("Images/EnonceUIElements/Curseur souris inactif.png", startPositionX, startPositionY, animationWidth, animationWidth);
+        super("Images/EnonceUIElements/curseur_souris_inactif.png", startPositionX, startPositionY, animationWidth, animationWidth);
         imageWidthInit = animationWidth;
 
-        Texture imgAux = new Texture("Images/EnonceUIElements/Curseur souris inactif.png");
+        Texture imgAux = new Texture("Images/EnonceUIElements/curseur_souris_inactif.png");
         imgAux.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         textureRegionMain = new TextureRegion(imgAux);
 
-
-        Texture imgAux2 = new Texture("Images/EnonceUIElements/Curseur souris actif.png");
+        Texture imgAux2 = new Texture("Images/EnonceUIElements/curseur_souris_actif.png");
         imgAux2.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         textureRegionMainClicked = new TextureRegion(imgAux2);
     }
@@ -31,8 +30,8 @@ public class UneSouris extends AnimationImageNew implements MyDrawInterface, MyC
     {
         imageUp();
 
-        float deplacemenNewY = (deplacementEnY - (animationHeight /** .8f*/));
-        float deplacemenNewX = (deplacementEnX/* - (animationWidth * .4f)*/);
+        float deplacemenNewY = deplacementEnY - animationHeight + 45f * animationHeight / 183f;
+        float deplacemenNewX = deplacementEnX - 45f * animationHeight / 183f;
 
         animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext, 1f / 6f);
     }
@@ -40,16 +39,18 @@ public class UneSouris extends AnimationImageNew implements MyDrawInterface, MyC
     public void cliqueTo(long animationDureemillis, float deplacementEnX, float deplacementEnY, MyTimer.TaskEtape taskEtape, long delayNext)
     {
         imageDown();
-
-        float deplacemenNewY = ((deplacementEnY) - (animationHeight * .8f));
-        float deplacemenNewX = (deplacementEnX - (animationWidth * .2f));
-
+        
+        float deplacemenNewY = deplacementEnY - animationHeight + 45f * animationHeight / 183f;
+        float deplacemenNewX = deplacementEnX - 45f * animationHeight / 183f;
 
         animateImage(animationDureemillis, false, deplacemenNewX, deplacemenNewY, taskEtape, delayNext, 1f / 6f);
     }
 
     public void imageDown()
     {
+//        textureRegionMainClicked.setRegionX((int) (currentPositionX - animationWidth * .3f));
+//        textureRegionMainClicked.setRegionY((int) (currentPositionX - animationWidth * .8f));
+
         changeImage(textureRegionMainClicked);
     }
 

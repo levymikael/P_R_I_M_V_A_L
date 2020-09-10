@@ -44,67 +44,67 @@ import java.util.ArrayList;
 
 public class ScreenOnglet implements Screen, InputProcessor
 {
-    protected int questionCourante = 0;
-    protected SacDeBilles sacDeBilles;
-    protected SacDeBougies sacDeBougies;
-    protected float firstPositionX, firstPositionY;
-    protected MyTouchInterface objectTouched;
-    protected SpriteBatch batch;
-    protected Stage stage;
+    public int questionCourante = 0;
+    public SacDeBilles sacDeBilles;
+    public SacDeBougies sacDeBougies;
+    public float firstPositionX, firstPositionY;
+    public MyTouchInterface objectTouched;
+    public SpriteBatch batch;
+    public Stage stage;
 
     private MyImageButton startPausebutton;
     boolean isVisible = true;
-    protected MyTimer timer;
+    public MyTimer timer;
 
     private boolean isInPause = false;
 
-    protected ArrayList<MyDrawInterface> allDrawables;
-    //    protected ArrayList<MyCorrectionAndPauseInterface> allCorrigibles;
-    protected ArrayList<MyTouchInterface> objectTouchedList;
+    public ArrayList<MyDrawInterface> allDrawables;
+    //    public ArrayList<MyCorrectionAndPauseInterface> allCorrigibles;
+    public ArrayList<MyTouchInterface> objectTouchedList;
 
-    protected ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
+    public ArrayList<UnePlancheNew> allPlanches = new ArrayList<>();
 
-    protected long startTime, endTime, seconds, dateTest;
+    public long startTime, endTime, seconds, dateTest;
 
-    protected Game game;
+    public Game game;
 
-    protected ValidusAnimated validusAnimated;
+    public ValidusAnimated validusAnimated;
 
-    protected Metrologue metrologue;
+    public Metrologue metrologue;
 
-    protected int mousePointerX, mousePointerY;
+    public int mousePointerX, mousePointerY;
 
-    protected float largeurBilleUnique, largeurBilleMultiple;
-    protected float largeurPlancheUnique, largeurPlancheMultiple;
+    public float largeurBilleUnique, largeurBilleMultiple;
+    public float largeurPlancheUnique, largeurPlancheMultiple;
 
-    protected UneSouris uneSouris;
+    public UneSouris uneSouris;
 
-    protected MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;
+    public MyCorrectionAndPauseGeneral myCorrectionAndPauseGeneral;
 
-    protected Table tableTitre;
+    public Table tableTitre;
 
-    protected UnResultat resultatExercice;
+    public UnResultat resultatExercice;
 
-    protected MyButtonBackToPreviousMenu myButtonBackToPreviousMenu;
+    public MyButtonBackToPreviousMenu myButtonBackToPreviousMenu;
 
-    protected EcrinDiamantView ecrinDiamantView;
+    public EcrinDiamantView ecrinDiamantView;
 
-    protected float activiteWidth, heightTop, xTableTitre;
+    public float activiteWidth, heightTop, xTableTitre;
 
-    protected ActiviteView activiteView;
-    protected ActiviteView solutionView;
+    public ActiviteView activiteView;
+    public ActiviteView solutionView;
 
-    protected Label.LabelStyle labelStyleArial, labelStyleComic, labelStyle3;
+    public Label.LabelStyle labelStyleArial, labelStyleComic, labelStyle3;
 
-    protected FreeTypeFontGenerator fontArial, fontComic;
+    public FreeTypeFontGenerator fontArial, fontComic;
 
-    protected String numExercice;
+    public String numExercice;
 
-    protected Label exoNumLabel, exoConsigneLabel, highestMarkObtainedLabel;
+    public Label exoNumLabel, exoConsigneLabel, highestMarkObtainedLabel;
 
-    protected ScreeenBackgroundImage backgroundScreen;
-    protected float largeurFond;
-    protected float hauteurFond;
+    public ScreeenBackgroundImage backgroundScreen;
+    public float largeurFond;
+    public float hauteurFond;
 //    private MyDataBase db;
 
 
@@ -183,9 +183,9 @@ public class ScreenOnglet implements Screen, InputProcessor
 
         allDrawables.add(myButtonBackToPreviousMenu);
 
-        float leftSideBtn = MyConstants.SCREENWIDTH / 15f;
+        float leftSideBtnWidth = MyConstants.SCREENWIDTH / 15f;
 
-        startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png",leftSideBtn , leftSideBtn);
+        startPausebutton = new MyImageButton(stage, "Images/StartPause/button_pause.png",leftSideBtnWidth , leftSideBtnWidth);
         startPausebutton.setPosition(MyConstants.SCREENWIDTH / 60f, 5 * MyConstants.SCREENHEIGHT / 7f);
         stage.addActor(startPausebutton);
 
@@ -222,10 +222,10 @@ public class ScreenOnglet implements Screen, InputProcessor
             }
         });
 
-        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60f, MyConstants.SCREENHEIGHT / 7f, leftSideBtn*2, leftSideBtn*2f, timer);
+        validusAnimated = new ValidusAnimated(MyConstants.SCREENWIDTH / 60f, MyConstants.SCREENHEIGHT / 7f, leftSideBtnWidth*2, leftSideBtnWidth*2f, timer);
         myCorrectionAndPauseGeneral.addElements(validusAnimated);
 
-        metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, leftSideBtn*2, leftSideBtn*2, timer);
+        metrologue = new Metrologue(MyConstants.SCREENWIDTH / 60, 2 * MyConstants.SCREENHEIGHT / 5, leftSideBtnWidth*2, leftSideBtnWidth*2, timer);
         myCorrectionAndPauseGeneral.addElements(metrologue);
 
         if (ecrin)
@@ -240,7 +240,7 @@ public class ScreenOnglet implements Screen, InputProcessor
         int posX = 6 * MyConstants.SCREENWIDTH / 7;
         int posY = MyConstants.SCREENHEIGHT / 2;
 
-        uneSouris = new UneSouris(posX, posY, validusAnimated.getWidth());
+        uneSouris = new UneSouris(posX, posY, leftSideBtnWidth);
         uneSouris.setVisible(false);
         myCorrectionAndPauseGeneral.addElements(uneSouris);
     }
@@ -497,14 +497,14 @@ public class ScreenOnglet implements Screen, InputProcessor
         return false;
     }
 
-    protected void addDiamonds(int nbDiamant)
+    public void addDiamonds(int nbDiamant)
     {
         ecrinDiamantView.addDiamond(nbDiamant);
         resultatExercice.setmPointsObtenus(resultatExercice.getPointsObtenus() + nbDiamant);
         resultatExercice.setmPointsPossibles(resultatExercice.getPointsPossibles() + nbDiamant);
     }
 
-    protected void addPierres(int nbPierres)
+    public void addPierres(int nbPierres)
     {
         ecrinDiamantView.addPierre(nbPierres);
         resultatExercice.setmPointsPossibles(resultatExercice.getPointsPossibles() + nbPierres);

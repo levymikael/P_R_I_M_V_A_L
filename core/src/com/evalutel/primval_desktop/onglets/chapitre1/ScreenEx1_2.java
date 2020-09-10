@@ -28,14 +28,14 @@ import java.util.ArrayList;
 
 public class ScreenEx1_2 extends ScreenOnglet
 {
-    private int posX, posY, failedAttempts;
+    private float posX, posY;
     private ArrayList<UneBille> billesList;
     private ArrayList<UnOiseau> oiseauxList;
     //    private ArrayList<UnePlancheNew> allPlanches;
     private UneBille billeRectification;
     private UnePlancheNew planche1;
     private int randNumOiseau;
-    private int cptOiseau;
+    private int cptOiseau, failedAttempts;
 
     private int[] numOiseauArray;
 
@@ -147,7 +147,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             }
         });
 
-        timer.schedule(new PresentationExercice(2000), 100);
+        timer.schedule(new PresentationExercice(2_000), 500);
     }
 
 
@@ -261,13 +261,26 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            activiteView.addTextActivite("Place autant de billes que d'oiseaux que tu vois et demande à Mademoiselle Validus si c'est juste pour avoir un diamant.");
+            MyTimer.TaskEtape nextEtape = new AtonTourDeJouer(1_000);
 
-            MyTimer.TaskEtape nextEtape = new EtapeInstruction(2_000, 0);
+            metrologue.metrologuePlaySound("Sounds/Onglet1_2/Onglet1_2_TitreOnglet.mp3", nextEtape);
+        }
+    }
 
-            metrologue.metrologuePlaySound("Sounds/Metrologue/Place autant de billes.mp3", nextEtape);
 
-            sacDeBilles.setActive(false);
+    private class AtonTourDeJouer extends MyTimer.TaskEtape
+    {
+        private AtonTourDeJouer(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            MyTimer.TaskEtape nextEtape = new EtapeInstruction(1_000, 500);
+
+            metrologue.metrologuePlaySound("Sounds/Onglet1_2/Onglet1_2_Atontourdejouer.mp3", nextEtape);
         }
     }
 
@@ -281,9 +294,20 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            randNumOiseau = numOiseauArray[questionCourante];
+            MyTimer.TaskEtape nextEtape = new DisplayOiseaux(1_000);
 
-            timer.schedule(new DisplayOiseaux(1_000), 0);
+            if (questionCourante == 0)
+            {
+                activiteView.addTextActivite("1. Place autant de billes que d'oiseaux que tu vois et demande à Mademoiselle Validus si c'est juste pour avoir un diamant.");
+                metrologue.metrologuePlaySound("Sounds/Metrologue/Place autant de billes.mp3", nextEtape);
+            }
+            else
+            {
+                timer.schedule(new DisplayOiseaux(1_000), 500);
+            }
+            sacDeBilles.setActive(false);
+
+            randNumOiseau = numOiseauArray[questionCourante];
         }
     }
 
@@ -316,7 +340,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                     if (cptOiseau < 3)
                     {
-                        posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+                        posX = (MyConstants.SCREENWIDTH / 6) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                     else
                     {

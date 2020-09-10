@@ -70,8 +70,9 @@ public class DesktopLauncher
 //		config.fullscreen = true;
 
         new LwjglApplication(new GdxSplashScreenGame(), config);
-
         Gdx.graphics.setTitle("Primval");
+
+
 
     }
 }
