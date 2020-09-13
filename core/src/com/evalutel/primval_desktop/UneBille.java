@@ -137,7 +137,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
                     if (this != null)
                     {
                         sacDeBilles.addBilleToReserve(this);
-                        this.setPosition(100000, 100000);
+                        this.setPosition(10_000, 10_000);
                     }
                 }
             }

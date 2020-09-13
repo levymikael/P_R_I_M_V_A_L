@@ -31,10 +31,6 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
     private float screenWidth, screenHeight, logoChapitreWidth, logoChapitreHeight, bandeauHautY, positionYLogoChapitre;
     private SpriteBatch batch;
 
-//    private Camera camera;
-//
-//    private Viewport viewport;
-
     private Texture logoChapitre;
 
     private ScreeenBackgroundImage bandeauHaut, fondSommaire;
@@ -61,9 +57,9 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         ListExercicesActiviteViewChap1 listExercicesActiviteViewChap1 = new ListExercicesActiviteViewChap1(stage, game);
 
-        MyButtonRetour myButtonRetour;
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15f, screenWidth / 15f, game, "chapitres");
-        myButtonRetour.setPosition(screenWidth / 25f, 5 * screenHeight / 6f - myButtonRetour.getHeight() / 2f);
+        MyButtonRetour myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15f, MyConstants.SCREENWIDTH / 15f, game, "sommaire general");
+        myButtonRetour.setPosition(MyConstants.SCREENWIDTH * .02f, 5 * MyConstants.SCREENHEIGHT / 6f - myButtonRetour.getHeight() / 2f);
+
 
         logoChapitre = new Texture(Gdx.files.internal("Images/chapitre_circle_1.png"));
         logoChapitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

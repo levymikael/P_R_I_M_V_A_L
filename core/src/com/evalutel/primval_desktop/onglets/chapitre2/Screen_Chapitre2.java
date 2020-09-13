@@ -34,11 +34,6 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
     private float screenWidth, screenHeight, logoChapitreWidth, logoChapitreHeight, bandeauHautY, positionYLogoChapitre;
 
     private SpriteBatch batch;
-//    private Game game;
-//
-//    private Camera camera;
-//
-//    private Viewport viewport;
 
     private Texture logoChapitre;
 
@@ -48,7 +43,6 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
     protected ArrayList<MyDrawInterface> allDrawables;
 
-    private MyButtonRetour myButtonRetour;
 
     FreeTypeFontGenerator generator;
 
@@ -70,8 +64,9 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
 
         ListExercicesActiviteViewChap2 listExercicesActiviteViewChap2 = new ListExercicesActiviteViewChap2(stage, game);
 
-        myButtonRetour = new MyButtonRetour(stage, screenWidth / 15f, screenWidth / 15f, game, "chapitres");
-        myButtonRetour.setPosition(screenWidth / 25f, 5 * screenHeight / 6f - myButtonRetour.getHeight() / 2);
+        MyButtonRetour myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15f, MyConstants.SCREENWIDTH / 15f, game, "sommaire general");
+        myButtonRetour.setPosition(MyConstants.SCREENWIDTH * .02f, 5 * MyConstants.SCREENHEIGHT / 6f - myButtonRetour.getHeight() / 2f);
+
 
         logoChapitre = new Texture(Gdx.files.internal("Images/Pages onglets/chapitre_circle_2.png"));
         logoChapitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

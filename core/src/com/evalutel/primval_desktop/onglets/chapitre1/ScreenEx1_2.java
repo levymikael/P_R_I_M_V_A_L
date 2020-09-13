@@ -64,7 +64,7 @@ public class ScreenEx1_2 extends ScreenOnglet
 
         for (int i = 0; i < 9; i++)
         {
-            UneBille bille = new UneBille(sacDeBilles.currentPositionX, sacDeBilles.currentPositionY, sacDeBilles.largeurBille);
+            UneBille bille = new UneBille(10_000, 10_000, sacDeBilles.largeurBille);
 
             sacDeBilles.addBilleToReserve(bille);
             allDrawables.add(bille);

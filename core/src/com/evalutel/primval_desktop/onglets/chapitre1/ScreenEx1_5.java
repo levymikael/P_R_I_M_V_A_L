@@ -80,7 +80,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
         for (int i = 0; i < 9; i++)
         {
-            UneBille bille = new UneBille(sacDeBilles.currentPositionX, sacDeBilles.currentPositionY, sacDeBilles.largeurBille);
+            UneBille bille = new UneBille(10_000, 10_000, sacDeBilles.largeurBille);
 
             sacDeBilles.addBilleToReserve(bille);
             allDrawables.add(bille);
@@ -455,6 +455,10 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                 {
                     validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
                 }
+                else if ((planche1.getNumberBilles() == randNumOiseau) && (value != planche1.getNumberBilles()))
+                {
+                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/Ong1_5_Validus_Tu n'as pas tape le bon chiffre au clavier.mp3");
+                }
                 else
                 {
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
@@ -773,9 +777,10 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             UneBille billeAdded = sacDeBilles.getBilleAndRemove();
             if (billeAdded != null)
             {
-                billeAdded.setVisible(true);
+
                 objectTouched = billeAdded;
                 billeAdded.setActive(true);
+                billeAdded.setVisible(true);
             }
 //            }
         }

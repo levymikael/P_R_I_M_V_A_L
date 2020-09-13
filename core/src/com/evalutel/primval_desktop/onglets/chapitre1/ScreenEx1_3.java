@@ -52,7 +52,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
     {
         super(game, 1, 3, false, 0);
 
-
         bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);
 
@@ -87,9 +86,9 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         highestMarkObtainedLabel.setWidth(MyConstants.SCREENWIDTH / 46);
 
 
-        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25).padLeft(MyConstants.SCREENWIDTH / 46);
-        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9);
-        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22);
+        tableTitre.add(exoNumLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 25f).padLeft(MyConstants.SCREENWIDTH / 46f);
+        tableTitre.add(exoConsigneLabel).width(activiteWidth - MyConstants.SCREENWIDTH / 9f);
+        tableTitre.add(highestMarkObtainedLabel).align(Align.center).width(MyConstants.SCREENWIDTH / 22f);
 
         stage.addActor(tableTitre);
 
@@ -145,7 +144,6 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
                 return true;
             }
         });
-
 
         timer.schedule(new PresentationOnglet(3000), 1_000);
     }
@@ -296,7 +294,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             UneBille bille = billesList.get(cptBille);
             bille.setVisible(true);
-            float posX = MyConstants.SCREENWIDTH / 2;
+            float posX = MyConstants.SCREENWIDTH / 2f;
             float posY = planche1.getHeight() / 2;
 
             MyTimer.TaskEtape nextEtape = new EtapeAddBille(2_000, 1_000);
@@ -439,8 +437,8 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             UnOiseau oiseau = oiseauxList.get(cptOiseau);
             myCorrectionAndPauseGeneral.addElements(oiseau);
-            float posY = 7 * MyConstants.SCREENHEIGHT / 10;
-            float posX = (MyConstants.SCREENWIDTH / 6) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+            float posY = 7 * MyConstants.SCREENHEIGHT / 10f;
+            float posX = (MyConstants.SCREENWIDTH / 6f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
 
             if (cptOiseau == 1)
             {
@@ -570,8 +568,8 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             UnOiseau oiseau = oiseauxList.get(cptOiseau);
             myCorrectionAndPauseGeneral.addElements(oiseau);
-            float posY = 7 * MyConstants.SCREENHEIGHT / 10;
-            float posX = (MyConstants.SCREENWIDTH / 6) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+            float posY = 7 * MyConstants.SCREENHEIGHT / 10f;
+            float posX = (MyConstants.SCREENWIDTH / 6f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
 
             if (cptOiseau == 2)
             {
@@ -706,8 +704,8 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             UnOiseau oiseau = oiseauxList.get(cptOiseau);
             myCorrectionAndPauseGeneral.addElements(oiseau);
-            float posY = 7 * MyConstants.SCREENHEIGHT / 10;
-            float posX = (2 * MyConstants.SCREENWIDTH / 9) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+            float posY = 7 * MyConstants.SCREENHEIGHT / 10f;
+            float posX = (2 * MyConstants.SCREENWIDTH / 9f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
 
 
             if (cptOiseau == 3)
@@ -839,8 +837,8 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             UnOiseau oiseau = oiseauxList.get(cptOiseau);
             myCorrectionAndPauseGeneral.addElements(oiseau);
-            float posY = 7 * MyConstants.SCREENHEIGHT / 10;
-            float posX = (2 * MyConstants.SCREENWIDTH / 9) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+            float posY = 7 * MyConstants.SCREENHEIGHT / 10f;
+            float posX = (2 * MyConstants.SCREENWIDTH / 9f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
 
             if (cptOiseau == 4)
             {
@@ -1564,14 +1562,11 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
     public ArrayList<UneBille> autoFillPlanche()
     {
-        float firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
-        float firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
-
         billesList = new ArrayList<>();
 
         for (int i = 0; i < oiseauxList.size() + 1; i++)
         {
-            UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, sacDeBilles.largeurBille);
+            UneBille billeAdded = new UneBille(10_000, 10_000, sacDeBilles.largeurBille);
             billesList.add(billeAdded);
             myCorrectionAndPauseGeneral.addElements(billeAdded);
             allDrawables.add(billeAdded);

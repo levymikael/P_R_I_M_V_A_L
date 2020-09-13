@@ -832,7 +832,6 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
         }
         else if (gateauAnniversaire.contains(mousePointerX, mousePointerY) && (!gateauAnniversaire.isPause()))
         {
-
             UneBougie bougie = gateauAnniversaire.getLastBougie();
             if (bougie != null && gateauAnniversaire.isActive())
             {

@@ -717,12 +717,8 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
-
             MyTimer.TaskEtape nextEtape = new MoveMainToPlanche1and2(1_500, 1_500);
-
-
             metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeDeplaceToutesLesBilles.mp3", nextEtape);
-
         }
     }
 
@@ -745,7 +741,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
                 MyTimer.TaskEtape nextEtape = new ClickOnBille1(500);
 
-                uneSouris.cliqueTo(durationMillis, Xbille1, Ybille1, nextEtape, 500);
+                uneSouris.moveTo(durationMillis, Xbille1, Ybille1, nextEtape, 500);
 
             }
             else
@@ -773,11 +769,10 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             float posYMilieuPlancheBille = planche3.getPosition().y + (planche3.getHeight() / 2) - (largeurBilleMultiple / 2);
 
             MyTimer.TaskEtape nextEtape = new EtapeDragBille1(500, 0);
-//            uneSouris.imageDown();
 
             bille.animateImage(durationMillis, true, posXMilieuPlancheBille, posYMilieuPlancheBille, nextEtape, 1_000, 1f / 6f);
 
-            uneSouris.moveTo(durationMillis, posXMilieuPlanche, posYMilieuPlanche, null, 500);
+            uneSouris.cliqueTo(durationMillis, posXMilieuPlanche, posYMilieuPlanche, null, 500);
         }
     }
 
@@ -1088,10 +1083,10 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
-        boolean isReserveActif = sacDeBilles.isActive();
+//        boolean isReserveActif = sacDeBilles.isActive();
         if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
-            UneBille billeAdded = new UneBille(sacDeBilles.currentPositionX + (int) sacDeBilles.animationWidth / 2, sacDeBilles.currentPositionY + (int) sacDeBilles.animationHeight / 2, sacDeBilles.largeurBille);
+            UneBille billeAdded = new UneBille(10_000, 10_000, sacDeBilles.largeurBille);
             objectTouchedList.add(billeAdded);
             allDrawables.add(billeAdded);
             objectTouched = billeAdded;

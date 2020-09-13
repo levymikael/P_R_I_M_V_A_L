@@ -869,14 +869,12 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
     private ArrayList<UneBille> autoFillPlanche()
     {
-        float firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
-        float firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
 
         billesList = new ArrayList<>();
 
         for (int i = 0; i < oiseauxList.size() + 1; i++)
         {
-            UneBille billeAdded = new UneBille(firstPositionBilleX, firstPositionBilleY, sacDeBilles.largeurBille);
+            UneBille billeAdded = new UneBille(10_000, 10_000, sacDeBilles.largeurBille);
             billesList.add(billeAdded);
 
             allDrawables.add(billeAdded);
