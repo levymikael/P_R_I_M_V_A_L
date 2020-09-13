@@ -162,7 +162,6 @@ public class ScreenEx1_2 extends ScreenOnglet
             UnOiseau unOiseau = new UnOiseau(firstPositionOiseauXNew, firstPositionOiseauY, ((MyConstants.SCREENWIDTH / 12f) * (396f / 500f)), (MyConstants.SCREENWIDTH / 12f) * (500f / 396f));
             allDrawables.add(unOiseau);
             oiseauxList.add(unOiseau);
-
             myCorrectionAndPauseGeneral.addElements(unOiseau);
         }
     }
@@ -183,7 +182,6 @@ public class ScreenEx1_2 extends ScreenOnglet
                 objectTouched = billeAdded;
                 billeAdded.setActive(true);
             }
-
         }
         else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))
         {
@@ -299,7 +297,7 @@ public class ScreenEx1_2 extends ScreenOnglet
             if (questionCourante == 0)
             {
                 activiteView.addTextActivite("1. Place autant de billes que d'oiseaux que tu vois et demande à Mademoiselle Validus si c'est juste pour avoir un diamant.");
-                metrologue.metrologuePlaySound("Sounds/Metrologue/Place autant de billes.mp3", nextEtape);
+                metrologue.metrologuePlaySound("Sounds/Onglet1_2/Onglet1.2_PlaceAutantdeBilles.mp3", nextEtape);
             }
             else
             {
@@ -331,20 +329,20 @@ public class ScreenEx1_2 extends ScreenOnglet
 
                 if (cptOiseau > 5)
                 {
-                    posY = 5 * MyConstants.SCREENHEIGHT / 11;
-                    posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 6);
+                    posY = 5 * MyConstants.SCREENHEIGHT / 11f;
+                    posX = (MyConstants.SCREENWIDTH / 6f) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 6);
                 }
                 else
                 {
-                    posY = 7 * MyConstants.SCREENHEIGHT / 10;
+                    posY = 7 * MyConstants.SCREENHEIGHT / 10f;
 
                     if (cptOiseau < 3)
                     {
-                        posX = (MyConstants.SCREENWIDTH / 6) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+                        posX = (MyConstants.SCREENWIDTH / 6f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                     else
                     {
-                        posX = (2 * MyConstants.SCREENWIDTH / 9) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
+                        posX = (2 * MyConstants.SCREENWIDTH / 9f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * cptOiseau;
                     }
                 }
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
@@ -354,8 +352,8 @@ public class ScreenEx1_2 extends ScreenOnglet
             else if (cptOiseau > randNumOiseau)
             {
                 UnOiseau oiseau = oiseauxList.get(cptOiseau - 1);
-                int posX = MyConstants.SCREENWIDTH * 2;
-                int posY = MyConstants.SCREENHEIGHT * 2;
+                float posX = MyConstants.SCREENWIDTH * 2;
+                float posY = MyConstants.SCREENHEIGHT * 2;
 
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
                 timer.schedule(nextEtape, 100);
@@ -576,8 +574,8 @@ public class ScreenEx1_2 extends ScreenOnglet
             planche1.removeBille(billeRectification);
             uneSouris.setVisible(true);
 
-            float posX = billeRectification.getPosition().x + (int) (billeRectification.animationWidth / 2);
-            float posY = billeRectification.getPosition().y + (int) (billeRectification.animationWidth / 2);
+            float posX = billeRectification.getPosition().x + (billeRectification.animationWidth / 2);
+            float posY = billeRectification.getPosition().y + (billeRectification.animationWidth / 2);
 
             MyTimer.TaskEtape nextEtape = new MoveBilleOutOfPlanche(500);
 
@@ -595,8 +593,8 @@ public class ScreenEx1_2 extends ScreenOnglet
         @Override
         public void run()
         {
-            int posX = (int) (planche1.currentPositionX + planche1.getWidth()) + MyConstants.SCREENWIDTH / 20;
-            int posY = (int) (planche1.currentPositionY + (planche1.getHeight() / 2));
+            float posX = (planche1.currentPositionX + planche1.getWidth()) + MyConstants.SCREENWIDTH / 20f;
+            float posY = (planche1.currentPositionY + (planche1.getHeight() / 2));
 
             uneSouris.cliqueTo(durationMillis, posX, posY, null, 500);
 

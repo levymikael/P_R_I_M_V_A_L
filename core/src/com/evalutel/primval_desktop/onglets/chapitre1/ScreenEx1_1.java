@@ -158,7 +158,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 //            uneSouris.imageDown();
             MyTimer.TaskEtape nextEtape = new VoiciLaRegleDuJeu(3_000, 2_500);
 
-            metrologue.metrologuePlaySound("Sounds/Metrologue/Bonjour je suis le prof.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet1_1/Bonjour je suis le prof.mp3", nextEtape);
         }
     }
 
@@ -174,7 +174,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         {
             MyTimer.TaskEtape nextEtape = new EtapeAddFirstOiseau(2_000, 1_000);
 
-            metrologue.metrologuePlaySound("Sounds/Metrologue/Voici la regle du jeu.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet1_1/Voici la regle du jeu.mp3", nextEtape);
         }
     }
 
@@ -214,7 +214,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
         {
             MyTimer.TaskEtape nextEtape = new MoveMainToReserve1(2_000, 500);
 
-            metrologue.metrologuePlaySound("Sounds/Metrologue/je vois un oiseau.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet1_1/je vois un oiseau.mp3", nextEtape);
         }
     }
 
@@ -288,7 +288,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             if (cptBille == 0)
             {
-                metrologue.metrologuePlaySound("Sounds/Metrologue/Je saisis une bille du sac.mp3");
+                metrologue.metrologuePlaySound("Sounds/Onglet1_1/Je saisis une bille du sac.mp3");
 
                 bille.animateImage(durationMillis, true, (posX - bille.getWidth() / 2f), (posY - bille.getWidth() / 2f), nextEtape, 2_500, 1f / 6f);
 
@@ -340,7 +340,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             if (cptOiseau == 1)
             {
                 oiseau.animateImage(1_000, true, posX, posY, new MoveMainToReserve2(1_000), 0, 1f / 6f);
-                metrologue.metrologuePlaySound("Sounds/Metrologue/Je vois maintenant.mp3");
+                metrologue.metrologuePlaySound("Sounds/Onglet1_1/Je vois maintenant.mp3");
             }
             cptOiseau++;
         }
@@ -423,7 +423,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
                 bille.animateImage(durationMillis, true, (int) (posX - bille.getWidth() / 2), (int) (posY - bille.getWidth() / 2), null, 2_000, 1f / 6f);
                 uneSouris.cliqueTo(durationMillis, posX, posY, null, 1_000);
 
-                metrologue.metrologuePlaySound("Sounds/Metrologue/je depose encore une bille.mp3", nextEtape);
+                metrologue.metrologuePlaySound("Sounds/Onglet1_1/je depose encore une bille.mp3", nextEtape);
             }
         }
     }
@@ -467,7 +467,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 2)
             {
-                metrologue.metrologuePlaySound("Sounds/Metrologue/Tiens encore un oiseau.mp3");
+                metrologue.metrologuePlaySound("Sounds/Onglet1_1/Tiens encore un oiseau.mp3");
 
                 oiseau.animateImage(1_000, true, posX, posY, new MoveMainToReserve3(2_000), 1_500, 1f / 6f);
             }
@@ -694,7 +694,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new MoveMainToValidus(3_000);
 
-            metrologue.metrologuePlaySound("Sounds/Metrologue/Mince je crois que.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet1_1/Mince je crois que.mp3", nextEtape);
         }
     }
 
@@ -766,7 +766,7 @@ public class ScreenEx1_1 extends ScreenOnglet implements InputProcessor
             uneSouris.moveTo(durationMillis, posX, posY, nextEtape, 3_000);
             uneSouris.imageDown();
 
-            metrologue.metrologuePlaySound("Sounds/Metrologue/Pour corriger mon erreur.mp3");
+            metrologue.metrologuePlaySound("Sounds/Onglet1_1/Pour corriger mon erreur.mp3");
         }
     }
 

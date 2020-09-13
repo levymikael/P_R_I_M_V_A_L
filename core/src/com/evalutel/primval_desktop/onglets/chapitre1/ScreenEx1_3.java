@@ -164,7 +164,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             MyTimer.TaskEtape nextEtape = new OnVaContinuer(3_000, 2_000);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.0 - Ecriture des chiffres de 1 a 9.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet1_3/Chap1Onglet3.0 - Ecriture des chiffres de 1 a 9.mp3", nextEtape);
         }
     }
 
@@ -180,7 +180,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             MyTimer.TaskEtape nextEtape = new EtapeAddFirstOiseau(2_000, 1_000);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.1 - On va continuer.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet1_3/Chap1Onglet3.1 - On va continuer.mp3", nextEtape);
         }
     }
 
@@ -220,7 +220,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
         {
             MyTimer.TaskEtape nextEtape = new MoveMainToReserve(2_000, 500);
 
-            metrologue.metrologuePlaySound("Sounds/Metrologue/je vois un oiseau.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet1_3/Chap1Onglet3.2 - Je vois un oiseau.mp3", nextEtape);
         }
     }
 
@@ -252,7 +252,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
                 if (cptOiseau == 3)
                 {
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.9 - Maintenant ils sont 3 oiseaux.mp3");
+                    metrologue.metrologuePlaySound("Sounds/Onglet1_3/Chap1Onglet3.9 - Maintenant ils sont 3 oiseaux.mp3");
 
                 }
             }
@@ -307,12 +307,12 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             switch (cptBille)
             {
                 case 0:
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.3 - Je saisis une bille du sac.mp3");
+                    metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.3 - Je saisis une bille du sac.mp3");
                     break;
 
                 case 1:
 
-                    metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.6 - je depose encore une bille.mp3", nextEtape);
+                    metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.6 - je depose encore une bille.mp3", nextEtape);
                     break;
             }
         }
@@ -339,7 +339,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneSouris.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.4 - Je tape un.mp3");
+            metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.4 - Je tape un.mp3");
         }
     }
 
@@ -445,7 +445,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             if (cptOiseau == 1)
             {
                 oiseau.animateImage(1_500, true, posX, posY, new MoveMainToReserve(1_500), 0, 1f / 6f);
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.5 - je vois maintenant 2 oiseaux.mp3");
+                metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.5 - je vois maintenant 2 oiseaux.mp3");
             }
             cptOiseau++;
         }
@@ -472,7 +472,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneSouris.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.7 - je tape 2.mp3");
+            metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.7 - je tape 2.mp3");
         }
     }
 
@@ -575,7 +575,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 2)
             {
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.8 - Puis je valide.mp3");
+                metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.8 - Puis je valide.mp3");
 
                 oiseau.animateImage(1_000, true, posX, posY, new MoveMainToReserve(1_500), 1_500, 1f / 6f);
             }
@@ -604,7 +604,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneSouris.moveTo(durationMillis, posX, posY, nextEtape, 500);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.10 - je tape 3.mp3");
+            metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.10 - je tape 3.mp3");
         }
     }
 
@@ -712,7 +712,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 3)
             {
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.11 - Une de plus ils sont 4.mp3");
+                metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.11 - Une de plus ils sont 4.mp3");
                 oiseau.animateImage(1_000, true, posX, posY, new MoveMainToReserve(1_500, 300), 1_500, 1f / 6f);
             }
             cptOiseau++;
@@ -741,7 +741,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             uneSouris.moveTo(durationMillis, posX, posY, nextEtape, 1_000);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.12 - je tape 4.mp3");
+            metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.12 - je tape 4.mp3");
         }
     }
 
@@ -844,7 +844,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 4)
             {
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.13 - Encore un ils sont 5.mp3");
+                metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.13 - Encore un ils sont 5.mp3");
                 oiseau.animateImage(1_000, true, posX, posY, new MoveMainToReserve(2_000, 300), 1_500, 1f / 6f);
             }
             cptOiseau++;
@@ -978,7 +978,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
             }
             cptOiseau++;
 
-            metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.14 - Maintenant ils occupennt toute la branche ils sont 6.mp3");
+            metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.14 - Maintenant ils occupennt toute la branche ils sont 6.mp3");
         }
     }
 
@@ -1108,7 +1108,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 6)
             {
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.15 - un oiseau tout seul sur la seconde.mp3");
+                metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.15 - un oiseau tout seul sur la seconde.mp3");
                 oiseau.animateImage(1_000, true, posX, posY, new MoveMainToReserve(2_000, 300), 1_500, 1f / 6f);
             }
             cptOiseau++;
@@ -1241,7 +1241,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 7)
             {
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.16 - L'oiseau a un compagnon ils sont 8.mp3");
+                metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.16 - L'oiseau a un compagnon ils sont 8.mp3");
                 oiseau.animateImage(1_000, true, posX, posY, new MoveMainToReserve(2_000, 300), 1_500, 1f / 6f);
             }
             cptOiseau++;
@@ -1374,7 +1374,7 @@ public class ScreenEx1_3 extends ScreenOnglet implements InputProcessor
 
             if (cptOiseau == 8)
             {
-                metrologue.metrologuePlaySound("Sounds/Onglet_1_3/Chap1Onglet3.17 - Il n'y a plus de place pour se poser.mp3");
+                metrologue.metrologuePlaySound("Sounds/onglet1_3/Chap1Onglet3.17 - Il n'y a plus de place pour se poser.mp3");
                 oiseau.animateImage(1_000, true, posX, posY, new MoveMainToReserve(2_000, 300), 1_500, 1f / 6f);
             }
             cptOiseau++;

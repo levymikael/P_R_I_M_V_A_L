@@ -36,14 +36,10 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     private int screenWidth, screenHeight;
     private SpriteBatch batch;
 
-//    private Camera camera;
-//
-//    private Viewport viewport;
 
     private ScreeenBackgroundImage fondSommairee, fondSommaire, imgSommaire;
 
-    //    MrTemps mrTemps;
-
+    float bandeauGaucheWidth;
     protected ArrayList<MyDrawInterface> allDrawables;
 
     private Texture logoTitre;
@@ -99,21 +95,20 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         container.setWidth(screenWidth / 7f);
         container.setHeight(screenHeight / 6f);
 
-        float bandeauGaucheWidth = screenWidth / 5f;
+        bandeauGaucheWidth = screenWidth / 5f;
         Table avatarPic = new Table();
         Texture avatarTexture = new Texture(Gdx.files.internal("Images/avatar_1.png"));
         avatarTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        MrNotes2 mrNotes2 = new MrNotes2(stage, bandeauGaucheWidth/2.2f, screenHeight / 2f - MyConstants.SCREENHEIGHT / 50f, "general");
+        MrNotes2 mrNotes2 = new MrNotes2(stage, bandeauGaucheWidth / 2.2f, screenHeight / 2f - MyConstants.SCREENHEIGHT / 50f, "general");
 
         float avatarWidth = 0.7f * bandeauGaucheWidth;
         float avatarHeight = avatarWidth * (450f / 476f);
 
-
         avatarPic.setBackground(new SpriteDrawable(new Sprite(avatarTexture)));
         avatarPic.setSize(avatarWidth, avatarHeight);
-        avatarPic.setPosition((bandeauGaucheWidth / 2f) - (avatarWidth / 2f), 6 * screenHeight / 10f);
+        avatarPic.setPosition((bandeauGaucheWidth / 2f) - (avatarWidth / 2f), 5.6f * screenHeight / 10f);
 
         int paddingButtonBorders = MyConstants.SCREENWIDTH / 500;
 
@@ -309,9 +304,10 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             }
         }
 
-        float titleHeight = screenHeight / 8f;
+        float titleWidth = .7f * bandeauGaucheWidth;
+        float titleHeight = titleWidth * (248f / 380f);
 
-        batch.draw(logoTitre, screenWidth / 40f, screenHeight - (titleHeight + screenHeight / 45f), screenWidth / 8f, titleHeight);
+        batch.draw(logoTitre, screenWidth / 40f, screenHeight - (titleHeight + screenHeight / 45f), titleWidth, titleHeight);
 
         batch.end();
 

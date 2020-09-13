@@ -75,7 +75,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         planche1.shouldReturnToReserve = true;
         allDrawables.add(planche1);
         myCorrectionAndPauseGeneral.addElements(planche1);
-//        allCorrigibles.add(planche1);
+        planche1.setActive(false);
         allPlanches.add(planche1);
 
         for (int i = 0; i < 9; i++)
@@ -285,7 +285,6 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             {
                 timer.schedule(new InputClavier(1_000), 100);
             }
-            sacDeBilles.setActive(true);
         }
     }
 
@@ -306,6 +305,9 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
         {
             calculetteView.setActive(true);
             validusAnimated.setActive(true);
+            sacDeBilles.setActive(true);
+
+            planche1.setActive(true);
 
             validusAnimated.etapeCorrection = new PressValidate(0);
             calculetteView.etapeCorrection = new PressValidate(0);
@@ -438,8 +440,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                     validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2_000));
                     failedAttempts = 0;
                     planche1.setAllBillesInactive();
-
-
+                    planche1.setActive(false);
                     addPierres(1);
                 }
                 else if (planche1.getNumberBilles() == 0)
@@ -665,6 +666,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
             timer.schedule(new NextQuestion(500), 500);
             styleTest.up = drawableAux;
             planche1.setAllBillesActive();
+            planche1.setActive(true);
             failedAttempts = 0;
         }
     }
@@ -766,16 +768,16 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
         if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
-            if ((billesList.size() <= 9) || planche1.getNumberBilles() <= 9)
+//            if ((billesList.size() <= 9) || planche1.getNumberBilles() <= 9)
+//            {
+            UneBille billeAdded = sacDeBilles.getBilleAndRemove();
+            if (billeAdded != null)
             {
-                UneBille billeAdded = sacDeBilles.getBilleAndRemove();
-                if (billeAdded != null)
-                {
-                    billeAdded.setVisible(true);
-                    objectTouched = billeAdded;
-                    billeAdded.setActive(true);
-                }
+                billeAdded.setVisible(true);
+                objectTouched = billeAdded;
+                billeAdded.setActive(true);
             }
+//            }
         }
         else if (validusAnimated.contains(mousePointerX, mousePointerY) && validusAnimated.isActive() && (!validusAnimated.isPause()))
         {
@@ -796,8 +798,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
                     if (objectTouched instanceof UneBille)
                     {
                         UneBille billeAux = (UneBille) objectTouched;
-                        //reserveBilles.isActive();
-                        //reserveBilles.setActive(true);
+
                         billeAux.touchDown();
                         break;
                     }
@@ -826,7 +827,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
 
         if (objectTouched != null)
         {
-            if (objectTouched instanceof UneBille)
+            if ((objectTouched instanceof UneBille) && (planche1.isActive()))
             {
                 UneBille billeAux = (UneBille) objectTouched;
                 billeAux.touchUp(allPlanches);
@@ -845,7 +846,7 @@ public class ScreenEx1_5 extends ScreenOnglet implements InputProcessor
     }
 
 
-    public ArrayList getNumberOiseauxArList()
+    ArrayList getNumberOiseauxArList()
     {
         oiseauxList = new ArrayList<>();
 

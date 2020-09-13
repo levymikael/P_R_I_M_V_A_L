@@ -61,13 +61,11 @@ public class CalculetteView implements MyDrawInterface, MyTouchInterface, MyCorr
         this.positionX = positionX;
         this.positionY = positionY;
 
-        buttonSize = width / 5.5f;
+        buttonSize = width / 5.4f;
         paddingAux1 = width / 35.0f;
         paddingAux2 = width / 35.0f;
 
-        int fontSizeButton = (int) (buttonSize / 1.7f);
-
-//        this.stage = stage;
+        int fontSizeButton = (int) (buttonSize / 1.3f);
 
         String emptyButtonInactivePath = "Images/calculetteKeys/vide_inactif.png";
         String emptyButtonActivePath = "Images/calculetteKeys/highlight/vide_actif.png";

@@ -308,7 +308,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         ScrollPane scroll = new ScrollPane(table);
         scroll.layout();
-        scroll.setSize(screenWidth, 2.4f * MyConstants.SCREENHEIGHT / 3f);
+        scroll.setSize(screenWidth, 2.3f * MyConstants.SCREENHEIGHT / 3f);
 
 //        container.add(scroll).height(2.5f * MyConstants.SCREENHEIGHT / 3f).width(screenWidth).padTop(90f);
 
