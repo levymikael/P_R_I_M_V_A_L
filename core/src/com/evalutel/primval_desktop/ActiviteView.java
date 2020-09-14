@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -26,7 +25,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 {
     private Table table;
     private Table tableMilieu;
-    //    private Table table5;
     private float heightTop, topYTablePosition, heightBackGroundImage;
 
     private float firstY, currentY, widthEnonce;
@@ -35,7 +33,6 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     private int cptInstructions;
 
-    //    Sprite sprite2, sprite3, spriteEnonceText, spriteSolutionText;
     private BitmapFont bitmapFontArial;
     private boolean isVisible = true;
 
@@ -71,15 +68,15 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         FreeTypeFontGenerator fontComic = new FreeTypeFontGenerator(Gdx.files.internal("font/ComicSansMSBold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameterComic = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameterComic.size = MyConstants.SCREENWIDTH / 70;
-        BitmapFont bitmapFontComic = fontComic.generateFont(parameter);
+        BitmapFont bitmapFontComic = fontComic.generateFont(parameterComic);
         fontComic.dispose();
 
         table = new Table();
         tableMilieu = new Table();
-        Table tableMilieuSolution = new Table();
+//        Table tableMilieuSolution = new Table();
         Table paddingTableMilieu = new Table();
         Table paddingTableMilieu2 = new Table();
-        Table tableBandeauBas = new Table();
+        final Table tableBandeauBas = new Table();
         Table tableBandeauBasDroite = new Table();
         Table tableBandeauBasGauche = new Table();
         Table tableBandeauBasCentreVierge = new Table();
@@ -101,37 +98,31 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         table.row();
 
 
-        if (activiteType.equals("activite"))
+        switch (activiteType)
         {
-            textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/activite.png"));
-        }
-        else if (activiteType.equals("enonce"))
-        {
-            textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_text.png"));
-        }
-        else if (activiteType.equals("solution"))
-        {
-            textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/texte_solution.png"));
+            case "activite":
+                textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/activite.png"));
+                break;
+            case "enonce":
+                textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/enonce_text.png"));
+                break;
+            case "solution":
+                textureTextEnonce = new Texture(Gdx.files.internal("Images/EnonceUIElements/texte_solution.png"));
+                break;
         }
         textureTextEnonce.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        TextField.TextFieldStyle textFieldStyleEnonce = new TextField.TextFieldStyle();
-        textFieldStyleEnonce.font = bitmapFontArial;
-        textFieldStyleEnonce.background = new SpriteDrawable(new Sprite(textureTextEnonce));
-        TextField textFieldEnonce = new TextField("", textFieldStyleEnonce);
-
 // Insertion texte.png dans tableau avec une imageBG.png:
-        float widthCote = MyConstants.SCREENWIDTH / 38f;
+        float widthCote = MyConstants.SCREENWIDTH / 40f;
         heightBackGroundImage = widthCote * 29f / 28f;
 
         heightTop = positionY;
 
-        float widthCentre = 310f;
+        float widthCentre = widthEnonce / 2f;
 
         float widthVierge = (widthEnonce - (2 * widthCote) - widthCentre) / 2f;
 
-        //heightBackGroundImage = widthEnonce * 31 / 809;
         float heightImageEnonce = heightBackGroundImage * 2f / 3f;
         float widthImageEnonce = heightImageEnonce * 218f / 41f;
 
@@ -166,14 +157,21 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
         tableBandeauBasCentreVierge2.setBackground(new SpriteDrawable(new Sprite(txtureCentre)));
         tableBandeauBasCentreEnonce.setBackground(new SpriteDrawable(new Sprite(txtureCentre)));
 
-        tableBandeauBasCentreEnonce.add(textFieldEnonce).height(heightImageEnonce).width(widthImageEnonce);
+        tableBandeauBasCentreEnonce.add(new Image(textureTextEnonce)).height(heightImageEnonce).width(widthImageEnonce);
 
         tableBandeauBas.add(tableBandeauBasGauche).width(widthCote).height(heightBackGroundImage);
-        tableBandeauBas.add(tableBandeauBasCentreVierge).width(widthVierge).height(heightBackGroundImage).fillX();
-        tableBandeauBas.add(tableBandeauBasCentreEnonce).width(widthCentre).height(heightBackGroundImage);
-        tableBandeauBas.add(tableBandeauBasCentreVierge2).width(widthVierge).height(heightBackGroundImage);
+        tableBandeauBas.add(tableBandeauBasCentreVierge).width(widthVierge).height(heightBackGroundImage)/*.padRight(-2)*/;
+        tableBandeauBas.add(tableBandeauBasCentreEnonce).width(widthCentre).height(heightBackGroundImage).padRight(-1);
+        tableBandeauBas.add(tableBandeauBasCentreVierge2).width(widthVierge).height(heightBackGroundImage)/*.padRight(-2)*/;
         tableBandeauBas.add(tableBandeauBasDroite).width(widthCote).height(heightBackGroundImage);
 
+        if (width > (((MyConstants.SCREENWIDTH / 4f) * 3f) / 2f))
+        {
+            Texture txtureEnonceGrandFond = new Texture("Images/Enoncé-solution/Enoncé-Grand-fond.png");
+            txtureEnonceGrandFond.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+            tableBandeauBas.setBackground(new SpriteDrawable(new Sprite(txtureEnonceGrandFond)));
+        }
         table.add(tableBandeauBas).width(widthEnonce).height(heightBackGroundImage);
 
         table.row();
@@ -216,6 +214,9 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
                 {
                     currentY = topYTablePosition;
                     table.setY(topYTablePosition);
+//                    if (topYTablePosition > MyConstants.SCREENHEIGHT / 2f)
+//                    {
+//                    }
                 }
                 else if (nextY > (MyConstants.SCREENHEIGHT - heightBackGroundImage - heightTop)) // si souris depasse bandeau alors on cache texte consigne
                 {
@@ -243,11 +244,9 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
     public Label addTextActivite(final String string)
     {
-
         Label.LabelStyle labelStyleBlue = new Label.LabelStyle();
         labelStyleBlue.font = bitmapFontArial;
         labelStyleBlue.fontColor = MyConstants.bluePrimval;
-
 
         final Label label3 = new Label(string, labelStyleBlue);
         Gdx.app.postRunnable(new Runnable()
@@ -261,12 +260,10 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
                 labelStyleBlack.font = bitmapFontArial;
                 labelStyleBlack.fontColor = Color.BLACK;
 
-
                 if (cptInstructions != 0)
                 {
                     lastLabel.setStyle(labelStyleBlack);
                 }
-
 
                 label3.setWrap(true);
 
@@ -281,17 +278,13 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
                 flechSprite.setSize(MyConstants.SCREENWIDTH / 30f, MyConstants.SCREENWIDTH / 30f);
 
-                SpriteDrawable flecheSpriteDrawable = new SpriteDrawable(flechSprite);
-
                 lastPointerTable = new Table();
 
 
                 if (activiteType.equals("activite"))
                 {
-//            lastPointerTable.setBackground(flecheSpriteDrawable);
                     lastPointerTable.add(new Image(fleche));
                 }
-
 
                 table4.add(lastPointerTable).top().center().height(MyConstants.SCREENHEIGHT / 50f).width(MyConstants.SCREENWIDTH / 100f).align(Align.top).padRight(MyConstants.SCREENWIDTH / 100f).padTop(MyConstants.SCREENHEIGHT / 200f);
 

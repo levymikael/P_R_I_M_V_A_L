@@ -156,14 +156,17 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
 
     public void reorganiseBilles()
     {
-        ArrayList<UneBille> arrayBillesAux = new ArrayList<>(allBilles);
-
-        allBilles.clear();
-
-        for (int i = 0; i < arrayBillesAux.size(); i++)
+        if (this.isActive)
         {
-            UneBille bille = arrayBillesAux.get(i);
-            addBille(bille);
+            ArrayList<UneBille> arrayBillesAux = new ArrayList<>(allBilles);
+
+            allBilles.clear();
+
+            for (int i = 0; i < arrayBillesAux.size(); i++)
+            {
+                UneBille bille = arrayBillesAux.get(i);
+                addBille(bille);
+            }
         }
     }
 

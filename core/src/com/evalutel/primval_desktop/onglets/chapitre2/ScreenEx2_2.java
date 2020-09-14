@@ -49,7 +49,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     private float posX, posY;
 
     TextButton.TextButtonStyle styleTest;
-    Drawable drawableAux;
+    private Drawable drawableAux;
 
     private int cptOiseauTotal, cptOiseau1, cptOiseau2, /*cptBille,*/
             oiseauxToDisplayBranche1, oiseauxToDisplayBranche2;
@@ -58,8 +58,8 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
     Label currentLabel;
 
-    String nbInput;
-    boolean afterCorrection, isAllActive, touchValidate = false;
+    private String nbInput;
+    private boolean afterCorrection, isAllActive, touchValidate = false;
 
 
     ScreenEx2_2(final Game game, String ongletTitre)
@@ -71,7 +71,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
         oiseauxList = getNumberOiseauxArList();
 
-        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60, 9 * MyConstants.SCREENHEIGHT / 11, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
+        sacDeBilles = new SacDeBilles(53 * MyConstants.SCREENWIDTH / 60f, 9 * MyConstants.SCREENHEIGHT / 11f, (largeurBilleUnique * 1.5f), (largeurBilleUnique * 1.5f));
         sacDeBilles.largeurBille = largeurBilleMultiple;
         sacDeBilles.setActive(false);
         allDrawables.add(sacDeBilles);
@@ -81,8 +81,8 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         float allPlanchesStartPositionX = 1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2;
 
         planche1 = new UnePlancheNew(allPlanchesStartPositionX, 1.9f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-        planche2 = new UnePlancheNew(allPlanchesStartPositionX, 1.2f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
-        planche3 = new UnePlancheNew(allPlanchesStartPositionX, 0.5f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        planche2 = new UnePlancheNew(allPlanchesStartPositionX, 1.1f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
+        planche3 = new UnePlancheNew(allPlanchesStartPositionX, .3f * MyConstants.SCREENHEIGHT / 3, largeurPlancheMultiple, largeurBilleMultiple);
         allPlanches.add(planche1);
         allPlanches.add(planche2);
         allPlanches.add(planche3);
@@ -201,13 +201,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 return true;
             }
         });
-
-
         timer.schedule(new PresentationMetrologue(3_000), 1_000);
-
-//        cptOiseau1 = 5;
-//        cptOiseau2 = 2;
-//        metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_JAnnonceLAddition.mp3", new Annonce1(1_000));
     }
 
 
@@ -239,7 +233,17 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         {
             MyTimer.TaskEtape nextEtape = new DisplayOiseauxBranche1(2_000, 1_000);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_desoiseauxSePosentSurLaBranche.mp3", nextEtape);
+            if (questionCourante == 0)
+            {
+
+                metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_desoiseauxSePosentSurLaBranche.mp3", nextEtape);
+
+            }
+            else
+            {
+                timer.schedule(nextEtape, delayN);
+            }
+
         }
     }
 
@@ -324,7 +328,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             try
             {
                 value = Integer.parseInt(txtTape);
-            } catch (Exception e)
+            } catch (Exception ignored)
             {
 
             }
@@ -336,7 +340,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                 planche1.setAllBillesInactive();
                 planche1.setActive(false);
                 uneArdoise2.fillLabel(1, Integer.toString(value));
-
             }
             else
             {
@@ -369,7 +372,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
                 }
                 failedAttempts++;
-
             }
         }
     }
@@ -583,7 +585,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
     private class NextQuestion extends MyTimer.TaskEtape
     {
-
         private NextQuestion(long durMillis)
         {
             super(durMillis);
@@ -597,7 +598,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             isAllActive = true;
 
             timer.schedule(new EtapeInstructionPlanche2(500, 0), 0);
-
 
             nbInput = null;
         }
@@ -615,7 +615,19 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         {
             MyTimer.TaskEtape nextEtape = new DisplayOiseauxBranche2(2_000, 1_000);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_PlaceSurLaDeuxiemePlancheAutantDebIlles.mp3", nextEtape);
+
+            if (questionCourante == 0)
+            {
+
+                metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_PlaceSurLaDeuxiemePlancheAutantDebIlles.mp3", nextEtape);
+
+            }
+            else
+            {
+                timer.schedule(nextEtape, delayN);
+            }
+
+
             activiteView.addTextActivite("Place sur la deuxième planche autant de billes que d'oiseaux que tu vois sur la seconde branche, tape leur nombre au clavier puis valide");
         }
     }
@@ -695,7 +707,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             try
             {
                 value = Integer.parseInt(txtTape);
-            } catch (Exception e)
+            } catch (Exception ignored)
             {
 
             }
@@ -992,7 +1004,10 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             {
                 if (cptOiseauTotal == cptOiseau1)
                 {
-                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_LesOiseauxSenvolent.mp3");
+                    if (questionCourante == 0)
+                    {
+                        metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_LesOiseauxSenvolent.mp3");
+                    }
                 }
 
                 UnOiseau oiseau = oiseauxList.get(cptOiseauTotal - 1);
@@ -1007,8 +1022,16 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             else
             {
                 planche3.setVisible(true);
+                MyTimer.TaskEtape nextEtape = new InputClavier3(1_000);
+                if (questionCourante == 0)
+                {
+                    metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_DeplaceToutesLesBillesSurLaPlancheTotal.mp3", nextEtape);
+                }
+                else
+                {
+                    timer.schedule(nextEtape, delayN);
+                }
 
-                metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_DeplaceToutesLesBillesSurLaPlancheTotal.mp3", new InputClavier3(/*(250),*/ 1_000));
                 activiteView.addTextActivite("Déplace toutes les billes sur la planche Total. \nTape ensuite sur le clavier le nombre de billes qui s'y trouvent puis valide.");
 
                 brancheRenewal++;
@@ -1060,7 +1083,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             try
             {
                 value = Integer.parseInt(txtTape);
-            } catch (Exception e)
+            } catch (Exception ignored)
             {
 
             }
@@ -1508,7 +1531,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
 
             }
         }
-
     }
 
 
@@ -1533,7 +1555,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     }
 
 
-    public ArrayList<UneBille> autoFillPlanche()
+    private ArrayList<UneBille> autoFillPlanche()
     {
         float firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
         float firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
@@ -1554,7 +1576,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     }
 
 
-    public int randOiseau2(int nbOiseau1)
+    private int randOiseau2(int nbOiseau1)
     {
         return MathUtils.random(1, Math.min(1, 9 - nbOiseau1));
     }
@@ -1569,7 +1591,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             oiseauxNumUpTo9[0] = nbOiseau1;
             oiseauxNumUpTo9[1] = randOiseau2(nbOiseau1);
             randOiseauxArray.add(oiseauxNumUpTo9);
-
         }
     }
 
@@ -1668,6 +1689,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             if (objectTouched instanceof UneBille)
             {
                 UneBille billeAux = (UneBille) objectTouched;
+
 
                 billeAux.touchUp(allPlanches);
                 billesList.add(billeAux);

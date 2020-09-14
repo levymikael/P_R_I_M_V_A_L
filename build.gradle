@@ -56,8 +56,6 @@ project(":desktop") {
 //        api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
 
-
-
         implementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         implementation group: 'de.dfki.mary', name: 'voice-cmu-slt-hsmm', version: '5.2'
 
@@ -116,9 +114,5 @@ project(":core") {
         implementation "com.kotcrab.vis:vis-ui:$visuiVersion"
         implementation "com.badlogicgames.gdx:gdx-ai:1.8.1"
         implementation 'org.codehaus.izpack:izpack-ant:5.1.3'
-
-
     }
-
-
 }

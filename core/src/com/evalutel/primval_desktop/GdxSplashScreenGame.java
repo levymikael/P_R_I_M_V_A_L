@@ -24,6 +24,7 @@ public class GdxSplashScreenGame extends Game implements ApplicationListener
         Gdx.graphics.setTitle("Primval");
 
         setScreen(new SplashScreen());
+        setScreen(new SplashScreen());
 
         Timer.schedule(
                 new Timer.Task()
@@ -31,7 +32,7 @@ public class GdxSplashScreenGame extends Game implements ApplicationListener
                     @Override
                     public void run()
                     {
-                        GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this/*, new DatabaseDesktop()*/));
+                        GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this));
                     }
                 }, 2f);
 
@@ -57,13 +58,13 @@ public class GdxSplashScreenGame extends Game implements ApplicationListener
                                         @Override
                                         public void run()
                                         {
-                                            GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this/*, new DatabaseDesktop()*/));
+                                            GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this));
                                         }
                                     }, (float) (GdxSplashScreenGame.SPLASH_MINIMUM_MILLIS - splash_elapsed_time) / 1_000f);
                         }
                         else
                         {
-                            GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this/*, new DatabaseDesktop()*/));
+                            GdxSplashScreenGame.this.setScreen(new Screen_Sommaire_General(GdxSplashScreenGame.this));
                         }
                     }
                 });

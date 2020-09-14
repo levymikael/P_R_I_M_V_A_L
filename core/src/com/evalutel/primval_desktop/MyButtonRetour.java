@@ -50,7 +50,7 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
                             }
                 );
                 break;
-            case "screen all chapters":
+           /* case "screen all chapters":
                 addListener(new ClickListener()
                             {
                                 @Override
@@ -61,7 +61,7 @@ public class MyButtonRetour extends MyImageButton implements MyDrawInterface
                                 }
                             }
                 );
-                break;
+                break;*/
         }
     }
 

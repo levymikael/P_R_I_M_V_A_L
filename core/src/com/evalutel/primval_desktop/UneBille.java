@@ -124,7 +124,7 @@ public class UneBille extends AnimationImageNew implements MyTouchInterface, MyD
                     if (this.plancheNew.shouldReturnToReserve)
                     {
                         this.plancheNew = null;
-                        this.setPosition(100000, 100000);
+                        this.setPosition(10_000, 10_000);
                         sacDeBilles.addBilleToReserve(this);
                     }
                     else

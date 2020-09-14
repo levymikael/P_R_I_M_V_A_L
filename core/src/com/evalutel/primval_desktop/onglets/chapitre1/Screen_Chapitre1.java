@@ -57,7 +57,7 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
 
         ListExercicesActiviteViewChap1 listExercicesActiviteViewChap1 = new ListExercicesActiviteViewChap1(stage, game);
 
-        MyButtonRetour myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15f, MyConstants.SCREENWIDTH / 15f, game, "sommaire general");
+        MyButtonRetour myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15f, MyConstants.SCREENWIDTH / 15f, game, "chapitres");
         myButtonRetour.setPosition(MyConstants.SCREENWIDTH * .02f, 5 * MyConstants.SCREENHEIGHT / 6f - myButtonRetour.getHeight() / 2f);
 
 
@@ -99,10 +99,10 @@ public class Screen_Chapitre1 extends Game implements Screen, InputProcessor, Ap
         Table nomChapitre = new Table();
 
 
-        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25f).height(titleChapterHeight).padRight(screenWidth / 150f);
+        nomChapitre.add(new Image(textureNumber1)).width(MyConstants.SCREENWIDTH / 25f).height(titleChapterHeight).padRight(screenWidth / 130f);
         nomChapitre.add(labelChap1Titre).width(MyConstants.SCREENWIDTH / 4f).align(Align.left);
         nomChapitre.setWidth(nomChapitreWidth);
-        nomChapitre.setPosition(screenWidth / 2f - (labelChap1Titre.getWidth() / 2f), positionYLogoChapitre - (titleChapterHeight*.5f));
+        nomChapitre.setPosition(screenWidth / 2f - (labelChap1Titre.getWidth() / 2f), positionYLogoChapitre - (titleChapterHeight * .5f));
         stage.addActor(nomChapitre);
 
         int numChapter = 1;

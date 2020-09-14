@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.General.MyConstants;
 import com.evalutel.primval_desktop.General.UIDesign;
@@ -42,7 +43,6 @@ public class MrNotes implements MyDrawInterface
 
         AppSingleton appSingleton = AppSingleton.getInstance();
         MyDataBase db = appSingleton.myDataBase;
-
 
         totalNotes = db.getTotalNotePageForIdProfil(chapitre);
 
@@ -83,7 +83,7 @@ public class MrNotes implements MyDrawInterface
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
         border.add(notes);
 
-        container.add(mrNotes).height(itemHeight).width(itemWidth);
+        container.add(mrNotes).height(itemHeight).width(itemWidth).align(Align.center);
         container.row();
         container.add(border).padRight(screenWidth / 50f);
 

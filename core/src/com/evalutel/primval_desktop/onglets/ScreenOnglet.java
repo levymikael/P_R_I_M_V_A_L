@@ -469,7 +469,7 @@ public class ScreenOnglet implements Screen, InputProcessor
             if (objectTouched instanceof UneBille)
             {
                 UneBille billeAux = (UneBille) objectTouched;
-                billeAux.touchUp(allPlanches/*, screenX, MyConstants.SCREENHeight - screenY*/);
+                billeAux.touchUp(allPlanches);
 //
 //                else /*si bille pas deposee dans planche*/
 //                    {

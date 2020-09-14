@@ -36,7 +36,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
     private int screenWidth, screenHeight;
     private SpriteBatch batch;
 
-
+    Table quit;
     private ScreeenBackgroundImage fondSommairee, fondSommaire, imgSommaire;
 
     float bandeauGaucheWidth;
@@ -198,7 +198,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         Texture escapeBtn = new Texture(Gdx.files.internal("Images/Quitter primaire.png"));
         escapeBtn.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        Table quit = new Table();
+        quit = new Table();
         quit.setTouchable(Touchable.enabled);
         quit.setBackground(new SpriteDrawable(new Sprite(escapeBtn)));
         quit.setSize(screenWidth / 20f, screenWidth / 20f);
@@ -211,16 +211,7 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
         strDate = formatter.format(date);
 
-        quit.addListener(new ClickListener()
-        {
-            @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
 
-                Gdx.app.exit();
-                Gdx.app.log("Escape", "Quit at " + strDate);
-            }
-        });
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -286,6 +277,18 @@ public class Screen_Sommaire_General extends Game implements Screen, InputProces
             Gdx.app.exit();
             Gdx.app.log("Escape", "Quit at " + strDate);
         }
+
+
+        quit.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+
+                Gdx.app.exit();
+                Gdx.app.log("Escape", "Quit at " + strDate);
+            }
+        });
         batch.begin();
 
         fondSommaire.myDraw2(batch, 0, 0, screenWidth / 5f, screenHeight);

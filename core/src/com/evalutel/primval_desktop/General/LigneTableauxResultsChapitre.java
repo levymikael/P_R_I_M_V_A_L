@@ -85,8 +85,21 @@ public class LigneTableauxResultsChapitre
         {
             totalNotesPossibles += arrayBareme[i];
         }
+        String newTotalNotes = "";
 
-        String newTotalNotes = notes2Implement.substring(0, notes2Implement.length() - 2) + totalNotesPossibles;
+        if (chapitre == 1)
+        {
+            newTotalNotes = notes2Implement.substring(0, notes2Implement.length() - 2) + "36";
+
+
+        }
+        else
+        {
+            newTotalNotes = notes2Implement.substring(0, notes2Implement.length() - 2) + totalNotesPossibles;
+
+        }
+
+//        String newTotalNotes = notes2Implement.substring(0, notes2Implement.length() - 2) + totalNotesPossibles;
 
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
         labelStyleNotes.font = bitmapFontArial;
@@ -110,7 +123,7 @@ public class LigneTableauxResultsChapitre
         Texture triangleDown = new Texture(Gdx.files.internal("Images/Sommaire/sort_down.png"));
         triangleDown.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-float labelWidth = screenWidth / 9f;
+        float labelWidth = screenWidth / 9f;
 
         table.add(new Image(triangleDown)).height(button.getWidth()).width(button.getWidth()).padLeft(screenWidth / 75f).padTop(screenHeight / 100f).padBottom(screenHeight / 100f);
         table.add(button).height(button.getHeight()).width(button.getWidth()).padLeft(screenWidth / 80f);

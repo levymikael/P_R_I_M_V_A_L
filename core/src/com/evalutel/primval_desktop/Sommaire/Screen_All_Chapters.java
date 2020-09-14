@@ -159,8 +159,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         myButtonRetour.setPosition(MyConstants.SCREENWIDTH * .02f, 5 * MyConstants.SCREENHEIGHT / 6f - myButtonRetour.getHeight() / 2f);
 
 
-        Texture chapter1Title = new Texture(Gdx.files.internal("Images/Pages Chapitres/titre Calcul et géométrie.png"));
-        chapter1Title.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Texture allChaptersScreenTitle = new Texture(Gdx.files.internal("Images/Pages Chapitres/titre Calcul et géométrie.png"));
+        allChaptersScreenTitle.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
         Table allChaptersTitle = new Table();
@@ -171,9 +171,12 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         bandeauHautY = (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f);
 
 
-        allChaptersTitle.setBackground(new SpriteDrawable(new Sprite(chapter1Title)));
+        float chapterTitleYPosition = bandeauHautY + ((MyConstants.SCREENHEIGHT - bandeauHautY) / 2f) - (chapterTitleHeight / 2);
+
+
+        allChaptersTitle.setBackground(new SpriteDrawable(new Sprite(allChaptersScreenTitle)));
         allChaptersTitle.setSize(chapterTitleWidth, chapterTitleHeight);
-        allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2f - allChaptersTitle.getWidth() / 2, bandeauHautY + ((MyConstants.SCREENHEIGHT - bandeauHautY) / 4f));
+        allChaptersTitle.setPosition(MyConstants.SCREENWIDTH / 2f - chapterTitleWidth / 2, chapterTitleYPosition);
         stage.addActor(allChaptersTitle);
 
         MrNotes2 mrNotes = new MrNotes2(stage, 22.5f * MyConstants.SCREENWIDTH / 25f, 4 * MyConstants.SCREENHEIGHT / 5f, "all chapters");
@@ -220,95 +223,8 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Gdx.input.setInputProcessor(stage);
     }
 
-    public Table border(Table innerTable)
-    {
-        Table border = new Table();
-        border.pad(2);
-        border.setBackground(new SpriteDrawable(new Sprite(new Texture(pmBlueBorder))));
-        border.add(innerTable);
 
-        return border;
-    }
-
-
-    public Table innerTitle(String innerTitle)
-    {
-        Table innerTitleTable = new Table();
-
-        Label labelManipulerTitle = new Label(innerTitle, labelStyleBlueArialBold);
-
-        innerTitleTable.add(labelManipulerTitle).width(tableWidth).align(Align.center);
-        innerTitleTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
-
-        return innerTitleTable;
-    }
-
-    public Table innerTable(String content)
-    {
-        Table innerContentTable = new Table();
-
-        Label labelContentText = new Label(content, labelStyleBlueArial);
-        labelContentText.setWrap(true);
-
-        innerContentTable.add(labelContentText).width(tableWidth).height(heightTable);
-        innerContentTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
-
-        return innerContentTable;
-    }
-
-    public Table manipulerTable()
-    {
-        Table manipulerTable = new Table();
-
-        Table manipulerTitleTable = new Table();
-        manipulerTitleTable.add(innerTitle("MANIPULER")).align(Align.center);
-
-        String manipulerTableContent = "Des objets interactifs et ludiques sont conçus pour permettre à l'enfant de comprendre la numération , les opérations arithmétiques et les notions de base de géométrie.";
-        Table manipulerContentTable = new Table();
-        manipulerContentTable.add(innerTable(manipulerTableContent));
-
-        manipulerTable.add(manipulerTitleTable).width(tableWidth).center();
-        manipulerTable.row();
-        manipulerTable.add(manipulerContentTable).width(tableWidth).height(heightTable)/*.width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 40f).align(Align.top).fillY()*/;
-//        manipulerTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
-
-
-        return manipulerTable;
-    }
-
-    public Table apprendreTable()
-    {
-        Table apprendreTable = new Table();
-        Label labelApprendreTitle = new Label("APPRENDRE", labelStyleBlueArialBold);
-        Label labelApprendreText = new Label("Les notions nouvelles sont introduites par des cours et des exemples. Chaque manipulation est mise en correspondance avec l'opération que l'enfant est invité à faire sur l'ardoise et sur la solution, tout en étant corrigé pas à pas.", labelStyleBlueArial);
-        labelApprendreText.setWrap(true);
-
-        apprendreTable.add(labelApprendreTitle).prefHeight(heightlabelTitle);
-        apprendreTable.row();
-        apprendreTable.add(labelApprendreText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).padRight(paddingManipulerApprendreEvaluer).padBottom(MyConstants.SCREENHEIGHT / 100f);
-        apprendreTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
-        return apprendreTable;
-    }
-
-    public Table evaluerTable()
-    {
-        Table evaluerTable = new Table();
-        Label labelEvaluerTitle = new Label("EVALUER", labelStyleBlueArialBold);
-        Label labelEvaluerText = new Label("Tous les exercices/problèmes sont notés. L'enfant peut toujours améliorer sa note en refaisant l'exercice. Un tableau récapitule les sujets abordés complètement ou partiellement, les temps passés et les résultats obtenus.       ", labelStyleBlueArial);
-        labelEvaluerText.setWrap(true);
-
-        evaluerTable.add(labelEvaluerTitle).prefHeight(heightlabelTitle);
-        evaluerTable.row();
-        evaluerTable.add(labelEvaluerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).padRight(paddingManipulerApprendreEvaluer).align(Align.top)/*.padBottom(MyConstants.SCREENHEIGHT / 100f)*/;
-        evaluerTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmWhite))));
-
-        evaluerTable.row();
-
-        return evaluerTable;
-    }
-
-
-    public Table evalutelMotto()
+    private Table evalutelMotto()
     {
         Label.LabelStyle labelStyleBlueArialBold = new Label.LabelStyle();
         labelStyleBlueArialBold.font = bitmapFontArialBold;
@@ -346,9 +262,9 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         int paddingMottoDetailsBorder = MyConstants.SCREENWIDTH / 1000;
         int heightlabelTitle = MyConstants.SCREENHEIGHT / 25;
-        int tableWidth = MyConstants.SCREENWIDTH / 4;
+        float tableWidth = MyConstants.SCREENWIDTH / 3.6f;
         float heightTable = MyConstants.SCREENHEIGHT / 5f;
-        int paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 70;
+        int paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 100;
         int paddingCoteEvalutelMotto = MyConstants.SCREENHEIGHT / 50;
 
         int leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80;

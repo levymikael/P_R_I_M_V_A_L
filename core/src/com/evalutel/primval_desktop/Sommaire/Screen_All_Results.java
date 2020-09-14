@@ -355,7 +355,7 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
         Table tableEx3 = LigneTableauxResults.getLigne(trois_bouton_red, label3, textureCours, "red", chapitre, 3, bitmapFontArial, arrayBaremeChapitre[0]);
         Table tableEx4 = LigneTableauxResults.getLigne(quatre_bouton_blue, label4, textureExercices, "blue", chapitre, 4, bitmapFontArial, arrayBaremeChapitre[1]);
         Table tableEx5 = LigneTableauxResults.getLigne(cinq_bouton_blue, label5, textureExercices, "blue", chapitre, 5, bitmapFontArial, arrayBaremeChapitre[2]);
-        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, bitmapFontArial, arrayBaremeChapitre[3]);
+        Table tableEx6 = LigneTableauxResults.getLigne(six_bouton_blue, label6, textureExercices, "blue", chapitre, 6, bitmapFontArial, arrayBaremeChapitre[4]);
 
         tableCollapsible1.add(tableEx1).height(lineHeight).padBottom(paddingInterOnglets).width(screenWidth).height(lineHeight);
         tableCollapsible1.row();
