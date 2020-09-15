@@ -23,7 +23,6 @@ public class MrNotes2 implements MyDrawInterface
     public MrNotes2(Stage stage, float positionX, float positionY, String screen)
     {
         screenWidth = MyConstants.SCREENWIDTH;
-        final int screenHeight = MyConstants.SCREENHEIGHT;
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial-bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -36,8 +35,6 @@ public class MrNotes2 implements MyDrawInterface
         String totalNotes;
 
         AppSingleton appSingleton = AppSingleton.getInstance();
-
-
 
         totalNotes = appSingleton.myDataBase.getTotalNotePageForIdProfil(0);
         String newTotalNotes;
@@ -69,13 +66,11 @@ public class MrNotes2 implements MyDrawInterface
         container.setSize(logoWidth, logoHeight);
 
 
-
         container.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
         if (screen.equals("general"))
         {
             container.add(labelNotes).padLeft(logoWidth/3f).padTop(MyConstants.SCREENHEIGHT / 160f).expand().fill();
             container.setPosition(positionXNew, positionY);
-
         }
         else
         {

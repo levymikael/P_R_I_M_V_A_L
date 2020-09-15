@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -57,11 +58,9 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
     boolean afterCorrection = false;
     Texture ardoiseBgInactive;
 
-     ScreenEx1_4(final Game game, String ongletTitre)
+    ScreenEx1_4(final Game game, String ongletTitre)
     {
         super(game, 1, 4, true, 9);
-
-        this.dataBase = dataBase;
 
         ardoiseBgInactive = new Texture("Images/Ardoise/ardoise_fond_inactive.jpg");
         ardoiseBgInactive.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -564,7 +563,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
     }
 
 
-    public void displayArdoise()
+    private void displayArdoise()
     {
         float firstPositionArdoiseX = MyConstants.SCREENWIDTH / 4f;
         float firstPositionArdoiseY = 2 * MyConstants.SCREENHEIGHT / 3f;
@@ -611,7 +610,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         }
     }
 
-    public void displayBille(int nbBillesToDisplay)
+    private void displayBille(int nbBillesToDisplay)
     {
         for (int i = 0; i < nbBillesToDisplay; i++)
         {
@@ -627,7 +626,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
     }
 
 
-    public void cleanPlanche()
+    private void cleanPlanche()
     {
         for (int i = 0; i < billesList.size(); i++)
         {
@@ -639,7 +638,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         billesList.clear();
     }
 
-    public void ardoiseDisappear()
+    private void ardoiseDisappear()
     {
         for (int i = 0; i < ardoiseList.size(); i++)
         {
@@ -648,7 +647,7 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         }
     }
 
-    public void ardoiseAppear()
+    private void ardoiseAppear()
     {
         for (int i = 0; i < ardoiseList.size(); i++)
         {
@@ -657,14 +656,12 @@ public class ScreenEx1_4 extends ScreenOnglet implements InputProcessor
         }
     }
 
-    public String getBgImageRandom()
+    private String getBgImageRandom()
     {
-        String bgImgRandom = "";
+        String bgImgRandom;
 
-        Random rand = new Random();
+        int rand_int = MathUtils.random(1, 14);
 
-        int fondSequenceFolderSize = 14;
-        int rand_int = rand.nextInt(fondSequenceFolderSize) + 1;
         if (rand_int < 10)
         {
             bgImgRandom = "fond0" + rand_int + ".jpg";

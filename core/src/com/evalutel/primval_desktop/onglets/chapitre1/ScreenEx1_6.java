@@ -48,7 +48,7 @@ public class ScreenEx1_6 extends ScreenOnglet implements InputProcessor
     int cptBougie = 0;
     private int randNumPastille;
 
-    TextButton.TextButtonStyle styleTest;
+    private TextButton.TextButtonStyle styleTest;
 
 //    int posX, posY;
 

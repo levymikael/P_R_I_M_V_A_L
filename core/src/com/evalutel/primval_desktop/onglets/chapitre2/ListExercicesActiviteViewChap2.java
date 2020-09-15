@@ -21,15 +21,11 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
     public float screenWidth;
     private boolean isVisible = true;
 
-    Game game;
-
 
     public ListExercicesActiviteViewChap2(Stage stage, final Game game)
     {
         screenWidth = MyConstants.SCREENWIDTH;
         final int screenHeight = MyConstants.SCREENHEIGHT;
-
-        this.game = game;
 
         final String label1 = "Addition dont le total ne dépasse pas 9";
         final String label2 = "Additionner les oiseaux sur les deux branches";
@@ -71,10 +67,10 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
         table.row();
         table.add(tableEx2).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
-//        table.add(tableEx3).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
-//        table.row();
-//        table.add(tableEx4).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
-//        table.row();
+        table.add(tableEx3).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
+        table.row();
+        table.add(tableEx4).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
+        table.row();
 //        table.add(tableEx5).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
 
 
@@ -115,15 +111,15 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
 
             }
         });
-//        tableEx4.addListener(new ClickListener()
-//        {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y)
-//            {
-//                game.setScreen(new ScreenEx2_4(game, label4));
-//                System.out.println("I got clicked!4");
-//            }
-//        });
+        tableEx4.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                game.setScreen(new ScreenEx2_4(game, label4));
+                System.out.println("I got clicked!4");
+            }
+        });
         tableEx5.addListener(new ClickListener()
         {
             @Override

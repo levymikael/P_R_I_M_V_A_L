@@ -264,7 +264,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         int heightlabelTitle = MyConstants.SCREENHEIGHT / 25;
         float tableWidth = MyConstants.SCREENWIDTH / 3.6f;
         float heightTable = MyConstants.SCREENHEIGHT / 5f;
-        int paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 100;
+        float paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 150f;
         int paddingCoteEvalutelMotto = MyConstants.SCREENHEIGHT / 50;
 
         int leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80;
@@ -286,7 +286,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
         apprendreTable.add(labelApprendreTitle).height(heightlabelTitle);
         apprendreTable.row();
-        apprendreTable.add(labelApprendreText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer);
+        apprendreTable.add(labelApprendreText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer * .8f).height(heightTable).padRight(paddingManipulerApprendreEvaluer * .8f);
         apprendreTable.setBackground(new SpriteDrawable(new Sprite(new Texture(pmWhite))));
 
         Table borderApprendre = new Table();

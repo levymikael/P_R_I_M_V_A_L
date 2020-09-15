@@ -63,7 +63,7 @@ public class MrNotes implements MyDrawInterface
         Table border = new Table();
 
 
-        container.setPosition(MyConstants.SCREENWIDTH - itemWidth /** .7f*/, 21f * screenHeight / 25f);
+        container.setPosition(MyConstants.SCREENWIDTH - itemWidth, 21f * screenHeight / 25f);
 
         int widthButton = 500;
         int heightButton = widthButton / 4;
@@ -73,6 +73,7 @@ public class MrNotes implements MyDrawInterface
         mrNotes.setBackground(new SpriteDrawable(new Sprite(new TextureRegion(textureMrNotes))));
         mrNotes.setSize(itemWidth, itemHeight);
         Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, cornerRadius, Color.WHITE);
+//        mrNotes.debug();
 
         notes.add(labelNotes).height(itemHeight / 4f).padLeft(screenWidth / 60f).padRight(screenWidth / 60f);
         notes.setBackground(new SpriteDrawable(new Sprite(new Texture(whiteRoundedBackground))));
@@ -83,7 +84,7 @@ public class MrNotes implements MyDrawInterface
         border.setBackground(new SpriteDrawable(new Sprite(new Texture(orangeBorder))));
         border.add(notes);
 
-        container.add(mrNotes).height(itemHeight).width(itemWidth).align(Align.center);
+        container.add(mrNotes).height(itemHeight).width(itemWidth).align(Align.left).padLeft(MyConstants.SCREENWIDTH / 80f);
         container.row();
         container.add(border).padRight(screenWidth / 50f);
 
