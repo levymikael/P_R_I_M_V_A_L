@@ -237,8 +237,8 @@ public class UnePlancheNew extends AnimationImageNew implements MyDrawInterface,
     }
 
     @Override
-    public void setActive(boolean isActive)
+    public void setActive(boolean active)
     {
-
+        isActive = active;
     }
 }

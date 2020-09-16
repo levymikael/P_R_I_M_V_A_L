@@ -159,14 +159,14 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         myButtonRetour.setPosition(MyConstants.SCREENWIDTH * .02f, 5 * MyConstants.SCREENHEIGHT / 6f - myButtonRetour.getHeight() / 2f);
 
 
-        Texture allChaptersScreenTitle = new Texture(Gdx.files.internal("Images/Pages Chapitres/titre Calcul et géométrie.png"));
+        Texture allChaptersScreenTitle = new Texture(Gdx.files.internal("Images/Pages Chapitres/texte calcul et géométrie.png"));
         allChaptersScreenTitle.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
         Table allChaptersTitle = new Table();
 
         float chapterTitleWidth = MyConstants.SCREENWIDTH / 2.5f;
-        float chapterTitleHeight = chapterTitleWidth * (55f / 387f);
+        float chapterTitleHeight = chapterTitleWidth * (106f / 769f);
 
         bandeauHautY = (MyConstants.SCREENHEIGHT - MyConstants.SCREENHEIGHT / 6f);
 
@@ -191,9 +191,17 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         container.setSize(MyConstants.SCREENWIDTH, heightContainer);
         container.setPosition(0, 0);
 
-        Table evalutelMotto = evalutelMotto();
+//        Table evalutelMotto = evalutelMotto();
+        Table evalutelMotto = new Table();
 
-        Texture chapitresLogo = new Texture(Gdx.files.internal("Images/Sommaire/Chapitres.png"));
+        Texture evalutelMottoTxture = new Texture(Gdx.files.internal("Images/Pages Chapitres/Texte devise.jpg"));
+        allChaptersScreenTitle.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        float evalutelMottoWidth = MyConstants.SCREENWIDTH * .96f;
+        float evalutelMottoHeight = evalutelMottoWidth * (216f / 1241f);
+
+        evalutelMotto.setBackground(new SpriteDrawable(new Sprite(evalutelMottoTxture)));
+
+        Texture chapitresLogo = new Texture(Gdx.files.internal("Images/Sommaire/texte chapitres.png"));
         chapitresLogo.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Table chapterLogo = new Table();
@@ -201,11 +209,11 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
 
 
         float chapterLogoWidth = MyConstants.SCREENWIDTH / 6f;
-        float chapterLogoHeight = chapterLogoWidth * 41f / 161f;
+        float chapterLogoHeight = chapterLogoWidth * 76f / 300f;
 
         Table chaptersListView = chaptersListView();
 
-        table.add(evalutelMotto).align(Align.center).padTop(MyConstants.SCREENHEIGHT / 50f).width(MyConstants.SCREENWIDTH * .96f).padLeft(MyConstants.SCREENWIDTH * .02f).padRight(MyConstants.SCREENWIDTH * .02f);
+        table.add(evalutelMotto)/*.align(Align.center)*/.padTop(MyConstants.SCREENHEIGHT / 50f).width(evalutelMottoWidth).height(evalutelMottoHeight).padLeft(MyConstants.SCREENWIDTH * .02f).padRight(MyConstants.SCREENWIDTH * .02f);
         table.row();
         table.add(chapterLogo).width(chapterLogoWidth).height(chapterLogoHeight).align(Align.center).padBottom(MyConstants.SCREENHEIGHT / 60f).padTop(MyConstants.SCREENHEIGHT / 50f);
         table.row();
@@ -224,119 +232,119 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
     }
 
 
-    private Table evalutelMotto()
-    {
-        Label.LabelStyle labelStyleBlueArialBold = new Label.LabelStyle();
-        labelStyleBlueArialBold.font = bitmapFontArialBold;
-        labelStyleBlueArialBold.fontColor = MyConstants.bluePrimval;
-
-        Label.LabelStyle labelStyleBlueArial = new Label.LabelStyle();
-        labelStyleBlueArial.font = bitmapFontArial;
-        labelStyleBlueArial.fontColor = MyConstants.bluePrimval;
-
-        Label.LabelStyle labelStyleBlueZap = new Label.LabelStyle();
-        labelStyleBlueZap.font = bitmapFontZAP;
-        labelStyleBlueZap.fontColor = MyConstants.bluePrimval;
-
-        Label labelMottoTitle = new Label("Primval développé par Evalutel, propose un programe complet de Math et de géométrie pour le Primaire basé sur notre devise:", labelStyleBlueArialBold);
-        labelMottoTitle.setFontScale(1f);
-
-        int widthButton = 1000;
-        int heightButton = widthButton / 5;
-        int cornerRadius = heightButton / 8;
-
-//        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, Color.WHITE);
-//        Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
-//        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, Color.ROYAL);
-
-
-        Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
-        bgPixmap.setColor(Color.rgb888(234, 241, 250));
-        bgPixmap.fill();
-
-        Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pmBlue.setColor(Color.NAVY);
-        pmBlue.fill();
-
-        textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue)));
-
-        int paddingMottoDetailsBorder = MyConstants.SCREENWIDTH / 1000;
-        int heightlabelTitle = MyConstants.SCREENHEIGHT / 25;
-        float tableWidth = MyConstants.SCREENWIDTH / 3.6f;
-        float heightTable = MyConstants.SCREENHEIGHT / 5f;
-        float paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 150f;
-        int paddingCoteEvalutelMotto = MyConstants.SCREENHEIGHT / 50;
-
-        int leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80;
-
-        Table evalutelMotto = new Table();
-        evalutelMotto.setBackground(new SpriteDrawable(new Sprite(new Texture(bgPixmapLightBlue))));
-
-        evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails).align(Align.center);
-        evalutelMotto.padTop(paddingCoteEvalutelMotto).padRight(paddingCoteEvalutelMotto);
-        evalutelMotto.row();
-
-        Table evalutelMottoDetails = new Table();
-
-
-        Table apprendreTable = new Table();
-        Label labelApprendreTitle = new Label("APPRENDRE", labelStyleBlueArialBold);
-        Label labelApprendreText = new Label("Les notions nouvelles sont introduites par des cours et des exemples. Chaque manipulation est mise en correspondance avec l'opération que l'enfant est invité à faire sur l'ardoise et sur la solution, tout en étant corrigé pas à pas.", labelStyleBlueArial);
-        labelApprendreText.setWrap(true);
-
-        apprendreTable.add(labelApprendreTitle).height(heightlabelTitle);
-        apprendreTable.row();
-        apprendreTable.add(labelApprendreText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer * .8f).height(heightTable).padRight(paddingManipulerApprendreEvaluer * .8f);
-        apprendreTable.setBackground(new SpriteDrawable(new Sprite(new Texture(pmWhite))));
-
-        Table borderApprendre = new Table();
-        borderApprendre.pad(paddingMottoDetailsBorder);
-        borderApprendre.setBackground(new SpriteDrawable(new Sprite(new Texture(pmBlueBorder))));
-        borderApprendre.add(apprendreTable);
-
-        Table manipulerTable = new Table();
-        Label labelManipulerTitle = new Label("MANIPULER", labelStyleBlueArialBold);
-        Label labelManipulerText = new Label("Des objets interactifs et ludiques sont conçus pour permettre à l'enfant de comprendre la numération , les opérations arithmétiques et les notions de base de géométrie.", labelStyleBlueArial);
-        labelManipulerText.setWrap(true);
-
-        manipulerTable.add(labelManipulerTitle).height(heightlabelTitle);
-        manipulerTable.row();
-        manipulerTable.add(labelManipulerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer);
-        manipulerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(pmWhite))));
-
-        Table borderManipuler = new Table();
-        borderManipuler.pad(paddingMottoDetailsBorder);
-        borderManipuler.setBackground(new SpriteDrawable(new Sprite(new Texture(pmBlueBorder))));
-        borderManipuler.add(manipulerTable);
-
-
-        Table evaluerTable = new Table();
-        Label labelEvaluerTitle = new Label("EVALUER", labelStyleBlueArialBold);
-        Label labelEvaluerText = new Label("Tous les exercices/problèmes sont notés. L'enfant peut toujours améliorer sa note en refaisant l'exercice. Un tableau récapitule les sujets abordés complètement ou partiellement, les temps passés et les résultats obtenus.", labelStyleBlueArial);
-        labelEvaluerText.setWrap(true);
-
-        evaluerTable.add(labelEvaluerTitle).height(heightlabelTitle).padBottom(MyConstants.SCREENHEIGHT / 400f);
-        evaluerTable.row();
-        evaluerTable.add(labelEvaluerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer);
-        evaluerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(pmWhite))));
-
-        Table borderEvaluer = new Table();
-        borderEvaluer.pad(paddingMottoDetailsBorder);
-        borderEvaluer.setBackground(new SpriteDrawable(new Sprite(new Texture(pmBlueBorder))));
-        borderEvaluer.add(evaluerTable);
-
-        evalutelMottoDetails.add(borderManipuler).padLeft(leftPaddingBorderEvalutelDetails);
-        evalutelMottoDetails.add(borderApprendre).padLeft(leftPaddingBorderEvalutelDetails);
-        evalutelMottoDetails.add(borderEvaluer).padLeft(leftPaddingBorderEvalutelDetails);
-        evalutelMotto.add(evalutelMottoDetails).padBottom(leftPaddingBorderEvalutelDetails).width(MyConstants.SCREENWIDTH * .94f);
-
-        Table border = new Table();
-        border.pad(2);
-        border.setBackground(new SpriteDrawable(new Sprite(new Texture(pmBlueBorder))));
-        border.add(evalutelMotto).height(MyConstants.SCREENHEIGHT / 3f);
-
-        return border;
-    }
+//    private Table evalutelMotto()
+//    {
+//        Label.LabelStyle labelStyleBlueArialBold = new Label.LabelStyle();
+//        labelStyleBlueArialBold.font = bitmapFontArialBold;
+//        labelStyleBlueArialBold.fontColor = MyConstants.bluePrimval;
+//
+//        Label.LabelStyle labelStyleBlueArial = new Label.LabelStyle();
+//        labelStyleBlueArial.font = bitmapFontArial;
+//        labelStyleBlueArial.fontColor = MyConstants.bluePrimval;
+//
+//        Label.LabelStyle labelStyleBlueZap = new Label.LabelStyle();
+//        labelStyleBlueZap.font = bitmapFontZAP;
+//        labelStyleBlueZap.fontColor = MyConstants.bluePrimval;
+//
+//        Label labelMottoTitle = new Label("Primval développé par Evalutel, propose un programe complet de Math et de géométrie pour le Primaire basé sur notre devise:", labelStyleBlueArialBold);
+//        labelMottoTitle.setFontScale(1f);
+//
+//        int widthButton = 1000;
+//        int heightButton = widthButton / 5;
+//        int cornerRadius = heightButton / 8;
+//
+////        Pixmap whiteRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, Color.WHITE);
+////        Pixmap blueRoundedBackground2 = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, new Color(234.0f / 255.0f, 241.0f / 255.0f, 250.0f / 255.0f, 1));
+////        Pixmap blueRoundedBackground = UIDesign.createRoundedRectangle(widthButton, heightButton, 20, Color.ROYAL);
+//
+//
+//        Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
+//        bgPixmap.setColor(Color.rgb888(234, 241, 250));
+//        bgPixmap.fill();
+//
+//        Pixmap pmBlue = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+//        pmBlue.setColor(Color.NAVY);
+//        pmBlue.fill();
+//
+//        textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue)));
+//
+//        int paddingMottoDetailsBorder = MyConstants.SCREENWIDTH / 1000;
+//        int heightlabelTitle = MyConstants.SCREENHEIGHT / 25;
+//        float tableWidth = MyConstants.SCREENWIDTH / 3.6f;
+//        float heightTable = MyConstants.SCREENHEIGHT / 5f;
+//        float paddingManipulerApprendreEvaluer = MyConstants.SCREENWIDTH / 150f;
+//        int paddingCoteEvalutelMotto = MyConstants.SCREENHEIGHT / 50;
+//
+//        int leftPaddingBorderEvalutelDetails = MyConstants.SCREENWIDTH / 80;
+//
+//        Table evalutelMotto = new Table();
+//        evalutelMotto.setBackground(new SpriteDrawable(new Sprite(new Texture(bgPixmapLightBlue))));
+//
+//        evalutelMotto.add(labelMottoTitle).padBottom(leftPaddingBorderEvalutelDetails).align(Align.center);
+//        evalutelMotto.padTop(paddingCoteEvalutelMotto).padRight(paddingCoteEvalutelMotto);
+//        evalutelMotto.row();
+//
+//        Table evalutelMottoDetails = new Table();
+//
+//
+//        Table apprendreTable = new Table();
+//        Label labelApprendreTitle = new Label("APPRENDRE", labelStyleBlueArialBold);
+//        Label labelApprendreText = new Label("Les notions nouvelles sont introduites par des cours et des exemples. Chaque manipulation est mise en correspondance avec l'opération que l'enfant est invité à faire sur l'ardoise et sur la solution, tout en étant corrigé pas à pas.", labelStyleBlueArial);
+//        labelApprendreText.setWrap(true);
+//
+//        apprendreTable.add(labelApprendreTitle).height(heightlabelTitle);
+//        apprendreTable.row();
+//        apprendreTable.add(labelApprendreText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer * .8f).height(heightTable).padRight(paddingManipulerApprendreEvaluer * .8f);
+//        apprendreTable.setBackground(new SpriteDrawable(new Sprite(new Texture(pmWhite))));
+//
+//        Table borderApprendre = new Table();
+//        borderApprendre.pad(paddingMottoDetailsBorder);
+//        borderApprendre.setBackground(new SpriteDrawable(new Sprite(new Texture(pmBlueBorder))));
+//        borderApprendre.add(apprendreTable);
+//
+//        Table manipulerTable = new Table();
+//        Label labelManipulerTitle = new Label("MANIPULER", labelStyleBlueArialBold);
+//        Label labelManipulerText = new Label("Des objets interactifs et ludiques sont conçus pour permettre à l'enfant de comprendre la numération , les opérations arithmétiques et les notions de base de géométrie.", labelStyleBlueArial);
+//        labelManipulerText.setWrap(true);
+//
+//        manipulerTable.add(labelManipulerTitle).height(heightlabelTitle);
+//        manipulerTable.row();
+//        manipulerTable.add(labelManipulerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer);
+//        manipulerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(pmWhite))));
+//
+//        Table borderManipuler = new Table();
+//        borderManipuler.pad(paddingMottoDetailsBorder);
+//        borderManipuler.setBackground(new SpriteDrawable(new Sprite(new Texture(pmBlueBorder))));
+//        borderManipuler.add(manipulerTable);
+//
+//
+//        Table evaluerTable = new Table();
+//        Label labelEvaluerTitle = new Label("EVALUER", labelStyleBlueArialBold);
+//        Label labelEvaluerText = new Label("Tous les exercices/problèmes sont notés. L'enfant peut toujours améliorer sa note en refaisant l'exercice. Un tableau récapitule les sujets abordés complètement ou partiellement, les temps passés et les résultats obtenus.", labelStyleBlueArial);
+//        labelEvaluerText.setWrap(true);
+//
+//        evaluerTable.add(labelEvaluerTitle).height(heightlabelTitle).padBottom(MyConstants.SCREENHEIGHT / 400f);
+//        evaluerTable.row();
+//        evaluerTable.add(labelEvaluerText).width(tableWidth).padLeft(paddingManipulerApprendreEvaluer).height(heightTable).padRight(paddingManipulerApprendreEvaluer);
+//        evaluerTable.setBackground(new SpriteDrawable(new Sprite(new Texture(pmWhite))));
+//
+//        Table borderEvaluer = new Table();
+//        borderEvaluer.pad(paddingMottoDetailsBorder);
+//        borderEvaluer.setBackground(new SpriteDrawable(new Sprite(new Texture(pmBlueBorder))));
+//        borderEvaluer.add(evaluerTable);
+//
+//        evalutelMottoDetails.add(borderManipuler).padLeft(leftPaddingBorderEvalutelDetails);
+//        evalutelMottoDetails.add(borderApprendre).padLeft(leftPaddingBorderEvalutelDetails);
+//        evalutelMottoDetails.add(borderEvaluer).padLeft(leftPaddingBorderEvalutelDetails);
+//        evalutelMotto.add(evalutelMottoDetails).padBottom(leftPaddingBorderEvalutelDetails).width(MyConstants.SCREENWIDTH * .94f);
+//
+//        Table border = new Table();
+//        border.pad(2);
+//        border.setBackground(new SpriteDrawable(new Sprite(new Texture(pmBlueBorder))));
+//        border.add(evalutelMotto).height(MyConstants.SCREENHEIGHT / 3f);
+//
+//        return border;
+//    }
 
 //    public Table evalutelMotto()
 //    {

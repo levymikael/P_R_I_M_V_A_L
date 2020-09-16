@@ -23,6 +23,7 @@ import com.evalutel.primval_desktop.UneArdoise;
 import com.evalutel.primval_desktop.UneArdoise2;
 import com.evalutel.primval_desktop.UneCase;
 import com.evalutel.primval_desktop.UnePastelle;
+import com.evalutel.primval_desktop.UneTrace;
 import com.evalutel.primval_desktop.ValidusAnimated;
 import com.evalutel.primval_desktop.onglets.ScreenOnglet;
 import com.evalutel.primval_desktop.onglets.chapitre1.ScreenEx1_4;
@@ -42,6 +43,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
     //    private float posX, posY;
     ArrayList<UneCase> caseList = new ArrayList<>();
     ArrayList<UnePastelle> pastelleList = new ArrayList<>();
+    ArrayList<UneTrace> traceList = new ArrayList<>();
 
     TextButton.TextButtonStyle styleTest;
     private Drawable drawableAux;
@@ -51,7 +53,8 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
     String currentColor;
 
     float caseWidth, caseHeight;
-
+    ArrayList<String> contentArray = new ArrayList<>();
+    ArrayList<Integer> valueArray = new ArrayList<>();
 
     private String[] nbCombinaisonArrayString = {"3", "1 + 2", "2 + 1", "4", "2 + 2", "3 + 1", "5", "2 + 3", "1 + 4", "6", "1 + 5", "2 + 4", "3 + 3", "7", "1 + 6", "2 + 5", "3 + 4", "8", "1 + 7", "2 + 6", "3 + 5", "4 + 4", "9", "1 + 8", "2 + 7", "3 + 6", "4 + 5"};
 
@@ -93,7 +96,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 
         int noteMax = db.getHighestNote(2, 4);
 
-        String noteMaxObtenue = noteMax + "/18";
+        String noteMaxObtenue = noteMax + "/27";
 
         exoConsigneLabel = new Label(ongletTitre, labelStyleComic);
         exoNumLabel = new Label(numExercice, labelStyleArial);
@@ -161,7 +164,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
     {
         for (int i = 0; i < 27; i++)
         {
-            final UneCase uneCase = new UneCase(stage, nbCombinaisonArrayString[i], caseWidth, caseHeight, nbCombinaisonArrayValues[i]);
+            final UneCase uneCase = new UneCase(stage, nbCombinaisonArrayString[i], caseWidth, caseHeight, nbCombinaisonArrayValues[i], i);
             caseList.add(uneCase);
             objectTouchedList.add(uneCase);
 
@@ -173,17 +176,21 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                 {
                     super.clicked(event, x, y);
                     System.out.println(uneCase.getCaseValue() + "" + uneCase.isActive());
-
                     if (uneCase.isActive())
                     {
-                        isCaseClicked = !isCaseClicked;
-                        if (!isCaseClicked)
+                        isCaseClicked = true;
+
+
+                        if (isCaseClicked)
                         {
-                            uneCase.setBackCaseCouleurFond();
-                        }
-                        else
-                        {
-                            uneCase.setCaseCouleurFond(currentColor);
+                            String color2Check = uneCase.getCaseCouleur();
+                            if (color2Check != null)
+                            {
+                                isCaseAlreadyClicked(color2Check);
+                            }
+                            checkCaseContent(uneCase.getCaseContent(), uneCase.getCaseValue(), uneCase.getCaseIndex());
+
+
                         }
                     }
                 }
@@ -259,8 +266,82 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                             }
                         }
                     });
+
+        }
+
+        positionTrace();
+    }
+
+
+    public void isCaseAlreadyClicked(String couleur)
+    {
+        int ok = 5;
+        ok++;
+
+        if (couleur == currentColor)
+        {
+            validusAnimated.validusPlaySound("Sounds/Onglet2_4/Ong2_4_Validus_CetteCaseEstDejaColoree.mp3");
+
         }
     }
+
+    public void checkCaseContent(String content, int value, int caseListIndex)
+    {
+        int ok = 5;
+        ok++;
+
+        if (contentArray.size() > 1 && valueArray.size() > 1)
+        {
+            int firstValue = valueArray.get(0);
+            for (int i = 1; i < contentArray.size(); i++)
+            {
+                if (firstValue == valueArray.get(i))
+                {
+                    addDiamonds(1);
+                    caseList.get(caseListIndex).setCaseCouleurFond(currentColor);
+                    contentArray.add(content);
+                    valueArray.add(value);
+                }
+
+                else
+                {
+                    System.out.println("pas mme couleur");
+                }
+            }
+        }
+        else
+        {
+            contentArray.add(content);
+            valueArray.add(value);
+            addDiamonds(1);
+            caseList.get(caseListIndex).setCaseCouleurFond(currentColor);
+
+        }
+    }
+
+    public void positionTrace()
+    {
+        float traceWidth = MyConstants.SCREENWIDTH / 4f;
+        float traceHeight = traceWidth * (117f / 606f);
+
+        String[] traceColorName = {"bleufonce", "gris", "jaune", "marron", "rouge", "vert", "violet"};
+
+        for (int i = 0; i < traceColorName.length; i++)
+        {
+            float traceAuxPositionY = pastelleList.get(i).positionY;
+
+            final UneTrace traceAux = new UneTrace(stage, traceWidth, traceHeight, traceColorName[i], traceAuxPositionY);
+            traceList.add(traceAux);
+            objectTouchedList.add(traceAux);
+
+            allDrawables.add(traceAux);
+            traceAux.setActive(true);
+
+            traceAux.setVisible(false);
+        }
+
+    }
+
 
     public void setAllCaseActive(boolean active)
     {

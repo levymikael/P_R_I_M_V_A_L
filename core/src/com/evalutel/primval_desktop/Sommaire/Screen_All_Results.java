@@ -214,14 +214,14 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         fondSommaire = new ScreeenBackgroundImage("Images/Backgrounds/web_hi_res_512.png");
 
-        Texture resultatsObtenus = new Texture(Gdx.files.internal("Images/Sommaire/Texte résultats obtenus.png"));
+        Texture resultatsObtenus = new Texture(Gdx.files.internal("Images/Sommaire/texte résultats obtenus.png"));
         resultatsObtenus.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
         Table resultatsObtenusTitle = new Table();
 
         float chapterTitleWidth = MyConstants.SCREENWIDTH / 2.5f;
-        float chapterTitleHeight = chapterTitleWidth * (45f / 365f);
+        float chapterTitleHeight = chapterTitleWidth * (81f / 722f);
 
         float chapterTitleYPosition = bandeauHautY + ((MyConstants.SCREENHEIGHT - bandeauHautY) / 2f) - (chapterTitleHeight / 2);
 
@@ -319,8 +319,9 @@ public class Screen_All_Results extends Game implements Screen, InputProcessor, 
 
         stage.addActor(scroll);
 
-        myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15f, MyConstants.SCREENWIDTH / 15f, game, "sommaire general");
-        myButtonRetour.setPosition(MyConstants.SCREENWIDTH / 25f, (5 * MyConstants.SCREENHEIGHT / 6f) - myButtonRetour.getHeight() / 2);
+
+        MyButtonRetour myButtonRetour = new MyButtonRetour(stage, MyConstants.SCREENWIDTH / 15f, MyConstants.SCREENWIDTH / 15f, game, "sommaire general");
+        myButtonRetour.setPosition(MyConstants.SCREENWIDTH * .02f, 5 * MyConstants.SCREENHEIGHT / 6f - myButtonRetour.getHeight() / 2f);
 
         Gdx.input.setInputProcessor(stage);
     }

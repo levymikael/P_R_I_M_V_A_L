@@ -159,7 +159,7 @@ public class ActiviteView implements MyDrawInterface, MyCorrectionAndPauseInterf
 
         tableBandeauBasCentreEnonce.add(new Image(textureTextEnonce)).height(heightImageEnonce).width(widthImageEnonce);
 
-        tableBandeauBas.add(tableBandeauBasGauche).width(widthCote).height(heightBackGroundImage);
+        tableBandeauBas.add(tableBandeauBasGauche).width(widthCote).height(heightBackGroundImage).padRight(-1);
         tableBandeauBas.add(tableBandeauBasCentreVierge).width(widthVierge).height(heightBackGroundImage)/*.padRight(-2)*/;
         tableBandeauBas.add(tableBandeauBasCentreEnonce).width(widthCentre).height(heightBackGroundImage).padRight(-1);
         tableBandeauBas.add(tableBandeauBasCentreVierge2).width(widthVierge).height(heightBackGroundImage)/*.padRight(-2)*/;

@@ -24,22 +24,24 @@ import java.util.HashSet;
 
 public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyDrawInterface, MyTouchInterface
 {
-    public String newCaseColor, boutonBlancFond;
+    public String newCaseColorPath, newCaseColor, boutonBlancFond, content;
 
-    private Texture fondCaseFondBlanc, ardoiseBgInactive;
+    private Texture fondCaseFondBlanc;
 
     boolean isActive = true;
 
     public float currentPositionX, currentPositionY;
 
-    int value;
+    int value, caseIndex;
 
-    public UneCase(Stage stage, final String number, /*float posX, float posY, */float caseWidth, float caseHeight, int value)
+    public UneCase(Stage stage, final String content, /*float posX, float posY, */float caseWidth, float caseHeight, int value, int caseIndex)
     {
 
         this.setSize(caseWidth, caseHeight);
 
         this.value = value;
+        this.content = content;
+        this.caseIndex = caseIndex;
 
         boutonBlancFond = "Images/Cases et couleurs pastels/carre_blanc.png";
 
@@ -63,7 +65,7 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
         labelStyleWhite.font = bitmapFont;
         labelStyleWhite.fontColor = Color.BLACK;
 
-        Label ardoiseNum = new Label(number, labelStyleWhite);
+        Label ardoiseNum = new Label(content, labelStyleWhite);
         this.add(ardoiseNum);
 
 
@@ -75,9 +77,32 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
         stage.addActor(this);
     }
 
+
+    public int getCaseIndex()
+    {
+        return caseIndex;
+    }
+
+    public String getCaseContent()
+    {
+        return content;
+    }
+
     public int getCaseValue()
     {
         return value;
+    }
+
+    public String getCaseCouleur()
+    {
+        if (newCaseColor != null)
+        {
+            return newCaseColor;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public void setCaseCouleurFond(String couleur)
@@ -85,9 +110,10 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
 
         if (isActive)
         {
-            newCaseColor = "Images/Cases et couleurs pastels/carre_" + couleur + ".png";
+            newCaseColor = couleur;
+            newCaseColorPath = "Images/Cases et couleurs pastels/carre_" + couleur + ".png";
 
-            Texture NewfondCaseColorTexture = new Texture(newCaseColor);
+            Texture NewfondCaseColorTexture = new Texture(newCaseColorPath);
 
             this.setBackground(new TextureRegionDrawable(new TextureRegion(NewfondCaseColorTexture)));
         }
@@ -137,7 +163,6 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
     {
         return isActive;
     }
-
 
 
     @Override

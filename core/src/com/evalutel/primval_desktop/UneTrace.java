@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -20,40 +19,43 @@ import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
-public class UnePastelle extends Table implements MyCorrectionAndPauseInterface, MyDrawInterface, MyTouchInterface
+public class UneTrace extends Table implements MyCorrectionAndPauseInterface, MyDrawInterface, MyTouchInterface
 {
     public String number;
 
-    private Texture couleurPastelleTexture;
+    private Texture couleurtraceTexture;
 
     boolean isActive = true;
 
-    public float positionX, positionY, pastelleWidth, pastelleHeight;
+    public float positionX, positionY, traceWidth, traceHeight;
 
     String couleur;
 
     boolean isClicked = false;
 
-    public UnePastelle(Stage stage, float pastelleWidth, float pastelleHeight, String couleur, /*float positionX,*/ float positionY)
+    public UneTrace(Stage stage, float traceWidth, float traceHeight, String couleur, float positionY)
     {
-        this.setSize(pastelleWidth, pastelleHeight);
 
-        positionX = MyConstants.SCREENWIDTH - (pastelleWidth * .2f);
+        this.setSize(traceWidth, traceHeight);
+
+        positionX = MyConstants.SCREENWIDTH - (traceWidth * .6f);
         this.positionY = positionY;
-        this.pastelleWidth = pastelleWidth;
-        this.pastelleHeight = pastelleHeight;
+        this.traceWidth = traceWidth;
+        this.traceHeight = traceHeight;
 
         this.setPosition(positionX, positionY);
 
         this.couleur = couleur;
 
-        String pastellePathName = "Images/Cases et couleurs pastels/pastel_" + couleur + ".png";
+        String tracePathName = "Images/Cases et couleurs pastels/trace_" + couleur + ".png";
 
 
-        couleurPastelleTexture = new Texture(pastellePathName);
-        couleurPastelleTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        couleurtraceTexture = new Texture(tracePathName);
+        couleurtraceTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        this.setBackground(new TextureRegionDrawable(new TextureRegion(couleurPastelleTexture)));
+
+        this.setBackground(new TextureRegionDrawable(new TextureRegion(couleurtraceTexture)));
+
 
         if (isActive)
         {
@@ -67,11 +69,9 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
                         {
                             super.clicked(event, x, y);
 
-                            isClicked = !isClicked;
-                            pastelleInAndOut(isClicked);
+                            isClicked = true;
 
-
-                            System.out.println("pastelle clicked");
+                            System.out.println("trace clicked");
                         }
                     }
         );
@@ -80,45 +80,27 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
         stage.addActor(this);
     }
 
-    public String getPastelleCouleur()
+    public String getTraceCouleur()
     {
         return couleur;
     }
 
-    public void pastelleInAndOut(boolean isClicked)
-    {
-
-        if (isActive)
-        {
-            if (isClicked)
-            {
-                positionX = MyConstants.SCREENWIDTH - (pastelleWidth * .6f);
-            }
-            else
-            {
-                positionX = MyConstants.SCREENWIDTH - (pastelleWidth * .2f);
-            }
-
-            this.setPosition(positionX, positionY);
-        }
-    }
 
     public void setActive(boolean active)
     {
         isActive = active;
-
     }
 
 
     public boolean contains(float currentPositionX, float currentPositionY)
     {
-        return this.positionX <= currentPositionX && this.positionX + this.pastelleWidth >= currentPositionX && this.positionY <= currentPositionY && this.positionY + this.pastelleHeight >= currentPositionY;
+        return this.positionX <= currentPositionX && this.positionX + this.traceWidth >= currentPositionX && this.positionY <= currentPositionY && this.positionY + this.traceHeight >= currentPositionY;
     }
 
     @Override
     public boolean isTouched(float x, float y)
     {
-        Rectangle rectangle = new Rectangle(positionX, positionY, pastelleWidth, pastelleHeight);
+        Rectangle rectangle = new Rectangle(positionX, positionY, traceWidth, traceHeight);
 
         return rectangle.contains(x, y);
     }

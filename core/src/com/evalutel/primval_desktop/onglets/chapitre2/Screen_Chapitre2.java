@@ -71,9 +71,7 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
         logoChapitre = new Texture(Gdx.files.internal("Images/Pages onglets/chapitre_circle_2.png"));
         logoChapitre.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-
         Table nomChapitre = new Table();
-
 
         logoChapitreWidth = screenWidth / 3f;
         float nomChapitreWidth = logoChapitreWidth * 2f;

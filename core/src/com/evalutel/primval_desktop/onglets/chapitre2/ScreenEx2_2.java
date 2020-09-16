@@ -615,18 +615,14 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         {
             MyTimer.TaskEtape nextEtape = new DisplayOiseauxBranche2(2_000, 1_000);
 
-
             if (questionCourante == 0)
             {
-
                 metrologue.metrologuePlaySound("Sounds/Onglet2_2/chap2_onglet2_PlaceSurLaDeuxiemePlancheAutantDebIlles.mp3", nextEtape);
-
             }
             else
             {
                 timer.schedule(nextEtape, delayN);
             }
-
 
             activiteView.addTextActivite("Place sur la deuxième planche autant de billes que d'oiseaux que tu vois sur la seconde branche, tape leur nombre au clavier puis valide");
         }
@@ -648,6 +644,7 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             oiseauxToDisplayBranche2 = randOiseauxArray.get(brancheRenewal)[1];
 
             planche2.setVisible(true);
+            planche2.setActive(true);
 
             if ((cptOiseau2 < oiseauxToDisplayBranche2)/* && ((oiseauxToDisplayBranche1 + oiseauxToDisplayBranche2) <= 9)*/)
             {
