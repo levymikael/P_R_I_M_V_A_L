@@ -21,7 +21,7 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 public class UneTrace extends Table implements MyCorrectionAndPauseInterface, MyDrawInterface, MyTouchInterface
 {
-    public String number;
+    public int traceValue;
 
     private Texture couleurtraceTexture;
 
@@ -85,6 +85,15 @@ public class UneTrace extends Table implements MyCorrectionAndPauseInterface, My
         return couleur;
     }
 
+    public void setTraceValue(int value)
+    {
+        traceValue = value;
+    }
+
+    public int getTraceValue()
+    {
+        return traceValue;
+    }
 
     public void setActive(boolean active)
     {

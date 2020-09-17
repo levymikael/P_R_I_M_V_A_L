@@ -18,9 +18,7 @@ import com.evalutel.primval_desktop.Interfaces.MyCorrectionAndPauseInterface;
 import com.evalutel.primval_desktop.Interfaces.MyDrawInterface;
 import com.evalutel.primval_desktop.Interfaces.MyTouchInterface;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
-
-import java.util.HashMap;
-import java.util.HashSet;
+import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyDrawInterface, MyTouchInterface
 {
@@ -28,13 +26,15 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
 
     private Texture fondCaseFondBlanc;
 
+    boolean alreadyColored = false;
     boolean isActive = true;
 
     public float currentPositionX, currentPositionY;
 
-    int value, caseIndex;
+    int value, caseIndex, casePosition;
+    float caseWidth, caseHeight;
 
-    public UneCase(Stage stage, final String content, /*float posX, float posY, */float caseWidth, float caseHeight, int value, int caseIndex)
+    public UneCase(Stage stage, final String content, float caseWidth, float caseHeight, int value)
     {
 
         this.setSize(caseWidth, caseHeight);
@@ -42,6 +42,8 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
         this.value = value;
         this.content = content;
         this.caseIndex = caseIndex;
+        this.caseWidth = caseWidth;
+        this.caseHeight = caseHeight;
 
         boutonBlancFond = "Images/Cases et couleurs pastels/carre_blanc.png";
 
@@ -77,10 +79,21 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
         stage.addActor(this);
     }
 
-
-    public int getCaseIndex()
+    public void setCasePositon(int position)
     {
-        return caseIndex;
+        casePosition = position;
+    }
+
+
+    public int getCasePositionList()
+    {
+        return casePosition;
+    }
+
+    public MyPoint getCasePositionXY()
+    {
+        return new MyPoint((getX() + (caseWidth / 2)), (getY() + caseHeight / 2));
+
     }
 
     public String getCaseContent()
@@ -121,23 +134,32 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
     }
 
 
-    public void setBackCaseCouleurFond()
-    {
-
-        if (isActive)
-        {
-
-
-            this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondBlanc)));
-        }
-
-    }
+//    public void setBackCaseCouleurFond()
+//    {
+//
+//        if (isActive)
+//        {
+//
+//
+//            this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondBlanc)));
+//        }
+//
+//    }
 
     public void setActive(boolean active)
     {
         isActive = active;
     }
 
+    public void setAlreadyColored()
+    {
+        alreadyColored = true;
+    }
+
+    public boolean getAlreadyColored()
+    {
+        return alreadyColored;
+    }
 
     @Override
     public boolean isTouched(float x, float y)

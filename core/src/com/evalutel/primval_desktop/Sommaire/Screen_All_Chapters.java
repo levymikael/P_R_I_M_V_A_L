@@ -197,7 +197,7 @@ public class Screen_All_Chapters extends Game implements Screen, InputProcessor,
         Texture evalutelMottoTxture = new Texture(Gdx.files.internal("Images/Pages Chapitres/Texte devise.jpg"));
         allChaptersScreenTitle.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         float evalutelMottoWidth = MyConstants.SCREENWIDTH * .96f;
-        float evalutelMottoHeight = evalutelMottoWidth * (216f / 1241f);
+        float evalutelMottoHeight = evalutelMottoWidth * (875f / 5174f);
 
         evalutelMotto.setBackground(new SpriteDrawable(new Sprite(evalutelMottoTxture)));
 

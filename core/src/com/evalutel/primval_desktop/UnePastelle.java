@@ -22,7 +22,7 @@ import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 public class UnePastelle extends Table implements MyCorrectionAndPauseInterface, MyDrawInterface, MyTouchInterface
 {
-    public String number;
+    private int valuePastelle;
 
     private Texture couleurPastelleTexture;
 
@@ -101,6 +101,16 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
 
             this.setPosition(positionX, positionY);
         }
+    }
+
+    public void setValuePastelle(int value)
+    {
+        valuePastelle = value;
+    }
+
+    public int getPastelleValue()
+    {
+        return valuePastelle;
     }
 
     public void setActive(boolean active)
