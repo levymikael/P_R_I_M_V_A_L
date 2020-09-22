@@ -1,16 +1,12 @@
 package com.evalutel.primval_desktop;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -24,36 +20,59 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
 {
     private int valuePastelle;
 
-    private Texture couleurPastelleTexture;
+    private Texture couleurPastelleTexture, couleurtraceTexture;
 
     boolean isActive = true;
 
-    public float positionX, positionY, pastelleWidth, pastelleHeight;
+    public float positionX, positionY, pastelleWidth, pastelleHeight, positionXTrace;
 
-    String couleur;
+    String couleurPastelle, couleurTrace;
 
     boolean isClicked = false;
 
-    public UnePastelle(Stage stage, float pastelleWidth, float pastelleHeight, String couleur, /*float positionX,*/ float positionY)
+    public UnePastelle(Stage stage, float pastelleWidth, float pastelleHeight, String couleurPastelle, float positionY)
     {
         this.setSize(pastelleWidth, pastelleHeight);
 
         positionX = MyConstants.SCREENWIDTH - (pastelleWidth * .2f);
+
         this.positionY = positionY;
         this.pastelleWidth = pastelleWidth;
         this.pastelleHeight = pastelleHeight;
 
         this.setPosition(positionX, positionY);
 
-        this.couleur = couleur;
+        this.couleurPastelle = couleurPastelle;
 
-        String pastellePathName = "Images/Cases et couleurs pastels/pastel_" + couleur + ".png";
+
+        String pastellePathName = "Images/Cases et couleurs pastels/pastel_" + couleurPastelle + ".png";
 
 
         couleurPastelleTexture = new Texture(pastellePathName);
         couleurPastelleTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         this.setBackground(new TextureRegionDrawable(new TextureRegion(couleurPastelleTexture)));
+
+//        if (couleurPastelle.equals("bleu"))
+//        {
+//            couleurTrace = "bleufonce";
+//
+//        }
+//        else if (couleurPastelle.equals("violet_clair"))
+//        {
+//            couleurTrace = "violet";
+//        }
+//        else
+//        {
+//            couleurTrace = couleurPastelle;
+//        }
+//
+//
+//        String tracePathName = "Images/Cases et couleurs pastels/trace_" + couleurTrace + ".png";
+//
+//        couleurtraceTexture = new Texture(tracePathName);
+//        couleurtraceTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
 
         if (isActive)
         {
@@ -70,7 +89,6 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
                             isClicked = !isClicked;
                             pastelleInAndOut(isClicked);
 
-
                             System.out.println("pastelle clicked");
                         }
                     }
@@ -82,12 +100,11 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
 
     public String getPastelleCouleur()
     {
-        return couleur;
+        return couleurPastelle;
     }
 
     public void pastelleInAndOut(boolean isClicked)
     {
-
         if (isActive)
         {
             if (isClicked)
@@ -106,6 +123,11 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
     public void setValuePastelle(int value)
     {
         valuePastelle = value;
+
+        if (value != 0)
+        {
+
+        }
     }
 
     public int getPastelleValue()

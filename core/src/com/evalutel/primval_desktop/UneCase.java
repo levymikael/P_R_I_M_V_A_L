@@ -24,7 +24,7 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
 {
     public String newCaseColorPath, newCaseColor, boutonBlancFond, content;
 
-    private Texture fondCaseFondBlanc;
+    private Texture fondCaseFondBlancTexture, fondCaseFondBleuTexture, fondCaseFondGrisTexture, fondCaseFondJauneTexture, fondCaseFondMarronTexture, fondCaseFondRougeTexture, fondCaseFondVertTexture, fondCaseFondVioletTexture;
 
     boolean alreadyColored = false;
     boolean isActive = true;
@@ -46,13 +46,32 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
         this.caseHeight = caseHeight;
 
         boutonBlancFond = "Images/Cases et couleurs pastels/carre_blanc.png";
+        fondCaseFondBlancTexture = new Texture(boutonBlancFond);
+        fondCaseFondBlancTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        fondCaseFondBleuTexture = new Texture("Images/Cases et couleurs pastels/carre_bleu.png");
+        fondCaseFondBleuTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        fondCaseFondGrisTexture = new Texture("Images/Cases et couleurs pastels/carre_gris.png");
+        fondCaseFondGrisTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        fondCaseFondJauneTexture = new Texture("Images/Cases et couleurs pastels/carre_jaune.png");
+        fondCaseFondJauneTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        fondCaseFondBlanc = new Texture(boutonBlancFond);
-        fondCaseFondBlanc.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        fondCaseFondMarronTexture = new Texture("Images/Cases et couleurs pastels/carre_marron.png");
+        fondCaseFondMarronTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+        fondCaseFondRougeTexture = new Texture("Images/Cases et couleurs pastels/carre_rouge.png");
+        fondCaseFondRougeTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondBlanc)));
+        fondCaseFondVertTexture = new Texture("Images/Cases et couleurs pastels/carre_vert.png");
+        fondCaseFondVertTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        fondCaseFondVioletTexture = new Texture("Images/Cases et couleurs pastels/carre_violet_clair.png");
+        fondCaseFondVioletTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondBlancTexture)));
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/arial.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -120,15 +139,44 @@ public class UneCase extends Table implements MyCorrectionAndPauseInterface, MyD
 
     public void setCaseCouleurFond(String couleur)
     {
-
         if (isActive)
         {
-            newCaseColor = couleur;
-            newCaseColorPath = "Images/Cases et couleurs pastels/carre_" + couleur + ".png";
 
-            Texture NewfondCaseColorTexture = new Texture(newCaseColorPath);
 
-            this.setBackground(new TextureRegionDrawable(new TextureRegion(NewfondCaseColorTexture)));
+//            newCaseColor = couleur;
+//            newCaseColorPath = "Images/Cases et couleurs pastels/carre_" + couleur + ".png";
+//
+//            Texture NewfondCaseColorTexture = new Texture(newCaseColorPath);
+//
+//            NewfondCaseColorTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+            switch (couleur)
+            {
+                case "bleu":
+                    this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondBleuTexture)));
+                    break;
+                case "gris":
+                    this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondGrisTexture)));
+                    break;
+                case "jaune":
+                    this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondJauneTexture)));
+                    break;
+                case "marron":
+                    this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondMarronTexture)));
+                    break;
+                case "rouge":
+                    this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondRougeTexture)));
+                    break;
+                case "vert":
+                    this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondVertTexture)));
+                    break;
+                case "violet":
+                    this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondVioletTexture)));
+                    break;
+                default:
+                    this.setBackground(new TextureRegionDrawable(new TextureRegion(fondCaseFondBlancTexture)));
+            }
+
         }
 
     }

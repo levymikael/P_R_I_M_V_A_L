@@ -33,24 +33,24 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 {
     private CalculetteView calculetteView;
     //    private float posX, posY;
-    ArrayList<UneCase> caseList = new ArrayList<>();
-    ArrayList<UnePastelle> pastelleList = new ArrayList<>();
-    ArrayList<UnePastelle> freePastelleList = new ArrayList<>();
-    ArrayList<UneTrace> traceList = new ArrayList<>();
+    private ArrayList<UneCase> caseList = new ArrayList<>();
+    private ArrayList<UnePastelle> pastelleList = new ArrayList<>();
+    private ArrayList<UnePastelle> freePastelleList = new ArrayList<>();
+    private ArrayList<UneTrace> traceList = new ArrayList<>();
 
     TextButton.TextButtonStyle styleTest;
     private Drawable drawableAux;
 
-    private int caseCorrected, failedAttempts, diceRenewal;
+    private int caseCorrected, failedAttempts;
 
-    UnePastelle currentPastelle = null;
-    UneCase currentCase = null;
+    private UnePastelle currentPastelle = null;
+    private UneCase currentCase = null;
 
-    String currentColor;
+    private String currentColor;
 
-    float caseWidth, caseHeight;
-    ArrayList<String> contentArray = new ArrayList<>();
-    ArrayList<Integer> valueArray = new ArrayList<>();
+    private float caseWidth, caseHeight, pastelleWidth, pastelleHeight;
+//    private  ArrayList<String> contentArray = new ArrayList<>();
+//    private  ArrayList<Integer> valueArray = new ArrayList<>();
 
     private String[] nbCombinaisonArrayString = {"3", "1 + 2", "2 + 1", "4", "2 + 2", "3 + 1", "5", "2 + 3", "1 + 4", "6", "1 + 5", "2 + 4", "3 + 3", "7", "1 + 6", "2 + 5", "3 + 4", "8", "1 + 7", "2 + 6", "3 + 5", "4 + 4", "9", "1 + 8", "2 + 7", "3 + 6", "4 + 5"};
 
@@ -109,6 +109,9 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 
         caseWidth = MyConstants.SCREENWIDTH / 20f;
         caseHeight = caseWidth * 1.5f;
+
+        pastelleWidth = MyConstants.SCREENWIDTH / 4f;
+        pastelleHeight = pastelleWidth * (117f / 606f);
 
         createCase();
         positionPastelPens();
@@ -190,10 +193,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                                 validusAnimated.validusPlaySound("Sounds/Onglet2_4/Ong2_4_Validus_CetteCaseEstDejaColoree.mp3");
                                 currentCase = null;
                             }
-
                         }
-
-
                     }
                 }
 
@@ -209,9 +209,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 
         Collections.shuffle(caseList);
 
-        for (
-                int j = 0; j < caseList.size(); j++)
-
+        for (int j = 0; j < caseList.size(); j++)
         {
             UneCase caseAux = caseList.get(j);
 
@@ -234,12 +232,11 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
         }
     }
 
-    public void positionPastelPens()
+    private void positionPastelPens()
     {
-        String[] pastelColorName = {"bleu", "gris", "jaune", "marron", "rouge", "vert", "violet_clair"};
+        String[] pastelColorName = {"bleu", "gris", "jaune", "marron", "rouge", "vert", "violet"};
 
-        float pastelleWidth = MyConstants.SCREENWIDTH / 4f;
-        float pastelleHeight = pastelleWidth * (117f / 606f);
+        positionTrace();
 
         for (int i = 0; i < pastelColorName.length; i++)
         {
@@ -251,7 +248,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
             objectTouchedList.add(pastelleAux);
 
             allDrawables.add(pastelleAux);
-            pastelleAux.setActive(true);
+            pastelleAux.setActive(false);
 
             pastelleAux.addListener(
                     new ClickListener()
@@ -261,92 +258,45 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                         {
                             super.clicked(event, x, y);
 
-                            if (isAllActive)
+//                            if (isAllActive)
+//                            {
+                            if (pastelleAux.isActive())
                             {
-                                if (pastelleAux.isActive())
-                                {
-                                    currentColor = pastelleAux.getPastelleCouleur();
+                                currentColor = pastelleAux.getPastelleCouleur();
 
-                                    currentPastelle = pastelleAux;
+                                currentPastelle = pastelleAux;
 
 
-                                    isAllActive = false;
-                                    setAllCaseActive(true);
-                                }
+                                isAllActive = false;
+                                setAllCaseActive(true);
+//                                }
                             }
                         }
                     });
-
         }
 
-        positionTrace();
     }
 
 
-    public void checkCaseContent(String content, int value, int casePositionList)
+    private void checkCaseContent(String content, int value, int casePositionList)
     {
-        int ok = 5;
-        ok++;
-
-//        if (contentArray.size() >= 1 && valueArray.size() >= 1)
-//        {
-//        if (currentPastelle.getPastelleValue() == value)
-//        {
-//
-//            int firstValue = valueArray.get(0);
-//
-//
-//            if (firstValue == value && !caseList.get(casePositionList).getAlreadyColored())
-//            {
-//                addDiamonds(1);
-//                caseList.get(casePositionList).setCaseCouleurFond(currentColor);
-//                contentArray.add(content);
-//                valueArray.add(value);
-//                caseList.get(casePositionList).setAlreadyColored();
-//                currentPastelle.setValuePastelle(value);
-//
-//            }
-//
-//            else if (firstValue != value && !caseList.get(casePositionList).getAlreadyColored())
-//            {
-//                System.out.println("pas mme valeur");
-//
-//                if (failedAttempts == 1)
-//                {
-//                    myCorrectionAndPauseGeneral.correctionStart();
-//
-//                    validusAnimated.isActive = false;
-//                    caseCorrected = casePositionList;
-//                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2_000));
-//                    failedAttempts = 0;
-//                    currentCase = caseList.get(casePositionList);
-//
-//                    addPierres(1);
-//                }
-//                failedAttempts++;
-//
-//            }
-//        }
-
-//        else
-//        {
         if (currentPastelle.getPastelleValue() == 0 && !currentCase.getAlreadyColored())
         {
             if (!isValuePastelleAlreadyAllocated(value))
             {
-                contentArray.add(content);
-                valueArray.add(value);
-                addDiamonds(1);
                 currentCase.setCaseCouleurFond(currentColor);
                 currentCase.setAlreadyColored();
                 addDiamonds(1);
                 currentPastelle.setValuePastelle(currentCase.getCaseValue());
+
                 for (int i = 0; i < traceList.size(); i++)
                 {
                     UneTrace traceAux = traceList.get(i);
-                    if (currentColor == traceAux.getTraceCouleur())
+                    if (currentColor.equals(traceAux.getTraceCouleur()))
                     {
                         traceAux.setTraceValue(value);
+
+                        break;
                     }
                 }
                 freePastelleList.remove(currentPastelle);
@@ -372,23 +322,27 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                 failedAttempts++;
             }
 
-//            }
+
         }
         else if (currentPastelle.getPastelleValue() == currentCase.getCaseValue() && !currentCase.getAlreadyColored())
         {
-            contentArray.add(content);
-            valueArray.add(value);
+
             addDiamonds(1);
             caseList.get(casePositionList).setCaseCouleurFond(currentColor);
             caseList.get(casePositionList).setAlreadyColored();
             addDiamonds(1);
             currentPastelle.setValuePastelle(value);
+
+            freePastelleList.remove(currentPastelle);
+
             for (int i = 0; i < traceList.size(); i++)
             {
                 UneTrace traceAux = traceList.get(i);
-                if (currentColor == traceAux.getTraceCouleur())
+                if (currentColor.equals(traceAux.getTraceCouleur()))
                 {
                     traceAux.setTraceValue(value);
+
+                    break;
                 }
             }
             currentCase = null;
@@ -412,15 +366,16 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 
     }
 
-    public boolean isValuePastelleAlreadyAllocated(int value)
+    private boolean isValuePastelleAlreadyAllocated(int value)
     {
         boolean isValue = false;
 
-        for (int i = 0; i < traceList.size(); i++)
+        for (int i = 0; i < pastelleList.size(); i++)
         {
-            if (traceList.get(i).getTraceValue() == value)
+            if (pastelleList.get(i).getPastelleValue() == value)
             {
                 isValue = true;
+                break;
             }
         }
         return isValue;
@@ -451,13 +406,56 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                 currentPastelle = pastelleAux;
                 noPastelleForThisValue = true;
             }
-
         }
         if (!noPastelleForThisValue)
         {
             currentPastelle = freePastelleList.get(0);
+            currentColor = currentPastelle.getPastelleCouleur();
+
+            for (int i = 0; i < traceList.size(); i++)
+            {
+                UneTrace traceAux = traceList.get(i);
+                if (currentColor.equals(traceAux.getTraceCouleur()))
+                {
+                    traceAux.setTraceValue(currentCase.getCaseValue());
+                }
+            }
+            freePastelleList.remove(currentPastelle);
+
+
         }
 
+
+    }
+
+    private class PresentationMetrologue extends MyTimer.TaskEtape
+    {
+        private PresentationMetrologue(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            MyTimer.TaskEtape nextEtape = new EtapeIntermediaire(3_000, 1_500);
+
+            metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Total dun lancer de 2 des.mp3", nextEtape);
+        }
+    }
+
+    private class EtapeIntermediaire extends MyTimer.TaskEtape
+    {
+        private EtapeIntermediaire(long durMillis, long delay)
+        {
+            super(durMillis, delay);
+        }
+
+        @Override
+        public void run()
+        {
+            setAllPastelleActive(true);
+        }
     }
 
 
@@ -512,8 +510,10 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
             float casePositionX = caseList.get(caseCorrected).getCasePositionXY().x;
             float casePositionY = caseList.get(caseCorrected).getCasePositionXY().y;
 
+            MyTimer.TaskEtape nextEtape = new HideMouse(3_000);
 
-            uneSouris.cliqueTo(durationMillis, casePositionX, casePositionY, null, 1_000);
+
+            uneSouris.cliqueTo(durationMillis, casePositionX, casePositionY, nextEtape, 1_000);
 
             currentPastelle.pastelleInAndOut(false);
             currentPastelle = null;
@@ -522,34 +522,72 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
             /*Selection de la nouvelle pastelle*/
             currentPastelle.pastelleInAndOut(true);
 
-         String newColor =    currentPastelle.getPastelleCouleur();
+            String newColor = currentPastelle.getPastelleCouleur();
+            currentPastelle.setValuePastelle(currentCase.getCaseValue());
 
-         currentCase.setCaseCouleurFond(newColor);
+            currentCase.setActive(true);
+            currentCase.setCaseCouleurFond(newColor);
+
+            int ok = 5;
+            ok++;
 
 
         }
     }
 
+//    private void isPastelleValue(String pastelleCouleur)
+//    {
+//        for (int i = 0; i < traceList.size(); i++)
+//        {
+//            if (pastelleCouleur.equals(traceList.get(i).getTraceCouleur()))
+//            {
+//                UneTrace traceAux = traceList.get(i);
+//                if (currentPastelle.getPastelleValue() != 0)
+//                {
+//                    traceAux.setVisible(true);
+//
+//                    break;
+//                }
+//                break;
+//            }
+//        }
+//
+//    }
+
+    private class HideMouse extends MyTimer.TaskEtape
+    {
+        private HideMouse(long durMillis)
+        {
+            super(durMillis);
+        }
+
+        @Override
+        public void run()
+        {
+            uneSouris.setVisible(false);
+
+            setAllCaseActive(true);
+
+            failedAttempts = 0;
+        }
+    }
+
     public void positionTrace()
     {
-        float traceWidth = MyConstants.SCREENWIDTH / 4f;
-        float traceHeight = traceWidth * (117f / 606f);
 
-        String[] traceColorName = {"bleufonce", "gris", "jaune", "marron", "rouge", "vert", "violet"};
+        String[] traceColorName = {"bleu", "gris", "jaune", "marron", "rouge", "vert", "violet"};
 
         for (int i = 0; i < traceColorName.length; i++)
         {
-            float traceAuxPositionY = pastelleList.get(i).positionY;
+            float traceAuxPositionY = .7f * MyConstants.SCREENHEIGHT - (i * (pastelleHeight * 1.2f));
 
-            final UneTrace traceAux = new UneTrace(stage, traceWidth, traceHeight, traceColorName[i], traceAuxPositionY);
+            final UneTrace traceAux = new UneTrace(stage, pastelleWidth, pastelleHeight, traceColorName[i], traceAuxPositionY);
             traceList.add(traceAux);
             objectTouchedList.add(traceAux);
             allDrawables.add(traceAux);
             traceAux.setActive(true);
             traceAux.setVisible(false);
         }
-
-
     }
 
 
@@ -568,42 +606,6 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
         {
             UnePastelle pastelleAux = pastelleList.get(i);
             pastelleAux.setActive(active);
-        }
-    }
-
-
-    private class PresentationMetrologue extends MyTimer.TaskEtape
-    {
-        private PresentationMetrologue(long durMillis)
-        {
-            super(durMillis);
-        }
-
-        @Override
-        public void run()
-        {
-            MyTimer.TaskEtape nextEtape = new EtapeIntermediaire(3_000, 1_500);
-
-            metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Total dun lancer de 2 des.mp3", nextEtape);
-            isAllActive = true;
-        }
-    }
-
-    private class EtapeIntermediaire extends MyTimer.TaskEtape
-    {
-        private EtapeIntermediaire(long durMillis, long delay)
-        {
-            super(durMillis, delay);
-        }
-
-        @Override
-        public void run()
-        {
-//            setAllCaseActive(true);
-            setAllPastelleActive(true);
-            isAllActive = true;
-
-
         }
     }
 

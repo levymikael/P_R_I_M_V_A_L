@@ -88,6 +88,11 @@ public class UneTrace extends Table implements MyCorrectionAndPauseInterface, My
     public void setTraceValue(int value)
     {
         traceValue = value;
+
+        if (value != 0)
+        {
+            this.setVisible(true);
+        }
     }
 
     public int getTraceValue()
