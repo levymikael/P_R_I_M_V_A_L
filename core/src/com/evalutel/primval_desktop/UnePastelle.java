@@ -28,7 +28,8 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
 
     String couleurPastelle, couleurTrace;
 
-    boolean isClicked = false;
+    public boolean isClicked = false;
+    public boolean isOut = false;
 
     public UnePastelle(Stage stage, float pastelleWidth, float pastelleHeight, String couleurPastelle, float positionY)
     {
@@ -87,7 +88,7 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
                             super.clicked(event, x, y);
 
                             isClicked = !isClicked;
-                            pastelleInAndOut(isClicked);
+//                            pastelleInAndOut(isClicked);
 
                             System.out.println("pastelle clicked");
                         }
@@ -110,10 +111,12 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
             if (isClicked)
             {
                 positionX = MyConstants.SCREENWIDTH - (pastelleWidth * .6f);
+                isOut = true;
             }
-            else
+            else if (!isClicked)
             {
                 positionX = MyConstants.SCREENWIDTH - (pastelleWidth * .2f);
+                isOut = false;
             }
 
             this.setPosition(positionX, positionY);

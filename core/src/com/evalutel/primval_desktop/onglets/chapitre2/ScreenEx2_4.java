@@ -15,6 +15,7 @@ import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.Dices;
 import com.evalutel.primval_desktop.General.MyConstants;
+import com.evalutel.primval_desktop.MyCorrectionAndPauseGeneral;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UneCase;
@@ -57,14 +58,6 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
     private int[] nbCombinaisonArrayValues = {3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9};
 
     boolean isAllActive, isCaseClicked = false;
-    Map<String, Integer> valueMap;
-
-
-    private Dices dice1;
-
-    private String nbInput;
-    //    //    private boolean isAllActive;
-    private boolean touchValidate = false;
 
 
     ScreenEx2_4(final Game game, String ongletTitre)
@@ -176,6 +169,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                     super.clicked(event, x, y);
                     System.out.println(uneCase.getCaseValue() + "" + uneCase.isActive());
                     System.out.println(uneCase.getCasePositionList());
+
                     if (uneCase.isActive())
                     {
                         isCaseClicked = true;
@@ -194,6 +188,12 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                                 currentCase = null;
                             }
                         }
+                    }
+
+                    else
+                    {
+                        validusAnimated.validusPlaySound("Sounds/Onglet2_4/Ong2_4_IlFautChoisirUneCouleur.mp3");
+
                     }
                 }
 
@@ -258,23 +258,35 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                         {
                             super.clicked(event, x, y);
 
-//                            if (isAllActive)
-//                            {
                             if (pastelleAux.isActive())
                             {
                                 currentColor = pastelleAux.getPastelleCouleur();
 
                                 currentPastelle = pastelleAux;
 
+                                inAndOut();
 
                                 isAllActive = false;
                                 setAllCaseActive(true);
-//                                }
                             }
                         }
                     });
         }
 
+    }
+
+    private void inAndOut()
+    {
+        for (int i = 0; i < pastelleList.size(); i++)
+        {
+            UnePastelle pastelleAux = pastelleList.get(i);
+            if (pastelleAux.isOut)
+            {
+                pastelleAux.pastelleInAndOut(false);
+
+            }
+        }
+        currentPastelle.pastelleInAndOut(true);
     }
 
 
@@ -302,32 +314,42 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                 freePastelleList.remove(currentPastelle);
 
                 currentCase = null;
+
+                questionCourante++;
+
+                int ok = 5;
+                ok++;
+
             }
             else
             {
                 System.out.println("pas mme valeur");
-
-                if (failedAttempts == 1)
+                if (currentCase.getCaseValue() != currentPastelle.getPastelleValue())
                 {
-                    myCorrectionAndPauseGeneral.correctionStart();
+                    if (failedAttempts == 1)
+                    {
+                        myCorrectionAndPauseGeneral.correctionStart();
 
-                    validusAnimated.isActive = false;
-                    caseCorrected = casePositionList;
-                    validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2_000));
-                    failedAttempts = 0;
+                        validusAnimated.isActive = false;
+                        caseCorrected = casePositionList;
+                        validusAnimated.validusPlaySound("Sounds/Onglet2_4/Ong2_4_TuNasPasChoisiLaBonneCouleurCORRECTION.mp3", new EtapeRectification(2_000));
+                        failedAttempts = 0;
 //                    currentCase = caseList.get(casePositionList);
 
-                    addPierres(1);
-                }
-                failedAttempts++;
-            }
+                        addPierres(1);
 
+                    }
+                    else
+                    {
+                        validusAnimated.validusPlaySound("Sounds / Onglet2_4 / Onglet2_4_TuNasPasChoisiLabonneCOuleur.mp3");
+                        failedAttempts++;
+                    }
+                }
+            }
 
         }
         else if (currentPastelle.getPastelleValue() == currentCase.getCaseValue() && !currentCase.getAlreadyColored())
         {
-
-            addDiamonds(1);
             caseList.get(casePositionList).setCaseCouleurFond(currentColor);
             caseList.get(casePositionList).setAlreadyColored();
             addDiamonds(1);
@@ -346,22 +368,39 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                 }
             }
             currentCase = null;
+
+            questionCourante++;
+
+            if (questionCourante == 27)
+            {
+                timer.schedule(new Fin(2_000, 0), 0);
+            }
+
         }
 
         else if (!caseList.get(casePositionList).getAlreadyColored() && currentPastelle.getPastelleValue() != value)
         {
-            if (failedAttempts == 1)
+            if (currentCase.getCaseValue() != currentPastelle.getPastelleValue())
             {
-                myCorrectionAndPauseGeneral.correctionStart();
+                if (failedAttempts == 1)
+                {
+                    myCorrectionAndPauseGeneral.correctionStart();
 
-                validusAnimated.isActive = false;
-                caseCorrected = casePositionList;
-                validusAnimated.validusPlaySound("Sounds/Validus/Voici la correction.mp3", new EtapeRectification(2_000));
-                failedAttempts = 0;
+                    validusAnimated.isActive = false;
+                    caseCorrected = casePositionList;
+                    validusAnimated.validusPlaySound("Sounds/Onglet2_4/Ong2_4_LeTotalDeCaseNeCorrespondPasCORRECTION.mp3", new EtapeRectification(2_000));
+                    failedAttempts = 0;
+//                    currentCase = caseList.get(casePositionList);
 
-                addPierres(1);
+                    addPierres(1);
+
+                }
+                else
+                {
+                    validusAnimated.validusPlaySound("Sounds/Onglet2_4/Ong2_4_LeTotalDeCaseNeCorrespondPas.mp3");
+                    failedAttempts++;
+                }
             }
-            failedAttempts++;
         }
 
     }
@@ -440,7 +479,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
         {
             MyTimer.TaskEtape nextEtape = new EtapeIntermediaire(3_000, 1_500);
 
-            metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Total dun lancer de 2 des.mp3", nextEtape);
+            metrologue.metrologuePlaySound("Sounds/Onglet2_4/Ong2_4_UtiliserLaMemeCouleurPourColorier.mp3", nextEtape);
         }
     }
 
@@ -454,6 +493,8 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
         @Override
         public void run()
         {
+            metrologue.metrologuePlaySound("Sounds/Onglet2_4/Ong2_4_ChoisisUneMemeCouleur.mp3");
+
             setAllPastelleActive(true);
         }
     }
@@ -492,8 +533,6 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
             MyTimer.TaskEtape nextEtape = new ClickOnCaseToColor(2_500);
 
             uneSouris.moveTo(durationMillis, casePositionX, casePositionY, nextEtape, 1_000);
-
-
         }
     }
 
@@ -515,8 +554,8 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 
             uneSouris.cliqueTo(durationMillis, casePositionX, casePositionY, nextEtape, 1_000);
 
+            inAndOut();
             currentPastelle.pastelleInAndOut(false);
-            currentPastelle = null;
 
             setColorForCaseCorrection(currentCase.getCaseValue());
             /*Selection de la nouvelle pastelle*/
@@ -569,6 +608,17 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
             setAllCaseActive(true);
 
             failedAttempts = 0;
+            questionCourante++;
+
+            if (questionCourante == 27)
+            {
+                timer.schedule(new Fin(2_000, 0), 0);
+            }
+
+            myCorrectionAndPauseGeneral.correctionStop();
+
+            setAllCaseActive(true);
+
         }
     }
 

@@ -27,7 +27,7 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
 //    static String directory = System.getProperty("user.dir");
 //    static FileHandle fh = Gdx.files.absolute(directory + "/Images/Validus");
 
-    Music music;
+    public Music music;
 
 
     public ValidusAnimated(float startPositionX, float startPositionY, float animationWidth, float animationHeight, MyTimer timer)
