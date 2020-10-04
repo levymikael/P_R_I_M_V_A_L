@@ -5,17 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.evalutel.primval_desktop.ActiviteView;
-import com.evalutel.primval_desktop.CalculetteView;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
-import com.evalutel.primval_desktop.Dices;
 import com.evalutel.primval_desktop.General.MyConstants;
-import com.evalutel.primval_desktop.MyCorrectionAndPauseGeneral;
 import com.evalutel.primval_desktop.MyTimer;
 import com.evalutel.primval_desktop.ScreeenBackgroundImage;
 import com.evalutel.primval_desktop.UneCase;
@@ -27,20 +22,14 @@ import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
 
 
 public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 {
-    private CalculetteView calculetteView;
-    //    private float posX, posY;
     private ArrayList<UneCase> caseList = new ArrayList<>();
     private ArrayList<UnePastelle> pastelleList = new ArrayList<>();
     private ArrayList<UnePastelle> freePastelleList = new ArrayList<>();
     private ArrayList<UneTrace> traceList = new ArrayList<>();
-
-    TextButton.TextButtonStyle styleTest;
-    private Drawable drawableAux;
 
     private int caseCorrected, failedAttempts;
 
@@ -50,14 +39,12 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
     private String currentColor;
 
     private float caseWidth, caseHeight, pastelleWidth, pastelleHeight;
-//    private  ArrayList<String> contentArray = new ArrayList<>();
-//    private  ArrayList<Integer> valueArray = new ArrayList<>();
 
     private String[] nbCombinaisonArrayString = {"3", "1 + 2", "2 + 1", "4", "2 + 2", "3 + 1", "5", "2 + 3", "1 + 4", "6", "1 + 5", "2 + 4", "3 + 3", "7", "1 + 6", "2 + 5", "3 + 4", "8", "1 + 7", "2 + 6", "3 + 5", "4 + 4", "9", "1 + 8", "2 + 7", "3 + 6", "4 + 5"};
 
     private int[] nbCombinaisonArrayValues = {3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9};
 
-    boolean isAllActive, isCaseClicked = false;
+    private boolean isAllActive, isCaseClicked = false;
 
 
     ScreenEx2_4(final Game game, String ongletTitre)
@@ -70,15 +57,10 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
         numExercice = super.resultatExercice.getChapitre() + "-" + resultatExercice.getOnglet();
 
         float posEnonceX = (MyConstants.SCREENWIDTH - activiteWidth) / 2f;
-        float posSolutionX = posEnonceX + activiteWidth / 2f;
 
-        activiteView = new ActiviteView(stage, posEnonceX, activiteWidth * 42 / 1626, activiteWidth /*/ 2f*/, "enonce");
+        activiteView = new ActiviteView(stage, posEnonceX, activiteWidth * 42 / 1626, activiteWidth, "enonce");
         allDrawables.add(activiteView);
         myCorrectionAndPauseGeneral.addElements(activiteView);
-//
-//        solutionView = new ActiviteView(stage, posSolutionX, activiteWidth * 42 / 1626, activiteWidth / 2f, "solution");
-//        allDrawables.add(solutionView);
-//        myCorrectionAndPauseGeneral.addElements(solutionView);
 
         AppSingleton appSingleton = AppSingleton.getInstance();
         MyDataBase db = appSingleton.myDataBase;
@@ -98,7 +80,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 
         stage.addActor(tableTitre);
 
-        resultatExercice = new UnResultat("Primval", 2, 4, 0, ongletTitre, 18, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 2, 4, 0, ongletTitre, 27, 0, dateTest, 0, 0, 0, 123);
 
         caseWidth = MyConstants.SCREENWIDTH / 20f;
         caseHeight = caseWidth * 1.5f;
@@ -174,29 +156,23 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                     {
                         isCaseClicked = true;
 
-                        if (isCaseClicked)
-                        {
-                            currentCase = uneCase;
+                        currentCase = uneCase;
 
-                            if (!currentCase.getAlreadyColored())
-                            {
-                                checkCaseContent(uneCase.getCaseContent(), uneCase.getCaseValue(), uneCase.getCasePositionList());
-                            }
-                            else
-                            {
-                                validusAnimated.validusPlaySound("Sounds/Onglet2_4/Ong2_4_Validus_CetteCaseEstDejaColoree.mp3");
-                                currentCase = null;
-                            }
+                        if (!currentCase.getAlreadyColored())
+                        {
+                            checkCaseContent(uneCase.getCaseValue(), uneCase.getCasePositionList());
+                        }
+                        else
+                        {
+                            validusAnimated.validusPlaySound("Sounds/Onglet2_4/Ong2_4_Validus_CetteCaseEstDejaColoree.mp3");
+                            currentCase = null;
                         }
                     }
-
                     else
                     {
                         validusAnimated.validusPlaySound("Sounds/Onglet2_4/Ong2_4_IlFautChoisirUneCouleur.mp3");
-
                     }
                 }
-
             });
             myCorrectionAndPauseGeneral.addElements(uneCase);
         }
@@ -283,14 +259,13 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
             if (pastelleAux.isOut)
             {
                 pastelleAux.pastelleInAndOut(false);
-
             }
         }
         currentPastelle.pastelleInAndOut(true);
     }
 
 
-    private void checkCaseContent(String content, int value, int casePositionList)
+    private void checkCaseContent(int value, int casePositionList)
     {
         if (currentPastelle.getPastelleValue() == 0 && !currentCase.getAlreadyColored())
         {
@@ -307,7 +282,6 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                     if (currentColor.equals(traceAux.getTraceCouleur()))
                     {
                         traceAux.setTraceValue(value);
-
                         break;
                     }
                 }
@@ -316,10 +290,6 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                 currentCase = null;
 
                 questionCourante++;
-
-                int ok = 5;
-                ok++;
-
             }
             else
             {
@@ -334,14 +304,12 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                         caseCorrected = casePositionList;
                         validusAnimated.validusPlaySound("Sounds/Onglet2_4/Ong2_4_TuNasPasChoisiLaBonneCouleurCORRECTION.mp3", new EtapeRectification(2_000));
                         failedAttempts = 0;
-//                    currentCase = caseList.get(casePositionList);
 
                         addPierres(1);
-
                     }
                     else
                     {
-                        validusAnimated.validusPlaySound("Sounds / Onglet2_4 / Onglet2_4_TuNasPasChoisiLabonneCOuleur.mp3");
+                        validusAnimated.validusPlaySound("Sounds/Onglet2_4/Onglet2_4_TuNasPasChoisiLabonneCOuleur.mp3");
                         failedAttempts++;
                     }
                 }
@@ -374,6 +342,8 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
             if (questionCourante == 27)
             {
                 timer.schedule(new Fin(2_000, 0), 0);
+                setAllCaseActive(false);
+                setAllPastelleActive(false);
             }
 
         }
@@ -420,21 +390,21 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
         return isValue;
     }
 
-    public void setValueToPastelle(String couleur, int value)
-    {
-        for (int i = 0; i < pastelleList.size(); i++)
-        {
-            UnePastelle pastelleAux = pastelleList.get(i);
-            if (pastelleAux.getPastelleCouleur().equals(couleur))
+//    public void setValueToPastelle(String couleur, int value)
+//    {
+//        for (int i = 0; i < pastelleList.size(); i++)
+//        {
+//            UnePastelle pastelleAux = pastelleList.get(i);
+//            if (pastelleAux.getPastelleCouleur().equals(couleur))
+//
+//            {
+//                pastelleAux.setValuePastelle(value);
+//            }
+//        }
+//    }
 
-            {
-                pastelleAux.setValuePastelle(value);
-            }
-        }
-    }
 
-
-    public void setColorForCaseCorrection(int value)
+    private void setColorForCaseCorrection(int value)
     {
         boolean noPastelleForThisValue = false;
         for (int i = 0; i < pastelleList.size(); i++)
@@ -566,32 +536,9 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 
             currentCase.setActive(true);
             currentCase.setCaseCouleurFond(newColor);
-
-            int ok = 5;
-            ok++;
-
-
         }
     }
 
-//    private void isPastelleValue(String pastelleCouleur)
-//    {
-//        for (int i = 0; i < traceList.size(); i++)
-//        {
-//            if (pastelleCouleur.equals(traceList.get(i).getTraceCouleur()))
-//            {
-//                UneTrace traceAux = traceList.get(i);
-//                if (currentPastelle.getPastelleValue() != 0)
-//                {
-//                    traceAux.setVisible(true);
-//
-//                    break;
-//                }
-//                break;
-//            }
-//        }
-//
-//    }
 
     private class HideMouse extends MyTimer.TaskEtape
     {
@@ -622,7 +569,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
         }
     }
 
-    public void positionTrace()
+    private void positionTrace()
     {
 
         String[] traceColorName = {"bleu", "gris", "jaune", "marron", "rouge", "vert", "violet"};
@@ -641,7 +588,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
     }
 
 
-    public void setAllCaseActive(boolean active)
+    private void setAllCaseActive(boolean active)
     {
         for (int i = 0; i < caseList.size(); i++)
         {
@@ -650,7 +597,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
         }
     }
 
-    public void setAllPastelleActive(boolean active)
+    private void setAllPastelleActive(boolean active)
     {
         for (int i = 0; i < pastelleList.size(); i++)
         {
@@ -691,8 +638,6 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 
         if (objectTouched instanceof UnePastelle)
         {
-            int ok = 5;
-            ok++;
             for (int i = 0; i < pastelleList.size(); i++)
             {
 
@@ -705,8 +650,6 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
                 }
             }
         }
-
-
         return true;
     }
 
@@ -739,9 +682,6 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
             }
             else if (objectTouched instanceof UnePastelle)
             {
-
-                int ok = 5;
-                ok++;
                 for (int i = 0; i < pastelleList.size(); i++)
                 {
 

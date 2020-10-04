@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.evalutel.primval_desktop.ActiviteView;
 import com.evalutel.primval_desktop.CalculetteView;
-import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.Database.UnResultat;
 import com.evalutel.primval_desktop.General.MyConstants;
@@ -37,28 +36,27 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
     private ArrayList<UnOiseau> oiseauxList;
 
     private UnePlancheNew planche1, planche2, planche3;
-    ScreeenBackgroundImage bgScreenEx1_1;
 
     private int cptOiseau, cptBille = 0;
 
 
-    UneArdoise2 uneArdoise2;
-    protected CalculetteView calculetteView;
-    private int posX, posY;
+    private UneArdoise2 uneArdoise2;
+    private CalculetteView calculetteView;
+    private float posY;
 
-    TextButton.TextButtonStyle styleTest;
+    private TextButton.TextButtonStyle styleTest;
     private Drawable drawableAux;
 
     private int cpt;
 
     private Label currentLabel;
 
-    public ScreenEx2_1(final Game game, String ongletTitre)
+    ScreenEx2_1(final Game game, String ongletTitre)
     {
         super(game, 2, 1, false, 0);
 
 
-        bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
+        ScreeenBackgroundImage bgScreenEx1_1 = new ScreeenBackgroundImage("Images/Chapitre1/mise_en_scene01.jpg");
         allDrawables.add(bgScreenEx1_1);
 
         oiseauxList = getNumberOiseauxArList();
@@ -136,8 +134,6 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             public void touchUp(InputEvent event, float x, float y, int pointer, int button)
             {
                 game.setScreen(new Screen_Chapitre2(game));
-
-//                game.dispose();
                 Gdx.app.log("button click", "click!");
 
                 endTime = System.currentTimeMillis();
@@ -220,15 +216,16 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
             {
                 UnOiseau oiseau = oiseauxList.get(cptOiseau);
 
+                float posX;
                 if (cptOiseau < 4)
                 {
-                    posY = 7 * MyConstants.SCREENHEIGHT / 10;
-                    posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau);
+                    posY = 7 * MyConstants.SCREENHEIGHT / 10f;
+                    posX = (MyConstants.SCREENWIDTH / 6f) + ((oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau));
                 }
                 else
                 {
-                    posY = 5 * MyConstants.SCREENHEIGHT / 11;
-                    posX = (MyConstants.SCREENWIDTH / 6) + (int) (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 4);
+                    posY = 5 * MyConstants.SCREENHEIGHT / 11f;
+                    posX = (MyConstants.SCREENWIDTH / 6f) +  (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau - 4);
                 }
 
                 oiseau.animateImage(500, true, posX, posY, null, 20, 1f / 6f);
@@ -292,14 +289,12 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
                 UneBille bille = billesList.get(cptBille);
                 bille.setPositionCenter(posXMain, posYMain);
                 bille.setVisible(true);
-//                bille.setActive(false);
 
                 MyTimer.TaskEtape nextEtape = new EtapeDragFirstBille(500);
                 if (cptBille == 0)
                 {
                     metrologue.metrologuePlaySound("Sounds/Onglet_2_1/chap2_onglet1_JeDeplace1a1.mp3");
                     timer.schedule(nextEtape, 0);
-
                 }
                 else
                 {
@@ -945,7 +940,7 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
     }
 
 
-    public ArrayList<UneBille> autoFillPlanche()
+    private ArrayList<UneBille> autoFillPlanche()
     {
         float firstPositionBilleX = (sacDeBilles.getPosition().x + sacDeBilles.largeurBille / 4);
         float firstPositionBilleY = (sacDeBilles.getPosition().y + sacDeBilles.largeurBille);
@@ -987,95 +982,6 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         return oiseauxList;
     }
 
-
-//    @Override
-//    public boolean touchDown(int screenX, int screenY, int pointer, int button)
-//    {
-//        int reversedScreenY = MyConstants.SCREENHEIGHT - screenY;
-//        mousePointerX = screenX;
-//        mousePointerY = reversedScreenY;
-//
-//        if (reserveBilles.contains(screenX, reversedScreenY)) /*si bille part de la reserve*/
-//        {
-//            System.out.println("clickedOnContainer");
-//            UneMain uneMainAdded = new UneMain("Images/EnonceUIElements/doigt_new.png",reserveBilles.currentPositionX + (int) reserveBilles.animationWidth / 2, reserveBilles.currentPositionY + (int) reserveBilles.animationHeight / 2, reserveBilles.largeurBille, reserveBilles.largeurBille);
-//            objectTouchedList.add(uneMainAdded);
-//            allDrawables.add(uneMainAdded);
-//            objectTouched = uneMainAdded;
-////            firstPositionX = mousePointerX;
-////            firstPositionY = mousePointerY;
-//        } else /*si bille part de la planche*/
-//        {
-//            for (int i = 0; i < objectTouchedList.size(); i++)
-//            {
-//                MyTouchInterface objetAux = objectTouchedList.get(i);
-//
-//                if (objetAux.isTouched(screenX, reversedScreenY))
-//                {
-//                    objectTouched = objetAux;
-//                    firstPositionX = objectTouched.getPositionBille().x;
-//                    firstPositionY = objectTouched.getPositionBille().y;
-//
-//                    if (objectTouched instanceof UneMain)
-//                    {
-//                        UneMain uneMainAux = (UneMain) objectTouched;
-//                        uneMainAux.touchDown();
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean touchDragged(int screenX, int screenY, int pointer)
-//    {
-//        if (objectTouched != null)
-//        {
-//            objectTouched.setPosition((int) (screenX - objectTouched.getWidth() / 2), (int) (MyConstants.SCREENHEIGHT - screenY - objectTouched.getHeight() / 2));
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean TouchUp(int screenX, int screenY, int pointer, int button)
-//    {
-//        if (objectTouched != null)
-//        {
-//            if (objectTouched instanceof UneMain)
-//            {
-//                UneMain mainAux = (UneMain) objectTouched;
-//                mainAux.TouchUp(planche1, screenX, MyConstants.SCREENHEIGHT - screenY);
-////
-////                else /*si bille pas deposee dans planche*/
-////                    {
-////                    objectTouched.setPosition(firstPositionX, firstPositionY);
-////                    if (billeAux.plancheNew != null) {
-////                        if (billeAux.plancheNew.shouldReturnToReserve)
-////                        {
-////                            billeAux.setPosition(100000, 100000);
-////                            allDrawables.remove(billeAux);
-////                            billeAux.plancheNew = null;
-////                        }
-////                        else {
-////                            planche1.addBilleAndOrganize(billeAux);
-////                            planche2.addBilleAndOrganize(billeAux);
-////                            planche3.addBilleAndOrganize(billeAux);
-////                        }
-////                    } else {
-////                        allDrawables.remove(billeAux);
-////                        billeAux.setPosition(100000, 100000);
-////                    }
-////                }
-//            }
-//
-//        }
-//        objectTouched = null;
-//        return false;
-//    }
-//
-
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
@@ -1083,14 +989,12 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
         mousePointerX = screenX;
         mousePointerY = reversedScreenY;
 
-//        boolean isReserveActif = sacDeBilles.isActive();
         if (sacDeBilles.contains(screenX, reversedScreenY) && sacDeBilles.isActive()) /*si bille part de la reserve*/
         {
             UneBille billeAdded = new UneBille(10_000, 10_000, sacDeBilles.largeurBille);
             objectTouchedList.add(billeAdded);
             allDrawables.add(billeAdded);
             objectTouched = billeAdded;
-//
         }
         else /*si bille part de la planche*/
         {
@@ -1137,29 +1041,8 @@ public class ScreenEx2_1 extends ScreenOnglet implements InputProcessor
 
                 if (billeAux != null)
                 {
-                    billeAux.touchUp(allPlanches/*, screenX, MyConstants.SCREENHEIGHT - screenY*/);
+                    billeAux.touchUp(allPlanches);
                 }
-//
-//                else /*si bille pas deposee dans planche*/
-//                    {
-//                    objectTouched.setPosition(firstPositionX, firstPositionY);
-//                    if (billeAux.plancheNew != null) {
-//                        if (billeAux.plancheNew.shouldReturnToReserve)
-//                        {
-//                            billeAux.setPosition(100000, 100000);
-//                            allDrawables.remove(billeAux);
-//                            billeAux.plancheNew = null;
-//                        }
-//                        else {
-//                            planche1.addBilleAndOrganize(billeAux);
-//                            planche2.addBilleAndOrganize(billeAux);
-//                            planche3.addBilleAndOrganize(billeAux);
-//                        }
-//                    } else {
-//                        allDrawables.remove(billeAux);
-//                        billeAux.setPosition(100000, 100000);
-//                    }
-//                }
             }
         }
         objectTouched = null;

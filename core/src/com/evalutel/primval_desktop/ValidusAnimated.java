@@ -24,8 +24,6 @@ public class ValidusAnimated extends AnimationImageNew implements MyTouchInterfa
     protected TextureRegion defaultTextureRegion;
     private TextureRegion textureRegionInactif;
 
-//    static String directory = System.getProperty("user.dir");
-//    static FileHandle fh = Gdx.files.absolute(directory + "/Images/Validus");
 
     public Music music;
 

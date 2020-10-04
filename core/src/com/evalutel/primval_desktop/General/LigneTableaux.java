@@ -7,13 +7,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
-import com.evalutel.primval_desktop.Database.DatabaseDesktop;
 import com.evalutel.primval_desktop.Database.MyDataBase;
 import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyTextButton;
@@ -21,9 +18,6 @@ import com.evalutel.primval_desktop.ui_tools.MyTextButton;
 
 public class LigneTableaux
 {
-
-    private static String notes2Implement;
-    private static long durationPerExercice;
 
     public static Table getLigne(MyTextButton button, String ongletTitre, Texture texture, String borderColor, int chapitre, int onglet, int noteMaxPossible)
     {
@@ -71,7 +65,7 @@ public class LigneTableaux
         AppSingleton appSingleton = AppSingleton.getInstance();
         MyDataBase db = appSingleton.myDataBase;
 
-        durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
+        long durationPerExercice = db.getMaxDureePageForIdProfil(chapitre, onglet);
 
         String duration = MillisToDuration(durationPerExercice);
 
@@ -82,13 +76,13 @@ public class LigneTableaux
         Label labelDuration = new Label(duration, labelStyleDuration);
         labelDuration.setWidth(MyConstants.SCREENWIDTH / 40f);
 
-        if (borderColor == "red")
+        if (borderColor.equals("red"))
         {
             borderTable2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
             borderTable1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmRed))));
             labelStyleOnglet.fontColor = MyConstants.redPrimval;
         }
-        else if ((borderColor == "blue"))
+        else if ((borderColor.equals("blue")))
         {
             borderTable1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
             borderTable2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(pmBlue))));
@@ -105,7 +99,7 @@ public class LigneTableaux
 
 //        noteMaxPerExercice = db.getMaxNotePerExercice(chapitre, onglet, 0);
 
-        notes2Implement = highestNote + "/" + notePossiblePerExercice + "/" + noteMaxPossible;
+        String notes2Implement = highestNote + "/" + notePossiblePerExercice + "/" + noteMaxPossible;
 
         Label.LabelStyle labelStyleNotes = new Label.LabelStyle();
         labelStyleNotes.fontColor = MyConstants.redresultat;
@@ -129,7 +123,7 @@ public class LigneTableaux
         }
         table.add(labelDuration).width(MyConstants.SCREENWIDTH / 12f).padRight(MyConstants.SCREENWIDTH / 17f).padLeft(MyConstants.SCREENWIDTH / 50f);
 
-        if (borderColor == "red")
+        if (borderColor.equals("red"))
         {
             table.add().width(MyConstants.SCREENWIDTH / 12f);
         }
@@ -151,7 +145,7 @@ public class LigneTableaux
     }
 
 
-    public static String MillisToDuration(long seconds)
+    private static String MillisToDuration(long seconds)
     {
         int sec = (int) seconds % 60;
         int min = (((int) seconds) / 60) % 60;

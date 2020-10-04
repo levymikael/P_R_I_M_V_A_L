@@ -22,7 +22,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
     private boolean isVisible = true;
 
 
-    public ListExercicesActiviteViewChap2(Stage stage, final Game game)
+    ListExercicesActiviteViewChap2(Stage stage, final Game game)
     {
         screenWidth = MyConstants.SCREENWIDTH;
         final int screenHeight = MyConstants.SCREENHEIGHT;
@@ -71,7 +71,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
         table.row();
         table.add(tableEx4).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
         table.row();
-//        table.add(tableEx5).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
+        table.add(tableEx5).width(screenWidth).height(lineHeight).padBottom(paddingInterOnglets);
 
 
         table.align(Align.top);
@@ -125,7 +125,7 @@ public class ListExercicesActiviteViewChap2 implements MyDrawInterface
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.setScreen(new ScreenEx1_1(game, label1));
+                game.setScreen(new ScreenEx2_5(game, label5));
                 System.out.println("I got clicked!5");
             }
         });

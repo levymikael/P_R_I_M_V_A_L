@@ -20,13 +20,11 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
 {
     private int valuePastelle;
 
-    private Texture couleurPastelleTexture, couleurtraceTexture;
+    private boolean isActive = true;
 
-    boolean isActive = true;
+    public float positionX, positionY, pastelleWidth, pastelleHeight;
 
-    public float positionX, positionY, pastelleWidth, pastelleHeight, positionXTrace;
-
-    String couleurPastelle, couleurTrace;
+    String couleurPastelle;
 
     public boolean isClicked = false;
     public boolean isOut = false;
@@ -49,31 +47,10 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
         String pastellePathName = "Images/Cases et couleurs pastels/pastel_" + couleurPastelle + ".png";
 
 
-        couleurPastelleTexture = new Texture(pastellePathName);
+        Texture couleurPastelleTexture = new Texture(pastellePathName);
         couleurPastelleTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         this.setBackground(new TextureRegionDrawable(new TextureRegion(couleurPastelleTexture)));
-
-//        if (couleurPastelle.equals("bleu"))
-//        {
-//            couleurTrace = "bleufonce";
-//
-//        }
-//        else if (couleurPastelle.equals("violet_clair"))
-//        {
-//            couleurTrace = "violet";
-//        }
-//        else
-//        {
-//            couleurTrace = couleurPastelle;
-//        }
-//
-//
-//        String tracePathName = "Images/Cases et couleurs pastels/trace_" + couleurTrace + ".png";
-//
-//        couleurtraceTexture = new Texture(tracePathName);
-//        couleurtraceTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
 
         if (isActive)
         {
@@ -88,13 +65,11 @@ public class UnePastelle extends Table implements MyCorrectionAndPauseInterface,
                             super.clicked(event, x, y);
 
                             isClicked = !isClicked;
-//                            pastelleInAndOut(isClicked);
 
                             System.out.println("pastelle clicked");
                         }
                     }
         );
-
 
         stage.addActor(this);
     }

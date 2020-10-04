@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
+public class ScreenEx2_5 extends ScreenOnglet implements InputProcessor
 {
     private ArrayList<UneCase> caseList = new ArrayList<>();
     private ArrayList<UnePastelle> pastelleList = new ArrayList<>();
@@ -47,9 +47,9 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
     private boolean isAllActive, isCaseClicked = false;
 
 
-    ScreenEx2_4(final Game game, String ongletTitre)
+    ScreenEx2_5(final Game game, String ongletTitre)
     {
-        super(game, 2, 4, true, MyConstants.noteMaxChap2[2]);
+        super(game, 2, 5, true, MyConstants.noteMaxChap2[3]);
 
         ScreeenBackgroundImage bgScreenEx1_1 = new ScreeenBackgroundImage("Images/onglet2_3/des_fond.jpg");
         allDrawables.add(bgScreenEx1_1);
@@ -65,7 +65,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
         AppSingleton appSingleton = AppSingleton.getInstance();
         MyDataBase db = appSingleton.myDataBase;
 
-        int noteMax = db.getHighestNote(2, 4);
+        int noteMax = db.getHighestNote(2, 5);
 
         String noteMaxObtenue = noteMax + "/27";
 
@@ -80,7 +80,7 @@ public class ScreenEx2_4 extends ScreenOnglet implements InputProcessor
 
         stage.addActor(tableTitre);
 
-        resultatExercice = new UnResultat("Primval", 2, 4, 0, ongletTitre, 27, 0, dateTest, 0, 0, 0, 123);
+        resultatExercice = new UnResultat("Primval", 2, 5, 0, ongletTitre, 27, 0, dateTest, 0, 0, 0, 123);
 
         caseWidth = MyConstants.SCREENWIDTH / 20f;
         caseHeight = caseWidth * 1.5f;

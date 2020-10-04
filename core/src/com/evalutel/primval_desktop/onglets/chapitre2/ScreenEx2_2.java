@@ -29,7 +29,6 @@ import com.evalutel.primval_desktop.ui_tools.AppSingleton;
 import com.evalutel.primval_desktop.ui_tools.MyPoint;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 
 public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
@@ -40,15 +39,13 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
     private UnePlancheNew planche1, planche2, planche3;
     private UneBille billeRectification;
 
-    int[] numOiseauArray;
-
     private ArrayList<int[]> randOiseauxArray = new ArrayList<>();
 
     private UneArdoise2 uneArdoise2;
     private CalculetteView calculetteView;
     private float posX, posY;
 
-    TextButton.TextButtonStyle styleTest;
+    private TextButton.TextButtonStyle styleTest;
     private Drawable drawableAux;
 
     private int cptOiseauTotal, cptOiseau1, cptOiseau2, /*cptBille,*/
@@ -76,7 +73,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
         sacDeBilles.setActive(false);
         allDrawables.add(sacDeBilles);
         myCorrectionAndPauseGeneral.addElements(sacDeBilles);
-//        allCorrigibles.add(sacDeBilles);
 
         float allPlanchesStartPositionX = 1.9f * MyConstants.SCREENWIDTH / 3 - largeurBilleMultiple / 2;
 
@@ -94,7 +90,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             allDrawables.add(unePlanche);
             unePlanche.shouldReturnToReserve = true;
             myCorrectionAndPauseGeneral.addElements(unePlanche);
-//            allCorrigibles.add(unePlanche);
         }
 
         planche2.setVisible(false);
@@ -170,7 +165,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             {
                 game.setScreen(new Screen_Chapitre2(game));
 
-//                game.dispose();
                 Gdx.app.log("button click", "click!");
 
                 endTime = System.currentTimeMillis();
@@ -578,7 +572,6 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             afterCorrection = true;
             timer.schedule(new NextQuestion(500), 500);
             styleTest.up = drawableAux;
-//            planche1.setAllBillesActive();
             failedAttempts = 0;
         }
     }
@@ -646,12 +639,12 @@ public class ScreenEx2_2 extends ScreenOnglet implements InputProcessor
             planche2.setVisible(true);
             planche2.setActive(true);
 
-            if ((cptOiseau2 < oiseauxToDisplayBranche2)/* && ((oiseauxToDisplayBranche1 + oiseauxToDisplayBranche2) <= 9)*/)
+            if ((cptOiseau2 < oiseauxToDisplayBranche2))
             {
                 if (cptOiseau2 + cptOiseau1 < 9)
                 {
                     UnOiseau oiseau = oiseauxList.get(cptOiseau1 + cptOiseau2);
-                    posX = (MyConstants.SCREENWIDTH / 7f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (/*cptOiseau -*/ cptOiseau2);
+                    posX = (MyConstants.SCREENWIDTH / 7f) + (oiseau.animationWidth + oiseau.animationWidth / 8) * (cptOiseau2);
 
                     posY = 5 * MyConstants.SCREENHEIGHT / 11f;
 

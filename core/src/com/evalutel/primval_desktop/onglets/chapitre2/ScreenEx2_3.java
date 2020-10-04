@@ -28,19 +28,15 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
 {
     private UneArdoise2 uneArdoise2;
     private CalculetteView calculetteView;
-//    private float posX, posY;
 
     TextButton.TextButtonStyle styleTest;
     private Drawable drawableAux;
 
     private int diceTotal, failedAttempts, diceRenewal;
 
-    Label currentLabel;
-
     private Dices dice1;
 
     private String nbInput;
-    //    //    private boolean isAllActive;
     private boolean touchValidate = false;
 
 
@@ -150,8 +146,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
                 return true;
             }
         });
-
-
         timer.schedule(new PresentationMetrologue(3_000), 1_000);
     }
 
@@ -194,11 +188,7 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
             dice1.setActive(true);
             dice1.diceRenewal = diceRenewal;
 
-//            MyTimer.TaskEtape nextEtape = new EtapeInstructionArdoise1(3_000, 500);
-
             metrologue.metrologuePlaySound("Sounds/Onglet2_3/Chap2_Onglet3 - Touche les des pour les faire tourner.mp3");
-
-
         }
     }
 
@@ -270,14 +260,6 @@ public class ScreenEx2_3 extends ScreenOnglet implements InputProcessor
                 {
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");
                 }
-//                else if (value < dice1.getLastDice1value())
-//                {
-//                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus - Tu'es trompe manque des billes planche.mp3");
-//                }
-//                else if (value > dice1.getLastDice1value())
-//                {
-//                    validusAnimated.validusPlaySound("Sounds/onglet_1_5/onglet_1_5 - Validus _ tu tes trompe trop de billes essaie encore.mp3");
-//                }
                 else
                 {
                     validusAnimated.validusPlaySound("Sounds/Validus/Validus - tu t'es trompe.mp3");

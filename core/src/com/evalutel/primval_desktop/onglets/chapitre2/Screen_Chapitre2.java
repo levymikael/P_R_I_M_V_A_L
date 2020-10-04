@@ -44,9 +44,6 @@ public class Screen_Chapitre2 extends Game implements Screen, InputProcessor, Ap
     protected ArrayList<MyDrawInterface> allDrawables;
 
 
-    FreeTypeFontGenerator generator;
-
-
     public Screen_Chapitre2(Game game)
     {
         stage = new Stage();
